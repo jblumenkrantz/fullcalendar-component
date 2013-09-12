@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pinwheelApp')
-  .controller('MonthCtl', function ($scope) {
+  .controller('CalendarCtl', function ($scope) {
   });
 
 
