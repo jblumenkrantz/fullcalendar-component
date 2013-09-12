@@ -37,6 +37,10 @@ module.exports = function (grunt) {
         files: ['test/spec/{,*/}*.coffee'],
         tasks: ['coffee:test']
       },
+			compass: {
+				files: ['<%= yeoman.app %>/scss/{,*/}*.{scss,sass}'],
+				tasks: ['compass']
+			},
       livereload: {
         options: {
           livereload: LIVERELOAD_PORT
@@ -133,6 +137,23 @@ module.exports = function (grunt) {
         }]
       }
     },
+		compass: {
+			options: {
+				sassDir: '<%= yeoman.app %>/scss',
+				cssDir: '<%= yeoman.app %>/assets/styles',
+				imagesDir: '<%= yeoman.app %>/assets/images',
+				javascriptsDir: '<%= yeoman.app %>/modules',
+				fontsDir: '<%= yeoman.app %>/assets/fonts',
+				//importPath: '<%= yeoman.app %>/components',
+				relativeAssets: true
+			},
+			dist: {},
+			server: {
+				options: {
+					debugInfo: true
+				}
+			}
+		},
     // not used since Uglify task does concat,
     // but still available if needed
     /*concat: {
@@ -294,11 +315,12 @@ module.exports = function (grunt) {
     }
 
     grunt.task.run([
+			'compass',
       'clean:server',
       'concurrent:server',
       'connect:livereload',
       'open',
-      'watch'
+      'watch',
     ]);
   });
 
@@ -323,9 +345,5 @@ module.exports = function (grunt) {
     'usemin'
   ]);
 
-  grunt.registerTask('default', [
-    'jshint',
-    'test',
-    'build'
-  ]);
+  grunt.registerTask('default', 'server');
 };
