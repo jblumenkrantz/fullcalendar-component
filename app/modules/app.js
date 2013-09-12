@@ -4,8 +4,8 @@ angular.module('pinwheelApp', [])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'calendar/month.html',
-        controller: 'calendar/monthCtl.js'
+        templateUrl: 'modules/calendar/month.html',
+        controller: 'MonthCtl'
       })
       .otherwise({
         redirectTo: '/'
