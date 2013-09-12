@@ -22,4 +22,16 @@ angular.module('pinwheelApp', [])
       .otherwise({
         redirectTo: '/calendar/month/'+(new Date().getFullYear())+'/'+(new Date().getMonth()+1)+'/'+(new Date().getDate())
       });
-  });
+  })
+	.factory('User', function($resource){
+		return $resource('/api/user', {}, {update: {method:'PUT'}});
+	})
+	.factory('Calendar', function($resource){
+		return $resource('/api/calendar', {}, {update: {method:'PUT'}});
+	})
+	.factory('Task', function($resource){
+		return $resource('/api/task', {}, {update: {method:'PUT'}});
+	})
+	.factory('Event', function($resource){
+		return $resource('/api/event', {}, {update: {method:'PUT'}});
+	})
