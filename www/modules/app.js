@@ -19,8 +19,12 @@ angular.module('pinwheelApp', ['ngResource'])
         templateUrl: 'modules/reference/main.html',
         controller: 'ReferenceCtl'
 			})
+			.when("/login", {
+        templateUrl: 'modules/login/main.html',
+        controller: 'LoginCtl'
+			})
       .otherwise({
-        redirectTo: '/calendar/month/'+(new Date().getFullYear())+'/'+(new Date().getMonth()+1)+'/'+(new Date().getDate())
+        redirectTo: '/calendar/month/'+(new Date().getFullYear())+'/'+(new Date().getMonth()+1)+'/23'
       });
   	})
   	.run(function($http){
@@ -47,6 +51,12 @@ angular.module('pinwheelApp', ['ngResource'])
 		});
 		return 'test';
 	})
-	.factory('task', function($resource){
-		return $resource('/api/task', {}, {update: {method:'PUT'}});
-	});
+	.factory('Task', function($resource){
+		return $resource('/api/v1/task', {}, {update: {method:'PUT'}});
+	})
+	.factory('Event', function($resource){
+		return $resource('/api/v1/event', {}, {update: {method:'PUT'}});
+	})
+	.factory('Calendar', function($resource){
+		return $resource('/api/v1/calendar', {}, {update: {method:'PUT'}});
+	})
