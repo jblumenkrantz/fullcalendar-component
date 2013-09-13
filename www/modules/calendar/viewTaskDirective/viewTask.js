@@ -22,6 +22,9 @@ angular.module('pinwheelApp')
 
 				$scope.updateTask = function(name){
 					angular.copy($scope.editTask, $scope.task);
+					$scope.task.$update({id: $scope.task.task_id}, function(task){
+						$scope.task = task;
+					});
 					$scope.cancel('editingTask');
 				}
 			}

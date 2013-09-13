@@ -4,7 +4,7 @@ angular.module('pinwheelApp', ['ngResource'])
 	.config(function ($routeProvider) {
 		$routeProvider
 			.when('/calendar/:view/:year/:month/:day', {
-				templateUrl: 'modules/calendar/month.html',
+				templateUrl: 'modules/calendar/_view_calendar.html',
 				controller: 'CalendarCtl'
 			})
 			.when("/handbook", {

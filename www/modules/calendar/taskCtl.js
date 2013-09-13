@@ -12,21 +12,18 @@ angular.module('pinwheelApp')
 		});
 		// ----------------- //
 
-		$scope.newTask = {title: '', calendar: {title: ''}, note: ''};
+		$scope.newTask = new Task();
 		$scope.toggle = function(name){
-			$scope.newTaskTitle = '';
-			$scope.newTaskCalendar = '';
-			$scope.newTaskNote = '';
+			$scope.newTask.task_name = '';
+			$scope.newTask.calendar = '';
+			$scope.newTask.task_notes = '';
 			$scope[name] = !$scope[name];
 		}
 
 		$scope.saveNew = function(){
-			console.log($scope.newTask);
-			$scope.tasks.push({
-					title: $scope.newTask.title,
-					calendar: $scope.newTask.calendar.title,
-					note: $scope.newTask.note
-				})
+			$scope.newTask.$save({}, function(task){
+				$scope.tasks.push(task);
+			});
 			$scope.toggle('addingTask');
 		}
   });
