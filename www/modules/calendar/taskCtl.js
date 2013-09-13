@@ -1,10 +1,15 @@
 'use strict';
 
 angular.module('pinwheelApp')
-  .controller('TaskCtl', function ($scope) {
+  .controller('TaskCtl', function ($scope, Calendar, Task) {
+
 		// API CALLS GO HERE //
-		$scope.calendars = [{title: 'one'}, {title: 'two'}];
-		$scope.tasks = []; 
+		Calendar.query({id: 'all'}, function(calendars){
+			$scope.calendar = calendars;
+		});
+		Task.query({id: 'all'}, function(tasks){
+			$scope.tasks = tasks;
+		});
 		// ----------------- //
 
 		$scope.newTask = {title: '', calendar: {title: ''}, note: ''};

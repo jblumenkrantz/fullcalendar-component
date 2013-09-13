@@ -1,7 +1,7 @@
 <div ng-hide="editingTask">
 	<div class="row">
 		<div class="large-12 columns">
-			<strong>{{task.title}} <small ng-click="edit('editingTask')">edit</small></strong>
+			<strong>{{task.task_name}} <small ng-click="edit('editingTask')">edit</small></strong>
 		</div>
 	</div>
 	<div class="row">
@@ -11,7 +11,7 @@
 	</div>
 	<div class="row">
 		<div class="large-12 columns">
-			{{task.note}}
+			{{task.task_notes}}
 		</div>
 	</div>
 
