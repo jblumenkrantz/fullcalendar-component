@@ -28,7 +28,7 @@ class CalendarCtl
 		$authUserID = Authorize:: sharedInstance()->userID();
 
 	 	$cals = (object) array_merge((array) Calendar::loadUserOrgCalendars($authUserID), (array) Calendar::loadUserSubscriptions($authUserID));
-		
+		$dataRay = array();
 		foreach($cals as $calendar){
 			$calendar->subscribed = false;
 			$calendar->color = '';
@@ -62,7 +62,7 @@ class CalendarCtl
 				unset($calendar->adhoc_events);
 			}
 						
-			$dataRay['calendars'][$calendar->calendar_id] = $calendar;
+			array_push($dataRay,$calendar);
 		}
 
 		echo json_encode($dataRay);
