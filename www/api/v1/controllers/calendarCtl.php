@@ -25,16 +25,48 @@ class CalendarCtl
 	* 	@todo get all calendars per signed in user
 	*/
 	function getAll ($id = null) {
-		$authUserID = null;
-		$authUserID = ($authUserID = Authorize:: sharedInstance()->userID());
-		if ($id !== null &&  $authUserID != $id) {
-			$forbidden = new UserForbiddenException($authUserID);
-			echo $forbidden->json_encode();
-			exit;
-		}
+		$authUserID = Authorize:: sharedInstance()->userID();
+
+	 	$cals = (object) array_merge((array) Calendar::loadUserOrgCalendars($authUserID), (array) Calendar::loadUserSubscriptions($authUserID));
 		
-		$calendars = Calendar::loadIndex($id === null? $authUserID: $id);
-	 	echo json_encode($calendars);
+		foreach($cals as $calendar){
+			$calendar->subscribed = false;
+			$calendar->color = '';
+			$colorResult = Calendar:: genericQuery("SELECT
+					color, view_setting
+				FROM
+					calendar_subs
+				WHERE
+					calendar_id='{$calendar->calendar_id}'
+				AND
+					user_id='$authUserID'");
+			if(sizeof($colorResult) > 0){
+				$calendar->color = $colorResult[0]->color;
+				$calendar->subscribed = true;
+				$calendar->viewing = ($colorResult[0]->view_setting)? true:false;
+			}
+			$publicResult = Calendar:: genericQuery("SELECT
+					calendar_id
+				FROM
+					public_calendars
+				WHERE
+					calendar_id='{$calendar->calendar_id}'
+				");
+			if(sizeof($publicResult) > 0){
+				$calendar->public = true;
+			}else{
+				$calendar->public = false;
+			}
+			
+			if(property_exists($calendar, 'adhoc_events') && !$calendar->adhoc_events){
+				unset($calendar->adhoc_events);
+			}
+						
+			$dataRay['calendars'][$calendar->calendar_id] = $calendar;
+		}
+
+		echo json_encode($dataRay);
+		
 	}
 	
 	/**
