@@ -1,0 +1,8 @@
+RewriteEngine on
+# Rewrite Root Level (ie api/v1/) Request
+RewriteRule ^$ router.php/$1 [L]
+
+# Rewrite Request for Non-existent Resources
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ router.php/$1 [L]

@@ -1,0 +1,10 @@
+#!/bin/bash
+dirname=`dirname $0`
+composer=`basename $dirname`/composer.phar
+execDir=$dirname/../
+cd $execDir
+if [ "$dirname" = "." ]
+then
+	composer='bin'/composer.phar
+fi
+$composer dump-autoload
