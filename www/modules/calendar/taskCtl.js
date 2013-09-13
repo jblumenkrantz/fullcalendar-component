@@ -29,8 +29,4 @@ angular.module('pinwheelApp')
 				})
 			$scope.toggle('addingTask');
 		}
-
-
   });
-
-

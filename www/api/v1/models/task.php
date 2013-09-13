@@ -143,7 +143,7 @@ class Task extends PinwheelModelObject
 					tasks.task_id,
 					tasks.calendar_id,
 					task_name,
-					(select if(count(task_id) >= 1,1,0) from tasks_complete where tasks_complete.task_id = tasks.task_id AND tasks_complete.user_id = '$authUserID') as is_complete,
+					(select if(count(task_id) >= 1,1,0) from tasks_complete where tasks_complete.task_id = tasks.task_id AND tasks_complete.user_id = '$userId') as is_complete,
 					UNIX_TIMESTAMP(create_time) as create_time,
 					UNIX_TIMESTAMP(due_time) as due_time,
 					creator_id,
@@ -161,6 +161,7 @@ class Task extends PinwheelModelObject
 				LEFT OUTER JOIN reminder_prefs
 				ON tasks.task_id = reminder_prefs.task_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$userId'
 				WHERE tasks.creator_id = '$userId'
+				ORDER BY create_time DESC
 			", $pinsqli);
 	}
 

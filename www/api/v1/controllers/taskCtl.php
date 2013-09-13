@@ -25,7 +25,8 @@ class TaskCtl
 	* 	@todo get all tasks per signed in user
 	*/
 	function getAll(){
-		$tasks = Task::loadByUser(1);
+		$authUserID = Authorize:: sharedInstance()->userID();
+		$tasks = Task::loadByUser($authUserID);
 	 	echo json_encode($tasks);
 	}
 
