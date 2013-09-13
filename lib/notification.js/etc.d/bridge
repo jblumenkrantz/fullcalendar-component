@@ -1,0 +1,24 @@
+#!/usr/bin/php
+<?php
+// mysqli stub
+if (!class_exists('mysqli'))
+	eval ('class mysqli {}');
+
+require_once (__DIR__.'/../../../vendor/autoload.php');
+// Task Modificaitons
+EVEnvironment:: set('TaskModificationType', BRCTaskModification::$Topic);
+EVEnvironment:: set('TaskModificationCreatedAction', BRCTaskModification::$Created);
+EVEnvironment:: set('TaskModificationUpdatedAction', BRCTaskModification::$Updated);
+EVEnvironment:: set('TaskModificationDeletedAction', BRCTaskModification::$Deleted);
+// Event Modifications
+EVEnvironment:: set('EventModificationType', BRCEventModification::$Topic);
+EVEnvironment:: set('EventModificationCreatedAction', BRCEventModification::$Created);
+EVEnvironment:: set('EventModificationUpdatedAction', BRCEventModification::$Updated);
+EVEnvironment:: set('EventModificationDeletedAction', BRCEventModification::$Deleted);
+// Reminder Modifications
+EVEnvironment:: set('ReminderPrefModificationType', BRCReminderPrefModification::$Topic);
+EVEnvironment:: set('ReminderPrefModificationCreatedAction', BRCReminderPrefModification::$Created);
+EVEnvironment:: set('ReminderPrefModificationUpdatedAction', BRCReminderPrefModification::$Updated);
+EVEnvironment:: set('ReminderPrefModificationDeletedAction', BRCReminderPrefModification::$Deleted);
+// Serialize
+echo EVEnvironment:: json_encode();
