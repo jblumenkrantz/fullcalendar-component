@@ -13,6 +13,7 @@
 
         <!-- build:css({.tmp,app}) styles/main.css -->
         <link rel="stylesheet" href="assets/styles/main.css">
+        <link rel="stylesheet" href="assets/styles/foundation.css">
         <!-- endbuild -->
 </head>
   <body ng-app="pinwheelApp">
@@ -27,8 +28,56 @@
 
     <!-- Add your site or application content here -->
 		<div ng-controller="PinwheelCtl">
-			<div class="container" ng-view=""></div>
+			<!-- header row -->
+			<div class="row">
+				<div class="large-12 columns">
+					<h3>Pinwheel</h3>
+				</div>
+			</div>
+			<!-- / header row -->
+
+			<!-- main content -->
+			<div class="row">
+				<!-- subscription view -->
+				<div class="large-2 columns" ng-controller="SubscriptionCtl">
+					<div class="row">
+						<div class="large-12 columns">
+							<h4>Calendars</h4>
+						</div>
+					</div>
+				</div>
+				<!-- / subscription view -->
+
+				<!-- route pane -->
+				<div class="large-8 columns" ng-view=""></div>
+				<!-- / route pane -->
+
+				<!-- task view -->
+				<div class="large-2 columns" ng-controller="TaskCtl">
+					<div class="row">
+						<div class="large-12 columns">
+							<h4>Tasks <small ng-click="toggle('addingTask')">add</small></h4>
+						</div>
+					</div>
+
+					<!-- task entry form -->
+					<div ng-show="addingTask">
+						<task-form task="newTask" save="saveNew()" cancel="toggle('addingTask')" calendars="calendars"></task-form>
+					</div>
+					<!-- / task entry form -->
+
+					<div ng-repeat="task in tasks">
+						<view-task task="task"> </view-task>
+					</div>
+
+				</div>
+				<!-- / task view -->
+
+			</div>
+			<!-- / main content -->
+
 		</div>
+		<!-- / application content -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
@@ -50,9 +99,12 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="modules/app.js"></script>
         <script src="modules/pinwheelCtl.js"></script>
+        <script src="modules/calendar/taskCtl.js"></script>
+        <script src="modules/calendar/subscriptionCtl.js"></script>
         <script src="modules/calendar/calendarCtl.js"></script>
         <script src="modules/calendar/viewTaskDirective/viewTask.js"></script>
-        <script src="modules/calendar/subscriptionDirective/calendarSubscription.js"></script>
+        <script src="modules/calendar/taskFormDirective/taskForm.js"></script>
+        <script src="modules/calendar/subscriptionDirective/subscription.js"></script>
         <script src="modules/reference/referenceCtl.js"></script>
         <script src="modules/messaging/messagingCtl.js"></script>
         <script src="modules/handbook/handbookCtl.js"></script>
