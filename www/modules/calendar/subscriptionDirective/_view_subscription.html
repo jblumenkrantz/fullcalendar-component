@@ -1,2 +1,26 @@
-<h1>subscription goes here</h1>
+<div ng-style="{backgroundColor: calendar.color}">
+	<div ng-hide="editingCalendar">
+		<div class="row">
+			<div class="large-12 columns">
+				<strong>{{calendar.calendar_name}} <small ng-click="edit('editingCalendar')">edit</small></strong>
+			</div>
+		</div>
+	</div>
+	<div ng-show="editingCalendar">
+		<div class="row">
+			<input type="text" ng-model="editCalendar.calendar_name" placeholder="Name (required)" />
+			<input type="text" ng-model="editCalendar.color" placeholder="Color (required)" />
+		</div>
+		<div class="row">
+			<div class="large-6 columns">
+				<div class="expand small alert button" ng-click="cancel('editingCalendar')" >cancel</div>
+			</div>
+			<div class="large-6 columns">
+				<div class="expand small button" ng-click="save('editingCalendar')" >save</div>
+			</div>
+		</div>
+	</div>
+	<hr />
+</div>
+
 
