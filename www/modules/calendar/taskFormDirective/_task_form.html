@@ -1,6 +1,6 @@
 <div class="row">
 	<input type="text" ng-model="task.task_name" placeholder="Title (required)" />
-	<select ng-options="calendar.title for calendar in calendars" ng-model="task.calendar" ></select>
+	<select ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars" ng-model="task.calendar_id" ></select>
 	<textarea ng-model="task.task_notes" placeholder="Add Note"></textarea>
 </div>
 <div class="row">
