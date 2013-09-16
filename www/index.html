@@ -30,99 +30,14 @@
 		<div ng-controller="PinwheelCtl">
 			<!-- header row -->
 			<div class="large-12 columns">
-				<h3>Pinwheel</h3>
+				<h3>Pinwheel <small ng-click="logout()">logout</small></h3>
 			</div>
 			<!-- / header row -->
 
 			<!-- main content -->
-				<!-- subscription view -->
-                <div class="large-2 columns" ng-controller="SubscriptionCtl">
-                    <div class="row">
-                        <div class="large-12 columns">
-                            <h4>Calendars <small ng-click="toggle('addingSubscription')">add</small></h4>
-                        </div>
-                        <hr />
-                    </div>
-                    
-                    <!-- SUBSCRIBED CALENDAR SECTION -->
-
-                    <div ng-show="subscribedCalendars.length">
-                        Subscribed Calendars
-                        <hr />
-                    </div>
-
-                    <!-- subscribed calendars ng-repeat -->
-                    <div ng-repeat="calendar in subscribedCalendars = (calendars | filter:{active: 1, subscribed: true} | orderBy:'calendar_name')">
-                        <calendar-subscription calendar="calendar"></calendar-subscription>
-                    </div>
-
-                    <!-- RECENTLY CREATED/SUBSCRIBED CALENDAR SECTION -->
-
-                    <div ng-show="recentCalendars.length">
-                        Recently Added
-                        <hr />
-                    </div>
-
-                    <!-- calendar creation form -->
-                    <div ng-show="addingSubscription">
-                        <div class="row">
-                            <input type="text" ng-model="newCalendar.calendar_name" placeholder="Name (required)" />
-                            <input type="text" ng-model="newCalendar.color" placeholder="Color (required)" />
-                        </div>
-                        <div class="row">
-                            <div class="large-6 columns">
-                                <div class="expand small alert button" ng-click="cancelNew()" >cancel</div>
-                            </div>
-                            <div class="large-6 columns">
-                                <div class="expand small button" ng-click="saveNew()" >save</div>
-                            </div>
-                        </div>
-                    </div>
-
-                     <!-- recently acquired calendars ng-repeat -->
-                    <div ng-repeat="calendar in recentCalendars = (calendars | filter:{active: 1, recent: true, subscribed: true} | orderBy:'calendar_name')">
-                        <available-subscription calendar="calendar"></available-subscription>
-                    </div>
-
-                     <!-- AVAILABLE CALENDAR SECTION -->
-
-                    <div ng-show="availabeCalendars.length">
-                        Available Calendars
-                        <hr />
-                    </div>
-
-                    <!-- available calendars ng-repeat -->
-                    <div ng-repeat="calendar in availabeCalendars = (calendars | filter:{active: 1, subscribed: false} | orderBy:'calendar_name')">
-                        <available-subscription calendar="calendar"></available-subscription>
-                    </div>
-                </div>
-                <!-- / subscription view -->
-
 				<!-- route pane -->
-				<div class="large-8 columns" ng-view=""></div>
+				<div class="large-12 columns" ng-view=""></div>
 				<!-- / route pane -->
-
-				<!-- task view -->
-				<div class="large-2 columns" ng-controller="TaskCtl">
-					<div class="row">
-						<div class="large-12 columns">
-							<h4>Tasks <small ng-click="toggle('addingTask')">add</small></h4>
-						</div>
-					</div>
-
-					<!-- task entry form -->
-					<div ng-show="addingTask">
-						<task-form task="newTask" save="saveNew()" cancel="toggle('addingTask')" calendars="calendars"></task-form>
-					</div>
-					<!-- / task entry form -->
-
-					<div ng-repeat="task in tasks">
-						<view-task task="task" calendars="calendars" ng-show="task.active"> </view-task>
-					</div>
-
-				</div>
-				<!-- / task view -->
-
 			<!-- / main content -->
 
 		</div>
@@ -148,6 +63,7 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="modules/app.js"></script>
         <script src="modules/pinwheelCtl.js"></script>
+        <script src="modules/login/loginCtl.js"></script>
         <script src="modules/calendar/taskCtl.js"></script>
         <script src="modules/calendar/subscriptionCtl.js"></script>
         <script src="modules/calendar/calendarCtl.js"></script>
