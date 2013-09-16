@@ -44,7 +44,7 @@
 
 		 <!-- recently acquired calendars ng-repeat -->
 		<div ng-repeat="calendar in recentCalendars = (calendars | filter:{active: 1, recent: true, subscribed: true} | orderBy:'calendar_name')">
-				<available-subscription calendar="calendar"></available-subscription>
+				<calendar-subscription type="available" calendar="calendar"></calendar-subscription>
 		</div>
 
 		 <!-- AVAILABLE CALENDAR SECTION -->
@@ -56,7 +56,7 @@
 
 		<!-- available calendars ng-repeat -->
 		<div ng-repeat="calendar in availabeCalendars = (calendars | filter:{active: 1, subscribed: false} | orderBy:'calendar_name')">
-				<available-subscription calendar="calendar"></available-subscription>
+				<calendar-subscription type="available" calendar="calendar"></calendar-subscription>
 		</div>
 </div>
 <!-- / subscription view -->

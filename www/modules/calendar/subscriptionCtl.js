@@ -19,13 +19,10 @@ angular.module('pinwheelApp')
 		}
 
 		$scope.saveNew = function() {
+			console.log($scope.newCalendar);
 			$scope.newCalendar.$save({}, function(calendar){
 				$scope.calendars.push(calendar);
 			});
 			$scope['addingSubscription'] = false;
 		}
-
   });
-
-
-

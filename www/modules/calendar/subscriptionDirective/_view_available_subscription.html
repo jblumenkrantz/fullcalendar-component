@@ -1,14 +1,10 @@
-<div ng-style="{backgroundColor: calendar.color}">
-	<div class="row">
-		<div class="large-12 columns">
-			<strong>
-				{{calendar.calendar_name}}
-				<small ng-click="toggleSubscribed()">
-					<span ng-hide="calendar.recent">subscribe</span>
-					<span ng-show="calendar.recent">remove</span>
-				</small>
-			</strong>
-		</div>
+<div class="row">
+	<div class="large-12 columns">
+		<strong>
+			{{calendar.calendar_name}}
+			<small ng-hide="calendar.recent" ng-click="subscribe()">subscribe</small>
+			<small ng-show="calendar.recent" ng-click="unsubscribe()">remove</small>
+		</strong>
 	</div>
-	<hr />
 </div>
+<hr />
