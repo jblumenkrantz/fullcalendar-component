@@ -4,18 +4,25 @@ angular.module('pinwheelApp')
   .controller('SubscriptionCtl', function ($scope, Calendar) {
 		// nice for toggling forms. see adding a task for example.
 		$scope.toggle = function(name){
-			$scope.newCalendar = {calendar_name: "baseball", color: "red", subscribed: true, active: 1, recent: true};
-			$scope[name] = !$scope[name];
+			$scope.newCalendar = new Calendar();
+			$scope.newCalendar.calendar_name = "baseball";
+			$scope.newCalendar.color = "red";
+			$scope.newCalendar.subscribed = true;
+			$scope.newCalendar.active = 1;
+			$scope.newCalendar.recent = true;
+			$scope['addingSubscription'] = true;
 		}
 
 		$scope.cancelNew = function() {
 			delete $scope.newCalendar;
-			$scope.toggle('addingSubscription');
+			$scope['addingSubscription'] = false;
 		}
 
 		$scope.saveNew = function() {
-			$scope.calendars.push($scope.newCalendar);
-			$scope.toggle('addingSubscription');
+			$scope.newCalendar.$save({}, function(calendar){
+				$scope.calendars.push(calendar);
+			});
+			$scope['addingSubscription'] = false;
 		}
 
   });
