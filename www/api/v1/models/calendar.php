@@ -416,27 +416,29 @@ class Calendar extends PinwheelModelObject
 		$authUserID = Authorize:: sharedInstance()->userID();
 		$pinsqli = $pinsqli === NULL? DistributedMySQLConnection:: readInstance(): $pinsqli;
 		$resulti = $pinsqli->query(
-			"SELECT
+			"SELECT 
 					calendars.calendar_id,
 					UNIX_TIMESTAMP(create_time) as create_time,
 					creator_id,
-					if(calendar_subs.subscription_name IS NOT NULL, calendar_subs.subscription_name,calendar_name) AS calendar_name,
-					calendar_subs.color,
 					UNIX_TIMESTAMP(calendars.last_modified) as last_modified,
 					calendars.active,
+					if(calendar_subs.subscription_name IS NOT NULL, calendar_subs.subscription_name,calendar_name) AS calendar_name,
+					calendar_subs.color,
 					calendars.version,
+					calendar_subs.adhoc_events,
 					reminder_prefs.mins_before,
 					reminder_prefs.reminder_type,
-					reminder_prefs.reminder_pref_id,
+					reminder_prefs.reminder_pref_id as reminder_pref_id,
 					reminder_prefs.version as reminder_pref_version,
+					reminder_prefs.reminder_pref_id as has_reminder,
 					reminder_prefs.aggregate as reminder_aggregate
-				From calendars
-				LEFT OUTER JOIN reminder_prefs
-				ON calendars.calendar_id = reminder_prefs.calendar_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$authUserID' AND reminder_prefs.task_id = '' AND reminder_prefs.event_id = ''
-				LEFT OUTER JOIN calendar_subs
-				ON calendar_subs.calendar_id = calendars.calendar_id AND calendar_subs.user_id = '$authUserID'
+				from calendars
+				left outer join	reminder_prefs
+				ON calendars.calendar_id = reminder_prefs.calendar_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$authUserID' AND reminder_prefs.aggregate = TRUE
+				left outer join	calendar_subs
+				ON calendars.calendar_id = calendar_subs.calendar_id AND calendar_subs.user_id = '$authUserID'
 				WHERE calendars.calendar_id = '$this->calendar_id'
-					AND calendars.version > $this->version
+				AND calendars.version > $this->version				
 			"
 		);
 		if (!$pinsqli->errno) {

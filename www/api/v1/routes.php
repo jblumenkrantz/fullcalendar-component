@@ -210,20 +210,19 @@ function routes () {
 		),
 
 		/* Calendar Api */
+
+		'/calendar/:alpha/:number' => array(
+			Route::$delete=>'CalendarCtl::delete',
+			Route::Authorize(),
+			Route::Request("application/json"),
+			Route::Response("application/json")
+		),
 		'/calendar/settings/view/?' => array(
 			Route::$put=>'CalendarCtl::updateVewSettings',
 			Route::Authorize(),
 			Route::Request("application/json"),
 			Route::Response("application/json")
 		),
-		'/calendar/:alpha/:alpha/?' => array(
-			Route::$get=>'CalendarCtl::get',
-			Route::$put=>'CalendarCtl::update',
-			Route::$delete=>'CalendarCtl::delete',
-			Route::Authorize(),
-			Route::Response("application/json")
-		),
-
 		'/calendar/unsubscribe' => array(
 			Route::$put=>'CalendarCtl::unsubscribe',
 			Route::Authorize(),
@@ -260,6 +259,13 @@ function routes () {
 		'/calendar/all/?' => array(
 			Route::$get => 'CalendarCtl::getAll',
 			Route::Authorize(),
+			Route::Response("application/json")
+		),
+		'/calendar/:alpha/?' => array(
+			Route::$get=>'CalendarCtl::get',
+			Route::$put=>'CalendarCtl::update',
+			Route::Authorize(),
+			Route::Request("application/json"),
 			Route::Response("application/json")
 		),
 		'/calendar/subscribe/?' => array(
