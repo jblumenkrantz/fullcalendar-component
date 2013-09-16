@@ -26,23 +26,11 @@ angular.module('pinwheelApp', ['ngResource'])
 			.otherwise({
 				redirectTo: '/calendar/month/'+(new Date().getFullYear())+'/'+(new Date().getMonth()+1)+'/23'
 			});
-		})
-	.run(function($http){
-		/** Fake it til you make it **/
-		$http.get("/api/v1/auth/token/test/asdf").
-		success(function(data){
-			var token = data.authFields;
-			localStorage['token'] = token;
-			$http.defaults.headers.common['Authorization'] =  token;
-		}).
-		error(function(data){
-				console.warn(['Authentication Failed',data]);
-			});
 	})
-	.config(['$httpProvider', function ($httpProvider) {
-		var token = localStorage['token'];
-		$httpProvider.defaults.headers.common['Authorization'] =  token;
-	}])
+	.value("localStorage", localStorage)
+	.factory('Auth', function($resource){
+		return $resource('/api/v1/auth/token/:user/:pass');
+	})
 	.factory('Task', function($resource){
 		return $resource('/api/v1/task/:id/:version', {}, {update: {method:'PUT'}, delete: {method: 'DELETE', params: {version: ':version'}}});
 	})
@@ -52,3 +40,6 @@ angular.module('pinwheelApp', ['ngResource'])
 	.factory('Calendar', function($resource){
 		return $resource('/api/v1/calendar/:id', {}, {update: {method:'PUT'}});
 	})
+	.config(['$httpProvider', function ($httpProvider) {
+		$httpProvider.defaults.headers.common['Authorization'] =  localStorage['token'];
+	}]);
