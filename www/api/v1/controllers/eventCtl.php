@@ -4,7 +4,9 @@ class EventCtl
 
 
 	function getAll(){
-	 	echo json_encode(array());
+		$authUserID = Authorize:: sharedInstance()->userID();
+		$events = Event:: getUsersEvents($authUserID);
+	 	echo json_encode($events);
 	}
 	/**
 	*	EventCtl::get provides an interface for aquiring events by means of
