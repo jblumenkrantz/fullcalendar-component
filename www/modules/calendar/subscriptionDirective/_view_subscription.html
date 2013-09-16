@@ -1,7 +1,9 @@
 <div ng-hide="editingCalendar">
 	<div class="row">
 		<div class="large-12 columns">
-			<strong>{{calendar.calendar_name}} <small ng-click="edit('editingCalendar')">edit</small></strong>
+			<strong>{{calendar.calendar_name}}
+				<small ng-click="edit('editingCalendar')">edit</small>
+			</strong>
 		</div>
 	</div>
 </div>
@@ -11,12 +13,11 @@
 		<input type="text" ng-model="editCalendar.color" placeholder="Color (required)" />
 	</div>
 	<div class="row">
-		<div class="large-6 columns">
-			<div class="expand small alert button" ng-click="cancel('editingCalendar')" >cancel</div>
-		</div>
-		<div class="large-6 columns">
-			<div class="expand small button" ng-click="save('editingCalendar')" >save</div>
-		</div>
+		<ul class="button-group even-3">
+			<li class="expand small alert button" ng-click="cancel('editingCalendar')" >cancel</li>
+			<li class="expand small button" ng-click="save('editingCalendar')" >save</li>
+			<li class="expand small button" ng-click="unsubscribe()" >unsubscribe</li>
+		</ul>
 	</div>
 </div>
 <hr />
