@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pinwheelApp')
-.directive('calendarSubscription', function(Calendar, Task, Event) {
+.directive('calendarSubscription', function() {
 	return {
 		restrict: 'E',
 		template: '<div ng-style="{backgroundColor: calendar.color}" ng-include="getTemplateUrl()"></div>',
@@ -10,6 +10,11 @@ angular.module('pinwheelApp')
 			watcher: '='
 		},
 		controller: function($scope, $element, $attrs, $routeParams) {
+			//undefined watches get passed for the calendars that do not pass the filter
+			if ($scope.watcher != undefined) {
+				$scope.watcher[$scope.calendar.calendar_id] = $scope.calendar.viewing;
+			}
+
 			$scope.getTemplateUrl = function() {
 				return ($attrs.type == 'available') ? 
 						'modules/calendar/subscriptionDirective/_view_available_subscription.html' :

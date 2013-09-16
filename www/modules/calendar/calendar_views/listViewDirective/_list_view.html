@@ -1,8 +1,9 @@
 <h1>list view</h1>
-<div ng-repeat="event in events" class="ng-scope">
+<div ng-repeat="event in events | filter: isCalendarShowing(event)" class="ng-scope">
 	<div class="row display">
 		<div class="large-3 columns">{{event.event_title}}</div>
-		<div class="large-3 large-offset-3 columns">{{event.event_start}}</div>
+		<div class="large-3 columns">{{event.calendar_id}}</div>
+		<div class="large-3 columns">{{event.event_start}}</div>
 		<div class="large-3 columns">{{event.event_end}}</div>
 		<div class="large-3 columns">{{event.event_description}}</div>
 	</div>
