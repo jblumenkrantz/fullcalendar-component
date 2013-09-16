@@ -15,20 +15,22 @@ angular.module('pinwheelApp')
 						'modules/calendar/subscriptionDirective/_view_subscription.html';
 			}
 
-			$scope.edit = function(name){
+			$scope.edit = function(name) {
 				$scope.editCalendar || ($scope.editCalendar = {});
 				angular.copy($scope.calendar, $scope.editCalendar);
 				$scope[name] = !$scope[name];
 			}
 
-			$scope.cancel = function(name){
+			$scope.cancel = function(name) {
 				delete $scope['editCalendar']; // is this helpful?
 				$scope[name] = !$scope[name];
 			}
 
-			$scope.save = function(name){
-				console.log($scope.editCalendar);
+			$scope.save = function(name) {
 				angular.copy($scope.editCalendar, $scope.calendar);
+				$scope.calendar.$update({id: $scope.calendar.calendar_id}, function(calendar) {
+					$scope.calendar = calendar;
+				});
 				$scope.cancel('editingCalendar');
 			}
 
