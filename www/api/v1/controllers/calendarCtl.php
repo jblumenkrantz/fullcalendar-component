@@ -174,25 +174,29 @@ class CalendarCtl
 	function unsubscribe() {
 		$subscription = json_decode(Request:: body());
 		$authUserID = Authorize:: sharedInstance()->userID();
+		$subscription->subscribed = false;
+
 		Event::removeAdhocEvents($subscription, $authUserID);
-		echo(json_encode(Calendar::unsubscribe($subscription, $authUserID)));
+		
+		$unsubscribed = Calendar::unsubscribe($subscription, $authUserID);														
+		echo json_encode($unsubscribed);
 		User:: incrementVersion($authUserID);
 	}
 
 	function subscribe($body=NULL, $return=FALSE) {
 		$subscription = ($body==NULL)? json_decode(Request:: body()):$body;
-		//error_log(print_r($subscription,true));
 		$authUserID = Authorize:: sharedInstance()->userID();
-																		
-		$subscription = json_encode(array('tasks'=> Task::getBatch(array("tasks.calendar_id='{$subscription->calendar_id}'","(tasks.creator_id='$authUserID' OR tasks.creator_id=(SELECT creator_id from calendars where calendar_id = '{$subscription->calendar_id}'))")),
-		                       'events'=> Event::getBatch(array("events.calendar_id='{$subscription->calendar_id}'","(events.creator_id='$authUserID' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$subscription->calendar_id}'))")),
-		                       'subscription'=>Calendar::subscribe($subscription, $authUserID)));
-		if($return){
-			User:: incrementVersion($authUserID);
-			return json_decode($subscription);
-		}else{
-			echo $subscription;
+		if(!property_exists($subscription, 'color')){
+			$subscription->color = 'red';
 		}
+		if(!property_exists($subscription, 'adhoc_events')){
+			$subscription->adhoc_events = false;
+		}
+		$subscription->subscribed = true;
+
+		$subscribed = Calendar::subscribe($subscription, $authUserID);														
+		User:: incrementVersion($authUserID);
+		echo json_encode($subscribed);	
 	}
 	function updateVewSettings() {
 		$calendar = json_decode(Request:: body());

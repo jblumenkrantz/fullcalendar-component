@@ -63,7 +63,7 @@ class Calendar extends PinwheelModelObject
 
 
 	static public function subscribe($subscription, $userId){
-		$subscription->adhoc_events = ($subscription->adhoc_events);
+		//$subscription->adhoc_events = ($subscription->adhoc_events);
 		$pinsqli = DistributedMySQLConnection:: writeInstance();
 		$resulti = $pinsqli->query(
 			"INSERT INTO calendar_subs (
