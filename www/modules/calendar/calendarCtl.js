@@ -1,13 +1,19 @@
 'use strict';
 
 angular.module('pinwheelApp')
-  .controller('CalendarCtl', function ($scope, $routeParams, $location, Calendar, Event) {
+  .controller('CalendarCtl', function ($scope, $routeParams, $location, Calendar, Event, Task) {
 
 		$scope.view = "month";
+		$scope.calendarWatchers = {};
 
 		Calendar.query({id: 'all'}, function(calendars){
-			console.log(calendars);
 			$scope.calendars = calendars;
+			Task.query({id: 'all'}, function(tasks){
+				$scope.tasks = tasks;
+			});
+			Event.query({id: 'all'}, function(events){
+				$scope.events = events;
+			});
 		}, function(error){
 			// TODO: update this and other requests
 			//       include proper error logging
@@ -17,12 +23,6 @@ angular.module('pinwheelApp')
 		Event.query({id: 'all'}, function(events){
 			$scope.events = events;
 		});
-
-		$scope.isViewable = function(item) {
-			console.log(item.calendar_id);
-			console.log($scope.calendars);
-			return true;
-		}	
 
 		$scope.changeView = function(view){
 			$scope.view = view;

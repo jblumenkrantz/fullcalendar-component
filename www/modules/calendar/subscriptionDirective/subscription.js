@@ -6,7 +6,8 @@ angular.module('pinwheelApp')
 		restrict: 'E',
 		template: '<div ng-style="{backgroundColor: calendar.color}" ng-include="getTemplateUrl()"></div>',
 		scope: {
-			calendar: '='
+			calendar: '=',
+			watcher: '='
 		},
 		controller: function($scope, $element, $attrs, $routeParams) {
 			$scope.getTemplateUrl = function() {
@@ -46,10 +47,6 @@ angular.module('pinwheelApp')
 					$scope.calendar = calendar;
 					$scope.calendar.recent = false;
 				});
-			}
-
-			$scope.toggleView = function() {
-				console.log($scope.calendar);
 			}
 		}
 	}

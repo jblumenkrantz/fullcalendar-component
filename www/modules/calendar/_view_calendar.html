@@ -32,7 +32,7 @@
 
 		<!-- subscribed calendars ng-repeat -->
 		<div ng-repeat="calendar in subscribedCalendars = (calendars | filter:{active: 1, subscribed: true} | orderBy:'calendar_name')">
-				<calendar-subscription calendar="calendar"></calendar-subscription>
+			<calendar-subscription watcher="calendarWatchers" calendar="calendar"></calendar-subscription>
 		</div>
 
 		<!-- RECENTLY CREATED/SUBSCRIBED CALENDAR SECTION -->
@@ -65,25 +65,26 @@
 <div class="large-8 columns">
 	<h3>{{view}} view <small ng-click="changeView('day')">day</small> <small ng-click="changeView('week')">week</small> <small ng-click="changeView('month')">month</small> <small ng-click="changeView('list')">list</small> <small ng-click="changeView('datebook')">datebook</small></h3>
 
+	{{events |  filter:{event_id: 'event_201302131053590x85369500x2984637'} }}
 	<div ng-switch="view">
 		<div ng-switch-when="day">
-			<strong>{{view}}</strong>
+			<day-view tasks="tasks" calendars="calendars" events="events"></day-view>
 		</div>
 
 		<div ng-switch-when="week">
-			<strong>{{view}}</strong>
+			<week-view tasks="tasks" calendars="calendars" events="events"></week-view>
 		</div>
 
 		<div ng-switch-when="month">
-			<strong>{{view}}</strong>
+			<month-view tasks="tasks" calendars="calendars" events="events"></month-view>
 		</div>
 
 		<div ng-switch-when="list">
-			<strong>{{view}}</strong>
+			<list-view tasks="tasks" calendars="calendars" events="events"></list-view>
 		</div>
 
 		<div ng-switch-when="datebook">
-			<strong>{{view}}</strong>
+			<datebook-view tasks="tasks" calendars="calendars" events="events"></datebook-view>
 		</div>
 	</div>
 </div>
@@ -103,8 +104,8 @@
 	</div>
 	<!-- / task entry form -->
 
-	<div ng-repeat="task in tasks | filter: isViewable">
-		<view-task task="task" calendars="calendars" ng-show="task.active"> </view-task>
+	<div ng-repeat="task in tasks">
+		<view-task task="task" calendars="calendars" ng-show="task.active" ng-show="calendarWatchers[task.calendar_id]"> </view-task>
 	</div>
 
 </div>
