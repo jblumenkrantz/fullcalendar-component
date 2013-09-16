@@ -63,7 +63,29 @@
 
 <!-- event view -->
 <div class="large-8 columns">
-	<h3>month view</h3>
+	<h3>{{view}} view <small ng-click="changeView('day')">day</small> <small ng-click="changeView('week')">week</small> <small ng-click="changeView('month')">month</small> <small ng-click="changeView('list')">list</small> <small ng-click="changeView('datebook')">datebook</small></h3>
+
+	<div ng-switch="view">
+		<div ng-switch-when="day">
+			<strong>{{view}}</strong>
+		</div>
+
+		<div ng-switch-when="week">
+			<strong>{{view}}</strong>
+		</div>
+
+		<div ng-switch-when="month">
+			<strong>{{view}}</strong>
+		</div>
+
+		<div ng-switch-when="list">
+			<strong>{{view}}</strong>
+		</div>
+
+		<div ng-switch-when="datebook">
+			<strong>{{view}}</strong>
+		</div>
+	</div>
 </div>
 <!-- / event view -->
 
@@ -81,7 +103,7 @@
 	</div>
 	<!-- / task entry form -->
 
-	<div ng-repeat="task in tasks | filter: viewableCalendars">
+	<div ng-repeat="task in tasks | filter: isViewable">
 		<view-task task="task" calendars="calendars" ng-show="task.active"> </view-task>
 	</div>
 

@@ -3,9 +3,10 @@
 angular.module('pinwheelApp', ['ngResource'])
 	.config(function ($routeProvider) {
 		$routeProvider
-			.when('/calendar/:view/:year/:month/:day', {
+			.when('/calendar/:year/:month/:day', {
 				templateUrl: 'modules/calendar/_view_calendar.html',
-				controller: 'CalendarCtl'
+				controller: 'CalendarCtl',
+				reloadOnSearch: false
 			})
 			.when("/handbook", {
 				templateUrl: 'modules/handbook/main.html',
@@ -24,7 +25,7 @@ angular.module('pinwheelApp', ['ngResource'])
 				controller: 'LoginCtl'
 			})
 			.otherwise({
-				redirectTo: '/calendar/month/'+(new Date().getFullYear())+'/'+(new Date().getMonth()+1)+'/23'
+				redirectTo: '/calendar/'+(new Date().getFullYear())+'/'+(new Date().getMonth()+1)+'/23'
 			});
 	})
 	.value("localStorage", localStorage)

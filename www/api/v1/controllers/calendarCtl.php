@@ -126,19 +126,14 @@ class CalendarCtl
 	*/
 	function update() {
 		$authUserID = Authorize:: sharedInstance()->userID();
-		//error_log("---- calendar request body ----");
-		//error_log(Request:: body());
 		$tsprops = json_decode(Request:: body());
-		echo '[';
+
 		if (is_object($tsprops))
 			$tsprops = array($tsprops);
 		$ncalendars = count($tsprops);
 		foreach ($tsprops as $tsprop) {
 			try {
-				//grab calendar obj and version
 				$calendar = new Calendar($tsprop);
-				error_log(print_r($calendar,true));
-				//grab shared sql conn
 				$pinsqli = DistributedMySQLConnection:: writeInstance();
 
 				//perform calendar updates
@@ -155,10 +150,22 @@ class CalendarCtl
 					error_log(print_r('calendar updated',true));
 				}
 
-				error_log(print_r($calendar,true));
-
-				//return response
-				echo json_encode(array($calendar->calendar_id => $calendar));
+				$calendar->subscribed = false;
+				$calendar->color = '';
+				$colorResult = Calendar:: genericQuery("SELECT
+						color, view_setting
+					FROM
+						calendar_subs
+					WHERE
+						calendar_id='{$calendar->calendar_id}'
+					AND
+						user_id='$authUserID'");
+				if(sizeof($colorResult) > 0){
+					$calendar->color = $colorResult[0]->color;
+					$calendar->subscribed = true;
+					$calendar->viewing = ($colorResult[0]->view_setting)? true:false;
+				}
+				echo json_encode($calendar);
 				
 			} catch (CalendarDataConflictException $e) {
 				echo $e->json_encode();
@@ -167,10 +174,11 @@ class CalendarCtl
 			}
 			if (--$ncalendars > 0) echo ',';
 		}
-		echo ']';
+
 		User:: incrementVersion($authUserID);
 	}
 
+	/** UPDATED FOR PINWHEEL **/
 	function unsubscribe() {
 		$subscription = json_decode(Request:: body());
 		$authUserID = Authorize:: sharedInstance()->userID();
@@ -182,12 +190,12 @@ class CalendarCtl
 		echo json_encode($unsubscribed);
 		User:: incrementVersion($authUserID);
 	}
-
+	/** UPDATED FOR PINWHEEL **/
 	function subscribe($body=NULL, $return=FALSE) {
 		$subscription = ($body==NULL)? json_decode(Request:: body()):$body;
 		$authUserID = Authorize:: sharedInstance()->userID();
-		if(!property_exists($subscription, 'color')){
-			$subscription->color = 'red';
+		if($subscription->color == ''){
+			$subscription->color = 'blue';
 		}
 		if(!property_exists($subscription, 'adhoc_events')){
 			$subscription->adhoc_events = false;
