@@ -63,9 +63,16 @@
 
 <!-- event view -->
 <div class="large-8 columns">
-	<h3>{{view}} view <small ng-click="changeView('day')">day</small> <small ng-click="changeView('week')">week</small> <small ng-click="changeView('month')">month</small> <small ng-click="changeView('list')">list</small> <small ng-click="changeView('datebook')">datebook</small></h3>
+	<div class="row">
+		<div class="large-5 columns">
+			<h3>{{view}} view </h3>
+		</div>
+		<div class="large-7 columns">
+			<h3><small ng-click="changeView('day')">day</small> <small ng-click="changeView('week')">week</small> <small ng-click="changeView('month')">month</small> <small ng-click="changeView('list')">list</small> <small ng-click="changeView('datebook')">datebook</small></h3>
+		</div>
+	</div>
+	
 
-	{{events |  filter:{event_id: 'event_201302131053590x85369500x2984637'} }}
 	<div ng-switch="view">
 		<div ng-switch-when="day">
 			<day-view tasks="tasks" calendars="calendars" events="events"></day-view>
