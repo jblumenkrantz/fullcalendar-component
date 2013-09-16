@@ -1,6 +1,7 @@
 <div ng-hide="editingCalendar">
 	<div class="row">
 		<div class="large-12 columns">
+			<input type='checkbox' ng-model="calendar.viewing" ng-click="toggleView()" />
 			<strong>{{calendar.calendar_name}}
 				<small ng-click="edit('editingCalendar')">edit</small>
 			</strong>

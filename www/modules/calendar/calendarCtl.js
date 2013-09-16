@@ -8,6 +8,12 @@ angular.module('pinwheelApp')
 		}, function(error){
 			$location.path("/login");
 		});
+
+		$scope.viewableCalendars = function(item) {
+			console.log(item.calendar_id);
+			console.log($scope.calendars);
+			return true;
+		}	
   });
 
 

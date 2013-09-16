@@ -6,6 +6,22 @@
 				</div>
 				<hr />
 		</div>
+
+		<!-- calendar creation form -->
+		<div ng-show="addingSubscription">
+				<div class="row">
+						<input type="text" ng-model="newCalendar.calendar_name" placeholder="Name (required)" />
+						<input type="text" ng-model="newCalendar.color" placeholder="Color (required)" />
+				</div>
+				<div class="row">
+						<div class="large-6 columns">
+								<div class="expand small alert button" ng-click="cancelNew()" >cancel</div>
+						</div>
+						<div class="large-6 columns">
+								<div class="expand small button" ng-click="saveNew()" >save</div>
+						</div>
+				</div>
+		</div>
 		
 		<!-- SUBSCRIBED CALENDAR SECTION -->
 
@@ -24,22 +40,6 @@
 		<div ng-show="recentCalendars.length">
 				Recently Added
 				<hr />
-		</div>
-
-		<!-- calendar creation form -->
-		<div ng-show="addingSubscription">
-				<div class="row">
-						<input type="text" ng-model="newCalendar.calendar_name" placeholder="Name (required)" />
-						<input type="text" ng-model="newCalendar.color" placeholder="Color (required)" />
-				</div>
-				<div class="row">
-						<div class="large-6 columns">
-								<div class="expand small alert button" ng-click="cancelNew()" >cancel</div>
-						</div>
-						<div class="large-6 columns">
-								<div class="expand small button" ng-click="saveNew()" >save</div>
-						</div>
-				</div>
 		</div>
 
 		 <!-- recently acquired calendars ng-repeat -->
@@ -81,7 +81,7 @@
 	</div>
 	<!-- / task entry form -->
 
-	<div ng-repeat="task in tasks">
+	<div ng-repeat="task in tasks | filter: viewableCalendars">
 		<view-task task="task" calendars="calendars" ng-show="task.active"> </view-task>
 	</div>
 
