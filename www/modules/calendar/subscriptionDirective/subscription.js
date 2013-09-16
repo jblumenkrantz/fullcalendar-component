@@ -33,18 +33,16 @@ angular.module('pinwheelApp')
 			}
 
 			$scope.subscribe = function() {
-				$scope.calendar.recent = true;
-				console.log($scope.calendar)
 				$scope.calendar.$update({id: "subscribe"}, function(calendar) {
 					$scope.calendar = calendar;
+					$scope.calendar.recent = true;
 				});
 			}	
 
 			$scope.unsubscribe = function() {
-				$scope.calendar.recent = false;
-				console.log($scope.calendar);
 				$scope.calendar.$update({id: "unsubscribe"}, function(calendar) {
 					$scope.calendar = calendar;
+					$scope.calendar.recent = false;
 				});
 			}
 		}
