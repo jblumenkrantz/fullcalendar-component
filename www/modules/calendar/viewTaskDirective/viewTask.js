@@ -28,6 +28,14 @@ angular.module('pinwheelApp')
 					});
 					$scope.cancel('editingTask');
 				}
+				$scope.deleteTask = function(task){
+					//console.warn('delete');
+					$scope.task.$delete({id: $scope.task.task_id}, function(task){
+						console.warn(task);
+						$scope.task = task;
+					});
+					$scope.cancel('editingTask');
+				}
 			}
 		}
 	});

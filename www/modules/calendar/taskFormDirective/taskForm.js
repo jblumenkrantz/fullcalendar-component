@@ -9,7 +9,8 @@ angular.module('pinwheelApp')
 				task: '=',
 				calendars: '=',
 				save: '&',
-				cancel: '&'
+				cancel: '&',
+				delete: '&'
 			}
 		}
 	});

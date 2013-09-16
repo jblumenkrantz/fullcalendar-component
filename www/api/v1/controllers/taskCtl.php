@@ -52,7 +52,7 @@ class TaskCtl
 	function create() {
 		$pinsqli = DistributedMySQLConnection:: writeInstance();
 		$authUserID = Authorize:: sharedInstance()->userID();
-		$tasks = Task:: create(json_decode(Request:: body()), $pinsqli);
+		$tasks = array_shift(Task:: create(json_decode(Request:: body()), $pinsqli));
 		echo json_encode($tasks);
 		User:: incrementVersion($authUserID);
 	}
@@ -82,7 +82,6 @@ class TaskCtl
 		$tsprops = json_decode(Request:: body());
 		$authUserID = Authorize:: sharedInstance()->userID();
 		$pinsqli = DistributedMySQLConnection:: writeInstance();
-		echo '[';
 		if (is_object($tsprops))
 			$tsprops = array($tsprops);
 		$ntasks = count($tsprops);
@@ -118,7 +117,7 @@ class TaskCtl
 				
 				$task->update($pinsqli);
 				
-				echo json_encode(array($task->task_id => $task));
+				echo json_encode($task);
 			} catch (TaskDataConflictException $e) {
 				echo $e->json_encode();
 			} catch (TaskDoesNotExist $e) {
@@ -126,7 +125,6 @@ class TaskCtl
 			}
 			if (--$ntasks > 0) echo ',';
 		}
-		echo ']';
 		User:: incrementVersion($authUserID);
 	}
 
@@ -143,34 +141,20 @@ class TaskCtl
 	*	the client to settle the conflict, regardless the local delte of the Same Task.	
 	*/
 	function delete(){
-		$tsprops = json_decode(Request:: body());
+		$taskBody = json_decode(Request:: body());
 		$authUserID = Authorize:: sharedInstance()->userID();
-		echo '[';
-		if (is_object($tsprops))
-			$tsprops = array($tsprops);
-		$ntasks = count($tsprops);
-		foreach ($tsprops as $tsprop) {
-			try {
-				$task = new Task($tsprop);
-				$task->delete();
+		error_log($taskBody);
+		/*$task = new Task($taskBody);
+		$task->delete();
 
-				//if event has a reminder and
-				if ($tsprop->reminder_pref_id != null && !$using_calendar_reminder) {
-					$tsprop->version = $tsprop->reminder_pref_version;
-					$reminder_pref = new ReminderPrefs($tsprop);
-					$reminder_pref->delete();
-				}
-
-				echo json_encode($task);
-			} catch (TaskDataConflictException $e) {
-				echo $e->json_encode();
-			} catch (TaskDoesNotExist $e) {
-				echo $e->json_encode();
-			}
-			if (--$ntasks > 0) echo ',';
+		//if event has a reminder and
+		if ($task->reminder_pref_id != null && !$using_calendar_reminder) {
+			$task->version = $task->reminder_pref_version;
+			$reminder_pref = new ReminderPrefs($tsprop);
+			$reminder_pref->delete();
 		}
-		echo ']';
-		User:: incrementVersion($authUserID);
+		echo json_encode($task);
+		User:: incrementVersion($authUserID);*/
 	}
 }
 ?>
