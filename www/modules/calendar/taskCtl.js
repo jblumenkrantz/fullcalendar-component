@@ -4,9 +4,6 @@ angular.module('pinwheelApp')
   .controller('TaskCtl', function ($scope, Calendar, Task) {
 
 		// API CALLS GO HERE //
-		Calendar.query({id: 'all'}, function(calendars){
-			$scope.calendars = calendars;
-		});
 		Task.query({id: 'all'}, function(tasks){
 			$scope.tasks = tasks;
 		});

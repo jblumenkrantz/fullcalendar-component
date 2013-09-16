@@ -18,10 +18,6 @@ angular.module('pinwheelApp')
 			$scope.toggle('addingSubscription');
 		}
 
-		Calendar.query({id: 'all'}, function(calendars){
-			console.log(calendars);
-			$scope.calendars = calendars;
-		});
   });
 
 
