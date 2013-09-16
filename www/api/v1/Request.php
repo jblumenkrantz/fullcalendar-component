@@ -41,4 +41,8 @@ class Request
 			$value = $_GET[$key];
 		return $value;
 	}
+
+	static public function parsePath () {
+		return explode('/',static:: path());
+	}
 }
