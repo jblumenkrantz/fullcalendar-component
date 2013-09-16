@@ -174,7 +174,7 @@ class Calendar extends PinwheelModelObject
 				left outer join
 					reminder_prefs
 				ON 
-					calendars.calendar_id = reminder_prefs.calendar_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$authUserID' AND reminder_prefs.aggregate = TRUE
+					calendars.calendar_id = reminder_prefs.calendar_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$userId' AND reminder_prefs.aggregate = TRUE
 				left outer join
 					public_calendars
 				ON
@@ -198,7 +198,6 @@ class Calendar extends PinwheelModelObject
 						WHERE 
 							user_id = '$userId')
 				", $pinsqli));
-
 
 	}
 	static public function loadUserSubscriptions($userId, $pinsqli=NULL){	
