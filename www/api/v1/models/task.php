@@ -202,7 +202,8 @@ class Task extends PinwheelModelObject
 		$tasks = array();
 		if (!$pinsqli->errno) {
 			while (($object = $resulti->fetch_object()))
-				$tasks[$object->task_id] = new Task($object);
+				//$tasks[$object->task_id] = new Task($object);
+				array_push($tasks, new Task($object));
 		} else
 			throw new Exception($pinsqli->error, 1);
 
