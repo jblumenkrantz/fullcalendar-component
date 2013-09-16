@@ -272,16 +272,20 @@ function routes () {
 
 
 		/* Task Api */
+		'/task/:alpha/:number' => array(
+			Route::$delete=>'TaskCtl::delete',
+			Route::Authorize(),
+			Route::Request("application/json"),
+			Route::Response("application/json")
+		),
 		'/task/all/?' => array(
 			Route::$get => 'TaskCtl::getAll',
 			Route::Authorize(),
 			Route::Response("application/json")
 		),
-
 		'/task/:alpha/?' => array(
 			Route::$get=>'TaskCtl::get',
 			Route::$put=>'TaskCtl::update',
-			Route::$delete=>'TaskCtl::delete',
 			Route::Authorize(),
 			Route::Request("application/json"),
 			Route::Response("application/json")
@@ -295,7 +299,6 @@ function routes () {
 		'/task/?' => array(
 			Route::$post=>'TaskCtl::create',
 			Route::$put=>'TaskCtl::update',
-			Route::$delete=>'TaskCtl::delete',
 			Route::Authorize(),
 			Route::Request("application/json"),
 			Route::Response("application/json")

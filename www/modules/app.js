@@ -44,7 +44,7 @@ angular.module('pinwheelApp', ['ngResource'])
 		$httpProvider.defaults.headers.common['Authorization'] =  token;
 	}])
 	.factory('Task', function($resource){
-		return $resource('/api/v1/task/:id', {}, {update: {method:'PUT'}});
+		return $resource('/api/v1/task/:id/:version', {}, {update: {method:'PUT'}, delete: {method: 'DELETE', params: {version: ':version'}}});
 	})
 	.factory('Event', function($resource){
 		return $resource('/api/v1/event/:id', {}, {update: {method:'PUT'}});
