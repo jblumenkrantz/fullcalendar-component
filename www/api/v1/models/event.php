@@ -191,6 +191,26 @@ class Event extends PinwheelModelObject
 		, $pinsqli);
 	}
 
+	/** USED BY PINWHEEL **/
+	static public function getUsersEvents($userId, $pinsqli=NULL) {
+		$dataRay = $eventArray = array();
+
+		$cals = (object) array_merge((array) Calendar::loadUserCreatedCalendars($userId), (array) Calendar::loadUserSubscriptions($userId));
+
+		foreach($cals as $calendar){
+
+			$events = Event::getBatch(array("events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}'))"));
+
+			if(property_exists($calendar, 'adhoc_events') && !$calendar->adhoc_events){
+				unset($calendar->adhoc_events);
+			}
+			foreach($events as $event){
+				array_push($dataRay, $event);
+			}
+		}
+		return($dataRay);
+	}
+
 	static public function loadByQuery ($query, $pinsqli = NULL) {
 		$pinsqli = $pinsqli === NULL? DistributedMySQLConnection:: readInstance(): $pinsqli;
 		$resulti = $pinsqli->query($query);
@@ -575,7 +595,8 @@ class Event extends PinwheelModelObject
 			}else{
 				$returnedEvent = $event['event_id'];
 			}
-			$events[$event['event_id']] = $returnedEvent;
+			array_push($events, $returnedEvent);
+			//$events[$event['event_id']] = $returnedEvent;
 		}
 		return($events);
 	}

@@ -6,7 +6,7 @@ function routes () {
 
 
 		/* Event Api */
-		'/event/' => array(
+		'/event/all/?' => array(
 			Route::$get => 'EventCtl::getAll',
 			Route::Authorize(),
 			Route::Request("application/json"),

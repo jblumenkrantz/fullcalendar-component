@@ -13,6 +13,10 @@ angular.module('pinwheelApp')
 			//       include proper error logging
 			$scope.logout();
 		});
+		
+		Event.query({id: 'all'}, function(events){
+			$scope.events = events;
+		});
 
 		$scope.isViewable = function(item) {
 			console.log(item.calendar_id);

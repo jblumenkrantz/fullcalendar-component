@@ -151,11 +151,40 @@ class Calendar extends PinwheelModelObject
 			*/
 	}
 
+	static public function loadUserCreatedCalendars($userId, $pinsqli=NULL){
+		return(static:: genericQuery("SELECT 
+					calendars.calendar_id,
+					calendar_name,
+					UNIX_TIMESTAMP(create_time) as create_time,
+					creator_id,
+					UNIX_TIMESTAMP(calendars.last_modified) as last_modified,
+					calendars.active,
+					calendars.version,
+					reminder_prefs.mins_before,
+					reminder_prefs.reminder_type,
+					reminder_prefs.reminder_pref_id as reminder_pref_id,
+					reminder_prefs.version as reminder_pref_version,
+					reminder_prefs.reminder_pref_id as has_reminder,
+					reminder_prefs.aggregate as reminder_aggregate
+				from
+					calendars
+				left outer join
+					reminder_prefs
+				ON 
+					calendars.calendar_id = reminder_prefs.calendar_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = 'user_201304301345170x96952700x6690726' AND reminder_prefs.aggregate = TRUE
+				left outer join
+					public_calendars
+				ON
+					calendars.calendar_id = public_calendars.calendar_id
+				where
+					calendars.creator_id = 'user_201304301345170x96952700x6690726'"));
+	}
+
 	static public function loadUserOrgCalendars($userId, $pinsqli=NULL){
 		$authUserID = Authorize:: sharedInstance()->userID();
 	
 		return(static:: genericQuery(
-			"select 
+			"SELECT 
 					calendars.calendar_id,
 					calendar_name,
 					UNIX_TIMESTAMP(create_time) as create_time,
