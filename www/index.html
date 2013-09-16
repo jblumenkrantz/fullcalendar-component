@@ -117,7 +117,7 @@
 					<!-- / task entry form -->
 
 					<div ng-repeat="task in tasks">
-						<view-task task="task" calendars="calendars"> </view-task>
+						<view-task task="task" calendars="calendars" ng-show="task.active"> </view-task>
 					</div>
 
 				</div>

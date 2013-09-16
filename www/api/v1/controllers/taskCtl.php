@@ -141,10 +141,12 @@ class TaskCtl
 	*	the client to settle the conflict, regardless the local delte of the Same Task.	
 	*/
 	function delete(){
-		$taskBody = json_decode(Request:: body());
+		$task = Request:: parsePath();
 		$authUserID = Authorize:: sharedInstance()->userID();
-		error_log($taskBody);
-		/*$task = new Task($taskBody);
+		$task['task_id'] = $task[2];
+		$task['version'] = $task[3];
+		unset($task[0], $task[1], $task[2], $task[3]);
+		$task = new Task($task);
 		$task->delete();
 
 		//if event has a reminder and
@@ -154,7 +156,7 @@ class TaskCtl
 			$reminder_pref->delete();
 		}
 		echo json_encode($task);
-		User:: incrementVersion($authUserID);*/
+		User:: incrementVersion($authUserID);
 	}
 }
 ?>
