@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pinwheelApp')
-.directive('calendarSubscription', function(Calendar) {
+.directive('calendarSubscription', function(Calendar, Task, Event) {
 	return {
 		restrict: 'E',
 		template: '<div ng-style="{backgroundColor: calendar.color}" ng-include="getTemplateUrl()"></div>',
@@ -46,6 +46,10 @@ angular.module('pinwheelApp')
 					$scope.calendar = calendar;
 					$scope.calendar.recent = false;
 				});
+			}
+
+			$scope.toggleView = function() {
+				console.log($scope.calendar);
 			}
 		}
 	}

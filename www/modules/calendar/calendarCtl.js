@@ -14,10 +14,15 @@ angular.module('pinwheelApp')
 			$scope.logout();
 		});
 
+		$scope.isViewable = function(item) {
+			console.log(item.calendar_id);
+			console.log($scope.calendars);
+			return true;
+		}	
+
 		$scope.changeView = function(view){
 			$scope.view = view;
 		};
-
   });
 
 
