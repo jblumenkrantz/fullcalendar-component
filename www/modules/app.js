@@ -25,7 +25,7 @@ angular.module('pinwheelApp', ['ngResource'])
 				controller: 'LoginCtl'
 			})
 			.otherwise({
-				redirectTo: '/calendar/'+(new Date().getFullYear())+'/'+(new Date().getMonth()+1)+'/'+(new Date().getDate());
+				redirectTo: '/calendar/'+(new Date().getFullYear())+'/'+(new Date().getMonth()+1)+'/'+(new Date().getDate())
 			});
 	})
 	.value("localStorage", localStorage)
