@@ -38,7 +38,7 @@ angular.module('pinwheelApp', ['ngResource'])
 		return $resource('/api/v1/event/:id', {}, {update: {method:'PUT'}});
 	})
 	.factory('Calendar', function($resource){
-		return $resource('/api/v1/calendar/:id', {}, {update: {method:'PUT'}});
+		return $resource('/api/v1/calendar/:id/:version', {}, {update: {method:'PUT'}, delete: {method: 'DELETE', params: {version: ':version'}}});
 	})
 	.config(['$httpProvider', function ($httpProvider) {
 		$httpProvider.defaults.headers.common['Authorization'] =  localStorage['token'];
