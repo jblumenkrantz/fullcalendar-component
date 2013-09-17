@@ -1,24 +1,9 @@
 'use strict';
 
 angular.module('pinwheelApp')
-.directive('calendarSubscription', function() {
-	return {
-		restrict: 'E',
-		template: '<div ng-style="{backgroundColor: calendar.color}" ng-include="getTemplateUrl()"></div>',
-		scope: {
-			calendar: '=',
-			watcher: '='
-		},
-		controller: function($scope, $element, $attrs, $routeParams) {
-			//undefined watches get passed for the calendars that do not pass the filter
+  .controller('SubscriptionDirectiveCtl', function ($scope, $routeParams) {
 			if ($scope.watcher != undefined) {
 				$scope.watcher[$scope.calendar.calendar_id] = $scope.calendar.viewing;
-			}
-
-			$scope.getTemplateUrl = function() {
-				return ($attrs.type == 'available') ? 
-						'modules/calendar/subscriptionDirective/_view_available_subscription.html' :
-						'modules/calendar/subscriptionDirective/_view_subscription.html';
 			}
 
 			$scope.edit = function(name) {
@@ -44,6 +29,7 @@ angular.module('pinwheelApp')
 				$scope.calendar.$update({id: "subscribe"}, function(calendar) {
 					$scope.calendar = calendar;
 					$scope.calendar.recent = true;
+					$scope.watcher[$scope.calendar.calendar_id] = true;
 				});
 			}	
 
@@ -51,9 +37,8 @@ angular.module('pinwheelApp')
 				$scope.calendar.$update({id: "unsubscribe"}, function(calendar) {
 					$scope.calendar = calendar;
 					$scope.calendar.recent = false;
-					delete $scope.watcher[$scope.calendar.calendar_id]
+					$scope.watcher[$scope.calendar.calendar_id] = false;
 				});
 			}
-		}
-	}
-});
+		});
+

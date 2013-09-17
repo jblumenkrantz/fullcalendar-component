@@ -1,7 +1,7 @@
 <div ng-hide="editingCalendar">
 	<div class="row">
-		<div class="large-12 columns">
-			<input type='checkbox' ng-model="watcher[calendar.calendar_id]" />
+		<div class="large-12 columns" style="background: {{calendar.color}}">
+			<input type='checkbox' ng-model="watcher[calendar.calendar_id]"/>
 			<strong>{{calendar.calendar_name}}
 				<small ng-click="edit('editingCalendar')">edit</small>
 			</strong>
