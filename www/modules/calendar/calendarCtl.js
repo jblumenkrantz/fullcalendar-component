@@ -3,7 +3,7 @@
 angular.module('pinwheelApp')
   .controller('CalendarCtl', function ($scope, $routeParams, $location, Calendar, Event, Task) {
 
-		$scope.view = "month";
+		$scope.view = "list";
 		$scope.calendarWatchers = {};
 
 		Calendar.query({id: 'all'}, function(calendars){
