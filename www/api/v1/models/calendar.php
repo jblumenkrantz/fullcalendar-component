@@ -17,6 +17,7 @@ class Calendar extends PinwheelModelObject
 	public $reminder_pref_version;
 	public $reminder_aggregate;
 	public $public;
+	public $viewing;
 
 
 	/**
@@ -40,7 +41,8 @@ class Calendar extends PinwheelModelObject
 			'reminder_pref_id' => '',
 			'reminder_pref_version' => 0,
 			'reminder_aggregate' => 1,
-			'public' => false
+			'public' => false,
+			'viewing' => false
 		);
 	}
 	static public function unsubscribe($subscription, $userId){
