@@ -14,8 +14,8 @@ angular.module('pinwheelApp')
 		$scope.saveNew = function(){
 			$scope.newTask.$save({}, function(task){
 				$scope.tasks.push(task);
+				$scope.newTask = new Task();
 			});
-			$scope.newTask = new Task(); //refresh newTask
 			$scope.toggle('addingTask');
 		}
   });
