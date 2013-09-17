@@ -51,6 +51,7 @@ angular.module('pinwheelApp')
 				$scope.calendar.$update({id: "unsubscribe"}, function(calendar) {
 					$scope.calendar = calendar;
 					$scope.calendar.recent = false;
+					delete $scope.watcher[$scope.calendar.calendar_id]
 				});
 			}
 		}
