@@ -26,6 +26,7 @@ angular.module('pinwheelApp')
 				$scope.calendar.$update({id: "subscribe"}, function(calendar) {
 					$scope.calendar = calendar;
 					$scope.calendar.recent = true;
+					$scope.watcher[$scope.calendar.calendar_id] = true;
 				});
 			}	
 
@@ -33,6 +34,7 @@ angular.module('pinwheelApp')
 				$scope.calendar.$update({id: "unsubscribe"}, function(calendar) {
 					$scope.calendar = calendar;
 					$scope.calendar.recent = false;
+					$scope.watcher[$scope.calendar.calendar_id] = false;
 				});
 			}
 		});
