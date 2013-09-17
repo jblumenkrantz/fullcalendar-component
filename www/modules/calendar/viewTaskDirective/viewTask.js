@@ -12,6 +12,7 @@ angular.module('pinwheelApp')
 			},
 			controller: function($scope, $element, $attrs, $routeParams){
 				$scope.edit = function(name){
+					console.log($scope.task);
 					$scope.editTask || ($scope.editTask = {});
 					angular.copy($scope.task, $scope.editTask);
 					$scope[name] = !$scope[name];
