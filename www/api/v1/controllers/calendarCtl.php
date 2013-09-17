@@ -139,6 +139,7 @@ class CalendarCtl
 				//perform calendar updates
 				$calendar->update_subscriptions($pinsqli);
 				$calendar->update_reminders($pinsqli);
+				$calendar->updateSubscription($calendar->calendar_id, $calendar->viewing, $authUserID);
 				$calendar->update($pinsqli);
 				if($calendar->creator_id == $authUserID){
 					if(property_exists($tsprop,'public') && $tsprop->public){
