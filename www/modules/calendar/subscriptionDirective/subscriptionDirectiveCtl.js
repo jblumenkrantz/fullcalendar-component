@@ -43,7 +43,7 @@ angular.module('pinwheelApp')
 		}
 
 		$scope.setShowState = function() {
-			$scope.calendar.viewing = $scope.watcher[$scope.calendar.calendar_id];
+			$scope.calendar.viewing = $scope.watcher[$scope.calendar.calendar_id].viewing;
 			$scope.calendar.$update({id: $scope.calendar.calendar_id}, function(calendar) {
 				$scope.calendar = calendar;
 			});
