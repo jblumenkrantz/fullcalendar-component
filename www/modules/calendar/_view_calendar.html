@@ -31,11 +31,11 @@
 	</div>
 
 	<!-- subscribed calendars ng-repeat -->
-	<calendar-subscription
-		ng-repeat="calendar in subscribedCalendars = (calendars | filter:{active: 1, subscribed: true} | orderBy:'calendar_name')"
-		watcher="calendarWatchers"
-		calendar="calendar">
-	</calendar-subscription>
+		<active-subscription
+		 ng-repeat="calendar in subscribedCalendars = (calendars | filter:{active: 1, subscribed: true} | orderBy:'calendar_name')" 
+			watcher="calendarWatchers"
+			calendar="calendar">
+		</active-subscription>
 
 	<!-- RECENTLY CREATED/SUBSCRIBED CALENDAR SECTION -->
 
@@ -45,11 +45,11 @@
 	</div>
 
 	 <!-- recently acquired calendars ng-repeat -->
-	<calendar-subscription
+	<active-subscription
 		ng-repeat="calendar in recentCalendars = (calendars | filter:{active: 1, recent: true, subscribed: true} | orderBy:'calendar_name')"
 		type="available"
 		calendar="calendar">
-	</calendar-subscription>
+		</active-subscription>
 	
 
 	 <!-- AVAILABLE CALENDAR SECTION -->
@@ -60,11 +60,11 @@
 	</div>
 
 	<!-- available calendars ng-repeat -->
-	<calendar-subscription
+	<available-subscription
 		ng-repeat="calendar in availabeCalendars = (calendars | filter:{active: 1, subscribed: false} | orderBy:'calendar_name')"
 		type="available" 
 		calendar="calendar">
-	</calendar-subscription>
+	</available-subscription>
 </div>
 <!-- / subscription view -->
 
