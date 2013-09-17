@@ -28,7 +28,11 @@ angular.module('pinwheelApp')
 		});
 
 		$scope.isCalendarShowing = function(item) {
-			return $scope.calendarWatchers[item.calendar_id];
+			return $scope.calendarWatchers[item.calendar_id] && $scope.calendarWatchers[item.calendar_id].viewing;
+		}
+
+		$scope.calendarColor = function(item) {
+			return $scope.calendarWatchers[item.calendar_id].color;
 		}
 
 		$scope.changeView = function(view) {

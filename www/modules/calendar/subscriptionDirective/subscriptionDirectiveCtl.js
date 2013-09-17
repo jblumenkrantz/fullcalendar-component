@@ -3,7 +3,7 @@
 angular.module('pinwheelApp')
 	.controller('SubscriptionDirectiveCtl', function ($scope, $routeParams) {
 		if ($scope.watcher != undefined) {
-			$scope.watcher[$scope.calendar.calendar_id] = $scope.calendar.viewing;
+			$scope.watcher[$scope.calendar.calendar_id] = {viewing: $scope.calendar.viewing, color: $scope.calendar.color};
 		}
 
 		$scope.edit = function(name) {
@@ -21,6 +21,7 @@ angular.module('pinwheelApp')
 			angular.copy($scope.editCalendar, $scope.calendar);
 			$scope.calendar.$update({id: $scope.calendar.calendar_id}, function(calendar) {
 				$scope.calendar = calendar;
+				$scope.watcher[$scope.calendar.calendar_id].color = $scope.calendar.color; 
 			});
 			$scope.cancel('editingCalendar');
 		}

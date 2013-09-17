@@ -7,7 +7,8 @@ angular.module('pinwheelApp')
 			templateUrl: 'modules/calendar/viewTaskDirective/_view_task.html',
 			scope: {
 				task: '=',
-				calendars: '='
+				calendars: '=',
+				colors: '='
 			},
 			controller: function($scope, $element, $attrs, $routeParams){
 				$scope.edit = function(name){
