@@ -53,6 +53,10 @@ angular.module('pinwheelApp')
 					$scope.calendar.recent = false;
 				});
 			}
+
+			$scope.setShowState = function() {
+				$scope.calendar.viewing = $scope.watcher[$scope.calendar.calendar_id];
+			}
 		}
 	}
 });
