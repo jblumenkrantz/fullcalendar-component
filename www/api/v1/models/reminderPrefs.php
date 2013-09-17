@@ -63,7 +63,74 @@ class ReminderPrefs extends PinwheelModelObject
 		return $rprefs;
 	}
 
+	static public function loadCalendarReminders($userId, $pinsqli = NULL) {
+		return static:: loadByQuery("SELECT
+					reminder_pref_id,
+					calendar_id,
+					event_id,
+					task_id,
+					event_reminder_pref,
+					user_id,
+					mins_before,
+					UNIX_TIMESTAMP(absolute_date) as absolute_date,
+					relative,
+					aggregate,
+					active,
+					UNIX_TIMESTAMP(last_modified) as last_modified,
+					version,
+					reminder_type
+				FROM reminder_prefs
+				WHERE user_id = '$userId'
+					AND active = TRUE
+				AND event_id = ''
+				AND task_id = ''", $pinsqli);
+	}
 
+	static public function loadEventReminders($userId, $pinsqli = NULL) {
+		return static:: loadByQuery("SELECT
+					reminder_pref_id,
+					calendar_id,
+					event_id,
+					task_id,
+					event_reminder_pref,
+					user_id,
+					mins_before,
+					UNIX_TIMESTAMP(absolute_date) as absolute_date,
+					relative,
+					aggregate,
+					active,
+					UNIX_TIMESTAMP(last_modified) as last_modified,
+					version,
+					reminder_type
+				FROM reminder_prefs
+				WHERE user_id = '$userId'
+					AND active = TRUE
+				AND event_id != ''
+				AND task_id = ''", $pinsqli);
+	}
+
+	static public function loadTaskReminders($userId, $pinsqli = NULL) {
+		return static:: loadByQuery("SELECT
+					reminder_pref_id,
+					calendar_id,
+					event_id,
+					task_id,
+					event_reminder_pref,
+					user_id,
+					mins_before,
+					UNIX_TIMESTAMP(absolute_date) as absolute_date,
+					relative,
+					aggregate,
+					active,
+					UNIX_TIMESTAMP(last_modified) as last_modified,
+					version,
+					reminder_type
+				FROM reminder_prefs
+				WHERE user_id = '$userId'
+					AND active = TRUE
+					AND event_id = ''
+					AND task_id != ''", $pinsqli);
+	}
 	/**
 	*	ReminderPrefs::load builds ReminderPref from datastore.
 	*

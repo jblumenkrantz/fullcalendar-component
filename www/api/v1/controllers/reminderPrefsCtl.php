@@ -14,14 +14,23 @@ class ReminderPrefsCtl
 		echo json_encode($rprefs);
 	}
 
-	function getByUser ($userID) {
-		if (!Authorize::skipAuthentication() && Authorize::sharedInstance()->userID() != $userID) {
-			echo '[';
-			$e = new UserForbiddenException(Authorize::sharedInstance()->userID());
-			echo $e->json_encode();
-			echo ']';
-		} else
-			echo json_encode(ReminderPrefs:: loadByUser($userID));
+	function getCalendarReminders () {
+		$authUserID = Authorize:: sharedInstance()->userID();
+		$tsprops = json_decode(Request:: body());
+
+		echo json_encode(ReminderPrefs:: loadCalendarReminders($authUserID));
+	}
+	function getEventReminders () {
+		$authUserID = Authorize:: sharedInstance()->userID();
+		$tsprops = json_decode(Request:: body());
+
+		echo json_encode(ReminderPrefs:: loadEventReminders($authUserID));
+	}
+	function getTaskReminders () {
+		$authUserID = Authorize:: sharedInstance()->userID();
+		$tsprops = json_decode(Request:: body());
+
+		echo json_encode(ReminderPrefs:: loadTaskReminders($authUserID));
 	}
 
 	function create () {

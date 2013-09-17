@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('pinwheelApp')
-  .controller('CalendarCtl', function ($filter, $scope, $routeParams, $location, Calendar, Event, Task) {
-
+	.controller('CalendarCtl', function ($filter, $scope, $routeParams, $location, Calendar, Event, Task) {
 		$scope.view = "list";
 		$scope.calendarWatchers = {};
+		$scope.reminders = {};
 
 		Calendar.query({id: 'all'}, function(calendars){
 			$scope.calendars = calendars;
@@ -24,7 +24,7 @@ angular.module('pinwheelApp')
 			//       include proper error logging
 			$scope.logout();
 		});
-		
+
 		$scope.isCalendarShowing = function(item) {
 			return $scope.calendarWatchers[item.calendar_id] && $scope.calendarWatchers[item.calendar_id].viewing;
 		}
