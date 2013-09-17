@@ -82,23 +82,23 @@
 
 	<div ng-switch="view">
 		<div ng-switch-when="day">
-			<day-view tasks="tasks" calendars="calendars" events="events" is-calendar-showing="isCalendarShowing"></day-view>
+			<day-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></day-view>
 		</div>
 
 		<div ng-switch-when="week">
-			<week-view tasks="tasks" calendars="calendars" events="events" is-calendar-showing="isCalendarShowing"></week-view>
+			<week-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></week-view>
 		</div>
 
 		<div ng-switch-when="month">
-			<month-view tasks="tasks" calendars="calendars" events="events" is-calendar-showing="isCalendarShowing"></month-view>
+			<month-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></month-view>
 		</div>
 
 		<div ng-switch-when="list">
-			<list-view tasks="tasks" calendars="calendars" events="events" is-calendar-showing="isCalendarShowing"></list-view>
+			<list-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></list-view>
 		</div>
 
 		<div ng-switch-when="datebook">
-			<datebook-view tasks="tasks" calendars="calendars" events="events" is-calendar-showing="isCalendarShowing"></datebook-view>
+			<datebook-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></datebook-view>
 		</div>
 	</div>
 </div>
@@ -119,7 +119,7 @@
 	<!-- / task entry form -->
 
 	<div ng-repeat="task in tasks | filter: isCalendarShowing">
-		<view-task task="task" calendars="calendars" ng-show="task.active"></view-task>
+		<view-task task="task" calendars="calendars" colors="calendarWatchers" ng-show="task.active"></view-task>
 	</div>
 
 </div>

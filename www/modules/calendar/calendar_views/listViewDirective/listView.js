@@ -9,10 +9,10 @@ angular.module('pinwheelApp')
 				task: '=',
 				calendars: '=',
 				events: '=',
-				isCalendarShowing: '&'
+				colors: '=',
+				filter: '&'
 			},
 			controller: function($scope, $element, $attrs, $routeParams){
-				console.log("list");
 			}
 		}
 	});
