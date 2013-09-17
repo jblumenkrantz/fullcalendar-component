@@ -2,6 +2,9 @@
 
 angular.module('pinwheelApp')
   .controller('SubscriptionDirectiveCtl', function ($scope, $routeParams) {
+			if ($scope.watcher != undefined) {
+				$scope.watcher[$scope.calendar.calendar_id] = $scope.calendar.viewing;
+			}
 
 			$scope.edit = function(name) {
 				$scope.editCalendar || ($scope.editCalendar = {});
