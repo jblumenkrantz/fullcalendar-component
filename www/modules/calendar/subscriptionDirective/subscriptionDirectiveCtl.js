@@ -40,5 +40,10 @@ angular.module('pinwheelApp')
 					$scope.watcher[$scope.calendar.calendar_id] = false;
 				});
 			}
-		});
 
+			$scope.setShowState = function() {
+				$scope.calendar.viewing = $scope.watcher[$scope.calendar.calendar_id];
+			}
+		}
+	}
+});
