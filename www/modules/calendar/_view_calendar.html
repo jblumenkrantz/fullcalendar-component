@@ -1,90 +1,104 @@
 <!-- subscription view -->
 <div class="large-2 columns" ng-controller="SubscriptionCtl">
+	<div class="row">
+		<div class="large-12 columns">
+			<h4>Calendars <small ng-click="toggle('addingSubscription')">add</small></h4>
+		</div>
+		<hr />
+	</div>
+
+	<!-- calendar creation form -->
+	<div ng-show="addingSubscription">
 		<div class="row">
-				<div class="large-12 columns">
-						<h4>Calendars <small ng-click="toggle('addingSubscription')">add</small></h4>
-				</div>
-				<hr />
+			<input type="text" ng-model="newCalendar.calendar_name" placeholder="Name (required)" />
+			<input type="text" ng-model="newCalendar.color" placeholder="Color (required)" />
 		</div>
-
-		<!-- calendar creation form -->
-		<div ng-show="addingSubscription">
-				<div class="row">
-						<input type="text" ng-model="newCalendar.calendar_name" placeholder="Name (required)" />
-						<input type="text" ng-model="newCalendar.color" placeholder="Color (required)" />
-				</div>
-				<div class="row">
-						<div class="large-6 columns">
-								<div class="expand small alert button" ng-click="cancelNew()" >cancel</div>
-						</div>
-						<div class="large-6 columns">
-								<div class="expand small button" ng-click="saveNew()" >save</div>
-						</div>
-				</div>
+		<div class="row">
+			<div class="large-6 columns">
+				<div class="expand small alert button" ng-click="cancelNew()" >cancel</div>
+			</div>
+			<div class="large-6 columns">
+				<div class="expand small button" ng-click="saveNew()" >save</div>
+			</div>
 		</div>
-		
-		<!-- SUBSCRIBED CALENDAR SECTION -->
+	</div>
+	
+	<!-- SUBSCRIBED CALENDAR SECTION -->
 
-		<div ng-show="subscribedCalendars.length">
-				Subscribed Calendars
-				<hr />
-		</div>
+	<div ng-show="subscribedCalendars.length">
+		Subscribed Calendars
+		<hr />
+	</div>
 
-		<!-- subscribed calendars ng-repeat -->
-		<div ng-repeat="calendar in subscribedCalendars = (calendars | filter:{active: 1, subscribed: true} | orderBy:'calendar_name')">
-			<calendar-subscription watcher="calendarWatchers" calendar="calendar"></calendar-subscription>
-		</div>
+	<!-- subscribed calendars ng-repeat -->
+	<calendar-subscription
+		ng-repeat="calendar in subscribedCalendars = (calendars | filter:{active: 1, subscribed: true} | orderBy:'calendar_name')"
+		watcher="calendarWatchers"
+		calendar="calendar">
+	</calendar-subscription>
 
-		<!-- RECENTLY CREATED/SUBSCRIBED CALENDAR SECTION -->
+	<!-- RECENTLY CREATED/SUBSCRIBED CALENDAR SECTION -->
 
-		<div ng-show="recentCalendars.length">
-				Recently Added
-				<hr />
-		</div>
+	<div ng-show="recentCalendars.length">
+		Recently Added
+		<hr />
+	</div>
 
-		 <!-- recently acquired calendars ng-repeat -->
-		<div ng-repeat="calendar in recentCalendars = (calendars | filter:{active: 1, recent: true, subscribed: true} | orderBy:'calendar_name')">
-				<calendar-subscription type="available" calendar="calendar"></calendar-subscription>
-		</div>
+	 <!-- recently acquired calendars ng-repeat -->
+	<calendar-subscription
+		ng-repeat="calendar in recentCalendars = (calendars | filter:{active: 1, recent: true, subscribed: true} | orderBy:'calendar_name')"
+		type="available"
+		calendar="calendar">
+	</calendar-subscription>
+	
 
-		 <!-- AVAILABLE CALENDAR SECTION -->
+	 <!-- AVAILABLE CALENDAR SECTION -->
 
-		<div ng-show="availabeCalendars.length">
-				Available Calendars
-				<hr />
-		</div>
+	<div ng-show="availabeCalendars.length">
+		Available Calendars
+		<hr />
+	</div>
 
-		<!-- available calendars ng-repeat -->
-		<div ng-repeat="calendar in availabeCalendars = (calendars | filter:{active: 1, subscribed: false} | orderBy:'calendar_name')">
-				<calendar-subscription type="available" calendar="calendar"></calendar-subscription>
-		</div>
+	<!-- available calendars ng-repeat -->
+	<calendar-subscription
+		ng-repeat="calendar in availabeCalendars = (calendars | filter:{active: 1, subscribed: false} | orderBy:'calendar_name')"
+		type="available" 
+		calendar="calendar">
+	</calendar-subscription>
 </div>
 <!-- / subscription view -->
 
 <!-- event view -->
 <div class="large-8 columns">
-	<h3>{{view}} view <small ng-click="changeView('day')">day</small> <small ng-click="changeView('week')">week</small> <small ng-click="changeView('month')">month</small> <small ng-click="changeView('list')">list</small> <small ng-click="changeView('datebook')">datebook</small></h3>
+	<div class="row">
+		<div class="large-5 columns">
+			<h3>{{view}} view </h3>
+		</div>
+		<div class="large-7 columns">
+			<h3><small ng-click="changeView('day')">day</small> <small ng-click="changeView('week')">week</small> <small ng-click="changeView('month')">month</small> <small ng-click="changeView('list')">list</small> <small ng-click="changeView('datebook')">datebook</small></h3>
+		</div>
+	</div>
+	
 
-	{{events |  filter:{event_id: 'event_201302131053590x85369500x2984637'} }}
 	<div ng-switch="view">
 		<div ng-switch-when="day">
-			<day-view tasks="tasks" calendars="calendars" events="events"></day-view>
+			<day-view tasks="tasks" calendars="calendars" events="events" is-calendar-showing="isCalendarShowing"></day-view>
 		</div>
 
 		<div ng-switch-when="week">
-			<week-view tasks="tasks" calendars="calendars" events="events"></week-view>
+			<week-view tasks="tasks" calendars="calendars" events="events" is-calendar-showing="isCalendarShowing"></week-view>
 		</div>
 
 		<div ng-switch-when="month">
-			<month-view tasks="tasks" calendars="calendars" events="events"></month-view>
+			<month-view tasks="tasks" calendars="calendars" events="events" is-calendar-showing="isCalendarShowing"></month-view>
 		</div>
 
 		<div ng-switch-when="list">
-			<list-view tasks="tasks" calendars="calendars" events="events"></list-view>
+			<list-view tasks="tasks" calendars="calendars" events="events" is-calendar-showing="isCalendarShowing"></list-view>
 		</div>
 
 		<div ng-switch-when="datebook">
-			<datebook-view tasks="tasks" calendars="calendars" events="events"></datebook-view>
+			<datebook-view tasks="tasks" calendars="calendars" events="events" is-calendar-showing="isCalendarShowing"></datebook-view>
 		</div>
 	</div>
 </div>
@@ -104,8 +118,8 @@
 	</div>
 	<!-- / task entry form -->
 
-	<div ng-repeat="task in tasks">
-		<view-task task="task" calendars="calendars" ng-show="task.active" ng-show="calendarWatchers[task.calendar_id]"> </view-task>
+	<div ng-repeat="task in tasks | filter: isCalendarShowing">
+		<view-task task="task" calendars="calendars" ng-show="task.active"></view-task>
 	</div>
 
 </div>

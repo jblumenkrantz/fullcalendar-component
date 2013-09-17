@@ -8,6 +8,9 @@ angular.module('pinwheelApp')
 
 		Calendar.query({id: 'all'}, function(calendars){
 			$scope.calendars = calendars;
+			$scope.calendars[9].viewing = true; //this is for testing: show this calendar's events and tasks
+			$scope.calendars[10].viewing = true; //this is for testing: show this calendar's events and tasks
+
 			Task.query({id: 'all'}, function(tasks){
 				$scope.tasks = tasks;
 			});
@@ -24,7 +27,11 @@ angular.module('pinwheelApp')
 			$scope.events = events;
 		});
 
-		$scope.changeView = function(view){
+		$scope.isCalendarShowing = function(item) {
+			return $scope.calendarWatchers[item.calendar_id];
+		}
+
+		$scope.changeView = function(view) {
 			$scope.view = view;
 		};
   });

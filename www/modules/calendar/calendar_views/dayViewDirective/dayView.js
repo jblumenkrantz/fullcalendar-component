@@ -8,9 +8,11 @@ angular.module('pinwheelApp')
 			scope: {
 				task: '=',
 				calendars: '=',
-				events: '='
+				events: '=',
+				isCalendarShowing: '&'
 			},
 			controller: function($scope, $element, $attrs, $routeParams){
+				console.log($scope.isCalendarShowing);
 			}
 		}
 	});
