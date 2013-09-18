@@ -1,7 +1,7 @@
-<div ng-repeat="event in events | filter: filter(event.calendar_id) | orderBy: 'event_start||due_time'">
-
-	<div class="row display" ng-style="{color: colors[event.calendar_id].color}">
-		<div class="large-3 columns">{{event.event_title||event.task_name}}</div>
+<h1>list view</h1>
+<div ng-repeat="event in events | filter: isCalendarShowing | orderBy: 'event_start||due_time'">
+	<div class="row display" ng-style="{color: calendarWatchers[event.calendar_id].color}">
+		<div ng-click="edit(event)" class="large-3 columns">{{event.event_title||event.task_name}}</div>
 		<div class="large-3 columns">{{event.calendar_id}}</div>
 		<div class="large-3 columns">{{event.event_start||event.due_time | date}}</div>
 		<div class="large-3 columns">{{event.event_end | date}}</div>

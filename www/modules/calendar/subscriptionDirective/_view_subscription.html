@@ -14,10 +14,12 @@
 		<input type="text" ng-model="editCalendar.color" placeholder="Color (required)" />
 	</div>
 	<div class="row">
-		<ul class="button-group even-3">
+		<ul class="button-group even-2">
 			<li class="expand small alert button" ng-click="cancel('editingCalendar')" >cancel</li>
+			<li class="expand small alert button" ng-click="unsubscribe()" >unsubscribe</li>
+		</ul>
+		<ul class="button-group">
 			<li class="expand small button" ng-click="save('editingCalendar')" >save</li>
-			<li class="expand small button" ng-click="unsubscribe()" >unsubscribe</li>
 		</ul>
 	</div>
 </div>
