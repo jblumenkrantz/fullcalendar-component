@@ -24,6 +24,12 @@ function routes () {
 			Route::Request("application/json"),
 			Route::Response("application/json")
 		),
+		'/event/week/:number/:number/:number/?' => array(
+			Route::$get => 'EventCtl::getWeek',
+			Route::Authorize(),
+			Route::Request("application/json"),
+			Route::Response("application/json")
+		),		
 		'/event/:alpha/?' => array(
 			Route::$get=>'EventCtl::get',
 			Route::$put=>'EventCtl::update',
