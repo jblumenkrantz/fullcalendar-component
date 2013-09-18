@@ -21,7 +21,7 @@ class EventCtl
 		$events = Event::getBatch();
 	 	echo json_encode($events);
 	}
-	function getMonth($id) {
+	function getMonth() {
 		$authUserID = Authorize:: sharedInstance()->userID();
 		$month = array_slice(Request::parsePath(),-2,2);
 		$month['year'] = $month[0];		
@@ -35,7 +35,24 @@ class EventCtl
 		$events = Event::getEventsBetween($authUserID, $month['start'], $month['end']);
 	 	echo json_encode($events);
 	}
-	function getDay($id) {
+
+	function getWeek() {
+		$authUserID = Authorize:: sharedInstance()->userID();
+		$week = array_slice(Request::parsePath(),-3,3);
+		$week['year'] = $week[0];
+		$week['month'] = $week[1];
+		$week['day'] = $week[2];
+		unset($week[0],$week[1],$week[2]);
+
+		$date = new DateTime($week['year']."-".$week['month']."-".$week['day']." 00:00:00");
+		$week['start'] = strtotime('this week', $date->format("U"));
+
+		$week['end'] = $week['start']+6*24*3600;
+		$events = Event::getEventsBetween($authUserID, $week['start'], $week['end']);
+	 	echo json_encode($events);
+	}
+
+	function getDay() {
 		$authUserID = Authorize:: sharedInstance()->userID();
 		$day = array_slice(Request::parsePath(),-3,3);
 		$day['year'] = $day[0];
