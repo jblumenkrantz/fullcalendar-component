@@ -235,7 +235,7 @@ class Event extends PinwheelModelObject
 		$events = array();
 		if (!$pinsqli->errno) {
 			while (($object = $resulti->fetch_object()))
-			$events[$object->event_id] = new Event($object);
+			array_push($events, new Event($object));
 				//array_push($events, new Event($object));  // why were we doing it this way?
 		} else
 			throw new Exception($pinsqli->error, 1);

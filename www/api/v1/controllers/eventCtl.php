@@ -92,7 +92,7 @@ class EventCtl
 		$events = Event:: create(json_decode(Request:: body()), $pinsqli);
 		$authUserID = Authorize:: sharedInstance()->userID();
 		//error_log(print_r(json_decode(Request:: body()),true));
-		echo json_encode($events);
+		echo json_encode(array_shift($events));
 		User:: incrementVersion($authUserID);
 	}
 
