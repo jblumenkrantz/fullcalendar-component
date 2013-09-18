@@ -10,6 +10,7 @@ angular.module('pinwheelApp')
 			$scope.formEvent = new Event();
 			$scope.addingEvent = true;
 			$scope.editingEvent = false;
+			$scope.quickAdding = false;
 		}
 
 		//open form for editing of existing event
@@ -38,6 +39,7 @@ angular.module('pinwheelApp')
 				$scope.formEvent = new Event();
 			});
 			$scope.addingEvent = false;
+			$scope.quickAdding = false;
 		}
 		//delete existing event
 		$scope.delete = function(){
@@ -50,5 +52,18 @@ angular.module('pinwheelApp')
 			$scope.formEvent = new Event();
 			$scope.addingEvent = false;
 			$scope.editingEvent = false;
+			$scope.quickAdding = false;
+		}
+
+		$scope.quickAdd = function() {
+			$scope.quickAdding = true;
+			$scope.addingEvent = false;
+			$scope.editingEvent = false;
+		}
+
+		$scope.quickSave = function() {
+			$scope.formEvent = new Event();
+			angular.copy(QuickAdd($scope.quickAdd.text), $scope.formEvent);
+			$scope.save();
 		}
   });
