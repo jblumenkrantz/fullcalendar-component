@@ -5,7 +5,6 @@ angular.module('pinwheelApp')
 		$scope.toggle = function(name) {
 			$scope[name] = !$scope[name];
 		}
-
 		//open form for adding of new event
 		$scope.add = function() {
 			$scope.formEvent = new Event();
@@ -31,11 +30,11 @@ angular.module('pinwheelApp')
 			});
 			$scope.editingEvent = false;
 		}
-		
+
 		//save new event
 		$scope.save = function(){
-			$scope.formEvent.$save({}, function(event) {
-				$scope.events.push(event);
+			$scope.formEvent.$save({}, function(newEvent) {
+				$scope.events.push(newEvent);
 				$scope.formEvent = new Event();
 			});
 			$scope.addingEvent = false;
