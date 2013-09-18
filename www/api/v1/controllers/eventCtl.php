@@ -21,7 +21,35 @@ class EventCtl
 		$events = Event::getBatch();
 	 	echo json_encode($events);
 	}
+	function getMonth($id) {
+		$authUserID = Authorize:: sharedInstance()->userID();
+		$month = array_slice(Request::parsePath(),-2,2);
+		$month['year'] = $month[0];		
+		$month['month'] = $month[1];
+		unset($month[0],$month[1]);
 
+		$date = new DateTime($month['year']."-".$month['month']."-1");
+		$month['start'] = $date->format("U");
+		$date = new DateTime($month['year']."-".$month['month']."-".$date->format("t"));
+		$month['end'] = $date->format("U");
+		$events = Event::getEventsBetween($authUserID, $month['start'], $month['end']);
+	 	echo json_encode($events);
+	}
+	function getDay($id) {
+		$authUserID = Authorize:: sharedInstance()->userID();
+		$day = array_slice(Request::parsePath(),-3,3);
+		$day['year'] = $day[0];
+		$day['month'] = $day[1];
+		$day['day'] = $day[2];
+		unset($day[0],$day[1],$day[2]);
+
+		$date = new DateTime($day['year']."-".$day['month']."-".$day['day']." 00:00:00");
+		$day['start'] = $date->format("U");
+		$date = new DateTime($day['year']."-".$day['month']."-".$day['day']." 23:59:59");
+		$day['end'] = $date->format("U");
+		$events = Event::getEventsBetween($authUserID, $day['start'], $day['end']);
+	 	echo json_encode($events);
+	}
 
 	/**
 	*	EventCtl::Create provides an interface for createing new events. The

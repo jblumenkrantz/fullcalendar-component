@@ -12,6 +12,18 @@ function routes () {
 			Route::Request("application/json"),
 			Route::Response("application/json")
 		),
+		'/event/month/:number/:number/?' => array(
+			Route::$get => 'EventCtl::getMonth',
+			Route::Authorize(),
+			Route::Request("application/json"),
+			Route::Response("application/json")
+		),
+		'/event/day/:number/:number/:number/?' => array(
+			Route::$get => 'EventCtl::getDay',
+			Route::Authorize(),
+			Route::Request("application/json"),
+			Route::Response("application/json")
+		),
 		'/event/:alpha/?' => array(
 			Route::$get=>'EventCtl::get',
 			Route::$put=>'EventCtl::update',
@@ -51,8 +63,20 @@ function routes () {
 			Route::Request("application/json"),
 			Route::Response("application/json")
 		),
-		'/reminder_preferences/user/:alpha/?' => array(
-			Route::$get=>'ReminderPrefsCtl::getByUser',
+		'/reminder/calendar/?' => array(
+			Route::$get=>'ReminderPrefsCtl::getCalendarReminders',
+			Route::Authorize(),
+			Route::Request("application/json"),
+			Route::Response("application/json")
+		),
+		'/reminder/event/?' => array(
+			Route::$get=>'ReminderPrefsCtl::getEventReminders',
+			Route::Authorize(),
+			Route::Request("application/json"),
+			Route::Response("application/json")
+		),
+		'/reminder/task/?' => array(
+			Route::$get=>'ReminderPrefsCtl::getTaskReminders',
 			Route::Authorize(),
 			Route::Request("application/json"),
 			Route::Response("application/json")
@@ -63,7 +87,8 @@ function routes () {
 			Route::Request("application/json"),
 			Route::Response("application/json")
 		),
-		'/reminder_preferences/?' => array(
+		'/reminder/?' => array(
+			Route::$get=>'ReminderPrefsCtl::getByUser',
 			Route::$post=>'ReminderPrefsCtl::create',
 			Route::$put=>'ReminderPrefsCtl::update',
 			Route::$delete=>'ReminderPrefsCtl::delete',

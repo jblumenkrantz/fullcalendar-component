@@ -11,7 +11,10 @@ angular.module('pinwheelApp')
 				events: '=',
 				isCalendarShowing: '&'
 			},
-			controller: function($scope, $element, $attrs, $routeParams){
+			controller: function($scope, $element, $attrs, $routeParams, Event){
+				Event.query({id: 'month',month:$routeParams.month,year:$routeParams.year}, function(event){
+					$scope.events = event;
+				});
 			}
 		}
 	});

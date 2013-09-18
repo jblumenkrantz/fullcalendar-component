@@ -13,6 +13,7 @@ angular.module('pinwheelApp')
 				filter: '&'
 			},
 			controller: function($scope, $element, $attrs, $routeParams){
+				console.log("list view directive");
 			}
 		}
 	});

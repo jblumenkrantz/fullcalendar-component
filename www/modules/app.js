@@ -36,7 +36,10 @@ angular.module('pinwheelApp', ['ngResource'])
 		return $resource('/api/v1/task/:id/:version', {}, {update: {method:'PUT'}, delete: {method: 'DELETE', params: {version: ':version'}}});
 	})
 	.factory('Event', function($resource){
-		return $resource('/api/v1/event/:id', {}, {update: {method:'PUT'}});
+		return $resource('/api/v1/event/:id/:year/:month/:day', {}, {update: {method:'PUT'}});
+	})
+	.factory('Reminder', function($resource){
+		return $resource('/api/v1/reminder/:id', {}, {update: {method:'PUT'}});
 	})
 	.factory('Calendar', function($resource){
 		return $resource('/api/v1/calendar/:id/:version', {}, {update: {method:'PUT'}, delete: {method: 'DELETE', params: {version: ':version'}}});

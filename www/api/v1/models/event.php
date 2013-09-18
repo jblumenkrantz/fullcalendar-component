@@ -210,7 +210,25 @@ class Event extends PinwheelModelObject
 		}
 		return($dataRay);
 	}
+	
+	static public function getEventsBetween($userId, $start, $end, $pinsqli=NULL) {
+		$dataRay = $eventArray = array();
 
+		$cals = (object) array_merge((array) Calendar::loadUserCreatedCalendars($userId), (array) Calendar::loadUserSubscriptions($userId));
+
+		foreach($cals as $calendar){
+
+			$events = Event::getBatch(array("event_start > FROM_UNIXTIME('$start')","event_start < FROM_UNIXTIME('$end')","events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}'))"));
+
+			if(property_exists($calendar, 'adhoc_events') && !$calendar->adhoc_events){
+				unset($calendar->adhoc_events);
+			}
+			foreach($events as $event){
+				array_push($dataRay, $event);
+			}
+		}
+		return($dataRay);
+	}
 	static public function loadByQuery ($query, $pinsqli = NULL) {
 		$pinsqli = $pinsqli === NULL? DistributedMySQLConnection:: readInstance(): $pinsqli;
 		$resulti = $pinsqli->query($query);
@@ -583,6 +601,7 @@ class Event extends PinwheelModelObject
 
 		// Query Datastore
 		$pinsqli = DistributedMySQLConnection:: readInstance();
+		//return $query;
 		$resulti = $pinsqli->query($query);
 		if ($pinsqli->errno)
 			throw new Exception($pinsqli->error, 1);
