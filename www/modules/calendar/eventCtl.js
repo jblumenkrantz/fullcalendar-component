@@ -39,7 +39,12 @@ angular.module('pinwheelApp')
 			});
 			$scope.addingEvent = false;
 		}
-
+		//delete existing event
+		$scope.delete = function(){
+			$scope.event.$delete({id:$scope.event.event_id, version:$scope.event.version});
+			$scope.editingEvent = false;
+			$scope.addingEvent = false;
+		}
 		//cancel event form
 		$scope.cancel = function() {
 			$scope.formEvent = new Event();
