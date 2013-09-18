@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pinwheelApp')
-  .controller('EventCtl', function ($scope, Event) {
+  .controller('EventCtl', function ($scope, Event, QuickAdd) {
 		$scope.toggle = function(name) {
 			$scope[name] = !$scope[name];
 		}
