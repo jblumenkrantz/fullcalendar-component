@@ -39,7 +39,7 @@
 		<div ng-controller="PinwheelCtl">
 			<!-- header row -->
 			<div class="large-12 columns">
-				<h3>Pinwheel <small ng-click="logout()">logout</small></h3>
+				<h3>Pinwheel <small><a ng-href="#/settings">settings</a></small> <small><a ng-href ng-click="logout()">logout</a></small></h3>
 			</div>
 			<!-- / header row -->
 
@@ -91,6 +91,7 @@
         <script src="modules/reference/referenceCtl.js"></script>
         <script src="modules/messaging/messagingCtl.js"></script>
         <script src="modules/handbook/handbookCtl.js"></script>
+        <script src="modules/settings/settingsCtl.js"></script>
         <script src="modules/quickAddParser.js"></script>
         <!-- endbuild -->
 </body>
