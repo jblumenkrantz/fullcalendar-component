@@ -20,6 +20,7 @@ angular.module('pinwheelApp')
 			angular.copy($scope.event, $scope.formEvent);
 			$scope.editingEvent = true;
 			$scope.addingEvent = false;
+			$scope.quickAdding = false;
 		}
 
 		//update existing event
