@@ -684,262 +684,6 @@
   background: #d4d4d4;
 }
 
-/* line 1, ../../scss/_tasks.scss */
-#task-list-tasks-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow-y: auto;
-}
-
-/* line 7, ../../scss/_tasks.scss */
-#task-list-tasks-container .input-text-container {
-  margin-top: -3px;
-  margin-bottom: 7px;
-}
-
-/* line 11, ../../scss/_tasks.scss */
-#task-list-tasks-container .hourmin-container {
-  margin-bottom: 6px;
-}
-
-/* line 14, ../../scss/_tasks.scss */
-#task-list-tasks-container label {
-  font-size: 12px;
-  margin-bottom: 8px !important;
-}
-
-/* line 18, ../../scss/_tasks.scss */
-.task {
-  overflow: hidden;
-  background: #aaa;
-  color: #333;
-  -webkit-box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0.1);
-  box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  margin: 0 0 2px 0;
-  padding: 0px 0 0px 10px;
-  border: 0px;
-}
-
-/*----------------------------
-Task panel colors must be solid. the 60% white rgba background  is from ".task-form"
-------------------------------*/
-/*gray for unscheduled to-do items?*/
-/* line 34, ../../scss/_tasks.scss */
-.color0 {
-  background: none;
-}
-
-/*red*/
-/* line 38, ../../scss/_tasks.scss */
-.task.color1, .color1 {
-  background: #E88989;
-}
-
-/*green*/
-/* line 43, ../../scss/_tasks.scss */
-.task.color2, .color2 {
-  background: #79c242;
-}
-
-/*blue*/
-/* line 48, ../../scss/_tasks.scss */
-.task.color3, .color3 {
-  background: #79C8DF;
-}
-
-/*orange*/
-/* line 53, ../../scss/_tasks.scss */
-.task.color4, .color4 {
-  background: #FCA469;
-}
-
-/*purple*/
-/* line 58, ../../scss/_tasks.scss */
-.task.color5, .color5 {
-  background: #C678C6;
-}
-
-/*this class supplies the 60% white rgba background that creates a lighter shade of the event/calendar color*/
-/* line 62, ../../scss/_tasks.scss */
-.task-form {
-  height: 100%;
-  background: rgba(255, 255, 255, 0.6);
-  padding: 4px;
-}
-
-/* line 67, ../../scss/_tasks.scss */
-.task .checkbox-container {
-  position: relative;
-  float: left;
-  width: 13%;
-}
-
-/* line 72, ../../scss/_tasks.scss */
-.task .body {
-  position: relative;
-  float: left;
-  width: 87%;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-/* line 78, ../../scss/_tasks.scss */
-.task .info .body {
-  width: 77.5%;
-  margin-right: 2%;
-}
-
-/* line 82, ../../scss/_tasks.scss */
-.task .body .title {
-  color: black;
-  font-size: 12px;
-  line-height: 14px;
-  margin-top: 2px;
-  margin-bottom: 1px;
-}
-
-/* line 89, ../../scss/_tasks.scss */
-.task .body .notes {
-  font-size: 10px;
-  line-height: 12px;
-  width: 100%;
-  margin-bottom: 2px;
-}
-
-/* line 95, ../../scss/_tasks.scss */
-.task .body .due-date {
-  font-size: 10px;
-  line-height: 12px;
-  width: 100%;
-}
-
-/* line 100, ../../scss/_tasks.scss */
-.task .body .title, .task .body .notes, .task .body .due-date {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-/* line 105, ../../scss/_tasks.scss */
-.task .body .notes:hover, .task .body .due-date:hover, .task .body .title:hover {
-  text-decoration: underline;
-}
-
-/* line 108, ../../scss/_tasks.scss */
-.due-date:empty {
-  min-height: 4px;
-}
-
-/* line 111, ../../scss/_tasks.scss */
-.notes:empty + .due-date:empty {
-  min-height: 15px;
-}
-
-/* line 114, ../../scss/_tasks.scss */
-.task .expand-container {
-  position: relative;
-  float: left;
-  width: 7.5%;
-  height: 100%;
-}
-
-/* line 120, ../../scss/_tasks.scss */
-.task .delete-container {
-  position: relative;
-}
-
-/* line 124, ../../scss/_tasks.scss */
-.task .expand-buttons {
-  display: none;
-}
-
-/* line 127, ../../scss/_tasks.scss */
-.task .info .icon-group {
-  display: block;
-}
-
-/* line 130, ../../scss/_tasks.scss */
-.task .info .body .notes, .task .info .body .title, .task .info .body .due-date {
-  white-space: normal;
-}
-
-/* line 133, ../../scss/_tasks.scss */
-.task.completed .body {
-  text-decoration: line-through !important;
-}
-
-/* line 136, ../../scss/_tasks.scss */
-.task-expand {
-  color: black;
-}
-
-/* line 139, ../../scss/_tasks.scss */
-.task-delete {
-  position: absolute;
-  top: -21px;
-  right: 0px;
-  color: black;
-  margin-top: 7px;
-}
-
-/* line 146, ../../scss/_tasks.scss */
-.edit-container {
-  position: relative;
-  clear: both;
-}
-
-/* line 150, ../../scss/_tasks.scss */
-.edit-container input[type=text] {
-  padding: 3px;
-  font-size: 12px;
-  margin-bottom: 7px !important;
-}
-
-/* line 155, ../../scss/_tasks.scss */
-.edit-container textarea {
-  padding: 3px;
-  font-size: 12px;
-  margin-bottom: 7px;
-  border-radius: 4px;
-}
-
-/* line 161, ../../scss/_tasks.scss */
-.edit-container .select {
-  font-size: 12px;
-  margin-bottom: 7px !important;
-}
-
-/* line 165, ../../scss/_tasks.scss */
-.edit-container .button-group {
-  padding: 0;
-  margin: 0;
-}
-
-/* iPads (portrait and landscape) ----------- */
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* line 174, ../../scss/_tasks.scss */
-  .task .body .title {
-    font-size: 12px;
-  }
-
-  /* line 177, ../../scss/_tasks.scss */
-  .task .body .due-date, .task .body .notes {
-    font-size: 9px;
-  }
-
-  /* line 180, ../../scss/_tasks.scss */
-  .edit-container input, textarea {
-    padding: 1px;
-    font-size: 9px !important;
-  }
-
-  /* line 184, ../../scss/_tasks.scss */
-  .task .body .notes:hover, .task .body .due-date:hover, .task .body .title:hover {
-    text-decoration: none;
-  }
-}
 /* line 264, ../../bower_components/foundation/scss/foundation/components/_global.scss */
 *,
 *:before,
@@ -7746,13 +7490,13 @@ a.th {
 }
 
 /* Each individual part that can be added in */
-/* line 59, ../../scss/foundation.scss */
+/* line 58, ../../scss/foundation.scss */
 .outer-container {
   padding: 0 !important;
   margin: 0 !important;
 }
 
-/* line 64, ../../scss/foundation.scss */
+/* line 63, ../../scss/foundation.scss */
 #my-calendars, #main-content, #tasks {
   min-height: 822px;
   padding: 0 !important;
@@ -7760,36 +7504,36 @@ a.th {
   margin-right: -1px;
 }
 
-/* line 70, ../../scss/foundation.scss */
+/* line 69, ../../scss/foundation.scss */
 #my-calendars, #tasks {
   background: #eee;
 }
 
-/* line 74, ../../scss/foundation.scss */
+/* line 73, ../../scss/foundation.scss */
 #main-content {
   background: #fff;
   border-left: 1px solid #afafaf;
   border-right: 1px solid #afafaf;
 }
 
-/* line 80, ../../scss/foundation.scss */
+/* line 79, ../../scss/foundation.scss */
 #tasks {
   height: 100%;
 }
 
-/* line 84, ../../scss/foundation.scss */
+/* line 83, ../../scss/foundation.scss */
 .top-bar-section ul {
   height: auto;
   background: none;
   margin: 0;
 }
 
-/* line 89, ../../scss/foundation.scss */
+/* line 88, ../../scss/foundation.scss */
 .top-bar-section ul.left {
   height: 45px;
 }
 
-/* line 94, ../../scss/foundation.scss */
+/* line 93, ../../scss/foundation.scss */
 .top-bar ul li a span {
   font-size: 20px;
   height: 45px;
@@ -7798,7 +7542,7 @@ a.th {
   margin: 0 -3px;
 }
 
-/* line 103, ../../scss/foundation.scss */
+/* line 102, ../../scss/foundation.scss */
 dl.sub-nav.calendar-filter {
   display: inline;
   padding: 0;
@@ -7808,12 +7552,12 @@ dl.sub-nav.calendar-filter {
   margin-top: 10px;
 }
 
-/* line 111, ../../scss/foundation.scss */
+/* line 110, ../../scss/foundation.scss */
 dl.sub-nav.calendar-filter dd {
   margin-top: 12px;
 }
 
-/* line 119, ../../scss/foundation.scss */
+/* line 118, ../../scss/foundation.scss */
 .pane-header {
   background: #d0d0d0;
   width: 100%;
@@ -7824,23 +7568,23 @@ dl.sub-nav.calendar-filter dd {
   height: 36px;
 }
 
-/* line 128, ../../scss/foundation.scss */
+/* line 127, ../../scss/foundation.scss */
 .pane-header span {
   position: relative;
   top: 8px;
 }
 
-/* line 132, ../../scss/foundation.scss */
+/* line 131, ../../scss/foundation.scss */
 .pane-header span.right {
   margin-right: 12px;
 }
 
-/* line 135, ../../scss/foundation.scss */
+/* line 134, ../../scss/foundation.scss */
 .pane-header .pane-title {
   margin-left: 6px;
 }
 
-/* line 145, ../../scss/foundation.scss */
+/* line 144, ../../scss/foundation.scss */
 header#content-header ul.small-block-grid-3 li {
   text-align: center;
   margin: 0 !important;
@@ -7850,20 +7594,20 @@ header#content-header ul.small-block-grid-3 li {
   padding-top: 4px;
 }
 
-/* line 154, ../../scss/foundation.scss */
+/* line 153, ../../scss/foundation.scss */
 header#content-header ul.small-block-grid-3 span.month-switcher {
   font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
   position: relative;
   top: -1px;
 }
 
-/* line 160, ../../scss/foundation.scss */
+/* line 159, ../../scss/foundation.scss */
 #org-name-wrapper {
   position: absolute;
   left: 50%;
 }
 
-/* line 163, ../../scss/foundation.scss */
+/* line 162, ../../scss/foundation.scss */
 .org-name {
   font-size: 20px;
   font-weight: bold;
@@ -7871,7 +7615,7 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
 }
 
 @media only screen and (max-width: 768px) {
-  /* line 170, ../../scss/foundation.scss */
+  /* line 169, ../../scss/foundation.scss */
   ul.days {
     padding: 0;
     margin: 0;
@@ -7880,12 +7624,12 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
     left: 2px;
   }
 }
-/* line 174, ../../scss/foundation.scss */
+/* line 173, ../../scss/foundation.scss */
 [class*="icon-"] {
   text-shadow: 1px 1px 2px white;
 }
 
-/* line 180, ../../scss/foundation.scss */
+/* line 179, ../../scss/foundation.scss */
 .calendar-wrapper {
   display: inline;
   overflow: visible;
@@ -7894,14 +7638,14 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
   padding: 0 !important;
 }
 
-/* line 181, ../../scss/foundation.scss */
+/* line 180, ../../scss/foundation.scss */
 .calendar {
   width: 101% !important;
   padding: 0;
   margin: 0;
 }
 
-/* line 182, ../../scss/foundation.scss */
+/* line 181, ../../scss/foundation.scss */
 .calendar ul.month-browser li {
   width: 33.3%;
   padding: 0;
@@ -7912,14 +7656,14 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
   margin: 20px 0;
 }
 
-/* line 183, ../../scss/foundation.scss */
+/* line 182, ../../scss/foundation.scss */
 .calendar {
   width: 100% !important;
   margin: 0;
   padding: 0;
 }
 
-/* line 184, ../../scss/foundation.scss */
+/* line 183, ../../scss/foundation.scss */
 .calendar ul {
   list-style: none;
   padding: 0;
@@ -7928,13 +7672,13 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
   width: 100%;
 }
 
-/* line 185, ../../scss/foundation.scss */
+/* line 184, ../../scss/foundation.scss */
 .calendar ul.weekdays {
   height: 40px;
   width: 100%;
 }
 
-/* line 186, ../../scss/foundation.scss */
+/* line 185, ../../scss/foundation.scss */
 .calendar ul.weekdays li {
   text-align: center;
   text-transform: uppercase;
@@ -7945,7 +7689,7 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
   font-size: 13px;
 }
 
-/* line 187, ../../scss/foundation.scss */
+/* line 186, ../../scss/foundation.scss */
 .calendar li {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -7961,23 +7705,23 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
   overflow: visible !important;
 }
 
-/* line 188, ../../scss/foundation.scss */
+/* line 187, ../../scss/foundation.scss */
 .calendar .days:last-child li {
   margin-bottom: 0px !important;
 }
 
-/* line 189, ../../scss/foundation.scss */
+/* line 188, ../../scss/foundation.scss */
 .calendar li .day, .calendar li .month {
   display: none;
 }
 
-/* line 190, ../../scss/foundation.scss */
+/* line 189, ../../scss/foundation.scss */
 .calendar .date {
   text-align: right;
   margin-bottom: 5px;
 }
 
-/* line 191, ../../scss/foundation.scss */
+/* line 190, ../../scss/foundation.scss */
 .show-info {
   display: block;
   font-size: 13px;
@@ -7992,42 +7736,299 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
   text-decoration: none;
 }
 
-/* line 192, ../../scss/foundation.scss */
+/* line 191, ../../scss/foundation.scss */
 .show-info:hover .venue {
   display: block;
 }
 
-/* line 193, ../../scss/foundation.scss */
+/* line 192, ../../scss/foundation.scss */
 .show-info .show-name {
   text-decoration: underline;
 }
 
-/* line 194, ../../scss/foundation.scss */
+/* line 193, ../../scss/foundation.scss */
 .show-info .show-time, .venue {
   color: #666;
   margin-top: 2px;
   text-decoration: none;
 }
 
-/* line 195, ../../scss/foundation.scss */
+/* line 194, ../../scss/foundation.scss */
 .calendar .no-shows {
   display: none;
 }
 
-/* line 196, ../../scss/foundation.scss */
+/* line 195, ../../scss/foundation.scss */
 .calendar .venue {
   display: none;
 }
 
-/* line 197, ../../scss/foundation.scss */
+/* line 196, ../../scss/foundation.scss */
 .calendar li.out_of_range {
   background-color: #F5F5F5;
   color: #666;
 }
 
-/* line 198, ../../scss/foundation.scss */
+/* line 197, ../../scss/foundation.scss */
 ul.days, .calendar-day {
   padding: 0;
   margin: 0;
   width: 100%;
+}
+
+/* line 202, ../../scss/foundation.scss */
+#task-list-tasks-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* line 208, ../../scss/foundation.scss */
+#task-list-tasks-container .input-text-container {
+  margin-top: -3px;
+  margin-bottom: 7px;
+}
+
+/* line 212, ../../scss/foundation.scss */
+#task-list-tasks-container .hourmin-container {
+  margin-bottom: 6px;
+}
+
+/* line 215, ../../scss/foundation.scss */
+#task-list-tasks-container label {
+  font-size: 12px;
+  margin-bottom: 8px !important;
+}
+
+/* line 219, ../../scss/foundation.scss */
+.task {
+  overflow: hidden;
+  background: #aaa;
+  color: #333;
+  -webkit-box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  margin: 0 0 2px 0;
+  padding: 0px 0 0px 10px;
+  border: 0px;
+}
+
+/*----------------------------
+Task panel colors must be solid. the 60% white rgba background  is from ".task-form"
+------------------------------*/
+/*gray for unscheduled to-do items?*/
+/* line 235, ../../scss/foundation.scss */
+.color0 {
+  background: none;
+}
+
+/*red*/
+/* line 239, ../../scss/foundation.scss */
+.task.color1, .color1 {
+  background: #E88989;
+}
+
+/*green*/
+/* line 244, ../../scss/foundation.scss */
+.task.color2, .color2 {
+  background: #79c242;
+}
+
+/*blue*/
+/* line 249, ../../scss/foundation.scss */
+.task.color3, .color3 {
+  background: #79C8DF;
+}
+
+/*orange*/
+/* line 254, ../../scss/foundation.scss */
+.task.color4, .color4 {
+  background: #FCA469;
+}
+
+/*purple*/
+/* line 259, ../../scss/foundation.scss */
+.task.color5, .color5 {
+  background: #C678C6;
+}
+
+/*this class supplies the 60% white rgba background that creates a lighter shade of the event/calendar color*/
+/* line 263, ../../scss/foundation.scss */
+.task-form {
+  height: 100%;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 4px;
+}
+
+/* line 268, ../../scss/foundation.scss */
+.task .checkbox-container {
+  position: relative;
+  float: left;
+  width: 13%;
+}
+
+/* line 273, ../../scss/foundation.scss */
+.task .body {
+  position: relative;
+  float: left;
+  width: 87%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* line 279, ../../scss/foundation.scss */
+.task .info .body {
+  width: 77.5%;
+  margin-right: 2%;
+}
+
+/* line 283, ../../scss/foundation.scss */
+.task .body .title {
+  color: black;
+  font-size: 12px;
+  line-height: 14px;
+  margin-top: 2px;
+  margin-bottom: 1px;
+}
+
+/* line 290, ../../scss/foundation.scss */
+.task .body .notes {
+  font-size: 10px;
+  line-height: 12px;
+  width: 100%;
+  margin-bottom: 2px;
+}
+
+/* line 296, ../../scss/foundation.scss */
+.task .body .due-date {
+  font-size: 10px;
+  line-height: 12px;
+  width: 100%;
+}
+
+/* line 301, ../../scss/foundation.scss */
+.task .body .title, .task .body .notes, .task .body .due-date {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* line 306, ../../scss/foundation.scss */
+.task .body .notes:hover, .task .body .due-date:hover, .task .body .title:hover {
+  text-decoration: underline;
+}
+
+/* line 309, ../../scss/foundation.scss */
+.due-date:empty {
+  min-height: 4px;
+}
+
+/* line 312, ../../scss/foundation.scss */
+.notes:empty + .due-date:empty {
+  min-height: 15px;
+}
+
+/* line 315, ../../scss/foundation.scss */
+.task .expand-container {
+  position: relative;
+  float: left;
+  width: 7.5%;
+  height: 100%;
+}
+
+/* line 321, ../../scss/foundation.scss */
+.task .delete-container {
+  position: relative;
+}
+
+/* line 325, ../../scss/foundation.scss */
+.task .expand-buttons {
+  display: none;
+}
+
+/* line 328, ../../scss/foundation.scss */
+.task .info .icon-group {
+  display: block;
+}
+
+/* line 331, ../../scss/foundation.scss */
+.task .info .body .notes, .task .info .body .title, .task .info .body .due-date {
+  white-space: normal;
+}
+
+/* line 334, ../../scss/foundation.scss */
+.task.completed .body {
+  text-decoration: line-through !important;
+}
+
+/* line 337, ../../scss/foundation.scss */
+.task-expand {
+  color: black;
+}
+
+/* line 340, ../../scss/foundation.scss */
+.task-delete {
+  position: absolute;
+  top: -21px;
+  right: 0px;
+  color: black;
+  margin-top: 7px;
+}
+
+/* line 347, ../../scss/foundation.scss */
+.edit-container {
+  position: relative;
+  clear: both;
+}
+
+/* line 351, ../../scss/foundation.scss */
+.edit-container input[type=text] {
+  padding: 3px;
+  font-size: 12px;
+  margin-bottom: 7px !important;
+}
+
+/* line 356, ../../scss/foundation.scss */
+.edit-container textarea {
+  padding: 3px;
+  font-size: 12px;
+  margin-bottom: 7px;
+  border-radius: 4px;
+}
+
+/* line 362, ../../scss/foundation.scss */
+.edit-container .select {
+  font-size: 12px;
+  margin-bottom: 7px !important;
+}
+
+/* line 366, ../../scss/foundation.scss */
+.edit-container .button-group {
+  padding: 0;
+  margin: 0;
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  /* line 375, ../../scss/foundation.scss */
+  .task .body .title {
+    font-size: 12px;
+  }
+
+  /* line 378, ../../scss/foundation.scss */
+  .task .body .due-date, .task .body .notes {
+    font-size: 9px;
+  }
+
+  /* line 381, ../../scss/foundation.scss */
+  .edit-container input, textarea {
+    padding: 1px;
+    font-size: 9px !important;
+  }
+
+  /* line 385, ../../scss/foundation.scss */
+  .task .body .notes:hover, .task .body .due-date:hover, .task .body .title:hover {
+    text-decoration: none;
+  }
 }
