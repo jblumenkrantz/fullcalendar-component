@@ -6,6 +6,12 @@ function routes () {
 
 
 		/* Event Api */
+		'/event/:alpha/:number/?' => array(
+			Route::$delete=>'EventCtl::delete',
+			Route::Authorize(),
+			Route::Request("application/json"),
+			Route::Response("application/json")
+		),
 		'/event/all/?' => array(
 			Route::$get => 'EventCtl::getAll',
 			Route::Authorize(),
@@ -33,7 +39,6 @@ function routes () {
 		'/event/:alpha/?' => array(
 			Route::$get=>'EventCtl::get',
 			Route::$put=>'EventCtl::update',
-			Route::$delete=>'EventCtl::delete',
 			Route::Authorize(),
 			Route::Request("application/json"),
 			Route::Response("application/json")
@@ -47,7 +52,6 @@ function routes () {
 		'/event/?' => array(
 			Route::$post=>'EventCtl::create',
 			Route::$put=>'EventCtl::update',
-			Route::$delete=>'EventCtl::delete',
 			Route::Authorize(),
 			Route::Request("application/json"),
 			Route::Response("application/json")

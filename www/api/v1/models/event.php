@@ -199,7 +199,7 @@ class Event extends PinwheelModelObject
 
 		foreach($cals as $calendar){
 
-			$events = Event::getBatch(array("events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}'))"));
+			$events = Event::getBatch(array("events.active = true","events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}'))"));
 
 			if(property_exists($calendar, 'adhoc_events') && !$calendar->adhoc_events){
 				unset($calendar->adhoc_events);
@@ -218,7 +218,7 @@ class Event extends PinwheelModelObject
 
 		foreach($cals as $calendar){
 
-			$events = Event::getBatch(array("event_start > FROM_UNIXTIME('$start')","event_start < FROM_UNIXTIME('$end')","events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}'))"));
+			$events = Event::getBatch(array("events.active = true","event_start > FROM_UNIXTIME('$start')","event_start < FROM_UNIXTIME('$end')","events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}'))"));
 
 			if(property_exists($calendar, 'adhoc_events') && !$calendar->adhoc_events){
 				unset($calendar->adhoc_events);
@@ -500,7 +500,7 @@ class Event extends PinwheelModelObject
 	*	where a,b,d are requests and e is event and f is delete-function). As a result,
 	*	Event::delete could be batched.
 	*/
-	public function delete ($pinsqli) {
+	public function delete ($pinsqli=NULL) {
 		if (!isset($pinsqli)) {
 			$pinsqli = DistributedMySQLConnection:: writeInstance();
 		}

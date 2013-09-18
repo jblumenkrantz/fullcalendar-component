@@ -214,33 +214,31 @@ class EventCtl
 	*	the client to settle the conflict, regardless the local delte of the Same Event.
 	*/
 	function delete(){
-		$evprops = json_decode(Request:: body());
 		$authUserID = Authorize:: sharedInstance()->userID();
-		echo '[';
-		if (is_object($evprops))
-			$evprops = array($evprops);
-		$nevets = count($evprops);
-		foreach ($evprops as $evprop) {
-			try {
-				$event = new Event($evprop);
-				$event->delete();
+		$event = Request:: parsePath();
+		$authUserID = Authorize:: sharedInstance()->userID();
+		$event['event_id'] = $event[2];
+		$event['version'] = $event[3];
+		unset($event[0], $event[1], $event[2], $event[3]);
 
-				//if event has a reminder
-				if ($evprop->reminder_pref_id != null && !$using_calendar_reminder) {
-					$evprop->version = $evprop->reminder_pref_version;
-					$reminder_pref = new ReminderPrefs($evprop);
-					$reminder_pref->delete();
-				}
-				
-				echo json_encode($event);
-			} catch (EventDataConflictException $e) {
-				echo $e->json_encode();
-			} catch (EventDoesNotExist $e) {
-				echo $e->json_encode();
+		try {
+			$event = new Event($event);
+			$event->delete();
+
+			//if event has a reminder
+			if ($event->reminder_pref_id != null && !$using_calendar_reminder) {
+				$event->version = $event->reminder_pref_version;
+				$reminder_pref = new ReminderPrefs($event);
+				$reminder_pref->delete();
 			}
-			if (--$nevets > 0) echo ',';
+			
+			echo json_encode($event);
+		} catch (EventDataConflictException $e) {
+			echo $e->json_encode();
+		} catch (EventDoesNotExist $e) {
+			echo $e->json_encode();
 		}
-		echo ']';
+
 		User:: incrementVersion($authUserID);
 	}
 }
