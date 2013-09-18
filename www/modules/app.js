@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('pinwheelApp', ['ngResource'])
+angular.module('pinwheelApp', ['ngResource', 'ui.date'])
 	.config(function ($routeProvider) {
 		$routeProvider
 			.when('/calendar/:year/:month/:day', {
@@ -33,7 +33,19 @@ angular.module('pinwheelApp', ['ngResource'])
 		return $resource('/api/v1/auth/token/:user/:pass');
 	})
 	.factory('Task', function($resource){
-		return $resource('/api/v1/task/:id/:version', {}, {update: {method:'PUT'}, delete: {method: 'DELETE', params: {version: ':version'}}});
+		return $resource('/api/v1/task/:id/:version', {},
+			{
+				update: {method:'PUT'},
+				delete: {method: 'DELETE', params: {version: ':version'}},
+				query: {method: 'GET', isArray: true, url: '/butts', transformRequest: function(data, headersGetter){
+					console.log([headersGetter, data]);
+					//return data;
+				}, transformResponse: function(data, headersGetter){
+					console.log([headersGetter, data]);
+					//return data;
+				}},
+				get: {method: 'GET'}
+			});
 	})
 	.factory('Event', function($resource){
 		return $resource('/api/v1/event/:id/:year/:month/:day', {}, {update: {method:'PUT'}});
