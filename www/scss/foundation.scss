@@ -1,1 +1,204 @@
+@import "settings";
+@import "events";
+@import "tasks";
 @import "../bower_components/foundation/scss/foundation";
+
+/* Each individual part that can be added in */
+// @import "foundation/components/global";
+// @import "foundation/components/grid";
+// @import "foundation/components/visibility";
+// @import "foundation/components/block-grid";
+// @import "foundation/components/type";
+// @import "foundation/components/buttons";
+// @import "foundation/components/forms";
+// @import "foundation/components/custom-forms";
+// @import "foundation/components/button-groups";
+// @import "foundation/components/dropdown-buttons";
+// @import "foundation/components/split-buttons";
+// @import "foundation/components/flex-video";
+// @import "foundation/components/section";
+// @import "foundation/components/top-bar";
+// @import "foundation/components/orbit";
+// @import "foundation/components/reveal";
+// @import "foundation/components/joyride";
+// @import "foundation/components/clearing";
+// @import "foundation/components/alert-boxes";
+// @import "foundation/components/breadcrumbs";
+// @import "foundation/components/keystrokes";
+// @import "foundation/components/labels";
+// @import "foundation/components/inline-lists";
+// @import "foundation/components/pagination";
+// @import "foundation/components/panels";
+// @import "foundation/components/pricing-tables";
+// @import "foundation/components/progress-bars";
+// @import "foundation/components/side-nav";
+// @import "foundation/components/sub-nav";
+// @import "foundation/components/switch";
+// @import "foundation/components/magellan";
+// @import "foundation/components/tables";
+// @import "foundation/components/thumbs";
+// @import "foundation/components/tooltips";
+// @import "foundation/components/dropdown";
+
+// WIREFRAME TODO
+// 
+// example of a task
+// 
+// example of calendar available
+// subscribed
+// subscribed while in edit mode
+
+// -----------------------------
+// SET CUSTOM VARIABLES HERE
+// -----------------------------
+$letter-press:  1px 1px 2px #fff;
+
+
+
+
+.outer-container {
+	padding: 0 !important; 
+	margin: 0 !important;
+}
+
+#my-calendars, #main-content, #tasks {
+	min-height: 822px; // min-height for simulation purposes -jt
+	padding: 0 !important; 
+	margin: 0 !important; margin-right:-1px;
+}
+
+#my-calendars, #tasks {
+	background: #eee; 
+}
+
+#main-content {
+	background: #fff;
+	border-left: 1px solid darken($topbar-bg, 18%);
+	border-right: 1px solid darken($topbar-bg, 18%);
+}
+
+#tasks{
+	height: 100%;
+}
+
+.top-bar-section ul {
+	height: auto;
+	background: none;
+	margin: 0;
+}
+.top-bar-section ul.left{
+	height: 45px;
+}
+
+//position topbar control icons
+.top-bar ul li a span {
+	font-size: 20px;
+	height: 45px;
+	position: relative;
+	top: 4px;
+	margin: 0 -3px;
+}
+
+//Calendar filter widget in top-bar
+dl.sub-nav.calendar-filter {
+	display: inline;
+	padding: 0;
+	margin: 0;
+	position: relative;
+	top: 12px;
+	margin-top: 10px;
+}
+dl.sub-nav.calendar-filter dd {
+	margin-top: 12px;
+}
+
+
+// --------------------------
+// header bar for sidebars
+// --------------------------
+.pane-header {
+	background: darken($topbar-bg, 5%);
+	width: 100%;
+	margin: 0 !important;
+	padding: 0 !important;
+	background: darken($topbar-bg, 5%);
+	font-size: 20px;
+	height: 36px;
+}
+.pane-header span{
+	position: relative;
+	top: 8px;
+}
+.pane-header span.right{
+	margin-right: 12px;
+}
+.pane-header .pane-title{ 
+	margin-left: 6px;
+}
+
+
+header#content-header {
+	// width: 100%; 
+	//fixes ipad rendering 1px gap
+}
+
+header#content-header ul.small-block-grid-3 li{
+	text-align: center;
+	margin: 0 !important;
+	padding-bottom: 0 !important;
+	background: darken($topbar-bg, 5%);
+	font-size: 20px;
+	padding-top: 4px;
+}
+
+header#content-header ul.small-block-grid-3 span.month-switcher{
+	font-family: $body-font-family;
+	position: relative;
+	top: -1px;
+}
+
+#org-name-wrapper {
+	position: absolute; left: 50%;
+}
+.org-name {
+font-size: 20px;
+font-weight: bold;
+text-shadow: $letter-press;
+}
+
+@media only screen and (max-width: 768px) {
+ul.days {padding: 0; margin: 0; width: 100%; position: relative; left: 2px;}
+}
+
+// apply letter-press shadow to all glyphs by default
+[class*="icon-"]{
+	text-shadow: $letter-press;
+}
+
+
+//dummy calendar for proper visionality during html wireframe developmentality -jt
+.calendar-wrapper{display:inline;overflow:visible;width:100% !important;margin:0 auto; padding: 0 !important; }
+.calendar {width: 101% !important; padding: 0; margin: 0;}
+.calendar ul.month-browser li{width:33.3%;padding:0;border:0;text-align:center;text-transform:uppercase;height:auto;margin:20px 0;}
+.calendar{width:100% !important; margin: 0; padding: 0;}
+.calendar ul{list-style:none;padding:0;margin:0;clear:both;width:100%;}
+.calendar ul.weekdays{height:40px; width: 100%;}
+.calendar ul.weekdays li{text-align:center;text-transform:uppercase;line-height:20px;border:none!important;padding:10px 0px;color:#666;font-size:13px;}
+.calendar li{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;width:14.2857142857%;padding:5px;display:block;float:left;border:1px solid #ccc;margin-right:0px;margin-bottom:-1px;overflow:visible!important;}
+.calendar .days:last-child li{margin-bottom:0px!important;}
+.calendar li .day,.calendar li .month{display:none;}
+.calendar .date{text-align:right;margin-bottom:5px;}
+.show-info{display:block;font-size:13px;border-radius:4px;padding:5px;margin-bottom:5px;color:#666;line-height:14px;background:#e4f2f2;border:1px solid #b5dbdc;color:#009aaf;text-decoration:none;}
+.show-info:hover .venue{display:block;}
+.show-info .show-name{text-decoration:underline;}
+.show-info .show-time,.venue{color:#666;margin-top:2px;text-decoration:none;}
+.calendar .no-shows{display:none;}
+.calendar .venue{display:none;}
+.calendar li.out_of_range{background-color:#F5F5F5;color:#666;}
+ul.days, .calendar-day {padding: 0; margin: 0; width: 100%;}
+
+
+
+
+
+
