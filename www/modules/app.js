@@ -45,6 +45,21 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute'])
 	.factory('Task', function($resource){
 		return $resource('/api/v1/task/:id/:version', {},
 			{
+				save: {
+					method:'POST',
+					isArray: false,
+					transformRequest: function(data){
+						// TODO: add if statements in case task does not have due time
+						// TODO: for save and update
+						data.due_time = new Date(data.due_time).getTime()/1000;
+						return angular.toJson(data);
+					},
+					transformResponse: function(data){
+						data = angular.fromJson(data);
+						data.due_time = new Date(data.due_time*1000);
+						return data;
+					}
+				},
 				update: {
 					method:'PUT',
 					isArray: false,
@@ -83,6 +98,23 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute'])
 	})
 	.factory('Event', function($resource){
 		return $resource('/api/v1/event/:id/:year/:month/:day', {}, {
+			save: {
+				method:'POST',
+				isArray: false,
+				transformRequest: function(data){
+					// TODO: add if statements in case task does not have due time
+					// TODO: for save and update
+					data.event_start = new Date(data.event_start).getTime()/1000;
+					data.event_end = new Date(data.event_end).getTime()/1000;
+					return angular.toJson(data);
+				},
+				transformResponse: function(data){
+					data = angular.fromJson(data);
+					data.event_start = new Date(data.event_start*1000);
+					data.event_end = new Date(data.event_end*1000);
+					return data;
+				}
+			},
 			update: {
 				method:'PUT',
 				isArray: false,

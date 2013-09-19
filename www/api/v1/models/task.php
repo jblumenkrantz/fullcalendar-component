@@ -241,7 +241,6 @@ class Task extends PinwheelModelObject
 			$tp = array_map(array($pinsqli, 'real_escape_string'), $tp);
 			$taskID = MySQLConnection::generateUID('task');
 			$tp['creator_id'] = $authUserID;
-			$tp['due_time'] = strtotime($tp['due_time']);
 			array_push($valueStrings,
 				"(
 					'$taskID',
