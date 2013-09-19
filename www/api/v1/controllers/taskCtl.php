@@ -85,6 +85,7 @@ class TaskCtl
 		if (is_object($tsprops))
 			$tsprops = array($tsprops);
 		$ntasks = count($tsprops);
+		error_log(print_r($tsprops,true));
 		foreach ($tsprops as $tsprop) {
 			try {
 				$task = new Task($tsprop);

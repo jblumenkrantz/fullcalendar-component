@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('pinwheelApp', ['ngResource', 'ui.date'])
+angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute'])
 	.config(function ($routeProvider) {
 		$routeProvider
 			.when('/calendar/:year/:month/:day', {
@@ -20,6 +20,10 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date'])
 				templateUrl: 'modules/reference/main.html',
 				controller: 'ReferenceCtl'
 			})
+			.when("/settings", {
+				templateUrl: 'modules/settings/main.html',
+				controller: 'SettingsCtl'
+			})
 			.when("/login", {
 				templateUrl: 'modules/login/main.html',
 				controller: 'LoginCtl'
@@ -29,26 +33,66 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date'])
 			});
 	})
 	.value("localStorage", localStorage)
+	.factory('User', function($resource){
+		return $resource('/api/v1/user');
+	})
 	.factory('Auth', function($resource){
 		return $resource('/api/v1/auth/token/:user/:pass');
+	})
+	.factory('User', function($resource){
+		return $resource('/api/v1/user/:id', {}, {update: {method:'PUT'}});
 	})
 	.factory('Task', function($resource){
 		return $resource('/api/v1/task/:id/:version', {},
 			{
-				update: {method:'PUT'},
+				update: {
+					method:'PUT',
+					isArray: false,
+					transformRequest: function(data){
+						data.due_time = new Date(data.due_time).getTime()/1000;
+						console.log(data);
+						return angular.toJson(data);
+					},
+				},
 				delete: {method: 'DELETE', params: {version: ':version'}},
-				query: {method: 'GET', isArray: true, url: '/butts', transformRequest: function(data, headersGetter){
-					console.log([headersGetter, data]);
-					//return data;
-				}, transformResponse: function(data, headersGetter){
-					console.log([headersGetter, data]);
-					//return data;
-				}},
+				query: {
+					method: 'GET',
+					isArray: true,
+					transformRequest: function(data){
+						console.log(data);
+						return data;
+					},
+					transformResponse: function(data){
+						var tasks = angular.fromJson(data);
+						angular.forEach(tasks, function(task,k){
+							tasks[k].due_time = new Date(task.due_time*1000);
+						});
+						return tasks;
+					}
+				},
 				get: {method: 'GET'}
 			});
 	})
 	.factory('Event', function($resource){
-		return $resource('/api/v1/event/:id/:year/:month/:day', {}, {update: {method:'PUT'}});
+		return $resource('/api/v1/event/:id/:year/:month/:day', {}, {
+			update: {method:'PUT'},
+			query: {
+					method: 'GET',
+					isArray: true,
+					transformRequest: function(data){
+						console.log(data);
+						//return data;
+					},
+					transformResponse: function(data){
+						var events = angular.fromJson(data);
+						angular.forEach(events, function(event,k){
+							events[k].event_start = Date(parseInt(event.event_start));
+							events[k].event_end = Date(parseInt(event.event_end));
+						});
+						return events;
+					}
+				},
+		});
 	})
 	.factory('Reminder', function($resource){
 		return $resource('/api/v1/reminder/:id', {}, {update: {method:'PUT'}});

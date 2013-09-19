@@ -5,7 +5,6 @@ angular.module('pinwheelApp')
 		$scope.view = "list";
 		$scope.calendarWatchers = {};
 		$scope.reminders = {};
-
 		Calendar.query({id: 'all'}, function(calendars){
 			$scope.calendars = calendars;
 			Event.query({id: 'all'}, function(events){

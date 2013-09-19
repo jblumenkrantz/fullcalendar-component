@@ -69,17 +69,26 @@
 <!-- / subscription view -->
 
 <!-- event view -->
-<div class="large-8 columns">
+<div class="large-8 columns" ng-controller="EventCtl">
 	<div class="row">
 		<div class="large-5 columns">
-			<h3>{{view}} view </h3>
+			<h3>{{view}} view
+				<small ng-click="add()">add event</small><br />
+				<small ng-click="quickAdd()">quick add event</small>
+			</h3>
 		</div>
 		<div class="large-7 columns">
 			<h3><small ng-click="changeView('day')">day</small> <small ng-click="changeView('week')">week</small> <small ng-click="changeView('month')">month</small> <small ng-click="changeView('list')">list</small> <small ng-click="changeView('datebook')">datebook</small></h3>
 		</div>
 	</div>
-	
 
+	<!-- event add/edit form -->
+	<div ng-show="quickAdding" ng-include src="'modules/calendar/_quickadd_event_form.html'"></div>
+
+	<!-- event add/edit form -->
+	<div ng-show="addingEvent || editingEvent" ng-include src="'modules/calendar/_event_form.html'"></div>
+
+	<!-- calendar views switch -->
 	<div ng-switch="view">
 		<div ng-switch-when="day">
 			<day-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></day-view>
@@ -94,7 +103,7 @@
 		</div>
 
 		<div ng-switch-when="list">
-			<list-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></list-view>
+			<list-view></list-view>
 		</div>
 
 		<div ng-switch-when="datebook">

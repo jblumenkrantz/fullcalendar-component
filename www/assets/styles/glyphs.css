@@ -1,0 +1,395 @@
+/* WARNING:	Your are using ligatures for your icon font.
+			Ligatures are not supported in IE 9 (and older).
+			Use the Private Use Area encoding for best browser support.
+==================================================================== */
+@font-face {
+	font-family: 'icomoon-ultimate';
+	src:url('../fonts/icomoon-ultimate.eot');
+	src:url('../fonts/icomoon-ultimate.svg#icomoon-ultimate') format('svg'),
+		url('../fonts/icomoon-ultimate.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/icomoon-ultimate.woff') format('woff'),
+		url('../fonts/icomoon-ultimate.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+@-webkit-keyframes anim-rotate8{0%{-webkit-transform:rotate(0)}12.4999%{-webkit-transform:rotate(0)}12.5%{-webkit-transform:rotate(45deg)}24.9999%{-webkit-transform:rotate(45deg)}25%{-webkit-transform:rotate(90deg)}37.4999%{-webkit-transform:rotate(90deg)}37.5%{-webkit-transform:rotate(135deg)}49.9999%{-webkit-transform:rotate(135deg)}50%{-webkit-transform:rotate(180deg)}62.4999%{-webkit-transform:rotate(180deg)}62.5%{-webkit-transform:rotate(225deg)}74.9999%{-webkit-transform:rotate(225deg)}75%{-webkit-transform:rotate(270deg)}87.4999%{-webkit-transform:rotate(270deg)}87.5%{-webkit-transform:rotate(315deg)}99.9999%{-webkit-transform:rotate(315deg)}}.anim-rotate8:hover{-webkit-animation:anim-rotate8 1s linear infinite; }
+
+@-moz-keyframes anim-rotate8{0%{-moz-transform:rotate(0)}12.4999%{-moz-transform:rotate(0)}12.5%{-moz-transform:rotate(45deg)}24.9999%{-moz-transform:rotate(45deg)}25%{-moz-transform:rotate(90deg)}37.4999%{-moz-transform:rotate(90deg)}37.5%{-moz-transform:rotate(135deg)}49.9999%{-moz-transform:rotate(135deg)}50%{-moz-transform:rotate(180deg)}62.4999%{-moz-transform:rotate(180deg)}62.5%{-moz-transform:rotate(225deg)}74.9999%{-moz-transform:rotate(225deg)}75%{-moz-transform:rotate(270deg)}87.4999%{-moz-transform:rotate(270deg)}87.5%{-moz-transform:rotate(315deg)}99.9999%{-moz-transform:rotate(315deg)}}.anim-rotate8:hover{-moz-animation:anim-rotate8 1s linear infinite}
+	
+.spinner{-webkit-animation:anim-rotate8 1s linear infinite; 
+	-moz-animation:anim-rotate8 1s linear infinite;
+	display:inline-block; 
+	font-size: 32px; 
+	line-height: 0; /*prevents wobble*/
+	padding: 0;
+	margin: 0;
+	color: rgba(199,0,0, .8); /*80% red*/
+	text-shadow: none;
+        filter: none;
+}
+.spinner.big {
+	font-size: 100px; 
+}
+
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before {
+	font-family: 'icomoon-ultimate';
+	content: attr(data-icon);
+	speak: none;
+	font-weight: normal;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	padding-bottom: 12px;
+}
+.darkbutton:hover {
+/*	background: rgba(255,255,255,.1);
+	padding: 6px !important;
+	margin: 0;
+	border-radius: 5px;*/
+}
+/* MAKE GROUPS OF THESE THINGS */
+.icon-group {
+	position: relative !important;
+	width: 100%;
+	overflow: hidden;
+}
+.icon-group .icon {
+	float: left;
+	text-align: center;
+	padding: 0 !important;
+	font-size: 14px;
+	border: none;
+	background: none;
+	cursor: pointer;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.icon-group .glyph-show {
+	display: block;
+	border: 1px solid rgba(0,0,0,0.3);
+	padding: 3px 0;
+	margin: 0 3px;
+	border-radius: 4px;
+
+}
+
+.icon-group.ones .icon {
+	width: 100%;
+}
+.icon-group.twos .icon {
+	width: 50%;
+}
+.icon-group.threes .icon {
+	width: 33.33333%;
+}
+.icon-group.fours .icon {
+	width: 25%;
+}
+.icon-group .icon span {
+	cursor: pointer;
+	color: #222;
+}
+.icon-group .icon:hover:enabled span.glyph-show {
+	background: rgba(0,0,0,0.1) !important;
+}
+.icon-group .icon:enabled span.glyph-show.cancel {
+	background: rgba(255,0,0,0.3) !important;
+}
+.icon-group .icon:hover:enabled span.glyph-show.cancel {
+	background: rgba(255,0,0,0.6) !important;
+}
+
+.icon-group .icon:enabled span.glyph-show.save {
+	background: rgba(0,100,0,0.3) !important;
+}
+.icon-group .icon:hover:enabled span.glyph-show.save {
+	background: rgba(0,100,0,0.6) !important;
+}
+
+
+.icon-group .icon:disabled span {
+	color: rgba(0,0,0,0.3) !important;
+	border-color: rgba(0,0,0,0.1);
+}
+.icon.cancel {
+	float: none;
+	position: absolute;
+	width: auto !important;
+	top: 5px;
+	right: 5px;
+
+}
+.icon.cancel .glyph-show {
+	border: none;
+	background: none;
+	padding: 0;
+	border-radius: 0;
+}
+.icon.cancel span {
+	text-align: right;
+}
+
+/* Use the following CSS code if you want to have a class per icon */
+/*
+Instead of a list of all class selectors,
+you can use the generic selector below, but it's slower:
+[class*="icon-"] {
+*/
+.icon-notification-2, .icon-grid, .icon-grid-2, .icon-menu, .icon-grid-3, .icon-spam, .icon-menu-2, .icon-signup, .icon-calendar, .icon-table, .icon-table-2, .icon-notification, .icon-warning, .icon-arrow-left, .icon-arrow-right, .icon-checkbox-checked, .icon-checkbox-unchecked, .icon-floppy, .icon-html5, .icon-apple, .icon-android, .icon-windows8, .icon-checkmark, .icon-close, .icon-flag, .icon-star, .icon-star-2, .icon-remove, .icon-remove-2, .icon-cog, .icon-settings, .icon-unlocked, .icon-lock, .icon-spinner, .icon-spinner-2, .icon-busy, .icon-spinner-3, .icon-calendar-2, .icon-envelop, .icon-notebook, .icon-book, .icon-books, .icon-pencil, .icon-home, .icon-check-alt, .icon-x-altx-alt, .icon-plus-alt, .icon-minus-alt, .icon-network, .icon-flag-2, .icon-bubble-notification, .icon-calendar-3, .icon-calendar-4, .icon-calendar-5, .icon-close-2, .icon-backspace, .icon-flag-3, .icon-calendar-6, .icon-folder-minus, .icon-folder-plus, .icon-menu-3, .icon-menu-4, .icon-cart, .icon-cart-plus, .icon-cart-minus, .icon-cart-remove, .icon-more, .icon-mobile, .icon-phone, .icon-mobile-2, .icon-new, .icon-share, .icon-new-tab, .icon-bell, .icon-alarm-plus, .icon-alarm-minus, .icon-alarm-check, .icon-alarm-cancel, .icon-calendarPlus, .icon-calendarMinus, .icon-arrow-right-2, .icon-arrow-left-2 {
+	font-family: 'icomoon-ultimate';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+.icon-notification-2:before {
+	content: "\e000";
+}
+.icon-grid:before {
+	content: "\e001";
+}
+.icon-grid-2:before {
+	content: "\e002";
+}
+.icon-menu:before {
+	content: "\e003";
+}
+.icon-grid-3:before {
+	content: "\e004";
+}
+.icon-spam:before {
+	content: "\e005";
+}
+.icon-menu-2:before {
+	content: "\e006";
+}
+.icon-signup:before {
+	content: "\e007";
+}
+.icon-calendar:before {
+	content: "\e008";
+}
+.icon-table:before {
+	content: "\e009";
+}
+.icon-table-2:before {
+	content: "\e00a";
+}
+.icon-notification:before {
+	content: "\e00b";
+}
+.icon-warning:before {
+	content: "\e00c";
+}
+.icon-arrow-left:before {
+	content: "\e00d";
+}
+.icon-arrow-right:before {
+	content: "\e00e";
+}
+.icon-checkbox-checked:before {
+	content: "\e00f";
+}
+.icon-checkbox-unchecked:before {
+	content: "\e010";
+}
+.icon-floppy:before {
+	content: "\e011";
+}
+.icon-html5:before {
+	content: "\e012";
+}
+.icon-apple:before {
+	content: "\e013";
+}
+.icon-android:before {
+	content: "\e014";
+}
+.icon-windows8:before {
+	content: "\e015";
+}
+.icon-checkmark:before {
+	content: "\e016";
+}
+.icon-close:before {
+	content: "\e017";
+}
+.icon-flag:before {
+	content: "\e018";
+}
+.icon-star:before {
+	content: "\e019";
+}
+.icon-star-2:before {
+	content: "\e01a";
+}
+.icon-remove:before {
+	content: "\e01b";
+}
+.icon-remove-2:before {
+	content: "\e01c";
+}
+.icon-cog:before {
+	content: "\e01d";
+}
+.icon-settings:before {
+	content: "\e01e";
+}
+.icon-unlocked:before {
+	content: "\e01f";
+}
+.icon-lock:before {
+	content: "\e020";
+}
+.icon-spinner:before {
+	content: "\e021";
+}
+.icon-spinner-2:before {
+	content: "\e022";
+}
+.icon-busy:before {
+	content: "\e023";
+}
+.icon-spinner-3:before {
+	content: "\e024";
+}
+.icon-calendar-2:before {
+	content: "\e025";
+}
+.icon-envelop:before {
+	content: "\e026";
+}
+.icon-notebook:before {
+	content: "\e027";
+}
+.icon-book:before {
+	content: "\e028";
+}
+.icon-books:before {
+	content: "\e029";
+}
+.icon-pencil:before {
+	content: "\e02a";
+}
+.icon-home:before {
+	content: "\e02b";
+}
+.icon-check-alt:before {
+	content: "\e02c";
+}
+.icon-x-altx-alt:before {
+	content: "\e02d";
+}
+.icon-plus-alt:before {
+	content: "\e02e";
+}
+.icon-minus-alt:before {
+	content: "\e02f";
+}
+.icon-network:before {
+	content: "\e030";
+}
+.icon-flag-2:before {
+	content: "\e031";
+}
+.icon-bubble-notification:before {
+	content: "\e032";
+}
+.icon-calendar-3:before {
+	content: "\e033";
+}
+.icon-calendar-4:before {
+	content: "\e034";
+}
+.icon-calendar-5:before {
+	content: "\e035";
+}
+.icon-close-2:before {
+	content: "\e036";
+}
+.icon-backspace:before {
+	content: "\e037";
+	background: #fff;
+	text-shadow: 0px 0px 0px #000;
+    filter: dropshadow(color=#000, offx=0, offy=0);
+}
+.icon-flag-3:before {
+	content: "\e038";
+}
+.icon-calendar-6:before {
+	content: "\e039";
+}
+.icon-folder-minus:before {
+	content: "\e03a";
+}
+.icon-folder-plus:before {
+	content: "\e03b";
+}
+.icon-menu-3:before {
+	content: "\e03c";
+}
+.icon-menu-4:before {
+	content: "\e03d";
+}
+.icon-cart:before {
+	content: "\e03e";
+}
+.icon-cart-plus:before {
+	content: "\e03f";
+}
+.icon-cart-minus:before {
+	content: "\e040";
+}
+.icon-cart-remove:before {
+	content: "\e041";
+}
+.icon-more:before {
+	content: "\e042";
+}
+.icon-mobile:before {
+	content: "\e043";
+}
+.icon-phone:before {
+	content: "\e044";
+}
+.icon-mobile-2:before {
+	content: "\e045";
+}
+.icon-new:before {
+	content: "\e046";
+}
+.icon-share:before {
+	content: "\e047";
+}
+.icon-new-tab:before {
+	content: "\e048";
+}
+.icon-bell:before {
+	content: "\e04d";
+}
+.icon-alarm-plus:before {
+	content: "\e04e";
+}
+.icon-alarm-minus:before {
+	content: "\e04f";
+}
+.icon-alarm-check:before {
+	content: "\e050";
+}
+.icon-alarm-cancel:before {
+	content: "\e051";
+}
+.icon-calendarPlus:before {
+	content: "\e049";
+}
+.icon-calendarMinus:before {
+	content: "\e04a";
+}
+.icon-arrow-right-2:before {
+	content: "\e04b";
+}
+.icon-arrow-left-2:before {
+	content: "\e04c";
+}
