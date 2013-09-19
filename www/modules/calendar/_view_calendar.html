@@ -1,75 +1,5 @@
-<!-- subscription view -->
-<div class="large-2 columns" ng-controller="SubscriptionCtl">
-	<div class="row">
-		<div class="large-12 columns">
-			<h4>Calendars <small ng-click="toggle('addingSubscription')">add</small></h4>
-		</div>
-		<hr />
-	</div>
-
-	<!-- calendar creation form -->
-	<div ng-show="addingSubscription">
-		<div class="row">
-			<input type="text" ng-model="newCalendar.calendar_name" placeholder="Name (required)" />
-			<input type="text" ng-model="newCalendar.color" placeholder="Color (required)" />
-		</div>
-		<div class="row">
-			<div class="large-6 columns">
-				<div class="expand small alert button" ng-click="cancelNew()" >cancel</div>
-			</div>
-			<div class="large-6 columns">
-				<div class="expand small button" ng-click="saveNew()" >save</div>
-			</div>
-		</div>
-	</div>
-	
-	<!-- SUBSCRIBED CALENDAR SECTION -->
-
-	<div ng-show="subscribedCalendars.length">
-		Subscribed Calendars
-		<hr />
-	</div>
-
-	<!-- subscribed calendars ng-repeat -->
-		<active-subscription
-		 ng-repeat="calendar in subscribedCalendars = (calendars | filter:{active: 1, subscribed: true} | orderBy:'calendar_name')" 
-			watcher="calendarWatchers"
-			calendar="calendar">
-		</active-subscription>
-
-	<!-- RECENTLY CREATED/SUBSCRIBED CALENDAR SECTION -->
-
-	<div ng-show="recentCalendars.length">
-		Recently Added
-		<hr />
-	</div>
-
-	 <!-- recently acquired calendars ng-repeat -->
-	<active-subscription
-		ng-repeat="calendar in recentCalendars = (calendars | filter:{active: 1, recent: true, subscribed: true} | orderBy:'calendar_name')"
-		watcher="calendarWatchers"
-		calendar="calendar">
-	</active-subscription>
-	
-
-	 <!-- AVAILABLE CALENDAR SECTION -->
-
-	<div ng-show="availabeCalendars.length">
-		Available Calendars
-		<hr />
-	</div>
-
-	<!-- available calendars ng-repeat -->
-	<available-subscription
-		ng-repeat="calendar in availabeCalendars = (calendars | filter:{active: 1, subscribed: false} | orderBy:'calendar_name')"
-		watcher="calendarWatchers"
-		calendar="calendar">
-	</available-subscription>
-</div>
-<!-- / subscription view -->
-
 <!-- event view -->
-<div class="large-8 columns" ng-controller="EventCtl">
+<div id="main-content" style="height: 100%; overflow: hidden;" class="small-12 large-8 push-2 columns" ng-controller="EventCtl">
 	<div class="row">
 		<div class="large-5 columns">
 			<h3>{{view}} view
@@ -114,12 +44,11 @@
 <!-- / event view -->
 
 <!-- task view -->
-<div class="large-2 columns" ng-controller="TaskCtl">
-	<div class="row">
-		<div class="large-12 columns">
-			<h4>Tasks <small ng-click="toggle('addingTask')">add</small></h4>
-		</div>
-	</div>
+<div id="tasks" style="height: 100%; overflow: hidden;" class="small-12 large-2 push-2 columns" ng-controller="TaskCtl">
+	<div class="pane-header">
+    	<span class="pane-title">Tasks/To Do</span>
+    	<span ng-click="toggle('addingTask')" aria-hidden="true" class="icon-plus-alt right"></span>
+    </div>
 
 	<!-- task entry form -->
 	<div ng-show="addingTask">
@@ -130,6 +59,74 @@
 	<div ng-repeat="task in tasks | filter: isCalendarShowing">
 		<view-task task="task" calendars="calendars" colors="calendarWatchers" ng-show="task.active"></view-task>
 	</div>
-
 </div>
 <!-- / task view -->
+
+<!-- subscription view  gets pulled 10 columns from it's original position, all the way to the left. -->
+<div id="my-calendars" style="height: 100%; overflow: hidden;" class="small-12 large-2 pull-10 columns" ng-controller="SubscriptionCtl">
+	<div class="pane-header">
+        <span class="pane-title">My Calendars</span>
+        <span aria-hidden="true" class="icon-plus-alt right"></span>
+    </div>
+	<div scroll-pane>
+		<!-- calendar creation form -->
+		<div ng-show="addingSubscription">
+			<div class="row">
+				<input type="text" ng-model="newCalendar.calendar_name" placeholder="Name (required)" />
+				<input type="text" ng-model="newCalendar.color" placeholder="Color (required)" />
+			</div>
+			<div class="row">
+				<div class="large-6 columns">
+					<div class="expand small alert button" ng-click="cancelNew()" >cancel</div>
+				</div>
+				<div class="large-6 columns">
+					<div class="expand small button" ng-click="saveNew()" >save</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- SUBSCRIBED CALENDAR SECTION -->
+
+		<div ng-show="subscribedCalendars.length">
+			Subscribed Calendars
+			<hr />
+		</div>
+
+		<!-- subscribed calendars ng-repeat -->
+		<active-subscription
+		 ng-repeat="calendar in subscribedCalendars = (calendars | filter:{active: 1, subscribed: true} | orderBy:'calendar_name')" 
+			watcher="calendarWatchers"
+			calendar="calendar">
+		</active-subscription>
+
+		<!-- RECENTLY CREATED/SUBSCRIBED CALENDAR SECTION -->
+
+		<div ng-show="recentCalendars.length">
+			Recently Added
+			<hr />
+		</div>
+
+		 <!-- recently acquired calendars ng-repeat -->
+		<active-subscription
+			ng-repeat="calendar in recentCalendars = (calendars | filter:{active: 1, recent: true, subscribed: true} | orderBy:'calendar_name')"
+			watcher="calendarWatchers"
+			calendar="calendar">
+		</active-subscription>
+		
+
+		 <!-- AVAILABLE CALENDAR SECTION -->
+
+		<div ng-show="availabeCalendars.length">
+			Available Calendars
+			<hr />
+		</div>
+
+		<!-- available calendars ng-repeat -->
+		<available-subscription
+			ng-repeat="calendar in availabeCalendars = (calendars | filter:{active: 1, subscribed: false} | orderBy:'calendar_name')"
+			watcher="calendarWatchers"
+			calendar="calendar">
+		</available-subscription>
+	</div>
+</div>
+<!-- / subscription view -->
