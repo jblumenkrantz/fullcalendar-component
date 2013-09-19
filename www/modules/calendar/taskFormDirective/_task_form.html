@@ -1,18 +1,53 @@
-<div class="row">
-	<input type="text" ng-model="task.task_name" placeholder="Title (required)" />
-	<input type="text" ng-model="task.due_time" placeholder="Due On" ui-date />
-	<select ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars" ng-model="task.calendar_id" ></select>
-	<textarea ng-model="task.task_notes" placeholder="Add Note"></textarea>
-</div>
-<div class="row">
-	<div class="large-6 columns">
-		<div class="expand small alert button" ng-click="cancel()" >cancel</div>
-	</div>
-	<div class="large-6 columns">
-		<div class="expand small alert button" ng-click="delete()" >delete</div>
-	</div>
-	<div class="large-12 columns">
-		<div class="expand small button" ng-click="save()" >save</div>
+<div class="task">
+	<div class="task-form">
+		<div class="row">
+			<input type="text" ng-model="task.task_name" placeholder="Title (required)" />
+			<select ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars" ng-model="task.calendar_id" ></select>
+			<textarea ng-model="task.task_notes" placeholder="Add Note"></textarea>
+			<label style="margin-top: 3px;" class="input-text-container" for="due-checkbox_{{task.task_id}}">
+				<input id="due-checkbox_{{task.task_id}}" type="checkbox" ng-model="task.hasDueDate" />
+				Has a due date
+			</label>
+			<input ng-show="task.hasDueDate" type="text" ng-model="task.due_time" placeholder="Due On" ui-date />
+			<label style="margin-top: 8px;" class="input-text-container" for="reminder-task_{{task.task_id}}">
+				<input id="reminder-task_{{task.task_id}}" type="checkbox" ng-model="task.has_reminder" />
+				Add Reminder
+			</label>
+		</div>
+		<div class="row">
+			<div class="large-6 columns">
+				<div class="expand small alert button" ng-click="cancel()" >cancel</div>
+			</div>
+			<div class="large-6 columns">
+				<div class="expand small alert button" ng-click="delete()" >delete</div>
+			</div>
+			<div class="large-12 columns">
+				<div class="expand small button" ng-click="save()" >save</div>
+			</div>
+		</div>
 	</div>
 </div>
 
+<!--
+<div class="task">
+	<div class="task-form">
+		<div class="edit-container">
+			<input type="text" ng-model="task.task_name" placeholder="Title (required)" />
+			<select ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars" ng-model="task.calendar_id" ></select>
+			<textarea placeholder="Add note" name="" class=""></textarea>
+			<label style="margin-top: 3px;" class="input-text-container" for="due-checkbox">
+				<input id="due-checkbox" type="checkbox" class="">
+				Has a due date
+			</label>
+			<label style="margin-top: 8px;" class="input-text-container" for="reminder-task">
+				<input id="reminder-task" type="checkbox" class="">
+				Add Reminder
+			</label>
+			<ul class="button-group even-2">
+				<li><a href="#" class="button small alert"><span aria-hidden="true" class="icon-close"></span></a></li>
+				<li><a href="#" class="button small success"><span aria-hidden="true" class="icon-checkmark"></span></a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+-->

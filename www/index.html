@@ -6,26 +6,18 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Pinwheel</title>
+    <title>TryPinwheel.com | The Jedi Academy, Dantooine</title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <!-- build:css({.tmp,app}) styles/main.css -->
-        <link rel="stylesheet" href="assets/styles/main.css">
-        <link rel="stylesheet" href="assets/styles/foundation.css">
-        <!-- endbuild -->
-        <style>
-            /** DELETE THIS SHIT WHENEVER THERE IS AN ACTUAL CSS FILE **/
-            /* USED IN EVENT LIST VIEW */
-            .row.display{
-                padding: 5px;
-                background-color: #EEE;
-                margin: 8px 0px;
-            }
-        </style>
+    <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="assets/styles/main.css">
+    <link rel="stylesheet" href="assets/styles/foundation.css">
+    <link rel="stylesheet" href="assets/styles/glyphs.css"> 
+    <!-- endbuild -->
 </head>
-  <body ng-app="pinwheelApp">
+  <body style="overflow: hidden;" ng-app="pinwheelApp">
     <!--[if lt IE 7]>
       <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
     <![endif]-->
@@ -37,18 +29,15 @@
 
     <!-- Add your site or application content here -->
 		<div ng-controller="PinwheelCtl">
-			<!-- header row -->
-			<div class="large-12 columns">
-				<h3>Pinwheel <small><a ng-href="#/settings">settings</a></small> <small><a ng-href ng-click="logout()">logout</a></small></h3>
-			</div>
-			<!-- / header row -->
+            <!-- header -->
+            <nav id="mainHeader" class="top-bar" ng-include src="'modules/_topbar.html'"></nav>
+            <!-- / header -->
 
 			<!-- main content -->
-				<!-- route pane -->
-				<div class="large-12 columns" ng-view=""></div>
-				<!-- / route pane -->
+			<!-- route pane -->
+			<div class="large-12 columns" style="overflow: hidden; padding: 0;" outer-container ng-view=""></div>
+			<!-- / route pane -->
 			<!-- / main content -->
-
 		</div>
 		<!-- / application content -->
 
@@ -93,6 +82,7 @@
         <script src="modules/handbook/handbookCtl.js"></script>
         <script src="modules/settings/settingsCtl.js"></script>
         <script src="modules/quickAddParser.js"></script>
+        <script src="modules/interfaceDirectives.js"></script>
         <!-- endbuild -->
 </body>
 </html>
