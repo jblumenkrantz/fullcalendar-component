@@ -2,7 +2,6 @@
 
 angular.module('pinwheelApp')
   .controller('PinwheelCtl', function ($scope, $location, Calendar, User, localStorage) {
-  		$scope.view = "list";
 		User.get({}, function(user){
 		});
 		// nice for toggling forms. see adding a task for example.
@@ -15,6 +14,11 @@ angular.module('pinwheelApp')
 			$location.path('/login');
 		}
 
+
+		//ui controller stuff
+		$scope.view = "list";
+		$scope.calendarDrawer = true;
+		$scope.taskDrawer = true;
 		$scope.changeView = function(view) {
 			$scope.view = view;
 		};
