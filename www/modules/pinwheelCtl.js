@@ -2,6 +2,7 @@
 
 angular.module('pinwheelApp')
   .controller('PinwheelCtl', function ($scope, $location, Calendar, User, localStorage) {
+  		$scope.view = "list";
 		User.get({}, function(user){
 		});
 		// nice for toggling forms. see adding a task for example.
@@ -13,5 +14,9 @@ angular.module('pinwheelApp')
 			delete localStorage['token'];
 			$location.path('/login');
 		}
+
+		$scope.changeView = function(view) {
+			$scope.view = view;
+		};
   });
 

@@ -1,43 +1,51 @@
 <!-- event view -->
 <div id="main-content" style="height: 100%; overflow: hidden;" class="small-12 large-8 push-2 columns" ng-controller="EventCtl">
-	<div class="row">
-		<div class="large-5 columns">
-			<h3>{{view}} view
-				<small ng-click="add()">add event</small><br />
-				<small ng-click="quickAdd()">quick add event</small>
-			</h3>
-		</div>
-		<div class="large-7 columns">
-			<h3><small ng-click="changeView('day')">day</small> <small ng-click="changeView('week')">week</small> <small ng-click="changeView('month')">month</small> <small ng-click="changeView('list')">list</small> <small ng-click="changeView('datebook')">datebook</small></h3>
-		</div>
-	</div>
+	<header id="content-header" class="scroll-header">
+		<ul class="small-block-grid-3">
+			<li class="text-left">
+				<span aria-hidden="true" class="icon-arrow-left"></span>
+				<span aria-hidden="true" class="icon-calendar-2"></span>
+			</li>
+			<li>
+				<span aria-hidden="true" class="icon-arrow-left-2"></span>
+				<span class="month-switcher">September</span>
+				<span aria-hidden="true" class="icon-arrow-right-2"></span>
+			</li>
+			<li class="text-right">
+				<span ng-click="quickAdd()" aria-hidden="true" class="icon-plus-alt"></span>
+				<span aria-hidden="true" class="icon-arrow-right"></span>
+			</li>
+		</ul>
+    </header>
 
-	<!-- event quickAdd form -->
-	<div ng-show="quickAdding" ng-include src="'modules/calendar/_quickadd_event_form.html'"></div>
+    <div scroll-pane style="overflow-y: auto; padding-right: 8px;">
+		<!-- event quickAdd form -->
+		<div ng-show="quickAdding" ng-include src="'modules/calendar/_quickadd_event_form.html'"></div>
 
-	<!-- event add/edit form -->
-	<div ng-show="addingEvent || editingEvent" ng-include src="'modules/calendar/_event_form.html'"></div>
+		<!-- event add/edit form -->
+		<div ng-show="addingEvent || editingEvent" ng-include src="'modules/calendar/_event_form.html'"></div>
 
-	<!-- calendar views switch -->
-	<div ng-switch="view">
-		<div ng-switch-when="day">
-			<day-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></day-view>
-		</div>
+		<!-- calendar views switch -->
+		<div ng-switch="view">
+			<div ng-switch-when="day">
+				<day-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></day-view>
+			</div>
 
-		<div ng-switch-when="week">
-			<week-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></week-view>
-		</div>
+			<div ng-switch-when="week">
+				<week-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></week-view>
+			</div>
 
-		<div ng-switch-when="month">
-			<month-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></month-view>
-		</div>
+			<div ng-switch-when="month">
+				<month-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></month-view>
+			</div>
 
-		<div ng-switch-when="list">
-			<list-view></list-view>
-		</div>
+			<div ng-switch-when="list">
+				<list-view></list-view>
+			</div>
 
-		<div ng-switch-when="datebook">
-			<datebook-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></datebook-view>
+			<div ng-switch-when="datebook">
+				<datebook-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></datebook-view>
+			</div>
 		</div>
 	</div>
 </div>
@@ -45,30 +53,31 @@
 
 <!-- task view -->
 <div id="tasks" style="height: 100%; overflow: hidden;" class="small-12 large-2 push-2 columns" ng-controller="TaskCtl">
-	<div class="pane-header">
+	<div class="pane-header scroll-header">
     	<span class="pane-title">Tasks/To Do</span>
     	<span ng-click="toggle('addingTask')" aria-hidden="true" class="icon-plus-alt right"></span>
     </div>
+    <div scroll-pane style="overflow-y: auto; border-left: 1px solid #afafaf;">
+		<!-- task entry form -->
+		<div ng-show="addingTask">
+			<task-form task="newTask" save="saveNew()" cancel="toggle('addingTask')" calendars="calendars"></task-form>
+		</div>
+		<!-- / task entry form -->
 
-	<!-- task entry form -->
-	<div ng-show="addingTask">
-		<task-form task="newTask" save="saveNew()" cancel="toggle('addingTask')" calendars="calendars"></task-form>
-	</div>
-	<!-- / task entry form -->
-
-	<div ng-repeat="task in tasks | filter: isCalendarShowing">
-		<view-task task="task" calendars="calendars" colors="calendarWatchers" ng-show="task.active"></view-task>
+		<div ng-repeat="task in tasks | filter: isCalendarShowing">
+			<view-task task="task" calendars="calendars" colors="calendarWatchers" ng-show="task.active"></view-task>
+		</div>
 	</div>
 </div>
 <!-- / task view -->
 
 <!-- subscription view  gets pulled 10 columns from it's original position, all the way to the left. -->
 <div id="my-calendars" style="height: 100%; overflow: hidden;" class="small-12 large-2 pull-10 columns" ng-controller="SubscriptionCtl">
-	<div class="pane-header">
+	<div class="pane-header scroll-header">
         <span class="pane-title">My Calendars</span>
-        <span aria-hidden="true" class="icon-plus-alt right"></span>
+        <span ng-click="toggle('addingSubscription')" aria-hidden="true" class="icon-plus-alt right"></span>
     </div>
-	<div scroll-pane>
+	<div scroll-pane style="overflow-y: auto; border-right: 1px solid #afafaf;">
 		<!-- calendar creation form -->
 		<div ng-show="addingSubscription">
 			<div class="row">
@@ -86,13 +95,6 @@
 		</div>
 		
 		<!-- SUBSCRIBED CALENDAR SECTION -->
-
-		<div ng-show="subscribedCalendars.length">
-			Subscribed Calendars
-			<hr />
-		</div>
-
-		<!-- subscribed calendars ng-repeat -->
 		<active-subscription
 		 ng-repeat="calendar in subscribedCalendars = (calendars | filter:{active: 1, subscribed: true} | orderBy:'calendar_name')" 
 			watcher="calendarWatchers"
