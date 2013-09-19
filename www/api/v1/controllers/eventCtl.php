@@ -121,7 +121,6 @@ class EventCtl
 		$evprops = json_decode(Request:: body());
 		$pinsqli = DistributedMySQLConnection:: writeInstance();
 		$authUserID = Authorize:: sharedInstance()->userID();
-		echo '[';
 		if (is_object($evprops))
 			$evprops = array($evprops);
 		$nevets = count($evprops);
@@ -152,7 +151,7 @@ class EventCtl
 				
 				$event->update($pinsqli);
 			
-				echo json_encode(array($event->event_id => $event));
+				echo json_encode($event);
 			} catch (EventDataConflictException $e) {
 				echo $e->json_encode();
 			} catch (EventDoesNotExist $e) {
@@ -160,7 +159,6 @@ class EventCtl
 			}
 			if (--$nevets > 0) echo ',';
 		}
-		echo ']';
 		User:: incrementVersion($authUserID);
 	}
 	function unsubscribe() {

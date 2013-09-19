@@ -26,7 +26,7 @@ angular.module('pinwheelApp')
 		//update existing event
 		$scope.update = function() {
 			angular.copy($scope.formEvent, $scope.event);
-			$scope.event.$save({}, function(event) {
+			$scope.event.$update({id: $scope.event.event_id}, function(event) {
 				$scope.event = event;
 				$scope.formEvent = new Event();
 			});

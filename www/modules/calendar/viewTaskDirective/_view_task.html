@@ -1,12 +1,12 @@
 <div ng-hide="editingTask">
 	<div class="row">
 		<div class="large-12 columns">
-			<strong>{{task.task_name}} <small ng-click="edit('editingTask')">edit</small></strong>
+			<strong><span  ng-style="{color: colors[task.calendar_id].color}">{{task.task_name}}</span> <small ng-click="edit('editingTask')">edit</small></strong>
 		</div>
 	</div>
 	<div class="row">
 		<div class="large-12 columns" ng-style="{color: colors[task.calendar_id].color}">
-			{{task.calendar_id}}
+			{{task.due_time | date}}
 		</div>
 	</div>
 	<div class="row">

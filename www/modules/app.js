@@ -49,14 +49,14 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute'])
 					method:'PUT',
 					isArray: false,
 					transformRequest: function(data){
+						data = angular.fromJson(data);
 						data.due_time = new Date(data.due_time).getTime()/1000;
-						console.log(data);
 						return angular.toJson(data);
 					},
 					transformResponse: function(data){
-						var tasks = angular.fromJson(data);
+						var data = angular.fromJson(data);
 						data.due_time = new Date(data.due_time*1000);
-						return angular.toJson(data);
+						return data;
 					}
 				},
 				delete: {method: 'DELETE', params: {version: ':version'}},
@@ -64,14 +64,12 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute'])
 					method: 'GET',
 					isArray: true,
 					transformRequest: function(data){
-						console.log(data);
 						return data;
 					},
 					transformResponse: function(data){
 						var tasks = angular.fromJson(data);
 						angular.forEach(tasks, function(task,k){
 							if(parseInt(task.due_time)){
-								console.log(task.due_time);
 								tasks[k].due_time = new Date(task.due_time*1000);
 							}else{
 								delete task.due_time
@@ -86,28 +84,24 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute'])
 	.factory('Event', function($resource){
 		return $resource('/api/v1/event/:id/:year/:month/:day', {}, {
 			update: {
-					method:'PUT',
-					transformRequest: function(data){
-						data = angular.fromJson(data);
-						console.log(data);
-						data.event_start = new Date(data.event_start).getTime()/1000;
-						data.event_end   = new Date(data.event_end).getTime()/1000;
-						return angular.toJson(data);
-					},
-					transformResponse: function(data){
-						data = angular.fromJson(data);
-						data.event_start = new Date(parseInt(data.event_start));
-						data.event_end = new Date(parseInt(data.event_end));
-						return angular.toJson(data);
-					}
+				method:'PUT',
+				isArray: false,
+				transformRequest: function(data){
+					data = angular.fromJson(data);
+					data.event_start = new Date(data.event_start).getTime()/1000;
+					data.event_end = new Date(data.event_end).getTime()/1000;
+					return angular.toJson(data);
+				},
+				transformResponse: function(data){
+					var data = angular.fromJson(data);
+					data.event_start = new Date(data.event_start*1000);
+					data.event_end = new Date(data.event_end*1000);
+					return data;
+				}
 			},
 			query: {
 					method: 'GET',
 					isArray: true,
-					transformRequest: function(data){
-						console.log(data);
-						//return data;
-					},
 					transformResponse: function(data){
 						var events = angular.fromJson(data);
 						angular.forEach(events, function(event,k){
