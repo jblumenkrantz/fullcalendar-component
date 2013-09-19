@@ -1,13 +1,24 @@
 'use strict';
 
 angular.module('pinwheelApp')
-.directive('outerContainer', function() {
+.directive('scrollPane', function(Debounce) {
 	return function(scope, element, attrs) {
-		element.height($(window).height() - $("#mainHeader").height());
-	}
-})
-.directive('scrollPane', function() {
-	return function(scope, element, attrs) {
-		element.height(element.parent().height()-element.siblings(".scroll-header").height());
+		function getHeight() {
+			return $(window).height() - $("#mainHeader").height() - element.siblings(".scroll-header").height() + "px";
+		}
+
+		if ($(window).width() > 768) {
+			element.css("height", getHeight());
+		}
+
+		$(window).resize(Debounce(function() {
+			if ($(window).width() > 768) {
+				$("body").scrollTop(0);
+				element.css("height", getHeight());
+			}
+			else {
+				element.css("height", "auto");
+			}
+		}));
 	}
 });
