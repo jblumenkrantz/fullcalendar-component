@@ -41,13 +41,15 @@ angular.module('pinwheelApp')
 			});
 			$scope.addingEvent = false;
 		}
+
 		//delete existing event
 		$scope.delete = function(){
 			$scope.event.$delete({id:$scope.event.event_id, version:$scope.event.version});
 			$scope.editingEvent = false;
 			$scope.addingEvent = false;
 		}
-		//cancel event form
+
+		//cancel all event forms, reset event object
 		$scope.cancel = function() {
 			$scope.formEvent = new Event();
 			$scope.addingEvent = false;
@@ -55,12 +57,14 @@ angular.module('pinwheelApp')
 			$scope.quickAdding = false;
 		}
 
+		//open quickadd form for new event
 		$scope.quickAdd = function() {
 			$scope.quickAdding = true;
 			$scope.addingEvent = false;
 			$scope.editingEvent = false;
 		}
 
+		//save new quickadded event
 		$scope.quickSave = function() {
 			$scope.formEvent = new Event();
 			angular.copy(QuickAdd($scope.quickAdd.text), $scope.formEvent);
