@@ -53,6 +53,11 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute'])
 						console.log(data);
 						return angular.toJson(data);
 					},
+					transformResponse: function(data){
+						var tasks = angular.fromJson(data);
+						data.due_time = new Date(data.due_time*1000);
+						return angular.toJson(data);
+					}
 				},
 				delete: {method: 'DELETE', params: {version: ':version'}},
 				query: {
@@ -65,7 +70,12 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute'])
 					transformResponse: function(data){
 						var tasks = angular.fromJson(data);
 						angular.forEach(tasks, function(task,k){
-							tasks[k].due_time = new Date(task.due_time*1000);
+							if(parseInt(task.due_time)){
+								console.log(task.due_time);
+								tasks[k].due_time = new Date(task.due_time*1000);
+							}else{
+								delete task.due_time
+							}
 						});
 						return tasks;
 					}
@@ -75,7 +85,22 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute'])
 	})
 	.factory('Event', function($resource){
 		return $resource('/api/v1/event/:id/:year/:month/:day', {}, {
-			update: {method:'PUT'},
+			update: {
+					method:'PUT',
+					transformRequest: function(data){
+						data = angular.fromJson(data);
+						console.log(data);
+						data.event_start = new Date(data.event_start).getTime()/1000;
+						data.event_end   = new Date(data.event_end).getTime()/1000;
+						return angular.toJson(data);
+					},
+					transformResponse: function(data){
+						data = angular.fromJson(data);
+						data.event_start = new Date(parseInt(data.event_start));
+						data.event_end = new Date(parseInt(data.event_end));
+						return angular.toJson(data);
+					}
+			},
 			query: {
 					method: 'GET',
 					isArray: true,
@@ -86,8 +111,8 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute'])
 					transformResponse: function(data){
 						var events = angular.fromJson(data);
 						angular.forEach(events, function(event,k){
-							events[k].event_start = Date(parseInt(event.event_start));
-							events[k].event_end = Date(parseInt(event.event_end));
+							events[k].event_start = new Date(parseInt(event.event_start*1000));
+							events[k].event_end = new Date(parseInt(event.event_end*1000));
 						});
 						return events;
 					}

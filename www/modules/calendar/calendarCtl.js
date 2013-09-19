@@ -2,7 +2,6 @@
 
 angular.module('pinwheelApp')
 	.controller('CalendarCtl', function ($filter, $scope, $routeParams, $location, Calendar, Event, Task) {
-		$scope.view = "list";
 		$scope.calendarWatchers = {};
 		$scope.reminders = {};
 		Calendar.query({id: 'all'}, function(calendars){
@@ -31,10 +30,6 @@ angular.module('pinwheelApp')
 		$scope.calendarColor = function(item) {
 			return $scope.calendarWatchers[item.calendar_id].color;
 		}
-
-		$scope.changeView = function(view) {
-			$scope.view = view;
-		};
   });
 
 
