@@ -239,7 +239,6 @@ angular.module('pinwheelApp')
 			else
 				jsonOutput["all_day"] = false;
 				
-				
 			//get user obj for default calendar
 			var userObj = JSON.parse(localStorage.User);	
 				
@@ -250,6 +249,3 @@ angular.module('pinwheelApp')
 			return(jsonOutput);
 
 		});
-
-
-
