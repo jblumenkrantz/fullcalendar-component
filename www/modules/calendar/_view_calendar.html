@@ -61,10 +61,7 @@
 <!-- / subscription view -->
 
 <!-- event view -->
-<div
-	ng-controller="EventCtl"
-	id="main-content"
-	style="height: 100%; overflow: hidden; position: relative; z-index: 2"
+<div ng-controller="EventCtl" id="main-content" style="height: 100%; overflow: hidden; position: relative; z-index: 2"
 	ng-class="{
 		'small-12':true,
 		'large-8':(calendarDrawer && taskDrawer),
@@ -77,7 +74,7 @@
 		<ul class="small-block-grid-3">
 			<li class="text-left">
 				<span>
-					<span ng-click="toggle('calendarDrawer')" aria-hidden="true" class="icon-arrow-left hide-for-small" style="margin-left: 4px;"></span>
+					<span ng-click="toggle('calendarDrawer')" aria-hidden="true" ng-class="{'icon-arrow-left':calendarDrawer, 'icon-arrow-right':!calendarDrawer, 'hide-for-small':true}" style="margin-left: 4px;"></span>
 				</span>
 				<span aria-hidden="true" class="icon-calendar-2"></span>
 			</li>
@@ -89,7 +86,7 @@
 			<li class="text-right">
 				<span ng-click="quickAdd()" aria-hidden="true" class="icon-plus-alt"></span>
 				<span>
-					<span ng-click="toggle('taskDrawer')" aria-hidden="true" class="icon-arrow-right hide-for-small" style="margin-right: 4px;"></span>
+					<span ng-click="toggle('taskDrawer')" aria-hidden="true"  ng-class="{'icon-arrow-right':taskDrawer, 'icon-arrow-left':!taskDrawer, 'hide-for-small':true}" style="margin-right: 4px;"></span>
 				</span>
 			</li>
 		</ul>
@@ -98,7 +95,7 @@
     <div scroll-pane class="scroll-pane scroll-medium-up">
 		<!-- event quickAdd form -->
 		<div ng-show="quickAdding" >
-		<div ng-include src="'modules/calendar/_quickadd_event_form.html'"></div>
+			<div ng-include src="'modules/calendar/_quickadd_event_form.html'"></div>
 		</div>
 
 		<!-- event add/edit form -->
