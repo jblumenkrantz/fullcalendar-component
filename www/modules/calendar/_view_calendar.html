@@ -20,10 +20,14 @@
 
     <div scroll-pane style="overflow-y: auto; padding-right: 8px;">
 		<!-- event quickAdd form -->
-		<div ng-show="quickAdding" ng-include src="'modules/calendar/_quickadd_event_form.html'"></div>
+		<div ng-show="quickAdding" >
+		<div ng-include src="'modules/calendar/_quickadd_event_form.html'"></div>
+		</div>
 
 		<!-- event add/edit form -->
-		<div ng-show="addingEvent || editingEvent" ng-include src="'modules/calendar/_event_form.html'"></div>
+		<div  ng-show="addingEvent || editingEvent">
+			<div ng-include src="'modules/calendar/_event_form.html'"></div>
+		</div>
 
 		<!-- calendar views switch -->
 		<div ng-switch="view">

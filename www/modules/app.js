@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('pinwheelApp', ['ngResource'])
+angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute'])
 	.config(function ($routeProvider) {
 		$routeProvider
 			.when('/calendar/:year/:month/:day', {
@@ -43,10 +43,107 @@ angular.module('pinwheelApp', ['ngResource'])
 		return $resource('/api/v1/user/:id', {}, {update: {method:'PUT'}});
 	})
 	.factory('Task', function($resource){
-		return $resource('/api/v1/task/:id/:version', {}, {update: {method:'PUT'}, delete: {method: 'DELETE', params: {version: ':version'}}});
+		return $resource('/api/v1/task/:id/:version', {},
+			{
+				save: {
+					method:'POST',
+					isArray: false,
+					transformRequest: function(data){
+						// TODO: add if statements in case task does not have due time
+						// TODO: for save and update
+						data.due_time = new Date(data.due_time).getTime()/1000;
+						return angular.toJson(data);
+					},
+					transformResponse: function(data){
+						data = angular.fromJson(data);
+						data.due_time = new Date(data.due_time*1000);
+						return data;
+					}
+				},
+				update: {
+					method:'PUT',
+					isArray: false,
+					transformRequest: function(data){
+						data = angular.fromJson(data);
+						data.due_time = new Date(data.due_time).getTime()/1000;
+						return angular.toJson(data);
+					},
+					transformResponse: function(data){
+						var data = angular.fromJson(data);
+						data.due_time = new Date(data.due_time*1000);
+						return data;
+					}
+				},
+				delete: {method: 'DELETE', params: {version: ':version'}},
+				query: {
+					method: 'GET',
+					isArray: true,
+					transformRequest: function(data){
+						return data;
+					},
+					transformResponse: function(data){
+						var tasks = angular.fromJson(data);
+						angular.forEach(tasks, function(task,k){
+							if(parseInt(task.due_time)){
+								tasks[k].due_time = new Date(task.due_time*1000);
+							}else{
+								delete task.due_time
+							}
+						});
+						return tasks;
+					}
+				},
+				get: {method: 'GET'}
+			});
 	})
 	.factory('Event', function($resource){
-		return $resource('/api/v1/event/:id/:version/:year/:month/:day', {}, {update: {method:'PUT'}});
+		return $resource('/api/v1/event/:id/:year/:month/:day', {}, {
+			save: {
+				method:'POST',
+				isArray: false,
+				transformRequest: function(data){
+					// TODO: add if statements in case task does not have due time
+					// TODO: for save and update
+					data.event_start = new Date(data.event_start).getTime()/1000;
+					data.event_end = new Date(data.event_end).getTime()/1000;
+					return angular.toJson(data);
+				},
+				transformResponse: function(data){
+					data = angular.fromJson(data);
+					data.event_start = new Date(data.event_start*1000);
+					data.event_end = new Date(data.event_end*1000);
+					return data;
+				}
+			},
+			update: {
+				method:'PUT',
+				isArray: false,
+				transformRequest: function(data){
+					data = angular.fromJson(data);
+					data.event_start = new Date(data.event_start).getTime()/1000;
+					data.event_end = new Date(data.event_end).getTime()/1000;
+					return angular.toJson(data);
+				},
+				transformResponse: function(data){
+					var data = angular.fromJson(data);
+					data.event_start = new Date(data.event_start*1000);
+					data.event_end = new Date(data.event_end*1000);
+					return data;
+				}
+			},
+			query: {
+					method: 'GET',
+					isArray: true,
+					transformResponse: function(data){
+						var events = angular.fromJson(data);
+						angular.forEach(events, function(event,k){
+							events[k].event_start = new Date(parseInt(event.event_start*1000));
+							events[k].event_end = new Date(parseInt(event.event_end*1000));
+						});
+						return events;
+					}
+				},
+		});
 	})
 	.factory('Reminder', function($resource){
 		return $resource('/api/v1/reminder/:id', {}, {update: {method:'PUT'}});

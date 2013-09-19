@@ -4,7 +4,6 @@ angular.module('pinwheelApp')
 	.controller('CalendarCtl', function ($filter, $scope, $routeParams, $location, Calendar, Event, Task) {
 		$scope.calendarWatchers = {};
 		$scope.reminders = {};
-
 		Calendar.query({id: 'all'}, function(calendars){
 			$scope.calendars = calendars;
 			Event.query({id: 'all'}, function(events){
