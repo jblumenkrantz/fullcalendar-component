@@ -1,0 +1,47 @@
+1/23/2012
+---------------
+Font Cheatsheet:  font.html
+Font files: fonts/
+CSS: stylesheets/glyphs.css
+
+IcoMoon.io is the site we will be using to manage our icon/glyph set. If you use Chrome, get the extension because it will be faster. I have included a .jSON file that can be loaded into the IcoMoon app to add, delete, or otherwise modify our glyph set. 
+
+It will probably work best if I continue to manage the glyphs while we are building the beta. But for future developers:
+
+1. Open IcoMoon app, load json file from repository
+2. make changes
+3. save session again
+4. overwrite old json file with new to preserve latest changes
+5. download .zip file from IcoMoon
+6. replace font files in 'fonts/' folder
+7. take index.html file from .zip file and copy its contents to font.html, and change the stylesheet path to <link rel="stylesheet" href="stylesheets/glyphs.css" />
+8. open style.css from .zip file, and open glyphs.css
+9. copy everything AFTER the @font-face rule FROM style.css, and overwrite that whole section in glyphs.css
+10. ????
+11. profit
+
+Notes: 
+1. to ensure icons that are wrapped in anchor/links will show in Chrome, you must specify class "glyph-show" on the <a> wrapper. 
+2. view http://brc-yourname.sdicgdev.com/font.html then place the code:
+<span aria-hidden="true" class="icon-CLASSNAME-HERE"> in the html where you want the glyph to appear.
+3. use css to resize, color, or otherwise style icons
+4. glyphs may be animated using css3 animation techniques
+
+ <!-- Nav Bar -->
+<div id="header_bar" class="row">
+	<div class="twelve columns">
+		<ul class="nav-bar contain-to-grid" style="z-index: 9;">
+			<li class="title"><a href="#">The JEDI Academy</a></li>
+			<li><a href="#" class="glyph-show"><span aria-hidden="true" class="icon-cog"></a></li>
+			<li><a href="#" class="glyph-show"><span aria-hidden="true" class="icon-books"></a></li>
+			<li><a href="#" class="glyph-show"><span aria-hidden="true" class="icon-book"></a></li>
+			<li><a href="#" class="glyph-show"><span aria-hidden="true" class="icon-calendar"></a></li>
+			<li><a href="#" class="notifications-click glyph-show"><div class="badge-counter">1</div><span aria-hidden="true" class="icon-notification-2"></a></li>
+			
+		<!-- 	<li><a href="font.html" class="notifications-click glyph-show"><div class="badge-counter">1</div><span aria-hidden="true" class="icon-warning"></span></a></li> -->
+			<!-- <li><a href="#" class="glyph-show"><span aria-hidden="true" class="icon-remove"></span></a></li>
+			<li><a href="font.html" class="glyph-show"><span aria-hidden="true" class="icon-grid-2"></span></a></li> -->
+		</ul>
+	</div>
+</div>
+  <!-- End Nav -->

@@ -1,1 +1,389 @@
+@import "settings";
+@import "events";
 @import "../bower_components/foundation/scss/foundation";
+
+/* Each individual part that can be added in */
+// @import "foundation/components/global";
+// @import "foundation/components/grid";
+// @import "foundation/components/visibility";
+// @import "foundation/components/block-grid";
+// @import "foundation/components/type";
+// @import "foundation/components/buttons";
+// @import "foundation/components/forms";
+// @import "foundation/components/custom-forms";
+// @import "foundation/components/button-groups";
+// @import "foundation/components/dropdown-buttons";
+// @import "foundation/components/split-buttons";
+// @import "foundation/components/flex-video";
+// @import "foundation/components/section";
+// @import "foundation/components/top-bar";
+// @import "foundation/components/orbit";
+// @import "foundation/components/reveal";
+// @import "foundation/components/joyride";
+// @import "foundation/components/clearing";
+// @import "foundation/components/alert-boxes";
+// @import "foundation/components/breadcrumbs";
+// @import "foundation/components/keystrokes";
+// @import "foundation/components/labels";
+// @import "foundation/components/inline-lists";
+// @import "foundation/components/pagination";
+// @import "foundation/components/panels";
+// @import "foundation/components/pricing-tables";
+// @import "foundation/components/progress-bars";
+// @import "foundation/components/side-nav";
+// @import "foundation/components/sub-nav";
+// @import "foundation/components/switch";
+// @import "foundation/components/magellan";
+// @import "foundation/components/tables";
+// @import "foundation/components/thumbs";
+// @import "foundation/components/tooltips";
+// @import "foundation/components/dropdown";
+
+// WIREFRAME TODO
+// 
+// example of a task
+// 
+// example of calendar available
+// subscribed
+// subscribed while in edit mode
+
+// -----------------------------
+// SET CUSTOM VARIABLES HERE
+// -----------------------------
+$letter-press:  1px 1px 2px #fff;
+
+
+
+
+.outer-container {
+	padding: 0 !important; 
+	margin: 0 !important;
+}
+
+#my-calendars, #main-content, #tasks {
+	min-height: 822px; // min-height for simulation purposes -jt
+	padding: 0 !important; 
+	margin: 0 !important; margin-right:-1px;
+}
+
+#my-calendars, #tasks {
+	background: #eee; 
+}
+
+#main-content {
+	background: #fff;
+	border-left: 1px solid darken($topbar-bg, 18%);
+	border-right: 1px solid darken($topbar-bg, 18%);
+}
+
+#tasks{
+	height: 100%;
+}
+
+.top-bar-section ul {
+	height: auto;
+	background: none;
+	margin: 0;
+}
+.top-bar-section ul.left{
+	height: 45px;
+}
+
+//position topbar control icons
+.top-bar ul li a span {
+	font-size: 20px;
+	height: 45px;
+	position: relative;
+	top: 4px;
+	margin: 0 -3px;
+}
+
+//Calendar filter widget in top-bar
+dl.sub-nav.calendar-filter {
+	display: inline;
+	padding: 0;
+	margin: 0;
+	position: relative;
+	top: 12px;
+	margin-top: 10px;
+}
+dl.sub-nav.calendar-filter dd {
+	margin-top: 12px;
+}
+
+
+// --------------------------
+// header bar for sidebars
+// --------------------------
+.pane-header {
+	background: darken($topbar-bg, 5%);
+	width: 100%;
+	margin: 0 !important;
+	padding: 0 !important;
+	background: darken($topbar-bg, 5%);
+	font-size: 20px;
+	height: 36px;
+}
+.pane-header span{
+	position: relative;
+	top: 8px;
+}
+.pane-header span.right{
+	margin-right: 12px;
+}
+.pane-header .pane-title{ 
+	margin-left: 6px;
+}
+
+
+header#content-header {
+	// width: 100%; 
+	//fixes ipad rendering 1px gap
+}
+
+header#content-header ul.small-block-grid-3 li{
+	text-align: center;
+	margin: 0 !important;
+	padding-bottom: 0 !important;
+	background: darken($topbar-bg, 5%);
+	font-size: 20px;
+	padding-top: 4px;
+}
+
+header#content-header ul.small-block-grid-3 span.month-switcher{
+	font-family: $body-font-family;
+	position: relative;
+	top: -1px;
+}
+
+#org-name-wrapper {
+	position: absolute; left: 50%;
+}
+.org-name {
+font-size: 20px;
+font-weight: bold;
+text-shadow: $letter-press;
+}
+
+@media only screen and (max-width: 768px) {
+ul.days {padding: 0; margin: 0; width: 100%; position: relative; left: 2px;}
+}
+
+// apply letter-press shadow to all glyphs by default
+[class*="icon-"]{
+	text-shadow: $letter-press;
+}
+
+
+//dummy calendar for proper visionality during html wireframe developmentality -jt
+.calendar-wrapper{display:inline;overflow:visible;width:100% !important;margin:0 auto; padding: 0 !important; }
+.calendar {width: 101% !important; padding: 0; margin: 0;}
+.calendar ul.month-browser li{width:33.3%;padding:0;border:0;text-align:center;text-transform:uppercase;height:auto;margin:20px 0;}
+.calendar{width:100% !important; margin: 0; padding: 0;}
+.calendar ul{list-style:none;padding:0;margin:0;clear:both;width:100%;}
+.calendar ul.weekdays{height:40px; width: 100%;}
+.calendar ul.weekdays li{text-align:center;text-transform:uppercase;line-height:20px;border:none!important;padding:10px 0px;color:#666;font-size:13px;}
+.calendar li{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;width:14.2857142857%;padding:5px;display:block;float:left;border:1px solid #ccc;margin-right:0px;margin-bottom:-1px;overflow:visible!important;}
+.calendar .days:last-child li{margin-bottom:0px!important;}
+.calendar li .day,.calendar li .month{display:none;}
+.calendar .date{text-align:right;margin-bottom:5px;}
+.show-info{display:block;font-size:13px;border-radius:4px;padding:5px;margin-bottom:5px;color:#666;line-height:14px;background:#e4f2f2;border:1px solid #b5dbdc;color:#009aaf;text-decoration:none;}
+.show-info:hover .venue{display:block;}
+.show-info .show-name{text-decoration:underline;}
+.show-info .show-time,.venue{color:#666;margin-top:2px;text-decoration:none;}
+.calendar .no-shows{display:none;}
+.calendar .venue{display:none;}
+.calendar li.out_of_range{background-color:#F5F5F5;color:#666;}
+ul.days, .calendar-day {padding: 0; margin: 0; width: 100%;}
+
+
+
+
+#task-list-tasks-container {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow-y: auto;
+}
+#task-list-tasks-container .input-text-container {
+	margin-top: -3px;
+	margin-bottom: 7px;
+}
+#task-list-tasks-container .hourmin-container {
+	margin-bottom: 6px;
+}
+#task-list-tasks-container label {
+	font-size: 12px;
+	margin-bottom: 8px !important;
+}
+.task {
+	overflow: hidden;
+	background: #aaa; 
+	color: #333; 
+	-webkit-box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0.1); 
+	-moz-box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0.1); 
+	box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0.1); 
+	cursor: pointer; 
+	margin: 0 0 2px 0; 
+	padding: 0px 0 0px 10px;
+	border: 0px; 
+}
+/*----------------------------
+Task panel colors must be solid. the 60% white rgba background  is from ".task-form"
+------------------------------*/
+/*gray for unscheduled to-do items?*/
+.color0 {
+	background:none;
+}
+/*red*/
+.task.color1, .color1 {
+	background: #E88989;
+}
+
+/*green*/
+.task.color2, .color2 {
+	background: #79c242;
+}
+
+/*blue*/
+.task.color3, .color3 {
+	background: #79C8DF;
+}
+
+/*orange*/
+.task.color4, .color4 {
+	background: #FCA469;
+}
+
+/*purple*/
+.task.color5, .color5 {
+	background: #C678C6;
+}
+/*this class supplies the 60% white rgba background that creates a lighter shade of the event/calendar color*/
+.task-form {
+	height: 100%;
+	background: rgba(255,255,255,.6);
+	padding: 4px;
+}
+.task .checkbox-container {
+	position: relative;
+	float: left;
+	width: 13%;
+}
+.task .body {
+	position: relative;
+	float: left;
+	width: 87%;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.task .info .body {
+	width: 77.5%;
+	margin-right: 2%;
+}
+.task .body .title {
+	color: black;
+	font-size: 12px;
+	line-height: 14px;
+	margin-top: 2px;
+	margin-bottom: 1px;
+}
+.task .body .notes {
+	font-size: 10px;
+	line-height: 12px;
+	width: 100%;
+	margin-bottom: 2px;
+}
+.task .body .due-date {
+	font-size: 10px;
+	line-height: 12px;
+	width: 100%;
+}
+.task .body .title, .task .body .notes, .task .body .due-date {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.task .body .notes:hover, .task .body .due-date:hover, .task .body .title:hover  {
+	text-decoration: underline;
+}
+.due-date:empty {
+	min-height: 4px;
+}
+.notes:empty + .due-date:empty {
+	min-height: 15px;
+}
+.task .expand-container {
+	position: relative;
+	float: left;
+	width: 7.5%;
+	height: 100%;
+}
+.task .delete-container {
+	position: relative;
+}
+
+.task .expand-buttons {
+	display: none;
+}
+.task .info .icon-group {
+	display: block;
+}
+.task .info .body .notes, .task .info .body .title, .task .info .body .due-date {
+	white-space: normal;
+}
+.task.completed .body {
+	text-decoration: line-through !important;
+}
+.task-expand {
+	color: black;
+}
+.task-delete {
+	position: absolute;
+	top: -21px;
+	right: 0px;
+	color: black;
+	margin-top: 7px;
+}
+.edit-container {
+	position: relative;
+	clear: both;
+}
+.edit-container input[type=text] {
+	padding: 3px;
+	font-size: 12px;
+	margin-bottom: 7px !important;
+}
+.edit-container textarea {
+	padding: 3px;
+	font-size: 12px;
+	margin-bottom: 7px;
+	border-radius: 4px;
+}
+.edit-container .select{
+	font-size: 12px;
+	margin-bottom: 7px !important;
+}
+.edit-container .button-group {
+	padding: 0;
+	margin: 0;
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) {
+	.task .body .title {
+		font-size: 12px;
+	}
+	.task .body .due-date, .task .body .notes {
+		font-size: 9px;
+	}
+	.edit-container input, textarea {
+		padding: 1px;
+		font-size: 9px !important;
+	}
+	.task .body .notes:hover, .task .body .due-date:hover, .task .body .title:hover  {
+		text-decoration: none;
+	}
+}
+

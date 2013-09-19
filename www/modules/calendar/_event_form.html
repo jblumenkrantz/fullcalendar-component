@@ -1,0 +1,35 @@
+<div class="row">
+	<h3 ng-show="editingEvent">Editing Event</h3>
+	<h3 ng-show="addingEvent">Add New Event</h3>
+	<div class="large-6 columns">
+		<input type="text" ng-model="formEvent.event_title" placeholder="Title (required)" />
+	</div>
+	<div class="large-6 columns">
+		<select ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars" ng-model="formEvent.calendar_id" ></select>
+	</div>
+</div>
+<div class="row">
+	<div class="large-6 columns">
+		<input type="text" ng-model="formEvent.event_start" placeholder="Starts" ui-date />
+	</div>
+	<div class="large-6 columns">
+		<input type="text" ng-model="formEvent.event_end" placeholder="Ends" ui-date />
+	</div>
+</div>
+<div class="row">
+	<div class="large-12 columns">
+		<textarea ng-model="formEvent.event_description" placeholder="Add Description"></textarea>
+	</div>
+</div>
+<div class="row">
+	<div class="large-6 columns">
+		<div class="expand small alert button" ng-click="cancel()" >cancel</div>
+	</div>
+	<div class="large-6 columns">
+		<div class="expand small alert button" ng-click="delete()" >delete</div>
+	</div>
+	<div class="large-12 columns">
+		<div ng-show="editingEvent" class="expand small button" ng-click="update()" >save</div>
+		<div ng-show="addingEvent" class="expand small button" ng-click="save()" >save</div>
+	</div>
+</div>

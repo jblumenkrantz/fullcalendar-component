@@ -20,6 +20,10 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute'])
 				templateUrl: 'modules/reference/main.html',
 				controller: 'ReferenceCtl'
 			})
+			.when("/settings", {
+				templateUrl: 'modules/settings/main.html',
+				controller: 'SettingsCtl'
+			})
 			.when("/login", {
 				templateUrl: 'modules/login/main.html',
 				controller: 'LoginCtl'
@@ -29,8 +33,14 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute'])
 			});
 	})
 	.value("localStorage", localStorage)
+	.factory('User', function($resource){
+		return $resource('/api/v1/user');
+	})
 	.factory('Auth', function($resource){
 		return $resource('/api/v1/auth/token/:user/:pass');
+	})
+	.factory('User', function($resource){
+		return $resource('/api/v1/user/:id', {}, {update: {method:'PUT'}});
 	})
 	.factory('Task', function($resource){
 		return $resource('/api/v1/task/:id/:version', {},

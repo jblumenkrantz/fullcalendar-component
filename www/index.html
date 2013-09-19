@@ -40,7 +40,7 @@
 		<div ng-controller="PinwheelCtl">
 			<!-- header row -->
 			<div class="large-12 columns">
-				<h3>Pinwheel <small ng-click="logout()">logout</small></h3>
+				<h3>Pinwheel <small><a ng-href="#/settings">settings</a></small> <small><a ng-href ng-click="logout()">logout</a></small></h3>
 			</div>
 			<!-- / header row -->
 
@@ -63,6 +63,7 @@
 
 
         <!-- build:js scripts/modules.js -->
+
 				<script src="bower_components/jquery/jquery.js"></script>
 				<script src="bower_components/jquery-ui/ui/jquery-ui.js"></script>
 				<script src="bower_components/angular/angular.js"></script>
@@ -78,6 +79,7 @@
         <script src="modules/pinwheelCtl.js"></script>
         <script src="modules/login/loginCtl.js"></script>
         <script src="modules/calendar/taskCtl.js"></script>
+        <script src="modules/calendar/eventCtl.js"></script>
         <script src="modules/calendar/subscriptionCtl.js"></script>
         <script src="modules/calendar/calendarCtl.js"></script>
         <script src="modules/calendar/calendar_views/datebookViewDirective/datebookView.js"></script>
@@ -93,7 +95,9 @@
         <script src="modules/reference/referenceCtl.js"></script>
         <script src="modules/messaging/messagingCtl.js"></script>
         <script src="modules/handbook/handbookCtl.js"></script>
-        <!--<script src="modules/quickAddParser.js"></script>-->
+        <script src="modules/settings/settingsCtl.js"></script>
+        <script src="modules/quickAddParser.js"></script>
+
         <!-- endbuild -->
 </body>
 </html>
