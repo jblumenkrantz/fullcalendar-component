@@ -40,7 +40,6 @@ angular.module('pinwheelApp')
 				$scope.formEvent = new Event();
 			});
 			$scope.addingEvent = false;
-			$scope.quickAdding = false;
 		}
 		//delete existing event
 		$scope.delete = function(){
@@ -66,5 +65,6 @@ angular.module('pinwheelApp')
 			$scope.formEvent = new Event();
 			angular.copy(QuickAdd($scope.quickAdd.text), $scope.formEvent);
 			$scope.save();
+			$scope.quickAdding = false;
 		}
   });
