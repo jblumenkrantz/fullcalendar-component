@@ -1,8 +1,13 @@
-<div class="row">
-	<div class="large-12 columns">
-		<h3 ng-show="editingEvent">Edit Event</h3>
-		<h3 ng-show="addingEvent">Add New Event <label style="display: inline; font-size: 14px;" for="alwaysAdvanced"><input id="alwaysAdvanced" type="checkbox" ng-model="quickAdd.alwaysAdvanced" ng-click="" /> Always open advanced event entry</label></h3>
-	</div>
+<div class="pane-header">
+    <span ng-if="editingEvent" class="pane-title">Edit Event</span>
+    <span ng-if="addingEvent" class="pane-title">
+    	Add New Event 
+    	<label style="display: inline; font-size: 14px;" for="alwaysAdvanced">
+    		<input id="alwaysAdvanced" type="checkbox" ng-model="quickAdd.alwaysAdvanced" ng-click="" />
+    		Always open advanced event entry
+    	</label>
+    </span>
+    <span class="icon-x-altx-alt right" ng-click="cancel()" aria-hidden="true"></span>
 </div>
 <div class="row">
 	<div class="large-6 columns">
@@ -33,6 +38,8 @@
 	<div class="large-6 columns">
 		<div class="expand small alert button" ng-click="cancel()" >cancel</div>
 	</div>
+</div>
+<div class="row">
 	<div ng-if="addingEvent" class="large-6 columns">
 		<div class="expand small button" ng-click="save(true)">save and continue</div>
 	</div>

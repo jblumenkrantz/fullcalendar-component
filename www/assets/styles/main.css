@@ -29,6 +29,15 @@
 /* Used to alter styles for screens at least 1440px wide. */
 @media only screen and (min-width: 1440px) {}
 
+#quickEvent .row, #advancedEvent .row {
+	border-left: 1px solid #afafaf;
+	border-right: 1px solid #afafaf;
+}
+
+#quickEvent .row:last-child, #advancedEvent .row:last-child {
+	border-bottom: 1px solid #afafaf;
+}
+
 /* define transition speed as .7 seconds for your animation */
 .transition-07 {
 	transition: 0.7s;
@@ -39,7 +48,7 @@
 	background: rgb(238, 238, 238);
 	position: absolute;
 	width: 100%;
-	z-index: 2;
+	z-index: 4;
 }
 
  /* Add .full class to .sliding-drawer if you want
@@ -64,7 +73,7 @@
  	36px is height of pane-headers 
  */
 .slide-drawer.open {
-	top: 36px;
+	top: 0;
 }
 
  /* rotate icon 45 degrees (make plus icons into x icons) */
