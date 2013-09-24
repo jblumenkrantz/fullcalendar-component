@@ -1,18 +1,16 @@
 <!-- event view -->
-<div ng-controller="EventCtl" id="main-content" style="height: 100%; overflow: hidden; position: relative; z-index: 2"
+<div ng-controller="EventCtl" id="main-content" style="height: 100%; overflow: hidden; position: relative; z-index: 2" class="small-12 columns transition-07"
 	ng-class="{
-		'small-12':true,
 		'large-8':(calendarDrawer && taskDrawer),
 		'large-10':(calendarDrawer && !taskDrawer) || (!calendarDrawer && taskDrawer),
 		'large-12':(!calendarDrawer && !taskDrawer),
-		'push-2': calendarDrawer,
-		'columns':true
+		'push-2': calendarDrawer
 	}">
 	<header id="content-header" class="scroll-header">
 		<ul class="small-block-grid-3">
 			<li class="text-left">
 				<span>
-					<span ng-click="toggle('calendarDrawer')" aria-hidden="true" ng-class="{'icon-arrow-left':calendarDrawer, 'icon-arrow-right':!calendarDrawer, 'hide-for-small':true}" style="margin-left: 4px;"></span>
+					<span class="hide-for-small" ng-click="toggle('calendarDrawer')" aria-hidden="true" ng-class="{'icon-arrow-left':calendarDrawer, 'icon-arrow-right':!calendarDrawer}" style="margin-left: 4px;"></span>
 				</span>
 				<span aria-hidden="true" class="icon-calendar-2"></span>
 			</li>
@@ -22,25 +20,25 @@
 				<span aria-hidden="true" class="icon-arrow-right-2"></span>
 			</li>
 			<li class="text-right">
-				<span ng-click="quickAdd()" aria-hidden="true" class="icon-plus-alt"></span>
+				<span class="icon-plus-alt" ng-click="quickAdd()" aria-hidden="true"></span>
 				<span>
-					<span ng-click="toggle('taskDrawer')" aria-hidden="true"  ng-class="{'icon-arrow-right':taskDrawer, 'icon-arrow-left':!taskDrawer, 'hide-for-small':true}" style="margin-right: 4px;"></span>
+					<span class="hide-for-small" ng-click="toggle('taskDrawer')" aria-hidden="true" ng-class="{'icon-arrow-right':taskDrawer, 'icon-arrow-left':!taskDrawer}" style="margin-right: 4px;"></span>
 				</span>
 			</li>
 		</ul>
     </header>
 
-    <div scroll-pane class="scroll-pane">
-		<!-- event quickAdd form -->
-		<div ng-show="quickAdding">
-			<div ng-include src="'modules/calendar/_quickadd_event_form.html'"></div>
-		</div>
+    <!-- event quickAdd form -->
+	<div class="transition-07 slide-drawer top-down" ng-class="{open:quickAdding}" style="border: 1px solid #afafaf; border-top: none;">
+		<div ng-include src="'modules/calendar/_quickadd_event_form.html'"></div>
+	</div>
 
-		<!-- event add/edit form -->
-		<div  ng-show="addingEvent || editingEvent">
-			<div ng-include src="'modules/calendar/_event_form.html'"></div>
-		</div>
+	<!-- event add/edit form -->
+	<div class="transition-07 slide-drawer top-down" ng-class="{open:(addingEvent || editingEvent)}" style="border: 1px solid #afafaf; border-top: none;">
+		<div ng-include src="'modules/calendar/_event_form.html'"></div>
+	</div>
 
+    <div scroll-pane class="scroll-pane"  style="border-left: 1px solid #afafaf; border-right: 1px solid #afafaf;">
 		<!-- calendar views switch -->
 		<div ng-switch="view">
 			<div ng-switch-when="day">
@@ -73,7 +71,7 @@
     	<span class="pane-title">Tasks/To Do</span>
     	<span ng-click="toggle('addingTask')" aria-hidden="true" class="icon-plus-alt right"></span>
     </div>
-    <div scroll-pane style="border-left: 1px solid #afafaf;" class="scroll-pane">
+    <div scroll-pane class="scroll-pane">
 		<!-- task entry form -->
 		<div ng-show="addingTask">
 			<task-form task="newTask" save="saveNew()" cancel="toggle('addingTask')" calendars="calendars"></task-form>
@@ -91,40 +89,41 @@
 <div ng-controller="SubscriptionCtl" id="my-calendars" style="height: 100%; overflow: hidden; left: 0px; z-index: 1;" class="small-12 large-2 columns drawer">
 	<div class="pane-header scroll-header">
         <span class="pane-title">My Calendars</span>
-        <span ng-click="toggle('addingSubscription')" aria-hidden="true" class="icon-plus-alt right"></span>
+        <span class="transition-07 icon-plus-alt right" ng-class="{'rotate-45':addingSubscription}" ng-click="toggle('addingSubscription');" aria-hidden="true"></span>
     </div>
-	<div scroll-pane style="border-right: 1px solid #afafaf;" class="scroll-pane">
-		<!-- calendar creation form -->
-		<div ng-show="addingSubscription">
-			<div class="row">
-				<input type="text" ng-model="newCalendar.calendar_name" placeholder="Name (required)" />
-				<input type="text" ng-model="newCalendar.color" placeholder="Color (required)" />
-			</div>
-			<div class="row">
-				<div class="large-6 columns">
-					<div class="expand small alert button" ng-click="cancelNew()" >cancel</div>
-				</div>
-				<div class="large-6 columns">
-					<div class="expand small button" ng-click="saveNew()" >save</div>
-				</div>
-			</div>
-		</div>
-		
-		<!-- SUBSCRIBED CALENDAR SECTION -->
+
+    <!-- SUBSCRIBED CALENDAR SECTION -->
+	<div scroll-pane class="scroll-pane">		
 		<active-subscription
 		 ng-repeat="calendar in subscribedCalendars = (calendars | filter:{active: 1, subscribed: true} | orderBy:'calendar_name')" 
 			watcher="calendarWatchers"
 			calendar="calendar">
 		</active-subscription>
+	</div>
+
+	<!-- ADD CALENDAR SECTION -->
+	<div id="add-calendar" class="transition-07 slide-drawer full bottom-up" ng-class="{open: addingSubscription}">
+    	<!-- calendar creation form -->
+    	<div class="pane-header secondary" style="border-top: 1px solid #afafaf;">
+	        <span class="pane-title">Create New Calendar</span>
+	    </div>
+		<div class="row">
+			<input type="text" ng-model="newCalendar.calendar_name" placeholder="Name (required)" />
+			<input type="text" ng-model="newCalendar.color" placeholder="Color (required)" />
+		</div>
+		<div class="row">
+			<div class="large-12 columns">
+				<div class="expand small button" ng-click="saveNew()" >create</div>
+			</div>
+		</div>
 
 		<!-- RECENTLY CREATED/SUBSCRIBED CALENDAR SECTION -->
 
-		<div ng-show="recentCalendars.length">
-			Recently Added
-			<hr />
-		</div>
+		<div ng-show="recentCalendars.length" class="pane-header secondary" style="border-top: 1px solid #afafaf;">
+	        <span class="pane-title">Recently Added Calendars</span>
+	    </div>
 
-		 <!-- recently acquired calendars ng-repeat -->
+		<!-- recently acquired calendars ng-repeat -->
 		<active-subscription
 			ng-repeat="calendar in recentCalendars = (calendars | filter:{active: 1, recent: true, subscribed: true} | orderBy:'calendar_name')"
 			watcher="calendarWatchers"
@@ -132,16 +131,18 @@
 		</active-subscription>
 		
 
-		 <!-- AVAILABLE CALENDAR SECTION -->
+		<div ng-show="availabeCalendars.length || calFilter" class="pane-header secondary" style="border-top: 1px solid #afafaf;">
+	        <span class="pane-title">Available Calendars</span>
+	    </div>
 
-		<div ng-show="availabeCalendars.length">
-			Available Calendars
-			<hr />
+	    <div class="row" style="position: relative;">
+			<input type="text" ng-model="calFilter" placeholder="Search Calendars" />
+			<span style="position: absolute; top: 4px; right: 6px; font-size: 24px; color: #d4d4d4;" aria-hidden="true" class="icon-backspace" ng-click="calFilter=''"></span>
 		</div>
 
-		<!-- available calendars ng-repeat -->
+    	<!-- available calendars ng-repeat -->
 		<available-subscription
-			ng-repeat="calendar in availabeCalendars = (calendars | filter:{active: 1, subscribed: false} | orderBy:'calendar_name')"
+			ng-repeat="calendar in availabeCalendars = (calendars | filter:{active: 1, subscribed: false} | filter:calFilter | orderBy:'calendar_name')"
 			watcher="calendarWatchers"
 			calendar="calendar">
 		</available-subscription>

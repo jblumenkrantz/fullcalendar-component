@@ -29,18 +29,18 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-		<div ng-controller="PinwheelCtl">
-            <!-- header -->
-            <nav id="mainHeader" class="top-bar" ng-include src="'modules/_topbar.html'"></nav>
-            <!-- / header -->
+	<div ng-controller="PinwheelCtl">
+        <!-- header -->
+        <nav id="mainHeader" class="top-bar" ng-include src="'modules/_topbar.html'"></nav>
+        <!-- / header -->
 
-			<!-- main content -->
-			<!-- route pane -->
-			<div class="large-12 columns" style="padding: 0;" ng-view=""></div>
-			<!-- / route pane -->
-			<!-- / main content -->
-		</div>
-		<!-- / application content -->
+		<!-- main content -->
+		<!-- route pane -->
+		<div class="large-12 columns" style="padding: 0;" ng-view=""></div>
+		<!-- / route pane -->
+		<!-- / main content -->
+	</div>
+	<!-- / application content -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
@@ -50,42 +50,41 @@
       s.parentNode.insertBefore(g,s)}(document,'script'));
     </script>
 
+    <!-- build:js scripts/modules.js -->
+	<script src="bower_components/jquery/jquery.js"></script>
+	<script src="bower_components/jquery-ui/ui/jquery-ui.js"></script>
+	<script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+	<script src="bower_components/angular-ui-date/src/date.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <!-- endbuild -->
 
-        <!-- build:js scripts/modules.js -->
-		<script src="bower_components/jquery/jquery.js"></script>
-		<script src="bower_components/jquery-ui/ui/jquery-ui.js"></script>
-		<script src="bower_components/angular/angular.js"></script>
-        <script src="bower_components/angular-route/angular-route.js"></script>
-		<script src="bower_components/angular-ui-date/src/date.js"></script>٬
-        <script src="bower_components/angular-resource/angular-resource.js"></script>
-        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-        <!-- endbuild -->
-
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="modules/app.js"></script>
-        <script src="modules/pinwheelCtl.js"></script>
-        <script src="modules/login/loginCtl.js"></script>
-        <script src="modules/calendar/taskCtl.js"></script>
-        <script src="modules/calendar/eventCtl.js"></script>
-        <script src="modules/calendar/subscriptionCtl.js"></script>
-        <script src="modules/calendar/calendarCtl.js"></script>
-        <script src="modules/calendar/calendar_views/datebookViewDirective/datebookView.js"></script>
-        <script src="modules/calendar/calendar_views/dayViewDirective/dayView.js"></script>
-        <script src="modules/calendar/calendar_views/listViewDirective/listView.js"></script>
-        <script src="modules/calendar/calendar_views/monthViewDirective/monthView.js"></script>
-        <script src="modules/calendar/calendar_views/weekViewDirective/weekView.js"></script>
-        <script src="modules/calendar/viewTaskDirective/viewTask.js"></script>
-        <script src="modules/calendar/taskFormDirective/taskForm.js"></script>
-        <script src="modules/calendar/subscriptionDirective/activeSubscription.js"></script>
-        <script src="modules/calendar/subscriptionDirective/availableSubscription.js"></script>
-        <script src="modules/calendar/subscriptionDirective/subscriptionDirectiveCtl.js"></script>
-        <script src="modules/reference/referenceCtl.js"></script>
-        <script src="modules/messaging/messagingCtl.js"></script>
-        <script src="modules/handbook/handbookCtl.js"></script>
-        <script src="modules/settings/settingsCtl.js"></script>
-        <script src="modules/quickAddParser.js"></script>
-        <script src="modules/interfaceDirectives.js"></script>
-        <!-- endbuild -->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="modules/app.js"></script>
+    <script src="modules/pinwheelCtl.js"></script>
+    <script src="modules/login/loginCtl.js"></script>
+    <script src="modules/calendar/taskCtl.js"></script>
+    <script src="modules/calendar/eventCtl.js"></script>
+    <script src="modules/calendar/subscriptionCtl.js"></script>
+    <script src="modules/calendar/calendarCtl.js"></script>
+    <script src="modules/calendar/calendar_views/datebookViewDirective/datebookView.js"></script>
+    <script src="modules/calendar/calendar_views/dayViewDirective/dayView.js"></script>
+    <script src="modules/calendar/calendar_views/listViewDirective/listView.js"></script>
+    <script src="modules/calendar/calendar_views/monthViewDirective/monthView.js"></script>
+    <script src="modules/calendar/calendar_views/weekViewDirective/weekView.js"></script>
+    <script src="modules/calendar/viewTaskDirective/viewTask.js"></script>
+    <script src="modules/calendar/taskFormDirective/taskForm.js"></script>
+    <script src="modules/calendar/subscriptionDirective/activeSubscription.js"></script>
+    <script src="modules/calendar/subscriptionDirective/availableSubscription.js"></script>
+    <script src="modules/calendar/subscriptionDirective/subscriptionDirectiveCtl.js"></script>
+    <script src="modules/reference/referenceCtl.js"></script>
+    <script src="modules/messaging/messagingCtl.js"></script>
+    <script src="modules/handbook/handbookCtl.js"></script>
+    <script src="modules/settings/settingsCtl.js"></script>
+    <script src="modules/quickAddParser.js"></script>
+    <script src="modules/interfaceDirectives.js"></script>
+    <!-- endbuild -->
 </body>
 </html>
