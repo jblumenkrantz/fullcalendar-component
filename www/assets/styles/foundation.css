@@ -7566,10 +7566,20 @@ dl.sub-nav.calendar-filter dd {
   height: 36px;
 }
 
+.pane-header.secondary {
+  background: #d9d9d9;
+  font-size: 16px;
+  height: 30px;
+}
+
 /* line 127, ../../scss/foundation.scss */
 .pane-header span {
   position: relative;
   top: 8px;
+}
+
+.pane-header.secondary span {
+  top: 6px;
 }
 
 /* line 131, ../../scss/foundation.scss */
@@ -7580,6 +7590,11 @@ dl.sub-nav.calendar-filter dd {
 /* line 134, ../../scss/foundation.scss */
 .pane-header .pane-title {
   margin-left: 6px;
+}
+
+header#content-header {
+  position: relative;
+  z-index: 3;
 }
 
 /* line 144, ../../scss/foundation.scss */

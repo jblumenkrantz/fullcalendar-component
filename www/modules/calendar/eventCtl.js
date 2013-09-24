@@ -28,39 +28,42 @@ angular.module('pinwheelApp')
 			angular.copy($scope.formEvent, $scope.event);
 			$scope.event.$update({id: $scope.event.event_id}, function(event) {
 				$scope.event = event;
-				$scope.formEvent = new Event();
+				$scope.cancel();
 			});
-			$scope.editingEvent = false;
 		}
 
 		//save new event
-		$scope.save = function(){
+		$scope.save = function(continuing) {
 			$scope.formEvent.$save({}, function(newEvent) {
 				$scope.events.push(newEvent);
-				$scope.formEvent = new Event();
+				$scope.cancel(continuing);
+				(continuing && angular.copy(newEvent, $scope.formEvent));
 			});
-			$scope.addingEvent = false;
 		}
 
 		//delete existing event
-		$scope.delete = function(){
+		$scope.delete = function() {
 			$scope.event.$delete({id:$scope.event.event_id, version:$scope.event.version});
-			$scope.editingEvent = false;
-			$scope.addingEvent = false;
+			$scope.cancel();
 		}
 
 		//cancel all event forms, reset event object
-		$scope.cancel = function() {
+		$scope.cancel = function(continuing) {
 			$scope.formEvent = new Event();
-			$scope.addingEvent = false;
+			$scope.addingEvent = continuing;
 			$scope.editingEvent = false;
 			$scope.quickAdding = false;
 		}
 
+		$scope.reset = function() {
+			$scope.formEvent = new Event();
+		}
+
+		$scope.quickAdd = {alwaysAdvanced: false}; //grab this from user settings
 		//open quickadd form for new event
 		$scope.quickAdd = function() {
-			$scope.quickAdding = true;
-			$scope.addingEvent = false;
+			$scope.quickAdding = !$scope.quickAdd.alwaysAdvanced;
+			$scope.addingEvent = $scope.quickAdd.alwaysAdvanced;
 			$scope.editingEvent = false;
 		}
 
@@ -69,6 +72,5 @@ angular.module('pinwheelApp')
 			$scope.formEvent = new Event();
 			angular.copy(QuickAdd($scope.quickAdd.text), $scope.formEvent);
 			$scope.save();
-			$scope.quickAdding = false;
 		}
   });
