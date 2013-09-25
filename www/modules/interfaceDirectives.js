@@ -1,17 +1,16 @@
 'use strict';
 
 angular.module('pinwheelApp')
-.directive('scrollPane', function(Debounce, $timeout) {
+.value("getHeight", function(element) {
+	return $(window).height() - $("#mainHeader").height() - element.siblings(".scroll-header").height() + "px";
+})
+.directive('scrollPane', function(Debounce, getHeight) {
 	return {
 		link: function(scope, element, attrs) {
-			function getHeight() {
-				return $(window).height() - $("#mainHeader").height() - element.siblings(".scroll-header").height() + "px";
-			}
-
 			function adjustHeight() {
-				if ($(window).width() > 768 || attrs.watch) {
+				if ($(window).width() > 768) {
 					$("body").scrollTop(0);
-					element.css("height", getHeight());
+					element.css("height", getHeight(element));
 				}
 				else {
 					element.css("height", "auto");
@@ -21,7 +20,20 @@ angular.module('pinwheelApp')
 			adjustHeight();
 	 
 	 		$(window).resize(Debounce(adjustHeight));
+		}
+	}
+})
+.directive('scrollPaneTwo', function(Debounce, $timeout, getHeight) {
+	return {
+		link: function(scope, element, attrs) {
+			function adjustHeight() {
+				element.css("height", getHeight(element))
+			}
 
+	 		adjustHeight();
+
+	 		$(window).resize(Debounce(adjustHeight));
+	 		
 			scope.$watch(attrs.watch, function() {
 				$timeout(adjustHeight);
 			});
