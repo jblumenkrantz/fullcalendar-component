@@ -51,9 +51,9 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute'])
 	        timeout = setTimeout(delayed, threshold || 100); 
 	    };
 	})
-	.factory('User', function($resource){
+/*	.factory('User', function($resource){
 		return $resource('/api/v1/user');
-	})
+	})*/
 	.factory('Auth', function($resource){
 		return $resource('/api/v1/auth/token/:user/:pass');
 	})
