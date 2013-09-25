@@ -277,7 +277,7 @@ class Calendar extends PinwheelModelObject
 		$calendars = array();
 		if (!$pinsqli->errno) {
 			while (($object = $resulti->fetch_object()))
-				$calendars[$object->calendar_id] = new Calendar($object);
+				$calendars = new Calendar($object);
 		} else
 			throw new Exception($pinsqli->error, 1);
 

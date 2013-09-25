@@ -95,11 +95,9 @@ class CalendarCtl
 			echo $forbidden->json_encode();
 			exit;
 		}
-		$calendars = Calendar:: create($id === null? $authUserID: $id,json_decode(Request:: body()));
-		foreach($calendars as $calendar){
+		$calendar = Calendar:: create($id === null? $authUserID: $id,json_decode(Request:: body()));
 			$calendar->subscribed = true;
-		}
-		echo json_encode($calendars);
+		echo json_encode($calendar);
 		User:: incrementVersion($authUserID);
 	}
 
