@@ -141,7 +141,7 @@
 				<span style="position: absolute; top: 4px; right: 6px; font-size: 24px; color: #d4d4d4;" aria-hidden="true" class="icon-backspace" ng-click="calFilter=''"></span>
 			</div>
 		</div>
-		<div scroll-pane watch="recentCalendars.length" class="scroll-pane">
+		<div scroll-pane watch="recentCalendars.length" style="overflow-y: auto;">
 	    	<!-- available calendars ng-repeat -->
 			<available-subscription
 				ng-repeat="calendar in availabeCalendars = (calendars | filter:{active: 1, subscribed: false} | filter:calFilter | orderBy:'calendar_name')"

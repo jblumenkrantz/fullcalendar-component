@@ -9,7 +9,7 @@ angular.module('pinwheelApp')
 			}
 
 			function adjustHeight() {
-				if ($(window).width() > 768) {
+				if ($(window).width() > 768 || attrs.watch) {
 					$("body").scrollTop(0);
 					element.css("height", getHeight());
 				}
