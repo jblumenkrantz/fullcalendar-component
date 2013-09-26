@@ -1,13 +1,22 @@
 'use strict';
 
 angular.module('pinwheelApp')
-  .controller('SettingsCtl', function ($scope, $http, User, Calendar) {
-  	User.get({}, function(user){
+  .controller('SettingsCtl', function ($scope, $http, User, Calendar, Timezones) {
+  	Calendar.query({id: 'all'}, function(calendars){
+		$scope.calendars = calendars;
+		
+		User.get({}, function(user){
 			$scope.user = user;
-	});
-	Calendar.query({id: 'all'}, function(calendars){
-		$scope.calendar = calendars;
-		console.warn(calendars);
+			User.query({id:'new'}, function(orgs){
+				$scope.orgs = orgs;
+			});
+			$scope.initialUser = {};
+			angular.copy(user, $scope.initialUser);
+		});
+
+		Timezones.query(function(timezone){
+			$scope.timezones = timezone;
+		});
 	});
   });
 

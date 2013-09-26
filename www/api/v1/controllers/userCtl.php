@@ -156,7 +156,7 @@ class UserCtl
 			}
 		}
 		try {
-			error_log(print_r(Request::body(),true));
+			//error_log(print_r(Request::body(),true));
 			$user = new User(json_decode(Request:: body()));
 			$user->update();
 			$user->password = null;

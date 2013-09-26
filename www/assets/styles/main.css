@@ -80,3 +80,23 @@
 .rotate-45 {
 	-webkit-transform: rotate(45deg);
 }
+
+
+/* Fade in animaiton for the user settings save/cancel buttons */
+.animate-show.ng-hide-remove {
+  -webkit-transition:all linear 0.5s;
+  -moz-transition:all linear 0.5s;
+  -o-transition:all linear 0.5s;
+  transition:all linear 0.5s;
+  display:block!important;
+}
+
+.animate-show.ng-hide-add.ng-hide-add-active,
+.animate-show.ng-hide-remove {
+  opacity:0;
+}
+
+.animate-show.ng-hide-add,
+.animate-show.ng-hide-remove.ng-hide-remove-active {
+  opacity:1;
+}

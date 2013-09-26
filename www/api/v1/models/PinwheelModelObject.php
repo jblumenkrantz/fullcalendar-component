@@ -61,9 +61,10 @@ class PinwheelModelObject
 	}
 	static public function mysql_escape_array($obj, $pinsqli=NULL) 
 	{
+		$pinsqli = $pinsqli === NULL? DistributedMySQLConnection:: readInstance(): $pinsqli;
 		$arrObj = is_object($obj) ? get_object_vars($obj) : $obj;
 		foreach ($arrObj as $key => $val) {
-			$val = (is_array($val) || is_object($val)) ? static:: object_to_array($val) :  mysql_real_escape_string($val);
+			$val = (is_array($val) || is_object($val)) ? static:: object_to_array($val) :  $pinsqli->real_escape_string($val);
 			$arr[$key] =$val;
 		}
 		return $arr;
