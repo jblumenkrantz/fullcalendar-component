@@ -555,8 +555,8 @@ class User extends PinwheelModelObject
 	*/
 	public function update () {
 		$pinsqli = DistributedMySQLConnection:: writeInstance();
-		$properties = array_map(array($pinsqli, 'real_escape_string'), get_object_vars($this));
-		$settings = array_map(array($pinsqli, 'real_escape_string'), get_object_vars($this->settings));
+		$properties = static::mysql_escape_array($this);
+		$settings = static::mysql_escape_array($this->settings);
 
 		$hash = NULL;
 		if (array_key_exists('password', $properties)){

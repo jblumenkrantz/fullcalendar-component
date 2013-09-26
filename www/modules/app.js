@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute'])
+angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute', 'ngAnimate'])
 	.config(function ($routeProvider) {
 		$routeProvider
 			.when('/calendar/:year/:month/:day', {
@@ -21,7 +21,7 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute'])
 				controller: 'ReferenceCtl'
 			})
 			.when("/settings", {
-				templateUrl: 'modules/settings/main.html',
+				templateUrl: 'modules/settings/settings.html',
 				controller: 'SettingsCtl'
 			})
 			.when("/login", {
@@ -50,9 +50,6 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute'])
 	 
 	        timeout = setTimeout(delayed, threshold || 100); 
 	    };
-	})
-	.factory('User', function($resource){
-		return $resource('/api/v1/user');
 	})
 	.factory('Auth', function($resource){
 		return $resource('/api/v1/auth/token/:user/:pass');
@@ -168,6 +165,13 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute'])
 	})
 	.factory('Calendar', function($resource){
 		return $resource('/api/v1/calendar/:id/:version', {}, {update: {method:'PUT'}, delete: {method: 'DELETE', params: {version: ':version'}}});
+	})
+	.factory('Timezones', function($resource){
+		return $resource('/timezone.json',{},{
+			query: {
+					method: 'GET',
+					isArray: true
+			}})
 	})
 	.config(['$httpProvider', function ($httpProvider) {
 		$httpProvider.defaults.headers.common['Authorization'] =  localStorage['token'];
