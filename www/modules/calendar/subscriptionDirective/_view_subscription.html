@@ -2,8 +2,9 @@
 	<div class="row">
 		<div class="large-12 columns">
 			<input type='checkbox' ng-model="watcher[calendar.calendar_id].viewing" ng-click="setShowState()" ng-false-state="false" />
-			<strong ng-style="{color:calendar.color}">{{calendar.calendar_name}}
-				<small ng-click="edit('editingCalendar')">edit</small>
+			<strong ng-style="{color:calendar.color}">
+				{{calendar.calendar_name}}
+				<small ng-click="edit()">edit</small>
 			</strong>
 		</div>
 	</div>
@@ -14,13 +15,15 @@
 		<input type="text" ng-model="editCalendar.color" placeholder="Color (required)" />
 	</div>
 	<div class="row">
-		<ul class="button-group even-2">
-			<li class="expand small alert button" ng-click="cancel('editingCalendar')" >cancel</li>
-			<li class="expand small alert button" ng-click="unsubscribe()" >unsubscribe</li>
-		</ul>
-		<ul class="button-group">
-			<li class="expand small button" ng-click="save('editingCalendar')" >save</li>
-		</ul>
+		<div class="large-6 columns">
+			<div class="expand small alert button" ng-click="cancel()">cancel</div>
+		</div>
+		<div class="large-6 columns">
+			<div class="expand small alert button" ng-click="unsubscribe()">unsubscribe</div>
+		</div>
+		<div class="large-12 columns">
+			<div class="expand small button" ng-click="update()">save</div>
+		</div>
 	</div>
 </div>
 <hr />

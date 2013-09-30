@@ -1,0 +1,44 @@
+<div class="row">
+	<div class="large-12 columns">
+		Email:
+		<input type="text" ng-model="user.email" disabled>
+		<div  class="large-6 columns left">
+			First Name:
+			<input type="text" ng-model="user.first_name" disabled>
+		</div>
+		<div class="large-6 right columns" >
+			Last Name:
+			<input type="text" ng-model="user.last_name" disabled>
+		</div>
+		<div class="large-12 columns">
+			Display Name:
+		<input type="text" ng-model="user.user_handle" disabled>
+		</div>
+		
+		<hr />
+		Default Timezone:
+		<select ng-options="tz.zone as tz.zone for tz in timezones" ng-model="user.timezone" ></select>
+
+		Default Calendar:
+		<select ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'" ng-model="user.settings.default_calendar" ></select>
+		Default Calendar ID: {{user.settings.default_calendar}}
+		<br /><br />
+		Start of Day:
+		<input type="text" ng-model="user.settings.start_of_day">
+		End of Day:
+		<input type="text" ng-model="user.settings.end_of_day">
+		Primary Organization:
+		<select disabled ng-options="org.org_id as org.org_name for org in orgs" ng-model="user.settings.primary_org.org_id" ></select>
+		Access Level: {{user.settings.primary_org.user_role}} - {{user.settings.primary_org.org_id}}
+	</div>
+</div>
+<div class="row">
+	<div class="large-12 columns animate-show" ng-hide="userDiff()">
+		<div class="large-6 columns">
+			<div class="expand small button" ng-click="save()" >Save</div>
+		</div>
+		<div class="large-6 columns">
+			<div class="expand small alert button" ng-click="cancel()" >Cancel</div>
+		</div>
+	</div>
+</div>
