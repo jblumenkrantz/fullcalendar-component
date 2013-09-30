@@ -559,7 +559,7 @@ class User extends PinwheelModelObject
 		$settings = static::mysql_escape_array($this->settings);
 
 		$hash = NULL;
-		if (array_key_exists('password', $properties)){
+		if (array_key_exists('password', $properties) && $properties['password'] != ''){
 			$hash = Authorize:: hashedPassword($properties['password']);
 			$passwordString = "password = '$hash',";
 		}

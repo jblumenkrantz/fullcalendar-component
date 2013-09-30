@@ -41,6 +41,7 @@
     <div scroll-pane class="scroll-pane"  style="border-left: 1px solid #afafaf; border-right: 1px solid #afafaf;">
 		<!-- calendar views switch -->
 		<div ng-switch="view">
+			<div class="spinwheel-holder"><div ng-show="loading_events" class="spinwheel"><div class="spinwheel"><div class="spinwheel"><div class="spinwheel"></div></div></div></div></div>
 			<div ng-switch-when="day">
 				<day-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></day-view>
 			</div>
@@ -71,6 +72,7 @@
     	<span class="pane-title">Tasks/To Do</span>
     	<span ng-click="toggle('addingTask')" aria-hidden="true" class="icon-plus-alt right"></span>
     </div>
+    <div ng-show="loading_tasks" class="spinwheel"></div>
     <div scroll-pane class="scroll-pane">
 		<!-- task entry form -->
 		<div ng-show="addingTask">
@@ -91,7 +93,7 @@
         <span class="pane-title">My Calendars</span>
         <span class="icon-plus-alt right" ng-click="add()" aria-hidden="true"></span>
     </div>
-
+	<div ng-show="loading_calendars" class="spinwheel"></div>
     <!-- SUBSCRIBED CALENDAR SECTION -->
 	<div scroll-pane class="scroll-pane">
 		<active-subscription

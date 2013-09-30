@@ -5,10 +5,13 @@ angular.module('pinwheelApp')
 		$scope.calendarWatchers = {};
 		$scope.reminders = {};
 		Calendar.query({id: 'all'}, function(calendars){
-			$scope.calendars = calendars;
+			$scope.loading_calendars = false;
+			$scope.calendars = calendars;			
 			Event.query({id: 'all'}, function(events){
+				$scope.loading_events = false;
 				$scope.events = events;
 				Task.query({id: 'all'}, function(tasks){
+					$scope.loading_tasks = false;
 					$scope.tasks = tasks;
 					angular.forEach($scope.tasks, function(task){
 						if(task.due_time){
