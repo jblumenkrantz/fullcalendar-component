@@ -1,6 +1,9 @@
 <div class="row">
 	<div class="large-6 large-centered columns">
 		<h1>Settings <small><a ng-href="/">home</a></small></h1>
-		<settings-form save="save()" cancel="cancel()" user="user" calendars="calendars" orgs="orgs" timezones="timezones" initialuser="initialUser"></task-form>
+		<spinwheel class="spinwheel-holder"><div ng-show="loading_user" class="spinwheel"></div></spinwheel>
+		<div ng-show="loading_user == ''">
+			<settings-form save="save()" cancel="cancel()" user="user" calendars="calendars" orgs="orgs" timezones="timezones" initialuser="initialUser"></task-form>
+		</div>
 	</div>
 </div>

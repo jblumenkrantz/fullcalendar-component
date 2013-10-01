@@ -14,6 +14,7 @@ angular.module('pinwheelApp')
 				save: '&',
 				cancel: '&',
 			},
+			transclude:true,
 			controller: function($scope, $element, $attrs){
 				$scope.cancel = function(name){
 					angular.copy($scope.initialuser, $scope.user);
