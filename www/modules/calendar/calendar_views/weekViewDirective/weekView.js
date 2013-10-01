@@ -5,22 +5,30 @@ angular.module('pinwheelApp')
 		return {
 			restrict: 'E',
 			templateUrl: 'modules/calendar/calendar_views/weekViewDirective/_week_view.html',
-			scope: {
-				task: '=',
-				calendars: '=',
-				events: '=',
-				isCalendarShowing: '&'
-			},
-			controller: function($scope, $element, $attrs, $routeParams, Event){
-				Event.query({id: 'week',day:$routeParams.day,month:$routeParams.month,year:$routeParams.year}, function(event){
-					$scope.events = event;
-				});
+			controller: function($scope, $element, $attrs, $routeParams){
+				$scope.thisWeeksEvents = function(item) {
+				 	var startOfWeek = $scope.getMonday(new Date($routeParams.month+'-'+$routeParams.day+'-'+$routeParams.year));
+				 	var endOfWeek = $scope.getSunday(new Date($routeParams.month+'-'+$routeParams.day+'-'+$routeParams.year));
+				 	var itemStart = new Date(item.event_start).getTime()/1000;
+				 	
+				 	if(itemStart >= startOfWeek && itemStart < endOfWeek){
+				 		return true;
+				 	}
+				return false;
+				}
+				$scope.getMonday = function(d) {
+				  d = new Date(d);
+				  var day = d.getDay(),
+				      diff = d.getDate() - day + (day == 0 ? -6:1);
+				  return new Date(d.setDate(diff)).getTime()/1000;
+				}
+				$scope.getSunday = function(d) {
+				  d = new Date(d);
+				  var day = d.getDay(),
+				      diff = d.getDate() - day + (day == 0 ? 6:8);
+				  return new Date(d.setDate(diff)).getTime()/1000;
+				}
 			}
 		}
 	});
-
-
-
-
-
 

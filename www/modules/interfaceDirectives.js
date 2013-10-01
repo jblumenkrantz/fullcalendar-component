@@ -39,4 +39,13 @@ angular.module('pinwheelApp')
 			});
 		}
 	}
+})
+.directive('spinwheel', function(Debounce, $timeout, getHeight) {
+	return {
+		restrict: 'E',
+		link: function(scope, element, attrs) {
+			var spinnerPosition = ($(window).height() - $("#mainHeader").height())/2 - element.height()/2;
+			element.css("top", spinnerPosition);			
+		}
+	}
 });
