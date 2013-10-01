@@ -53,7 +53,9 @@
 			<div ng-switch-when="month">
 				<month-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></month-view>
 			</div>
-
+			<div ng-switch-when="year">
+				<year-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></year-view>
+			</div>
 			<div ng-switch-when="list">
 				<list-view></list-view>
 			</div>
