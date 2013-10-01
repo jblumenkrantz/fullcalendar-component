@@ -1,4 +1,4 @@
-<div ng-repeat="event in events | filter: isCalendarShowing | filter: thisDaysEvents | orderBy: '(due_time||event_start)'">
+<div ng-repeat="event in events | filter: isCalendarShowing | filter: thisWeeksEvents | orderBy: '(due_time||event_start)'">
 	<div class="row display" ng-style="{color: calendarWatchers[event.calendar_id].color}">
 		<div class="large-3 columns">{{event.event_title}}</div>
 		<div class="large-3 columns">{{event.event_start | date}}</div>
