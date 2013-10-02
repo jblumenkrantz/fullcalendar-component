@@ -7490,13 +7490,13 @@ a.th {
 }
 
 /* Each individual part that can be added in */
-/* line 58, ../../scss/foundation.scss */
+/* line 61, ../../scss/foundation.scss */
 .outer-container {
   padding: 0 !important;
   margin: 0 !important;
 }
 
-/* line 63, ../../scss/foundation.scss */
+/* line 66, ../../scss/foundation.scss */
 #my-calendars, #main-content, #tasks {
   min-height: 822px;
   padding: 0 !important;
@@ -7504,34 +7504,36 @@ a.th {
   margin-right: -1px;
 }
 
-/* line 69, ../../scss/foundation.scss */
+/* line 72, ../../scss/foundation.scss */
 #my-calendars, #tasks {
   background: #eee;
 }
 
-/* line 73, ../../scss/foundation.scss */
+/* line 76, ../../scss/foundation.scss */
 #main-content {
   background: #fff;
+  border-left: 1px solid #afafaf;
+  border-right: 1px solid #afafaf;
 }
 
-/* line 79, ../../scss/foundation.scss */
+/* line 82, ../../scss/foundation.scss */
 #tasks {
   height: 100%;
 }
 
-/* line 83, ../../scss/foundation.scss */
+/* line 86, ../../scss/foundation.scss */
 .top-bar-section ul {
   height: auto;
   background: none;
   margin: 0;
 }
 
-/* line 88, ../../scss/foundation.scss */
+/* line 91, ../../scss/foundation.scss */
 .top-bar-section ul.left {
   height: 45px;
 }
 
-/* line 93, ../../scss/foundation.scss */
+/* line 96, ../../scss/foundation.scss */
 .top-bar ul li a span {
   font-size: 20px;
   height: 45px;
@@ -7540,7 +7542,7 @@ a.th {
   margin: 0 -3px;
 }
 
-/* line 102, ../../scss/foundation.scss */
+/* line 105, ../../scss/foundation.scss */
 dl.sub-nav.calendar-filter {
   display: inline;
   padding: 0;
@@ -7550,12 +7552,12 @@ dl.sub-nav.calendar-filter {
   margin-top: 10px;
 }
 
-/* line 110, ../../scss/foundation.scss */
+/* line 113, ../../scss/foundation.scss */
 dl.sub-nav.calendar-filter dd {
   margin-top: 12px;
 }
 
-/* line 118, ../../scss/foundation.scss */
+/* line 121, ../../scss/foundation.scss */
 .pane-header {
   background: #d0d0d0;
   width: 100%;
@@ -7566,38 +7568,23 @@ dl.sub-nav.calendar-filter dd {
   height: 36px;
 }
 
-.pane-header.secondary {
-  background: #d9d9d9;
-  font-size: 16px;
-  height: 30px;
-}
-
-/* line 127, ../../scss/foundation.scss */
+/* line 130, ../../scss/foundation.scss */
 .pane-header span {
   position: relative;
   top: 8px;
 }
 
-.pane-header.secondary span {
-  top: 6px;
-}
-
-/* line 131, ../../scss/foundation.scss */
+/* line 134, ../../scss/foundation.scss */
 .pane-header span.right {
   margin-right: 12px;
 }
 
-/* line 134, ../../scss/foundation.scss */
+/* line 137, ../../scss/foundation.scss */
 .pane-header .pane-title {
   margin-left: 6px;
 }
 
-header#content-header {
-  position: relative;
-  z-index: 3;
-}
-
-/* line 144, ../../scss/foundation.scss */
+/* line 147, ../../scss/foundation.scss */
 header#content-header ul.small-block-grid-3 li {
   text-align: center;
   margin: 0 !important;
@@ -7607,20 +7594,20 @@ header#content-header ul.small-block-grid-3 li {
   padding-top: 4px;
 }
 
-/* line 153, ../../scss/foundation.scss */
+/* line 156, ../../scss/foundation.scss */
 header#content-header ul.small-block-grid-3 span.month-switcher {
   font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
   position: relative;
   top: -1px;
 }
 
-/* line 159, ../../scss/foundation.scss */
+/* line 162, ../../scss/foundation.scss */
 #org-name-wrapper {
   position: absolute;
   left: 50%;
 }
 
-/* line 162, ../../scss/foundation.scss */
+/* line 165, ../../scss/foundation.scss */
 .org-name {
   font-size: 20px;
   font-weight: bold;
@@ -7628,7 +7615,7 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
 }
 
 @media only screen and (max-width: 768px) {
-  /* line 169, ../../scss/foundation.scss */
+  /* line 172, ../../scss/foundation.scss */
   ul.days {
     padding: 0;
     margin: 0;
@@ -7637,12 +7624,12 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
     left: 2px;
   }
 }
-/* line 173, ../../scss/foundation.scss */
+/* line 176, ../../scss/foundation.scss */
 [class*="icon-"] {
   text-shadow: 1px 1px 2px white;
 }
 
-/* line 179, ../../scss/foundation.scss */
+/* line 182, ../../scss/foundation.scss */
 .calendar-wrapper {
   display: inline;
   overflow: visible;
@@ -7651,14 +7638,14 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
   padding: 0 !important;
 }
 
-/* line 180, ../../scss/foundation.scss */
+/* line 183, ../../scss/foundation.scss */
 .calendar {
   width: 101% !important;
   padding: 0;
   margin: 0;
 }
 
-/* line 181, ../../scss/foundation.scss */
+/* line 184, ../../scss/foundation.scss */
 .calendar ul.month-browser li {
   width: 33.3%;
   padding: 0;
@@ -7669,14 +7656,14 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
   margin: 20px 0;
 }
 
-/* line 182, ../../scss/foundation.scss */
+/* line 185, ../../scss/foundation.scss */
 .calendar {
   width: 100% !important;
   margin: 0;
   padding: 0;
 }
 
-/* line 183, ../../scss/foundation.scss */
+/* line 186, ../../scss/foundation.scss */
 .calendar ul {
   list-style: none;
   padding: 0;
@@ -7685,13 +7672,13 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
   width: 100%;
 }
 
-/* line 184, ../../scss/foundation.scss */
+/* line 187, ../../scss/foundation.scss */
 .calendar ul.weekdays {
   height: 40px;
   width: 100%;
 }
 
-/* line 185, ../../scss/foundation.scss */
+/* line 188, ../../scss/foundation.scss */
 .calendar ul.weekdays li {
   text-align: center;
   text-transform: uppercase;
@@ -7702,7 +7689,7 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
   font-size: 13px;
 }
 
-/* line 186, ../../scss/foundation.scss */
+/* line 189, ../../scss/foundation.scss */
 .calendar li {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -7718,23 +7705,23 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
   overflow: visible !important;
 }
 
-/* line 187, ../../scss/foundation.scss */
+/* line 190, ../../scss/foundation.scss */
 .calendar .days:last-child li {
   margin-bottom: 0px !important;
 }
 
-/* line 188, ../../scss/foundation.scss */
+/* line 191, ../../scss/foundation.scss */
 .calendar li .day, .calendar li .month {
   display: none;
 }
 
-/* line 189, ../../scss/foundation.scss */
+/* line 192, ../../scss/foundation.scss */
 .calendar .date {
   text-align: right;
   margin-bottom: 5px;
 }
 
-/* line 190, ../../scss/foundation.scss */
+/* line 193, ../../scss/foundation.scss */
 .show-info {
   display: block;
   font-size: 13px;
@@ -7749,47 +7736,47 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
   text-decoration: none;
 }
 
-/* line 191, ../../scss/foundation.scss */
+/* line 194, ../../scss/foundation.scss */
 .show-info:hover .venue {
   display: block;
 }
 
-/* line 192, ../../scss/foundation.scss */
+/* line 195, ../../scss/foundation.scss */
 .show-info .show-name {
   text-decoration: underline;
 }
 
-/* line 193, ../../scss/foundation.scss */
+/* line 196, ../../scss/foundation.scss */
 .show-info .show-time, .venue {
   color: #666;
   margin-top: 2px;
   text-decoration: none;
 }
 
-/* line 194, ../../scss/foundation.scss */
+/* line 197, ../../scss/foundation.scss */
 .calendar .no-shows {
   display: none;
 }
 
-/* line 195, ../../scss/foundation.scss */
+/* line 198, ../../scss/foundation.scss */
 .calendar .venue {
   display: none;
 }
 
-/* line 196, ../../scss/foundation.scss */
+/* line 199, ../../scss/foundation.scss */
 .calendar li.out_of_range {
   background-color: #F5F5F5;
   color: #666;
 }
 
-/* line 197, ../../scss/foundation.scss */
+/* line 200, ../../scss/foundation.scss */
 ul.days, .calendar-day {
   padding: 0;
   margin: 0;
   width: 100%;
 }
 
-/* line 202, ../../scss/foundation.scss */
+/* line 205, ../../scss/foundation.scss */
 #task-list-tasks-container {
   position: relative;
   width: 100%;
@@ -7797,24 +7784,24 @@ ul.days, .calendar-day {
   overflow-y: auto;
 }
 
-/* line 208, ../../scss/foundation.scss */
+/* line 211, ../../scss/foundation.scss */
 #task-list-tasks-container .input-text-container {
   margin-top: -3px;
   margin-bottom: 7px;
 }
 
-/* line 212, ../../scss/foundation.scss */
+/* line 215, ../../scss/foundation.scss */
 #task-list-tasks-container .hourmin-container {
   margin-bottom: 6px;
 }
 
-/* line 215, ../../scss/foundation.scss */
+/* line 218, ../../scss/foundation.scss */
 #task-list-tasks-container label {
   font-size: 12px;
   margin-bottom: 8px !important;
 }
 
-/* line 219, ../../scss/foundation.scss */
+/* line 222, ../../scss/foundation.scss */
 .task {
   overflow: hidden;
   background: #aaa;
@@ -7832,57 +7819,57 @@ ul.days, .calendar-day {
 Task panel colors must be solid. the 60% white rgba background  is from ".task-form"
 ------------------------------*/
 /*gray for unscheduled to-do items?*/
-/* line 235, ../../scss/foundation.scss */
+/* line 238, ../../scss/foundation.scss */
 .color0 {
   background: none;
 }
 
 /*red*/
-/* line 239, ../../scss/foundation.scss */
+/* line 242, ../../scss/foundation.scss */
 .task.color1, .color1 {
   background: #E88989;
 }
 
 /*green*/
-/* line 244, ../../scss/foundation.scss */
+/* line 247, ../../scss/foundation.scss */
 .task.color2, .color2 {
   background: #79c242;
 }
 
 /*blue*/
-/* line 249, ../../scss/foundation.scss */
+/* line 252, ../../scss/foundation.scss */
 .task.color3, .color3 {
   background: #79C8DF;
 }
 
 /*orange*/
-/* line 254, ../../scss/foundation.scss */
+/* line 257, ../../scss/foundation.scss */
 .task.color4, .color4 {
   background: #FCA469;
 }
 
 /*purple*/
-/* line 259, ../../scss/foundation.scss */
+/* line 262, ../../scss/foundation.scss */
 .task.color5, .color5 {
   background: #C678C6;
 }
 
 /*this class supplies the 60% white rgba background that creates a lighter shade of the event/calendar color*/
-/* line 263, ../../scss/foundation.scss */
+/* line 266, ../../scss/foundation.scss */
 .task-form {
   height: 100%;
   background: rgba(255, 255, 255, 0.6);
   padding: 4px;
 }
 
-/* line 268, ../../scss/foundation.scss */
+/* line 271, ../../scss/foundation.scss */
 .task .checkbox-container {
   position: relative;
   float: left;
   width: 13%;
 }
 
-/* line 273, ../../scss/foundation.scss */
+/* line 276, ../../scss/foundation.scss */
 .task .body {
   position: relative;
   float: left;
@@ -7890,13 +7877,13 @@ Task panel colors must be solid. the 60% white rgba background  is from ".task-f
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-/* line 279, ../../scss/foundation.scss */
+/* line 282, ../../scss/foundation.scss */
 .task .info .body {
   width: 77.5%;
   margin-right: 2%;
 }
 
-/* line 283, ../../scss/foundation.scss */
+/* line 286, ../../scss/foundation.scss */
 .task .body .title {
   color: black;
   font-size: 12px;
@@ -7905,7 +7892,7 @@ Task panel colors must be solid. the 60% white rgba background  is from ".task-f
   margin-bottom: 1px;
 }
 
-/* line 290, ../../scss/foundation.scss */
+/* line 293, ../../scss/foundation.scss */
 .task .body .notes {
   font-size: 10px;
   line-height: 12px;
@@ -7913,36 +7900,36 @@ Task panel colors must be solid. the 60% white rgba background  is from ".task-f
   margin-bottom: 2px;
 }
 
-/* line 296, ../../scss/foundation.scss */
+/* line 299, ../../scss/foundation.scss */
 .task .body .due-date {
   font-size: 10px;
   line-height: 12px;
   width: 100%;
 }
 
-/* line 301, ../../scss/foundation.scss */
+/* line 304, ../../scss/foundation.scss */
 .task .body .title, .task .body .notes, .task .body .due-date {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-/* line 306, ../../scss/foundation.scss */
+/* line 309, ../../scss/foundation.scss */
 .task .body .notes:hover, .task .body .due-date:hover, .task .body .title:hover {
   text-decoration: underline;
 }
 
-/* line 309, ../../scss/foundation.scss */
+/* line 312, ../../scss/foundation.scss */
 .due-date:empty {
   min-height: 4px;
 }
 
-/* line 312, ../../scss/foundation.scss */
+/* line 315, ../../scss/foundation.scss */
 .notes:empty + .due-date:empty {
   min-height: 15px;
 }
 
-/* line 315, ../../scss/foundation.scss */
+/* line 318, ../../scss/foundation.scss */
 .task .expand-container {
   position: relative;
   float: left;
@@ -7950,37 +7937,37 @@ Task panel colors must be solid. the 60% white rgba background  is from ".task-f
   height: 100%;
 }
 
-/* line 321, ../../scss/foundation.scss */
+/* line 324, ../../scss/foundation.scss */
 .task .delete-container {
   position: relative;
 }
 
-/* line 325, ../../scss/foundation.scss */
+/* line 328, ../../scss/foundation.scss */
 .task .expand-buttons {
   display: none;
 }
 
-/* line 328, ../../scss/foundation.scss */
+/* line 331, ../../scss/foundation.scss */
 .task .info .icon-group {
   display: block;
 }
 
-/* line 331, ../../scss/foundation.scss */
+/* line 334, ../../scss/foundation.scss */
 .task .info .body .notes, .task .info .body .title, .task .info .body .due-date {
   white-space: normal;
 }
 
-/* line 334, ../../scss/foundation.scss */
+/* line 337, ../../scss/foundation.scss */
 .task.completed .body {
   text-decoration: line-through !important;
 }
 
-/* line 337, ../../scss/foundation.scss */
+/* line 340, ../../scss/foundation.scss */
 .task-expand {
   color: black;
 }
 
-/* line 340, ../../scss/foundation.scss */
+/* line 343, ../../scss/foundation.scss */
 .task-delete {
   position: absolute;
   top: -21px;
@@ -7989,20 +7976,20 @@ Task panel colors must be solid. the 60% white rgba background  is from ".task-f
   margin-top: 7px;
 }
 
-/* line 347, ../../scss/foundation.scss */
+/* line 350, ../../scss/foundation.scss */
 .edit-container {
   position: relative;
   clear: both;
 }
 
-/* line 351, ../../scss/foundation.scss */
+/* line 354, ../../scss/foundation.scss */
 .edit-container input[type=text] {
   padding: 3px;
   font-size: 12px;
   margin-bottom: 7px !important;
 }
 
-/* line 356, ../../scss/foundation.scss */
+/* line 359, ../../scss/foundation.scss */
 .edit-container textarea {
   padding: 3px;
   font-size: 12px;
@@ -8010,38 +7997,154 @@ Task panel colors must be solid. the 60% white rgba background  is from ".task-f
   border-radius: 4px;
 }
 
-/* line 362, ../../scss/foundation.scss */
+/* line 365, ../../scss/foundation.scss */
 .edit-container .select {
   font-size: 12px;
   margin-bottom: 7px !important;
 }
 
-/* line 366, ../../scss/foundation.scss */
+/* line 369, ../../scss/foundation.scss */
 .edit-container .button-group {
   padding: 0;
   margin: 0;
 }
 
+/* line 375, ../../scss/foundation.scss */
+.calendar-picker-container button {
+  top: 8px;
+  right: 20px;
+  position: absolute;
+  display: block;
+  color: #555;
+  font-size: 18px;
+  border: 0;
+  background: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
 /* iPads (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* line 375, ../../scss/foundation.scss */
+  /* line 394, ../../scss/foundation.scss */
   .task .body .title {
     font-size: 12px;
   }
 
-  /* line 378, ../../scss/foundation.scss */
+  /* line 397, ../../scss/foundation.scss */
   .task .body .due-date, .task .body .notes {
     font-size: 9px;
   }
 
-  /* line 381, ../../scss/foundation.scss */
+  /* line 400, ../../scss/foundation.scss */
   .edit-container input, textarea {
     padding: 1px;
     font-size: 9px !important;
   }
 
-  /* line 385, ../../scss/foundation.scss */
+  /* line 404, ../../scss/foundation.scss */
   .task .body .notes:hover, .task .body .due-date:hover, .task .body .title:hover {
     text-decoration: none;
   }
+}
+/* line 9, ../../scss/_fugly.scss */
+header#content-header [class*="icon-"], .pane-header [class*="icon-"] {
+  text-shadow: 1px 1px 2px #23538a !important;
+}
+
+/* line 29, ../../scss/_fugly.scss */
+.top-bar, .top-bar-section li a:not(.button) {
+  background: #eeeeee;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eeeeee), color-stop(100%, #cccccc));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #eeeeee 0%, #cccccc 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );
+  /* IE6-9 */
+}
+
+/* line 43, ../../scss/_fugly.scss */
+.pane-header {
+  background: #5d77af;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #5d77af 2%, #23538a 68%, #23538a 84%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(2%, #5d77af), color-stop(68%, #23538a), color-stop(84%, #23538a));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #5d77af 2%, #23538a 68%, #23538a 84%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #5d77af 2%, #23538a 68%, #23538a 84%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #5d77af 2%, #23538a 68%, #23538a 84%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #5d77af 2%, #23538a 68%, #23538a 84%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5d77af', endColorstr='#23538a',GradientType=0 );
+  /* IE6-9 */
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 20px;
+  height: 36px;
+  color: #fff;
+}
+
+/* line 62, ../../scss/_fugly.scss */
+.pane-header span {
+  position: relative;
+  top: 8px;
+}
+
+/* line 66, ../../scss/_fugly.scss */
+.pane-header span.right {
+  margin-right: 12px;
+}
+
+/* line 69, ../../scss/_fugly.scss */
+.pane-header .pane-title {
+  margin-left: 6px;
+}
+
+/* line 76, ../../scss/_fugly.scss */
+header#content-header ul.small-block-grid-3 li {
+  text-align: center;
+  margin: 0 !important;
+  padding-bottom: 0 !important;
+  background: #5d77af;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #5d77af 2%, #23538a 68%, #23538a 84%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(2%, #5d77af), color-stop(68%, #23538a), color-stop(84%, #23538a));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #5d77af 2%, #23538a 68%, #23538a 84%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #5d77af 2%, #23538a 68%, #23538a 84%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #5d77af 2%, #23538a 68%, #23538a 84%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #5d77af 2%, #23538a 68%, #23538a 84%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5d77af', endColorstr='#23538a',GradientType=0 );
+  /* IE6-9 */
+  color: #fff;
+}
+
+/*default width changed to auto from 17em*/
+/* line 96, ../../scss/_fugly.scss */
+.ui-datepicker {
+  width: auto !important;
+}
+
+/* line 100, ../../scss/_fugly.scss */
+label {
+  color: #fff;
 }
