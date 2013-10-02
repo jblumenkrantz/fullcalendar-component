@@ -1,6 +1,9 @@
 @import "settings";
 @import "events";
+
 @import "../bower_components/foundation/scss/foundation";
+
+
 
 /* Each individual part that can be added in */
 // @import "foundation/components/global";
@@ -51,7 +54,7 @@
 // SET CUSTOM VARIABLES HERE
 // -----------------------------
 $letter-press:  1px 1px 2px #fff;
-
+$primary-color: #23538A; //org primary color
 
 
 
@@ -368,6 +371,22 @@ Task panel colors must be solid. the 60% white rgba background  is from ".task-f
 	margin: 0;
 }
 
+
+.calendar-picker-container button {
+top: 24px;
+right: 20px;
+position: absolute;
+display: block;
+color: #555;
+font-size: 18px;
+border: 0;
+background: 0;
+padding: 0;
+margin: 0;
+cursor: pointer;
+}
+
+
 /* iPads (portrait and landscape) ----------- */
 @media only screen 
 and (min-device-width : 768px) 
@@ -387,3 +406,5 @@ and (max-device-width : 1024px) {
 	}
 }
 
+//comment out 'fugly' import below to disable marketing mode
+@import "fugly";
