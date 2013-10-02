@@ -54,7 +54,7 @@
 // SET CUSTOM VARIABLES HERE
 // -----------------------------
 $letter-press:  1px 1px 2px #fff;
-
+$primary-color: #23538A; //org primary color
 
 
 
@@ -373,7 +373,7 @@ Task panel colors must be solid. the 60% white rgba background  is from ".task-f
 
 
 .calendar-picker-container button {
-top: 8px;
+top: 24px;
 right: 20px;
 position: absolute;
 display: block;

@@ -20,14 +20,16 @@
 	</div>
 </div>
 <div class="row">
-<<<<<<< HEAD
-	<div class="large-6 columns">
+
+	<div class="large-6 columns calendar-picker-container">
 		<label>From<span ng-show="formEvent.all_day=='1'"> start of day</span>:</label>
 		<datetime all-day="formEvent.all_day" ng-model="formEvent.event_start" name="event_start" placeholder="m/d/yyyy h:mm AM/PM" />
+		<button type="button" class="glyph-show"><span calendar-shower="" aria-hidden="true" class="icon-calendar-2"></span></button>
 	</div>
-	<div class="large-6 columns">
+	<div class="large-6 columns calendar-picker-container">
 		<label>To<span ng-show="formEvent.all_day=='1'"> end of day</span>:</label>
 		<datetime all-day="formEvent.all_day" ng-model="formEvent.event_end" name="event_end" placeholder="m/d/yyyy h:mm AM/PM" />
+		<button type="button" class="glyph-show"><span calendar-shower="" aria-hidden="true" class="icon-calendar-2"></span></button>
 	</div>
 </div>
 <div class="row">
@@ -48,16 +50,7 @@
 			<input type="checkbox" ng-model="formEvent.isRepeating" />
 			Repeating
 		</label>
-=======
-	<div class="large-6 columns calendar-picker-container">
-		<input type="text" ng-model="formEvent.event_start" placeholder="Starts" ui-date />
-		<button type="button" class="glyph-show"><span calendar-shower="" aria-hidden="true" class="icon-calendar-2"></span></button>
-	</div>
-	<div class="large-6 columns calendar-picker-container">
-		<input type="text" ng-model="formEvent.event_end" placeholder="Ends" ui-date />
-		<button type="button" class="glyph-show"><span calendar-shower="" aria-hidden="true" class="icon-calendar-2"></span></button>
->>>>>>> jt2
-	</div>
+
 </div>
 <div class="row">
 	<div class="large-12 columns">

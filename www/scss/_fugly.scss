@@ -3,17 +3,20 @@
 // fugly skin, by the Jon & Darren Design Group
 // 
 // --------------------------------------------------------------------
-
+$org-color1: #23538A; //org primary color
 $letter-press-ugly:  1px 1px 2px #23538a;
 // apply letter-press-ugly shadow to all glyphs in header panes
 header#content-header [class*="icon-"], .pane-header [class*="icon-"]{
-	text-shadow: $letter-press-ugly !important;
+text-shadow: $letter-press-ugly !important;
 }
 
 // -----------------
 // topbar settings
 // -----------------
-$primary-color: #658929; //org primary color
+
+.sub-nav dt.active a, .sub-nav dd.active a {
+background: $org-color1;
+}
 
 // -----------------
 // topbar settings
@@ -69,7 +72,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', end
 .pane-header .pane-title{ 
 	margin-left: 6px;
 }
-
+.pane-header .pane-title label {
+	color: #fff;
+}
 // --------------------------
 // header bar for content pane
 // --------------------------
@@ -97,6 +102,3 @@ header#content-header ul.small-block-grid-3 li{
 	width: auto !important;
 }
 
-label {
-	color: #fff;
-}

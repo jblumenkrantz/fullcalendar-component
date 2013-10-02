@@ -8011,7 +8011,7 @@ Task panel colors must be solid. the 60% white rgba background  is from ".task-f
 
 /* line 375, ../../scss/foundation.scss */
 .calendar-picker-container button {
-  top: 8px;
+  top: 24px;
   right: 20px;
   position: absolute;
   display: block;
@@ -8052,7 +8052,12 @@ header#content-header [class*="icon-"], .pane-header [class*="icon-"] {
   text-shadow: 1px 1px 2px #23538a !important;
 }
 
-/* line 29, ../../scss/_fugly.scss */
+/* line 17, ../../scss/_fugly.scss */
+.sub-nav dt.active a, .sub-nav dd.active a {
+  background: #23538a;
+}
+
+/* line 32, ../../scss/_fugly.scss */
 .top-bar, .top-bar-section li a:not(.button) {
   background: #eeeeee;
   /* Old browsers */
@@ -8072,7 +8077,7 @@ header#content-header [class*="icon-"], .pane-header [class*="icon-"] {
   /* IE6-9 */
 }
 
-/* line 43, ../../scss/_fugly.scss */
+/* line 46, ../../scss/_fugly.scss */
 .pane-header {
   background: #5d77af;
   /* Old browsers */
@@ -8098,23 +8103,28 @@ header#content-header [class*="icon-"], .pane-header [class*="icon-"] {
   color: #fff;
 }
 
-/* line 62, ../../scss/_fugly.scss */
+/* line 65, ../../scss/_fugly.scss */
 .pane-header span {
   position: relative;
   top: 8px;
 }
 
-/* line 66, ../../scss/_fugly.scss */
+/* line 69, ../../scss/_fugly.scss */
 .pane-header span.right {
   margin-right: 12px;
 }
 
-/* line 69, ../../scss/_fugly.scss */
+/* line 72, ../../scss/_fugly.scss */
 .pane-header .pane-title {
   margin-left: 6px;
 }
 
-/* line 76, ../../scss/_fugly.scss */
+/* line 75, ../../scss/_fugly.scss */
+.pane-header .pane-title label {
+  color: #fff;
+}
+
+/* line 81, ../../scss/_fugly.scss */
 header#content-header ul.small-block-grid-3 li {
   text-align: center;
   margin: 0 !important;
@@ -8139,12 +8149,7 @@ header#content-header ul.small-block-grid-3 li {
 }
 
 /*default width changed to auto from 17em*/
-/* line 96, ../../scss/_fugly.scss */
+/* line 101, ../../scss/_fugly.scss */
 .ui-datepicker {
   width: auto !important;
-}
-
-/* line 100, ../../scss/_fugly.scss */
-label {
-  color: #fff;
 }
