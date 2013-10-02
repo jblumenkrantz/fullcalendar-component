@@ -137,6 +137,7 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute', 'ngAnimate'])
 					data = angular.fromJson(data);
 					data.event_start = new Date(data.event_start).getTime()/1000;
 					data.event_end = new Date(data.event_end).getTime()/1000;
+					console.log(data);
 					return angular.toJson(data);
 				},
 				transformResponse: function(data){

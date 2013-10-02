@@ -1,50 +1,75 @@
 <div class="pane-header">
-    <span ng-if="editingEvent" class="pane-title">Edit Event</span>
-    <span ng-if="addingEvent" class="pane-title">
+    <span ng-show="editingEvent" class="pane-title">Edit Event</span>
+    <span ng-show="addingEvent" class="pane-title">
     	Add New Event 
     	<label style="display: inline; font-size: 14px;" for="alwaysAdvanced">
-    		<input id="alwaysAdvanced" type="checkbox" ng-model="quickAdd.alwaysAdvanced" ng-click="" />
+    		<input id="alwaysAdvanced" type="checkbox" ng-model="quickAdder.alwaysAdvanced" ng-click="" />
     		Always open advanced event entry
     	</label>
     </span>
     <span class="icon-x-altx-alt right" ng-click="cancel()" aria-hidden="true"></span>
 </div>
-<div class="row">
+<div class="row" style="padding-top: 10px;">
 	<div class="large-6 columns">
-		<input type="text" ng-model="formEvent.event_title" placeholder="Title (required)" />
+		<label>Title:</label>
+		<input type="text" ng-model="formEvent.event_title" placeholder="Untitled event" />
 	</div>
 	<div class="large-6 columns">
+		<label>Calendar:</label>
 		<select ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'" ng-model="formEvent.calendar_id" ></select>
 	</div>
 </div>
 <div class="row">
 	<div class="large-6 columns">
-		<input type="text" ng-model="formEvent.event_start" placeholder="Starts" ui-date />
+		<label>From<span ng-show="formEvent.all_day=='1'"> start of day</span>:</label>
+		<datetime all-day="formEvent.all_day" ng-model="formEvent.event_start" name="event_start" placeholder="m/d/yyyy h:mm AM/PM" />
 	</div>
 	<div class="large-6 columns">
-		<input type="text" ng-model="formEvent.event_end" placeholder="Ends" ui-date />
+		<label>To<span ng-show="formEvent.all_day=='1'"> end of day</span>:</label>
+		<datetime all-day="formEvent.all_day" ng-model="formEvent.event_end" name="event_end" placeholder="m/d/yyyy h:mm AM/PM" />
+	</div>
+</div>
+<div class="row">
+	<div class="large-4 columns">
+		<label class="checkbox">
+			<input type="checkbox" ng-model="formEvent.all_day" ng-true-value="1" ng-false-value="0" ng-change="convertTimes()" />
+			All Day Event
+		</label>
+	</div>
+	<div class="large-4 columns">
+		<label class="checkbox">
+			<input type="checkbox" ng-model="formEvent.has_reminder" />
+			Add Reminder
+		</label>
+	</div>
+	<div class="large-4 columns">
+		<label class="checkbox">
+			<input type="checkbox" ng-model="formEvent.isRepeating" />
+			Repeating
+		</label>
 	</div>
 </div>
 <div class="row">
 	<div class="large-12 columns">
-		<textarea ng-model="formEvent.event_description" placeholder="Add Description"></textarea>
+		<label>Description:</label>
+		<textarea ng-model="formEvent.event_description" placeholder="Add a description"></textarea>
 	</div>
 </div>
 <div class="row">
 	<div class="large-6 columns">
-		<div ng-if="editingEvent" class="expand small alert button" ng-click="delete()" >delete</div>
-		<div ng-if="addingEvent" class="expand small button" ng-click="reset()" >reset</div>
+		<div ng-show="editingEvent" class="expand small alert button" ng-click="delete()" >delete</div>
+		<div ng-show="addingEvent" class="expand small button" ng-click="reset()" >reset</div>
 	</div>
 	<div class="large-6 columns">
 		<div class="expand small alert button" ng-click="cancel()" >cancel</div>
 	</div>
 </div>
 <div class="row">
-	<div ng-if="addingEvent" class="large-6 columns">
+	<div ng-show="addingEvent" class="large-6 columns">
 		<div class="expand small button" ng-click="save(true)">save and continue</div>
 	</div>
 	<div ng-class="{'large-12':editingEvent, 'large-6':addingEvent}" class=" columns">
-		<div ng-if="editingEvent" class="expand small button" ng-click="update()" >save</div>
-		<div ng-if="addingEvent" class="expand small button" ng-click="save()" >save</div>
+		<div ng-show="editingEvent" class="expand small button" ng-click="update()" >save</div>
+		<div ng-show="addingEvent" class="expand small button" ng-click="save()" >save</div>
 	</div>
 </div>

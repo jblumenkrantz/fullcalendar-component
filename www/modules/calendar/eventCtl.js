@@ -1,13 +1,20 @@
 'use strict';
 
 angular.module('pinwheelApp')
-  .controller('EventCtl', function ($scope, Event, QuickAdd) {
+	.controller('EventCtl', function ($scope, Event, QuickAdd, $filter) {
 		$scope.toggle = function(name) {
 			$scope[name] = !$scope[name];
 		}
 		//open form for adding of new event
 		$scope.add = function() {
-			$scope.formEvent = new Event();
+			$scope.formEvent = new Event({
+				event_start: new Date($filter('date')((new Date()).getTime(), "M/d/yyyy h:00 a")), //get date object set to current hour
+				event_end: new Date($filter('date')((new Date()).getTime()+3600000, "M/d/yyyy h:00 a")), //get date object set to current hour + 1
+				all_day: "0",
+				has_reminder: false,
+				isRepeating: false,
+				calendar_id: $scope.user.settings.default_calendar
+			});
 			$scope.addingEvent = true;
 			$scope.editingEvent = false;
 			$scope.quickAdding = false;
@@ -56,15 +63,27 @@ angular.module('pinwheelApp')
 		}
 
 		$scope.reset = function() {
-			$scope.formEvent = new Event();
+			$scope.formEvent = new Event({
+				all_day: "0",
+				event_start: new Date($filter('date')((new Date()).getTime(), "M/d/yyyy h:00 a")), //get date object set to current hour
+				event_end: new Date($filter('date')((new Date()).getTime()+3600000, "M/d/yyyy h:00 a")), //get date object set to current hour + 1
+				has_reminder: false,
+				isRepeating: false,
+				calendar_id: $scope.user.settings.default_calendar
+			});
 		}
 
-		$scope.quickAdd = {alwaysAdvanced: false}; //grab this from user settings
+		$scope.quickAdder = {alwaysAdvanced: false};
 		//open quickadd form for new event
 		$scope.quickAdd = function() {
-			$scope.quickAdding = !$scope.quickAdd.alwaysAdvanced;
-			$scope.addingEvent = $scope.quickAdd.alwaysAdvanced;
-			$scope.editingEvent = false;
+			if ($scope.quickAdder.alwaysAdvanced) {
+				$scope.add();
+			}
+			else {
+				$scope.quickAdding = true;
+				$scope.addingEvent = false;
+				$scope.editingEvent = false;
+			}
 		}
 
 		//save new quickadded event

@@ -10,6 +10,34 @@
 	}
 }
 
+textarea {
+	resize: none;
+}
+
+label.checkbox {
+	height: 2.3125em;
+	font-size: 14px;
+	border: 1px solid #aaa;
+	padding: 0.5em;
+	color: #555;
+	margin: 0 0 1em 0;
+	color: rgba(0, 0, 0, 0.75);
+	-webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+select {
+	font-family: 'Helvetica Neue', Helvetica, Helvetica, Arial, sans-serif;
+	display: inline-block;
+	height: 2.3125em;
+	font-size: 14px;
+	border: 1px solid #aaa;
+	padding: 0.5em;
+	color: #555;
+	margin: 0 0 1em 0;
+	color: rgba(0, 0, 0, 0.75);
+}
+
 /* Used to alter styles for screens at least 768px wide. This is where the grid changes. */
 @media only screen and (min-width: 768px) {
 	body {

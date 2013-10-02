@@ -3,6 +3,10 @@
 angular.module('pinwheelApp')
   .controller('PinwheelCtl', function ($scope, $location, Calendar, User, localStorage) {
 		User.get({}, function(user){
+			$scope.user = user;
+			User.query({id:'new'}, function(orgs){
+				$scope.orgs = orgs;
+			});
 		});
 		// nice for toggling forms. see adding a task for example.
 		$scope.toggle = function(name){
