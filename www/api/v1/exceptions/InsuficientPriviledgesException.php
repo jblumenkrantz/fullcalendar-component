@@ -17,6 +17,7 @@ class InsuficientPriviledgesException extends Exception
 		if ($this->request !== NULL)
 			$pkg['requested'] = $this->request;
 		error_log(print_r($Errno,true));
+		header("HTTP/1.0 {$this->getCode()} {$this->getMessage()}");
 		return json_encode($pkg);
 	}
 }

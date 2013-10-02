@@ -10,7 +10,6 @@ angular.module('pinwheelApp')
 				 	var startOfYear = new Date('01-01-'+$routeParams.year).getTime()/1000;
 				 	var endOfYear = (new Date('12-31-'+$routeParams.year).getTime()/1000)+86400;
 				 	var itemStart = new Date(item.event_start).getTime()/1000;
-				 	console.warn([startOfYear,endOfYear,itemStart]);
 				 	if(itemStart >= startOfYear && itemStart < endOfYear){
 				 		return true;
 				 	}
