@@ -1,3 +1,25 @@
+<!-- Global confirm dialog box -->
+<div id="global-modal-bg" class="reveal-modal-bg"></div>
+<div id="global-modal" class="reveal-modal [expand, xlarge, large, medium, small]" style="position:fixed; color:black; ">
+	<h2 style="white-space:normal;">{{header}}</h2>
+	<p style="white-space:normal;" class="lead">{{body}}</p>
+	<p style="white-space:normal;">{{footer}}</p>
+	<div class="icon-group">
+		<button ng-click="negative()" class="icon" style="width:50% !important;">
+			<span class="glyph-show cancel">
+				<span aria-hidden="true" class="icon-close"></span> {{negativeText}}
+			</span>
+		</button>
+		<button ng-click="affirmative()" class="icon" style="width:50% !important;">
+			<span class="glyph-show save">
+				<span aria-hidden="true" class="icon-checkmark"></span> {{affirmativeText}}
+			</span>
+		</button>
+	</div>
+	<a class="close-reveal-modal">&#215;</a>
+</div>
+<!-- END Global confirm dialog box -->
+
 <ul class="title-area">
 	<!-- Title Area -->
 	<li class="name"><h1><a href="#"></a></h1></li>
