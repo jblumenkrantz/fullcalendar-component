@@ -69,19 +69,15 @@ class Authorize
 			else
 				throw new NoCredentialsProvidedException(static:: $AuthType, static:: $Realm, static:: $tokenURL);
 		} catch (NoCredentialsProvidedException $e) {
-			header("HTTP/1.0 401 Not Authorized");
 			echo $e->json_encode();
 			exit;
 		} catch (TokenAuthFailedException $e) {
-			header("HTTP/1.0 401 Not Authorized");
 			echo $e->json_encode();
 			exit;
 		} catch (UserPassAuthFailedException $e) {
-			header("HTTP/1.0 401 Not Authorized");
 			echo $e->json_encode();
 			exit;
 		} catch (UserDeactivatedException $e) {
-			header("HTTP/1.0 401 Not Authorized");
 			echo $e->json_encode();
 			exit;
 		}

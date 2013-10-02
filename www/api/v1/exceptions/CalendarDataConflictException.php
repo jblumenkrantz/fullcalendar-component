@@ -3,8 +3,7 @@
 class CalendarDataConflictException extends Exception
 {
 	static public $Errno = 409;
-	static public $Message =
-		'The request could not be completed due to a conflict with the current state of the Calendar resource.';
+	static public $Message ='The request could not be completed due to a conflict with the current state of the Calendar resource.';
 
 	private $resource;
 	private $conflicts;
@@ -14,6 +13,7 @@ class CalendarDataConflictException extends Exception
 		$this->conflicts = $conflicts;
 	}
 	public function json_encode() {
+		header("HTTP/1.0 {$this->getCode()} {$this->getMessage()}");
 		return json_encode(array(
 			'errno'=>$this->getCode(),
 			'message'=>$this->getMessage(),
