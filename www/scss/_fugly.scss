@@ -1,0 +1,104 @@
+// --------------------------------------------------------------------
+// 
+// fugly skin, by the Jon & Darren Design Group
+// 
+// --------------------------------------------------------------------
+$org-color1: #23538A; //org primary color
+$letter-press-ugly:  1px 1px 2px #23538a;
+// apply letter-press-ugly shadow to all glyphs in header panes
+header#content-header [class*="icon-"], .pane-header [class*="icon-"]{
+text-shadow: $letter-press-ugly !important;
+}
+
+// -----------------
+// topbar settings
+// -----------------
+
+.sub-nav dt.active a, .sub-nav dd.active a {
+background: $org-color1;
+}
+
+// -----------------
+// topbar settings
+// -----------------
+
+// $topbar-link-color-active: $primary-color;
+
+// .top-bar{
+// background: rgba($topbar-bg, .3) $topbar-bg-logo repeat !important; 
+// overflow: visible;
+// }
+
+.top-bar, .top-bar-section li a:not(.button){
+background: #eeeeee; /* Old browsers */
+background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+}
+
+// --------------------------
+// header bar for sidebars
+// --------------------------
+.pane-header {
+	//replace this gradient with SASS version if possible
+	background: #5d77af; /* Old browsers */
+	background: -moz-linear-gradient(top,  #5d77af 2%, #23538a 68%, #23538a 84%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(2%,#5d77af), color-stop(68%,#23538a), color-stop(84%,#23538a)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #5d77af 2%,#23538a 68%,#23538a 84%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #5d77af 2%,#23538a 68%,#23538a 84%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #5d77af 2%,#23538a 68%,#23538a 84%); /* IE10+ */
+	background: linear-gradient(to bottom,  #5d77af 2%,#23538a 68%,#23538a 84%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d77af', endColorstr='#23538a',GradientType=0 ); /* IE6-9 */
+
+	width: 100%;
+	margin: 0 !important;
+	padding: 0 !important;
+	// background: darken($topbar-bg, 5%);
+	font-size: 20px;
+	height: 36px;
+	color: #fff;
+}
+.pane-header span{
+	position: relative;
+	top: 8px;
+}
+.pane-header span.right{
+	margin-right: 12px;
+}
+.pane-header .pane-title{ 
+	margin-left: 6px;
+}
+.pane-header .pane-title label {
+	color: #fff;
+}
+// --------------------------
+// header bar for content pane
+// --------------------------
+header#content-header ul.small-block-grid-3 li{
+	text-align: center;
+	margin: 0 !important;
+	padding-bottom: 0 !important;
+	// background: darken($topbar-bg, 5%);
+
+	//replace this gradient with SASS version if possible
+	background: #5d77af; /* Old browsers */
+	background: -moz-linear-gradient(top,  #5d77af 2%, #23538a 68%, #23538a 84%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(2%,#5d77af), color-stop(68%,#23538a), color-stop(84%,#23538a)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #5d77af 2%,#23538a 68%,#23538a 84%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #5d77af 2%,#23538a 68%,#23538a 84%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #5d77af 2%,#23538a 68%,#23538a 84%); /* IE10+ */
+	background: linear-gradient(to bottom,  #5d77af 2%,#23538a 68%,#23538a 84%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d77af', endColorstr='#23538a',GradientType=0 ); /* IE6-9 */
+	color: #fff;
+}
+
+
+/*default width changed to auto from 17em*/
+.ui-datepicker {
+	width: auto !important;
+}
+
