@@ -59,7 +59,8 @@ angular.module('pinwheelApp')
 		replace: true,
 		link: function(scope, element, attrs, ngModelCtrl) {
 			function displayDate(modelValue) {
-				return $filter('date')(modelValue, (attrs.allDay=='1') ? formDateFormat : formDatetimeFormat);
+				element.datetimeEntry('option', "datetimeFormat", (scope.formEvent.all_day=='1') ? 'o/d/Y' : 'o/d/Y @ h:M a');
+				return $filter('date')(modelValue, (scope.formEvent.all_day=='1') ? formDateFormat : formDatetimeFormat);
 			}
 
 			ngModelCtrl.$formatters.push(displayDate);
@@ -69,9 +70,22 @@ angular.module('pinwheelApp')
 			}).change(function() {
 				ngModelCtrl.$setViewValue($(this).val());
 			});
-			
+
 			scope.$watch(attrs.allDay, function(newVal) {
-				element.datetimeEntry('option', "datetimeFormat", (newVal=='1') ? 'o/d/Y' : 'o/d/Y @ h:M a');
+				//new events
+				if (!scope.formEvent.hasOwnProperty("event_id")) {
+					var format = (newVal=="1") ? "M/d/yyyy" : "M/d/yyyy h:00 a";
+					var s = (scope.formEvent.event_start) ? new Date(scope.formEvent.event_start) : new Date();
+					var e = (scope.formEvent.event_end) ? new Date(scope.formEvent.event_end) : new Date();
+					s.setHours((new Date()).getHours());
+					e.setHours((new Date()).addHours(1).getHours());
+					scope.formEvent.event_start = new Date($filter('date')(s, format)); //get date object set to current hour
+					scope.formEvent.event_end = new Date($filter('date')(e, format)); //get date object set to current hour + 1
+				}
+				//existing events
+				else {
+					displayDate(ngModelCtrl.$modelValue);
+				}
 			});
 		}
 	}
