@@ -75,4 +75,35 @@ angular.module('pinwheelApp')
 			});
 		}
 	}
+})
+.directive("uiColorpicker", function($compile) {
+return {
+		restrict: 'E',
+		require: 'ngModel',
+		scope: false,
+		replace: true,
+		template: "<span><input class='input-small' /></span>",
+		link: function(scope, element, attrs, ngModel) {
+			var input = element.find('input');
+			var options = angular.extend({
+				color: ngModel.$viewValue,
+				showPalette: true,
+				showSelectionPalette: true,
+				preferredFormat: "hex6",
+				palette: [ ],
+				localStorageKey: "spectrum.brc", // Any Spectrum with the same string will share selection
+				change: function(color) {
+					scope.$apply(function() {
+						ngModel.$setViewValue(color.toHexString());
+					});
+				}
+			}, scope.$eval(attrs.options));
+			
+			ngModel.$render = function() {
+			  input.spectrum('set', ngModel.$viewValue || '');
+			};
+			
+			input.spectrum(options);
+		}
+	};
 });

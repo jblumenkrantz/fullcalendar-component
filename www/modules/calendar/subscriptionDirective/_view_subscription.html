@@ -12,7 +12,7 @@
 <div ng-show="editingCalendar">
 	<div class="row">
 		<input type="text" ng-model="editCalendar.calendar_name" placeholder="Name (required)" />
-		<input type="text" ng-model="editCalendar.color" placeholder="Color (required)" />
+		<ui-colorpicker ng-model="editCalendar.color"></ui-colorpicker>
 	</div>
 	<div class="row">
 		<div class="large-6 columns">
