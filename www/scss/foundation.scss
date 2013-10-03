@@ -54,7 +54,7 @@
 // SET CUSTOM VARIABLES HERE
 // -----------------------------
 $letter-press:  1px 1px 2px #fff;
-$primary-color: #23538A; //org primary color
+// $primary-color: #23538A; //org primary color
 
 
 
@@ -82,7 +82,11 @@ $primary-color: #23538A; //org primary color
 #tasks{
 	height: 100%;
 }
-
+#mainHeader {
+	-webkit-box-shadow:  0px 1px 3px 1px rgba(0, 0, 0, .5); 
+  box-shadow:  0px 1px 3px 1px rgba(0, 0, 0, .5);
+  z-index: 100;
+}
 .top-bar-section ul {
 	height: auto;
 	background: none;
@@ -386,6 +390,64 @@ margin: 0;
 cursor: pointer;
 }
 
+.subscription-panel button {
+top: 0px;
+right: 8px;
+position: absolute;
+display: block;
+color: #555;
+font-size: 18px;
+border: 0;
+background: 0;
+padding: 0;
+margin: 0;
+cursor: pointer;
+transform: rotate(180deg) !important;
+-ms-transform: rotate(180deg) !important; /* IE 9 */
+-webkit-transform: rotate(180deg) !important; /* Safari and Chrome */
+box-shadow: none;
+font-size: 16px;
+}
+// -----------------------------
+// subscriptions
+// -----------------------------
+
+.subscription-panel { //outside
+min-height: 50px;
+border-bottom: 1px solid #999;
+overflow: hidden;
+
+}
+
+.subscription-body { //inside
+width: 100%;
+// background: rgba(255,255,255,.9);
+// same light gray gradient as topbar
+background: #eeeeee; /* Old browsers */
+	background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+padding: 16px 4px 6px;
+margin-left: 8px;
+}
+.subscription-gradient {
+	background:  url('../images/white-gradient-25.png') top center repeat !important;
+}
+
+.subscription-calendar-title {
+	overflow: hidden;
+white-space: nowrap;
+text-overflow: ellipsis;
+width: 80%;
+display: inline-block !important;
+cursor: pointer;
+color: #222;
+font-size: 14px;
+}
 
 /* iPads (portrait and landscape) ----------- */
 @media only screen 

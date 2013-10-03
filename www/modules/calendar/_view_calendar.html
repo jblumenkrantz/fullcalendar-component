@@ -98,11 +98,13 @@
 	<div ng-show="loading_calendars" class="spinwheel"></div>
     <!-- SUBSCRIBED CALENDAR SECTION -->
 	<div scroll-pane class="scroll-pane">
-		<active-subscription
+		<div class="calendar-wrapper">
+			<active-subscription
 		 ng-repeat="calendar in subscribedCalendars = (calendars | filter:{active: 1, subscribed: true} | orderBy:'calendar_name')" 
 			watcher="calendarWatchers"
 			calendar="calendar">
 		</active-subscription>
+		</div>
 	</div>
 
 	<!-- ADD CALENDAR SECTION -->
