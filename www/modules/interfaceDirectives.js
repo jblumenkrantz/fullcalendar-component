@@ -73,7 +73,7 @@ angular.module('pinwheelApp')
 
 			scope.$watch(attrs.allDay, function(newVal) {
 				//new events
-				if (!scope.formEvent.hasOwnProperty("event_id")) {
+				if (!scope.formEvent.hasOwnProperty("version")) {
 					var format = (newVal=="1") ? "M/d/yyyy" : "M/d/yyyy h:00 a";
 					var s = (scope.formEvent.event_start) ? new Date(scope.formEvent.event_start) : new Date();
 					var e = (scope.formEvent.event_end) ? new Date(scope.formEvent.event_end) : new Date();
