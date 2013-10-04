@@ -11,8 +11,8 @@ angular.module('pinwheelApp')
 		//open form for adding of new event
 		$scope.add = function() {
 			$scope.formEvent = new Event({
-				event_start: new Date($filter('date')((new Date()).getTime(), "M/d/yyyy h:00 a")), //get date object set to current hour
-				event_end: new Date($filter('date')((new Date()).getTime()+3600000, "M/d/yyyy h:00 a")), //get date object set to current hour + 1
+				event_start: new Date($filter('date')(new Date(), "M/d/yyyy h:00 a")), //get date object set to current hour
+				event_end: new Date($filter('date')((new Date()).addHours(1), "M/d/yyyy h:00 a")), //get date object set to current hour + 1
 				all_day: "0",
 				has_reminder: false,
 				isRepeating: false,
@@ -67,8 +67,8 @@ angular.module('pinwheelApp')
 
 		$scope.reset = function() {
 			$scope.formEvent = new Event({
-				event_start: new Date($filter('date')((new Date()).getTime(), "M/d/yyyy h:00 a")), //get date object set to current hour
-				event_end: new Date($filter('date')((new Date()).getTime()+3600000, "M/d/yyyy h:00 a")), //get date object set to current hour + 1
+				event_start: new Date($filter('date')(new Date(), "M/d/yyyy h:00 a")), //get date object set to current hour
+				event_end: new Date($filter('date')((new Date()).addHours(1), "M/d/yyyy h:00 a")), //get date object set to current hour + 1
 				all_day: "0",
 				has_reminder: false,
 				isRepeating: false,

@@ -7,7 +7,8 @@ angular.module('pinwheelApp')
 		templateUrl: 'modules/calendar/subscriptionDirective/_view_subscription.html',
 		scope: {
 			calendar: '=',
-			watcher: '='
+			watcher: '=',
+			user:'='
 		},
 		controller: 'SubscriptionDirectiveCtl'
 	}
