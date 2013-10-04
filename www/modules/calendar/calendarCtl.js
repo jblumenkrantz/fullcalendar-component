@@ -2,16 +2,8 @@
 
 angular.module('pinwheelApp')
 	.controller('CalendarCtl', function ($filter, $scope, $routeParams, $location, Calendar, Event, Task) {
-		$scope.calendarWatchers = {};
-		$scope.reminders = {};
 
-		$scope.isCalendarShowing = function(item) {
-			return $scope.calendarWatchers[item.calendar_id] && $scope.calendarWatchers[item.calendar_id].viewing;
-		}
-
-		$scope.calendarColor = function(item) {
-			return $scope.calendarWatchers[item.calendar_id].color;
-		}
+		$scope.routeDate = new Date($routeParams.month+"/"+$routeParams.day+"/"+$routeParams.year);
 
 		$scope.moveMonths = function(dist){
 			$routeParams.month = parseInt($routeParams.month)+dist;
