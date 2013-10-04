@@ -5,11 +5,14 @@ angular.module('pinwheelApp')
 		$scope.toggle = function(name) {
 			$scope[name] = !$scope[name];
 		}
+
+		$scope.formEvent = {all_day: "0"};
+
 		//open form for adding of new event
 		$scope.add = function() {
 			$scope.formEvent = new Event({
-				event_start: new Date($filter('date')((new Date()).getTime(), "M/d/yyyy h:00 a")), //get date object set to current hour
-				event_end: new Date($filter('date')((new Date()).getTime()+3600000, "M/d/yyyy h:00 a")), //get date object set to current hour + 1
+				event_start: new Date($filter('date')(new Date(), "M/d/yyyy h:00 a")), //get date object set to current hour
+				event_end: new Date($filter('date')((new Date()).addHours(1), "M/d/yyyy h:00 a")), //get date object set to current hour + 1
 				all_day: "0",
 				has_reminder: false,
 				isRepeating: false,
@@ -64,16 +67,16 @@ angular.module('pinwheelApp')
 
 		$scope.reset = function() {
 			$scope.formEvent = new Event({
+				event_start: new Date($filter('date')(new Date(), "M/d/yyyy h:00 a")), //get date object set to current hour
+				event_end: new Date($filter('date')((new Date()).addHours(1), "M/d/yyyy h:00 a")), //get date object set to current hour + 1
 				all_day: "0",
-				event_start: new Date($filter('date')((new Date()).getTime(), "M/d/yyyy h:00 a")), //get date object set to current hour
-				event_end: new Date($filter('date')((new Date()).getTime()+3600000, "M/d/yyyy h:00 a")), //get date object set to current hour + 1
 				has_reminder: false,
 				isRepeating: false,
 				calendar_id: $scope.user.settings.default_calendar
 			});
 		}
 
-		$scope.quickAdder = {alwaysAdvanced: false};
+		$scope.quickAdder = {alwaysAdvanced: true};
 		//open quickadd form for new event
 		$scope.quickAdd = function() {
 			if ($scope.quickAdder.alwaysAdvanced) {

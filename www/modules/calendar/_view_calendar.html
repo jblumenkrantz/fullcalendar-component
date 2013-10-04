@@ -15,9 +15,9 @@
 				<span aria-hidden="true" class="icon-calendar-2"></span>
 			</li>
 			<li>
-				<span aria-hidden="true" class="icon-arrow-left-2"></span>
+				<span aria-hidden="true" class="icon-arrow-left-2" ng-click="moveMonths(-1)"></span></a>
 				<span class="month-switcher">September</span>
-				<span aria-hidden="true" class="icon-arrow-right-2"></span>
+				<span aria-hidden="true" class="icon-arrow-right-2" ng-click="moveMonths(1)"></span>
 			</li>
 			<li class="text-right">
 				<span class="icon-plus-alt" ng-click="quickAdd()" aria-hidden="true"></span>
@@ -98,12 +98,14 @@
 	<div ng-show="loading_calendars" class="spinwheel"></div>
     <!-- SUBSCRIBED CALENDAR SECTION -->
 	<div scroll-pane class="scroll-pane">
-		<active-subscription
+		<div class="calendar-wrapper">
+			<active-subscription
 		 ng-repeat="calendar in subscribedCalendars = (calendars | filter:{active: 1, subscribed: true} | orderBy:'calendar_name')" 
 			watcher="calendarWatchers"
 			calendar="calendar"
 			user="user">
 		</active-subscription>
+		</div>
 	</div>
 
 	<!-- ADD CALENDAR SECTION -->
