@@ -46,7 +46,7 @@ class CalendarCtl
 				$calendar->viewing = ($colorResult[0]->view_setting)? true:false;
 			}
 			$publicResult = Calendar:: genericQuery("SELECT
-					calendar_id
+					org_id
 				FROM
 					public_calendars
 				WHERE
@@ -54,6 +54,7 @@ class CalendarCtl
 				");
 			if(sizeof($publicResult) > 0){
 				$calendar->public = true;
+				$calendar->org_id = $publicResult[0]->org_id;
 			}else{
 				$calendar->public = false;
 			}
@@ -138,15 +139,15 @@ class CalendarCtl
 				$calendar->update_subscriptions($pinsqli);
 				$calendar->update_reminders($pinsqli);
 				$calendar->updateSubscription($calendar->calendar_id, $calendar->viewing, $authUserID);
-				$calendar->update($pinsqli);
 				if($calendar->creator_id == $authUserID){
+					$calendar->update($pinsqli);
 					if(property_exists($tsprop,'public') && $tsprop->public){
 						Admin::promoteToPublicCalendar($tsprop);
 					}
 					else{
 						Admin::demoteFromPublicCalendar($tsprop);
 					}
-					error_log(print_r('calendar updated',true));
+					
 				}
 
 				$calendar->subscribed = false;

@@ -73,7 +73,7 @@ angular.module('pinwheelApp')
 
 			scope.$watch(attrs.allDay, function(newVal) {
 				//new events
-				if (!scope.formEvent.hasOwnProperty("event_id")) {
+				if (!scope.formEvent.hasOwnProperty("version")) {
 					var format = (newVal=="1") ? "M/d/yyyy" : "M/d/yyyy h:00 a";
 					var s = (scope.formEvent.event_start) ? new Date(scope.formEvent.event_start) : new Date();
 					var e = (scope.formEvent.event_end) ? new Date(scope.formEvent.event_end) : new Date();
@@ -89,4 +89,35 @@ angular.module('pinwheelApp')
 			});
 		}
 	}
+})
+.directive("uiColorpicker", function($compile) {
+return {
+		restrict: 'E',
+		require: 'ngModel',
+		scope: false,
+		replace: true,
+		template: "<span><input class='input-small' /></span>",
+		link: function(scope, element, attrs, ngModel) {
+			var input = element.find('input');
+			var options = angular.extend({
+				color: ngModel.$viewValue,
+				showPalette: true,
+				showSelectionPalette: true,
+				preferredFormat: "hex6",
+				palette: [ ],
+				localStorageKey: "spectrum.brc", // Any Spectrum with the same string will share selection
+				change: function(color) {
+					scope.$apply(function() {
+						ngModel.$setViewValue(color.toHexString());
+					});
+				}
+			}, scope.$eval(attrs.options));
+			
+			ngModel.$render = function() {
+			  input.spectrum('set', ngModel.$viewValue || '');
+			};
+			
+			input.spectrum(options);
+		}
+	};
 });
