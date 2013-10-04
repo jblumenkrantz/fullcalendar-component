@@ -2,6 +2,7 @@
 class Calendar extends PinwheelModelObject
 {
 	public $calendar_id;
+	public $calendar_admin;
 	public $calendar_name;
 	public $create_time;
 	public $creator_id;
@@ -28,6 +29,7 @@ class Calendar extends PinwheelModelObject
 		return array(
 			'calendar_id' => NULL,
 			'calendar_name' => '',
+			'calendar_admin' => false,
 			'color' => '',
 			'create_time' => '',
 			'creator_id' => '',
@@ -135,7 +137,8 @@ class Calendar extends PinwheelModelObject
 					reminder_prefs.reminder_pref_id as reminder_pref_id,
 					reminder_prefs.version as reminder_pref_version,
 					reminder_prefs.reminder_pref_id as has_reminder,
-					reminder_prefs.aggregate as reminder_aggregate
+					reminder_prefs.aggregate as reminder_aggregate,
+					IF(calendar_admins.calendar_id is not null, TRUE, FALSE) as calendar_admin
 				FROM calendars
 				LEFT OUTER JOIN reminder_prefs
 				ON calendars.calendar_id = reminder_prefs.calendar_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$authUserID' AND reminder_prefs.task_id = '' AND reminder_prefs.event_id = ''
@@ -143,6 +146,8 @@ class Calendar extends PinwheelModelObject
 				ON calendar_subs.calendar_id = calendars.calendar_id AND calendar_subs.user_id = '$authUserID'
 				LEFT OUTER JOIN public_calendars
 				ON public_calendars.calendar_id = calendars.calendar_id
+				left outer join	calendar_admins
+				ON 	calendars.calendar_id = calendar_admins.calendar_id AND calendar_admins.user_id = '$authUserID'
 				WHERE calendars.calendar_id IN ($id)
 			", $pinsqli);
 			
@@ -199,7 +204,8 @@ class Calendar extends PinwheelModelObject
 					reminder_prefs.reminder_pref_id as reminder_pref_id,
 					reminder_prefs.version as reminder_pref_version,
 					reminder_prefs.reminder_pref_id as has_reminder,
-					reminder_prefs.aggregate as reminder_aggregate
+					reminder_prefs.aggregate as reminder_aggregate,
+					IF(calendar_admins.calendar_id is not null, TRUE, FALSE) as calendar_admin
 				from
 					calendars
 				left outer join
@@ -210,6 +216,10 @@ class Calendar extends PinwheelModelObject
 					public_calendars
 				ON
 					calendars.calendar_id = public_calendars.calendar_id
+				left outer join
+					calendar_admins
+				ON 
+					calendars.calendar_id = calendar_admins.calendar_id AND calendar_admins.user_id = '$userId'	
 				where
 					calendars.creator_id = '$userId'
 				OR
@@ -248,7 +258,8 @@ class Calendar extends PinwheelModelObject
 					reminder_prefs.reminder_pref_id as reminder_pref_id,
 					reminder_prefs.version as reminder_pref_version,
 					reminder_prefs.reminder_pref_id as has_reminder,
-					reminder_prefs.aggregate as reminder_aggregate
+					reminder_prefs.aggregate as reminder_aggregate,
+					IF(calendar_admins.calendar_id is not null, TRUE, FALSE) as calendar_admin
 				from
 					calendars
 				left outer join
@@ -259,6 +270,10 @@ class Calendar extends PinwheelModelObject
 					calendar_subs
 				ON
 					calendars.calendar_id = calendar_subs.calendar_id
+				left outer join
+					calendar_admins
+				ON 
+					calendars.calendar_id = calendar_admins.calendar_id AND calendar_admins.user_id = '$userId'
 				where
 					calendar_subs.user_id = '$userId'
 				AND calendar_subs.calendar_id not in (
@@ -267,7 +282,8 @@ class Calendar extends PinwheelModelObject
 						FROM
 							calendars
 						WHERE
-							calendars.creator_id = '$userId')", $pinsqli));
+							calendars.creator_id = '$userId')
+", $pinsqli));
 
 
 	}
@@ -462,12 +478,15 @@ class Calendar extends PinwheelModelObject
 					reminder_prefs.reminder_pref_id as reminder_pref_id,
 					reminder_prefs.version as reminder_pref_version,
 					reminder_prefs.reminder_pref_id as has_reminder,
-					reminder_prefs.aggregate as reminder_aggregate
+					reminder_prefs.aggregate as reminder_aggregate,
+					IF(calendar_admins.calendar_id is not null, TRUE, FALSE) as calendar_admin
 				from calendars
 				left outer join	reminder_prefs
 				ON calendars.calendar_id = reminder_prefs.calendar_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$authUserID' AND reminder_prefs.aggregate = TRUE
 				left outer join	calendar_subs
 				ON calendars.calendar_id = calendar_subs.calendar_id AND calendar_subs.user_id = '$authUserID'
+				left outer join	calendar_admins
+				ON 	calendars.calendar_id = calendar_admins.calendar_id AND calendar_admins.user_id = '$authUserID'
 				WHERE calendars.calendar_id = '$this->calendar_id'
 				AND calendars.version > $this->version				
 			"
@@ -511,11 +530,13 @@ class Calendar extends PinwheelModelObject
 		if ($pinsqli->affected_rows == 0) {
 			$resource = static:: load($this->calendar_id, $pinsqli);
 			$resource = array_pop($resource);
+			//error_log(print_r($resource,true));
 			if (!$resource)
 				throw new CalendarDoesNotExist($this);
 			throw new CalendarDataConflictException($resource, array($this));
 		}
 		$this->reload($pinsqli);
+		//error_log(print_r($this,true));
 	}
 
 	public function updateSubscription($calendar_id, $calendar_view, $user_id){

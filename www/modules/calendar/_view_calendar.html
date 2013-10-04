@@ -101,7 +101,8 @@
 		<active-subscription
 		 ng-repeat="calendar in subscribedCalendars = (calendars | filter:{active: 1, subscribed: true} | orderBy:'calendar_name')" 
 			watcher="calendarWatchers"
-			calendar="calendar">
+			calendar="calendar"
+			user="user">
 		</active-subscription>
 	</div>
 

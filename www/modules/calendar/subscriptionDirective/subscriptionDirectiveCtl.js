@@ -5,7 +5,6 @@ angular.module('pinwheelApp')
 		if ($scope.watcher != undefined) {
 			$scope.watcher[$scope.calendar.calendar_id] = {viewing: $scope.calendar.viewing, color: $scope.calendar.color};
 		}
-
 		//open existing calendar for editing
 		$scope.edit = function() {
 			$scope.editCalendar || ($scope.editCalendar = {});
@@ -54,4 +53,32 @@ angular.module('pinwheelApp')
 				$scope.calendar = calendar;
 			});
 		}
+		$scope.isCalendarAdmin = function(calendar){
+			return calendar.calendar_admin;
+		}
+		$scope.isCalendarCreator = function(calendar){
+			return ($scope.user.user_id == calendar.creator_id);
+		}
+
+		$scope.isOrgSuperAdmin = function() {
+			var exp =  /super-admin/g;
+			if(this.getUser()){
+				if(exp.test($scope.user.settings.primary_org.user_role)){
+					return true;
+				}else{
+					return false;
+				}	
+			}	
+		}
+		$scope.isOrgAdmin = function() {
+			var exp =  /admin/g;
+			if(this.getUser()){
+				if(exp.test($scope.user.settings.primary_org.user_role)){
+					return true;
+				}else{
+					return false;
+				}	
+			}	
+		}
+		
 });

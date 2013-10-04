@@ -13,6 +13,9 @@
 	<div class="row">
 		<input type="text" ng-model="editCalendar.calendar_name" placeholder="Name (required)" />
 		<ui-colorpicker ng-model="editCalendar.color"></ui-colorpicker>
+		<div class="" ng-show="isCalendarCreator(calendar) && isOrgAdmin(calendar)">
+			<label><input ng-model="editCalendar.public" type="checkbox">Public</label>
+		</div>
 	</div>
 	<div class="row">
 		<div class="large-6 columns">
