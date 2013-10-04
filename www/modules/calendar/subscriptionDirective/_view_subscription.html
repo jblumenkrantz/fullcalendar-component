@@ -4,7 +4,7 @@
 		<div class="row">
 			<div class="large-12 columns subscription-body">
 				<input type='checkbox' ng-model="watcher[calendar.calendar_id].viewing" ng-click="setShowState()" ng-false-state="false" />
-				<strong class="subscription-calendar-title">
+				<strong ng-click="edit()" class="subscription-calendar-title">
 					{{calendar.calendar_name}}
 					<small ng-click="edit()">edit</small>
 				</strong>

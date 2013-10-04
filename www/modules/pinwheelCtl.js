@@ -26,11 +26,11 @@ angular.module('pinwheelApp')
 						});
 					});
 				});
-			}, function(error){
-				// TODO: update this and other requests
-				//       include proper error logging
-				$scope.logout();
 			});
+		}, function(error){
+			// TODO: update this and other requests
+			//       include proper error logging
+			$scope.logout();
 		});
 		
 
