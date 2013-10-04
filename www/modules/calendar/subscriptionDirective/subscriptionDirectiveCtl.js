@@ -62,23 +62,18 @@ angular.module('pinwheelApp')
 
 		$scope.isOrgSuperAdmin = function() {
 			var exp =  /super-admin/g;
-			if(this.getUser()){
-				if(exp.test($scope.user.settings.primary_org.user_role)){
-					return true;
-				}else{
-					return false;
-				}	
+			if(exp.test($scope.user.settings.primary_org.user_role)){
+				return true;
+			}else{
+				return false;
 			}	
 		}
 		$scope.isOrgAdmin = function() {
 			var exp =  /admin/g;
-			if(this.getUser()){
-				if(exp.test($scope.user.settings.primary_org.user_role)){
-					return true;
-				}else{
-					return false;
-				}	
+			if(exp.test($scope.user.settings.primary_org.user_role)){
+				return true;
+			}else{
+				return false;
 			}	
 		}
-		
 });
