@@ -12,12 +12,13 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="assets/styles/glyphs.css">
     <link rel="stylesheet" href="assets/styles/main.css">
     <link rel="stylesheet" href="assets/styles/foundation.css">
-    <link rel="stylesheet" href="assets/styles/glyphs.css">
     <link rel="stylesheet" href="assets/styles/datetimeentry.css">
     <link rel="stylesheet" href="assets/styles/spectrum.css"> 
 	<link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css">
+    <!-- <link href='//fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>    -->
     <!-- endbuild -->
 </head>
   <body ng-app="pinwheelApp">
@@ -102,7 +103,7 @@
 
 			<!-- RECENTLY CREATED/SUBSCRIBED CALENDAR SECTION -->
 			<div ng-show="recentCalendars.length" class="pane-header secondary" style="border-top: 1px solid #afafaf;">
-		        <span class="pane-title">Recently Added Calendars</span>
+		        <span class="pane-title">Recently Added </span>
 		    </div>
 
 			<!-- recently acquired calendars ng-repeat -->
@@ -119,7 +120,7 @@
 
 		    <div style="position: relative;">
 				<input style="margin: 0;" type="text" ng-model="calFilter" placeholder="Search Calendars" />
-				<span style="position: absolute; top: 4px; right: 6px; font-size: 24px; color: #d4d4d4;" aria-hidden="true" class="icon-backspace" ng-click="calFilter=''"></span>
+				<span style="  cursor: pointer !important;" aria-hidden="true" class="icon-backspace" ng-click="calFilter=''"></span>
 			</div>
 		</div>
 		<div scroll-pane-two watch="recentCalendars.length" style="overflow-y: auto;">

@@ -705,8 +705,8 @@ body {
   color: #222222;
   padding: 0;
   margin: 0;
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-  font-weight: normal;
+  font-family: "Oswald", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-weight: 300;
   font-style: normal;
   line-height: 1;
   position: relative;
@@ -7609,7 +7609,7 @@ header#content-header ul.small-block-grid-3 li {
 
 /* line 165, ../../scss/foundation.scss */
 header#content-header ul.small-block-grid-3 span.month-switcher {
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-family: "Oswald", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
   position: relative;
   top: -1px;
 }
@@ -7789,242 +7789,9 @@ ul.days, .calendar-day {
   width: 100%;
 }
 
-/* line 214, ../../scss/foundation.scss */
-#task-list-tasks-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow-y: auto;
-}
-
-/* line 220, ../../scss/foundation.scss */
-#task-list-tasks-container .input-text-container {
-  margin-top: -3px;
-  margin-bottom: 7px;
-}
-
-/* line 224, ../../scss/foundation.scss */
-#task-list-tasks-container .hourmin-container {
-  margin-bottom: 6px;
-}
-
-/* line 227, ../../scss/foundation.scss */
-#task-list-tasks-container label {
-  font-size: 12px;
-  margin-bottom: 8px !important;
-}
-
-/* line 231, ../../scss/foundation.scss */
-.task {
-  overflow: hidden;
-  background: #aaa;
-  color: #333;
-  -webkit-box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0.1);
-  box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  margin: 0 0 2px 0;
-  padding: 0px 0 0px 10px;
-  border: 0px;
-}
-
-/*----------------------------
-Task panel colors must be solid. the 60% white rgba background  is from ".task-form"
-------------------------------*/
-/*gray for unscheduled to-do items?*/
-/* line 247, ../../scss/foundation.scss */
-.color0 {
-  background: none;
-}
-
-/*red*/
-/* line 251, ../../scss/foundation.scss */
-.task.color1, .color1 {
-  background: #E88989;
-}
-
-/*green*/
-/* line 256, ../../scss/foundation.scss */
-.task.color2, .color2 {
-  background: #79c242;
-}
-
-/*blue*/
-/* line 261, ../../scss/foundation.scss */
-.task.color3, .color3 {
-  background: #79C8DF;
-}
-
-/*orange*/
-/* line 266, ../../scss/foundation.scss */
-.task.color4, .color4 {
-  background: #FCA469;
-}
-
-/*purple*/
-/* line 271, ../../scss/foundation.scss */
-.task.color5, .color5 {
-  background: #C678C6;
-}
-
-/*this class supplies the 60% white rgba background that creates a lighter shade of the event/calendar color*/
-/* line 275, ../../scss/foundation.scss */
-.task-form {
-  height: 100%;
-  background: rgba(255, 255, 255, 0.6);
-  padding: 4px;
-}
-
-/* line 280, ../../scss/foundation.scss */
-.task .checkbox-container {
-  position: relative;
-  float: left;
-  width: 13%;
-}
-
-/* line 285, ../../scss/foundation.scss */
-.task .body {
-  position: relative;
-  float: left;
-  width: 87%;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-/* line 291, ../../scss/foundation.scss */
-.task .info .body {
-  width: 77.5%;
-  margin-right: 2%;
-}
-
-/* line 295, ../../scss/foundation.scss */
-.task .body .title {
-  color: black;
-  font-size: 12px;
-  line-height: 14px;
-  margin-top: 2px;
-  margin-bottom: 1px;
-}
-
-/* line 302, ../../scss/foundation.scss */
-.task .body .notes {
-  font-size: 10px;
-  line-height: 12px;
-  width: 100%;
-  margin-bottom: 2px;
-}
-
-/* line 308, ../../scss/foundation.scss */
-.task .body .due-date {
-  font-size: 10px;
-  line-height: 12px;
-  width: 100%;
-}
-
-/* line 313, ../../scss/foundation.scss */
-.task .body .title, .task .body .notes, .task .body .due-date {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-/* line 318, ../../scss/foundation.scss */
-.task .body .notes:hover, .task .body .due-date:hover, .task .body .title:hover {
-  text-decoration: underline;
-}
-
-/* line 321, ../../scss/foundation.scss */
-.due-date:empty {
-  min-height: 4px;
-}
-
-/* line 324, ../../scss/foundation.scss */
-.notes:empty + .due-date:empty {
-  min-height: 15px;
-}
-
-/* line 327, ../../scss/foundation.scss */
-.task .expand-container {
-  position: relative;
-  float: left;
-  width: 7.5%;
-  height: 100%;
-}
-
-/* line 333, ../../scss/foundation.scss */
-.task .delete-container {
-  position: relative;
-}
-
-/* line 337, ../../scss/foundation.scss */
-.task .expand-buttons {
-  display: none;
-}
-
-/* line 340, ../../scss/foundation.scss */
-.task .info .icon-group {
-  display: block;
-}
-
-/* line 343, ../../scss/foundation.scss */
-.task .info .body .notes, .task .info .body .title, .task .info .body .due-date {
-  white-space: normal;
-}
-
-/* line 346, ../../scss/foundation.scss */
-.task.completed .body {
-  text-decoration: line-through !important;
-}
-
-/* line 349, ../../scss/foundation.scss */
-.task-expand {
-  color: black;
-}
-
-/* line 352, ../../scss/foundation.scss */
-.task-delete {
-  position: absolute;
-  top: -21px;
-  right: 0px;
-  color: black;
-  margin-top: 7px;
-}
-
-/* line 359, ../../scss/foundation.scss */
-.edit-container {
-  position: relative;
-  clear: both;
-}
-
-/* line 363, ../../scss/foundation.scss */
-.edit-container input[type=text] {
-  padding: 3px;
-  font-size: 12px;
-  margin-bottom: 7px !important;
-}
-
-/* line 368, ../../scss/foundation.scss */
-.edit-container textarea {
-  padding: 3px;
-  font-size: 12px;
-  margin-bottom: 7px;
-  border-radius: 4px;
-}
-
-/* line 374, ../../scss/foundation.scss */
-.edit-container .select {
-  font-size: 12px;
-  margin-bottom: 7px !important;
-}
-
-/* line 378, ../../scss/foundation.scss */
-.edit-container .button-group {
-  padding: 0;
-  margin: 0;
-}
-
-/* line 384, ../../scss/foundation.scss */
+/* line 213, ../../scss/foundation.scss */
 .calendar-picker-container button {
-  top: 24px;
+  top: 20px;
   right: 20px;
   position: absolute;
   display: block;
@@ -8037,7 +7804,99 @@ Task panel colors must be solid. the 60% white rgba background  is from ".task-f
   cursor: pointer;
 }
 
-/* line 398, ../../scss/foundation.scss */
+/* line 227, ../../scss/foundation.scss */
+.icon-calendarPlus {
+  top: -5px;
+  right: 5px;
+  position: absolute;
+  display: block;
+  color: #555;
+  font-size: 18px;
+  border: 0;
+  background: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+/* line 244, ../../scss/foundation.scss */
+.icon-backspace:before {
+  content: "\e037";
+  background: #fff;
+  text-shadow: 0px 0px 0px #000;
+  filter: dropshadow(color=black, offx=0, offy=0);
+  position: absolute;
+  top: 3px;
+  right: 2px;
+  height: auto;
+  padding-left: 5px;
+  line-height: 24px;
+  color: #555;
+  cursor: pointer !important;
+  font-size: 20px;
+}
+
+/* line 262, ../../scss/foundation.scss */
+.subscription-panel {
+  border-bottom: 1px solid #999;
+  overflow: hidden;
+}
+
+/* line 267, ../../scss/foundation.scss */
+.subscription-body {
+  width: 100%;
+  min-height: 50px !important;
+  background: #eeeeee;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eeeeee), color-stop(100%, #cccccc));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #eeeeee 0%, #cccccc 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );
+  /* IE6-9 */
+  padding: 16px 4px 6px;
+  margin-left: 8px;
+}
+
+/* line 283, ../../scss/foundation.scss */
+.subscription-gradient {
+  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.3)), color-stop(100%, rgba(255, 255, 255, 0)));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4dffffff', endColorstr='#00ffffff',GradientType=0 );
+  /* IE6-9 */
+}
+
+/* line 295, ../../scss/foundation.scss */
+.subscription-calendar-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 80%;
+  display: inline-block !important;
+  cursor: pointer;
+  color: #222;
+  font-size: 14px;
+}
+
+/* line 306, ../../scss/foundation.scss */
 .subscription-panel button {
   position: absolute;
   top: -19px;
@@ -8059,90 +7918,263 @@ Task panel colors must be solid. the 60% white rgba background  is from ".task-f
   font-size: 16px;
 }
 
-/* line 419, ../../scss/foundation.scss */
-.subscription-panel {
-  min-height: 50px;
-  border-bottom: 1px solid #999;
-  overflow: hidden;
-}
-
-/* line 425, ../../scss/foundation.scss */
-.subscription-body {
-  width: 100%;
-  background: #eeeeee;
-  /* Old browsers */
-  background: -moz-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
-  /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eeeeee), color-stop(100%, #cccccc));
-  /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
-  /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
-  /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
-  /* IE10+ */
-  background: linear-gradient(to bottom, #eeeeee 0%, #cccccc 100%);
-  /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );
-  /* IE6-9 */
-  padding: 16px 4px 6px;
-  margin-left: 8px;
-}
-
-/* line 440, ../../scss/foundation.scss */
-.subscription-gradient {
-  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
-  /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.3)), color-stop(100%, rgba(255, 255, 255, 0)));
-  /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
-  /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
-  /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
-  /* IE10+ */
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
-  /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4dffffff', endColorstr='#00ffffff',GradientType=0 );
-  /* IE6-9 */
-}
-
-/* line 452, ../../scss/foundation.scss */
-.subscription-calendar-title {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  width: 80%;
-  display: inline-block !important;
-  cursor: pointer;
-  color: #222;
-  font-size: 14px;
-}
-
-/* line 463, ../../scss/foundation.scss */
+/* line 325, ../../scss/foundation.scss */
 .button-group li {
   padding: 0 4px 0 0;
 }
 
+/* line 338, ../../scss/foundation.scss */
+#task-list-tasks-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* line 344, ../../scss/foundation.scss */
+#task-list-tasks-container .input-text-container {
+  margin-top: -3px;
+  margin-bottom: 7px;
+}
+
+/* line 348, ../../scss/foundation.scss */
+#task-list-tasks-container .hourmin-container {
+  margin-bottom: 6px;
+}
+
+/* line 351, ../../scss/foundation.scss */
+#task-list-tasks-container label {
+  font-size: 12px;
+  margin-bottom: 8px !important;
+}
+
+/* line 355, ../../scss/foundation.scss */
+.task {
+  overflow: hidden;
+  background: #aaa;
+  color: #333;
+  -webkit-box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  margin: 0 0 2px 0;
+  padding: 0px 0 0px 10px;
+  border: 0px;
+}
+
+/*----------------------------
+Task panel colors must be solid. the 60% white rgba background  is from ".task-form"
+------------------------------*/
+/*gray for unscheduled to-do items?*/
+/* line 371, ../../scss/foundation.scss */
+.color0 {
+  background: none;
+}
+
+/*red*/
+/* line 375, ../../scss/foundation.scss */
+.task.color1, .color1 {
+  background: #E88989;
+}
+
+/*green*/
+/* line 380, ../../scss/foundation.scss */
+.task.color2, .color2 {
+  background: #79c242;
+}
+
+/*blue*/
+/* line 385, ../../scss/foundation.scss */
+.task.color3, .color3 {
+  background: #79C8DF;
+}
+
+/*orange*/
+/* line 390, ../../scss/foundation.scss */
+.task.color4, .color4 {
+  background: #FCA469;
+}
+
+/*purple*/
+/* line 395, ../../scss/foundation.scss */
+.task.color5, .color5 {
+  background: #C678C6;
+}
+
+/*this class supplies the 60% white rgba background that creates a lighter shade of the event/calendar color*/
+/* line 399, ../../scss/foundation.scss */
+.task-form {
+  height: 100%;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 4px;
+}
+
+/* line 404, ../../scss/foundation.scss */
+.task .checkbox-container {
+  position: relative;
+  float: left;
+  width: 13%;
+}
+
+/* line 409, ../../scss/foundation.scss */
+.task .body {
+  position: relative;
+  float: left;
+  width: 87%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* line 415, ../../scss/foundation.scss */
+.task .info .body {
+  width: 77.5%;
+  margin-right: 2%;
+}
+
+/* line 419, ../../scss/foundation.scss */
+.task .body .title {
+  color: black;
+  font-size: 12px;
+  line-height: 14px;
+  margin-top: 2px;
+  margin-bottom: 1px;
+}
+
+/* line 426, ../../scss/foundation.scss */
+.task .body .notes {
+  font-size: 10px;
+  line-height: 12px;
+  width: 100%;
+  margin-bottom: 2px;
+}
+
+/* line 432, ../../scss/foundation.scss */
+.task .body .due-date {
+  font-size: 10px;
+  line-height: 12px;
+  width: 100%;
+}
+
+/* line 437, ../../scss/foundation.scss */
+.task .body .title, .task .body .notes, .task .body .due-date {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* line 442, ../../scss/foundation.scss */
+.task .body .notes:hover, .task .body .due-date:hover, .task .body .title:hover {
+  text-decoration: underline;
+}
+
+/* line 445, ../../scss/foundation.scss */
+.due-date:empty {
+  min-height: 4px;
+}
+
+/* line 448, ../../scss/foundation.scss */
+.notes:empty + .due-date:empty {
+  min-height: 15px;
+}
+
+/* line 451, ../../scss/foundation.scss */
+.task .expand-container {
+  position: relative;
+  float: left;
+  width: 7.5%;
+  height: 100%;
+}
+
+/* line 457, ../../scss/foundation.scss */
+.task .delete-container {
+  position: relative;
+}
+
+/* line 461, ../../scss/foundation.scss */
+.task .expand-buttons {
+  display: none;
+}
+
+/* line 464, ../../scss/foundation.scss */
+.task .info .icon-group {
+  display: block;
+}
+
+/* line 467, ../../scss/foundation.scss */
+.task .info .body .notes, .task .info .body .title, .task .info .body .due-date {
+  white-space: normal;
+}
+
+/* line 470, ../../scss/foundation.scss */
+.task.completed .body {
+  text-decoration: line-through !important;
+}
+
+/* line 473, ../../scss/foundation.scss */
+.task-expand {
+  color: black;
+}
+
+/* line 476, ../../scss/foundation.scss */
+.task-delete {
+  position: absolute;
+  top: -21px;
+  right: 0px;
+  color: black;
+  margin-top: 7px;
+}
+
+/* line 483, ../../scss/foundation.scss */
+.edit-container {
+  position: relative;
+  clear: both;
+}
+
+/* line 487, ../../scss/foundation.scss */
+.edit-container input[type=text] {
+  padding: 3px;
+  font-size: 12px;
+  margin-bottom: 7px !important;
+}
+
+/* line 492, ../../scss/foundation.scss */
+.edit-container textarea {
+  padding: 3px;
+  font-size: 12px;
+  margin-bottom: 7px;
+  border-radius: 4px;
+}
+
+/* line 498, ../../scss/foundation.scss */
+.edit-container .select {
+  font-size: 12px;
+  margin-bottom: 7px !important;
+}
+
+/* line 502, ../../scss/foundation.scss */
+.edit-container .button-group {
+  padding: 0;
+  margin: 0;
+}
+
 /* iPads (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* line 475, ../../scss/foundation.scss */
+  /* line 516, ../../scss/foundation.scss */
   .task .body .title {
     font-size: 12px;
   }
 
-  /* line 478, ../../scss/foundation.scss */
+  /* line 519, ../../scss/foundation.scss */
   .task .body .due-date, .task .body .notes {
     font-size: 9px;
   }
 
-  /* line 481, ../../scss/foundation.scss */
+  /* line 522, ../../scss/foundation.scss */
   .edit-container input, textarea {
     padding: 1px;
     font-size: 9px !important;
   }
 
-  /* line 485, ../../scss/foundation.scss */
+  /* line 526, ../../scss/foundation.scss */
   .task .body .notes:hover, .task .body .due-date:hover, .task .body .title:hover {
     text-decoration: none;
   }
