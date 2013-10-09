@@ -175,3 +175,67 @@ select {
     from {transform:rotate(0deg);}
     to {transform:rotate(360deg);}
 }
+
+/* Settings Dropdown menu */
+#settingsMenu {
+	position: absolute;
+	margin-left: 0 !important;
+	width: 125px !important;
+	background: #FFF !important;
+	right: 0px;
+	padding: 5px;
+}
+#settingsMenu.extended {
+	top:42px !important;
+}
+#settingsMenu.f-dropdown{
+	top:-170px;
+}
+#settingsMenu.f-dropdown:before{
+	display:none !important;
+}
+/* settings modal window */
+#account-settings-modal {
+	display:block !important;
+	visibility:visible !important;
+	top:-400px !important;
+}
+#account-settings-modal.extended {
+	top:100px !important;
+}
+/* Settings Tabs */
+.settings>dd {
+	float:left;
+	border-bottom: 1px solid #E6E6E6;
+}
+.settings.tabs>dd.active>p {
+	font-weight:bolder !important;
+}
+.settings.tabs {
+	margin-bottom:0px !important;
+}
+.tabs dd.active {
+	border-top: 3px solid #2BA6CB;
+	margin-top: -3px;
+	border-bottom:0;
+}
+
+.tabs dd p {
+	color: #6F6F6F;
+	display: block;
+	font-size: 14px;
+	height: 40px;
+	line-height: 40px;
+	padding: 0px 23.8px;
+	cursor:pointer;
+	margin-bottom:0px !important;
+}
+.tabs dd.active p {
+	cursor: default;
+	color: #3C3C3C;
+	background: #FFF;
+	border-left: 1px solid #E6E6E6;
+	border-right: 1px solid #E6E6E6;
+	font-weight: bold;
+	margin-bottom:0px !important;
+}
