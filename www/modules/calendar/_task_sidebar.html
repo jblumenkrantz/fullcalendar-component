@@ -1,0 +1,16 @@
+<div class="pane-header scroll-header">
+	<span class="pane-title">Tasks/To Do</span>
+	<span ng-click="toggle('addingTask')" aria-hidden="true" class="icon-plus-alt right"></span>
+</div>
+<div ng-show="loading_tasks" class="spinwheel"></div>
+<div scroll-pane class="scroll-pane">
+	<!-- task entry form -->
+	<div ng-show="addingTask">
+		<task-form task="newTask" save="saveNew()" cancel="toggle('addingTask')" calendars="calendars"></task-form>
+	</div>
+	<!-- / task entry form -->
+
+	<div ng-repeat="task in tasks | filter: isCalendarShowing">
+		<view-task task="task" calendars="calendars" colors="calendarWatchers" ng-show="task.active"></view-task>
+	</div>
+</div>

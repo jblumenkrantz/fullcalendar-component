@@ -1,7 +1,7 @@
-<div class="subscription-panel" ng-style="{background:calendar.color}" >
-	<div class="subscription-gradient"> <!-- added because i can't figure out how to attach a bg image to the ngstyle above, nor through css because angular overwrites all my bg calls on that div; someone else should probably fix this so we can get rid of this extra div -jt -->
+<div class="subscription-panel" ng-style="{background:calendar.color}">
+	<div class="subscription-gradient"> 
 		<div class="subscription-body">
-			<div ng-hide="editingCalendar" >
+			<div ng-hide="editingCalendar">
 				<div class="row">
 					<div class="large-12 columns">
 						<button ng-hide="isCalendarCreator(calendar)" type="button"><span aria-hidden="true" class="icon-rss-alt" ng-style="{color:calendar.color}"></span></button>
@@ -10,27 +10,56 @@
 							{{calendar.calendar_name}}
 							<small ng-click="edit()">edit</small>
 						</strong>
-						
 					</div>
 				</div>
 			</div>
 			<div ng-show="editingCalendar">
+				<input type="text" ng-model="editCalendar.calendar_name" placeholder="Name (required)" />
 				<div class="row">
-					<input type="text" ng-model="editCalendar.calendar_name" placeholder="Name (required)" />
-					<ui-colorpicker ng-model="editCalendar.color"></ui-colorpicker>
-					<!-- div below this is just temporary for me to turn public checkbox for styling -jt -->
-					<!-- <div class="" ng-show="true"> -->
-					<div class="" ng-show="isCalendarCreator(calendar) && isOrgAdmin(calendar)">
-						<label><input ng-model="editCalendar.public" type="checkbox">Public</label>
+					<div class="large-6 columns">
+						<ui-colorpicker ng-model="editCalendar.color"></ui-colorpicker>
+					</div>
+					<div class="large-6 columns">
+						<label>
+							<input ng-model="watcher[calendar.calendar_id].viewing" type="checkbox" />
+							Show
+						</label>
 					</div>
 				</div>
 				<div class="row">
-					<ul class="button-group even-4" >
-				    <li><a href="#" class="tiny alert button" ng-click="cancel()"><span aria-hidden="true" class="icon-close"></span> <!-- cancel --></a></li>
-				    <li><a href="#" class="tiny alert button" ng-click=""><span aria-hidden="true" class="icon-share"></span> <!-- cancel --></a></li>
-				    <li><a href="#" class=" tiny alert button" ng-click="unsubscribe()"><span aria-hidden="true" class="icon-remove-2"></span> <!-- unsubscribe --></a></li>
-				    <li><a href="#" class="tiny button success" ng-click="update()"><span aria-hidden="true" class="icon-checkmark"></span> <!-- save --></a></li>
-				  </ul>
+					<div ng-class="{'large-6':what , 'large-12':!what }" class="columns">
+						<label>
+							<check if="{{calendar.reminder_pref_id}}" ng-model="editCalendar.has_reminder" ng-change="test()" />
+							Add Reminder
+						</label>
+					</div>
+					<div class="large-6 columns" ng-show="what = (isCalendarCreator(calendar) && isOrgAdmin(calendar))">
+						<label>
+							<input ng-model="editCalendar.public" type="checkbox" />
+							Public
+						</label>
+					</div>
+				</div>
+				<div class="row" ng-show="editCalendar.has_reminder">
+					<b>For all events and tasks:</b>
+					<div class="large-2 columns">
+						<input ng-model="editCalendar.reminder_offset" type="text" />
+					</div>
+					<div class="large-10 columns">
+						<select id="calRType" name="calRType" ng-model="editCalendar.reminder_type">
+							<option value="0">Minutes before</option>
+							<option value="1">Hours before</option>
+							<option value="2">Days before</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<ul class="button-group even-4">
+						<li><div class="tiny alert button" ng-click="cancel()"><span aria-hidden="true" class="icon-close"></span> <!-- cancel --></div></li>
+						<li><div class="tiny alert button" ng-click=""><span aria-hidden="true" class="icon-share"></span> <!-- cancel --></div></li>
+						<li><div class=" tiny alert button" ng-click="unsubscribe()"><span aria-hidden="true" class="icon-remove-2"></span> <!-- unsubscribe --></div></li>
+						<li><div class="tiny button success" ng-click="update()"><span aria-hidden="true" class="icon-checkmark"></span> <!-- save --></div></li>
+					</ul>
 				</div>
 			</div>
 		</div>

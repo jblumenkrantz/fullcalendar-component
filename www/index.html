@@ -43,97 +43,25 @@
 		<!-- / route pane -->
 		<!-- / main content -->
 
-<!-- task view -->
-<div ng-controller="TaskCtl" id="tasks" style="height: 100%; overflow: hidden; right: 0px; z-index: 1;" class="small-12 large-2 columns drawer">
-	<div class="pane-header scroll-header">
-    	<span class="pane-title">Tasks/To Do</span>
-    	<span ng-click="toggle('addingTask')" aria-hidden="true" class="icon-plus-alt right"></span>
-    </div>
-    <div ng-show="loading_tasks" class="spinwheel"></div>
-    <div scroll-pane class="scroll-pane">
-		<!-- task entry form -->
-		<div ng-show="addingTask">
-			<task-form task="newTask" save="saveNew()" cancel="toggle('addingTask')" calendars="calendars"></task-form>
-		</div>
-		<!-- / task entry form -->
+        <!-- task view -->
+        <div
+            ng-controller="TaskCtl"
+            id="tasks"
+            style="height: 100%; overflow: hidden; right: 0px; z-index: 1;"
+            class="small-12 large-2 columns drawer"
+            ng-include src="'modules/calendar/_task_sidebar.html'">
+        </div>
+        <!-- / task view -->
 
-		<div ng-repeat="task in tasks | filter: isCalendarShowing">
-			<view-task task="task" calendars="calendars" colors="calendarWatchers" ng-show="task.active"></view-task>
-		</div>
-	</div>
-</div>
-<!-- / task view -->
-
-<!-- subscription view  gets pulled 10 columns from it's original position, all the way to the left. -->
-<div ng-controller="SubscriptionCtl" id="my-calendars" style="height: 100%; overflow: hidden; left: 0px; z-index: 1;" class="small-12 large-2 columns drawer">
-	<div class="pane-header scroll-header">
-        <span class="pane-title">My Calendars</span>
-        <span class="icon-plus-alt right" ng-click="add()" aria-hidden="true"></span>
-    </div>
-	<div ng-show="loading_calendars" class="spinwheel"></div>
-    <!-- SUBSCRIBED CALENDAR SECTION -->
-	<div scroll-pane class="scroll-pane">
-		<div class="calendar-wrapper">
-			<active-subscription
-		 ng-repeat="calendar in subscribedCalendars = (calendars | filter:{active: 1, subscribed: true} | orderBy:'calendar_name')" 
-			watcher="calendarWatchers"
-			calendar="calendar"
-			user="user">
-		</active-subscription>
-		</div>
-	</div>
-
-	<!-- ADD CALENDAR SECTION -->
-	<div id="add-calendar" class="transition-07 slide-drawer full bottom-up" ng-class="{open: addingSubscription}">
-		<div class="scroll-header">
-	    	<!-- calendar creation form -->
-	    	<div class="pane-header">
-		        <span class="pane-title">Add Calendars</span>
-		        <span class="icon-x-altx-alt right" ng-click="add()" aria-hidden="true"></span>
-		    </div>
-			<div class="row">
-				<input type="text" ng-model="newCalendar.calendar_name" placeholder="Name (required)" />
-				<input type="text" ng-model="newCalendar.color" placeholder="Color (required)" />
-			</div>
-			<div class="row">
-				<div class="large-12 columns">
-					<div class="expand small button" ng-click="save()" >create</div>
-				</div>
-			</div>
-
-			<!-- RECENTLY CREATED/SUBSCRIBED CALENDAR SECTION -->
-			<div ng-show="recentCalendars.length" class="pane-header secondary" style="border-top: 1px solid #afafaf;">
-		        <span class="pane-title">Recently Added </span>
-		    </div>
-
-			<!-- recently acquired calendars ng-repeat -->
-			<active-subscription
-				ng-repeat="calendar in recentCalendars = (calendars | filter:{active: 1, recent: true, subscribed: true} | orderBy:'calendar_name')"
-				watcher="calendarWatchers"
-				calendar="calendar">
-			</active-subscription>
-			
-
-			<div ng-show="availabeCalendars.length || calFilter" class="pane-header secondary" style="border-top: 1px solid #afafaf;">
-		        <span class="pane-title">Available Calendars</span>
-		    </div>
-
-		    <div style="position: relative;">
-				<input style="margin: 0;" type="text" ng-model="calFilter" placeholder="Search Calendars" />
-				<span style="  cursor: pointer !important;" aria-hidden="true" class="icon-backspace" ng-click="calFilter=''"></span>
-			</div>
-		</div>
-		<div scroll-pane-two watch="recentCalendars.length" style="overflow-y: auto;">
-	    	<!-- available calendars ng-repeat -->
-			<available-subscription
-				ng-repeat="calendar in availabeCalendars = (calendars | filter:{active: 1, subscribed: false} | filter:calFilter | orderBy:'calendar_name')"
-				watcher="calendarWatchers"
-				calendar="calendar">
-			</available-subscription>
-		</div>
-	</div>
-</div>
-<!-- / subscription view -->
+        <!-- subscription view  gets pulled 10 columns from it's original position, all the way to the left. -->
+        <div
+            ng-controller="SubscriptionCtl"
+            id="my-calendars"
+            style="height: 100%; overflow: hidden; left: 0px; z-index: 1;"
+            class="small-12 large-2 columns drawer"
+            ng-include src="'modules/calendar/_calendar_sidebar.html'">
+        </div>
+        <!-- / subscription view -->
 	</div>
 	<!-- / application content -->
 

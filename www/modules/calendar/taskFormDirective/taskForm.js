@@ -14,8 +14,3 @@ angular.module('pinwheelApp')
 			}
 		}
 	});
-
-
-
-
-

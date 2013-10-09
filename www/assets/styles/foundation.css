@@ -697,6 +697,7 @@
 html,
 body {
   font-size: 100%;
+  height: 100%;
 }
 
 /* line 272, ../../bower_components/foundation/scss/foundation/components/_global.scss */
@@ -7498,7 +7499,6 @@ a.th {
 
 /* line 66, ../../scss/foundation.scss */
 #my-calendars, #main-content, #tasks {
-  min-height: 822px;
   padding: 0 !important;
   margin: 0 !important;
   margin-right: -1px;

@@ -6,7 +6,7 @@ angular.module('pinwheelApp')
 })
 .value("formDatetimeFormat", "M/d/yyyy @ h:mm a")
 .value("formDateFormat", "M/d/yyyy")
-.directive('scrollPane', function(Debounce, getHeight) {
+.directive('scrollPane', function(Debounce, getHeight, $timeout) {
 	return {
 		link: function(scope, element, attrs) {
 			function adjustHeight() {
@@ -51,7 +51,7 @@ angular.module('pinwheelApp')
 		}
 	}		
 })	
-.directive('datetime', function($filter, formDatetimeFormat, formDateFormat) {
+.directive('eventDatetime', function($filter, formDatetimeFormat, formDateFormat) {
 	return {
 		restrict: "E",
 		require: "ngModel",
@@ -90,13 +90,57 @@ angular.module('pinwheelApp')
 		}
 	}
 })
-.directive("uiColorpicker", function($compile) {
+.directive('datetime', function($filter, formDatetimeFormat) {
+	return {
+		restrict: "E",
+		require: "ngModel",
+		template: "<input type='text' />",
+		replace: true,
+		link: function(scope, element, attrs, ngModelCtrl) {
+			function displayDate(modelValue) {
+				return $filter('date')(modelValue, formDatetimeFormat);
+			}
+
+			ngModelCtrl.$formatters.push(displayDate);
+
+			element.datetimeEntry({
+				spinnerImage: '',
+				datetimeFormat: 'o/d/Y @ h:M a'
+			}).change(function() {
+				ngModelCtrl.$setViewValue($(this).val());
+			});
+		}
+	}
+})
+.directive('date', function($filter, formDateFormat) {
+	return {
+		restrict: "E",
+		require: "ngModel",
+		template: "<input type='text' />",
+		replace: true,
+		link: function(scope, element, attrs, ngModelCtrl) {
+			function displayDate(modelValue) {
+				return $filter('date')(modelValue, formDateFormat);
+			}
+
+			ngModelCtrl.$formatters.push(displayDate);
+
+			element.datetimeEntry({
+				spinnerImage: '',
+				datetimeFormat: 'o/d/Y'
+			}).change(function() {
+				ngModelCtrl.$setViewValue($(this).val());
+			});
+		}
+	}
+})
+.directive("uiColorpicker", function() {
 return {
 		restrict: 'E',
 		require: 'ngModel',
 		scope: false,
 		replace: true,
-		template: "<span><input class='input-small' /></span>",
+		template: "<label><input class='input-small' /></label>",
 		link: function(scope, element, attrs, ngModel) {
 			var input = element.find('input');
 			var options = angular.extend({
@@ -120,4 +164,18 @@ return {
 			input.spectrum(options);
 		}
 	};
+})
+.directive("check", function() {
+	return {
+		restrict: "E",
+		require: "ngModel",
+		template: "<input type='checkbox' />",
+		replace: true,
+		link: function(scope, element, attrs, ngModelCtrl) {
+			function check() {
+				return attrs.if;
+			}
+			ngModelCtrl.$formatters.push(check);
+		}
+	}
 });
