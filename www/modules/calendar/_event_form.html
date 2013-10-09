@@ -20,15 +20,14 @@
 	</div>
 </div>
 <div class="row">
-
 	<div class="large-6 columns calendar-picker-container">
 		<label>From<span ng-show="formEvent.all_day=='1'"> start of day</span>:</label>
-		<datetime all-day="formEvent.all_day" ng-model="formEvent.event_start" name="event_start" placeholder="m/d/yyyy h:mm AM/PM" />
+		<event-datetime all-day="formEvent.all_day" ng-model="formEvent.event_start" name="event_start" placeholder="m/d/yyyy h:mm AM/PM" />
 		<button type="button" class="glyph-show"><span calendar-shower="" aria-hidden="true" class="icon-calendar-2"></span></button>
 	</div>
 	<div class="large-6 columns calendar-picker-container">
 		<label>To<span ng-show="formEvent.all_day=='1'"> end of day</span>:</label>
-		<datetime all-day="formEvent.all_day" ng-model="formEvent.event_end" name="event_end" placeholder="m/d/yyyy h:mm AM/PM" />
+		<event-datetime all-day="formEvent.all_day" ng-model="formEvent.event_end" name="event_end" placeholder="m/d/yyyy h:mm AM/PM" />
 		<button type="button" class="glyph-show"><span calendar-shower="" aria-hidden="true" class="icon-calendar-2"></span></button>
 	</div>
 </div>
@@ -41,13 +40,13 @@
 	</div>
 	<div class="large-4 columns">
 		<label class="checkbox">
-			<input type="checkbox" ng-model="formEvent.has_reminder" />
+			<check if="{{formEvent.reminder_pref_id}}" ng-model="formEvent.has_reminder" ng-change="" />
 			Add Reminder
 		</label>
 	</div>
 	<div class="large-4 columns">
 		<label class="checkbox">
-			<input type="checkbox" ng-model="formEvent.isRepeating" />
+			<check if="{{formEvent.repeat_id}}" ng-model="formEvent.isRepeating" ng-change="" />
 			Repeating
 		</label>
 	</div>

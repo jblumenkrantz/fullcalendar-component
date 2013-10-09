@@ -11,7 +11,7 @@ angular.module('pinwheelApp')
 				colors: '='
 			},
 			controller: function($scope, $element, $attrs, $routeParams){
-				$scope.task.hasDueDate = ($scope.task.due_time!='0'); //for the hide/show of due field. Do we want it this way going forward??
+				$scope.task.hasDueDate = $scope.task.hasOwnProperty("due_time");
 				$scope.edit = function(name){
 					console.log($scope.task);
 					$scope.editTask || ($scope.editTask = {});
