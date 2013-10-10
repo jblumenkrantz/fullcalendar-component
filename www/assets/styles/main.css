@@ -189,20 +189,20 @@ select {
 	top:42px !important;
 }
 #settingsMenu.f-dropdown{
-	top:-170px;
+	top:-400%;
 }
 #settingsMenu.f-dropdown:before{
 	display:none !important;
 }
 /* settings modal window */
-#account-settings-modal {
+/*#account-settings-modal {
 	display:block !important;
 	visibility:visible !important;
 	top:-400px !important;
 }
 #account-settings-modal.extended {
 	top:100px !important;
-}
+}*/
 /* Settings Tabs */
 .settings>dd {
 	float:left;
@@ -213,6 +213,12 @@ select {
 }
 .settings.tabs {
 	margin-bottom:0px !important;
+	-webkit-touch-callout: none;
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
 }
 .tabs dd.active {
 	border-top: 3px solid #2BA6CB;
@@ -226,7 +232,7 @@ select {
 	font-size: 14px;
 	height: 40px;
 	line-height: 40px;
-	padding: 0px 23.8px;
+	padding: 0px 15px;
 	cursor:pointer;
 	margin-bottom:0px !important;
 }

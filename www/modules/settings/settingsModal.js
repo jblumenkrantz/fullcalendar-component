@@ -7,8 +7,8 @@ angular.module('pinwheelApp')
 		link: function(scope, element, attrs) {
 			element.bind('click', function(){
 				scope.activeTab = {};
-				angular.element('#account-settings-modal').css('visibility','visible').addClass('extended');
-				
+				angular.element('#account-settings-modal').show().css('visibility','visible');
+				angular.element('#global-modal-bg').show();
 				$("dd[settings-tab='"+attrs.settingsModalTrigger+"']").addClass("active").siblings().removeClass("active");
 				scope.activeTab[attrs.settingsModalTrigger] = true;
 				angular.element('#account-settings-modal').find('.close-reveal-modal').bind('click', function(){
@@ -16,32 +16,44 @@ angular.module('pinwheelApp')
 				});
 				scope.$apply();
 			});
-		},
-		controller: function($scope, $element, $attrs){
-			$scope.closeModal = function() {
-				angular.element('#account-settings-modal').css('visibility','hidden').removeClass('extended');
-			}
 		}
 	};
 })
 .directive('settingsInterface', function(){
 	return {
 		restrict: 'E',
-		scope:{
-			user:'='
-		},
 		templateUrl: 'modules/settings/settings_interface.html',
 		link: function($scope, $element, $attrs){
-			console.warn($scope);
+			/* we have to watch the user attribute that is passed in to */
+			/* avoid a race condition where the test functions wont work */
+			$scope.$watch($attrs.user, function(user) {
+				if(user != undefined){
+					$scope.user = user;
+					$scope.initialUser = {};
+					angular.copy($scope.user, $scope.initialUser);
+					$scope.isOrgAdmin = function(){
+						var exp =  /admin/g;
+						return exp.test($scope.user.settings.primary_org.user_role);
+					}
+					$scope.isOrgSuperAdmin = function(){
+						var exp =  /super-admin/g;
+						return exp.test($scope.user.settings.primary_org.user_role);
+					}
+				}
+            });
+            $scope.closeModal = function() {
+				angular.element('#account-settings-modal').hide().css('visibility','hidden');
+				angular.element('#global-modal-bg').hide();
+			}
 		}
 	}
 })
 .directive("settingsTab", function(){
 	return {
 		restrict: "A",
-		replace:false,
-		controller: function($scope, $element, $attrs){
+		link: function($scope, $element, $attrs, $parentCtl){
 			$element.bind('click', function(){
+				$scope.test = 'new';
 				$element.addClass("active").siblings().removeClass("active");
 				angular.forEach($scope.activeTab, function(value, section){
 					/* set all activeTab properties to false */
@@ -51,7 +63,6 @@ angular.module('pinwheelApp')
 				$scope.activeTab[$attrs.settingsTab] = true;
 				$scope.$apply();
 			});
-			//console.warn($scope);
 		}
 	}
 });

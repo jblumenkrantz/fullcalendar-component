@@ -3,20 +3,66 @@
 		<dd settings-tab="account" user='user' activeTab='activeTab'><p>Account</p></dd>
 		<dd settings-tab="contact_points" user='user' activeTab='activeTab'><p>Contact Points</p></dd>
 		<dd settings-tab="diagnostics" user='user' activeTab='activeTab'><p>Application Diagnostics</p></dd>
-		<dd settings-tab="calendars" ng-show="isOrgAdmin" user='user' activeTab='activeTab'><p>Calendar Manager</p></dd>
-		<dd settings-tab="admin" ng-show="isOrgSuperAdmin" user='user' activeTab='activeTab'><p>Administrator</p></dd>
+		<dd settings-tab="calendars" ng-show="isOrgAdmin()" user='user' activeTab='activeTab'><p>Calendar Manager</p></dd>
+		<dd settings-tab="admin" ng-show="isOrgSuperAdmin()" user='user' activeTab='activeTab'><p>Administrator</p></dd>
 	</dl> 
-</div>	
- 	
-	<div ng-show="activeTab.account">
-		<h2>Account</h2>
-		Name: {{user.first_name}}
+</div>
+<div ng-show="activeTab.account">
+	<div class="row">
+		<div class="large-12 columns">
+			Email:
+			<input type="text" ng-model="user.email" disabled>
+			<!-- <div  class="large-6 columns left">
+				First Name:
+				<input type="text" ng-model="user.first_name" disabled>
+			</div>
+			<div class="large-6 right columns" >
+				Last Name:
+				<input type="text" ng-model="user.last_name" disabled>
+			</div> -->
+			<!-- <div class="large-12 columns">
+				Display Name:
+				<input type="text" ng-model="user.user_handle" disabled>
+			</div> -->
+			<div class="large-6 left columns" >
+				Default Timezone:
+				<select ng-options="tz.zone as tz.zone for tz in timezones" ng-model="user.timezone" ></select>
+			</div>
+			<div class="large-6 right columns" >
+				Default Calendar:
+				<select ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'" ng-model="user.settings.default_calendar" ></select>
+			</div>
+			<div class="large-6 left columns" >
+				Start of Day:
+				<input type="text" ng-model="user.settings.start_of_day">
+			</div>
+			<div class="large-6 right columns" >
+				End of Day:	<input type="text" ng-model="user.settings.end_of_day">
+			</div>
+			<!-- Primary Organization:
+			<select disabled ng-options="org.org_id as org.org_name for org in orgs" ng-model="user.settings.primary_org.org_id" ></select>
+			Access Level: {{user.settings.primary_org.user_role}} - {{user.settings.primary_org.org_id}} -->
+		</div>
 	</div>
-	<div ng-show="activeTab.diagnostics">
-		<h2>Diagnostics</h2>
-		Name: {{user.first_name}}
+	<div class="row">
+		<div class="large-12 columns animate-show" ng-hide="userDiff()">
+			<div class="large-6 columns">
+				<div class="expand small alert button" ng-click="cancel()" >Cancel</div>
+			</div>
+			<div class="large-6 columns">
+				<confirm button-class="expand small success" header="Update Account Information" body="Are you sure you want to update your user settings?" footer="You are about to change your account settings, this could affect the way your information is displayed to you.  Are you sure you wnat to continue" affirmative-text="Save" negative-text="Cancel" affirmative-action="save()" negative-action="cancel()">Save</confirm>
+			</div>
+		</div>
 	</div>
-	<div ng-show="activeTab.contact_points">
-		<h2>Contact Points</h2>
-		Name: {{user.first_name}}
-	</div>
+</div> <!-- End Account Section -->
+<div ng-show="activeTab.diagnostics">
+	<h2>Diagnostics</h2>
+	Name: {{user.first_name}}
+</div>
+<div ng-show="activeTab.contact_points">
+	<h2>Contact Points</h2>
+	Name: {{user.first_name}}
+</div>
+
+
+
