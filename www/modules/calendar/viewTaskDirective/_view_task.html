@@ -6,7 +6,7 @@
 	</div>
 	<div class="row">
 		<div class="large-12 columns" ng-style="{color: colors[task.calendar_id].color}">
-			{{task.due_time | date}}
+			{{task.due_time | date:'M/d/yyyy h:mm a'}}
 		</div>
 	</div>
 	<div class="row">

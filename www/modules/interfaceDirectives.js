@@ -6,6 +6,7 @@ angular.module('pinwheelApp')
 })
 .value("formDatetimeFormat", "M/d/yyyy @ h:mm a")
 .value("formDateFormat", "M/d/yyyy")
+.value("formTimeFormat", "h:mm a")
 .directive('scrollPane', function(Debounce, getHeight, $timeout) {
 	return {
 		link: function(scope, element, attrs) {
@@ -128,6 +129,28 @@ angular.module('pinwheelApp')
 			element.datetimeEntry({
 				spinnerImage: '',
 				datetimeFormat: 'o/d/Y'
+			}).change(function() {
+				ngModelCtrl.$setViewValue($(this).val());
+			});
+		}
+	}
+})
+.directive('time', function($filter, formTimeFormat) {
+	return {
+		restrict: "E",
+		require: "ngModel",
+		template: "<input type='text' />",
+		replace: true,
+		link: function(scope, element, attrs, ngModelCtrl) {
+			function displayDate(modelValue) {
+				return $filter('date')(modelValue, formTimeFormat);
+			}
+
+			ngModelCtrl.$formatters.push(displayDate);
+
+			element.datetimeEntry({
+				spinnerImage: '',
+				datetimeFormat: 'h:M a'
 			}).change(function() {
 				ngModelCtrl.$setViewValue($(this).val());
 			});
