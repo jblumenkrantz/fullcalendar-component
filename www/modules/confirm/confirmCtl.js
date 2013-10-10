@@ -63,7 +63,9 @@ angular.module('pinwheelApp')
 
 					scope.closeModal = function(){
 						mod.hide();
-						screen.hide();
+						if(!angular.element('#account-settings-modal').is(':visible')){
+							screen.hide();
+						}
 					}
 					mod.find('.close-reveal-modal').bind('click', function(){
 						scope.closeModal();
