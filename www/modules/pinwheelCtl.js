@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pinwheelApp')
-  .controller('PinwheelCtl', function ($scope, $location, Calendar, User, localStorage, Event, Task) {
+  .controller('PinwheelCtl', function ($scope, $location, $http, Calendar, User, localStorage, Event, Task) {
 		$scope.calendarWatchers = {};
 		$scope.reminders = {};
 
@@ -54,7 +54,18 @@ angular.module('pinwheelApp')
 		}
 
 		$scope.logout = function(){
+			/* Delete protected data */
+			delete $scope.calendars;
+			delete $scope.events
+			delete $scope.tasks;
+			delete $scope.user
+			delete $scope.initialUser;
+			
+			/* Delete users access token */
 			delete localStorage['token'];
+			$http.defaults.headers.common['Authorization'] =  localStorage['token'];
+
+			/* Redirect to login */
 			$location.path('/login');
 		}
 
