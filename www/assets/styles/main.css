@@ -194,15 +194,6 @@ select {
 #settingsMenu.f-dropdown:before{
 	display:none !important;
 }
-/* settings modal window */
-/*#account-settings-modal {
-	display:block !important;
-	visibility:visible !important;
-	top:-400px !important;
-}
-#account-settings-modal.extended {
-	top:100px !important;
-}*/
 /* Settings Tabs */
 .settings>dd {
 	float:left;

@@ -8,6 +8,7 @@ angular.module('pinwheelApp')
 			Auth.get({user: $scope.user, pass: $scope.password}, function(auth){
 				localStorage['token'] = $http.defaults.headers.common['Authorization'] =  auth.authFields;
 				$location.path('/calendar/month/'+(new Date().getFullYear())+'/'+(new Date().getMonth()+1)+'/23');
+				$scope.init();
 			});
 		}
   });
