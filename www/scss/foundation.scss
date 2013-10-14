@@ -1,60 +1,57 @@
 @import "settings";
 @import "events";
 
-@import "../bower_components/foundation/scss/foundation";
-
-
+// @import "../bower_components/foundation/scss/foundation";
 
 /* Each individual part that can be added in */
-// @import "foundation/components/global";
-// @import "foundation/components/grid";
-// @import "foundation/components/visibility";
-// @import "foundation/components/block-grid";
-// @import "foundation/components/type";
-// @import "foundation/components/buttons";
-// @import "foundation/components/forms";
-// @import "foundation/components/custom-forms";
-// @import "foundation/components/button-groups";
-// @import "foundation/components/dropdown-buttons";
-// @import "foundation/components/split-buttons";
-// @import "foundation/components/flex-video";
-// @import "foundation/components/section";
-// @import "foundation/components/top-bar";
-// @import "foundation/components/orbit";
-// @import "foundation/components/reveal";
-// @import "foundation/components/joyride";
-// @import "foundation/components/clearing";
-// @import "foundation/components/alert-boxes";
-// @import "foundation/components/breadcrumbs";
-// @import "foundation/components/keystrokes";
-// @import "foundation/components/labels";
-// @import "foundation/components/inline-lists";
-// @import "foundation/components/pagination";
-// @import "foundation/components/panels";
-// @import "foundation/components/pricing-tables";
-// @import "foundation/components/progress-bars";
-// @import "foundation/components/side-nav";
-// @import "foundation/components/sub-nav";
-// @import "foundation/components/switch";
-// @import "foundation/components/magellan";
-// @import "foundation/components/tables";
-// @import "foundation/components/thumbs";
-// @import "foundation/components/tooltips";
-// @import "foundation/components/dropdown";
+// FYI, turning off all unessential components (about half) only shaves about 50-60KB
+@import "../bower_components/foundation/scss/foundation/components/global";
+@import "../bower_components/foundation/scss/foundation/components/grid";
+@import "../bower_components/foundation/scss/foundation/components/visibility";
+@import "../bower_components/foundation/scss/foundation/components/block-grid";
+@import "../bower_components/foundation/scss/foundation/components/type";
+@import "../bower_components/foundation/scss/foundation/components/buttons";
+@import "../bower_components/foundation/scss/foundation/components/forms";
+@import "../bower_components/foundation/scss/foundation/components/custom-forms";
+@import "../bower_components/foundation/scss/foundation/components/button-groups";
+@import "../bower_components/foundation/scss/foundation/components/dropdown-buttons";
+// @import "../bower_components/foundation/scss/foundation/components/split-buttons";
+// @import "../bower_components/foundation/scss/foundation/components/flex-video";
+@import "../bower_components/foundation/scss/foundation/components/section";
+@import "../bower_components/foundation/scss/foundation/components/top-bar";
+// @import "../bower_components/foundation/scss/foundation/components/orbit";
+@import "../bower_components/foundation/scss/foundation/components/reveal"; //LEAVE THIS ON -jt
+// @import "../bower_components/foundation/scss/foundation/components/joyride";
+// @import "../bower_components/foundation/scss/foundation/components/clearing";
+// @import "../bower_components/foundation/scss/foundation/components/alert-boxes";
+// @import "../bower_components/foundation/scss/foundation/components/breadcrumbs";
+@import "../bower_components/foundation/scss/foundation/components/keystrokes";
+@import "../bower_components/foundation/scss/foundation/components/labels";
+@import "../bower_components/foundation/scss/foundation/components/inline-lists";
+// @import "../bower_components/foundation/scss/foundation/components/pagination";
+@import "../bower_components/foundation/scss/foundation/components/panels";
+// @import "../bower_components/foundation/scss/foundation/components/pricing-tables";
+// @import "../bower_components/foundation/scss/foundation/components/progress-bars";
+// @import "../bower_components/foundation/scss/foundation/components/side-nav";
+@import "../bower_components/foundation/scss/foundation/components/sub-nav";
+// @import "../bower_components/foundation/scss/foundation/components/switch";
+// @import "../bower_components/foundation/scss/foundation/components/magellan";
+// @import "../bower_components/foundation/scss/foundation/components/tables";
+// @import "../bower_components/foundation/scss/foundation/components/thumbs";
+// @import "../bower_components/foundation/scss/foundation/components/tooltips";
+// @import "../bower_components/foundation/scss/foundation/components/dropdown";
 
 // WIREFRAME TODO
 // 
 // example of a task
 // 
-// example of calendar available
-// subscribed
-// subscribed while in edit mode
+
 
 // -----------------------------
 // SET CUSTOM VARIABLES HERE
 // -----------------------------
 $letter-press:  1px 1px 2px #fff;
-// $primary-color: #23538A; //org primary color
+// $primary-color: #658929; //org primary color
 
 
 
@@ -505,7 +502,16 @@ Task panel colors must be solid. the 60% white rgba background  is from ".task-f
 }
 
 
+$topbar-link-color-active: $primary-color;
 
+.top-bar{
+background: rgba($topbar-bg, .3) repeat !important; 
+overflow: visible;
+}
+
+.top-bar-section li a:not(.button) {
+background: none !important;
+}
 
 
 
