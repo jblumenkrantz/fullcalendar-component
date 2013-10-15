@@ -1,60 +1,57 @@
 @import "settings";
 @import "events";
 
-@import "../bower_components/foundation/scss/foundation";
-
-
+// @import "../bower_components/foundation/scss/foundation";
 
 /* Each individual part that can be added in */
-// @import "foundation/components/global";
-// @import "foundation/components/grid";
-// @import "foundation/components/visibility";
-// @import "foundation/components/block-grid";
-// @import "foundation/components/type";
-// @import "foundation/components/buttons";
-// @import "foundation/components/forms";
-// @import "foundation/components/custom-forms";
-// @import "foundation/components/button-groups";
-// @import "foundation/components/dropdown-buttons";
-// @import "foundation/components/split-buttons";
-// @import "foundation/components/flex-video";
-// @import "foundation/components/section";
-// @import "foundation/components/top-bar";
-// @import "foundation/components/orbit";
-// @import "foundation/components/reveal";
-// @import "foundation/components/joyride";
-// @import "foundation/components/clearing";
-// @import "foundation/components/alert-boxes";
-// @import "foundation/components/breadcrumbs";
-// @import "foundation/components/keystrokes";
-// @import "foundation/components/labels";
-// @import "foundation/components/inline-lists";
-// @import "foundation/components/pagination";
-// @import "foundation/components/panels";
-// @import "foundation/components/pricing-tables";
-// @import "foundation/components/progress-bars";
-// @import "foundation/components/side-nav";
-// @import "foundation/components/sub-nav";
-// @import "foundation/components/switch";
-// @import "foundation/components/magellan";
-// @import "foundation/components/tables";
-// @import "foundation/components/thumbs";
-// @import "foundation/components/tooltips";
-// @import "foundation/components/dropdown";
+// FYI, turning off all unessential components (about half) only shaves about 50-60KB
+@import "../bower_components/foundation/scss/foundation/components/global";
+@import "../bower_components/foundation/scss/foundation/components/grid";
+@import "../bower_components/foundation/scss/foundation/components/visibility";
+@import "../bower_components/foundation/scss/foundation/components/block-grid";
+@import "../bower_components/foundation/scss/foundation/components/type";
+@import "../bower_components/foundation/scss/foundation/components/buttons";
+@import "../bower_components/foundation/scss/foundation/components/forms";
+@import "../bower_components/foundation/scss/foundation/components/custom-forms";
+@import "../bower_components/foundation/scss/foundation/components/button-groups";
+@import "../bower_components/foundation/scss/foundation/components/dropdown-buttons";
+// @import "../bower_components/foundation/scss/foundation/components/split-buttons";
+// @import "../bower_components/foundation/scss/foundation/components/flex-video";
+@import "../bower_components/foundation/scss/foundation/components/section";
+@import "../bower_components/foundation/scss/foundation/components/top-bar";
+// @import "../bower_components/foundation/scss/foundation/components/orbit";
+@import "../bower_components/foundation/scss/foundation/components/reveal"; //LEAVE THIS ON -jt
+// @import "../bower_components/foundation/scss/foundation/components/joyride";
+// @import "../bower_components/foundation/scss/foundation/components/clearing";
+// @import "../bower_components/foundation/scss/foundation/components/alert-boxes";
+// @import "../bower_components/foundation/scss/foundation/components/breadcrumbs";
+@import "../bower_components/foundation/scss/foundation/components/keystrokes";
+@import "../bower_components/foundation/scss/foundation/components/labels";
+@import "../bower_components/foundation/scss/foundation/components/inline-lists";
+// @import "../bower_components/foundation/scss/foundation/components/pagination";
+@import "../bower_components/foundation/scss/foundation/components/panels";
+// @import "../bower_components/foundation/scss/foundation/components/pricing-tables";
+// @import "../bower_components/foundation/scss/foundation/components/progress-bars";
+// @import "../bower_components/foundation/scss/foundation/components/side-nav";
+@import "../bower_components/foundation/scss/foundation/components/sub-nav";
+// @import "../bower_components/foundation/scss/foundation/components/switch";
+// @import "../bower_components/foundation/scss/foundation/components/magellan";
+// @import "../bower_components/foundation/scss/foundation/components/tables";
+// @import "../bower_components/foundation/scss/foundation/components/thumbs";
+// @import "../bower_components/foundation/scss/foundation/components/tooltips";
+// @import "../bower_components/foundation/scss/foundation/components/dropdown";
 
 // WIREFRAME TODO
 // 
 // example of a task
 // 
-// example of calendar available
-// subscribed
-// subscribed while in edit mode
+
 
 // -----------------------------
 // SET CUSTOM VARIABLES HERE
 // -----------------------------
 $letter-press:  1px 1px 2px #fff;
-// $primary-color: #23538A; //org primary color
+// $primary-color: #658929; //org primary color
 
 
 
@@ -129,8 +126,13 @@ dl.sub-nav.calendar-filter dd {
 	padding: 0 !important;
 	background: darken($topbar-bg, 5%);
 	font-size: 20px;
-	height: 36px;
+	height: 37px !important;
 }
+.pane-header [class*="icon-"]{
+	position: relative;
+	top: 3px;
+}
+
 .pane-header span{
 	position: relative;
 	top: 8px;
@@ -205,7 +207,131 @@ ul.days, .calendar-day {padding: 0; margin: 0; width: 100%;}
 
 
 
+.calendar-picker-container button {
+top: 20px;
+right: 20px;
+position: absolute;
+display: block;
+color: #555;
+font-size: 18px;
+border: 0;
+background: 0;
+padding: 0;
+margin: 0;
+cursor: pointer;
+}
 
+.icon-calendarPlus {
+top: -5px;
+right: 5px;
+position: absolute;
+display: block;
+color: #555;
+font-size: 18px;
+border: 0;
+background: 0;
+padding: 0;
+margin: 0;
+cursor: pointer;
+
+}
+
+
+
+.icon-backspace:before {
+	content: "\e037";
+	background: #fff;
+	text-shadow: 0px 0px 0px #000;
+    filter: dropshadow(color=#000, offx=0, offy=0);
+  position: absolute;
+  top: 3px;
+  right: 2px;
+  height: auto;
+  padding-left: 5px;
+  line-height: 24px;
+  color: #555;
+  cursor: pointer !important; //make inline style
+  font-size: 20px;
+}
+// -----------------------------
+// subscriptions
+// -----------------------------
+.subscription-panel { //outside
+border-bottom: 1px solid #999;
+overflow: hidden;
+}
+
+.subscription-body { //inside
+width: 100%;
+min-height: 50px !important;
+// background: rgba(255,255,255,.9);
+// same light gray gradient as topbar
+background: #eeeeee; /* Old browsers */
+	background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+padding: 16px 4px 6px;
+margin-left: 8px;
+}
+.subscription-gradient {
+	// background:  url('../images/white-gradient-30.png') top center repeat !important;
+	background: -moz-linear-gradient(top,  rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.3)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(255,255,255,0.3) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(255,255,255,0.3) 0%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(255,255,255,0.3) 0%,rgba(255,255,255,0) 100%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(255,255,255,0.3) 0%,rgba(255,255,255,0) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4dffffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
+
+}
+
+.subscription-calendar-title {
+	overflow: hidden;
+white-space: nowrap;
+text-overflow: ellipsis;
+width: 80%;
+display: inline-block !important;
+cursor: pointer;
+color: #222;
+font-size: 14px;
+}
+
+.subscription-panel button {
+position: absolute;
+top: -19px;
+right: 5px;
+display: block;
+color: #555;
+font-size: 18px;
+border: 0;
+background: 0;
+padding: 0;
+margin: 0;
+cursor: pointer;
+transform: rotate(180deg) !important;
+-ms-transform: rotate(180deg) !important; /* IE 9 */
+-webkit-transform: rotate(180deg) !important; /* Safari and Chrome */
+box-shadow: none;
+font-size: 16px;
+}
+
+.button-group li{
+padding: 0 4px 0 0;
+}
+
+.button-group li [class*="icon-"]{
+
+}
+
+
+
+// -----------------------------
+// tasks
+// -----------------------------
 #task-list-tasks-container {
 	position: relative;
 	width: 100%;
@@ -376,78 +502,18 @@ Task panel colors must be solid. the 60% white rgba background  is from ".task-f
 }
 
 
-.calendar-picker-container button {
-top: 24px;
-right: 20px;
-position: absolute;
-display: block;
-color: #555;
-font-size: 18px;
-border: 0;
-background: 0;
-padding: 0;
-margin: 0;
-cursor: pointer;
+$topbar-link-color-active: $primary-color;
+
+.top-bar{
+background: rgba($topbar-bg, .3) repeat !important; 
+overflow: visible;
 }
 
-.subscription-panel button {
-top: 0px;
-right: 8px;
-position: absolute;
-display: block;
-color: #555;
-font-size: 18px;
-border: 0;
-background: 0;
-padding: 0;
-margin: 0;
-cursor: pointer;
-transform: rotate(180deg) !important;
--ms-transform: rotate(180deg) !important; /* IE 9 */
--webkit-transform: rotate(180deg) !important; /* Safari and Chrome */
-box-shadow: none;
-font-size: 16px;
-}
-// -----------------------------
-// subscriptions
-// -----------------------------
-
-.subscription-panel { //outside
-min-height: 50px;
-border-bottom: 1px solid #999;
-overflow: hidden;
-
+.top-bar-section li a:not(.button) {
+background: none !important;
 }
 
-.subscription-body { //inside
-width: 100%;
-// background: rgba(255,255,255,.9);
-// same light gray gradient as topbar
-background: #eeeeee; /* Old browsers */
-	background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
-padding: 16px 4px 6px;
-margin-left: 8px;
-}
-.subscription-gradient {
-	background:  url('../images/white-gradient-30.png') top center repeat !important;
-}
 
-.subscription-calendar-title {
-	overflow: hidden;
-white-space: nowrap;
-text-overflow: ellipsis;
-width: 80%;
-display: inline-block !important;
-cursor: pointer;
-color: #222;
-font-size: 14px;
-}
 
 /* iPads (portrait and landscape) ----------- */
 @media only screen 

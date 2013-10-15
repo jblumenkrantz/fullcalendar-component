@@ -53,8 +53,8 @@ $default-float: left;
 
 $body-bg: #eee;
 // $body-font-color: #8500FF;
-// $body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-// $body-font-weight: normal;
+$body-font-family: 'Oswald', "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+$body-font-weight: 300;
 // $body-font-style: normal;
 
 // Font-smoothing
@@ -67,7 +67,7 @@ $body-bg: #eee;
 
 // Colors
 
-// $primary-color: #2ba6cb;
+$primary-color: #23538A;
 // $secondary-color: #e9e9e9;
 // $alert-color: #c60f13;
 // $success-color: #5da423;
@@ -1263,7 +1263,7 @@ $topbar-margin-bottom: emCalc(0);
 
 $topbar-link-color: #555;
 $topbar-link-color-hover: #777;
-// $topbar-link-color-active: #fff;
+$topbar-link-color-active: $primary-color;
 // $topbar-link-weight: bold;
 // $topbar-link-font-size: emCalc(13);
 // $topbar-link-hover-lightness: -30%; // Darken by 30%

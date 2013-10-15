@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pinwheelApp')
-  .controller('PinwheelCtl', function ($scope, $location, Calendar, User, localStorage, Event, Task) {
+  .controller('PinwheelCtl', function ($scope, $location, $http, Calendar, User, localStorage, Event, Task) {
 		$scope.calendarWatchers = {};
 		$scope.reminders = {};
 
@@ -12,38 +12,41 @@ angular.module('pinwheelApp')
 		$scope.isCalendarShowing = function(item) {
 			return $scope.calendarWatchers[item.calendar_id] && $scope.calendarWatchers[item.calendar_id].viewing;
 		}
-		User.get({}, function(user){
-			$scope.user = user;
-			User.query({id:'new'}, function(orgs){
-				$scope.loading_user = false;
-				$scope.orgs = orgs;
-			});
-			$scope.initialUser = {};
-			angular.copy(user, $scope.initialUser);
-			Calendar.query({id: 'all'}, function(calendars){
-				$scope.loading_calendars = false;
-				$scope.calendars = calendars;			
-				Event.query({id: 'all'}, function(events){
-					$scope.loading_events = false;
-					$scope.events = events;
-					Task.query({id: 'all'}, function(tasks){
-						$scope.loading_tasks = false;
-						$scope.tasks = tasks;
-						angular.forEach($scope.tasks, function(task){
-							if(task.due_time){
-								$scope.events.push(task);
-							}
+		$scope.init = function(){
+			User.get({}, function(user){
+				$scope.user = user;
+				User.query({id:'new'}, function(orgs){
+					$scope.loading_user = false;
+					$scope.orgs = orgs;
+				});
+				$scope.initialUser = {};
+				angular.copy(user, $scope.initialUser);
+				Calendar.query({id: 'all'}, function(calendars){
+					$scope.loading_calendars = false;
+					$scope.calendars = calendars;			
+					Event.query({id: 'all'}, function(events){
+						$scope.loading_events = false;
+						$scope.events = events;
+						Task.query({id: 'all'}, function(tasks){
+							$scope.loading_tasks = false;
+							$scope.tasks = tasks;
+							angular.forEach($scope.tasks, function(task){
+								if(task.due_time){
+									$scope.events.push(task);
+								}
+							});
 						});
 					});
 				});
+			}, function(error){
+				// TODO: update this and other requests
+				//       include proper error logging
+				$scope.logout();
 			});
-		}, function(error){
-			// TODO: update this and other requests
-			//       include proper error logging
-			$scope.logout();
-		});
-		
-
+		}
+		/* resource queries were put into an init funciton */
+		/* to accomidate the user login functions */
+		$scope.init()
 
 		// nice for toggling forms. see adding a task for example.
 		$scope.toggle = function(name){
@@ -51,7 +54,18 @@ angular.module('pinwheelApp')
 		}
 
 		$scope.logout = function(){
+			/* Delete protected data */
+			delete $scope.calendars;
+			delete $scope.events
+			delete $scope.tasks;
+			delete $scope.user
+			delete $scope.initialUser;
+			
+			/* Delete users access token */
 			delete localStorage['token'];
+			$http.defaults.headers.common['Authorization'] =  localStorage['token'];
+
+			/* Redirect to login */
 			$location.path('/login');
 		}
 

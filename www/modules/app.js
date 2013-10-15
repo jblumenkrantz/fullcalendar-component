@@ -20,10 +20,6 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute', 'ngAnimate'])
 				templateUrl: 'modules/reference/main.html',
 				controller: 'ReferenceCtl'
 			})
-			.when("/settings", {
-				templateUrl: 'modules/settings/settings.html',
-				controller: 'SettingsCtl'
-			})
 			.when("/login", {
 				templateUrl: 'modules/login/main.html',
 				controller: 'LoginCtl'

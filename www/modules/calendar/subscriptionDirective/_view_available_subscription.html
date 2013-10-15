@@ -1,10 +1,21 @@
-<div class="row">
-	<div class="large-12 columns">
-		<strong>
-			{{calendar.calendar_name}}
-			<small ng-hide="calendar.recent" ng-click="subscribe()">subscribe</small>
-			<small ng-show="calendar.recent" ng-click="unsubscribe()">remove</small>
-		</strong>
+<div class="subscription-panel">
+	<div class="subscription-gradient">
+		<div class="subscription-body" >
+			<div class="row">
+				<div class="large-12 columns">
+					<strong>
+						{{calendar.calendar_name}}
+						<span ng-hide="calendar.recent" ng-click="subscribe()" class="icon-calendarPlus"></span>
+						<span ng-show="calendar.recent" ng-click="unsubscribe()" class="icon-calendarPlus"></span>
+						<!-- <div class="row">
+							<ul class="button-group even-2" >
+						    <li><span ng-hide="calendar.recent" ng-click="subscribe()" class="icon-add-calendarPlus"></span></li>
+						    <li><span ng-show="calendar.recent" ng-click="unsubscribe()" class="icon-add-calendarMinus"></span></li>
+						  </ul>
+						</div> -->
+					</strong>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
-<hr />
