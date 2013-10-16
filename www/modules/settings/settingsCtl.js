@@ -2,9 +2,9 @@
 
 angular.module('pinwheelApp')
 .controller('SettingsCtl', function ($scope, $http, User, Calendar, Timezones) {
-	Timezones.query({}, function(timezones){
+/*	Timezones.query({}, function(timezones){
 		$scope.timezones = timezones;
-	});
+	});*/
 	$scope.cancel = function(name){
 		angular.extend($scope.user, $scope.initialUser);
 	}

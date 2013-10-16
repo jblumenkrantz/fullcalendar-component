@@ -486,8 +486,8 @@ class User extends PinwheelModelObject
 			throw new Exception($pinsqli->error, 1);
 		
 		// create user default calendar
-		$dco = Calendar::create($userID,array('calendar_name'=>'Default Calendar','color'=>'blue'));
-		$dca = array_shift($dco);
+		$dca = Calendar::create($userID,array('calendar_name'=>'Default Calendar','color'=>'blue'));
+		//$dca = array_shift($dco);
 		
 		// make new calendar visibility turned on
 		$pinsqli->query(
