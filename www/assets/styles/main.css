@@ -236,3 +236,10 @@ user-select: none;
 	font-weight: bold;
 	margin-bottom:0px !important;
 }
+/* general use */
+.centered {
+	text-align: center;
+}
+.required.fail {
+	border: 1px #F00 solid;
+}
