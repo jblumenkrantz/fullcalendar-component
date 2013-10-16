@@ -193,12 +193,15 @@ function routes () {
 		),
 
 		'/user/new/?' => array(
-			Route::$post=>'UserCtl::validateUserName',
 			Route::$get=>'UserCtl::loadNewUserOptions',
 			Route::Request("application/json"),
 			Route::Response("application/json")
 		),
-
+		'/user/validate/:alpha/:any?' => array(
+			Route::$get=>'UserCtl::validate',
+			Route::Request("application/json"),
+			Route::Response("application/json")
+		),
 		'/user/create/?' => array(
 			Route::$post=>'UserCtl::create',
 			Route::Request("application/json"),

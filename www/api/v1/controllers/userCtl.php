@@ -43,11 +43,21 @@ class UserCtl
 		$options = User::loadNewUserOptions();
 		echo json_encode($options);
 	}
-	function validateUserName() {
-		$body = json_decode(Request:: body());
-		$validity = User::validateUserName($body);
+	function validate($prop, $string) {
+		if($prop == 'username'){
+			$validity = User::validateUserName($string);
+		}
+		elseif($prop == 'email'){
+			$validity = User::validateUserEmail($string);
+		}
 		echo json_encode($validity);
 	}
+/*	function validateUserName($bypass=false) {
+		$body = json_decode(Request:: body());
+		error_log(print_r($body->user_handle,true));
+		$validity = User::validateUserName($body->user_handle);
+		echo json_encode($validity);
+	}*/
 	function forgotPassword () {
 		$body = json_decode(Request:: body());
 		$user = new User($body);
