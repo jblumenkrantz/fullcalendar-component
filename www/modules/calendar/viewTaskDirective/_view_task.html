@@ -1,4 +1,30 @@
-<div ng-hide="editingTask">
+<div class="task-panel" ng-style="{background: colors[task.calendar_id].color}">
+	<div class="task-gradient">
+		<div ng-hide="editingTask" class="task-body">
+			<div class="row">
+				<div class="large-12 columns">
+					<strong><span  ng-style="{color: colors[task.calendar_id].color}">{{task.task_name}}</span> <small ng-click="edit('editingTask')">edit</small></strong>
+				</div>
+			</div>
+			<div class="row">
+				<div class="large-12 columns" ng-style="{color: colors[task.calendar_id].color}">
+					{{task.due_time | date:'M/d/yyyy h:mm a'}}
+				</div>
+			</div>
+			<div class="row">
+				<div class="large-12 columns">
+					{{task.task_notes}}
+				</div>
+			</div>
+		</div>
+		<div ng-show="editingTask">
+			<task-form task="editTask" save="updateTask(task)" cancel="cancel('editingTask')" delete="deleteTask(task)" calendars="calendars"></task-form>
+		</div>
+	</div>
+</div>
+
+
+<!-- <div ng-hide="editingTask">
 	<div class="row">
 		<div class="large-12 columns">
 			<strong><span  ng-style="{color: colors[task.calendar_id].color}">{{task.task_name}}</span> <small ng-click="edit('editingTask')">edit</small></strong>
@@ -18,4 +44,4 @@
 <div ng-show="editingTask">
 	<task-form task="editTask" save="updateTask(task)" cancel="cancel('editingTask')" delete="deleteTask(task)" calendars="calendars"></task-form>
 </div>
-<hr />
+<hr /> -->
