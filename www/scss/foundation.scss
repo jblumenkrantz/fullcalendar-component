@@ -1,39 +1,39 @@
 @import "settings";
 @import "events";
 
-// @import "../bower_components/foundation/scss/foundation";
+@import "../bower_components/foundation/scss/foundation";
 
 /* Each individual part that can be added in */
 // FYI, turning off all unessential components (about half) only shaves about 50-60KB
-@import "../bower_components/foundation/scss/foundation/components/global";
-@import "../bower_components/foundation/scss/foundation/components/grid";
-@import "../bower_components/foundation/scss/foundation/components/visibility";
-@import "../bower_components/foundation/scss/foundation/components/block-grid";
-@import "../bower_components/foundation/scss/foundation/components/type";
-@import "../bower_components/foundation/scss/foundation/components/buttons";
-@import "../bower_components/foundation/scss/foundation/components/forms";
-@import "../bower_components/foundation/scss/foundation/components/custom-forms";
-@import "../bower_components/foundation/scss/foundation/components/button-groups";
-@import "../bower_components/foundation/scss/foundation/components/dropdown-buttons";
+// @import "../bower_components/foundation/scss/foundation/components/global";
+// @import "../bower_components/foundation/scss/foundation/components/grid";
+// @import "../bower_components/foundation/scss/foundation/components/visibility";
+// @import "../bower_components/foundation/scss/foundation/components/block-grid";
+// @import "../bower_components/foundation/scss/foundation/components/type";
+// @import "../bower_components/foundation/scss/foundation/components/buttons";
+// @import "../bower_components/foundation/scss/foundation/components/forms";
+// @import "../bower_components/foundation/scss/foundation/components/custom-forms";
+// @import "../bower_components/foundation/scss/foundation/components/button-groups";
+// @import "../bower_components/foundation/scss/foundation/components/dropdown-buttons";
 // @import "../bower_components/foundation/scss/foundation/components/split-buttons";
 // @import "../bower_components/foundation/scss/foundation/components/flex-video";
-@import "../bower_components/foundation/scss/foundation/components/section";
-@import "../bower_components/foundation/scss/foundation/components/top-bar";
+// @import "../bower_components/foundation/scss/foundation/components/section";
+// @import "../bower_components/foundation/scss/foundation/components/top-bar";
 // @import "../bower_components/foundation/scss/foundation/components/orbit";
-@import "../bower_components/foundation/scss/foundation/components/reveal"; //LEAVE THIS ON -jt
+// @import "../bower_components/foundation/scss/foundation/components/reveal"; //LEAVE THIS ON -jt
 // @import "../bower_components/foundation/scss/foundation/components/joyride";
 // @import "../bower_components/foundation/scss/foundation/components/clearing";
 // @import "../bower_components/foundation/scss/foundation/components/alert-boxes";
 // @import "../bower_components/foundation/scss/foundation/components/breadcrumbs";
-@import "../bower_components/foundation/scss/foundation/components/keystrokes";
-@import "../bower_components/foundation/scss/foundation/components/labels";
-@import "../bower_components/foundation/scss/foundation/components/inline-lists";
+// @import "../bower_components/foundation/scss/foundation/components/keystrokes";
+// @import "../bower_components/foundation/scss/foundation/components/labels";
+// @import "../bower_components/foundation/scss/foundation/components/inline-lists";
 // @import "../bower_components/foundation/scss/foundation/components/pagination";
-@import "../bower_components/foundation/scss/foundation/components/panels";
+// @import "../bower_components/foundation/scss/foundation/components/panels";
 // @import "../bower_components/foundation/scss/foundation/components/pricing-tables";
 // @import "../bower_components/foundation/scss/foundation/components/progress-bars";
 // @import "../bower_components/foundation/scss/foundation/components/side-nav";
-@import "../bower_components/foundation/scss/foundation/components/sub-nav";
+// @import "../bower_components/foundation/scss/foundation/components/sub-nav";
 // @import "../bower_components/foundation/scss/foundation/components/switch";
 // @import "../bower_components/foundation/scss/foundation/components/magellan";
 // @import "../bower_components/foundation/scss/foundation/components/tables";
@@ -233,10 +233,7 @@ background: 0;
 padding: 0;
 margin: 0;
 cursor: pointer;
-
 }
-
-
 
 .icon-backspace:before {
 	content: "\e037";
@@ -254,7 +251,7 @@ cursor: pointer;
   font-size: 20px;
 }
 // -----------------------------
-// subscriptions
+// subscriptions & tasks
 // -----------------------------
 .subscription-panel, .task-panel { //outside
 border-bottom: 1px solid #999;
@@ -327,151 +324,6 @@ padding: 0 4px 0 0;
 .button-group li [class*="icon-"]{
 
 }
-
-
-
-// -----------------------------
-// tasks
-// -----------------------------
-// #task-list-tasks-container {
-// 	position: relative;
-// 	width: 100%;
-// 	height: 100%;
-// 	overflow-y: auto;
-// }
-// #task-list-tasks-container .input-text-container {
-// 	margin-top: -3px;
-// 	margin-bottom: 7px;
-// }
-// #task-list-tasks-container .hourmin-container {
-// 	margin-bottom: 6px;
-// }
-// #task-list-tasks-container label {
-// 	font-size: 12px;
-// 	margin-bottom: 8px !important;
-// }
-// .task {
-// 	overflow: hidden;
-// 	background: #aaa; 
-// 	color: #333; 
-// 	-webkit-box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0.1); 
-// 	-moz-box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0.1); 
-// 	box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0.1); 
-// 	cursor: pointer; 
-// 	margin: 0 0 2px 0; 
-// 	padding: 0px 0 0px 10px;
-// 	border: 0px; 
-// 	}
-
-
-// .task-form {
-// 	height: 100%;
-// 	background: rgba(255,255,255,.6);
-// 	padding: 4px;
-// }
-// .task .checkbox-container {
-// 	position: relative;
-// 	float: left;
-// 	width: 13%;
-// }
-// .task .body {
-// 	position: relative;
-// 	float: left;
-// 	width: 87%;
-// 	-webkit-tap-highlight-color: rgba(0,0,0,0);
-// }
-// .task .info .body {
-// 	width: 77.5%;
-// 	margin-right: 2%;
-// }
-// .task .body .title {
-// 	color: black;
-// 	font-size: 12px;
-// 	line-height: 14px;
-// 	margin-top: 2px;
-// 	margin-bottom: 1px;
-// }
-// .task .body .notes {
-// 	font-size: 10px;
-// 	line-height: 12px;
-// 	width: 100%;
-// 	margin-bottom: 2px;
-// }
-// .task .body .due-date {
-// 	font-size: 10px;
-// 	line-height: 12px;
-// 	width: 100%;
-// }
-// .task .body .title, .task .body .notes, .task .body .due-date {
-// 	overflow: hidden;
-// 	white-space: nowrap;
-// 	text-overflow: ellipsis;
-// }
-// .task .body .notes:hover, .task .body .due-date:hover, .task .body .title:hover  {
-// 	text-decoration: underline;
-// }
-// .due-date:empty {
-// 	min-height: 4px;
-// }
-// .notes:empty + .due-date:empty {
-// 	min-height: 15px;
-// }
-// .task .expand-container {
-// 	position: relative;
-// 	float: left;
-// 	width: 7.5%;
-// 	height: 100%;
-// }
-// .task .delete-container {
-// 	position: relative;
-// }
-
-// .task .expand-buttons {
-// 	display: none;
-// }
-// .task .info .icon-group {
-// 	display: block;
-// }
-// .task .info .body .notes, .task .info .body .title, .task .info .body .due-date {
-// 	white-space: normal;
-// }
-// .task.completed .body {
-// 	text-decoration: line-through !important;
-// }
-// .task-expand {
-// 	color: black;
-// }
-// .task-delete {
-// 	position: absolute;
-// 	top: -21px;
-// 	right: 0px;
-// 	color: black;
-// 	margin-top: 7px;
-// }
-// .edit-container {
-// 	position: relative;
-// 	clear: both;
-// }
-// .edit-container input[type=text] {
-// 	padding: 3px;
-// 	font-size: 12px;
-// 	margin-bottom: 7px !important;
-// }
-// .edit-container textarea {
-// 	padding: 3px;
-// 	font-size: 12px;
-// 	margin-bottom: 7px;
-// 	border-radius: 4px;
-// }
-// .edit-container .select{
-// 	font-size: 12px;
-// 	margin-bottom: 7px !important;
-// }
-// .edit-container .button-group {
-// 	padding: 0;
-// 	margin: 0;
-// }
-
 
 $topbar-link-color-active: $primary-color;
 
