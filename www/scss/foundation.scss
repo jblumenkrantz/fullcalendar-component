@@ -253,7 +253,7 @@ cursor: pointer;
 // -----------------------------
 // subscriptions & tasks
 // -----------------------------
-.subscription-panel, .task-panel { //outside
+.subscription-panel, .task-panel{ //outside
 border-bottom: 1px solid #999;
 overflow: hidden;
 }
@@ -286,6 +286,21 @@ padding: 16px 4px 6px;
 margin-left: 8px;
 }
 
+.task-body.add {
+	min-height: none;
+// background: rgba(255,255,255,.9);
+// same light gray gradient as topbar
+background: #eeeeee; /* Old browsers */
+	background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+padding: 16px 4px 6px;
+margin-left: 8px;
+}
 
 .subscription-calendar-title {
 	overflow: hidden;

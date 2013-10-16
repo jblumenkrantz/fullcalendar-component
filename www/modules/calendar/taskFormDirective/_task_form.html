@@ -1,30 +1,26 @@
 <div class="task">
-	<div class="task-form">
-		<div class="row">
-			<input type="text" ng-model="task.task_name" placeholder="Title (required)" />
-			<select ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars" ng-model="task.calendar_id" ></select>
-			<textarea ng-model="task.task_notes" placeholder="Add Note"></textarea>
-			<label class="checkbox">
-				<input type="checkbox" ng-model="task.hasDueDate" />
-				<!--<check if="task.due_time" ng-model="task.hasDueDate" ng-change="" />-->
-				Has a due date
-			</label>
-			<datetime ng-show="task.hasDueDate" ng-model="task.due_time" placeholder="m/d/yyyy h:mm AM/PM" />
-			<label class="checkbox">
-				<check if="{{task.reminder_pref_id}}" ng-model="task.has_reminder" ng-change="" />
-				Add Reminder
-			</label>
+	<input type="text" ng-model="task.task_name" placeholder="Title (required)" />
+	<select ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars" ng-model="task.calendar_id" ></select>
+	<textarea ng-model="task.task_notes" placeholder="Add Note"></textarea>
+	<label class="checkbox">
+		<input type="checkbox" ng-model="task.hasDueDate" />
+		<!--<check if="task.due_time" ng-model="task.hasDueDate" ng-change="" />-->
+		Has a due date
+	</label>
+	<datetime ng-show="task.hasDueDate" ng-model="task.due_time" placeholder="m/d/yyyy h:mm AM/PM" />
+	<label class="checkbox">
+		<check if="{{task.reminder_pref_id}}" ng-model="task.has_reminder" ng-change="" />
+		Add Reminder
+	</label>
+	<div class="row">
+		<div class="large-6 columns">
+			<div class="expand small alert button" ng-click="cancel()" >cancel</div>
 		</div>
-		<div class="row">
-			<div class="large-6 columns">
-				<div class="expand small alert button" ng-click="cancel()" >cancel</div>
-			</div>
-			<div class="large-6 columns">
-				<div class="expand small alert button" ng-click="delete()" >delete</div>
-			</div>
-			<div class="large-12 columns">
-				<div class="expand small button" ng-click="save()" >save</div>
-			</div>
+		<div class="large-6 columns">
+			<div class="expand small alert button" ng-click="delete()" >delete</div>
+		</div>
+		<div class="large-12 columns">
+			<div class="expand small button" ng-click="save()" >save</div>
 		</div>
 	</div>
 </div>
