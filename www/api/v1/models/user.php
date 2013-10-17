@@ -503,12 +503,14 @@ class User extends PinwheelModelObject
 		$resulti = $pinsqli->query(
 			"INSERT INTO users_settings (
 					user_id,
+					version,
 					default_calendar,
 					start_of_day,
 					end_of_day
 				)
 				Values (
 					'$userID',
+					0,
 					'{$dca->calendar_id}',
 					'08:00:00',
 					'17:00:00'

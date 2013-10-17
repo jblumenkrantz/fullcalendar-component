@@ -63,14 +63,14 @@ angular.module('pinwheelApp')
 		$scope.logout = function(){
 			/* Delete protected data */
 			delete $scope.calendars;
-			delete $scope.events
+			delete $scope.events;
 			delete $scope.tasks;
-			delete $scope.user
+			delete $scope.user;
 			delete $scope.initialUser;
 			
 			/* Delete users access token */
 			delete localStorage['token'];
-			$http.defaults.headers.common['Authorization'] =  localStorage['token'];
+			$http.defaults.headers.common['Authorization'] = null;
 
 			/* Redirect to login */
 			$location.path('/login');
