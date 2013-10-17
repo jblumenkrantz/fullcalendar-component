@@ -1,22 +1,22 @@
 <!-- event view -->
-<div ng-controller="EventCtl" id="main-content" style="height: 100%; overflow: hidden; position: relative; z-index: 2" class="small-12 columns transition-07 {{size}}">
+<div ng-controller="EventCtl" id="main-content" style="height: 100%; overflow: hidden; position: relative; z-index: 2" class="small-12 columns {{size}}">
 	<header id="content-header" class="scroll-header">
 		<ul class="small-block-grid-3">
 			<li class="text-left">
 				<span>
-					<span class="hide-for-small" ng-click="toggle('calendarDrawer')" aria-hidden="true" ng-class="{'icon-arrow-left':calendarDrawer, 'icon-arrow-right':!calendarDrawer}" style="margin-left: 4px;"></span>
+					<span class="hide-for-small" ng-click="toggleSidebar('calendarDrawer')" aria-hidden="true" ng-class="{'icon-arrow-left':calendarDrawer, 'icon-arrow-right':!calendarDrawer}" style="margin-left: 4px;"></span>
 				</span>
 				<span aria-hidden="true" class="icon-poop-1"></span>
 			</li>
 			<li>
 				<span aria-hidden="true" class="icon-arrow-left-2" ng-click="moveMonths(-1)"></span></a>
-			<span class="month-switcher">{{routeDate | date: 'MMMM y'}}</span>
+				<span class="month-switcher">{{routeDate | date: 'MMMM y'}}</span>
 				<span aria-hidden="true" class="icon-arrow-right-2" ng-click="moveMonths(1)"></span>
 			</li>
 			<li class="text-right">
 				<span class="icon-plus-alt" ng-click="quickAdd()" aria-hidden="true"></span>
 				<span>
-					<span class="hide-for-small" ng-click="toggle('taskDrawer')" aria-hidden="true" ng-class="{'icon-arrow-right':taskDrawer, 'icon-arrow-left':!taskDrawer}" style="margin-right: 4px;"></span>
+					<span class="hide-for-small" ng-click="toggleSidebar('taskDrawer')" aria-hidden="true" ng-class="{'icon-arrow-right':taskDrawer, 'icon-arrow-left':!taskDrawer}" style="margin-right: 4px;"></span>
 				</span>
 			</li>
 		</ul>

@@ -73,6 +73,7 @@ angular.module('pinwheelApp')
 		}
 
 		$scope.mainAreaSize = function(){
+			var locMatch = $location.path().match(/calendar/);
 			if($scope.calendarDrawer&&$scope.taskDrawer){
 				$scope.size = 'large-8';
 			}else if(($scope.calendarDrawer && !$scope.taskDrawer) || (!$scope.calendarDrawer && $scope.taskDrawer)){
@@ -88,7 +89,7 @@ angular.module('pinwheelApp')
 		}
 
 		//ui controller stuff
-		$scope.view = "list";
+		$scope.view = "month";
 		$scope.calendarDrawer = true;
 		$scope.taskDrawer = true;
 		$scope.mainAreaSize();;
