@@ -14,6 +14,10 @@ angular.module('pinwheelApp')
 				delete $scope.password;
 			});
 		}
+		$scope.showNewUserForm = function(){
+			$location.path('/new_user');
+		}
   });
+
 
 

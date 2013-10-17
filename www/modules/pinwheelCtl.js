@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pinwheelApp')
-  .controller('PinwheelCtl', function ($scope, $location, $routeParams, $http, Calendar, User, localStorage, Event, Task) {
+  .controller('PinwheelCtl', function ($scope, $location, $http, Calendar, User, localStorage, Event, Task, Timezones) {
 		$scope.calendarWatchers = {};
 		$scope.reminders = {};
 
@@ -48,6 +48,9 @@ angular.module('pinwheelApp')
 		/* to accomidate the user login functions */
 		$scope.init()
 
+		Timezones.query({}, function(timezones){
+			$scope.timezones = timezones;
+		});
 		// nice for toggling forms. see adding a task for example.
 		$scope.toggle = function(name){
 			$scope[name] = !$scope[name];

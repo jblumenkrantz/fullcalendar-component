@@ -21,7 +21,15 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute', 'ngAnimate'])
 				controller: 'ReferenceCtl'
 			})
 			.when("/login", {
-				templateUrl: 'modules/login/main.html',
+				templateUrl: 'modules/login/login.html',
+				controller: 'LoginCtl'
+			})
+			.when("/new_user", {
+				templateUrl: 'modules/login/new_user.html',
+				controller: 'NewUserCtl'
+			})
+			.when("/reset_password", {
+				templateUrl: 'modules/login/password_reset.html',
 				controller: 'LoginCtl'
 			})
 			.otherwise({
@@ -52,6 +60,9 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute', 'ngAnimate'])
 	})
 	.factory('User', function($resource){
 		return $resource('/api/v1/user/:id', {}, {update: {method:'PUT'}});
+	})
+	.factory('NewUser', function($resource){
+		return $resource('/api/v1/user/new/', {}, {post: {method:'POST'}});
 	})
 	.factory('Task', function($resource){
 		return $resource('/api/v1/task/:id/:version', {},

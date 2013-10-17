@@ -1,39 +1,39 @@
 @import "settings";
 @import "events";
 
-// @import "../bower_components/foundation/scss/foundation";
+@import "../bower_components/foundation/scss/foundation";
 
 /* Each individual part that can be added in */
 // FYI, turning off all unessential components (about half) only shaves about 50-60KB
-@import "../bower_components/foundation/scss/foundation/components/global";
-@import "../bower_components/foundation/scss/foundation/components/grid";
-@import "../bower_components/foundation/scss/foundation/components/visibility";
-@import "../bower_components/foundation/scss/foundation/components/block-grid";
-@import "../bower_components/foundation/scss/foundation/components/type";
-@import "../bower_components/foundation/scss/foundation/components/buttons";
-@import "../bower_components/foundation/scss/foundation/components/forms";
-@import "../bower_components/foundation/scss/foundation/components/custom-forms";
-@import "../bower_components/foundation/scss/foundation/components/button-groups";
-@import "../bower_components/foundation/scss/foundation/components/dropdown-buttons";
+// @import "../bower_components/foundation/scss/foundation/components/global";
+// @import "../bower_components/foundation/scss/foundation/components/grid";
+// @import "../bower_components/foundation/scss/foundation/components/visibility";
+// @import "../bower_components/foundation/scss/foundation/components/block-grid";
+// @import "../bower_components/foundation/scss/foundation/components/type";
+// @import "../bower_components/foundation/scss/foundation/components/buttons";
+// @import "../bower_components/foundation/scss/foundation/components/forms";
+// @import "../bower_components/foundation/scss/foundation/components/custom-forms";
+// @import "../bower_components/foundation/scss/foundation/components/button-groups";
+// @import "../bower_components/foundation/scss/foundation/components/dropdown-buttons";
 // @import "../bower_components/foundation/scss/foundation/components/split-buttons";
 // @import "../bower_components/foundation/scss/foundation/components/flex-video";
-@import "../bower_components/foundation/scss/foundation/components/section";
-@import "../bower_components/foundation/scss/foundation/components/top-bar";
+// @import "../bower_components/foundation/scss/foundation/components/section";
+// @import "../bower_components/foundation/scss/foundation/components/top-bar";
 // @import "../bower_components/foundation/scss/foundation/components/orbit";
-@import "../bower_components/foundation/scss/foundation/components/reveal"; //LEAVE THIS ON -jt
+// @import "../bower_components/foundation/scss/foundation/components/reveal"; //LEAVE THIS ON -jt
 // @import "../bower_components/foundation/scss/foundation/components/joyride";
 // @import "../bower_components/foundation/scss/foundation/components/clearing";
 // @import "../bower_components/foundation/scss/foundation/components/alert-boxes";
 // @import "../bower_components/foundation/scss/foundation/components/breadcrumbs";
-@import "../bower_components/foundation/scss/foundation/components/keystrokes";
-@import "../bower_components/foundation/scss/foundation/components/labels";
-@import "../bower_components/foundation/scss/foundation/components/inline-lists";
+// @import "../bower_components/foundation/scss/foundation/components/keystrokes";
+// @import "../bower_components/foundation/scss/foundation/components/labels";
+// @import "../bower_components/foundation/scss/foundation/components/inline-lists";
 // @import "../bower_components/foundation/scss/foundation/components/pagination";
-@import "../bower_components/foundation/scss/foundation/components/panels";
+// @import "../bower_components/foundation/scss/foundation/components/panels";
 // @import "../bower_components/foundation/scss/foundation/components/pricing-tables";
 // @import "../bower_components/foundation/scss/foundation/components/progress-bars";
 // @import "../bower_components/foundation/scss/foundation/components/side-nav";
-@import "../bower_components/foundation/scss/foundation/components/sub-nav";
+// @import "../bower_components/foundation/scss/foundation/components/sub-nav";
 // @import "../bower_components/foundation/scss/foundation/components/switch";
 // @import "../bower_components/foundation/scss/foundation/components/magellan";
 // @import "../bower_components/foundation/scss/foundation/components/tables";
@@ -233,10 +233,7 @@ background: 0;
 padding: 0;
 margin: 0;
 cursor: pointer;
-
 }
-
-
 
 .icon-backspace:before {
 	content: "\e037";
@@ -254,14 +251,25 @@ cursor: pointer;
   font-size: 20px;
 }
 // -----------------------------
-// subscriptions
+// subscriptions & tasks
 // -----------------------------
-.subscription-panel { //outside
+.subscription-panel, .task-panel{ //outside
 border-bottom: 1px solid #999;
 overflow: hidden;
 }
 
-.subscription-body { //inside
+.subscription-gradient, .task-gradient {
+// background:  url('../images/white-gradient-30.png') top center repeat !important;
+background: -moz-linear-gradient(top,  rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.3)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(255,255,255,0.3) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(255,255,255,0.3) 0%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(255,255,255,0.3) 0%,rgba(255,255,255,0) 100%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(255,255,255,0.3) 0%,rgba(255,255,255,0) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4dffffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
+}
+
+.subscription-body, .task-body { //inside
 width: 100%;
 min-height: 50px !important;
 // background: rgba(255,255,255,.9);
@@ -277,16 +285,21 @@ background: #eeeeee; /* Old browsers */
 padding: 16px 4px 6px;
 margin-left: 8px;
 }
-.subscription-gradient {
-	// background:  url('../images/white-gradient-30.png') top center repeat !important;
-	background: -moz-linear-gradient(top,  rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.3)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top,  rgba(255,255,255,0.3) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top,  rgba(255,255,255,0.3) 0%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top,  rgba(255,255,255,0.3) 0%,rgba(255,255,255,0) 100%); /* IE10+ */
-background: linear-gradient(to bottom,  rgba(255,255,255,0.3) 0%,rgba(255,255,255,0) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4dffffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
 
+.task-body.add {
+	min-height: none;
+// background: rgba(255,255,255,.9);
+// same light gray gradient as topbar
+background: #eeeeee; /* Old browsers */
+	background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+padding: 16px 4px 6px;
+margin-left: 8px;
 }
 
 .subscription-calendar-title {
@@ -326,181 +339,6 @@ padding: 0 4px 0 0;
 .button-group li [class*="icon-"]{
 
 }
-
-
-
-// -----------------------------
-// tasks
-// -----------------------------
-#task-list-tasks-container {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	overflow-y: auto;
-}
-#task-list-tasks-container .input-text-container {
-	margin-top: -3px;
-	margin-bottom: 7px;
-}
-#task-list-tasks-container .hourmin-container {
-	margin-bottom: 6px;
-}
-#task-list-tasks-container label {
-	font-size: 12px;
-	margin-bottom: 8px !important;
-}
-.task {
-	overflow: hidden;
-	background: #aaa; 
-	color: #333; 
-	-webkit-box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0.1); 
-	-moz-box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0.1); 
-	box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0.1); 
-	cursor: pointer; 
-	margin: 0 0 2px 0; 
-	padding: 0px 0 0px 10px;
-	border: 0px; 
-}
-/*----------------------------
-Task panel colors must be solid. the 60% white rgba background  is from ".task-form"
-------------------------------*/
-/*gray for unscheduled to-do items?*/
-.color0 {
-	background:none;
-}
-/*red*/
-.task.color1, .color1 {
-	background: #E88989;
-}
-
-/*green*/
-.task.color2, .color2 {
-	background: #79c242;
-}
-
-/*blue*/
-.task.color3, .color3 {
-	background: #79C8DF;
-}
-
-/*orange*/
-.task.color4, .color4 {
-	background: #FCA469;
-}
-
-/*purple*/
-.task.color5, .color5 {
-	background: #C678C6;
-}
-/*this class supplies the 60% white rgba background that creates a lighter shade of the event/calendar color*/
-.task-form {
-	height: 100%;
-	background: rgba(255,255,255,.6);
-	padding: 4px;
-}
-.task .checkbox-container {
-	position: relative;
-	float: left;
-	width: 13%;
-}
-.task .body {
-	position: relative;
-	float: left;
-	width: 87%;
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
-}
-.task .info .body {
-	width: 77.5%;
-	margin-right: 2%;
-}
-.task .body .title {
-	color: black;
-	font-size: 12px;
-	line-height: 14px;
-	margin-top: 2px;
-	margin-bottom: 1px;
-}
-.task .body .notes {
-	font-size: 10px;
-	line-height: 12px;
-	width: 100%;
-	margin-bottom: 2px;
-}
-.task .body .due-date {
-	font-size: 10px;
-	line-height: 12px;
-	width: 100%;
-}
-.task .body .title, .task .body .notes, .task .body .due-date {
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-}
-.task .body .notes:hover, .task .body .due-date:hover, .task .body .title:hover  {
-	text-decoration: underline;
-}
-.due-date:empty {
-	min-height: 4px;
-}
-.notes:empty + .due-date:empty {
-	min-height: 15px;
-}
-.task .expand-container {
-	position: relative;
-	float: left;
-	width: 7.5%;
-	height: 100%;
-}
-.task .delete-container {
-	position: relative;
-}
-
-.task .expand-buttons {
-	display: none;
-}
-.task .info .icon-group {
-	display: block;
-}
-.task .info .body .notes, .task .info .body .title, .task .info .body .due-date {
-	white-space: normal;
-}
-.task.completed .body {
-	text-decoration: line-through !important;
-}
-.task-expand {
-	color: black;
-}
-.task-delete {
-	position: absolute;
-	top: -21px;
-	right: 0px;
-	color: black;
-	margin-top: 7px;
-}
-.edit-container {
-	position: relative;
-	clear: both;
-}
-.edit-container input[type=text] {
-	padding: 3px;
-	font-size: 12px;
-	margin-bottom: 7px !important;
-}
-.edit-container textarea {
-	padding: 3px;
-	font-size: 12px;
-	margin-bottom: 7px;
-	border-radius: 4px;
-}
-.edit-container .select{
-	font-size: 12px;
-	margin-bottom: 7px !important;
-}
-.edit-container .button-group {
-	padding: 0;
-	margin: 0;
-}
-
 
 $topbar-link-color-active: $primary-color;
 
