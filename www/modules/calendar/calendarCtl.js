@@ -5,6 +5,11 @@ angular.module('pinwheelApp')
 
 		$scope.routeDate = new Date($routeParams.month+"/"+$routeParams.day+"/"+$routeParams.year);
 
+		$scope.toggleSidebar = function(name){
+			$scope.toggle(name);
+			$scope.mainAreaSize();
+		}
+
 		$scope.moveMonths = function(dist){
 			$routeParams.month = parseInt($routeParams.month)+dist;
 			$routeParams.day = 1;

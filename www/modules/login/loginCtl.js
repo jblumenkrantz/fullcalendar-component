@@ -2,6 +2,7 @@
 
 angular.module('pinwheelApp')
   .controller('LoginCtl', function ($scope, $http, $location, Auth, localStorage) {
+		mainAreaSize();
 		$scope.username = 'test';
 		$scope.password = 'asdf';
 		$scope.authenticate = function(){
