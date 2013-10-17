@@ -1,69 +1,71 @@
-<div class="row">
-	<div class="large-6 large-centered columns">
-		<h1>Create Account</h1>
-	</div>
-</div>
-<div id='new-user-form'>
-	<div class="row large-8 center">
-		<div class="large-6 columns">
-			<input ng-model='register.firstName' ng-keyup="this.removeClass('fail')" autocorrect="off" autocapitalize="off" type="text" name="firstname" value="" placeholder="First Name" id="firstName">
-		</div>
-		<div class="large-6 columns">
-			<input ng-model='register.lastName' autocorrect="off" autocapitalize="off" type="text" name="lastName" value="" placeholder="Last Name" id="lastName">
-		</div>
-	</div>
-	<div class="row large-8 center">
-		<div class="large-6 columns">
-			<input ng-model='register.user_handle' autocorrect="off" autocapitalize="off" ng-keyup="validateUserName()" type="text" value="" placeholder="Username" >
-		</div>
-		<div class="large-6 columns alert-box alert centered" ng-show="!validUsername && (register.user_handle != undefined && register.user_handle != '')">
-			Username Already in use
-		</div>
-		<div class="large-6 columns alert-box success centered" ng-show="validUsername && (register.user_handle != undefined && register.user_handle != '')">
-			<span aria-hidden="true" class="icon-checkmark"></span> Valid Username
-		</div>
-	</div>
-	<div class="row large-8 center">
-		<div class="large-6 columns">
-			<input ng-model='register.email' autocorrect="off" ng-keyup="isEmailAvailable()" autocapitalize="off" type="text"  value="" placeholder="Email">
-		</div>
-		<div class="large-6 columns" ng-show="false">
-			Email address is not a valid format
-		</div>
-			<div class="large-6 columns alert-box success centered" ng-show="emailAvailable && (register.email != undefined && register.email != '')">
-			<span aria-hidden="true" class="icon-checkmark"></span> Email address is available
-		</div>
-		<div class="large-6 columns alert-box alert centered" ng-show="!emailAvailable && validEmailFormat">
-			Email address is already in use
-		</div>
-
-	</div>
-	<div class="row large-8 center">
-		<div class="large-6 columns">
-			<input ng-model='register.password' autocorrect="off" autocapitalize="off" type="password" name="password" value="" placeholder='Password' id="password">
-		</div>
-		<div class="large-6 columns">
-			<input ng-model='register.repassword' autocorrect="off" ng-blur="passwordsMatch()" autocapitalize="off"  type="password" name="repassword" value="" placeholder='Verify Password' id="repassword">
-		</div>
-		<div class="large-12 columns alert-box alert centered" ng-show="invalidPasswords">
-			The password must match
-		</div>
-	</div>
-	<div class="row large-8 center">
-		<div class="large-6 columns">
-			<select ng-options="org.org_id as org.org_name for org in orgs" ng-model="register.org_id">
-				<option value="">-- Select Default School --</option>
-			</select>
-		</div>
-		<div class="large-6 columns">
-			<select ng-options="tz.zone as tz.zone for tz in timezones" ng-model="register.timezone">
-				<option value="">-- Select Default Timezone --</option>
-			</select>
-		</div>
-	</div>
+<div id="main-content" style="height: 100%; overflow: hidden; position: relative; z-index: 2" class="small-12 columns large-12">
 	<div class="row">
-		<div class="large-6 large-centered end columns">
-			<div class="expand small button" ng-click="validateNewUserForm()" >submit</div>
+		<div class="large-6 large-centered columns">
+			<h1>Create Account</h1>
+		</div>
+	</div>
+	<div id='new-user-form'>
+		<div class="row large-8 center">
+			<div class="large-6 columns">
+				<input ng-model='register.firstName' ng-keyup="this.removeClass('fail')" autocorrect="off" autocapitalize="off" type="text" name="firstname" value="" placeholder="First Name" id="firstName">
+			</div>
+			<div class="large-6 columns">
+				<input ng-model='register.lastName' autocorrect="off" autocapitalize="off" type="text" name="lastName" value="" placeholder="Last Name" id="lastName">
+			</div>
+		</div>
+		<div class="row large-8 center">
+			<div class="large-6 columns">
+				<input ng-model='register.user_handle' autocorrect="off" autocapitalize="off" ng-keyup="validateUserName()" type="text" value="" placeholder="Username" >
+			</div>
+			<div class="large-6 columns alert-box alert centered" ng-show="!validUsername && (register.user_handle != undefined && register.user_handle != '')">
+				Username Already in use
+			</div>
+			<div class="large-6 columns alert-box success centered" ng-show="validUsername && (register.user_handle != undefined && register.user_handle != '')">
+				<span aria-hidden="true" class="icon-checkmark"></span> Valid Username
+			</div>
+		</div>
+		<div class="row large-8 center">
+			<div class="large-6 columns">
+				<input ng-model='register.email' autocorrect="off" ng-keyup="isEmailAvailable()" autocapitalize="off" type="text"  value="" placeholder="Email">
+			</div>
+			<div class="large-6 columns" ng-show="false">
+				Email address is not a valid format
+			</div>
+				<div class="large-6 columns alert-box success centered" ng-show="emailAvailable && (register.email != undefined && register.email != '')">
+				<span aria-hidden="true" class="icon-checkmark"></span> Email address is available
+			</div>
+			<div class="large-6 columns alert-box alert centered" ng-show="!emailAvailable && validEmailFormat">
+				Email address is already in use
+			</div>
+
+		</div>
+		<div class="row large-8 center">
+			<div class="large-6 columns">
+				<input ng-model='register.password' autocorrect="off" autocapitalize="off" type="password" name="password" value="" placeholder='Password' id="password">
+			</div>
+			<div class="large-6 columns">
+				<input ng-model='register.repassword' autocorrect="off" ng-blur="passwordsMatch()" autocapitalize="off"  type="password" name="repassword" value="" placeholder='Verify Password' id="repassword">
+			</div>
+			<div class="large-12 columns alert-box alert centered" ng-show="invalidPasswords">
+				The password must match
+			</div>
+		</div>
+		<div class="row large-8 center">
+			<div class="large-6 columns">
+				<select ng-options="org.org_id as org.org_name for org in orgs" ng-model="register.org_id">
+					<option value="">-- Select Default School --</option>
+				</select>
+			</div>
+			<div class="large-6 columns">
+				<select ng-options="tz.zone as tz.zone for tz in timezones" ng-model="register.timezone">
+					<option value="">-- Select Default Timezone --</option>
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="large-6 large-centered end columns">
+				<div class="expand small button" ng-click="validateNewUserForm()" >submit</div>
+			</div>
 		</div>
 	</div>
 </div>
