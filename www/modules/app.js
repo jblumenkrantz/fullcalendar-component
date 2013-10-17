@@ -25,12 +25,16 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute', 'ngAnimate'])
 				controller: 'LoginCtl'
 			})
 			.when("/new_user", {
-				templateUrl: 'modules/login/new_user.html',
+				templateUrl: 'modules/new_user/new_user.html',
 				controller: 'NewUserCtl'
 			})
-			.when("/reset_password", {
-				templateUrl: 'modules/login/password_reset.html',
-				controller: 'LoginCtl'
+			.when("/forgot_password", {
+				templateUrl: 'modules/forgot_password/forgot_password.html',
+				controller: 'ForgotPasswordCtl'
+			})
+			.when("/reset_password/:reset_token", {
+				templateUrl: 'modules/reset_password/reset_password.html',
+				controller: 'ResetPasswordCtl'
 			})
 			.otherwise({
 				redirectTo: '/calendar/'+(new Date().getFullYear())+'/'+(new Date().getMonth()+1)+'/'+(new Date().getDate())

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pinwheelApp')
-  .controller('PinwheelCtl', function ($scope, $location, $http, Calendar, User, localStorage, Event, Task, Timezones) {
+  .controller('PinwheelCtl', function ($scope, $location, $http, Calendar, User, localStorage, Event, Task, Timezones, $route) {
 		$scope.calendarWatchers = {};
 		$scope.reminders = {};
 
@@ -41,7 +41,11 @@ angular.module('pinwheelApp')
 			}, function(error){
 				// TODO: update this and other requests
 				//       include proper error logging
-				$scope.logout();
+				var route = $route.current.$$route.originalPath;
+				if(route != '/forgot_password' && route != '/reset_password/:reset_token' && route != '/new_user'){
+					/* Dont redirect with these routes */
+					$scope.logout();
+				}
 			});
 		}
 		/* resource queries were put into an init funciton */

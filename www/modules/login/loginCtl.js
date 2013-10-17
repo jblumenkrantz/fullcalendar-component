@@ -16,6 +16,9 @@ angular.module('pinwheelApp')
 		$scope.showNewUserForm = function(){
 			$location.path('/new_user');
 		}
+		$scope.showForgotPasswordForm = function(){
+			$location.path('/forgot_password');
+		}
   });
 
 

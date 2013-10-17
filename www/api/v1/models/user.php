@@ -354,9 +354,9 @@ class User extends PinwheelModelObject
 		$user = $this;
 		$pw_reset_token = MySQLConnection:: generateUID('pw_rst');
 		$this->updatePasswordResetSettings($this->user_id, $pw_reset_token);
-		$queryParameters = array('pw_rst'=>$pw_reset_token);
-		$queryString = http_build_query($queryParameters);
-		$url = $_SERVER['HTTP_REFERER']."?".$queryString;
+		//$queryParameters = array('pw_rst'=>$pw_reset_token);
+		//$queryString = http_build_query($queryParameters);
+		$url = $_SERVER['HTTP_REFERER']."#/reset_password/".$pw_reset_token ;
 		//$this->delete();
 		$messageBody['html'] = "<html>
 									<body lang='en' style='background-color:#fff; color: #222'>
@@ -374,7 +374,7 @@ class User extends PinwheelModelObject
 													To reset your password, click on the link below (or copy and paste the URL into your browser):<br/>
 													<a href='$url'>$url</a>
 												</p>
-												<p>The link will only be valid for one hour.</p>
+												<p>The link will only be valid for one hour, and can only be used once.</p>
 												<p style='font-family: Helvetica Neue, Arial, Helvetica, sans-serif;margin-top:5px;font-size:10px;color:#888888;'>
 													Please do not reply to this message; it was sent from an unmonitored email address.  This message is a service email related to your Pinwheel account.
 												</p>
