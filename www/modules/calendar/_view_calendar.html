@@ -32,7 +32,7 @@
 		<div ng-include src="'modules/calendar/_event_form.html'"></div>
 	</div>
 
-    <div scroll-pane class="scroll-pane"  style="border-left: 1px solid #afafaf; border-right: 1px solid #afafaf;">
+  <div scroll-pane class="scroll-pane"  style="border-left: 1px solid #afafaf; border-right: 1px solid #afafaf;">
 		<!-- calendar views switch -->
 		<div ng-switch="view">
 			<spinwheel class="spinwheel-holder"><div ng-show="loading_events" class="spinwheel"><div class="spinwheel"><div class="spinwheel"><div class="spinwheel"></div></div></div></div></spinwheel>
@@ -45,6 +45,28 @@
 			</div>
 
 			<div ng-switch-when="month">
+				<div class="calendar-index">
+					<ul class="side-nav">
+						<li><b>2012</b></li>
+						<li>
+							<ul class="side-nav" style="padding: 0; margin: 0;">
+								<li>Jan</li>
+								<li>Feb</li>
+								<li>Mar</li>
+								<li>Apr</li>
+								<li>May</li>
+								<li>Jun</li>
+								<li>Jul</li>
+								<li>Aug</li>
+								<li>Sep</li>
+								<li>Oct</li>
+								<li>Nov</li>
+								<li>Dec</li>
+							</ul>
+						</li>
+						<li><b>2014</b></li>
+					</ul>	
+				</div>
 				<month-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></month-view>
 			</div>
 			<div ng-switch-when="year">
