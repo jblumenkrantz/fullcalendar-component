@@ -7957,25 +7957,30 @@ ul.days, .calendar-day {
   background: none !important;
 }
 
+/* line 356, ../../scss/foundation.scss */
+.tabs dd.active {
+  border-top: 3px solid #23538a;
+}
+
 /* iPads (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* line 360, ../../scss/foundation.scss */
+  /* line 364, ../../scss/foundation.scss */
   .task .body .title {
     font-size: 12px;
   }
 
-  /* line 363, ../../scss/foundation.scss */
+  /* line 367, ../../scss/foundation.scss */
   .task .body .due-date, .task .body .notes {
     font-size: 9px;
   }
 
-  /* line 366, ../../scss/foundation.scss */
+  /* line 370, ../../scss/foundation.scss */
   .edit-container input, textarea {
     padding: 1px;
     font-size: 9px !important;
   }
 
-  /* line 370, ../../scss/foundation.scss */
+  /* line 374, ../../scss/foundation.scss */
   .task .body .notes:hover, .task .body .due-date:hover, .task .body .title:hover {
     text-decoration: none;
   }

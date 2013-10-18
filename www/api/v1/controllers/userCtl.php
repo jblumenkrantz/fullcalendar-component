@@ -71,7 +71,7 @@ class UserCtl
 			$user = $user->loadWithEmail($user->email);
 		}
 		if($match){
-			error_log(print_r($user,true));
+			//error_log(print_r($user,true));
 			$user->sendResetInfo();
 		}else{
 			$noReset = new CantFindUser();

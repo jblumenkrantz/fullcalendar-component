@@ -529,7 +529,7 @@ class Calendar extends PinwheelModelObject
 			throw new Exception($pinsqli->error, 1);
 		if ($pinsqli->affected_rows == 0) {
 			$resource = static:: load($this->calendar_id, $pinsqli);
-			$resource = array_pop($resource);
+			//$resource = array_pop($resource);
 			//error_log(print_r($resource,true));
 			if (!$resource)
 				throw new CalendarDoesNotExist($this);
