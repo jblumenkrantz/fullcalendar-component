@@ -188,20 +188,54 @@ ul.days {padding: 0; margin: 0; width: 100%; position: relative; left: 2px;}
 	position: absolute;
 	left: 0;
 	top: 37px;
-	padding: 0; 
-	margin: 0; 
+	padding: 0 !important; 
+	margin: 0 !important; 
 	background: #ddd;
 	margin-right: 20px;
 	width: 40px;
 	height: 100%;
+	text-align: center;
+	border-right: 1px solid #aaa;
+}
+.calendar-index ul.side-nav {
+	margin: 0;
+  padding: 0;
+
+}
+.calendar-index ul.side-nav li  {
+list-style-type: none;
+margin: 0;
+text-align: center;
+padding: 14px 0 ;
+border: 1px solid #aaa;
+border-width: 1px 0 0 0;
+cursor: pointer; 
 }
 
-.calendar-index ul.side-nav li ul.side-nav li{
-	background: #eee;
-	margin-top: 100%;
-	padding: 5px 0;
-	text-align: center;
+.calendar-index ul.side-nav li:hover  {
+background: rgba($primary-color, .1); 
 }
+
+// .calendar-index ul.side-nav li:hover  {
+// list-style-type: none;
+// margin: 0;
+// text-align: center;
+// padding: 10px 0 ;
+// border: 1px solid #aaa;
+// border-width: 1px 0 0 0;
+// cursor: pointer;
+// background: rgba($primary-color, .1); 
+// }
+
+.calendar-index ul.side-nav li:nth-child(1) {
+background: #ccc;
+border-width: 0; 
+}
+.calendar-index ul.side-nav li:nth-child(14) {
+	background: #ccc;
+border-width: 1px 0 1px  0; 
+}
+
 
 //dummy calendar for proper visionality during html wireframe developmentality -jt
 .calendar-wrapper{display:inline;overflow:visible;width:100% !important;margin:0 auto; padding: 0 !important; }
@@ -355,14 +389,40 @@ font-size: 16px;
 margin-left: 3px !important;
 }
 .button-group li{
-padding: 0 4px 0 0;
+padding: 0 5px 0 0;
 
 }
 .button-group li div.button {
- background: #000 !important;
-}
-.button-group li [class*="icon-"]{
+padding: 10px;	
+ background: #eeeeee; /* Old browsers */
+	background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+ border: 1px solid #ccc;
+ margin: 0;
 
+}
+
+.button-group li div.button:hover {
+padding: 10px;	
+ background: #eeeeee; /* Old browsers */
+	background: -moz-linear-gradient(top,  #eeeeee 60%, #cccccc 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(60%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #eeeeee 60%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #eeeeee 60%,#cccccc 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #eeeeee 60%,#cccccc 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #eeeeee 60%,#cccccc 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+
+ margin: 0;
+}
+
+.button-group li [class*="icon-"]{
+ color: #333;
 }
 
 $topbar-link-color-active: $primary-color;
