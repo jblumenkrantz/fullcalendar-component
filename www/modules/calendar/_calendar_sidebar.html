@@ -40,6 +40,7 @@
 		<active-subscription
 			ng-repeat="calendar in recentCalendars = (calendars | filter:{active: 1, recent: true, subscribed: true} | orderBy:'calendar_name')"
 			watcher="calendarWatchers"
+			user="user"
 			calendar="calendar">
 		</active-subscription>
 		
@@ -58,6 +59,7 @@
 		<available-subscription
 			ng-repeat="calendar in availabeCalendars = (calendars | filter:{active: 1, subscribed: false} | filter:calFilter | orderBy:'calendar_name')"
 			watcher="calendarWatchers"
+			user="user"
 			calendar="calendar">
 		</available-subscription>
 	</div>
