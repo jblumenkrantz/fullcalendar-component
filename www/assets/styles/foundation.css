@@ -7647,23 +7647,51 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
   position: absolute;
   left: 0;
   top: 37px;
-  padding: 0;
-  margin: 0;
+  padding: 0 !important;
+  margin: 0 !important;
   background: #ddd;
   margin-right: 20px;
   width: 40px;
   height: 100%;
-}
-
-/* line 199, ../../scss/foundation.scss */
-.calendar-index ul.side-nav li ul.side-nav li {
-  background: #eee;
-  margin-top: 100%;
-  padding: 5px 0;
   text-align: center;
+  border-right: 1px solid #aaa;
 }
 
-/* line 207, ../../scss/foundation.scss */
+/* line 200, ../../scss/foundation.scss */
+.calendar-index ul.side-nav {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 205, ../../scss/foundation.scss */
+.calendar-index ul.side-nav li {
+  list-style-type: none;
+  margin: 0;
+  text-align: center;
+  padding: 14px 0;
+  border: 1px solid #aaa;
+  border-width: 1px 0 0 0;
+  cursor: pointer;
+}
+
+/* line 215, ../../scss/foundation.scss */
+.calendar-index ul.side-nav li:hover {
+  background: rgba(35, 83, 138, 0.1);
+}
+
+/* line 230, ../../scss/foundation.scss */
+.calendar-index ul.side-nav li:nth-child(1) {
+  background: #ccc;
+  border-width: 0;
+}
+
+/* line 234, ../../scss/foundation.scss */
+.calendar-index ul.side-nav li:nth-child(14) {
+  background: #ccc;
+  border-width: 1px 0 1px  0;
+}
+
+/* line 241, ../../scss/foundation.scss */
 .calendar-wrapper {
   display: inline;
   overflow: visible;
@@ -7672,14 +7700,14 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
   padding: 0 !important;
 }
 
-/* line 208, ../../scss/foundation.scss */
+/* line 242, ../../scss/foundation.scss */
 .calendar {
   width: 101% !important;
   padding: 0;
   margin: 0;
 }
 
-/* line 209, ../../scss/foundation.scss */
+/* line 243, ../../scss/foundation.scss */
 .calendar ul.month-browser li {
   width: 33.3%;
   padding: 0;
@@ -7690,14 +7718,14 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
   margin: 20px 0;
 }
 
-/* line 210, ../../scss/foundation.scss */
+/* line 244, ../../scss/foundation.scss */
 .calendar {
   width: 100% !important;
   margin: 0;
   padding: 0;
 }
 
-/* line 211, ../../scss/foundation.scss */
+/* line 245, ../../scss/foundation.scss */
 .calendar ul {
   list-style: none;
   padding: 0;
@@ -7706,13 +7734,13 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
   width: 100%;
 }
 
-/* line 212, ../../scss/foundation.scss */
+/* line 246, ../../scss/foundation.scss */
 .calendar ul.weekdays {
   height: 40px;
   width: 100%;
 }
 
-/* line 213, ../../scss/foundation.scss */
+/* line 247, ../../scss/foundation.scss */
 .calendar ul.weekdays li {
   text-align: center;
   text-transform: uppercase;
@@ -7723,7 +7751,7 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
   font-size: 13px;
 }
 
-/* line 214, ../../scss/foundation.scss */
+/* line 248, ../../scss/foundation.scss */
 .calendar li {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -7739,23 +7767,23 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
   overflow: visible !important;
 }
 
-/* line 215, ../../scss/foundation.scss */
+/* line 249, ../../scss/foundation.scss */
 .calendar .days:last-child li {
   margin-bottom: 0px !important;
 }
 
-/* line 216, ../../scss/foundation.scss */
+/* line 250, ../../scss/foundation.scss */
 .calendar li .day, .calendar li .month {
   display: none;
 }
 
-/* line 217, ../../scss/foundation.scss */
+/* line 251, ../../scss/foundation.scss */
 .calendar .date {
   text-align: right;
   margin-bottom: 5px;
 }
 
-/* line 218, ../../scss/foundation.scss */
+/* line 252, ../../scss/foundation.scss */
 .show-info {
   display: block;
   font-size: 13px;
@@ -7770,47 +7798,47 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
   text-decoration: none;
 }
 
-/* line 219, ../../scss/foundation.scss */
+/* line 253, ../../scss/foundation.scss */
 .show-info:hover .venue {
   display: block;
 }
 
-/* line 220, ../../scss/foundation.scss */
+/* line 254, ../../scss/foundation.scss */
 .show-info .show-name {
   text-decoration: underline;
 }
 
-/* line 221, ../../scss/foundation.scss */
+/* line 255, ../../scss/foundation.scss */
 .show-info .show-time, .venue {
   color: #666;
   margin-top: 2px;
   text-decoration: none;
 }
 
-/* line 222, ../../scss/foundation.scss */
+/* line 256, ../../scss/foundation.scss */
 .calendar .no-shows {
   display: none;
 }
 
-/* line 223, ../../scss/foundation.scss */
+/* line 257, ../../scss/foundation.scss */
 .calendar .venue {
   display: none;
 }
 
-/* line 224, ../../scss/foundation.scss */
+/* line 258, ../../scss/foundation.scss */
 .calendar li.out_of_range {
   background-color: #F5F5F5;
   color: #666;
 }
 
-/* line 225, ../../scss/foundation.scss */
+/* line 259, ../../scss/foundation.scss */
 ul.days, .calendar-day {
   padding: 0;
   margin: 0;
   width: 100%;
 }
 
-/* line 229, ../../scss/foundation.scss */
+/* line 263, ../../scss/foundation.scss */
 .calendar-picker-container button {
   top: 20px;
   right: 20px;
@@ -7825,7 +7853,7 @@ ul.days, .calendar-day {
   cursor: pointer;
 }
 
-/* line 243, ../../scss/foundation.scss */
+/* line 277, ../../scss/foundation.scss */
 .icon-calendarPlus {
   top: -5px;
   right: 5px;
@@ -7840,7 +7868,7 @@ ul.days, .calendar-day {
   cursor: pointer;
 }
 
-/* line 257, ../../scss/foundation.scss */
+/* line 291, ../../scss/foundation.scss */
 .icon-backspace:before {
   content: "\e037";
   background: #fff;
@@ -7857,13 +7885,13 @@ ul.days, .calendar-day {
   font-size: 20px;
 }
 
-/* line 275, ../../scss/foundation.scss */
+/* line 309, ../../scss/foundation.scss */
 .subscription-panel, .task-panel {
   border-bottom: 1px solid #999;
   overflow: hidden;
 }
 
-/* line 280, ../../scss/foundation.scss */
+/* line 314, ../../scss/foundation.scss */
 .subscription-gradient, .task-gradient {
   background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
   /* FF3.6+ */
@@ -7881,7 +7909,7 @@ ul.days, .calendar-day {
   /* IE6-9 */
 }
 
-/* line 291, ../../scss/foundation.scss */
+/* line 325, ../../scss/foundation.scss */
 .subscription-body, .task-body {
   min-height: 50px !important;
   background: #eeeeee;
@@ -7904,7 +7932,7 @@ ul.days, .calendar-day {
   margin-left: 8px;
 }
 
-/* line 307, ../../scss/foundation.scss */
+/* line 341, ../../scss/foundation.scss */
 .task-body.add {
   min-height: none;
   background: #eeeeee;
@@ -7927,7 +7955,7 @@ ul.days, .calendar-day {
   margin-left: 8px;
 }
 
-/* line 323, ../../scss/foundation.scss */
+/* line 357, ../../scss/foundation.scss */
 .subscription-calendar-title {
   overflow: hidden;
   white-space: nowrap;
@@ -7939,7 +7967,7 @@ ul.days, .calendar-day {
   font-size: 14px;
 }
 
-/* line 334, ../../scss/foundation.scss */
+/* line 368, ../../scss/foundation.scss */
 .subscription-panel button {
   position: absolute;
   top: -19px;
@@ -7961,56 +7989,101 @@ ul.days, .calendar-day {
   font-size: 16px;
 }
 
-/* line 354, ../../scss/foundation.scss */
+/* line 388, ../../scss/foundation.scss */
 .button-group > *:first-child {
   margin-left: 3px !important;
 }
 
-/* line 357, ../../scss/foundation.scss */
+/* line 391, ../../scss/foundation.scss */
 .button-group li {
-  padding: 0 4px 0 0;
+  padding: 0 5px 0 0;
 }
 
-/* line 361, ../../scss/foundation.scss */
+/* line 395, ../../scss/foundation.scss */
 .button-group li div.button {
-  background: #000 !important;
+  padding: 10px;
+  background: #eeeeee;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eeeeee), color-stop(100%, #cccccc));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #eeeeee 0%, #cccccc 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );
+  /* IE6-9 */
+  border: 1px solid #ccc;
+  margin: 0;
 }
 
-/* line 370, ../../scss/foundation.scss */
+/* line 410, ../../scss/foundation.scss */
+.button-group li div.button:hover {
+  padding: 10px;
+  background: #eeeeee;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #eeeeee 60%, #cccccc 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(60%, #eeeeee), color-stop(100%, #cccccc));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #eeeeee 60%, #cccccc 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #eeeeee 60%, #cccccc 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #eeeeee 60%, #cccccc 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #eeeeee 60%, #cccccc 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );
+  /* IE6-9 */
+  margin: 0;
+}
+
+/* line 424, ../../scss/foundation.scss */
+.button-group li [class*="icon-"] {
+  color: #333;
+}
+
+/* line 430, ../../scss/foundation.scss */
 .top-bar {
   background: rgba(221, 221, 221, 0.3) repeat !important;
   overflow: visible;
 }
 
-/* line 375, ../../scss/foundation.scss */
+/* line 435, ../../scss/foundation.scss */
 .top-bar-section li a:not(.button) {
   background: none !important;
 }
 
-/* line 381, ../../scss/foundation.scss */
+/* line 441, ../../scss/foundation.scss */
 .tabs dd.active {
   border-top: 3px solid #23538a;
 }
 
 /* iPads (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* line 389, ../../scss/foundation.scss */
+  /* line 449, ../../scss/foundation.scss */
   .task .body .title {
     font-size: 12px;
   }
 
-  /* line 392, ../../scss/foundation.scss */
+  /* line 452, ../../scss/foundation.scss */
   .task .body .due-date, .task .body .notes {
     font-size: 9px;
   }
 
-  /* line 395, ../../scss/foundation.scss */
+  /* line 455, ../../scss/foundation.scss */
   .edit-container input, textarea {
     padding: 1px;
     font-size: 9px !important;
   }
 
-  /* line 399, ../../scss/foundation.scss */
+  /* line 459, ../../scss/foundation.scss */
   .task .body .notes:hover, .task .body .due-date:hover, .task .body .title:hover {
     text-decoration: none;
   }

@@ -37,7 +37,7 @@ $em-base: 16 !default;
   // This is done because a list can't be multiplied or divided even if it contains a single value
   @if $max == 1 { @return convert-to-em(nth($values, 1)); }
 
-  $emValues: (); // This will eventually store the converted $values in a list
+  $emValues: (); // This will eventually store teh converted $values in a list
   @for $i from 1 through $max {
     $emValues: append($emValues, convert-to-em(nth($values, $i)));
   }
@@ -74,7 +74,7 @@ $primary-color: #23538A;
 
 // Make sure border radius matches unless we want it different.
 
-// $global-radius: 3px;
+$global-radius: 3px;
 // $global-rounded: 1000px;
 
 // Inset shadow shiny edges and depressions.
@@ -357,7 +357,7 @@ $primary-color: #23538A;
 // We use these to control button text styles.
 
 // $button-font-family: inherit;
-// $button-font-color: #fff;
+// $button-font-color: #333;
 // $button-font-color-alt: #333;
 // $button-font-med: emCalc(16);
 // $button-font-tny: emCalc(11);
@@ -377,7 +377,7 @@ $primary-color: #23538A;
 
 // We use this to set the default radius used throughout the core.
 
-// $button-radius: $global-radius;
+$button-radius: $global-radius;
 // $button-round: $global-rounded;
 
 // We use this to set default opacity for disabled buttons.
