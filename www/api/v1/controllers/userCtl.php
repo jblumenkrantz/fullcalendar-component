@@ -29,6 +29,8 @@ class UserCtl
 		$user = User::loadActive($id === null? $authUserID: $id);
 		$user->settings = array_shift(User::loadSettings($id === null? $authUserID: $id));
 		$user->settings->primary_org = array_shift(MessagingGroup:: getPrimaryOrg($authUserID));
+		$user->settings->calendar_drawer_visible = ($user->settings->calendar_drawer_visible) ? true:false;
+		$user->settings->task_drawer_visible = ($user->settings->task_drawer_visible) ? true:false;
 		echo json_encode($user);
 	}
 
