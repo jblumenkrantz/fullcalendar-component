@@ -12,6 +12,11 @@ angular.module('pinwheelApp')
 		$scope.isCalendarShowing = function(item) {
 			return $scope.calendarWatchers[item.calendar_id] && $scope.calendarWatchers[item.calendar_id].viewing;
 		}
+
+		$scope.isTask = function(item){
+			return item.due_time
+		}
+
 		$scope.init = function(){
 			User.get({}, function(user){
 				$scope.user = user;
@@ -29,12 +34,7 @@ angular.module('pinwheelApp')
 						$scope.events = events;
 						Task.query({id: 'all'}, function(tasks){
 							$scope.loading_tasks = false;
-							$scope.tasks = tasks;
-							angular.forEach($scope.tasks, function(task){
-								if(task.due_time){
-									$scope.events.push(task);
-								}
-							});
+							$scope.events = $scope.events.concat(tasks);
 						});
 					});
 				});
@@ -60,7 +60,6 @@ angular.module('pinwheelApp')
 			/* Delete protected data */
 			delete $scope.calendars;
 			delete $scope.events
-			delete $scope.tasks;
 			delete $scope.user
 			delete $scope.initialUser;
 			

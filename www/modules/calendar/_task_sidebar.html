@@ -17,7 +17,7 @@
 	</div>
 	<!-- / task entry form -->
 
-	<div ng-repeat="task in tasks | filter: isCalendarShowing">
+	<div ng-repeat="task in events | filter: isTask | filter: isCalendarShowing">
 		<view-task task="task" calendars="calendars" colors="calendarWatchers" ng-show="task.active"></view-task>
 	</div>
 </div>
