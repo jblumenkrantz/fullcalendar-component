@@ -196,7 +196,7 @@ class Event extends PinwheelModelObject
 		$dataRay = $eventArray = array();
 
 		$cals = (object) array_merge((array) Calendar::loadUserCreatedCalendars($userId), (array) Calendar::loadUserSubscriptions($userId));
-
+		//error_log(print_r($cals,true));
 		foreach($cals as $calendar){
 
 			$events = Event::getBatch(array("events.active = true","events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}'))"));
@@ -598,7 +598,7 @@ class Event extends PinwheelModelObject
 		}
 
 		$query .= $where_query;
-
+		//error_log(print_r(preg_replace('~[\r\n\t]+~','',$query),true));
 		// Query Datastore
 		$pinsqli = DistributedMySQLConnection:: readInstance();
 		//return $query;
