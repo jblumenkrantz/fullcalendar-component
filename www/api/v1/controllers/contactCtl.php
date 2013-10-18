@@ -30,6 +30,7 @@ class ContactCtl
 	/* CONTACT POINT ACTIVATION FUNCITONS */
 	function activateContactPoint () {
 		$body = json_decode(Request:: body());
+		error_log(print_r($body,true));
 		$authUserID = ($authUserID = Authorize:: sharedInstance()->userID());
 		$activationStatus = Contact:: activateContactPoint($authUserID,$body);
 		echo json_encode($activationStatus);
