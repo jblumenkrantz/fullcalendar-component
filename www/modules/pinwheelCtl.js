@@ -26,6 +26,7 @@ angular.module('pinwheelApp')
 				});
 				$scope.initialUser = {};
 				angular.copy(user, $scope.initialUser);
+
 				Calendar.query({id: 'all'}, function(calendars){
 					$scope.loading_calendars = false;
 					$scope.calendars = calendars;			
@@ -58,6 +59,17 @@ angular.module('pinwheelApp')
 		// nice for toggling forms. see adding a task for example.
 		$scope.toggle = function(name){
 			$scope[name] = !$scope[name];
+
+			/* update the users settings in the database for drawer visibility */
+			if(name == 'taskDrawer' || name == 'calendarDrawer'){
+				$scope.user.settings.task_drawer_visible = $scope.taskDrawer;
+				$scope.user.settings.calendar_drawer_visible = $scope.calendarDrawer;
+				$scope.user.$update({id: $scope.user.user_id}, function(user){
+					$scope.user = user;
+					$scope.initialUser = {};
+					angular.copy($scope.user, $scope.initialUser);
+				});
+			}
 		}
 
 		$scope.logout = function(){
@@ -93,9 +105,13 @@ angular.module('pinwheelApp')
 
 		//ui controller stuff
 		$scope.view = "month";
-		$scope.calendarDrawer = true;
-		$scope.taskDrawer = true;
-		$scope.mainAreaSize();;
+		//$scope.mainAreaSize();
+		$scope.$watch('user', function(){
+			$scope.calendarDrawer = ($scope.user == undefined) ? false:$scope.user.settings.calendar_drawer_visible;
+			$scope.taskDrawer = ($scope.user == undefined) ? false:$scope.user.settings.task_drawer_visible;
+			$scope.mainAreaSize();
+		});
+		
 		$scope.changeView = function(view) {
 			$scope.view = view;
 		};

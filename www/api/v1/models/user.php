@@ -90,7 +90,7 @@ class User extends PinwheelModelObject
 	static public function loadSettings ($id, $pinsqli = NULL) {
 		return(static:: genericQuery(
 			"SELECT
-				default_calendar, start_of_day, end_of_day, version as DB_version
+				default_calendar, start_of_day, end_of_day, version as DB_version, calendar_drawer_visible, task_drawer_visible
 				FROM users_settings
 				WHERE user_id = '$id'
 			"
@@ -559,7 +559,6 @@ class User extends PinwheelModelObject
 		$pinsqli = DistributedMySQLConnection:: writeInstance();
 		$properties = static::mysql_escape_array($this);
 		$settings = static::mysql_escape_array($this->settings);
-
 		$hash = NULL;
 		if (array_key_exists('password', $properties) && $properties['password'] != ''){
 			$hash = Authorize:: hashedPassword($properties['password']);
@@ -591,6 +590,8 @@ class User extends PinwheelModelObject
 		$resulti2 = $pinsqli->query(
 			"UPDATE users_settings
 				SET
+					calendar_drawer_visible ='{$settings['calendar_drawer_visible']}',
+					task_drawer_visible = '{$settings['task_drawer_visible']}',
 					default_calendar = '{$settings['default_calendar']}',
 					start_of_day = '{$settings['start_of_day']}',
 					end_of_day = '{$settings['end_of_day']}'
