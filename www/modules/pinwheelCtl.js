@@ -14,7 +14,7 @@ angular.module('pinwheelApp')
 		}
 
 		$scope.isTask = function(item){
-			return item.due_time
+			return item.task_id
 		}
 
 		$scope.init = function(){

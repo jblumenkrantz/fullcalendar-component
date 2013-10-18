@@ -81,12 +81,20 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute', 'ngAnimate'])
 					transformRequest: function(data){
 						// TODO: add if statements in case task does not have due time
 						// TODO: for save and update
-						data.due_time = new Date(data.due_time).getTime()/1000;
+						if(data.due_time){
+							data.due_time = new Date(data.due_time).getTime()/1000;
+							data.hasDueDate = true;
+						}
 						return angular.toJson(data);
 					},
 					transformResponse: function(data){
 						data = angular.fromJson(data);
-						data.due_time = new Date(data.due_time*1000);
+						if(parseInt(data.due_time)){
+							data.due_time = new Date(data.due_time*1000);
+							data.hasDueDate = true;
+						}else{
+							delete data.due_time;
+						}
 						return data;
 					}
 				},
@@ -95,12 +103,22 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute', 'ngAnimate'])
 					isArray: false,
 					transformRequest: function(data){
 						data = angular.fromJson(data);
-						data.due_time = new Date(data.due_time).getTime()/1000;
+						if(data.due_time){
+							data.due_time = new Date(data.due_time).getTime()/1000;
+							data.hasDueDate = true;
+						}else{
+							delete data.due_time
+						}
 						return angular.toJson(data);
 					},
 					transformResponse: function(data){
 						var data = angular.fromJson(data);
-						data.due_time = new Date(data.due_time*1000);
+						if(parseInt(data.due_time)){
+							data.due_time = new Date(data.due_time*1000);
+							data.hasDueDate = true;
+						}else{
+							delete data.due_time
+						}
 						return data;
 					}
 				},
@@ -152,7 +170,6 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute', 'ngAnimate'])
 					data = angular.fromJson(data);
 					data.event_start = new Date(data.event_start).getTime()/1000;
 					data.event_end = new Date(data.event_end).getTime()/1000;
-					console.log(data);
 					return angular.toJson(data);
 				},
 				transformResponse: function(data){
