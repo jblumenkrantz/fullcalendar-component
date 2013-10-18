@@ -35,7 +35,7 @@
 </ul>
 
 <section class="top-bar-section left">
-	<dl class="sub-nav calendar-filter">
+	<dl class="sub-nav calendar-filter" ng-show="user">
 		<dd ng-click="changeView('datebook')" ng-class="{active:view=='datebook'}"><a>DB</a></dd>
 		<dd ng-click="changeView('day')" ng-class="{active:view=='day'}"><a>D</a></dd>
 		<dd ng-click="changeView('week')" ng-class="{active:view=='week'}"><a>W</a></dd>
@@ -53,7 +53,7 @@
 
 <section class="top-bar-section right">
 	<!-- Right Nav Section -->
-	<ul>
+	<ul ng-show="user">
 		<li class=""><a><span aria-hidden="true" class="icon-network"></span></a></li>
 		<li class=""><a ng-href="#/messaging"><span aria-hidden="true" class="icon-bubble-notification"></span></a></li>
 		<li class=""><a ng-href="#/calendar"><span aria-hidden="true" class="icon-calendar"></span></a></li>
