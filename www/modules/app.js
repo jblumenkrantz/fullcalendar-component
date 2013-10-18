@@ -127,7 +127,7 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute', 'ngAnimate'])
 			});
 	})
 	.factory('Event', function($resource){
-		return $resource('/api/v1/event/:id/:year/:month/:day', {}, {
+		return $resource('/api/v1/event/:id/:year/:month/:day/:version', {}, {
 			save: {
 				method:'POST',
 				isArray: false,
