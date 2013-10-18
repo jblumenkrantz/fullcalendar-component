@@ -36,6 +36,10 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute', 'ngAnimate'])
 				templateUrl: 'modules/reset_password/reset_password.html',
 				controller: 'ResetPasswordCtl'
 			})
+			.when("/activate_contact_point/:activation_token", {
+				templateUrl: 'modules/activate_contact_point/activate_contact_point.html',
+				controller: 'ActivateContactPointCtl'
+			})
 			.otherwise({
 				redirectTo: '/calendar/'+(new Date().getFullYear())+'/'+(new Date().getMonth()+1)+'/'+(new Date().getDate())
 			});
