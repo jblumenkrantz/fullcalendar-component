@@ -2,8 +2,6 @@
 
 angular.module('pinwheelApp')
   .controller('LoginCtl', function ($scope, $http, $location, Auth, localStorage) {
-		$scope.username = 'test';
-		$scope.password = 'asdf';
 		$scope.authenticate = function(){
 			Auth.get({user: $scope.username, pass: $scope.password}, function(auth){
 				localStorage['token'] = $http.defaults.headers.common['Authorization'] =  auth.authFields;

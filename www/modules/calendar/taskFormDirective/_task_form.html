@@ -1,6 +1,6 @@
 <div class="task">
 	<input type="text" ng-model="task.task_name" placeholder="Title (required)" />
-	<select ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars" ng-model="task.calendar_id" ></select>
+	<select ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'" ng-model="task.calendar_id" ></select>
 	<textarea ng-model="task.task_notes" placeholder="Add Note"></textarea>
 	<label class="checkbox">
 		<input type="checkbox" ng-model="task.hasDueDate" />
