@@ -9,24 +9,9 @@
 			{{error_text}}
 		</div>
 	</div>
-	<div class="row" ng-show="!requestComplete">
-		<div class="large-6 large-centered columns">
-			<input type="password" value="" placeholder="New Password" ng-keyup="" ng-model='reset.password' autocorrect="off" autocapitalize="off" />
-		</div>
-		<div class="large-6 large-centered columns">
-			<input type="password" value="" placeholder="Re-type Password" ng-keyup="" ng-model='reset.repassword' autocorrect="off" autocapitalize="off" />
-		</div>
-		
-		<!-- <div class="large-6 large-centered columns alert-box alert centered" ng-show="validUsername && (forgot.user_handle != '' && forgot.user_handle != undefined)">
-			Username not found
-		</div> -->
-		<div class="large-6 large-centered end columns">
-			<div class="expand small button" ng-click="validateResetForm()" >Confirm</div>
-		</div>
-	</div>
 	<div class="row" ng-show="requestComplete">
 		<div class="large-6 large-centered columns alert-box success centered">
-			Password has been sucessfully reset
+			Contact Point Has Been Sucessfully Activated.
 		</div>
 	</div>
 </div>
