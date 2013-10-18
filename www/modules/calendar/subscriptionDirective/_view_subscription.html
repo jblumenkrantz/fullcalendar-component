@@ -2,11 +2,11 @@
 	<div class="subscription-gradient"> 
 		<div class="subscription-body">
 			<div ng-hide="editingCalendar">
-				<div class="row" ng-click="edit()">
+				<div class="row">
 					<div class="large-12 columns">
 						<button ng-hide="isCalendarCreator(calendar)" type="button"><span aria-hidden="true" class="icon-rss-alt" ng-style="{color:calendar.color}"></span></button>
 						<input type='checkbox' ng-model="watcher[calendar.calendar_id].viewing" ng-click="setShowState()" ng-false-state="false" />
-						<strong class="subscription-calendar-title">
+						<strong class="subscription-calendar-title" ng-click="edit()">
 							{{calendar.calendar_name}}
 						</strong>
 					</div>
