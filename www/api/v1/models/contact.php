@@ -70,6 +70,7 @@ class Contact extends PinwheelModelObject
 
 	public function generateMessage($activationCode, $p) {
 		//error_log(print_r($p,true));
+		$url = $_SERVER['HTTP_REFERER']."#/activate_contact_point/".$activationCode ;
 		if($p['point_type'] === "mobile"){
 			$messageBody['html'] = "{$p['point_name']} Activation Code: $activationCode";
 			$messageBody['plain'] = $messageBody['html'];
@@ -88,17 +89,7 @@ class Contact extends PinwheelModelObject
 												Pinwheel received a request to activate a point of contact for you.
 											</p>
 											<p>
-												In order for Pinwheel to use your newly created contact point it must first be activated.
-											</p>
-											<p>
-												<ul>
-													<li>Copy the activation code below.</li>
-													<li>Select \"My Account\" from the settings dropdown menu</li>
-													<li>Click the \"Activate\" button that is next to your newly created contact point.</li>
-													<li>Paste the activation code in the text box</li>
-													<li>Click the \"Activate\" button</li>
-													<li>You will now have a new contact point for your account</li>
-												</ul>
+												In order for Pinwheel to use your newly created contact point it must first be activated by clicking the link below or pasting it into your browser.
 											</p>
 											<p>
 												Activating your contact point is necesary to ensure that you recieve updates and reminders to your calendars and subscribed calendars.
@@ -107,7 +98,7 @@ class Contact extends PinwheelModelObject
 												Emergency Alerts will also be sent to your activated contact points.  To be sure you recieve important Emergency Alerts from your school or organization, be sure to activate this contact point.
 											</p>
 												<strong>{$p['point_name']}</strong><br/>
-												<strong>Activation Code: $activationCode</strong>
+												<strong>Activation Link: <a href='$url'>$url</a></strong>
 											</p>
 											<p style='font-family: Helvetica Neue, Arial, Helvetica, sans-serif;margin-top:5px;font-size:10px;color:#888888;'>
 												Please do not reply to this message; it was sent from an unmonitored email address.  This message is a service email related to your Pinwheel account.
@@ -119,15 +110,11 @@ class Contact extends PinwheelModelObject
 		$messageBody['plain'] = "Contact Point Activation
 								Pinwheel received a request to activate a point of contact for you.
 
-								In order for Pinwheel to use your newly created contact point it must first be activated.
-								Copy the activation code below.
-								Click the \"Activate\" button that is /lion your newly created contact point.
-								Paste the activation code in the text box
-								Click the \"Activate\" button
-								You will now have a new contact point for your account
+								In order for Pinwheel to use your newly created contact point it must
+								first be activated by clicking the link below or pasting it into your browser.
 
 								{$p['point_name']}
-								Activation Code: $activationCode
+								Activation Link: $url
 
 								Please do not reply to this message; it was sent from an unmonitored email address. This message is a service email related to your Pinwheel account.
 								";		
@@ -146,7 +133,7 @@ class Contact extends PinwheelModelObject
 		$pinsqli = DistributedMySQLConnection:: writeInstance();
 		$p = array_map(array($pinsqli, 'real_escape_string'), $p);
 		$point_id = MySQLConnection:: generateUID('contact_point');
-		$activationCode = MySQLConnection:: generateActivationCode();
+		$activationCode = MySQLConnection:: generateUID('activate_point');
 		$countryCode = ($p['point_type'] == 'mobile')? "1":"NULL";
 		$resulti = $pinsqli->query(
 			"INSERT INTO contact_points (
@@ -315,9 +302,8 @@ class Contact extends PinwheelModelObject
 				SET
 					activated_on = NOW(),
 					version 	= version + 1
-				WHERE point_id = '{$p['point_id']}'
-				AND user_id = '$user_id'
-				AND activation_code = '{$p['activation_code']}'
+				WHERE user_id = '$user_id'
+				AND activation_code = '{$p['activation_token']}'
 			"
 
 		);
