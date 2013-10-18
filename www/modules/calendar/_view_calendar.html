@@ -47,24 +47,24 @@
 			<div ng-switch-when="month">
 				<div class="calendar-index">
 					<ul class="side-nav">
-						<li><b>2012</b></li>
+						<li><b ng-click="makeNavYear(navYear-1)">{{navYear-1}}</b></li>
 						<li>
 							<ul class="side-nav" style="padding: 0; margin: 0;">
-								<li>Jan</li>
-								<li>Feb</li>
-								<li>Mar</li>
-								<li>Apr</li>
-								<li>May</li>
-								<li>Jun</li>
-								<li>Jul</li>
-								<li>Aug</li>
-								<li>Sep</li>
-								<li>Oct</li>
-								<li>Nov</li>
-								<li>Dec</li>
+								<li ng-click="gotoMonth(1, navYear)">Jan</li>
+								<li ng-click="gotoMonth(2, navYear)">Feb</li>
+								<li ng-click="gotoMonth(3, navYear)">Mar</li>
+								<li ng-click="gotoMonth(4, navYear)">Apr</li>
+								<li ng-click="gotoMonth(5, navYear)">May</li>
+								<li ng-click="gotoMonth(6, navYear)">Jun</li>
+								<li ng-click="gotoMonth(7, navYear)">Jul</li>
+								<li ng-click="gotoMonth(8, navYear)">Aug</li>
+								<li ng-click="gotoMonth(9, navYear)">Sep</li>
+								<li ng-click="gotoMonth(10, navYear)">Oct</li>
+								<li ng-click="gotoMonth(11, navYear)">Nov</li>
+								<li ng-click="gotoMonth(12, navYear)">Dec</li>
 							</ul>
 						</li>
-						<li><b>2014</b></li>
+						<li><b ng-click="makeNavYear(navYear+1)">{{navYear+1}}</b></li>
 					</ul>	
 				</div>
 				<month-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></month-view>
