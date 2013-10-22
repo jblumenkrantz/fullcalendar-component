@@ -10,9 +10,7 @@ angular.module('pinwheelApp')
 				 	var startOfMonth = new Date($routeParams.month+'-01-'+$routeParams.year).getTime()/1000;
 				 	var endOfMonth = new Date($routeParams.month*1+1+'-01-'+$routeParams.year).getTime()/1000;
 				 	var itemStart = new Date((item.event_start||item.due_time)).getTime()/1000;
-					console.log([item, (item.event_start||item.due_time)]);
-				 	
-				 return(itemStart >= startOfMonth && itemStart < endOfMonth)
+					return(itemStart >= startOfMonth && itemStart < endOfMonth)
 				}
 			}
 		}
