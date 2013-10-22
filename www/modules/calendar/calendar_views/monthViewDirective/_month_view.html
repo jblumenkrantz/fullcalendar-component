@@ -1,8 +1,15 @@
-<div ng-repeat="event in events | filter: isCalendarShowing | filter: thisMonthsEvents | orderBy: '(due_time||event_start)'">
-	<div class="row display" ng-style="{color: calendarWatchers[event.calendar_id].color}">
-		<div class="large-3 columns">{{event.event_title}}</div>
-		<div class="large-3 columns">{{event.event_start | date}}</div>
+<div ng-repeat="event in events | filter: {active: 1} | filter: isCalendarShowing | filter: thisMonthsEvents | orderBy: '(due_time||event_start)'">
+	<div ng-show="event.event_id" class="row display" ng-style="{color: calendarWatchers[event.calendar_id].color}" style="margin: 0 0 0 30px; width: auto;">	
+		<div ng-click="edit(event)" class="large-3 columns">{{event.event_title}}</div>
+		<div ng-click="edit(event)" class="large-3 columns">{{event.event_start | date}}</div>
 		<div class="large-3 columns">{{event.event_end | date}}</div>
 		<div class="large-3 columns">{{event.event_description}}</div>
 	</div>
+
+	<div ng-hide="event.event_id" class="row display" ng-style="{color: calendarWatchers[event.calendar_id].color}" style="margin: 0 0 0 30px; width: auto;">	
+		<div ng-click="edit(event)" class="large-3 columns">{{event.task_name}}</div>
+		<div ng-click="edit(event)" class="large-3 columns">{{event.due_time | date}}</div>
+		<div class="large-3 columns">{{event.task_notes}}</div>
+	</div>
 </div>
+	

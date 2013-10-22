@@ -178,13 +178,13 @@ class Calendar extends PinwheelModelObject
 				left outer join
 					reminder_prefs
 				ON 
-					calendars.calendar_id = reminder_prefs.calendar_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = 'user_201304301345170x96952700x6690726' AND reminder_prefs.aggregate = TRUE
+					calendars.calendar_id = reminder_prefs.calendar_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$userId' AND reminder_prefs.aggregate = TRUE
 				left outer join
 					public_calendars
 				ON
 					calendars.calendar_id = public_calendars.calendar_id
 				where
-					calendars.creator_id = 'user_201304301345170x96952700x6690726'"));
+					calendars.creator_id = '$userId'"));
 	}
 
 	static public function loadUserOrgCalendars($userId, $pinsqli=NULL){
@@ -529,7 +529,7 @@ class Calendar extends PinwheelModelObject
 			throw new Exception($pinsqli->error, 1);
 		if ($pinsqli->affected_rows == 0) {
 			$resource = static:: load($this->calendar_id, $pinsqli);
-			$resource = array_pop($resource);
+			//$resource = array_pop($resource);
 			//error_log(print_r($resource,true));
 			if (!$resource)
 				throw new CalendarDoesNotExist($this);

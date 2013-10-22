@@ -251,3 +251,10 @@ select {
 	margin-right: 2.6%
 }
 
+/* general use */
+.centered {
+	text-align: center;
+}
+.required.fail {
+	border: 1px #F00 solid;
+}

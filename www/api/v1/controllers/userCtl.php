@@ -29,6 +29,8 @@ class UserCtl
 		$user = User::loadActive($id === null? $authUserID: $id);
 		$user->settings = array_shift(User::loadSettings($id === null? $authUserID: $id));
 		$user->settings->primary_org = array_shift(MessagingGroup:: getPrimaryOrg($authUserID));
+		$user->settings->calendar_drawer_visible = ($user->settings->calendar_drawer_visible) ? true:false;
+		$user->settings->task_drawer_visible = ($user->settings->task_drawer_visible) ? true:false;
 		echo json_encode($user);
 	}
 
@@ -43,11 +45,21 @@ class UserCtl
 		$options = User::loadNewUserOptions();
 		echo json_encode($options);
 	}
-	function validateUserName() {
-		$body = json_decode(Request:: body());
-		$validity = User::validateUserName($body);
+	function validate($prop, $string) {
+		if($prop == 'username'){
+			$validity = User::validateUserName($string);
+		}
+		elseif($prop == 'email'){
+			$validity = User::validateUserEmail($string);
+		}
 		echo json_encode($validity);
 	}
+/*	function validateUserName($bypass=false) {
+		$body = json_decode(Request:: body());
+		error_log(print_r($body->user_handle,true));
+		$validity = User::validateUserName($body->user_handle);
+		echo json_encode($validity);
+	}*/
 	function forgotPassword () {
 		$body = json_decode(Request:: body());
 		$user = new User($body);
@@ -61,7 +73,7 @@ class UserCtl
 			$user = $user->loadWithEmail($user->email);
 		}
 		if($match){
-			error_log(print_r($user,true));
+			//error_log(print_r($user,true));
 			$user->sendResetInfo();
 		}else{
 			$noReset = new CantFindUser();

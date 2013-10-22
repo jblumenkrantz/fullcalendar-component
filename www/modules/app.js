@@ -21,8 +21,24 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute', 'ngAnimate'])
 				controller: 'ReferenceCtl'
 			})
 			.when("/login", {
-				templateUrl: 'modules/login/main.html',
+				templateUrl: 'modules/login/login.html',
 				controller: 'LoginCtl'
+			})
+			.when("/new_user", {
+				templateUrl: 'modules/new_user/new_user.html',
+				controller: 'NewUserCtl'
+			})
+			.when("/forgot_password", {
+				templateUrl: 'modules/forgot_password/forgot_password.html',
+				controller: 'ForgotPasswordCtl'
+			})
+			.when("/reset_password/:reset_token", {
+				templateUrl: 'modules/reset_password/reset_password.html',
+				controller: 'ResetPasswordCtl'
+			})
+			.when("/activate_contact_point/:activation_token", {
+				templateUrl: 'modules/activate_contact_point/activate_contact_point.html',
+				controller: 'ActivateContactPointCtl'
 			})
 			.otherwise({
 				redirectTo: '/calendar/'+(new Date().getFullYear())+'/'+(new Date().getMonth()+1)+'/'+(new Date().getDate())
@@ -53,6 +69,9 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute', 'ngAnimate'])
 	.factory('User', function($resource){
 		return $resource('/api/v1/user/:id', {}, {update: {method:'PUT'}});
 	})
+	.factory('NewUser', function($resource){
+		return $resource('/api/v1/user/new/', {}, {post: {method:'POST'}});
+	})
 	.factory('Task', function($resource){
 		return $resource('/api/v1/task/:id/:version', {},
 			{
@@ -62,12 +81,20 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute', 'ngAnimate'])
 					transformRequest: function(data){
 						// TODO: add if statements in case task does not have due time
 						// TODO: for save and update
-						data.due_time = new Date(data.due_time).getTime()/1000;
+						if(data.due_time){
+							data.due_time = new Date(data.due_time).getTime()/1000;
+							data.hasDueDate = true;
+						}
 						return angular.toJson(data);
 					},
 					transformResponse: function(data){
 						data = angular.fromJson(data);
-						data.due_time = new Date(data.due_time*1000);
+						if(parseInt(data.due_time)){
+							data.due_time = new Date(data.due_time*1000);
+							data.hasDueDate = true;
+						}else{
+							delete data.due_time;
+						}
 						return data;
 					}
 				},
@@ -76,12 +103,22 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute', 'ngAnimate'])
 					isArray: false,
 					transformRequest: function(data){
 						data = angular.fromJson(data);
-						data.due_time = new Date(data.due_time).getTime()/1000;
+						if(data.due_time){
+							data.due_time = new Date(data.due_time).getTime()/1000;
+							data.hasDueDate = true;
+						}else{
+							delete data.due_time
+						}
 						return angular.toJson(data);
 					},
 					transformResponse: function(data){
 						var data = angular.fromJson(data);
-						data.due_time = new Date(data.due_time*1000);
+						if(parseInt(data.due_time)){
+							data.due_time = new Date(data.due_time*1000);
+							data.hasDueDate = true;
+						}else{
+							delete data.due_time
+						}
 						return data;
 					}
 				},
@@ -108,7 +145,7 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute', 'ngAnimate'])
 			});
 	})
 	.factory('Event', function($resource){
-		return $resource('/api/v1/event/:id/:year/:month/:day', {}, {
+		return $resource('/api/v1/event/:id/:year/:month/:day/:version', {}, {
 			save: {
 				method:'POST',
 				isArray: false,

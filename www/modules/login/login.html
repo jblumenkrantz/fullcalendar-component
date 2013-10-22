@@ -1,0 +1,30 @@
+<div id="main-content" style="height: 100%; overflow: hidden; position: relative; z-index: 2" class="small-12 columns large-12">
+	<div class="row">
+		<div class="large-6 large-centered columns">
+			<h1>LOGIN</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="large-6 large-centered columns">
+			<input type="text" placeholder="user name" ng-model="username" />
+		</div>
+		<div class="large-6 large-centered columns">
+			<input type="password" placeholder="password" ng-model="password" />
+		</div>
+	</div>
+	<div class="row">
+		<div class="large-6 large-centered end columns">
+			<div class="expand small button" ng-click="authenticate()" >Login</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="large-6 large-centered end columns">
+			<div class="expand small button" ng-click="showNewUserForm()" >Create New Account</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="large-6 large-centered end columns">
+			<div class="expand small button" ng-click="showForgotPasswordForm()" >Forgot Password</div>
+		</div>
+	</div>
+</div>

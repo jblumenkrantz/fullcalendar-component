@@ -5,12 +5,19 @@
 <div ng-show="loading_tasks" class="spinwheel"></div>
 <div scroll-pane class="scroll-pane">
 	<!-- task entry form -->
+	
 	<div ng-show="addingTask">
-		<task-form task="newTask" save="saveNew()" cancel="toggle('addingTask')" calendars="calendars"></task-form>
+		<div class="task-panel">
+			<div class="task-gradient">
+				<div class="task-body">
+					<task-form task="newTask" save="saveNew()" cancel="toggle('addingTask')" calendars="calendars"></task-form>
+				</div>
+			</div>
+		</div>
 	</div>
 	<!-- / task entry form -->
 
-	<div ng-repeat="task in tasks | filter: isCalendarShowing">
+	<div ng-repeat="task in events | filter: isTask | filter: isCalendarShowing">
 		<view-task task="task" calendars="calendars" colors="calendarWatchers" ng-show="task.active"></view-task>
 	</div>
 </div>
