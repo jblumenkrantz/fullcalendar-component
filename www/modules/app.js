@@ -115,12 +115,14 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute', 'ngAnimate'])
 				transformRequest: function(data){
 					// TODO: add if statements in case task does not have due time
 					// TODO: for save and update
-					data.event_start = new Date(data.event_start).getTime()/1000;
-					data.event_end = new Date(data.event_end).getTime()/1000;
+					data.event_start = data.event_start.getTime()/1000;
+					data.event_end = data.event_end.getTime()/1000;
+					console.log("transformRequest",data);
 					return angular.toJson(data);
 				},
 				transformResponse: function(data){
 					data = angular.fromJson(data);
+					console.log("transformResponse",data);
 					data.event_start = new Date(data.event_start*1000);
 					data.event_end = new Date(data.event_end*1000);
 					return data;
@@ -130,14 +132,14 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute', 'ngAnimate'])
 				method:'PUT',
 				isArray: false,
 				transformRequest: function(data){
-					data = angular.fromJson(data);
-					data.event_start = new Date(data.event_start).getTime()/1000;
-					data.event_end = new Date(data.event_end).getTime()/1000;
-					console.log(data);
+					data.event_start = data.event_start.getTime()/1000;
+					data.event_end = data.event_end.getTime()/1000;
+					console.log("transformRequest",data);
 					return angular.toJson(data);
 				},
 				transformResponse: function(data){
-					var data = angular.fromJson(data);
+					data = angular.fromJson(data);
+					console.log("transformResponse",data);
 					data.event_start = new Date(data.event_start*1000);
 					data.event_end = new Date(data.event_end*1000);
 					return data;

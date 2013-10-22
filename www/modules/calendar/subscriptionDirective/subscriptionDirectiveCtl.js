@@ -2,13 +2,26 @@
 
 angular.module('pinwheelApp')
 	.controller('SubscriptionDirectiveCtl', function ($scope, $routeParams) {
+		//build calendarWatcher array
 		if ($scope.watcher != undefined) {
-			$scope.watcher[$scope.calendar.calendar_id] = {viewing: $scope.calendar.viewing, color: $scope.calendar.color};
+			$scope.watcher[$scope.calendar.calendar_id] = {
+				viewing: $scope.calendar.viewing,
+				color: $scope.calendar.color,
+				reminder: {
+					has_reminder: ($scope.calendar.reminder_pref_id!=null),
+					using_calendar_reminder: ($scope.calendar.reminder_pref_id!=null),
+					reminder_pref_id: $scope.calendar.reminder_pref_id,
+					mins_before: $scope.calendar.mins_before,
+					reminder_aggregate: $scope.calendar.reminder_aggregate,
+					reminder_type: $scope.calendar.reminder_type,
+				}
+			};
 		}
 		//open existing calendar for editing
 		$scope.edit = function() {
 			$scope.editCalendar || ($scope.editCalendar = {});
 			angular.copy($scope.calendar, $scope.editCalendar);
+			console.log($scope.editCalendar);
 			$scope.editingCalendar = true;
 		}
 

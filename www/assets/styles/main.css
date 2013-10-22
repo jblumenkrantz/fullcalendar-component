@@ -57,7 +57,7 @@ select {
 /* Used to alter styles for screens at least 1440px wide. */
 @media only screen and (min-width: 1440px) {}
 
-#quickEvent .row, #advancedEvent .row {
+#quickEvent .row:first-child, #advancedEvent .row:first-child {
 	border-left: 1px solid #afafaf;
 	border-right: 1px solid #afafaf;
 }
@@ -205,11 +205,11 @@ select {
 .settings.tabs {
 	margin-bottom:0px !important;
 	-webkit-touch-callout: none;
--webkit-user-select: none;
--khtml-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
-user-select: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 .tabs dd.active {
 	border-top: 3px solid #2BA6CB;
@@ -236,3 +236,18 @@ user-select: none;
 	font-weight: bold;
 	margin-bottom:0px !important;
 }
+
+/* EVENT FORM STYLES */
+.without-offset {
+	width: 100%;
+}
+.with-offset {
+	width: 88%;
+}
+.on-date {
+	display: block;
+	float: left;
+	width: 48.7%;
+	margin-right: 2.6%
+}
+

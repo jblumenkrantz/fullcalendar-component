@@ -29,7 +29,7 @@
 				<div class="row">
 					<div ng-class="{'large-6':what , 'large-12':!what }" class="columns">
 						<label>
-							<check if="{{calendar.reminder_pref_id}}" ng-model="editCalendar.has_reminder" ng-change="test()" />
+							<input type='checkbox' ng-model="editCalendar.has_reminder" ng-change="test()" />
 							Add Reminder
 						</label>
 					</div>
