@@ -7911,7 +7911,6 @@ ul.days, .calendar-day {
 
 /* line 325, ../../scss/foundation.scss */
 .subscription-body, .task-body {
-  min-height: 50px !important;
   background: #eeeeee;
   /* Old browsers */
   background: -moz-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
@@ -7928,11 +7927,23 @@ ul.days, .calendar-day {
   /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );
   /* IE6-9 */
-  padding: 16px 4px 6px;
+}
+
+/* line 335, ../../scss/foundation.scss */
+.subscription-body {
+  min-height: 50px !important;
+  padding: 5px 4px 0px 5px;
   margin-left: 8px;
 }
 
 /* line 341, ../../scss/foundation.scss */
+.task-body {
+  min-height: 50px !important;
+  padding: 16px 4px 6px;
+  margin-left: 8px;
+}
+
+/* line 346, ../../scss/foundation.scss */
 .task-body.add {
   min-height: none;
   background: #eeeeee;
@@ -7955,23 +7966,24 @@ ul.days, .calendar-day {
   margin-left: 8px;
 }
 
-/* line 357, ../../scss/foundation.scss */
+/* line 362, ../../scss/foundation.scss */
 .subscription-calendar-title {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  width: 80%;
+  width: 90%;
   display: inline-block !important;
   cursor: pointer;
   color: #222;
   font-size: 14px;
+  padding-top: 12px;
 }
 
-/* line 368, ../../scss/foundation.scss */
-.subscription-panel button {
+/* line 374, ../../scss/foundation.scss */
+.subscription-panel .subscribed {
   position: absolute;
-  top: -19px;
-  right: -4px;
+  top: -8px;
+  right: -3px;
   display: block;
   color: #555;
   font-size: 18px;
@@ -7979,7 +7991,6 @@ ul.days, .calendar-day {
   background: 0;
   padding: 0;
   margin: 0;
-  cursor: pointer;
   transform: rotate(180deg) !important;
   -ms-transform: rotate(180deg) !important;
   /* IE 9 */
@@ -7989,19 +8000,14 @@ ul.days, .calendar-day {
   font-size: 16px;
 }
 
-/* line 388, ../../scss/foundation.scss */
-.button-group > *:first-child {
-  margin-left: 3px !important;
-}
-
-/* line 391, ../../scss/foundation.scss */
+/* line 397, ../../scss/foundation.scss */
 .button-group li {
   padding: 0 5px 0 0;
 }
 
-/* line 395, ../../scss/foundation.scss */
+/* line 401, ../../scss/foundation.scss */
 .button-group li div.button {
-  padding: 10px;
+  padding: 6px;
   background: #eeeeee;
   /* Old browsers */
   background: -moz-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
@@ -8020,11 +8026,11 @@ ul.days, .calendar-day {
   /* IE6-9 */
   border: 1px solid #ccc;
   margin: 0;
+  height: 36px;
 }
 
-/* line 410, ../../scss/foundation.scss */
+/* line 416, ../../scss/foundation.scss */
 .button-group li div.button:hover {
-  padding: 10px;
   background: #eeeeee;
   /* Old browsers */
   background: -moz-linear-gradient(top, #eeeeee 60%, #cccccc 100%);
@@ -8044,46 +8050,51 @@ ul.days, .calendar-day {
   margin: 0;
 }
 
-/* line 424, ../../scss/foundation.scss */
+/* line 429, ../../scss/foundation.scss */
 .button-group li [class*="icon-"] {
   color: #333;
 }
 
-/* line 430, ../../scss/foundation.scss */
+/* line 435, ../../scss/foundation.scss */
 .top-bar {
   background: rgba(221, 221, 221, 0.3) repeat !important;
   overflow: visible;
 }
 
-/* line 435, ../../scss/foundation.scss */
+/* line 440, ../../scss/foundation.scss */
 .top-bar-section li a:not(.button) {
   background: none !important;
 }
 
-/* line 441, ../../scss/foundation.scss */
+/* line 446, ../../scss/foundation.scss */
 .tabs dd.active {
   border-top: 3px solid #23538a;
 }
 
+/* line 449, ../../scss/foundation.scss */
+.top-bar-section ul li {
+  float: left !important;
+}
+
 /* iPads (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* line 449, ../../scss/foundation.scss */
+  /* line 458, ../../scss/foundation.scss */
   .task .body .title {
     font-size: 12px;
   }
 
-  /* line 452, ../../scss/foundation.scss */
+  /* line 461, ../../scss/foundation.scss */
   .task .body .due-date, .task .body .notes {
     font-size: 9px;
   }
 
-  /* line 455, ../../scss/foundation.scss */
+  /* line 464, ../../scss/foundation.scss */
   .edit-container input, textarea {
     padding: 1px;
     font-size: 9px !important;
   }
 
-  /* line 459, ../../scss/foundation.scss */
+  /* line 468, ../../scss/foundation.scss */
   .task .body .notes:hover, .task .body .due-date:hover, .task .body .title:hover {
     text-decoration: none;
   }
