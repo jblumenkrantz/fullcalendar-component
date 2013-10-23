@@ -238,10 +238,9 @@ border-width: 1px 0 1px  0;
 
 
 //dummy calendar for proper visionality during html wireframe developmentality -jt
-.calendar-wrapper{display:inline;overflow:visible;width:100% !important;margin:0 auto; padding: 0 !important; }
-.calendar {width: 101% !important; padding: 0; margin: 0;}
-.calendar ul.month-browser li{width:33.3%;padding:0;border:0;text-align:center;text-transform:uppercase;height:auto;margin:20px 0;}
-.calendar{width:100% !important; margin: 0; padding: 0;}
+.calendar-wrapper{display:inline;overflow:hidden;margin:0 auto; padding: 0 !important;  width: auto;}
+.calendar { padding: 0; margin: 0 0 0 38px !important;}
+.calendar ul.month-browser li{ width: 33.3%;padding:0;border:0;text-align:center;text-transform:uppercase;height:auto;margin:20px 0;}
 .calendar ul{list-style:none;padding:0;margin:0;clear:both;width:100%;}
 .calendar ul.weekdays{height:40px; width: 100%;}
 .calendar ul.weekdays li{text-align:center;text-transform:uppercase;line-height:20px;border:none!important;padding:10px 0px;color:#666;font-size:13px;}
