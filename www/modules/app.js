@@ -101,7 +101,6 @@ angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute', 'ngAnimate'])
 					isArray: false,
 					transformRequest: function(data){
 						data = angular.fromJson(data);
-						console.log(angular.extend({}, data));
 						if(data.hasDueDate){
 							data.due_time = new Date(data.due_time).getTime()/1000;
 							data.hasDueDate = true;
