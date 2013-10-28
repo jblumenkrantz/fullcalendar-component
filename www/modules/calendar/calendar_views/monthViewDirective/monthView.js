@@ -13,6 +13,13 @@ angular.module('pinwheelApp')
 				 	
 				 return(itemStart >= startOfMonth && itemStart < endOfMonth)
 				}
+
+				$scope.eventSources = [[]];
+				$scope.calendarOptions = {
+					editable: true,
+					header:{
+					}
+				};
 			}
 		}
 	});

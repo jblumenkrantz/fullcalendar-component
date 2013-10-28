@@ -89,35 +89,7 @@
 
 	<!-- Add your site or application content here -->
 	<div ng-controller="PinwheelCtl">
-		<!-- header -->
-		<nav id="mainHeader" class="top-bar" ng-include src="'modules/_topbar.html'"></nav>
-		<!-- / header -->
-
-		<!-- main content -->
-		<!-- route pane -->
-		<div class="large-12 columns" style="padding: 0;" ng-view=""></div>
-		<!-- / route pane -->
-		<!-- / main content -->
-
-        <!-- task view -->
-        <div
-            ng-controller="TaskCtl"
-            id="tasks"
-            style="height: 100%; overflow: hidden; right: 0px; z-index: 1;"
-            class="small-12 large-2 columns drawer"
-            ng-include src="'modules/calendar/_task_sidebar.html'">
-        </div>
-        <!-- / task view -->
-
-        <!-- subscription view  gets pulled 10 columns from it's original position, all the way to the left. -->
-        <div
-            ng-controller="SubscriptionCtl"
-            id="my-calendars"
-            style="height: 100%; overflow: hidden; left: 0px; z-index: 1;"
-            class="small-12 large-2 columns drawer"
-            ng-include src="'modules/calendar/_calendar_sidebar.html'">
-        </div>
-        <!-- / subscription view -->
+		<div ui-calendar/>
 	</div>
 	<!-- / application content -->
 
@@ -136,7 +108,6 @@
 	<!-- build:js scripts/modules.js -->
 	<script src="bower_components/jquery/jquery.js"></script>
 	<script src="bower_components/jquery-ui/ui/jquery-ui.js"></script>
-	<script src="bower_components/fullcalendar/fullcalendar.js"></script>
 	<script src="bower_components/angular/angular.js"></script>
 	<script src="bower_components/angular-route/angular-route.js"></script>
 	<script src="bower_components/angular-ui-date/src/date.js"></script>
@@ -145,6 +116,7 @@
 	<script src="bower_components/angular-cookies/angular-cookies.js"></script>
 	<script src="bower_components/angular-animate/angular-animate.min.js"></script>
 	<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+	<script src="bower_components/fullcalendar/fullcalendar.js"></script>
 	<script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
 	<script src="assets/js/datetimeentry/datetimeentry.min.js"></script>
 	<script src="assets/js/spectrum/spectrum.min.js"></script>
@@ -187,3 +159,4 @@
 	<!-- endbuild -->
 </body>
 </html>
+

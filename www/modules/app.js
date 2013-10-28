@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('pinwheelApp', ['ngResource', 'ui.date', 'ngRoute', 'ngAnimate'])
+angular.module('pinwheelApp', ['ui.calendar', 'ngDragDrop', 'ngResource', 'ui.date', 'ngRoute', 'ngAnimate'])
 	.config(function ($routeProvider) {
 		$routeProvider
 			.when('/calendar/:year/:month/:day', {
