@@ -12,165 +12,171 @@
 		<div class="large-3 columns">{{event.task_notes}}</div>
 	</div>
 </div> -->
-	<div class="calendar-wrapper">
-		<div class="calendar-index">
-					<ul class="side-nav">		
-						<li><b ng-click="makeNavYear(navYear-1)">{{navYear-1}}</b></li>
-						<li><b>{{navYear}}</b></li>
-						<li ng-click="gotoMonth(1, navYear)">Jan</li>
-						<li ng-click="gotoMonth(2, navYear)">Feb</li>
-						<li ng-click="gotoMonth(3, navYear)">Mar</li>
-						<li ng-click="gotoMonth(4, navYear)">Apr</li>
-						<li ng-click="gotoMonth(5, navYear)">May</li>
-						<li ng-click="gotoMonth(6, navYear)">Jun</li>
-						<li ng-click="gotoMonth(7, navYear)">Jul</li>
-						<li ng-click="gotoMonth(8, navYear)">Aug</li>
-						<li ng-click="gotoMonth(9, navYear)">Sep</li>
-						<li ng-click="gotoMonth(10, navYear)">Oct</li>
-						<li ng-click="gotoMonth(11, navYear)">Nov</li>
-						<li ng-click="gotoMonth(12, navYear)">Dec</li>
-						<li><b ng-click="makeNavYear(navYear+1)">{{navYear+1}}</b></li>
-					</ul>	
-				</div>
-    <div class="calendar">
-      <ul class="weekdays">
-        <li class="day_of_week Sunday">Sunday</li>
-        <li class="day_of_week Monday">Monday</li>
-        <li class="day_of_week Tuesday">Tuesday</li>
-        <li class="day_of_week Wednesday">Wednesday</li>
-        <li class="day_of_week Thursday">Thursday</li>
-        <li class="day_of_week Friday">Friday</li>
-        <li class="day_of_week Saturday">Saturday</li>
-      </ul>
-      <ul class="days">
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Sun,</span> <span class="month">Sep</span> 1</div>
-        </li>
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Mon,</span> <span class="month">Sep</span> 2</div>
-        </li>
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Tue,</span> <span class="month">Sep</span> 3</div>
-          <ul class="dayContainer events" id="">
-            <li style="border: 0px solid green; border-left:8px solid green;width: 100%;" class="event normal"><span class="tinter" style="width: 100%;">Find out what the fox says</span>
-            <li style="border: 0px solid green; border-left:8px solid green;width: 100%;" class="event normal"><span class="tinter" style="width: 100%;">Find out what the fox says</span>
-            </li>
+<div class="calendar-wrapper">
+	<div class="calendar-index">
+		<ul class="side-nav">		
+			<li><b ng-click="makeNavYear(navYear-1)">{{navYear-1}}</b></li>
+			<li><b>{{navYear}}</b></li>
+			<li ng-click="gotoMonth(1, navYear)">Jan</li>
+			<li ng-click="gotoMonth(2, navYear)">Feb</li>
+			<li ng-click="gotoMonth(3, navYear)">Mar</li>
+			<li ng-click="gotoMonth(4, navYear)">Apr</li>
+			<li ng-click="gotoMonth(5, navYear)">May</li>
+			<li ng-click="gotoMonth(6, navYear)">Jun</li>
+			<li ng-click="gotoMonth(7, navYear)">Jul</li>
+			<li ng-click="gotoMonth(8, navYear)">Aug</li>
+			<li ng-click="gotoMonth(9, navYear)">Sep</li>
+			<li ng-click="gotoMonth(10, navYear)">Oct</li>
+			<li ng-click="gotoMonth(11, navYear)">Nov</li>
+			<li ng-click="gotoMonth(12, navYear)">Dec</li>
+			<li><b ng-click="makeNavYear(navYear+1)">{{navYear+1}}</b></li>
+		</ul>
+	</div>
+	<div ui-calendar="calendarOptions" ng-model="eventSources">
+</div>
 
-            </ul>
-        </li>
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Wed,</span> <span class="month">Sep</span> 4</div>
-        </li>
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Thu,</span> <span class="month">Sep</span> 5</div>
-        </li>
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Fri,</span> <span class="month">Sep</span> 6</div>
-        </li>
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Sat,</span> <span class="month">Sep</span> 7</div>
-        </li>
-      </ul>
-      <ul class="days">
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Sun,</span> <span class="month">Sep</span> 8</div>
-          <div class="show-info">
-            <a href="http://centre.atlantaballet.com/community-programs/healthy-living-day/" class="show-name">Lorem ipsum dolor sit amet...</a>
-          </div>
-        </li>
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Mon,</span> <span class="month">Sep</span> 9</div>
-        </li>
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Tue,</span> <span class="month">Sep</span> 10</div>
-        </li>
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Wed,</span> <span class="month">Sep</span> 11</div>
-        </li>
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Thu,</span> <span class="month">Sep</span> 12</div>
-        </li>
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Fri,</span> <span class="month">Sep</span> 13</div>
-        </li>
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Sat,</span> <span class="month">Sep</span> 14</div>
-        </li>
-      </ul>
-      <ul class="days">
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Sun,</span> <span class="month">Sep</span> 15</div>
-        </li>
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Mon,</span> <span class="month">Sep</span> 16</div>
-        </li>
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Tue,</span> <span class="month">Sep</span> 17</div>
-        </li>
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Wed,</span> <span class="month">Sep</span> 18</div>
-        </li>
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Thu,</span> <span class="month">Sep</span> 19</div>
-        </li>
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Fri,</span> <span class="month">Sep</span> 20</div>
-        </li>
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Sat,</span> <span class="month">Sep</span> 21</div>
-        </li>
-      </ul>
-      <ul class="days">
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Sun,</span> <span class="month">Sep</span> 22</div>
-        </li>
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Mon,</span> <span class="month">Sep</span> 23</div>
-          <div class="show-info">
-            <a href="http://www.atlantaballet.com/get-involved/corps-de-ballet/" class="show-name">Lorem ipsum dolor sit amet...</a>
-          </div>
-        </li>
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Tue,</span> <span class="month">Sep</span> 24</div>
-        </li>
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Wed,</span> <span class="month">Sep</span> 25</div>
-        </li>
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Thu,</span> <span class="month">Sep</span> 26</div>
-        </li>
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Fri,</span> <span class="month">Sep</span> 27</div>
-          <div class="show-info">
-           <a href="http://www.atlantaballet.com/get-involved/corps-de-ballet/" class="show-name">Lorem ipsum dolor sit amet...</a>
-          </div>
-        </li>
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Sat,</span> <span class="month">Sep</span> 28</div>
-        </li>
-      </ul>
-      <ul class="days">
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Sun,</span> <span class="month">Sep</span> 29</div>
-        </li>
-        <li class="calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Mon,</span> <span class="month">Sep</span> 30</div>
-        </li>
-        <li class="out_of_range calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Tue,</span> <span class="month">Oct</span> 1</div>
-        </li>
-        <li class="out_of_range calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Wed,</span> <span class="month">Oct</span> 2</div>
-        </li>
-        <li class="out_of_range calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Thu,</span> <span class="month">Oct</span> 3</div>
-        </li>
-        <li class="out_of_range calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Fri,</span> <span class="month">Oct</span> 4</div>
-        </li>
-        <li class="out_of_range calendar-day" style="height: 150px; overflow: auto;">
-          <div class="date day_cell"><span class="day">Sat,</span> <span class="month">Oct</span> 5</div>
-        </li>
-      </ul>
-    </div>
-  </div>
+
+
+		<!--<ul class="weekdays">
+			<li class="day_of_week Sunday">Sunday</li>
+			<li class="day_of_week Monday">Monday</li>
+			<li class="day_of_week Tuesday">Tuesday</li>
+			<li class="day_of_week Wednesday">Wednesday</li>
+			<li class="day_of_week Thursday">Thursday</li>
+			<li class="day_of_week Friday">Friday</li>
+			<li class="day_of_week Saturday">Saturday</li>
+		</ul>
+		<ul class="days">
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Sun,</span> <span class="month">Sep</span> 1</div>
+				<ul data-drop="true" jqyoui-droppable class="dayContainer events" id="">
+				</ul>
+			</li>
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Mon,</span> <span class="month">Sep</span> 2</div>
+			</li>
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Tue,</span> <span class="month">Sep</span> 3</div>
+				<ul class="dayContainer events" id="">
+					<li data-drag="true" data-jqyoui-options="{revert:'invalid'}" jqyoui-draggable="{animate:true}" style="border: 0px solid green; border-left:8px solid green;width: 100%;" class="event normal"><span class="tinter" style="width: 100%;">Find out what the fox says</span>
+					<li style="border: 0px solid green; border-left:8px solid green;width: 100%;" class="event normal"><span class="tinter" style="width: 100%;">Find out what the fox says</span>
+					</li>
+
+					</ul>
+			</li>
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Wed,</span> <span class="month">Sep</span> 4</div>
+			</li>
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Thu,</span> <span class="month">Sep</span> 5</div>
+			</li>
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Fri,</span> <span class="month">Sep</span> 6</div>
+			</li>
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Sat,</span> <span class="month">Sep</span> 7</div>
+			</li>
+		</ul>
+		<ul class="days">
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Sun,</span> <span class="month">Sep</span> 8</div>
+				<div class="show-info">
+					<a href="http://centre.atlantaballet.com/community-programs/healthy-living-day/" class="show-name">Lorem ipsum dolor sit amet...</a>
+				</div>
+			</li>
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Mon,</span> <span class="month">Sep</span> 9</div>
+			</li>
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Tue,</span> <span class="month">Sep</span> 10</div>
+			</li>
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Wed,</span> <span class="month">Sep</span> 11</div>
+			</li>
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Thu,</span> <span class="month">Sep</span> 12</div>
+			</li>
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Fri,</span> <span class="month">Sep</span> 13</div>
+			</li>
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Sat,</span> <span class="month">Sep</span> 14</div>
+			</li>
+		</ul>
+		<ul class="days">
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Sun,</span> <span class="month">Sep</span> 15</div>
+			</li>
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Mon,</span> <span class="month">Sep</span> 16</div>
+			</li>
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Tue,</span> <span class="month">Sep</span> 17</div>
+			</li>
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Wed,</span> <span class="month">Sep</span> 18</div>
+			</li>
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Thu,</span> <span class="month">Sep</span> 19</div>
+			</li>
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Fri,</span> <span class="month">Sep</span> 20</div>
+			</li>
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Sat,</span> <span class="month">Sep</span> 21</div>
+			</li>
+		</ul>
+		<ul class="days">
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Sun,</span> <span class="month">Sep</span> 22</div>
+			</li>
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Mon,</span> <span class="month">Sep</span> 23</div>
+				<div class="show-info">
+					<a href="http://www.atlantaballet.com/get-involved/corps-de-ballet/" class="show-name">Lorem ipsum dolor sit amet...</a>
+				</div>
+			</li>
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Tue,</span> <span class="month">Sep</span> 24</div>
+			</li>
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Wed,</span> <span class="month">Sep</span> 25</div>
+			</li>
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Thu,</span> <span class="month">Sep</span> 26</div>
+			</li>
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Fri,</span> <span class="month">Sep</span> 27</div>
+				<div class="show-info">
+				 <a href="http://www.atlantaballet.com/get-involved/corps-de-ballet/" class="show-name">Lorem ipsum dolor sit amet...</a>
+				</div>
+			</li>
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Sat,</span> <span class="month">Sep</span> 28</div>
+			</li>
+		</ul>
+		<ul class="days">
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Sun,</span> <span class="month">Sep</span> 29</div>
+			</li>
+			<li class="calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Mon,</span> <span class="month">Sep</span> 30</div>
+			</li>
+			<li class="out_of_range calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Tue,</span> <span class="month">Oct</span> 1</div>
+			</li>
+			<li class="out_of_range calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Wed,</span> <span class="month">Oct</span> 2</div>
+			</li>
+			<li class="out_of_range calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Thu,</span> <span class="month">Oct</span> 3</div>
+			</li>
+			<li class="out_of_range calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Fri,</span> <span class="month">Oct</span> 4</div>
+			</li>
+			<li class="out_of_range calendar-day" style="height: 150px; overflow: auto;">
+				<div class="date day_cell"><span class="day">Sat,</span> <span class="month">Oct</span> 5</div>
+			</li>
+		</ul>
+	</div>
+</div>-->
