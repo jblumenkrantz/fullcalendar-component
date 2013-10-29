@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pinwheelApp')
-  .controller('PinwheelCtl', function ($scope, $location, $http, Calendar, User, localStorage, Event, Task, Timezones, $route) {
+  .controller('PinwheelCtl', function ($scope, $location, $http, Calendar, User, localStorage, Event, Task, Timezones, ContactPoints, $route) {
 		$scope.calendarWatchers = {};
 		$scope.reminders = {};
 
@@ -26,7 +26,10 @@ angular.module('pinwheelApp')
 				});
 				$scope.initialUser = {};
 				angular.copy(user, $scope.initialUser);
-
+				ContactPoints.query(function(contactPoints){
+					$scope.contactPoints = contactPoints;
+					console.warn(contactPoints);
+				});
 				Calendar.query({id: 'all'}, function(calendars){
 					$scope.loading_calendars = false;
 					$scope.calendars = calendars;			
@@ -78,6 +81,7 @@ angular.module('pinwheelApp')
 			delete $scope.events
 			delete $scope.user
 			delete $scope.initialUser;
+			delete $scope.contactPoints;
 			
 			/* Delete users access token */
 			delete localStorage['token'];

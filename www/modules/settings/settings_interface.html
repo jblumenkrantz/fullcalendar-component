@@ -7,6 +7,9 @@
 		<dd settings-tab="admin" ng-show="isOrgSuperAdmin()" user='user' activeTab='activeTab'><p>Administrator</p></dd>
 	</dl> 
 </div>
+<!-- ********************* -->
+<!-- ** Account Section ** -->
+<!-- ********************* -->
 <div ng-show="activeTab.account">
 	<div class="row">
 		<div class="large-12 columns">
@@ -54,15 +57,53 @@
 			</div>
 		</div>
 	</div>
-</div> <!-- End Account Section -->
+</div>
+<!-- END Account Section -->
+
+<!-- ************************* -->
+<!-- ** Diagnostics Section ** -->
+<!-- ************************* -->
 <div ng-show="activeTab.diagnostics">
 	<h2>Diagnostics</h2>
 	Name: {{user.first_name}}
 </div>
+<!-- END Diagnostics Section -->
+
+<!-- ***************************** -->
+<!-- **  Contact Points Section ** -->
+<!-- ***************************** -->
 <div ng-show="activeTab.contact_points">
 	<h2>Contact Points</h2>
-	Name: {{user.first_name}}
+	<div ng-repeat="point in contactPoints">
+		<div class="large-6 columns left">
+			NEEDs a directive for clicking this that shows the edit form
+			<div class="large-12 columns contactPoint item">
+				{{point.point_name}}
+			</div>
+		</div>
+		<div class="large-6 columns right clear">
+			<div class="large-12 columns" ng-show='point.edit'>
+				<div class="large-6 columns">
+					Name: <input type="text" ng-model="point.point_name" />
+				</div>
+				<div  class="large-12 columns">
+					Address: <input type="text" ng-model="point.address" />
+				</div>
+				<div class="large-12 columns">
+					Point Type: 
+					<select ng-options="type for type in ['email','phone']" ng-model="point.point_type" ></select>
+				</div>
+				<div class="large-12 columns">
+					Activated: <input type="checkbox" disabled ng-model="point.activated" />
+				</div>
+				<div class="large-12 columns">
+					Emergency Only: <input type="checkbox" ng-model="point.emergency_only" />
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+<!-- END Contact Points Section -->
 
 
 

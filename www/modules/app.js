@@ -69,6 +69,9 @@ angular.module('pinwheelApp', ['ui.calendar', 'ngDragDrop', 'ngResource', 'ui.da
 	.factory('User', function($resource){
 		return $resource('/api/v1/user/:id', {}, {update: {method:'PUT'}});
 	})
+	.factory('ContactPoints', function($resource){
+		return $resource('/api/v1/user/contactPoints/', {}, {update: {method:'PUT'}});
+	})	
 	.factory('NewUser', function($resource){
 		return $resource('/api/v1/user/new/', {}, {post: {method:'POST'}});
 	})
