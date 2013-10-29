@@ -1,5 +1,8 @@
 <div class="task">
-	<input type="text" ng-model="task.task_name" placeholder="Title (required)" />
+	<div ng-click="cancel()" style="position: relative; top: 3px; right: 0px; float: right; cursor:pointer;">
+					<span aria-hidden="true" class="icon-x-altx-alt" ></span>
+				</div>
+	<input type="text" ng-model="task.task_name" placeholder="Title (required)" style="width: 90%;"/>
 	<select ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'" ng-model="task.calendar_id" ></select>
 	<textarea ng-model="task.task_notes" placeholder="Add Note"></textarea>
 	<label class="checkbox">
@@ -12,15 +15,10 @@
 		<check if="{{task.reminder_pref_id}}" ng-model="task.has_reminder" ng-change="" />
 		Add Reminder
 	</label>
-	<div class="row">
-		<div class="large-6 columns">
-			<div class="expand small alert button" ng-click="cancel()" >cancel</div>
-		</div>
-		<div class="large-6 columns">
-			<div class="expand small alert button" ng-click="delete()" >delete</div>
-		</div>
-		<div class="large-12 columns">
-			<div class="expand small button" ng-click="save()" >save</div>
-		</div>
-	</div>
+	<ul class="button-group even-2">
+		<li><div class="button radius" ng-click="delete()"><span aria-hidden="true" class="icon-remove-2"></span> <!-- unsubscribe --></div></li>
+		<li style="padding-right: 0;"><div class="button radius" ng-click="save()"><span aria-hidden="true" class="icon-checkmark"></span> <!-- save --></div></li>
+	</ul>
+	
+	
 </div>

@@ -7931,7 +7931,7 @@ ul.days, .calendar-day {
 /* line 340, ../../scss/foundation.scss */
 .task-body {
   min-height: 50px !important;
-  padding: 16px 4px 6px;
+  padding: 5px 4px 0px 5px;
   margin-left: 8px;
 }
 
