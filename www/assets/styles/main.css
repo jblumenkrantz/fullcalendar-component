@@ -243,3 +243,10 @@ user-select: none;
 .required.fail {
 	border: 1px #F00 solid;
 }
+.clear {
+	clear: both;
+}
+/* contact points */
+.contactPoint.item {
+	background:#BADA55;
+}
