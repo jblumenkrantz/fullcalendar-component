@@ -15,7 +15,9 @@ angular.module('pinwheelApp')
 				checkCalendarReminder: '&',
 				dueDateToggle: '&',
 				reminderTypeFilter: '&',
-				reminderTypes: '='
+				reminderTypes: '=',
+				usingOwnReminder: '&',
+				noReminder: "&"
 			}
 		}
 	});

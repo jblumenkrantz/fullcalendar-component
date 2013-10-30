@@ -30,7 +30,7 @@
 				task.reminder_type == 7
 				"
 			style="float: left; width: 20%; margin-right: 2%;">
-			<input type='text' ng-model="task.reminder_offset" placeholder="2" />
+			<input type='text' ng-change="usingOwnReminder()" ng-model="task.reminder_offset" placeholder="2" />
 		</div>
 
 		<div style="float: left;" ng-class="{'with-offset':!hideOffset, 'without-offset':hideOffset}">
@@ -38,7 +38,8 @@
 			<select
 				ng-class="{'on-date':task.reminder_type==3}"
 				ng-options="r.id as r.name for r in reminderTypes | filter:reminderTypeFilter()"
-				ng-model="task.reminder_type">
+				ng-model="task.reminder_type"
+				ng-change="usingOwnReminder()">
 			</select>
 			<!-- Absolute Reminder Datetime -->
 			<datetime
@@ -51,10 +52,19 @@
 		<div style="clear: both;"></div>
 
 		<div style="font-size: 12px; margin: -0.8em 0 1em 0;">
-			This event is using
-			<span ng-show="task.using_calendar_reminder">its calendar's reminder.</span>
-			<span ng-show="!task.using_calendar_reminder && task.reminder_type != 7">its own reminder.</span>
-			<span ng-show="task.reminder_type == 7">no reminder.</span>
+			This task is using
+			<span ng-show="task.using_calendar_reminder">
+				its calendar's reminder.
+				<span style="cursor: pointer; text-decoration: underline;" ng-click="noReminder()">Don't remind me.</span>
+			</span>
+			<span ng-show="!task.using_calendar_reminder && task.reminder_type != 7">
+				its own reminder.
+				<span ng-if="task.using_calendar_reminder!=undefined" style="cursor: pointer; text-decoration: underline;" ng-click="checkCalendarReminder()">Use calendar reminder.</span></span>
+			</span>
+			<span ng-show="task.reminder_type == 7">
+				no reminder.
+				<span ng-if="task.using_calendar_reminder!=undefined" style="cursor: pointer; text-decoration: underline;" ng-click="checkCalendarReminder()">Use calendar reminder.</span></span>
+			</span>
 		</div>
 	</div>
 	<!-- BUTTONS -->

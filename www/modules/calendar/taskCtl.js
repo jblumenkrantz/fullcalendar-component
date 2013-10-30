@@ -19,13 +19,11 @@ angular.module('pinwheelApp')
 		$scope.add = function() {
 			$scope.newTask.calendar_id = $scope.user.settings.default_calendar;
 			$scope.addingTask = true;
-			console.log($scope.newTask);
 		}
 		
 		//save new task
 		$scope.save = function(){
 			$scope.newTask.$save({}, function(task) {
-				console.log(task);
 				$scope.events.push(task);
 				$scope.cancel();
 			});
@@ -47,7 +45,7 @@ angular.module('pinwheelApp')
 			if ($scope.newTask.has_due_date) {
 				$scope.useReminderType = 'relative';
 				$scope.newTask.due_time = new Date($filter('date')((new Date()).addHours(1), "M/d/yyyy h:00 a"));
-				(!$scope.newTask.has_reminder && ReminderService.checkCalendarReminder($scope.newTask, $scope.calendarWatchers));
+				(!$scope.newTask.has_reminder && $scope.checkCalendarReminder());
 			}
 			else {
 				$scope.useReminderType = '';
@@ -61,12 +59,26 @@ angular.module('pinwheelApp')
 		}
 
 		$scope.reminderToggle = function() {
-			($scope.newTask.has_reminder &&
-			$scope.newTask.reminder_pref_id == null &&
-			ReminderService.reminderDefaultsTask($scope.newTask, $scope.user));
+			//if adding reminder
+			if ($scope.newTask.has_reminder) {
+				//if no existing reminder (calendar or other), use default reminder settings
+				($scope.newTask.reminder_pref_id == null && ReminderService.reminderDefaultsTask($scope.newTask, $scope.user));
+			}
+			//if removing reminder
+			else {
+				$scope.checkCalendarReminder();
+			}
 		}
 
 		$scope.checkCalendarReminder = function() {
 			ReminderService.checkCalendarReminder($scope.newTask, $scope.calendarWatchers);
+		}
+
+		$scope.usingOwnReminder = function() {
+			ReminderService.usingOwnReminder($scope.newTask);
+		}
+
+		$scope.noReminder = function() {
+			ReminderService.noReminder($scope.newTask);
 		}
   });

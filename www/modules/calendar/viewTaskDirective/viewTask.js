@@ -22,7 +22,7 @@ angular.module('pinwheelApp')
 					//apply calendar reminder if task doesn't have one already AND has a due date
 					(!$scope.editTask.has_reminder &&
 					$scope.editTask.has_due_date &&
-					ReminderService.checkCalendarReminder($scope.editTask, $scope.calendarWatchers));
+					$scope.checkCalendarReminder());
 
 					$scope.editingTask = true;
 				}
@@ -64,13 +64,27 @@ angular.module('pinwheelApp')
 
 
 				$scope.reminderToggle = function() {
-					($scope.editTask.has_reminder &&
-					$scope.editTask.reminder_pref_id == null &&
-					ReminderService.reminderDefaultsTask($scope.editTask, $scope.user));
+					//if adding reminder
+					if ($scope.editTask.has_reminder) {
+						//if no existing reminder (calendar or other), use default reminder settings
+						($scope.editTask.reminder_pref_id == null && ReminderService.reminderDefaultsTask($scope.editTask, $scope.user));
+					}
+					//if removing reminder
+					else {
+						$scope.checkCalendarReminder();
+					}
 				}
 
 				$scope.checkCalendarReminder = function() {
 					ReminderService.checkCalendarReminder($scope.editTask, $scope.calendarWatchers);
+				}
+
+				$scope.usingOwnReminder = function() {
+					ReminderService.usingOwnReminder($scope.editTask);
+				}
+
+				$scope.noReminder = function() {
+					ReminderService.noReminder($scope.editTask);
 				}
 			}
 		}
