@@ -192,7 +192,7 @@ class Contact extends PinwheelModelObject
 		}
 
 		static:: sendActivationCode($msg);
-		$contactPoint = static:: loadContactPoint($point_id, $pinsqli);
+		$contactPoint = array_shift(static:: loadContactPoint($point_id, $pinsqli));
 		return $contactPoint;
 	}
 
