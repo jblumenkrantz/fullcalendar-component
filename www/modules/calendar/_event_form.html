@@ -14,13 +14,11 @@
 <div class="row" style="padding-top: 10px;">
 	<!-- Event Title -->
 	<div class="large-6 columns">
-		<label>Title:</label>
 		<input type="text" ng-model="formEvent.event_title" placeholder="Untitled event" />
 	</div>
 	<!-- / Event Title -->
 	<!-- Calendar -->
 	<div class="large-6 columns">
-		<label>Calendar:</label>
 		<select ng-change="checkCalendarReminder()" ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'" ng-model="formEvent.calendar_id" ></select>
 	</div>
 	<!-- / Calendar -->
@@ -73,7 +71,6 @@
 <!-- Description -->
 <div class="row">
 	<div class="large-12 columns">
-		<label>Description:</label>
 		<textarea ng-model="formEvent.event_description" placeholder="Add a description"></textarea>
 	</div>
 </div>
