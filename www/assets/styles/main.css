@@ -10,6 +10,11 @@
 	}
 }
 
+html,
+body {
+  height: 100%;
+}
+
 textarea {
 	resize: none;
 }
@@ -241,14 +246,22 @@ select {
 .without-offset {
 	width: 100%;
 }
-.with-offset {
+#advancedEvent .with-offset {
 	width: 88%;
 }
-.on-date {
+#advancedEvent .on-date {
 	display: block;
 	float: left;
 	width: 48.7%;
 	margin-right: 2.6%
+}
+#tasks .with-offset,
+#my-calendars .with-offset {
+	width: 78%;
+}
+#tasks .on-date,
+#my-calendars .on-date {
+	margin-bottom: .1875em;
 }
 
 /* general use */

@@ -134,12 +134,17 @@
 			return this;
 		}
 		Date.prototype.setTimeByString = function(str) {
-			var parts = s.match(/(\d+)\.(\d+) (\w+)/),
+			var parts = str.match(/(\d+)\.(\d+) (\w+)/),
     			hours = /am/i.test(parts[3]) ? parseInt(parts[1], 10) : parseInt(parts[1], 10) + 12,
     			minutes = parseInt(parts[2], 10);
 			
 			this.setHours(hours);
 			this.setMinutes(minutes);
+			return this;
+		}
+		Date.prototype.setTimeByObj = function(obj) {			
+			this.setHours(obj.getHours());
+			this.setMinutes(obj.getMinutes());
 			return this;
 		}
 	</script>
@@ -191,6 +196,7 @@
 	<script src="modules/settings/settingsCtl.js"></script>
 	<script src="modules/settings/settingsModal.js"></script>
 	<script src="modules/quickAddParser.js"></script>
+	<script src="modules/reminderService.js"></script>
 	<script src="modules/interfaceDirectives.js"></script>
 	<!-- endbuild -->
 </body>

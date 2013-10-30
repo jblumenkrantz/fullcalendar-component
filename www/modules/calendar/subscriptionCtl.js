@@ -17,9 +17,14 @@ angular.module('pinwheelApp')
 			$scope.newCalendar.recent = true;
 			$scope.newCalendar.viewing = true;
 			$scope.newCalendar.$save({}, function(calendar) {
-				console.log(calendar);
 				$scope.calendars.push(calendar);
 				$scope.newCalendar = new Calendar();
 			});
+		}
+
+		$scope.reminderToggle = function() {
+			($scope.newCalendar.has_reminder &&
+			$scope.newCalendar.reminder_pref_id == null &&
+			ReminderService.reminderDefaultsEvent($scope.newCalendar, $scope.user));
 		}
   });

@@ -10,7 +10,12 @@ angular.module('pinwheelApp')
 				calendars: '=',
 				save: '&',
 				cancel: '&',
-				delete: '&'
+				delete: '&',
+				reminderToggle: '&',
+				checkCalendarReminder: '&',
+				dueDateToggle: '&',
+				reminderTypeFilter: '&',
+				reminderTypes: '='
 			}
 		}
 	});

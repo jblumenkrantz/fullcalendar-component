@@ -48,7 +48,7 @@
 	<!-- All Day -->
 	<div class="large-4 columns">
 		<label class="checkbox">
-			<input type="checkbox" ng-model="formEvent.all_day" ng-true-value="1" ng-false-value="0" />
+			<input type="checkbox" ng-model="formEvent.all_day" ng-true-value="1" ng-false-value="0" ng-click="allDayToggle()" />
 			All Day Event
 		</label>
 	</div>
@@ -56,7 +56,7 @@
 	<!-- Reminder -->
 	<div class="large-4 columns">
 		<label class="checkbox">
-			<input type="checkbox" ng-model="formEvent.has_reminder" />
+			<input type="checkbox" ng-model="formEvent.has_reminder" ng-click="reminderToggle()" />
 			Add Reminder
 		</label>
 	</div>
@@ -82,10 +82,6 @@
 	<!-- REMINDER SETTINGS -->
 	<div class="large-6 columns" ng-if="formEvent.has_reminder">
 		<label>Remind Me:</label>
-
-
-
-
 		<!-- Reminder Offset -->
 		<div
 			ng-hide="
@@ -96,31 +92,21 @@
 				formEvent.reminder_type == 7
 				"
 			style="float: left; width: 10%; margin-right: 2%;">
-			<input type='text' ng-model="formEvent.reminder_offset" placeholder="2" />
+			<input type='text' ng-model="formEvent.reminder_offset" placeholder="2" ng-change="usingOwnReminder()" />
 		</div>
 
 		<div style="float: left;" ng-class="{'with-offset':!hideOffset, 'without-offset':hideOffset}">
-			<!-- Normal Reminder Types -->
+			<!-- Reminder Types -->
 			<select
-				ng-class="{'on-date':formEvent.reminder_type == 3}"
-				ng-model="formEvent.reminder_type"
-				ng-show="formEvent.all_day == '0'">
-					<option value="0">Minutes before</option>
-					<option value="1">Hours before</option>
-					<option value="2">Days before</option>
-					<option value="3">On date:</option>
-					<option value="7">No Reminder</option>
-			</select>
-			<!-- All Day Reminder Types -->
-			<select
-				ng-class="{'on-date':formEvent.reminder_type != 7}"
-				ng-model="formEvent.reminder_type"
-				ng-show="formEvent.all_day == '1'">
-					<option value="4">The same day at:</option>
-					<option value="5">The day before at:</option>
-					<option value="6">Days before at:</option>
-					<option value="3">On date:</option>
-					<option value="7">No Reminder</option>
+				ng-class="{
+					'on-date':	formEvent.reminder_type == 3 ||
+								formEvent.reminder_type == 4 ||
+								formEvent.reminder_type == 5 ||
+								formEvent.reminder_type == 6
+				}"
+				ng-options="r.id as r.name for r in reminderTypes | filter:reminderTypeFilter"
+				ng-change="usingOwnReminder()"
+				ng-model="formEvent.reminder_type" >
 			</select>
 			<!-- All Day Reminder Time of day -->
 			<time
@@ -145,9 +131,17 @@
 
 		<div style="font-size: 12px; margin: -0.8em 0 1em 0;">
 			This event is using
-			<span ng-show="formEvent.using_calendar_reminder">its calendar's reminder.</span>
-			<span ng-show="!formEvent.using_calendar_reminder && formEvent.reminder_type != 7">its own reminder.</span>
-			<span ng-show="formEvent.reminder_type == 7">no reminder.</span>
+			<span ng-show="formEvent.using_calendar_reminder">
+				its calendar's reminder.
+				<span style="cursor: pointer; text-decoration: underline;" ng-click="noReminder()">Don't remind me.</span>
+			</span>
+			<span ng-show="!formEvent.using_calendar_reminder && formEvent.reminder_type != 7">
+				its own reminder.
+				<span ng-if="formEvent.using_calendar_reminder!=undefined" style="cursor: pointer; text-decoration: underline;" ng-click="checkCalendarReminder()">Use calendar reminder.</span></span>
+			<span ng-show="formEvent.reminder_type == 7">
+				no reminder.
+				<span ng-if="formEvent.using_calendar_reminder!=undefined" style="cursor: pointer; text-decoration: underline;" ng-click="checkCalendarReminder()">Use calendar reminder.</span></span>
+			</span>
 		</div>
 	</div>
 	<!-- REPEAT SETTINGS -->

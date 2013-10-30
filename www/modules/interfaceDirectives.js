@@ -129,7 +129,6 @@ angular.module('pinwheelApp')
 				datetimeFormat: 'h:M a'
 			}).change(function() {
 				ngModelCtrl.$setViewValue($(this).val());
-				console.log(scope.formEvent);
 			});
 		}
 	}
@@ -162,19 +161,6 @@ angular.module('pinwheelApp')
 			}
 			
 			input.spectrum(options);
-		}
-	}
-})
-.directive("hasReminder", function() {
-	return {
-		restrict: "E",
-		require: "ngModel",
-		template: "<input type='checkbox' />",
-		replace: true,
-		link: function(scope, element, attrs, ngModelCtrl) {
-			scope.$watch(attrs.checkIf, function(newVal, oldVal) {
-
-			});
 		}
 	}
 });
