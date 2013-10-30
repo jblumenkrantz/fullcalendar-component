@@ -131,6 +131,11 @@ dl.sub-nav.calendar-filter dd {
 .pane-header [class*="icon-"]{
 	position: relative;
 	top: 3px;
+	cursor:pointer;
+}
+
+.pane-header [class*="icon-"]:active{
+	
 }
 
 .pane-header span{
@@ -163,6 +168,10 @@ header#content-header ul.small-block-grid-3 span.month-switcher{
 	font-family: $body-font-family;
 	position: relative;
 	top: -1px;
+}
+
+header#content-header [class*="icon-"] {
+	cursor:pointer;
 }
 
 #org-name-wrapper {
@@ -238,10 +247,9 @@ border-width: 1px 0 1px  0;
 
 
 //dummy calendar for proper visionality during html wireframe developmentality -jt
-.calendar-wrapper{display:inline;overflow:visible;width:100% !important;margin:0 auto; padding: 0 !important; }
-.calendar {width: 101% !important; padding: 0; margin: 0;}
-.calendar ul.month-browser li{width:33.3%;padding:0;border:0;text-align:center;text-transform:uppercase;height:auto;margin:20px 0;}
-.calendar{width:100% !important; margin: 0; padding: 0;}
+.calendar-wrapper{display:inline;overflow:hidden;margin:0 auto; padding: 0 !important;  width: auto;}
+.calendar { padding: 0; margin: 0 0 0 38px !important;}
+.calendar ul.month-browser li{ width: 33.3%;padding:0;border:0;text-align:center;text-transform:uppercase;height:auto;margin:20px 0;}
 .calendar ul{list-style:none;padding:0;margin:0;clear:both;width:100%;}
 .calendar ul.weekdays{height:40px; width: 100%;}
 .calendar ul.weekdays li{text-align:center;text-transform:uppercase;line-height:20px;border:none!important;padding:10px 0px;color:#666;font-size:13px;}
@@ -323,9 +331,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4dffffff', e
 }
 
 .subscription-body, .task-body { //inside
-min-height: 50px !important;
-// background: rgba(255,255,255,.9);
-// same light gray gradient as topbar
 background: #eeeeee; /* Old browsers */
 	background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
@@ -334,10 +339,18 @@ background: #eeeeee; /* Old browsers */
 	background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
 	background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
-padding: 16px 4px 6px;
+}
+.subscription-body { //inside
+min-height: 50px !important;
+padding: 5px 4px 0px 5px;
 margin-left: 8px;
 }
 
+.task-body { //inside
+min-height: 50px !important;
+padding: 5px 4px 0px 5px;
+margin-left: 8px;
+}
 .task-body.add {
 	min-height: none;
 // background: rgba(255,255,255,.9);
@@ -358,17 +371,18 @@ margin-left: 8px;
 	overflow: hidden;
 white-space: nowrap;
 text-overflow: ellipsis;
-width: 80%;
+width: 90%;
 display: inline-block !important;
 cursor: pointer;
 color: #222;
 font-size: 14px;
+padding-top: 12px;
 }
 
-.subscription-panel button {
+.subscription-panel  .subscribed{
 position: absolute;
-top: -19px;
-right: -4px;
+top: -8px;
+right: -3px;
 display: block;
 color: #555;
 font-size: 18px;
@@ -376,7 +390,6 @@ border: 0;
 background: 0;
 padding: 0;
 margin: 0;
-cursor: pointer;
 transform: rotate(180deg) !important;
 -ms-transform: rotate(180deg) !important; /* IE 9 */
 -webkit-transform: rotate(180deg) !important; /* Safari and Chrome */
@@ -384,16 +397,38 @@ box-shadow: none;
 font-size: 16px;
 }
 
-
-.button-group > *:first-child {
-margin-left: 3px !important;
+.subscription-panel [class*="icon-"], .task-panel [class*="icon-"]{
+	color: #999;
 }
+
+.subscription-panel [class*="icon-"]:hover, .task-panel [class*="icon-"]:hover{
+	color: #666;
+}
+.subscription-panel [class*="icon-"]:active, .task-panel [class*="icon-"]:active{
+	color: $primary-color;
+}
+
+.close-panel {
+	position: relative; 
+	top: 3px; 
+	right: 0px; 
+	float: right; 
+	cursor:pointer;
+}
+// target first input box in task-form and offset to make room for close button
+.subscription input[type=text]:first-of-type, .task input[type=text]:first-of-type {
+	// width: 90%;
+	width: calc(100% - 20px) ;
+}
+
+
+
 .button-group li{
 padding: 0 5px 0 0;
 
 }
 .button-group li div.button {
-padding: 10px;	
+padding: 6px;	
  background: #eeeeee; /* Old browsers */
 	background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
@@ -404,11 +439,10 @@ padding: 10px;
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
  border: 1px solid #ccc;
  margin: 0;
-
+height: 36px;
 }
 
 .button-group li div.button:hover {
-padding: 10px;	
  background: #eeeeee; /* Old browsers */
 	background: -moz-linear-gradient(top,  #eeeeee 60%, #cccccc 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(60%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
@@ -441,6 +475,10 @@ background: none !important;
 .tabs dd.active {
 border-top: 3px solid $primary-color;
 }
+.top-bar-section ul li {
+	float: left !important;
+}
+
 
 /* iPads (portrait and landscape) ----------- */
 @media only screen 

@@ -3,8 +3,8 @@
 		<div class="subscription-body">
 			<div ng-hide="editingCalendar">
 				<div class="row">
-					<div class="large-12 columns">
-						<button ng-hide="isCalendarCreator(calendar)" type="button"><span aria-hidden="true" class="icon-rss-alt" ng-style="{color:calendar.color}"></span></button>
+					<div class="large-12 columns" style="padding: 0;">
+						<div class="subscribed" ng-hide="isCalendarCreator(calendar)" type="button"><span aria-hidden="true" class="icon-rss-alt" ng-style="{color:calendar.color}"></span></div>
 						<input type='checkbox' ng-model="watcher[calendar.calendar_id].viewing" ng-click="setShowState()" ng-false-state="false" />
 						<strong class="subscription-calendar-title" ng-click="edit()">
 							{{calendar.calendar_name}}
@@ -12,8 +12,11 @@
 					</div>
 				</div>
 			</div>
-			<div ng-show="editingCalendar">
-				<input type="text" ng-model="editCalendar.calendar_name" placeholder="Name (required)" />
+			<div ng-show="editingCalendar" class="subscription">
+				<div ng-click="cancel()" class="close-panel">
+					<span aria-hidden="true" class="icon-x-altx-alt" ></span>
+				</div>
+				<input type="text" ng-model="editCalendar.calendar_name" placeholder="Name (required)"/>
 				<div class="row">
 					<div class="large-6 columns">
 						<ui-colorpicker ng-model="editCalendar.color"></ui-colorpicker>
@@ -52,14 +55,13 @@
 						</select>
 					</div>
 				</div>
-				<div class="row">
-					<ul class="button-group even-4">
-						<li><div class="button radius" ng-click="cancel()"><span aria-hidden="true" class="icon-close"></span> <!-- cancel --></div></li>
+				<!-- <div class="row"> -->
+					<ul class="button-group even-3">
 						<li><div class="button radius" ng-click=""><span aria-hidden="true" class="icon-share"></span> <!-- cancel --></div></li>
 						<li><div class="button radius" ng-click="unsubscribe()"><span aria-hidden="true" class="icon-remove-2"></span> <!-- unsubscribe --></div></li>
-						<li><div class="button radius" ng-click="update()"><span aria-hidden="true" class="icon-checkmark"></span> <!-- save --></div></li>
+						<li style="padding-right: 0;"><div class="button radius" ng-click="update()"><span aria-hidden="true" class="icon-checkmark"></span> <!-- save --></div></li>
 					</ul>
-				</div>
+				<!-- </div> -->
 			</div>
 		</div>
 	</div>
