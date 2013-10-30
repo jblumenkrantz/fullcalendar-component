@@ -1,8 +1,8 @@
 <div class="task">
-	<div ng-click="cancel()" style="position: relative; top: 3px; right: 0px; float: right; cursor:pointer;">
+	<div ng-click="cancel()" class="close-panel">
 					<span aria-hidden="true" class="icon-x-altx-alt" ></span>
 				</div>
-	<input type="text" ng-model="task.task_name" placeholder="Title (required)" style="width: 90%;"/>
+	<input type="text" ng-model="task.task_name" placeholder="Title (required)"/>
 	<select ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'" ng-model="task.calendar_id" ></select>
 	<textarea ng-model="task.task_notes" placeholder="Add Note"></textarea>
 	<label class="checkbox">
@@ -19,6 +19,4 @@
 		<li><div class="button radius" ng-click="delete()"><span aria-hidden="true" class="icon-remove-2"></span> <!-- unsubscribe --></div></li>
 		<li style="padding-right: 0;"><div class="button radius" ng-click="save()"><span aria-hidden="true" class="icon-checkmark"></span> <!-- save --></div></li>
 	</ul>
-	
-	
 </div>

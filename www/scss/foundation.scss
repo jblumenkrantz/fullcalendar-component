@@ -131,6 +131,11 @@ dl.sub-nav.calendar-filter dd {
 .pane-header [class*="icon-"]{
 	position: relative;
 	top: 3px;
+	cursor:pointer;
+}
+
+.pane-header [class*="icon-"]:active{
+	
 }
 
 .pane-header span{
@@ -163,6 +168,10 @@ header#content-header ul.small-block-grid-3 span.month-switcher{
 	font-family: $body-font-family;
 	position: relative;
 	top: -1px;
+}
+
+header#content-header [class*="icon-"] {
+	cursor:pointer;
 }
 
 #org-name-wrapper {
@@ -389,10 +398,32 @@ box-shadow: none;
 font-size: 16px;
 }
 
+.subscription-panel [class*="icon-"], .task-panel [class*="icon-"]{
+	color: #999;
+}
 
-// .button-group > *:last-child {
-// padding-right: 0 !important;
-// }
+.subscription-panel [class*="icon-"]:hover, .task-panel [class*="icon-"]:hover{
+	color: #666;
+}
+.subscription-panel [class*="icon-"]:active, .task-panel [class*="icon-"]:active{
+	color: $primary-color;
+}
+
+.close-panel {
+	position: relative; 
+	top: 3px; 
+	right: 0px; 
+	float: right; 
+	cursor:pointer;
+}
+// target first input box in task-form and offset to make room for close button
+.subscription input[type=text]:first-of-type, .task input[type=text]:first-of-type {
+	// width: 90%;
+	width: calc(100% - 20px) !important;
+}
+
+
+
 .button-group li{
 padding: 0 5px 0 0;
 

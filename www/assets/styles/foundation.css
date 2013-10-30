@@ -7579,25 +7579,26 @@ dl.sub-nav.calendar-filter dd {
 .pane-header [class*="icon-"] {
   position: relative;
   top: 3px;
+  cursor: pointer;
 }
 
-/* line 136, ../../scss/foundation.scss */
+/* line 141, ../../scss/foundation.scss */
 .pane-header span {
   position: relative;
   top: 8px;
 }
 
-/* line 140, ../../scss/foundation.scss */
+/* line 145, ../../scss/foundation.scss */
 .pane-header span.right {
   margin-right: 12px;
 }
 
-/* line 143, ../../scss/foundation.scss */
+/* line 148, ../../scss/foundation.scss */
 .pane-header .pane-title {
   margin-left: 6px;
 }
 
-/* line 153, ../../scss/foundation.scss */
+/* line 158, ../../scss/foundation.scss */
 header#content-header ul.small-block-grid-3 li {
   text-align: center;
   margin: 0 !important;
@@ -7607,20 +7608,25 @@ header#content-header ul.small-block-grid-3 li {
   padding-top: 4px;
 }
 
-/* line 162, ../../scss/foundation.scss */
+/* line 167, ../../scss/foundation.scss */
 header#content-header ul.small-block-grid-3 span.month-switcher {
   font-family: "Oswald", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
   position: relative;
   top: -1px;
 }
 
-/* line 168, ../../scss/foundation.scss */
+/* line 173, ../../scss/foundation.scss */
+header#content-header [class*="icon-"] {
+  cursor: pointer;
+}
+
+/* line 177, ../../scss/foundation.scss */
 #org-name-wrapper {
   position: absolute;
   left: 50%;
 }
 
-/* line 171, ../../scss/foundation.scss */
+/* line 180, ../../scss/foundation.scss */
 .org-name {
   font-size: 20px;
   font-weight: bold;
@@ -7628,7 +7634,7 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
 }
 
 @media only screen and (max-width: 768px) {
-  /* line 178, ../../scss/foundation.scss */
+  /* line 187, ../../scss/foundation.scss */
   ul.days {
     padding: 0;
     margin: 0;
@@ -7637,12 +7643,12 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
     left: 2px;
   }
 }
-/* line 182, ../../scss/foundation.scss */
+/* line 191, ../../scss/foundation.scss */
 [class*="icon-"] {
   text-shadow: 1px 1px 2px white;
 }
 
-/* line 187, ../../scss/foundation.scss */
+/* line 196, ../../scss/foundation.scss */
 .calendar-index {
   position: absolute;
   left: 0;
@@ -7657,13 +7663,13 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
   border-right: 1px solid #aaa;
 }
 
-/* line 200, ../../scss/foundation.scss */
+/* line 209, ../../scss/foundation.scss */
 .calendar-index ul.side-nav {
   margin: 0;
   padding: 0;
 }
 
-/* line 205, ../../scss/foundation.scss */
+/* line 214, ../../scss/foundation.scss */
 .calendar-index ul.side-nav li {
   list-style-type: none;
   margin: 0;
@@ -7674,24 +7680,24 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
   cursor: pointer;
 }
 
-/* line 215, ../../scss/foundation.scss */
+/* line 224, ../../scss/foundation.scss */
 .calendar-index ul.side-nav li:hover {
   background: rgba(35, 83, 138, 0.1);
 }
 
-/* line 230, ../../scss/foundation.scss */
+/* line 239, ../../scss/foundation.scss */
 .calendar-index ul.side-nav li:nth-child(1) {
   background: #ccc;
   border-width: 0;
 }
 
-/* line 234, ../../scss/foundation.scss */
+/* line 243, ../../scss/foundation.scss */
 .calendar-index ul.side-nav li:nth-child(14) {
   background: #ccc;
   border-width: 1px 0 1px  0;
 }
 
-/* line 241, ../../scss/foundation.scss */
+/* line 250, ../../scss/foundation.scss */
 .calendar-wrapper {
   display: inline;
   overflow: hidden;
@@ -7700,13 +7706,13 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
   width: auto;
 }
 
-/* line 242, ../../scss/foundation.scss */
+/* line 251, ../../scss/foundation.scss */
 .calendar {
   padding: 0;
   margin: 0 0 0 38px !important;
 }
 
-/* line 243, ../../scss/foundation.scss */
+/* line 252, ../../scss/foundation.scss */
 .calendar ul.month-browser li {
   width: 33.3%;
   padding: 0;
@@ -7717,7 +7723,7 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
   margin: 20px 0;
 }
 
-/* line 244, ../../scss/foundation.scss */
+/* line 253, ../../scss/foundation.scss */
 .calendar ul {
   list-style: none;
   padding: 0;
@@ -7726,13 +7732,13 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
   width: 100%;
 }
 
-/* line 245, ../../scss/foundation.scss */
+/* line 254, ../../scss/foundation.scss */
 .calendar ul.weekdays {
   height: 40px;
   width: 100%;
 }
 
-/* line 246, ../../scss/foundation.scss */
+/* line 255, ../../scss/foundation.scss */
 .calendar ul.weekdays li {
   text-align: center;
   text-transform: uppercase;
@@ -7743,7 +7749,7 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
   font-size: 13px;
 }
 
-/* line 247, ../../scss/foundation.scss */
+/* line 256, ../../scss/foundation.scss */
 .calendar li {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -7759,23 +7765,23 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
   overflow: visible !important;
 }
 
-/* line 248, ../../scss/foundation.scss */
+/* line 257, ../../scss/foundation.scss */
 .calendar .days:last-child li {
   margin-bottom: 0px !important;
 }
 
-/* line 249, ../../scss/foundation.scss */
+/* line 258, ../../scss/foundation.scss */
 .calendar li .day, .calendar li .month {
   display: none;
 }
 
-/* line 250, ../../scss/foundation.scss */
+/* line 259, ../../scss/foundation.scss */
 .calendar .date {
   text-align: right;
   margin-bottom: 5px;
 }
 
-/* line 251, ../../scss/foundation.scss */
+/* line 260, ../../scss/foundation.scss */
 .show-info {
   display: block;
   font-size: 13px;
@@ -7790,47 +7796,47 @@ header#content-header ul.small-block-grid-3 span.month-switcher {
   text-decoration: none;
 }
 
-/* line 252, ../../scss/foundation.scss */
+/* line 261, ../../scss/foundation.scss */
 .show-info:hover .venue {
   display: block;
 }
 
-/* line 253, ../../scss/foundation.scss */
+/* line 262, ../../scss/foundation.scss */
 .show-info .show-name {
   text-decoration: underline;
 }
 
-/* line 254, ../../scss/foundation.scss */
+/* line 263, ../../scss/foundation.scss */
 .show-info .show-time, .venue {
   color: #666;
   margin-top: 2px;
   text-decoration: none;
 }
 
-/* line 255, ../../scss/foundation.scss */
+/* line 264, ../../scss/foundation.scss */
 .calendar .no-shows {
   display: none;
 }
 
-/* line 256, ../../scss/foundation.scss */
+/* line 265, ../../scss/foundation.scss */
 .calendar .venue {
   display: none;
 }
 
-/* line 257, ../../scss/foundation.scss */
+/* line 266, ../../scss/foundation.scss */
 .calendar li.out_of_range {
   background-color: #F5F5F5;
   color: #666;
 }
 
-/* line 258, ../../scss/foundation.scss */
+/* line 267, ../../scss/foundation.scss */
 ul.days, .calendar-day {
   padding: 0;
   margin: 0;
   width: 100%;
 }
 
-/* line 262, ../../scss/foundation.scss */
+/* line 271, ../../scss/foundation.scss */
 .calendar-picker-container button {
   top: 20px;
   right: 20px;
@@ -7845,7 +7851,7 @@ ul.days, .calendar-day {
   cursor: pointer;
 }
 
-/* line 276, ../../scss/foundation.scss */
+/* line 285, ../../scss/foundation.scss */
 .icon-calendarPlus {
   top: -5px;
   right: 5px;
@@ -7860,7 +7866,7 @@ ul.days, .calendar-day {
   cursor: pointer;
 }
 
-/* line 290, ../../scss/foundation.scss */
+/* line 299, ../../scss/foundation.scss */
 .icon-backspace:before {
   content: "\e037";
   background: #fff;
@@ -7877,13 +7883,13 @@ ul.days, .calendar-day {
   font-size: 20px;
 }
 
-/* line 308, ../../scss/foundation.scss */
+/* line 317, ../../scss/foundation.scss */
 .subscription-panel, .task-panel {
   border-bottom: 1px solid #999;
   overflow: hidden;
 }
 
-/* line 313, ../../scss/foundation.scss */
+/* line 322, ../../scss/foundation.scss */
 .subscription-gradient, .task-gradient {
   background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
   /* FF3.6+ */
@@ -7901,7 +7907,7 @@ ul.days, .calendar-day {
   /* IE6-9 */
 }
 
-/* line 324, ../../scss/foundation.scss */
+/* line 333, ../../scss/foundation.scss */
 .subscription-body, .task-body {
   background: #eeeeee;
   /* Old browsers */
@@ -7921,21 +7927,21 @@ ul.days, .calendar-day {
   /* IE6-9 */
 }
 
-/* line 334, ../../scss/foundation.scss */
+/* line 343, ../../scss/foundation.scss */
 .subscription-body {
   min-height: 50px !important;
   padding: 5px 4px 0px 5px;
   margin-left: 8px;
 }
 
-/* line 340, ../../scss/foundation.scss */
+/* line 349, ../../scss/foundation.scss */
 .task-body {
   min-height: 50px !important;
   padding: 5px 4px 0px 5px;
   margin-left: 8px;
 }
 
-/* line 345, ../../scss/foundation.scss */
+/* line 354, ../../scss/foundation.scss */
 .task-body.add {
   min-height: none;
   background: #eeeeee;
@@ -7958,7 +7964,7 @@ ul.days, .calendar-day {
   margin-left: 8px;
 }
 
-/* line 361, ../../scss/foundation.scss */
+/* line 370, ../../scss/foundation.scss */
 .subscription-calendar-title {
   overflow: hidden;
   white-space: nowrap;
@@ -7971,7 +7977,7 @@ ul.days, .calendar-day {
   padding-top: 12px;
 }
 
-/* line 373, ../../scss/foundation.scss */
+/* line 382, ../../scss/foundation.scss */
 .subscription-panel .subscribed {
   position: absolute;
   top: -8px;
@@ -7992,12 +7998,41 @@ ul.days, .calendar-day {
   font-size: 16px;
 }
 
-/* line 396, ../../scss/foundation.scss */
+/* line 401, ../../scss/foundation.scss */
+.subscription-panel [class*="icon-"], .task-panel [class*="icon-"] {
+  color: #999;
+}
+
+/* line 405, ../../scss/foundation.scss */
+.subscription-panel [class*="icon-"]:hover, .task-panel [class*="icon-"]:hover {
+  color: #666;
+}
+
+/* line 408, ../../scss/foundation.scss */
+.subscription-panel [class*="icon-"]:active, .task-panel [class*="icon-"]:active {
+  color: #23538a;
+}
+
+/* line 412, ../../scss/foundation.scss */
+.close-panel {
+  position: relative;
+  top: 3px;
+  right: 0px;
+  float: right;
+  cursor: pointer;
+}
+
+/* line 420, ../../scss/foundation.scss */
+.subscription input[type=text]:first-of-type, .task input[type=text]:first-of-type {
+  width: calc(100% - 20px) !important;
+}
+
+/* line 427, ../../scss/foundation.scss */
 .button-group li {
   padding: 0 5px 0 0;
 }
 
-/* line 400, ../../scss/foundation.scss */
+/* line 431, ../../scss/foundation.scss */
 .button-group li div.button {
   padding: 6px;
   background: #eeeeee;
@@ -8021,7 +8056,7 @@ ul.days, .calendar-day {
   height: 36px;
 }
 
-/* line 415, ../../scss/foundation.scss */
+/* line 446, ../../scss/foundation.scss */
 .button-group li div.button:hover {
   background: #eeeeee;
   /* Old browsers */
@@ -8042,51 +8077,51 @@ ul.days, .calendar-day {
   margin: 0;
 }
 
-/* line 428, ../../scss/foundation.scss */
+/* line 459, ../../scss/foundation.scss */
 .button-group li [class*="icon-"] {
   color: #333;
 }
 
-/* line 434, ../../scss/foundation.scss */
+/* line 465, ../../scss/foundation.scss */
 .top-bar {
   background: rgba(221, 221, 221, 0.3) repeat !important;
   overflow: visible;
 }
 
-/* line 439, ../../scss/foundation.scss */
+/* line 470, ../../scss/foundation.scss */
 .top-bar-section li a:not(.button) {
   background: none !important;
 }
 
-/* line 445, ../../scss/foundation.scss */
+/* line 476, ../../scss/foundation.scss */
 .tabs dd.active {
   border-top: 3px solid #23538a;
 }
 
-/* line 448, ../../scss/foundation.scss */
+/* line 479, ../../scss/foundation.scss */
 .top-bar-section ul li {
   float: left !important;
 }
 
 /* iPads (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* line 457, ../../scss/foundation.scss */
+  /* line 488, ../../scss/foundation.scss */
   .task .body .title {
     font-size: 12px;
   }
 
-  /* line 460, ../../scss/foundation.scss */
+  /* line 491, ../../scss/foundation.scss */
   .task .body .due-date, .task .body .notes {
     font-size: 9px;
   }
 
-  /* line 463, ../../scss/foundation.scss */
+  /* line 494, ../../scss/foundation.scss */
   .edit-container input, textarea {
     padding: 1px;
     font-size: 9px !important;
   }
 
-  /* line 467, ../../scss/foundation.scss */
+  /* line 498, ../../scss/foundation.scss */
   .task .body .notes:hover, .task .body .due-date:hover, .task .body .title:hover {
     text-decoration: none;
   }

@@ -12,11 +12,10 @@
 					</div>
 				</div>
 			</div>
-			<div ng-show="editingCalendar">
-				<div ng-click="cancel()" style="position: relative; top: 3px; right: 0px; float: right; cursor:pointer;">
+			<div ng-show="editingCalendar" class="subscription">
+				<div ng-click="cancel()" class="close-panel">
 					<span aria-hidden="true" class="icon-x-altx-alt" ></span>
 				</div>
-				
 				<input type="text" ng-model="editCalendar.calendar_name" placeholder="Name (required)" style="width: 90%;"/>
 				<div class="row">
 					<div class="large-6 columns">
