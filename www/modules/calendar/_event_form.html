@@ -58,6 +58,17 @@
 	</div>
 </div>
 <div class="row">
+	<div class="large-12">
+		<ul class="button-group even-3">
+			<li><div class="button radius" ng-click="reset()"><span aria-hidden="true" class="icon-reload-alt"></span> <!-- cancel --></div></li>
+			<li><div class="button radius" ng-click="unsubscribe()"><span aria-hidden="true" class="icon-remove-2"></span> <!-- unsubscribe --></div></li>
+			<li style="padding-right: 0;"><div class="button radius" ng-click="save(true)"><span aria-hidden="true" class="icon-checkmark"></span> <!-- save --></div></li>
+		</ul>
+		<br>
+	</div>
+</div>
+
+<!-- <div class="row">
 	<div class="large-6 columns">
 		<div ng-show="editingEvent" class="expand small alert button" ng-click="delete()" >delete</div>
 		<div ng-show="addingEvent" class="expand small button" ng-click="reset()" >reset</div>
@@ -74,4 +85,4 @@
 		<div ng-show="editingEvent" class="expand small button" ng-click="update()" >save</div>
 		<div ng-show="addingEvent" class="expand small button" ng-click="save()" >save</div>
 	</div>
-</div>
+</div> -->
