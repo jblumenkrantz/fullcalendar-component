@@ -1,23 +1,29 @@
 'use strict';
 
 angular.module('pinwheelApp')
-	.controller('EventCtl', function ($scope, Event, QuickAdd, $filter) {
+	.controller('EventCtl', function ($scope, Event, QuickAdd, $filter, ReminderService) {
 		$scope.toggle = function(name) {
 			$scope[name] = !$scope[name];
 		}
 
-		$scope.formEvent = {all_day: "0"};
-
-		//open form for adding of new event
-		$scope.add = function() {
-			$scope.formEvent = new Event({
-				event_start: new Date($filter('date')(new Date(), "M/d/yyyy h:00 a")), //get date object set to current hour
-				event_end: new Date($filter('date')((new Date()).addHours(1), "M/d/yyyy h:00 a")), //get date object set to current hour + 1
+		//default event object
+		$scope.defaultEvent = function() {
+			return {
+				event_start: new Date($filter('date')((new Date()).addHours(1), "M/d/yyyy h:00 a")), //get date object set to next hour
+				event_end: new Date($filter('date')((new Date()).addHours(2), "M/d/yyyy h:00 a")), //get date object set to next hour + 1
 				all_day: "0",
 				has_reminder: false,
-				isRepeating: false,
-				calendar_id: $scope.user.settings.default_calendar
-			});
+				isRepeating: false
+			};
+		}
+
+		$scope.formEvent = new Event($scope.defaultEvent());
+		$scope.useReminderType = 'relative';
+		
+		//open form for adding of new event
+		$scope.add = function() {
+			$scope.formEvent.calendar_id = $scope.user.settings.default_calendar;
+			ReminderService.checkCalendarReminder($scope.formEvent, $scope.calendarWatchers);
 			$scope.addingEvent = true;
 			$scope.editingEvent = false;
 			$scope.quickAdding = false;
@@ -27,7 +33,9 @@ angular.module('pinwheelApp')
 		$scope.edit = function(event) {
 			$scope.event = event;	//store the original event object
 			$scope.formEvent = new Event();
-			angular.copy($scope.event, $scope.formEvent);
+			angular.copy(event, $scope.formEvent);
+			$scope.useReminderType = ($scope.formEvent.all_day=='1') ? 'absolute' : 'relative';
+			(!$scope.formEvent.has_reminder && $scope.checkCalendarReminder());
 			$scope.editingEvent = true;
 			$scope.addingEvent = false;
 			$scope.quickAdding = false;
@@ -57,23 +65,32 @@ angular.module('pinwheelApp')
 			$scope.cancel();
 		}
 
-		//cancel all event forms, reset event object
+		//cancel all event forms, reset event object unless continuing
 		$scope.cancel = function(continuing) {
-			$scope.formEvent = new Event();
+			if (continuing) {
+				$scope.formEvent = new Event();
+			}
+			else {
+				$scope.reset();
+			}
 			$scope.addingEvent = continuing;
 			$scope.editingEvent = false;
 			$scope.quickAdding = false;
 		}
 
 		$scope.reset = function() {
-			$scope.formEvent = new Event({
-				event_start: new Date($filter('date')(new Date(), "M/d/yyyy h:00 a")), //get date object set to current hour
-				event_end: new Date($filter('date')((new Date()).addHours(1), "M/d/yyyy h:00 a")), //get date object set to current hour + 1
-				all_day: "0",
-				has_reminder: false,
-				isRepeating: false,
-				calendar_id: $scope.user.settings.default_calendar
-			});
+			$scope.useReminderType = 'relative';
+			$scope.formEvent = new Event($scope.defaultEvent());
+			$scope.formEvent.calendar_id = $scope.user.settings.default_calendar;
+			ReminderService.checkCalendarReminder($scope.formEvent, $scope.calendarWatchers);
+		}
+
+		$scope.usingOwnReminder = function() {
+			ReminderService.usingOwnReminder($scope.formEvent);
+		}
+
+		$scope.noReminder = function() {
+			ReminderService.noReminder($scope.formEvent);
 		}
 
 		$scope.quickAdder = {alwaysAdvanced: true};
@@ -83,6 +100,7 @@ angular.module('pinwheelApp')
 				$scope.add();
 			}
 			else {
+				$scope.formEvent.calendar_id = $scope.user.settings.default_calendar;
 				$scope.quickAdding = true;
 				$scope.addingEvent = false;
 				$scope.editingEvent = false;
@@ -91,8 +109,68 @@ angular.module('pinwheelApp')
 
 		//save new quickadded event
 		$scope.quickSave = function() {
-			$scope.formEvent = new Event();
 			angular.copy(QuickAdd($scope.quickAdd.text), $scope.formEvent);
 			$scope.save();
+		}
+
+		$scope.checkCalendarReminder = function() {
+			ReminderService.checkCalendarReminder($scope.formEvent, $scope.calendarWatchers);
+			($scope.formEvent.all_day=='1' && $scope.formEvent.using_calendar_reminder && $scope.convertToAbsoluteReminder());
+		}
+
+		$scope.convertToAbsoluteReminder = function() {
+			var translated = ReminderService.relativeToAbsolute($scope.formEvent, $scope.formEvent.event_start);
+			$scope.formEvent.reminder_time = translated.date;
+			$scope.formEvent.offset = translated.offset;
+			$scope.formEvent.reminder_type = translated.type;
+		}
+
+		$scope.reminderTypeFilter = function(reminderType) {
+			return (reminderType.type==$scope.useReminderType || reminderType.type=='both');
+		}
+
+		$scope.reminderToggle = function() {
+			//if adding reminder
+			if ($scope.formEvent.has_reminder) {
+				//if no existing reminder (calendar or other), use default reminder settings
+				($scope.formEvent.reminder_pref_id == null && ReminderService.reminderDefaultsEvent($scope.formEvent, $scope.user));
+			}
+			//if removing reminder
+			else {
+				$scope.checkCalendarReminder();
+			}
+		}
+
+		$scope.allDayToggle = function() {
+			//update a new event's models
+			(!$scope.formEvent.hasOwnProperty("version") && newEvents());		
+
+			//filter reminder type drop down
+			$scope.useReminderType = ($scope.formEvent.all_day=='1') ? 'absolute' : 'relative';
+
+			//handle the switch between all day and normal event reminders
+			//types 3 and 7 are common to both so do nothing for those types
+			if ($scope.formEvent.reminder_type != 3 && $scope.formEvent.reminder_type != 7) {
+				if ($scope.formEvent.all_day=='0' && $scope.formEvent.using_calendar_reminder) {
+					$scope.checkCalendarReminder();
+				}
+				else if ($scope.formEvent.all_day=='1' && $scope.formEvent.has_reminder) {
+					$scope.convertToAbsoluteReminder();
+				}
+				else {
+					ReminderService.reminderDefaultsEvent($scope.formEvent, $scope.user);
+				}
+			}
+
+			function newEvents() {
+				//update start and end times
+				var format = ($scope.formEvent.all_day=="1") ? "M/d/yyyy" : "M/d/yyyy h:00 a";
+				var s = ($scope.formEvent.event_start) ? new Date($scope.formEvent.event_start) : new Date();
+				var e = ($scope.formEvent.event_end) ? new Date($scope.formEvent.event_end) : new Date();
+				s.setHours((new Date()).addHours(1).getHours());
+				e.setHours((new Date()).addHours(2).getHours());
+				$scope.formEvent.event_start = new Date($filter('date')(s, format)); //get date object set to current hour
+				$scope.formEvent.event_end = new Date($filter('date')(e, format)); //get date object set to current hour + 1
+			}
 		}
   });

@@ -16,42 +16,42 @@
 				<div ng-click="cancel()" class="close-panel">
 					<span aria-hidden="true" class="icon-x-altx-alt" ></span>
 				</div>
-				<input type="text" ng-model="editCalendar.calendar_name" placeholder="Name (required)"/>
+				<label>Name:</label>
+				<input type="text" ng-model="editCalendar.calendar_name" placeholder="Name (required)" />
 				<div class="row">
-					<div class="large-6 columns">
-						<ui-colorpicker ng-model="editCalendar.color"></ui-colorpicker>
+					<div class="large-6 columns" style='padding: 0;'>
+						<ui-colorpicker class="checkbox" ng-model="editCalendar.color"></ui-colorpicker>
 					</div>
-					<div class="large-6 columns">
-						<label>
+					<div class="large-6 columns" style='padding: 0;'>
+						<label class="checkbox">
 							<input ng-model="watcher[calendar.calendar_id].viewing" type="checkbox" />
 							Show
 						</label>
 					</div>
 				</div>
 				<div class="row">
-					<div ng-class="{'large-6':what , 'large-12':!what }" class="columns">
-						<label>
-							<check if="{{calendar.reminder_pref_id}}" ng-model="editCalendar.has_reminder" ng-change="test()" />
+					<div ng-class="{'large-6':hasPublic , 'large-12':!hasPublic }" class="columns" style='padding: 0;'>
+						<label class="checkbox" ng-class="{'on-date':editCalendar.has_reminder}">
+							<input type='checkbox' ng-model="editCalendar.has_reminder" ng-change="reminderToggle()" />
 							Add Reminder
 						</label>
 					</div>
-					<div class="large-6 columns" ng-show="what = (isCalendarCreator(calendar) && isOrgAdmin(calendar))">
-						<label>
+					<div class="large-6 columns" ng-show="hasPublic = (isCalendarCreator(calendar) && isOrgAdmin(calendar))" style='padding: 0;'>
+						<label class=checkbox>
 							<input ng-model="editCalendar.public" type="checkbox" />
 							Public
 						</label>
 					</div>
 				</div>
 				<div class="row" ng-show="editCalendar.has_reminder">
-					<b>For all events and tasks:</b>
-					<div class="large-2 columns">
-						<input ng-model="editCalendar.reminder_offset" type="text" />
+					<div style="float: left; width: 20%; margin-right: 2%;">
+						<input type='text' ng-model="editCalendar.reminder_offset" placeholder="2" />
 					</div>
-					<div class="large-10 columns">
-						<select id="calRType" name="calRType" ng-model="editCalendar.reminder_type">
-							<option value="0">Minutes before</option>
-							<option value="1">Hours before</option>
-							<option value="2">Days before</option>
+					<div style="float: left;" class="with-offset">
+						<!-- Relative Reminder Types -->
+						<select
+							ng-options="r.id as r.name for r in reminderTypes | filter:{type:'relative'}"
+							ng-model="editCalendar.reminder_type">
 						</select>
 					</div>
 				</div>
