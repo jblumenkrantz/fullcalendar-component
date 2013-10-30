@@ -75,24 +75,26 @@ angular.module('pinwheelApp', ['ui.calendar', 'ngDragDrop', 'ngResource', 'ui.da
 	.factory('NewUser', function($resource){
 		return $resource('/api/v1/user/new/', {}, {post: {method:'POST'}});
 	})
-	.factory('Task', function($resource){
+	.factory('Task', function($resource, ReminderService){
 		return $resource('/api/v1/task/:id/:version', {},
 			{
 				save: {
 					method:'POST',
 					isArray: false,
 					transformRequest: function(data){
-						if(data.hasDueDate && data.due_time){
+						(data.has_reminder && ReminderService.setReminderData(data, data.due_time));
+						if(data.has_due_date && data.due_time){
 							data.due_time = new Date(data.due_time).getTime()/1000;
-							data.hasDueDate = true;
+							data.has_due_date = true;
 						}
 						return angular.toJson(data);
 					},
 					transformResponse: function(data){
 						data = angular.fromJson(data);
-						if(parseInt(data.due_time) && !data.hasDueDate){
+						(data.reminder_pref_id != null && ReminderService.setReminderProperties(data));
+						if(parseInt(data.due_time) && !data.has_due_date){
 							data.due_time = new Date(data.due_time*1000);
-							data.hasDueDate = true;
+							data.has_due_date = true;
 						}else{
 							delete data.due_time;
 						}
@@ -102,25 +104,26 @@ angular.module('pinwheelApp', ['ui.calendar', 'ngDragDrop', 'ngResource', 'ui.da
 				update: {
 					method:'PUT',
 					isArray: false,
-					transformRequest: function(data){
-						data = angular.fromJson(data);
-						if(data.hasDueDate){
+					transformRequest: function(data) {
+						(data.has_reminder && ReminderService.setReminderData(data, data.due_time));
+						if(data.has_due_date) {
 							data.due_time = new Date(data.due_time).getTime()/1000;
-							data.hasDueDate = true;
+							data.has_due_date = true;
 						}else{
 							delete data.due_time
-							delete data.hasDueDate
+							delete data.has_due_date
 						}
 						return angular.toJson(data);
 					},
-					transformResponse: function(data){
-						var data = angular.fromJson(data);
+					transformResponse: function(data) {
+						data = angular.fromJson(data);
+						(data.reminder_pref_id != null && ReminderService.setReminderProperties(data));
 						if(data.due_time && parseInt(data.due_time)){
 							data.due_time = new Date(data.due_time*1000);
-							data.hasDueDate = true;
+							data.has_due_date = true;
 						}else{
 							delete data.due_time
-							delete data.hasDueDate
+							delete data.has_due_date
 						}
 						return data;
 					}
@@ -135,6 +138,7 @@ angular.module('pinwheelApp', ['ui.calendar', 'ngDragDrop', 'ngResource', 'ui.da
 					transformResponse: function(data){
 						var tasks = angular.fromJson(data);
 						angular.forEach(tasks, function(task,k){
+							(tasks[k].reminder_pref_id != null && ReminderService.setReminderProperties(tasks[k]));
 							if(parseInt(task.due_time)){
 								tasks[k].due_time = new Date(task.due_time*1000);
 							}else{
@@ -147,7 +151,7 @@ angular.module('pinwheelApp', ['ui.calendar', 'ngDragDrop', 'ngResource', 'ui.da
 				get: {method: 'GET'}
 			});
 	})
-	.factory('Event', function($resource){
+	.factory('Event', function($resource, ReminderService){
 		return $resource('/api/v1/event/:id/:year/:month/:day/:version', {}, {
 			save: {
 				method:'POST',
@@ -155,30 +159,35 @@ angular.module('pinwheelApp', ['ui.calendar', 'ngDragDrop', 'ngResource', 'ui.da
 				transformRequest: function(data){
 					// TODO: add if statements in case task does not have due time
 					// TODO: for save and update
-					data.event_start = new Date(data.event_start).getTime()/1000;
-					data.event_end = new Date(data.event_end).getTime()/1000;
+					//data.using_calendar_reminder = (data.using_calendar_reminder!=undefined);
+					(data.has_reminder && ReminderService.setReminderData(data, data.event_start));
+					data.event_start = data.event_start.getTime()/1000;
+					data.event_end = data.event_end.getTime()/1000;
 					return angular.toJson(data);
 				},
 				transformResponse: function(data){
 					data = angular.fromJson(data);
 					data.event_start = new Date(data.event_start*1000);
 					data.event_end = new Date(data.event_end*1000);
+					(data.reminder_pref_id != null && ReminderService.setReminderProperties(data));
 					return data;
 				}
 			},
 			update: {
 				method:'PUT',
 				isArray: false,
-				transformRequest: function(data){
-					data = angular.fromJson(data);
-					data.event_start = new Date(data.event_start).getTime()/1000;
-					data.event_end = new Date(data.event_end).getTime()/1000;
+				transformRequest: function(data) {
+					//data.using_calendar_reminder = (data.using_calendar_reminder!=undefined);
+					(data.has_reminder && ReminderService.setReminderData(data, data.event_start));
+					data.event_start = data.event_start.getTime()/1000;
+					data.event_end = data.event_end.getTime()/1000;
 					return angular.toJson(data);
 				},
 				transformResponse: function(data){
-					var data = angular.fromJson(data);
+					data = angular.fromJson(data);
 					data.event_start = new Date(data.event_start*1000);
 					data.event_end = new Date(data.event_end*1000);
+					(data.reminder_pref_id != null && ReminderService.setReminderProperties(data));
 					return data;
 				}
 			},
@@ -190,6 +199,7 @@ angular.module('pinwheelApp', ['ui.calendar', 'ngDragDrop', 'ngResource', 'ui.da
 						angular.forEach(events, function(event,k){
 							events[k].event_start = new Date(parseInt(event.event_start*1000));
 							events[k].event_end = new Date(parseInt(event.event_end*1000));
+							(events[k].reminder_pref_id != null && ReminderService.setReminderProperties(events[k]));
 						});
 						return events;
 					}
@@ -199,8 +209,48 @@ angular.module('pinwheelApp', ['ui.calendar', 'ngDragDrop', 'ngResource', 'ui.da
 	.factory('Reminder', function($resource){
 		return $resource('/api/v1/reminder/:id', {}, {update: {method:'PUT'}});
 	})
-	.factory('Calendar', function($resource){
-		return $resource('/api/v1/calendar/:id/:version', {}, {update: {method:'PUT'}, delete: {method: 'DELETE', params: {version: ':version'}}});
+	.factory('Calendar', function($resource, ReminderService){
+		return $resource('/api/v1/calendar/:id/:version', {},
+			{
+				save: {
+					method:'POST',
+					isArray: false,
+					transformRequest: function(data) {
+						(data.has_reminder && ReminderService.setReminderData(data));
+						return angular.toJson(data);
+					},
+					transformResponse: function(data) {
+						data = angular.fromJson(data);
+						(data.reminder_pref_id != null && ReminderService.setReminderProperties(data));
+						return data;
+					}
+				},
+				update: {
+					method:'PUT',
+					isArray: false,
+					transformRequest: function(data) {
+						(data.has_reminder && ReminderService.setReminderData(data));
+						return angular.toJson(data);
+					},
+					transformResponse: function(data) {
+						data = angular.fromJson(data);
+						(data.reminder_pref_id != null && ReminderService.setReminderProperties(data));
+						return data;
+					}
+				},
+				query: {
+					method: 'GET',
+					isArray: true,
+					transformResponse: function(data) {
+						var calendars = angular.fromJson(data);
+						angular.forEach(calendars, function(calendar, k) {
+							(calendars[k].reminder_pref_id != null && ReminderService.setReminderProperties(calendars[k]));
+						});
+						return calendars;
+					}
+				},
+				delete: {method: 'DELETE', params: {version: ':version'}}
+			});
 	})
 	.factory('Timezones', function($resource){
 		return $resource('/timezone.json',{},{

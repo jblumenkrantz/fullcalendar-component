@@ -18,7 +18,7 @@ angular.module('pinwheelApp')
 					buttonIcon:"@",
 					disabled:"&",
 					buttonFloat:"@",
-					enforceDialog:"="
+					enforceDialog:"@"
 				},
 				template: '<div ng-click="openModal()" ng-disabled="disabled()" class="icon modalTrigger button {{buttonFloat}} {{buttonClass}}">'+
 							'<span aria-hidden="true" class="{{buttonIcon}}" ng-transclude> </span>'+
@@ -31,10 +31,8 @@ angular.module('pinwheelApp')
 
 					var mod = angular.element('#global-modal');
 					var screen = angular.element('#global-modal-bg');
+
 					scope.openModal = function(){
-						screen.show();
-						mod.show().css('visibility','visible');
-						angular.element('#global-modal-bg').show();
 						var defaults = {
 									buttonClass:"",
 									buttonIcon:"icon-checkmark",
@@ -45,12 +43,19 @@ angular.module('pinwheelApp')
 									affirmativeText:"Yes",
 									enforceDialog:true
 						};
-
 						// Apply default values if the attribute was not sent
 						angular.forEach(defaults, function (value, key)	{
 							mod.scope()[key] = (attrs[key] === undefined)? value:attrs[key];
+							mod.scope().enforceDialog = (attrs.enforceDialog == "false")? false:true;
 						});
-
+						if(mod.scope().enforceDialog){
+							screen.show();
+							mod.show().css('visibility','visible');
+							angular.element('#global-modal-bg').show();
+						}else{
+							//console.warn('bypass modal');
+							scope.affirmativeAction();
+						}
 						mod.scope().negative = function(){
 							scope.closeModal();
 							scope.negativeAction();
@@ -70,13 +75,6 @@ angular.module('pinwheelApp')
 					mod.find('.close-reveal-modal').bind('click', function(){
 						scope.closeModal();
 					})
-					var trigger = element.find('.modalTrigger');
-					trigger.bind('click', function(){
-						if(!((scope.enforceDialog) || (scope.enforceDialog == undefined))){
-							console.warn('bypass modal');
-							scope.affirmativeAction();
-						}
-					});
 				}
 			};
 });

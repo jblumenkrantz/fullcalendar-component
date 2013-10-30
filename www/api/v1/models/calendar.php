@@ -11,7 +11,6 @@ class Calendar extends PinwheelModelObject
 	public $last_modified;
 	public $version;
 	public $has_reminder;
-	public $had_reminder;
 	public $mins_before;
 	public $reminder_type;
 	public $reminder_pref_id;
@@ -38,7 +37,6 @@ class Calendar extends PinwheelModelObject
 			'subscribed' => false,
 			'mins_before' => '',
 			'has_reminder' => false,
-			'had_reminder' => false,
 			'reminder_type' => '',
 			'reminder_pref_id' => '',
 			'reminder_pref_version' => 0,
@@ -388,7 +386,7 @@ class Calendar extends PinwheelModelObject
 			ReminderPrefs:: create($this, $pinsqli);
 		}
 		//updated calendar is removing it's reminder
-		if ($this->had_reminder && $this->reminder_pref_id != null) {
+		if (!$this->has_reminder && $this->reminder_pref_id != null) {
 			$this->version = $this->reminder_pref_version;
 			$this->has_reminder = null;
 			$this->aggregate = $this->reminder_aggregate;

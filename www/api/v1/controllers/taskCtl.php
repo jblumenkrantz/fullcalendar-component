@@ -110,7 +110,7 @@ class TaskCtl
 				}
 				
 				//updated task is removing it's reminder
-				if (@$tsprop->had_reminder) {
+				if (@!$tsprop->has_reminder && $tsprop->reminder_pref_id != null && !$tsprop->using_calendar_reminder) {
 					$tsprop->version = $tsprop->reminder_pref_version;
 					$rpref = new ReminderPrefs($tsprop);
 					$rpref->delete($pinsqli);
