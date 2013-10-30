@@ -342,13 +342,13 @@ background: #eeeeee; /* Old browsers */
 }
 .subscription-body { //inside
 min-height: 50px !important;
-padding: 5px 4px 0px 5px;
+padding: 5px 4px 5px 5px;
 margin-left: 8px;
 }
 
 .task-body { //inside
 min-height: 50px !important;
-padding: 5px 4px 0px 5px;
+padding: 5px 4px 5px 5px;
 margin-left: 8px;
 }
 .task-body.add {
@@ -410,15 +410,14 @@ font-size: 16px;
 
 .close-panel {
 	position: relative; 
-	top: 3px; 
-	right: 0px; 
 	float: right; 
 	cursor:pointer;
+	font-size: 20px;
 }
 // target first input box in task-form and offset to make room for close button
-.subscription input[type=text]:first-of-type, .task input[type=text]:first-of-type {
+.subscription > input[type=text]:first-of-type, .task > input[type=text]:first-of-type {
 	// width: 90%;
-	width: calc(100% - 20px) ;
+	width: calc(100% - 23px);
 }
 
 

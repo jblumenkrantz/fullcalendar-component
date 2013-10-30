@@ -75,7 +75,12 @@
 	<!-- BUTTONS -->
 	<div class="row">
 		<div class="large-12 columns">
-			<ul class="button-group even-2">
+			<ul class="button-group" ng-class="{'even-2':task.version == undefined, 'even-3':task.version != undefined}">
+				<li ng-show="task.version != undefined">
+					<div class="button radius" ng-click="share()">
+						<span aria-hidden="true" class="icon-share"></span>
+					</div>
+				</li>
 				<li>
 					<div class="button radius" ng-click="delete()">
 						<span aria-hidden="true" class="icon-remove-2"></span>

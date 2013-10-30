@@ -79,9 +79,17 @@ angular.module('pinwheelApp')
 		}
 
 		$scope.reset = function() {
-			$scope.useReminderType = 'relative';
-			$scope.formEvent = new Event($scope.defaultEvent());
-			$scope.formEvent.calendar_id = $scope.user.settings.default_calendar;
+			if ($scope.addingEvent) {
+				$scope.formEvent = new Event($scope.defaultEvent());
+				$scope.formEvent.calendar_id = $scope.user.settings.default_calendar;
+				
+			}
+			
+			if ($scope.editingEvent) {
+				angular.copy($scope.event, $scope.formEvent);
+			}
+
+			$scope.useReminderType = ($scope.formEvent.all_day=='1') ? 'absolute' : 'relative';
 			ReminderService.checkCalendarReminder($scope.formEvent, $scope.calendarWatchers);
 		}
 
