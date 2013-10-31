@@ -121,6 +121,10 @@ angular.module('pinwheelApp')
 			$scope.save();
 		}
 
+		$scope.switchCalendar = function() {
+			($scope.formEvent.using_calendar_reminder && $scope.checkCalendarReminder());
+		}
+
 		$scope.checkCalendarReminder = function() {
 			ReminderService.checkCalendarReminder($scope.formEvent, $scope.calendarWatchers);
 			($scope.formEvent.all_day=='1' && $scope.formEvent.using_calendar_reminder && $scope.convertToAbsoluteReminder());

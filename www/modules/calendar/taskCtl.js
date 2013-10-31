@@ -70,6 +70,10 @@ angular.module('pinwheelApp')
 			}
 		}
 
+		$scope.switchCalendar = function() {
+			($scope.newTask.using_calendar_reminder && $scope.checkCalendarReminder());
+		}
+
 		$scope.checkCalendarReminder = function() {
 			ReminderService.checkCalendarReminder($scope.newTask, $scope.calendarWatchers);
 		}

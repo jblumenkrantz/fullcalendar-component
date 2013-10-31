@@ -19,7 +19,7 @@
 	<!-- / Event Title -->
 	<!-- Calendar -->
 	<div class="large-6 columns">
-		<select ng-change="checkCalendarReminder()" ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'" ng-model="formEvent.calendar_id" ></select>
+		<select ng-change="switchCalendar()" ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'" ng-model="formEvent.calendar_id" ></select>
 	</div>
 	<!-- / Calendar -->
 </div>
