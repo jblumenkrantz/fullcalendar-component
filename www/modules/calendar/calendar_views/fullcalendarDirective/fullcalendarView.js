@@ -22,7 +22,8 @@ angular.module('pinwheelApp')
 					return height;
 				}
 
-				$scope.eventSources = [[]];
+				console.log($scope.events);
+				$scope.eventSources = [[$scope.events]];
 				$scope.calendarOptions = {
 					editable: true,
 					header:{

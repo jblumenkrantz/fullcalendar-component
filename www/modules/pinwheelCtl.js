@@ -17,6 +17,7 @@ angular.module('pinwheelApp')
 			return item.id
 		}
 
+		$scope.events = [];
 		$scope.init = function(){
 			User.get({}, function(user){
 				$scope.user = user;
@@ -38,6 +39,7 @@ angular.module('pinwheelApp')
 						Task.query({id: 'all'}, function(tasks){
 							$scope.loading_tasks = false;
 							$scope.events = $scope.events.concat(tasks);
+							console.log($scope.events);
 						});
 					});
 				});

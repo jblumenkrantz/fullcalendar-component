@@ -34,29 +34,27 @@
 
   <div scroll-pane class="scroll-pane"  style="border-left: 1px solid #afafaf; border-right: 1px solid #afafaf;">
 		<!-- calendar views switch -->
-		<div ng-switch="view">
-			<spinwheel class="spinwheel-holder"><div ng-show="loading_events" class="spinwheel"><div class="spinwheel"><div class="spinwheel"><div class="spinwheel"></div></div></div></div></spinwheel>
+		<spinwheel class="spinwheel-holder"><div ng-show="loading_events" class="spinwheel"><div class="spinwheel"><div class="spinwheel"><div class="spinwheel"></div></div></div></div></spinwheel>
 <!-- 			<div ng-switch-when="day">
-				<day-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></day-view>
-			</div>
+			<day-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></day-view>
+		</div>
 
-			<div ng-switch-when="week">
-				<week-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></week-view>
-			</div> -->
+		<div ng-switch-when="week">
+			<week-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></week-view>
+		</div> -->
 
-			<div>
-				<fullcalendar-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></month-view>
-			</div>
-			<!-- <div ng-switch-when="year">
-				<year-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></year-view>
-			</div> -->
-			<div ng-switch-when="list">
-				<list-view></list-view>
-			</div>
+		<div ng-hide="view==('list'||'datebook')">
+			<fullcalendar-view></fullcalendar-view>
+		</div>
+		<!-- <div ng-switch-when="year">
+			<year-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></year-view>
+		</div> -->
+		<div ng-show="view=='list'">
+			<list-view></list-view>
+		</div>
 
-			<div ng-switch-when="datebook">
-				<datebook-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></datebook-view>
-			</div>
+		<div ng-show="view=='datebook'">
+			<datebook-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></datebook-view>
 		</div>
 	</div>
 </div>
