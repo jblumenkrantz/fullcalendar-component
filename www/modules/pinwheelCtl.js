@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pinwheelApp')
-  .controller('PinwheelCtl', function ($scope, $location, $http, Calendar, User, localStorage, Event, Task, Timezones, $route) {
+  .controller('PinwheelCtl', function ($scope, $location, $http, Calendar, User, localStorage, Event, Task, Timezones, ContactPoints, $route) {
 		$scope.calendarWatchers = {};
 		$scope.reminders = {};
 
@@ -26,7 +26,10 @@ angular.module('pinwheelApp')
 				});
 				$scope.initialUser = {};
 				angular.copy(user, $scope.initialUser);
-
+				ContactPoints.query(function(contactPoints){
+					$scope.contactPoints = contactPoints;
+					console.warn(contactPoints);
+				});
 				Calendar.query({id: 'all'}, function(calendars){
 					$scope.loading_calendars = false;
 					$scope.calendars = calendars;			
@@ -51,7 +54,19 @@ angular.module('pinwheelApp')
 		}
 		/* resource queries were put into an init funciton */
 		/* to accomidate the user login functions */
-		$scope.init()
+		$scope.init();
+
+		//list of reminder types for use in reminder <select ng-model='reminder_type'> 
+		$scope.reminderTypes = [
+			{id: 0, name: "Minutes before", type: "relative"},
+			{id: 1, name: "Hours before", type: "relative"},
+			{id: 2, name: "Days before", type: "relative"},
+			{id: 4, name: "The same day at:", type: "absolute"},
+			{id: 5, name: "The day before at:", type: "absolute"},
+			{id: 6, name: "Days before at:", type: "absolute"},
+			{id: 3, name: "On date:", type: "both"},
+			{id: 7, name: "No reminder", type: "both"}
+		];
 
 		Timezones.query({}, function(timezones){
 			$scope.timezones = timezones;
@@ -78,6 +93,7 @@ angular.module('pinwheelApp')
 			delete $scope.events
 			delete $scope.user
 			delete $scope.initialUser;
+			delete $scope.contactPoints;
 			
 			/* Delete users access token */
 			delete localStorage['token'];

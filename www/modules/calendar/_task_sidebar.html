@@ -1,6 +1,7 @@
 <div class="pane-header scroll-header">
 	<span class="pane-title">Tasks/To Do</span>
-	<span ng-click="toggle('addingTask')" aria-hidden="true" class="icon-plus-alt right"></span>
+	<span ng-show="!addingTask" ng-click="add()" aria-hidden="true" class="icon-plus-alt right"></span>
+	<span ng-show="addingTask" ng-click="cancel()" aria-hidden="true" class="icon-plus-alt right"></span>
 </div>
 <div ng-show="loading_tasks" class="spinwheel"></div>
 <div scroll-pane class="scroll-pane">
@@ -10,7 +11,20 @@
 		<div class="task-panel">
 			<div class="task-gradient">
 				<div class="task-body">
-					<task-form task="newTask" save="saveNew()" cancel="toggle('addingTask')" calendars="calendars"></task-form>
+					<task-form
+						task="newTask"
+						save="save()"
+						cancel="cancel()"
+						reminder-toggle="reminderToggle()"
+						switch-calendar="switchCalendar()"
+						check-calendar-reminder="checkCalendarReminder()"
+						due-date-toggle="dueDateToggle()"
+						calendars="calendars"
+						reminder-type-filter="reminderTypeFilter"
+						reminder-types="reminderTypes"
+						using-own-reminder="usingOwnReminder()"
+						no-reminder="noReminder()">
+					</task-form>
 				</div>
 			</div>
 		</div>
@@ -18,6 +32,12 @@
 	<!-- / task entry form -->
 
 	<div ng-repeat="task in events | filter: isTask | filter: isCalendarShowing">
-		<view-task task="task" calendars="calendars" colors="calendarWatchers" ng-show="task.active"></view-task>
+		<view-task
+			task="task"
+			calendars="calendars"
+			calendar-watchers="calendarWatchers"
+			ng-show="task.active"
+			reminder-types="reminderTypes">
+		</view-task>
 	</div>
 </div>

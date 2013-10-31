@@ -131,6 +131,11 @@ dl.sub-nav.calendar-filter dd {
 .pane-header [class*="icon-"]{
 	position: relative;
 	top: 3px;
+	cursor:pointer;
+}
+
+.pane-header [class*="icon-"]:active{
+	
 }
 
 .pane-header span{
@@ -163,6 +168,10 @@ header#content-header ul.small-block-grid-3 span.month-switcher{
 	font-family: $body-font-family;
 	position: relative;
 	top: -1px;
+}
+
+header#content-header [class*="icon-"] {
+	cursor:pointer;
 }
 
 #org-name-wrapper {
@@ -333,13 +342,13 @@ background: #eeeeee; /* Old browsers */
 }
 .subscription-body { //inside
 min-height: 50px !important;
-padding: 5px 4px 0px 5px;
+padding: 5px 4px 5px 5px;
 margin-left: 8px;
 }
 
 .task-body { //inside
 min-height: 50px !important;
-padding: 16px 4px 6px;
+padding: 5px 4px 5px 5px;
 margin-left: 8px;
 }
 .task-body.add {
@@ -381,7 +390,6 @@ border: 0;
 background: 0;
 padding: 0;
 margin: 0;
-// cursor: pointer;
 transform: rotate(180deg) !important;
 -ms-transform: rotate(180deg) !important; /* IE 9 */
 -webkit-transform: rotate(180deg) !important; /* Safari and Chrome */
@@ -389,10 +397,31 @@ box-shadow: none;
 font-size: 16px;
 }
 
+.subscription-panel [class*="icon-"], .task-panel [class*="icon-"]{
+	color: #999;
+}
 
-// .button-group > *:last-child {
-// padding-right: 0 !important;
-// }
+.subscription-panel [class*="icon-"]:hover, .task-panel [class*="icon-"]:hover{
+	color: #666;
+}
+.subscription-panel [class*="icon-"]:active, .task-panel [class*="icon-"]:active{
+	color: $primary-color;
+}
+
+.close-panel {
+	position: relative; 
+	float: right; 
+	cursor:pointer;
+	font-size: 20px;
+}
+// target first input box in task-form and offset to make room for close button
+.subscription > input[type=text]:first-of-type, .task > input[type=text]:first-of-type {
+	// width: 90%;
+	width: calc(100% - 23px);
+}
+
+
+
 .button-group li{
 padding: 0 5px 0 0;
 

@@ -63,9 +63,9 @@ class Contact extends PinwheelModelObject
 			$value->emergency_only = ($value->emergency_only == '1') ? true:false;
 			$value->activated = ($value->activated_on != null) ? true:false;
 			unset($value->activated_on);
-			$contactPointObject[$value->point_id] = $value;
+			//$contactPointObject[$value->point_id] = $value;
 		}
-		return $contactPointObject;
+		return $contactPoints;
 	}
 
 	public function generateMessage($activationCode, $p) {
@@ -192,7 +192,7 @@ class Contact extends PinwheelModelObject
 		}
 
 		static:: sendActivationCode($msg);
-		$contactPoint = static:: loadContactPoint($point_id, $pinsqli);
+		$contactPoint = array_shift(static:: loadContactPoint($point_id, $pinsqli));
 		return $contactPoint;
 	}
 
