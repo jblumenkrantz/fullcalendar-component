@@ -2,11 +2,11 @@
 
 angular.module('pinwheelApp')
 .controller('SettingsCtl', function ($scope, $http, User, Calendar, Timezones, ContactPoints) {
-	$scope.cancel = function(name){
+	$scope.cancelUser = function(name){
 		angular.extend($scope.user, $scope.initialUser);
 	}
 
-	$scope.save = function(name){
+	$scope.saveUser = function(name){
 		$scope.user.$update({id: $scope.user.user_id}, function(user){
 			$scope.user = user;
 			$scope.initialUser = {};

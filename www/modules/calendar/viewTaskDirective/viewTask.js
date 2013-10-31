@@ -75,6 +75,10 @@ angular.module('pinwheelApp')
 					}
 				}
 
+				$scope.switchCalendar = function() {
+					($scope.editTask.using_calendar_reminder && $scope.checkCalendarReminder());
+				}
+
 				$scope.checkCalendarReminder = function() {
 					ReminderService.checkCalendarReminder($scope.editTask, $scope.calendarWatchers);
 				}

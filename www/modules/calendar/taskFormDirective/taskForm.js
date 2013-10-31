@@ -12,6 +12,7 @@ angular.module('pinwheelApp')
 				cancel: '&',
 				delete: '&',
 				reminderToggle: '&',
+				switchCalendar: '&',
 				checkCalendarReminder: '&',
 				dueDateToggle: '&',
 				reminderTypeFilter: '&',

@@ -43,10 +43,11 @@
 			</div>
 			<div class="large-6 left columns" >
 				Start of Day:
-				<input type="text" ng-model="user.settings.start_of_day">
+				<time db="true" ng-model="user.settings.start_of_day" placeholder="h:mm AM/PM" />
 			</div>
 			<div class="large-6 right columns" >
-				End of Day:	<input type="text" ng-model="user.settings.end_of_day">
+				End of Day:
+				<time db="true" ng-model="user.settings.end_of_day" placeholder="h:mm AM/PM" />
 			</div>
 			<!-- Primary Organization:
 			<select disabled ng-options="org.org_id as org.org_name for org in orgs" ng-model="user.settings.primary_org.org_id" ></select>
@@ -56,10 +57,10 @@
 	<div class="row">
 		<div class="large-12 columns animate-show" ng-hide="userDiff()">
 			<div class="large-6 columns">
-				<div class="expand small alert button" ng-click="cancel()" >Cancel</div>
+				<div class="expand small alert button" ng-click="cancelUser()" >Cancel</div>
 			</div>
 			<div class="large-6 columns">
-				<confirm button-class="expand small success" header="Update Account Information" body="Are you sure you want to update your user settings?" footer="You are about to change your account settings, this could affect the way your information is displayed to you.  Are you sure you wnat to continue" affirmative-text="Save" negative-text="Cancel" affirmative-action="save()" negative-action="cancel()">Save</confirm>
+				<confirm button-class="expand small success" header="Update Account Information" body="Are you sure you want to update your user settings?" footer="You are about to change your account settings, this could affect the way your information is displayed to you.  Are you sure you wnat to continue" affirmative-text="Save" negative-text="Cancel" affirmative-action="saveUser()" negative-action="cancelUser()">Save</confirm>
 			</div>
 		</div>
 	</div>
