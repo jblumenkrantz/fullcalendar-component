@@ -14,7 +14,8 @@
 <div class="row" style="padding-top: 1em;">
 	<!-- Event Title -->
 	<div class="large-6 columns">
-		<input type="text" ng-model="formEvent.event_title" placeholder="Untitled event" />
+		<label>Title:</label>
+		<input type="text" ng-model="formEvent.title" placeholder="Untitled event" />
 	</div>
 	<!-- / Event Title -->
 	<!-- Calendar -->
@@ -27,16 +28,16 @@
 	<!-- Start Time -->
 	<div class="large-6 columns calendar-picker-container">
 		<label>From<span ng-show="formEvent.all_day=='1'"> start of day</span>:</label>
-		<datetime ng-show="formEvent.all_day == '0'" ng-model="formEvent.event_start" name="event_start" placeholder="m/d/yyyy h:mm AM/PM" />
-		<date ng-show="formEvent.all_day == '1'" ng-model="formEvent.event_start" name="event_start" placeholder="m/d/yyyy" />
+		<datetime ng-show="formEvent.all_day == '0'" ng-model="formEvent.start" name="start" placeholder="m/d/yyyy h:mm AM/PM" />
+		<date ng-show="formEvent.all_day == '1'" ng-model="formEvent.start" name="start" placeholder="m/d/yyyy" />
 		<button type="button" class="glyph-show"><span aria-hidden="true" class="icon-calendar-2"></span></button>
 	</div>
 	<!-- / Start Time -->
 	<!-- End Time -->
 	<div class="large-6 columns calendar-picker-container">
 		<label>To<span ng-show="formEvent.all_day=='1'"> end of day</span>:</label>
-		<datetime ng-show="formEvent.all_day == '0'" ng-model="formEvent.event_end" name="event_end" placeholder="m/d/yyyy h:mm AM/PM" />
-		<date ng-show="formEvent.all_day == '1'" ng-model="formEvent.event_end" name="event_end" placeholder="m/d/yyyy" />
+		<datetime ng-show="formEvent.all_day == '0'" ng-model="formEvent.end" name="end" placeholder="m/d/yyyy h:mm AM/PM" />
+		<date ng-show="formEvent.all_day == '1'" ng-model="formEvent.end" name="end" placeholder="m/d/yyyy" />
 		<button type="button" class="glyph-show"><span aria-hidden="true" class="icon-calendar-2"></span></button>
 	</div>
 	<!-- / End Time -->

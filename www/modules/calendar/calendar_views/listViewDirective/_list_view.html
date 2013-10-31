@@ -1,13 +1,13 @@
-<div ng-repeat="event in events | filter: {active: 1} | filter: isCalendarShowing | orderBy: '-(due_time||event_start)'">
-	<div class="row display" ng-style="{color: calendarWatchers[event.calendar_id].color}" ng-show="event.event_end">
-		<div ng-click="edit(event)" class="large-3 columns">{{event.event_title||event.task_name}}</div>
-		<div class="large-3 columns">{{event.event_start | date}}</div>
-		<div class="large-3 columns">{{event.event_end | date}}</div>
+<div ng-repeat="event in events | filter: {active: 1} | filter: isCalendarShowing | orderBy: 'start'">
+	<div class="row display" ng-style="{color: calendarWatchers[event.calendar_id].color}" ng-show="event.end">
+		<div ng-click="edit(event)" class="large-3 columns">{{event.title}}</div>
+		<div class="large-3 columns">{{event.start | date}}</div>
+		<div class="large-3 columns">{{event.end | date}}</div>
 		<div class="large-3 columns">{{event.active}}</div>
 	</div>
-	<div class="row display" ng-style="{color: calendarWatchers[event.calendar_id].color}" ng-hide="event.event_end">
-		<div ng-click="edit(event)" class="large-3 columns">{{event.event_title||event.task_name}}</div>
-		<div class="large-3 columns">{{event.due_time | date}}</div>
+	<div class="row display" ng-style="{color: calendarWatchers[event.calendar_id].color}" ng-hide="event.end">
+		<div ng-click="edit(event)" class="large-3 columns">{{event.title}}</div>
+		<div class="large-3 columns">{{event.start | date}}</div>
 		<div class="large-3 columns">{{event.event_description}}</div>
 	</div>
 </div>

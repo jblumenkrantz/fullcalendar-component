@@ -116,7 +116,7 @@ class UserCtl
 	*	UserCtl::create's query pattern is not atomic due to an INSERT followed
 	*	by a SELECT without locking. There does exist a posibility,
 	*	however unlikely, after the INSERT an update occurs before the following
-	*	SELECT on the newly created User, and if the event_id and
+	*	SELECT on the newly created User, and if the id and
 	*	last_modified where the only properties to be returned, the client's
 	*	cached/local view of the User would be improperly bound to the wrong
 	*	last_modified(s). As a result, the improperly bound last_modified(s) could

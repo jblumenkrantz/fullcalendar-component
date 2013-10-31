@@ -197,8 +197,8 @@ class Sharing extends PinwheelModelObject
 			switch ($this->element_type) {
 				case 'event':
 					$raw = array_shift(Event:: load($this->element_id));
-					$raw->event_start = ($raw->all_day)? date('F j, Y', $raw->event_start):date('F j, Y, g:i a', $raw->event_start);
-					$raw->event_end = ($raw->all_day)? date('F j, Y', $raw->event_end):date('F j, Y, g:i a', $raw->event_end);
+					$raw->start = ($raw->all_day)? date('F j, Y', $raw->start):date('F j, Y, g:i a', $raw->start);
+					$raw->end = ($raw->all_day)? date('F j, Y', $raw->end):date('F j, Y, g:i a', $raw->end);
 					$messageBody['html'] = "<html>
 											<body lang='en' style='background-color:#fff; color: #222'>
 												<div style='-moz-box-shadow: 0px 5px 16px #999;-webkit-box-shadow:0px 5px 16px #999;box-shadow: 0px 5px 16px #999;-ms-filter: 'progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=90, Color='#999999')';filter:progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=90, Color='#999999');'>
@@ -216,10 +216,10 @@ class Sharing extends PinwheelModelObject
 																<th>End Time</th>
 															</tr>
 															<tr>
-																<td>{$raw->event_title}</td>
+																<td>{$raw->title}</td>
 																<td>{$raw->event_description}</td>
-																<td>{$raw->event_start}</td>
-																<td>{$raw->event_end}</td>
+																<td>{$raw->start}</td>
+																<td>{$raw->end}</td>
 															</tr>
 														</table>
 														<p style='font-family: Helvetica Neue, Arial, Helvetica, sans-serif;margin-top:5px;font-size:10px;color:#888888;'>
@@ -231,16 +231,16 @@ class Sharing extends PinwheelModelObject
 										</html>";
 
 					$messageBody['plain'] = $user->first_name." ".$user->last_name." has shared an event with you\r\n \r\n
-											Event Title: {$raw->event_title}\r\n
+											Event Title: {$raw->title}\r\n
 											Description: {$raw->event_description}\r\n
-											Start Time: {$raw->event_start}\r\n
-											End Time: {$raw->event_end}\r\n
+											Start Time: {$raw->start}\r\n
+											End Time: {$raw->end}\r\n
 											";
 					break;
 
 				case 'task':
 					$raw = array_shift(Task:: load($this->element_id));
-					$raw->due_time = ($raw->due_time == 0)? 'None':date('F j, Y, g:i a', $raw->due_time);
+					$raw->start = ($raw->start == 0)? 'None':date('F j, Y, g:i a', $raw->start);
 					$messageBody['html'] = "<html>
 											<body lang='en' style='background-color:#fff; color: #222'>
 												<div style='-moz-box-shadow: 0px 5px 16px #999;-webkit-box-shadow:0px 5px 16px #999;box-shadow: 0px 5px 16px #999;-ms-filter: 'progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=90, Color='#999999')';filter:progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=90, Color='#999999');'>
@@ -258,8 +258,8 @@ class Sharing extends PinwheelModelObject
 																<th>Notes</th>
 															</tr>
 															<tr>
-																<td>{$raw->task_name}</td>
-																<td>{$raw->due_time}</td>
+																<td>{$raw->title}</td>
+																<td>{$raw->start}</td>
 																<td>{$raw->progress}</td>
 																<td>{$raw->task_notes}</td>
 															</tr>
@@ -272,8 +272,8 @@ class Sharing extends PinwheelModelObject
 											</body>
 										</html>";
 					$messageBody['plain'] = $user->first_name." ".$user->last_name." has shared a task with you \r\n \r\n
-											Task Name: {$raw->task_name}\r\n
-											Due Time: {$raw->due_time}\r\n
+											Task Name: {$raw->title}\r\n
+											Due Time: {$raw->start}\r\n
 											Progress: {$raw->progress}\r\n
 											Notes: {$raw->task_notes}\r\n
 											";
@@ -289,34 +289,34 @@ class Sharing extends PinwheelModelObject
 
 					$eventRows = array('html'=>null,'plain'=>null);
 					foreach ($events as $event) {
-						$event->event_start = ($event->all_day)? date('F j, Y', $event->event_start):date('F j, Y, g:i a', $event->event_start);
-						$event->event_end = ($event->all_day)? date('F j, Y', $event->event_end):date('F j, Y, g:i a', $event->event_end);
+						$event->start = ($event->all_day)? date('F j, Y', $event->start):date('F j, Y, g:i a', $event->start);
+						$event->end = ($event->all_day)? date('F j, Y', $event->end):date('F j, Y, g:i a', $event->end);
 						$eventRows['html'] .= "<tr>
-											<td>{$event->event_title}</td>
+											<td>{$event->title}</td>
 											<td>{$event->event_description}</td>
-											<td>{$event->event_start}</td>
-											<td>{$event->event_end}</td>
+											<td>{$event->start}</td>
+											<td>{$event->end}</td>
 										</tr>";
 						$eventRows['plain'] .= "\r\n
-											Event Title: {$event->event_title}\r\n
+											Event Title: {$event->title}\r\n
 											Description: {$event->event_description}\r\n
-											Start Time: {$event->event_start}\r\n
-											End Time: {$event->event_end}\r\n
+											Start Time: {$event->start}\r\n
+											End Time: {$event->end}\r\n
 											";
 					}
 
 					$taskRows = array('html'=>null,'plain'=>null);
 					foreach ($tasks as $task) {
-						$task->due_time = ($task->due_time == 0)? 'None':date('F j, Y, g:i a', $task->due_time);
+						$task->start = ($task->start == 0)? 'None':date('F j, Y, g:i a', $task->start);
 						$taskRows['html'] .= "<tr>
-											<td>{$task->task_name}</td>
-											<td>{$task->due_time}</td>
+											<td>{$task->title}</td>
+											<td>{$task->start}</td>
 											<td>{$task->progress}</td>
 											<td>{$task->task_notes}</td>
 									</tr>";
 						$taskRows['plain'] .= "\r\n
-												Task Name: {$task->task_name}
-												Due Time: {$task->due_time}
+												Task Name: {$task->title}
+												Due Time: {$task->start}
 												Progress: {$task->progress}
 												Notes:{$task->task_notes}
 												";
@@ -438,7 +438,7 @@ class Sharing extends PinwheelModelObject
 		} else
 			throw new Exception($pinsqli->error, 1);
 		$elementType = explode('_', $element_id)[0];
-		$title = ($elementType == 'event')? 'event_title':'calendar_name';
+		$title = ($elementType == 'event')? 'title':'calendar_name';
 		$result = $pinsqli->query(
 				"SELECT {$title} AS title
 					FROM {$elementType}s
@@ -472,10 +472,10 @@ class Sharing extends PinwheelModelObject
 		$payload = false;
 		$match = static:: genericQuery(
 			"SELECT
-				event_id
+				id
 				FROM event_subs
 				WHERE
-					event_id = '{$props->event_id}'
+					id = '{$props->id}'
 				AND
 					user_id = '{$props->user_id}'
 			"

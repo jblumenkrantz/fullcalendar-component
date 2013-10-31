@@ -213,24 +213,24 @@ angular.module('pinwheelApp')
 			
 			jsonOutput = new Object();
 			if (eventTitle != "")
-				jsonOutput["event_title"] = eventTitle;
+				jsonOutput["title"] = eventTitle;
 			else
-				jsonOutput["event_title"] = null;
+				jsonOutput["title"] = null;
 			if (timeCoordObjects[0] && timeCoordObjects[0]["timestamp"] != "")
-				jsonOutput["event_start"] = timeCoordObjects[0]["timestamp"];
+				jsonOutput["start"] = timeCoordObjects[0]["timestamp"];
 			else
-				jsonOutput["event_start"] = null;
+				jsonOutput["start"] = null;
 			if (timeCoordObjects.length > 1) {
 				if (timeCoordObjects[0]["timestamp"] != timeCoordObjects[1]["timestamp"]) {
-					jsonOutput["event_end"] = timeCoordObjects[1]["timestamp"];
+					jsonOutput["end"] = timeCoordObjects[1]["timestamp"];
 				} else {
-					jsonOutput["event_end"] = parseInt(timeCoordObjects[0]["timestamp"]) + 3600;
+					jsonOutput["end"] = parseInt(timeCoordObjects[0]["timestamp"]) + 3600;
 				}
 			} else {
 				if (timeCoordObjects[0] && timeCoordObjects[0]["timestamp"] != "")
-					jsonOutput["event_end"] = parseInt(timeCoordObjects[0]["timestamp"]) + 3600;
+					jsonOutput["end"] = parseInt(timeCoordObjects[0]["timestamp"]) + 3600;
 				else
-					jsonOutput["event_end"] = null;
+					jsonOutput["end"] = null;
 			}
 			if (eventLocation != null)
 				jsonOutput["event_location"] = eventLocation;

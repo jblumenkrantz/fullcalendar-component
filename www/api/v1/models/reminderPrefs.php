@@ -4,8 +4,8 @@ class ReminderPrefs extends PinwheelModelObject
 {
 	public $reminder_pref_id;
 	public $calendar_id;
-	public $event_id;
-	public $task_id;
+	public $id;
+	public $id;
 	public $event_reminder_pref;
 	public $user_id;
 	public $mins_before;
@@ -26,8 +26,8 @@ class ReminderPrefs extends PinwheelModelObject
 		return array(
 			'reminder_pref_id' => NULL,
 			'calendar_id' => NULL,
-			'event_id' => NULL,
-			'task_id' => NULL,
+			'id' => NULL,
+			'id' => NULL,
 			'event_reminder_pref' => 1,
 			'user_id' => NULL,
 			'mins_before' => 0,
@@ -67,8 +67,8 @@ class ReminderPrefs extends PinwheelModelObject
 		return static:: loadByQuery("SELECT
 					reminder_pref_id,
 					calendar_id,
-					event_id,
-					task_id,
+					id,
+					id,
 					event_reminder_pref,
 					user_id,
 					mins_before,
@@ -82,16 +82,16 @@ class ReminderPrefs extends PinwheelModelObject
 				FROM reminder_prefs
 				WHERE user_id = '$userId'
 					AND active = TRUE
-				AND event_id = ''
-				AND task_id = ''", $pinsqli);
+				AND id = ''
+				AND id = ''", $pinsqli);
 	}
 
 	static public function loadEventReminders($userId, $pinsqli = NULL) {
 		return static:: loadByQuery("SELECT
 					reminder_pref_id,
 					calendar_id,
-					event_id,
-					task_id,
+					id,
+					id,
 					event_reminder_pref,
 					user_id,
 					mins_before,
@@ -105,16 +105,16 @@ class ReminderPrefs extends PinwheelModelObject
 				FROM reminder_prefs
 				WHERE user_id = '$userId'
 					AND active = TRUE
-				AND event_id != ''
-				AND task_id = ''", $pinsqli);
+				AND id != ''
+				AND id = ''", $pinsqli);
 	}
 
 	static public function loadTaskReminders($userId, $pinsqli = NULL) {
 		return static:: loadByQuery("SELECT
 					reminder_pref_id,
 					calendar_id,
-					event_id,
-					task_id,
+					id,
+					id,
 					event_reminder_pref,
 					user_id,
 					mins_before,
@@ -128,8 +128,8 @@ class ReminderPrefs extends PinwheelModelObject
 				FROM reminder_prefs
 				WHERE user_id = '$userId'
 					AND active = TRUE
-					AND event_id = ''
-					AND task_id != ''", $pinsqli);
+					AND id = ''
+					AND id != ''", $pinsqli);
 	}
 	/**
 	*	ReminderPrefs::load builds ReminderPref from datastore.
@@ -144,8 +144,8 @@ class ReminderPrefs extends PinwheelModelObject
 			"SELECT
 					reminder_pref_id,
 					calendar_id,
-					event_id,
-					task_id,
+					id,
+					id,
 					event_reminder_pref,
 					user_id,
 					mins_before,
@@ -167,8 +167,8 @@ class ReminderPrefs extends PinwheelModelObject
 			"SELECT
 					reminder_pref_id,
 					calendar_id,
-					event_id,
-					task_id,
+					id,
+					id,
 					event_reminder_pref,
 					user_id,
 					mins_before,
@@ -191,8 +191,8 @@ class ReminderPrefs extends PinwheelModelObject
 			"SELECT
 					reminder_pref_id,
 					calendar_id,
-					event_id,
-					task_id,
+					id,
+					id,
 					event_reminder_pref,
 					user_id,
 					mins_before,
@@ -215,8 +215,8 @@ class ReminderPrefs extends PinwheelModelObject
 			"SELECT
 					reminder_pref_id,
 					calendar_id,
-					event_id,
-					task_id,
+					id,
+					id,
 					event_reminder_pref,
 					user_id,
 					mins_before,
@@ -279,8 +279,8 @@ class ReminderPrefs extends PinwheelModelObject
 				"(
 					'$rprefID',
 					'{$tp['calendar_id']}',
-					'{$tp['event_id']}',
-					'{$tp['task_id']}',
+					'{$tp['id']}',
+					'{$tp['id']}',
 					'{$tp['event_reminder_pref']}',
 					'{$tp['user_id']}',
 					'{$tp['mins_before']}',
@@ -297,8 +297,8 @@ class ReminderPrefs extends PinwheelModelObject
 			"INSERT INTO reminder_prefs (
 					reminder_pref_id,
 					calendar_id,
-					event_id,
-					task_id,
+					id,
+					id,
 					event_reminder_pref,
 					user_id,
 					mins_before,
@@ -331,8 +331,8 @@ class ReminderPrefs extends PinwheelModelObject
 			"SELECT
 					reminder_pref_id,
 					calendar_id,
-					event_id,
-					task_id,
+					id,
+					id,
 					event_reminder_pref,
 					user_id,
 					mins_before,
@@ -376,8 +376,8 @@ class ReminderPrefs extends PinwheelModelObject
 			"UPDATE reminder_prefs
 				SET
 					calendar_id   = '{$properties['calendar_id']}',
-					event_id      = '{$properties['event_id']}',
-					task_id       = '{$properties['task_id']}',
+					id      = '{$properties['id']}',
+					id       = '{$properties['id']}',
 					event_reminder_pref       = '{$properties['event_reminder_pref']}',
 					user_id       = '{$properties['user_id']}',
 					mins_before   = '{$properties['mins_before']}',
