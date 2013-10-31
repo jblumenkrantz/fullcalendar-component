@@ -7,6 +7,7 @@ angular.module('pinwheelApp')
 .value("formDatetimeFormat", "M/d/yyyy @ h:mm a")
 .value("formDateFormat", "M/d/yyyy")
 .value("formTimeFormat", "h:mm a")
+.value("dbTimeFormat", "HH:mm:ss")
 .directive('scrollPane', function(Debounce, getHeight, $timeout) {
 	return {
 		link: function(scope, element, attrs) {
@@ -74,6 +75,7 @@ angular.module('pinwheelApp')
 				datetimeFormat: 'o/d/Y @ h:M a'
 			}).change(function() {
 				ngModelCtrl.$setViewValue($(this).val());
+				scope.$apply();
 			});
 		}
 	}
@@ -101,11 +103,20 @@ angular.module('pinwheelApp')
 				datetimeFormat: 'o/d/Y'
 			}).change(function() {
 				ngModelCtrl.$setViewValue($(this).val());
+				scope.$apply();
 			});
 		}
 	}
 })
-.directive('time', function($filter, formTimeFormat) {
+/*
+The time directive by default works with ng-models that are dates by displaying/saving just the time portion.
+Either a date obj or date in milliseconds (as string OR int) will work.
+Default usage: <time ng-model="xxx" />
+
+Optionally, if you use <time db='true' ng-model="xxx" /> it will save the value as the DB's TIME format HH:mm:ss.
+Use db='true' if the ng-model is directly saved in the database as a TIME type.
+*/
+.directive('time', function($filter, formTimeFormat, dbTimeFormat) {
 	return {
 		restrict: "E",
 		require: "ngModel",
@@ -113,11 +124,12 @@ angular.module('pinwheelApp')
 		replace: true,
 		link: function(scope, element, attrs, ngModelCtrl) {
 			function display(modelValue) {
-				return $filter('date')(modelValue, formTimeFormat);
+				return $filter('date')((attrs.db=='true') ? new Date("1970-01-01 "+modelValue) : modelValue, formTimeFormat);
 			}
 
 			function save(viewValue) {
-				return new Date("1970-01-01 "+viewValue);
+				var date = new Date("1970-01-01 "+viewValue);
+				return (attrs.db=='true') ? $filter('date')(date, dbTimeFormat) : date;
 			}
 
 			ngModelCtrl.$formatters.push(display);
@@ -128,6 +140,7 @@ angular.module('pinwheelApp')
 				datetimeFormat: 'h:M a'
 			}).change(function() {
 				ngModelCtrl.$setViewValue($(this).val());
+				scope.$apply();
 			});
 		}
 	}

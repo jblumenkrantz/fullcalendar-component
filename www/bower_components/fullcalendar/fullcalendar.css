@@ -28,9 +28,11 @@ html .fc,
 	vertical-align: top;
 	}
 
+
 .calendar-wrapper {
 	display: block !important; /* Added by Deac */
-}
+	}
+
 
 /* Header
 ------------------------------------------------------------------------*/
