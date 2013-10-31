@@ -37,10 +37,11 @@
 			</div>
 			<div class="large-6 left columns" >
 				Start of Day:
-				<input type="text" ng-model="user.settings.start_of_day">
+				<time db="true" ng-model="user.settings.start_of_day" placeholder="h:mm AM/PM" />
 			</div>
 			<div class="large-6 right columns" >
-				End of Day:	<input type="text" ng-model="user.settings.end_of_day">
+				End of Day:
+				<time db="true" ng-model="user.settings.end_of_day" placeholder="h:mm AM/PM" />
 			</div>
 			<!-- Primary Organization:
 			<select disabled ng-options="org.org_id as org.org_name for org in orgs" ng-model="user.settings.primary_org.org_id" ></select>

@@ -4,7 +4,8 @@ angular.module('pinwheelApp')
 			restrict:"E",
 			replace:true,
 			transclude:true,
-			template:'<li><a><span aria-hidden="true" class="icon-menu"></span></a>'+
+			template:'<li>' +
+						'<a><span aria-hidden="true" class="icon-menu"></span></a>'+
 						'<ul id="settingsMenu" class="f-dropdown settingsMenu slide-drawer top-down transition-07">'+
 						    '<li settings-modal-trigger="account"><span aria-hidden="true" class="icon-cog"></span> My Account</li>'+
 						    '<li settings-modal-trigger="contact_points"><span aria-hidden="true" class="icon-notebook"></span> Contact Points</li>'+
@@ -17,15 +18,16 @@ angular.module('pinwheelApp')
 						  '</ul>'+
 					'</li>',
 			link: function(scope, element, attrs) {
+				var settingsMenu = element.find('#settingsMenu');
+				$(document).click(function(e) {
+					(element.has($(e.target)).length == 0 && settingsMenu.removeClass('extended'));
+				});
 				element.bind({
 					click: function(){
-						element.find('#settingsMenu').addClass('extended');
-					},
-					mouseleave: function(){
-						element.find('#settingsMenu').removeClass('extended');
+						settingsMenu.toggleClass('extended');
 					},
 					blur: function(){
-						element.find('#settingsMenu').removeClass('extended');
+						settingsMenu.removeClass('extended');
 					}
 				});
 			}
