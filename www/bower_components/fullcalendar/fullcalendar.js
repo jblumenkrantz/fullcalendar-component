@@ -753,7 +753,7 @@ function Header(calendar, options) {
 						.append(renderSection('center'))
 						.append(renderSection('right'))
 				);
-			return element;
+			//return element; // commented out by Deac to prevent the header from loading
 		}
 	}
 	

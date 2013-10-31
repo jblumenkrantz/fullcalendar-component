@@ -22,7 +22,6 @@ angular.module('pinwheelApp')
 			}
 
 			adjustHeight();
-	 
 	 		$(window).resize(Debounce(adjustHeight));
 		}
 	}

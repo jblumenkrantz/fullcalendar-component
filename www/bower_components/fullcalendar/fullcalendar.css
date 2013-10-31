@@ -13,6 +13,8 @@
 .fc table {
 	border-collapse: collapse;
 	border-spacing: 0;
+	margin-bottom:0; /* Added by Deac */
+	border: 0px; /* Added by Deac */
 	}
 	
 html .fc,
@@ -26,6 +28,10 @@ html .fc,
 	vertical-align: top;
 	}
 
+
+.calendar-wrapper {
+	display: block !important; /* Added by Deac */
+	}
 
 
 /* Header

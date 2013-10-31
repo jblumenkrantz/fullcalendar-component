@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pinwheelApp')
-  .controller('PinwheelCtl', function ($scope, $location, $http, Calendar, User, localStorage, Event, Task, Timezones, ContactPoints, $route) {
+  .controller('PinwheelCtl', function ($scope, $location, $http, $timeout, $routeParams, Calendar, User, localStorage, Event, Task, Timezones, ContactPoints, $route) {
 		$scope.calendarWatchers = {};
 		$scope.reminders = {};
 
@@ -28,7 +28,6 @@ angular.module('pinwheelApp')
 				angular.copy(user, $scope.initialUser);
 				ContactPoints.query(function(contactPoints){
 					$scope.contactPoints = contactPoints;
-					console.warn(contactPoints);
 				});
 				Calendar.query({id: 'all'}, function(calendars){
 					$scope.loading_calendars = false;
@@ -127,9 +126,22 @@ angular.module('pinwheelApp')
 			$scope.taskDrawer = ($scope.user == undefined) ? false:$scope.user.settings.task_drawer_visible;
 			$scope.mainAreaSize();
 		});
-		
+		$scope.$watch('calendarDrawer', function(){
+			$timeout(function(){$('#monthCalendar').fullCalendar('render')});
+		});
+		$scope.$watch('taskDrawer', function(){
+			$timeout(function(){$('#monthCalendar').fullCalendar('render')});
+		});
+
 		$scope.changeView = function(view) {
 			$scope.view = view;
+			if(view == 'week' || view == 'day'){
+				var translate = 'agenda'+view.charAt(0).toUpperCase() + view.slice(1);
+				$('#monthCalendar').fullCalendar('changeView',translate);
+			}
+			else if(view == 'month'){
+				$('#monthCalendar').fullCalendar('changeView','month');
+			}
 		};
   });
 
