@@ -9,7 +9,8 @@
 	  ng-repeat="calendar in subscribedCalendars = (calendars | filter:{active: 1, subscribed: true} | orderBy:'calendar_name')" 
 		watcher="calendarWatchers"
 		calendar="calendar"
-		user="user">
+		user="user"
+		reminder-types="reminderTypes">
 	  </active-subscription>
 </div>
 
@@ -44,7 +45,6 @@
 			calendar="calendar">
 		</active-subscription>
 		
-
 		<div ng-show="availabeCalendars.length || calFilter" class="pane-header secondary" style="border-top: 1px solid #afafaf;">
 	        <span class="pane-title">Available Calendars</span>
 	    </div>

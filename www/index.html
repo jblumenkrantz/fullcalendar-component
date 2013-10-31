@@ -68,8 +68,9 @@
 
 	<!-- build:css({.tmp,app}) styles/main.css -->
 	<link rel="stylesheet" href="assets/styles/main.css">
-	<link rel="stylesheet" href="assets/styles/foundation.css">
 	<link rel="stylesheet" href="assets/styles/glyphs.css">
+	<link rel="stylesheet" href="assets/styles/foundation.css">
+	
 	<link rel="stylesheet" href="assets/styles/datetimeentry.css">
 	<link rel="stylesheet" href="assets/styles/spectrum.css"> 
 	<link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css">
@@ -131,6 +132,24 @@
 			this.setHours(this.getHours()+h);
 			return this;
 		}
+		Date.prototype.addDays = function(d){
+			this.setDate(this.getDate()+d);
+			return this;
+		}
+		Date.prototype.setTimeByString = function(str) {
+			var parts = str.match(/(\d+)\.(\d+) (\w+)/),
+    			hours = /am/i.test(parts[3]) ? parseInt(parts[1], 10) : parseInt(parts[1], 10) + 12,
+    			minutes = parseInt(parts[2], 10);
+			
+			this.setHours(hours);
+			this.setMinutes(minutes);
+			return this;
+		}
+		Date.prototype.setTimeByObj = function(obj) {			
+			this.setHours(obj.getHours());
+			this.setMinutes(obj.getMinutes());
+			return this;
+		}
 	</script>
 
 	<!-- build:js scripts/modules.js -->
@@ -165,11 +184,12 @@
 	<script src="modules/calendar/subscriptionCtl.js"></script>
 	<script src="modules/calendar/calendarCtl.js"></script>
 	<script src="modules/calendar/calendar_views/datebookViewDirective/datebookView.js"></script>
-	<script src="modules/calendar/calendar_views/dayViewDirective/dayView.js"></script>
 	<script src="modules/calendar/calendar_views/listViewDirective/listView.js"></script>
-	<script src="modules/calendar/calendar_views/monthViewDirective/monthView.js"></script>
-	<script src="modules/calendar/calendar_views/weekViewDirective/weekView.js"></script>
-	<script src="modules/calendar/calendar_views/yearViewDirective/yearView.js"></script>
+	<script src="modules/calendar/calendar_views/fullcalendarDirective/fullcalendarView.js"></script>
+	<!-- <script src="modules/calendar/calendar_views/dayViewDirective/dayView.js"></script> -->
+	<!-- <script src="modules/calendar/calendar_views/monthViewDirective/monthView.js"></script> -->
+	<!-- <script src="modules/calendar/calendar_views/weekViewDirective/weekView.js"></script> -->
+	<!-- <script src="modules/calendar/calendar_views/yearViewDirective/yearView.js"></script> -->
 	<script src="modules/calendar/viewTaskDirective/viewTask.js"></script>
 	<script src="modules/calendar/taskFormDirective/taskForm.js"></script>
 	<script src="modules/calendar/subscriptionDirective/activeSubscription.js"></script>
@@ -183,7 +203,10 @@
 	<script src="modules/settings/settingsCtl.js"></script>
 	<script src="modules/settings/settingsModal.js"></script>
 	<script src="modules/quickAddParser.js"></script>
+	<script src="modules/reminderService.js"></script>
 	<script src="modules/interfaceDirectives.js"></script>
+	<script src="modules/contact_points/contactPoint.js"></script>
+
 	<!-- endbuild -->
 </body>
 </html>

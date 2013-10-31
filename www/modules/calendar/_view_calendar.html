@@ -6,12 +6,12 @@
 				<span>
 					<span class="hide-for-small" ng-click="toggleSidebar('calendarDrawer')" aria-hidden="true" ng-class="{'icon-arrow-left':calendarDrawer, 'icon-arrow-right':!calendarDrawer}" style="margin-left: 4px;"></span>
 				</span>
-				<span aria-hidden="true" class="icon-poop-1"></span>
+				<!-- <span aria-hidden="true" class="icon-poop-1"></span> -->
 			</li>
 			<li>
-				<span aria-hidden="true" class="icon-arrow-left-2" ng-click="moveMonths(-1)"></span></a>
+				<span aria-hidden="true" class="icon-arrow-left-2" ng-click="previous()"></span></a>
 				<span class="month-switcher">{{routeDate | date: 'MMMM y'}}</span>
-				<span aria-hidden="true" class="icon-arrow-right-2" ng-click="moveMonths(1)"></span>
+				<span aria-hidden="true" class="icon-arrow-right-2" ng-click="next()"></span>
 			</li>
 			<li class="text-right">
 				<span class="icon-plus-alt" ng-click="quickAdd()" aria-hidden="true"></span>
@@ -36,20 +36,20 @@
 		<!-- calendar views switch -->
 		<div ng-switch="view">
 			<spinwheel class="spinwheel-holder"><div ng-show="loading_events" class="spinwheel"><div class="spinwheel"><div class="spinwheel"><div class="spinwheel"></div></div></div></div></spinwheel>
-			<div ng-switch-when="day">
+<!-- 			<div ng-switch-when="day">
 				<day-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></day-view>
 			</div>
 
 			<div ng-switch-when="week">
 				<week-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></week-view>
-			</div>
+			</div> -->
 
-			<div ng-switch-when="month">
-				<month-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></month-view>
+			<div>
+				<fullcalendar-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></month-view>
 			</div>
-			<div ng-switch-when="year">
+			<!-- <div ng-switch-when="year">
 				<year-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></year-view>
-			</div>
+			</div> -->
 			<div ng-switch-when="list">
 				<list-view></list-view>
 			</div>

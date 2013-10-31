@@ -1,9 +1,14 @@
 'use strict';
 
 angular.module('pinwheelApp')
-	.controller('SubscriptionDirectiveCtl', function ($scope, $routeParams) {
+	.controller('SubscriptionDirectiveCtl', function ($scope, $routeParams, ReminderService) {
+		//build calendarWatcher array
 		if ($scope.watcher != undefined) {
-			$scope.watcher[$scope.calendar.calendar_id] = {viewing: $scope.calendar.viewing, color: $scope.calendar.color};
+			$scope.watcher[$scope.calendar.calendar_id] = {
+				viewing: $scope.calendar.viewing,
+				color: $scope.calendar.color,
+				reminder: ReminderService.getCalendarReminderProperties($scope.calendar)
+			};
 		}
 		//open existing calendar for editing
 		$scope.edit = function() {
@@ -17,7 +22,10 @@ angular.module('pinwheelApp')
 			angular.copy($scope.editCalendar, $scope.calendar);
 			$scope.calendar.$update({id: $scope.calendar.calendar_id}, function(calendar) {
 				$scope.calendar = calendar;
-				$scope.watcher[$scope.calendar.calendar_id].color = $scope.calendar.color; 
+				angular.extend($scope.watcher[$scope.calendar.calendar_id], {
+					color: $scope.calendar.color,
+					reminder: ReminderService.getCalendarReminderProperties($scope.calendar)
+				});
 				$scope.cancel();
 			});
 		}
@@ -75,5 +83,11 @@ angular.module('pinwheelApp')
 			}else{
 				return false;
 			}	
+		}
+
+		$scope.reminderToggle = function() {
+			($scope.editCalendar.has_reminder &&
+			$scope.editCalendar.reminder_pref_id == null &&
+			ReminderService.reminderDefaultsEvent($scope.editCalendar, $scope.user));
 		}
 });

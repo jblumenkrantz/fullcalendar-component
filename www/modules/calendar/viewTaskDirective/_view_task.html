@@ -1,8 +1,8 @@
-<div class="task-panel" ng-style="{background: colors[task.calendar_id].color}">
+<div class="task-panel" ng-style="{background: calendarWatchers[task.calendar_id].color}">
 	<div class="task-gradient">
 		<div class="task-body">
 			<div ng-hide="editingTask" >
-				<div class="row" ng-click="edit('editingTask')">
+				<div class="row" ng-click="edit()">
 					<div class="large-12 columns">
 						<strong>{{task.task_name}}</strong>
 					</div>
@@ -19,7 +19,20 @@
 				</div>
 			</div>
 			<div ng-show="editingTask">
-				<task-form task="editTask" save="updateTask(task)" cancel="cancel('editingTask')" delete="deleteTask(task)" calendars="calendars"></task-form>
+				<task-form
+					task="editTask"
+					reminder-toggle="reminderToggle()"
+					save="update()"
+					cancel="cancel()"
+					delete="delete()"
+					calendars="calendars"
+					check-calendar-reminder="checkCalendarReminder()"
+					due-date-toggle="dueDateToggle()"
+					reminder-type-filter="reminderTypeFilter"
+					reminder-types="reminderTypes"
+					using-own-reminder="usingOwnReminder()"
+					no-reminder="noReminder()">
+				</task-form>
 			</div>
 		</div>
 	</div>

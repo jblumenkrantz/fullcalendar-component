@@ -31,8 +31,8 @@ angular.module('ui.calendar', [])
       scope.init = function(){
         var options = { eventSources: sources };
         angular.extend(options, uiCalendarConfig, attrs.uiCalendar ? scope.$parent.$eval(attrs.uiCalendar) : {});
-				console.log(scope.calendar);
         scope.calendar.fullCalendar(options);
+        $('#monthCalendar').css('margin-left',angular.element('.calendar-index').width()); // Added by Deac to offset the month quick selector
       };
       scope.init();
 
