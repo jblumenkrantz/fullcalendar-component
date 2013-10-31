@@ -9,7 +9,7 @@ angular.module('pinwheelApp')
 				$scope.thisDaysEvents = function(item) {
 				 	var startOfDay = new Date($routeParams.month+'-'+$routeParams.day+'-'+$routeParams.year).getTime()/1000;
 				 	var endOfDay = new Date($routeParams.month+'-'+$routeParams.day+'-'+$routeParams.year).getTime()/1000;
-				 	var itemStart = new Date(item.event_start).getTime()/1000;
+				 	var itemStart = new Date(item.start).getTime()/1000;
 				 	if(itemStart >= startOfDay && itemStart < (endOfDay+86400)){
 				 		return true;
 				 	}

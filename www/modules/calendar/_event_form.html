@@ -14,7 +14,8 @@
 <div class="row" style="padding-top: 1em;">
 	<!-- Event Title -->
 	<div class="large-6 columns">
-		<input type="text" ng-model="formEvent.event_title" placeholder="Untitled event" />
+		<label>Title:</label>
+		<input type="text" ng-model="formEvent.title" placeholder="Untitled event" />
 	</div>
 	<!-- / Event Title -->
 	<!-- Calendar -->
@@ -26,17 +27,17 @@
 <div class="row">
 	<!-- Start Time -->
 	<div class="large-6 columns calendar-picker-container">
-		<label>From<span ng-show="formEvent.all_day=='1'"> start of day</span>:</label>
-		<datetime ng-show="formEvent.all_day == '0'" ng-model="formEvent.event_start" name="event_start" placeholder="m/d/yyyy h:mm AM/PM" />
-		<date ng-show="formEvent.all_day == '1'" ng-model="formEvent.event_start" name="event_start" placeholder="m/d/yyyy" />
+		<label>From<span ng-show="formEvent.allDay=='1'"> start of day</span>:</label>
+		<datetime ng-show="formEvent.allDay == '0'" ng-model="formEvent.start" name="start" placeholder="m/d/yyyy h:mm AM/PM" />
+		<date ng-show="formEvent.allDay == '1'" ng-model="formEvent.start" name="start" placeholder="m/d/yyyy" />
 		<button type="button" class="glyph-show"><span aria-hidden="true" class="icon-calendar-2"></span></button>
 	</div>
 	<!-- / Start Time -->
 	<!-- End Time -->
 	<div class="large-6 columns calendar-picker-container">
-		<label>To<span ng-show="formEvent.all_day=='1'"> end of day</span>:</label>
-		<datetime ng-show="formEvent.all_day == '0'" ng-model="formEvent.event_end" name="event_end" placeholder="m/d/yyyy h:mm AM/PM" />
-		<date ng-show="formEvent.all_day == '1'" ng-model="formEvent.event_end" name="event_end" placeholder="m/d/yyyy" />
+		<label>To<span ng-show="formEvent.allDay=='1'"> end of day</span>:</label>
+		<datetime ng-show="formEvent.allDay == '0'" ng-model="formEvent.end" name="end" placeholder="m/d/yyyy h:mm AM/PM" />
+		<date ng-show="formEvent.allDay == '1'" ng-model="formEvent.end" name="end" placeholder="m/d/yyyy" />
 		<button type="button" class="glyph-show"><span aria-hidden="true" class="icon-calendar-2"></span></button>
 	</div>
 	<!-- / End Time -->
@@ -46,7 +47,7 @@
 	<!-- All Day -->
 	<div class="large-4 columns">
 		<label class="checkbox">
-			<input type="checkbox" ng-model="formEvent.all_day" ng-true-value="1" ng-false-value="0" ng-click="allDayToggle()" />
+			<input type="checkbox" ng-model="formEvent.allDay" ng-true-value="1" ng-false-value="0" ng-click="allDayToggle()" />
 			All Day Event
 		</label>
 	</div>
@@ -111,7 +112,7 @@
 				ng-model="formEvent.reminder_time"
 				placeholder="h:mm AM/PM"
 				ng-show="
-					formEvent.all_day == '1' &&
+					formEvent.allDay == '1' &&
 					formEvent.reminder_type != 3 &&
 					formEvent.reminder_type != 7"
 			/>

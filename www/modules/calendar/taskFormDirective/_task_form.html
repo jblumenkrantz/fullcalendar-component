@@ -3,7 +3,7 @@
 	<div ng-click="cancel()" class="close-panel">
 		<span aria-hidden="true" class="icon-x-altx-alt" ></span>
 	</div>
-	<input type="text" class="on-date" ng-model="task.task_name" placeholder="Untitled task" />
+	<input type="text" class="on-date" ng-model="task.title" placeholder="Untitled task" />
 	<!-- CALENDAR -->
 	<select
 		ng-change="switchCalendar()"
@@ -18,7 +18,7 @@
 		<input type="checkbox" ng-model="task.has_due_date" ng-change="dueDateToggle()" />
 		Has a due date
 	</label>
-	<datetime ng-show="task.has_due_date" ng-model="task.due_time" placeholder="m/d/yyyy h:mm AM/PM" />
+	<datetime ng-show="task.has_due_date" ng-model="task.start" placeholder="m/d/yyyy h:mm AM/PM" />
 	<!-- REMINDER CHECKBOX -->
 	<label class="checkbox" ng-class="{'on-date':task.has_reminder}">
 		<input type="checkbox" ng-model="task.has_reminder" ng-click="reminderToggle()" />

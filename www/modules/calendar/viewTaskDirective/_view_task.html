@@ -4,12 +4,12 @@
 			<div ng-hide="editingTask" >
 				<div class="row" ng-click="edit()">
 					<div class="large-12 columns">
-						<strong>{{task.task_name}}</strong>
+						<strong>{{task.title}}</strong>
 					</div>
 				</div>
 				<div class="row">
 					<div class="large-12 columns">
-						{{task.due_time | date:'M/d/yyyy h:mm a'}}
+						{{task.start | date:'M/d/yyyy h:mm a'}}
 					</div>
 				</div>
 				<div class="row">
