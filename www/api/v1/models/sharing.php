@@ -197,8 +197,8 @@ class Sharing extends PinwheelModelObject
 			switch ($this->element_type) {
 				case 'event':
 					$raw = array_shift(Event:: load($this->element_id));
-					$raw->start = ($raw->all_day)? date('F j, Y', $raw->start):date('F j, Y, g:i a', $raw->start);
-					$raw->end = ($raw->all_day)? date('F j, Y', $raw->end):date('F j, Y, g:i a', $raw->end);
+					$raw->start = ($raw->allDay)? date('F j, Y', $raw->start):date('F j, Y, g:i a', $raw->start);
+					$raw->end = ($raw->allDay)? date('F j, Y', $raw->end):date('F j, Y, g:i a', $raw->end);
 					$messageBody['html'] = "<html>
 											<body lang='en' style='background-color:#fff; color: #222'>
 												<div style='-moz-box-shadow: 0px 5px 16px #999;-webkit-box-shadow:0px 5px 16px #999;box-shadow: 0px 5px 16px #999;-ms-filter: 'progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=90, Color='#999999')';filter:progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=90, Color='#999999');'>
@@ -289,8 +289,8 @@ class Sharing extends PinwheelModelObject
 
 					$eventRows = array('html'=>null,'plain'=>null);
 					foreach ($events as $event) {
-						$event->start = ($event->all_day)? date('F j, Y', $event->start):date('F j, Y, g:i a', $event->start);
-						$event->end = ($event->all_day)? date('F j, Y', $event->end):date('F j, Y, g:i a', $event->end);
+						$event->start = ($event->allDay)? date('F j, Y', $event->start):date('F j, Y, g:i a', $event->start);
+						$event->end = ($event->allDay)? date('F j, Y', $event->end):date('F j, Y, g:i a', $event->end);
 						$eventRows['html'] .= "<tr>
 											<td>{$event->title}</td>
 											<td>{$event->event_description}</td>

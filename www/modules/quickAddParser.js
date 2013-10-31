@@ -235,9 +235,9 @@ angular.module('pinwheelApp')
 			if (eventLocation != null)
 				jsonOutput["event_location"] = eventLocation;
 			if (allDayEvent)
-				jsonOutput["all_day"] = true;
+				jsonOutput["allDay"] = true;
 			else
-				jsonOutput["all_day"] = false;
+				jsonOutput["allDay"] = false;
 				
 			//get user obj for default calendar
 			var userObj = JSON.parse(localStorage.User);	

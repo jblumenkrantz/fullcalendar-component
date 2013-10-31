@@ -14,7 +14,7 @@ class Event extends PinwheelModelObject
 	public $active;
 	public $last_modified;
 	public $version;
-	public $all_day;
+	public $allDay;
   public $stops_repeating;
   public $repeat_by;
   public $repeat_on;
@@ -45,7 +45,7 @@ class Event extends PinwheelModelObject
 			'repeat_by' => null,
 			'repeat_on' => null,
 			'repeat_interval' => null,
-			'all_day' => 0,
+			'allDay' => 0,
 			'last_modified' => NULL,
 			'version' => 0,
 			'mins_before' => '',
@@ -105,7 +105,7 @@ class Event extends PinwheelModelObject
 					repeat_on,
 					repeat_interval,
 					events.active,
-					all_day,
+					allDay,
 					UNIX_TIMESTAMP(events.last_modified) as last_modified,
 					events.version,
 					reminder_prefs.mins_before,
@@ -139,7 +139,7 @@ class Event extends PinwheelModelObject
 					repeat_on,
 					repeat_interval,
 					events.active,
-					all_day,
+					allDay,
 					UNIX_TIMESTAMP(events.last_modified) as last_modified,
 					events.version,
 					reminder_prefs.mins_before,
@@ -174,7 +174,7 @@ class Event extends PinwheelModelObject
 					repeat_on,
 					repeat_interval,
 					events.active,
-					all_day,
+					allDay,
 					UNIX_TIMESTAMP(events.last_modified) as last_modified,
 					events.version,
 					reminder_prefs.mins_before,
@@ -316,7 +316,7 @@ class Event extends PinwheelModelObject
 					'{$ep['opponent_id']}',
 					'{$ep['location_id']}',
 					'{$ep['creator_id']}',
-					'{$ep['all_day']}',
+					'{$ep['allDay']}',
 					'{$ep['repeat_id']}',
 					FROM_UNIXTIME('{$ep['stops_repeating']}'),
 					'{$ep['repeat_interval']}',
@@ -344,7 +344,7 @@ class Event extends PinwheelModelObject
 					opponent_id,
 					location_id,
 					creator_id,
-					all_day,
+					allDay,
 					repeat_id,
 					stops_repeating,
 					repeat_interval,
@@ -388,7 +388,7 @@ class Event extends PinwheelModelObject
 					repeat_on,
 					repeat_interval,
 					events.active,
-					all_day,
+					allDay,
 					UNIX_TIMESTAMP(events.last_modified) as last_modified,
 					events.version,
 					reminder_prefs.mins_before,
@@ -427,8 +427,8 @@ class Event extends PinwheelModelObject
 			$pinsqli = DistributedMySQLConnection:: writeInstance();
 		}
 		$properties = array_map(array($pinsqli, 'real_escape_string'), get_object_vars($this));
-		if(!IsSet($properties['all_day'])){
-			$properties['all_day'] = 0;
+		if(!IsSet($properties['allDay'])){
+			$properties['allDay'] = 0;
 		}
 		
 		$resulti = $pinsqli->query(
@@ -442,7 +442,7 @@ class Event extends PinwheelModelObject
 					opponent_id = '{$properties['opponent_id']}',
 					location_id = '{$properties['location_id']}',
 					creator_id  = '{$properties['creator_id']}',
-					all_day     = '{$properties['all_day']}',
+					allDay     = '{$properties['allDay']}',
 					repeat_id   = '{$properties['repeat_id']}',
 					stops_repeating = FROM_UNIXTIME('{$properties['stops_repeating']}'),
 					repeat_interval = '{$properties['repeat_interval']}',
@@ -465,7 +465,7 @@ class Event extends PinwheelModelObject
 					opponent_id = '{$properties['opponent_id']}',
 					location_id = '{$properties['location_id']}',
 					creator_id  = '{$properties['creator_id']}',
-					all_day  = {$properties['all_day']},
+					allDay  = {$properties['allDay']},
 					repeat_id   = '{$properties['repeat_id']}',
 					stops_repeating = FROM_UNIXTIME('{$properties['stops_repeating']}'),
 					repeat_interval = '{$properties['repeat_interval']}',
@@ -579,7 +579,7 @@ class Event extends PinwheelModelObject
 				UNIX_TIMESTAMP(events.last_modified) as last_modified,
 				UNIX_TIMESTAMP(stops_repeating) as stops_repeating,
 				events.active,
-				all_day,
+				allDay,
 				events.version,
 				reminder_prefs.mins_before,
 				UNIX_TIMESTAMP(reminder_prefs.absolute_date) as absolute_date,

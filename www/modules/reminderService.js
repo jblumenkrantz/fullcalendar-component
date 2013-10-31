@@ -87,11 +87,11 @@ angular.module('pinwheelApp').service('ReminderService', function($filter) {
 			angular.extend(resource, calendarWatchers[resource.calendar_id].reminder);
 		},
 		reminderDefaultsEvent: function(resource, user) {
-			resource.reminder_type = (resource.all_day == '1') ? 5 : 1;
-			resource.reminder_offset = (resource.all_day == '1') ? null : 2;
-			resource.reminder_time = (resource.all_day == '1') ? new Date("1970-01-01 "+user.settings.start_of_day) : null;
-			resource.relative = (resource.all_day == '1') ? 0 : 1;
-			resource.absolute_date = (resource.all_day == '1') ? null : 0;
+			resource.reminder_type = (resource.allDay == '1') ? 5 : 1;
+			resource.reminder_offset = (resource.allDay == '1') ? null : 2;
+			resource.reminder_time = (resource.allDay == '1') ? new Date("1970-01-01 "+user.settings.start_of_day) : null;
+			resource.relative = (resource.allDay == '1') ? 0 : 1;
+			resource.absolute_date = (resource.allDay == '1') ? null : 0;
 		},
 		reminderDefaultsTask: function(resource, user) {
 			resource.reminder_type = (resource.has_due_date) ? 1 : 3;
