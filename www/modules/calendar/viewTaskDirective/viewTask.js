@@ -11,7 +11,7 @@ angular.module('pinwheelApp')
 				colors: '='
 			},
 			controller: function($scope, $element, $attrs, $routeParams){
-				$scope.task.hasDueDate = $scope.task.hasOwnProperty("due_time");
+				$scope.task.hasDueDate = $scope.task.hasOwnProperty("start");
 				$scope.edit = function(name){
 					console.log($scope.task);
 					$scope.editTask || ($scope.editTask = {});
@@ -26,13 +26,13 @@ angular.module('pinwheelApp')
 
 				$scope.updateTask = function(name){
 					angular.copy($scope.editTask, $scope.task);
-					$scope.task.$update({id: $scope.task.task_id}, function(task){
+					$scope.task.$update({id: $scope.task.id}, function(task){
 						$scope.task = task;
 					});
 					$scope.cancel('editingTask');
 				}
 				$scope.deleteTask = function(task){
-					$scope.task.$delete({id: $scope.task.task_id, version: $scope.task.version});
+					$scope.task.$delete({id: $scope.task.id, version: $scope.task.version});
 					$scope.cancel('editingTask');
 				}
 			}

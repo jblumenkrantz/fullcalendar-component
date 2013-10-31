@@ -79,19 +79,19 @@ angular.module('pinwheelApp', ['ui.calendar', 'ngDragDrop', 'ngResource', 'ui.da
 					method:'POST',
 					isArray: false,
 					transformRequest: function(data){
-						if(data.hasDueDate && data.due_time){
-							data.due_time = new Date(data.due_time).getTime()/1000;
+						if(data.hasDueDate && data.start){
+							data.start = new Date(data.start).getTime()/1000;
 							data.hasDueDate = true;
 						}
 						return angular.toJson(data);
 					},
 					transformResponse: function(data){
 						data = angular.fromJson(data);
-						if(parseInt(data.due_time) && !data.hasDueDate){
-							data.due_time = new Date(data.due_time*1000);
+						if(parseInt(data.start) && !data.hasDueDate){
+							data.start = new Date(data.start*1000);
 							data.hasDueDate = true;
 						}else{
-							delete data.due_time;
+							delete data.start;
 						}
 						return data;
 					}
@@ -102,21 +102,21 @@ angular.module('pinwheelApp', ['ui.calendar', 'ngDragDrop', 'ngResource', 'ui.da
 					transformRequest: function(data){
 						data = angular.fromJson(data);
 						if(data.hasDueDate){
-							data.due_time = new Date(data.due_time).getTime()/1000;
+							data.start = new Date(data.start).getTime()/1000;
 							data.hasDueDate = true;
 						}else{
-							delete data.due_time
+							delete data.start
 							delete data.hasDueDate
 						}
 						return angular.toJson(data);
 					},
 					transformResponse: function(data){
 						var data = angular.fromJson(data);
-						if(data.due_time && parseInt(data.due_time)){
-							data.due_time = new Date(data.due_time*1000);
+						if(data.start && parseInt(data.start)){
+							data.start = new Date(data.start*1000);
 							data.hasDueDate = true;
 						}else{
-							delete data.due_time
+							delete data.start
 							delete data.hasDueDate
 						}
 						return data;
@@ -132,10 +132,10 @@ angular.module('pinwheelApp', ['ui.calendar', 'ngDragDrop', 'ngResource', 'ui.da
 					transformResponse: function(data){
 						var tasks = angular.fromJson(data);
 						angular.forEach(tasks, function(task,k){
-							if(parseInt(task.due_time)){
-								tasks[k].due_time = new Date(task.due_time*1000);
+							if(parseInt(task.start)){
+								tasks[k].start = new Date(task.start*1000);
 							}else{
-								delete task.due_time
+								delete task.start
 							}
 						});
 						return tasks;
@@ -152,14 +152,14 @@ angular.module('pinwheelApp', ['ui.calendar', 'ngDragDrop', 'ngResource', 'ui.da
 				transformRequest: function(data){
 					// TODO: add if statements in case task does not have due time
 					// TODO: for save and update
-					data.event_start = new Date(data.event_start).getTime()/1000;
-					data.event_end = new Date(data.event_end).getTime()/1000;
+					data.start = new Date(data.start).getTime()/1000;
+					data.end = new Date(data.end).getTime()/1000;
 					return angular.toJson(data);
 				},
 				transformResponse: function(data){
 					data = angular.fromJson(data);
-					data.event_start = new Date(data.event_start*1000);
-					data.event_end = new Date(data.event_end*1000);
+					data.start = new Date(data.start*1000);
+					data.end = new Date(data.end*1000);
 					return data;
 				}
 			},
@@ -168,14 +168,14 @@ angular.module('pinwheelApp', ['ui.calendar', 'ngDragDrop', 'ngResource', 'ui.da
 				isArray: false,
 				transformRequest: function(data){
 					data = angular.fromJson(data);
-					data.event_start = new Date(data.event_start).getTime()/1000;
-					data.event_end = new Date(data.event_end).getTime()/1000;
+					data.start = new Date(data.start).getTime()/1000;
+					data.end = new Date(data.end).getTime()/1000;
 					return angular.toJson(data);
 				},
 				transformResponse: function(data){
 					var data = angular.fromJson(data);
-					data.event_start = new Date(data.event_start*1000);
-					data.event_end = new Date(data.event_end*1000);
+					data.start = new Date(data.start*1000);
+					data.end = new Date(data.end*1000);
 					return data;
 				}
 			},
@@ -185,8 +185,8 @@ angular.module('pinwheelApp', ['ui.calendar', 'ngDragDrop', 'ngResource', 'ui.da
 					transformResponse: function(data){
 						var events = angular.fromJson(data);
 						angular.forEach(events, function(event,k){
-							events[k].event_start = new Date(parseInt(event.event_start*1000));
-							events[k].event_end = new Date(parseInt(event.event_end*1000));
+							events[k].start = new Date(parseInt(event.start*1000));
+							events[k].end = new Date(parseInt(event.end*1000));
 						});
 						return events;
 					}

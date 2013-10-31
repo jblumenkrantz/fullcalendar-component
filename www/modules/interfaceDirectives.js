@@ -76,12 +76,12 @@ angular.module('pinwheelApp')
 				//new events
 				if (!scope.formEvent.hasOwnProperty("version")) {
 					var format = (newVal=="1") ? "M/d/yyyy" : "M/d/yyyy h:00 a";
-					var s = (scope.formEvent.event_start) ? new Date(scope.formEvent.event_start) : new Date();
-					var e = (scope.formEvent.event_end) ? new Date(scope.formEvent.event_end) : new Date();
+					var s = (scope.formEvent.start) ? new Date(scope.formEvent.start) : new Date();
+					var e = (scope.formEvent.end) ? new Date(scope.formEvent.end) : new Date();
 					s.setHours((new Date()).getHours());
 					e.setHours((new Date()).addHours(1).getHours());
-					scope.formEvent.event_start = new Date($filter('date')(s, format)); //get date object set to current hour
-					scope.formEvent.event_end = new Date($filter('date')(e, format)); //get date object set to current hour + 1
+					scope.formEvent.start = new Date($filter('date')(s, format)); //get date object set to current hour
+					scope.formEvent.end = new Date($filter('date')(e, format)); //get date object set to current hour + 1
 				}
 				//existing events
 				else {

@@ -1,12 +1,12 @@
 <?php
 class Task extends PinwheelModelObject
 {
-	public $task_id;
+	public $id;
 	public $calendar_id;
-	public $task_name;
+	public $title;
 	public $is_complete;
 	public $create_time;
-	public $due_time;
+	public $start;
 	public $creator_id;
 	public $progress;
 	public $active;
@@ -25,12 +25,12 @@ class Task extends PinwheelModelObject
 	*/
 	static protected function defaults () {
 		return array(
-			'task_id' => NULL,
+			'id' => NULL,
 			'calendar_id' => NULL,
-			'task_name' => '',
+			'title' => '',
 			'is_complete' => 0,
 			'create_time' => '',
-			'due_time' => '',
+			'start' => '',
 			'creator_id' => '',
 			'progress' => 0,
 			'active' => 1,
@@ -83,12 +83,12 @@ class Task extends PinwheelModelObject
 		$id = is_array($id)? "'".implode("','", $id)."'": "'$id'";
 		return static:: loadByQuery(
 			"SELECT 
-					tasks.task_id,
+					tasks.id,
 					tasks.calendar_id,
-					task_name,
-					(select if(count(task_id) >= 1,1,0) from tasks_complete where tasks_complete.task_id = tasks.task_id AND tasks_complete.user_id = '$authUserID') as is_complete,
+					title,
+					(select if(count(id) >= 1,1,0) from tasks_complete where tasks_complete.task_id = tasks.id AND tasks_complete.user_id = '$authUserID') as is_complete,
 					UNIX_TIMESTAMP(create_time) as create_time,
-					UNIX_TIMESTAMP(due_time) as due_time,
+					UNIX_TIMESTAMP(start) as start,
 					creator_id,
 					progress,
 					UNIX_TIMESTAMP(tasks.last_modified) as last_modified,
@@ -102,8 +102,8 @@ class Task extends PinwheelModelObject
 					reminder_prefs.version as reminder_pref_version
 				FROM tasks
 				LEFT OUTER JOIN reminder_prefs
-				ON tasks.task_id = reminder_prefs.task_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$authUserID'
-				WHERE tasks.task_id IN ($id)
+				ON tasks.id = reminder_prefs.task_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$authUserID'
+				WHERE tasks.id IN ($id)
 			", $pinsqli);
 	}
 
@@ -112,12 +112,12 @@ class Task extends PinwheelModelObject
 		$id = is_array($id)? "'".implode("','", $id)."'": "'$id'";
 		return static:: loadByQuery(
 			"SELECT 
-					tasks.task_id,
+					tasks.id,
 					tasks.calendar_id,
-					task_name,
-					(select if(count(task_id) >= 1,1,0) from tasks_complete where tasks_complete.task_id = tasks.task_id AND tasks_complete.user_id = '$authUserID') as is_complete,
+					title,
+					(select if(count(id) >= 1,1,0) from tasks_complete where tasks_complete.task_id = tasks.id AND tasks_complete.user_id = '$authUserID') as is_complete,
 					UNIX_TIMESTAMP(create_time) as create_time,
-					UNIX_TIMESTAMP(due_time) as due_time,
+					UNIX_TIMESTAMP(start) as start,
 					creator_id,
 					progress,
 					UNIX_TIMESTAMP(tasks.last_modified) as last_modified,
@@ -131,8 +131,8 @@ class Task extends PinwheelModelObject
 					reminder_prefs.version as reminder_pref_version
 				FROM tasks
 				LEFT OUTER JOIN reminder_prefs
-				ON tasks.task_id = reminder_prefs.task_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$authUserID'
-				WHERE tasks.task_id IN ($id)
+				ON tasks.id = reminder_prefs.task_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$authUserID'
+				WHERE tasks.id IN ($id)
 					AND tasks.active = TRUE
 			", $pinsqli);
 	}
@@ -140,12 +140,12 @@ class Task extends PinwheelModelObject
 	static public function loadByUser($userId, $pinsqli=NULL){
 		return static:: loadByQuery(
 			"SELECT
-					tasks.task_id,
+					tasks.id,
 					tasks.calendar_id,
-					task_name,
-					(select if(count(task_id) >= 1,1,0) from tasks_complete where tasks_complete.task_id = tasks.task_id AND tasks_complete.user_id = '$userId') as is_complete,
+					title,
+					(select if(count(id) >= 1,1,0) from tasks_complete where tasks_complete.task_id = tasks.id AND tasks_complete.user_id = '$userId') as is_complete,
 					UNIX_TIMESTAMP(create_time) as create_time,
-					UNIX_TIMESTAMP(due_time) as due_time,
+					UNIX_TIMESTAMP(start) as start,
 					creator_id,
 					progress,
 					UNIX_TIMESTAMP(tasks.last_modified) as last_modified,
@@ -159,7 +159,7 @@ class Task extends PinwheelModelObject
 					reminder_prefs.version as reminder_pref_version
 				FROM tasks
 				LEFT OUTER JOIN reminder_prefs
-				ON tasks.task_id = reminder_prefs.task_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$userId'
+				ON tasks.id = reminder_prefs.task_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$userId'
 				WHERE tasks.creator_id = '$userId'
 				ORDER BY create_time DESC
 			", $pinsqli);
@@ -173,12 +173,12 @@ class Task extends PinwheelModelObject
 		}
 		return static:: loadByQuery(
 			"SELECT
-					tasks.task_id,
+					tasks.id,
 					tasks.calendar_id,
-					task_name,
-					(select if(count(task_id) >= 1,1,0) from tasks_complete where tasks_complete.task_id = tasks.task_id AND tasks_complete.user_id = '$authUserID') as is_complete,
+					title,
+					(select if(count(id) >= 1,1,0) from tasks_complete where tasks_complete.task_id = tasks.id AND tasks_complete.user_id = '$authUserID') as is_complete,
 					UNIX_TIMESTAMP(create_time) as create_time,
-					UNIX_TIMESTAMP(due_time) as due_time,
+					UNIX_TIMESTAMP(start) as start,
 					creator_id,
 					progress,
 					UNIX_TIMESTAMP(tasks.last_modified) as last_modified,
@@ -192,7 +192,7 @@ class Task extends PinwheelModelObject
 					reminder_prefs.version as reminder_pref_version
 				FROM tasks
 				LEFT OUTER JOIN reminder_prefs
-				ON tasks.task_id = reminder_prefs.task_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$authUserID'
+				ON tasks.id = reminder_prefs.task_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$authUserID'
 				$where_query", $pinsqli);
 	}
 
@@ -202,7 +202,7 @@ class Task extends PinwheelModelObject
 		$tasks = array();
 		if (!$pinsqli->errno) {
 			while (($object = $resulti->fetch_object()))
-				//$tasks[$object->task_id] = new Task($object);
+				//$tasks[$object->id] = new Task($object);
 				array_push($tasks, new Task($object));
 		} else
 			throw new Exception($pinsqli->error, 1);
@@ -245,10 +245,10 @@ class Task extends PinwheelModelObject
 				"(
 					'$taskID',
 					'{$tp['calendar_id']}',
-					'{$tp['task_name']}',
+					'{$tp['title']}',
 					'{$tp['is_complete']}',
 					NOW(),
-					FROM_UNIXTIME('{$tp['due_time']}'),
+					FROM_UNIXTIME('{$tp['start']}'),
 					'{$tp['creator_id']}',
 					'{$tp['progress']}',
 					'{$tp['active']}',
@@ -256,11 +256,11 @@ class Task extends PinwheelModelObject
 				)"
 			);
 			if ($tp["has_reminder"] == true && !$tp['using_calendar_reminder']) {
-				$tp["task_id"] = $taskID;
+				$tp["id"] = $taskID;
 				$tp["user_id"] = $authUserID;
 
-				if (isset($tp['event_id'])) {
-					unset($tp['event_id']);
+				if (isset($tp['id'])) {
+					unset($tp['id']);
 				}
 
 				ReminderPrefs:: create($tp, $pinsqli);
@@ -270,12 +270,12 @@ class Task extends PinwheelModelObject
 		$values = implode(',', $valueStrings);
 		$resulti = $pinsqli->query(
 			"INSERT INTO tasks (
-					task_id,
+					id,
 					calendar_id,
-					task_name,
+					title,
 					is_complete,
 					create_time,
-					due_time,
+					start,
 					creator_id,
 					progress,
 					active,
@@ -303,12 +303,12 @@ class Task extends PinwheelModelObject
 		$pinsqli = $pinsqli === NULL? DistributedMySQLConnection:: readInstance(): $pinsqli;
 		$resulti = $pinsqli->query(
 			"SELECT
-					tasks.task_id,
+					tasks.id,
 					tasks.calendar_id,
-					task_name,
-					(select if(count(task_id) >= 1,1,0) from tasks_complete where tasks_complete.task_id = tasks.task_id AND tasks_complete.user_id = '$authUserID') as is_complete,
+					title,
+					(select if(count(id) >= 1,1,0) from tasks_complete where tasks_complete.task_id = tasks.id AND tasks_complete.user_id = '$authUserID') as is_complete,
 					UNIX_TIMESTAMP(create_time) as create_time,
-					UNIX_TIMESTAMP(due_time) as due_time,
+					UNIX_TIMESTAMP(start) as start,
 					creator_id,
 					progress,
 					UNIX_TIMESTAMP(tasks.last_modified) as last_modified,
@@ -322,8 +322,8 @@ class Task extends PinwheelModelObject
 					reminder_prefs.version as reminder_pref_version
 				From tasks
 				LEFT OUTER JOIN reminder_prefs
-				ON tasks.task_id = reminder_prefs.task_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$authUserID'
-				WHERE tasks.task_id = '$this->task_id'
+				ON tasks.id = reminder_prefs.task_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$authUserID'
+				WHERE tasks.id = '$this->id'
 					AND tasks.version > $this->version
 			"
 		);
@@ -358,7 +358,7 @@ class Task extends PinwheelModelObject
 						last_modified
 					)
 					Values (
-						'{$properties['task_id']}',
+						'{$properties['id']}',
 						'$authUserID',
 						NOW()
 						)
@@ -370,7 +370,7 @@ class Task extends PinwheelModelObject
 			$resulti = $pinsqli->query(
 				"DELETE FROM tasks_complete
 					WHERE user_id = '$authUserID'
-					AND task_id = '{$properties['task_id']}'
+					AND id = '{$properties['id']}'
 				"
 			);
 			if ($pinsqli->errno)
@@ -380,13 +380,13 @@ class Task extends PinwheelModelObject
 		$resulti = $pinsqli->query(
 			"UPDATE tasks
 				SET
-					task_name   = '{$properties['task_name']}',
+					title   = '{$properties['title']}',
 					calendar_id = '{$properties['calendar_id']}',
 					task_notes  = '{$properties['task_notes']}',
-					due_time    = FROM_UNIXTIME('{$properties['due_time']}'),
+					start    = FROM_UNIXTIME('{$properties['start']}'),
 					progress    = '{$properties['progress']}',
 					version 	= version + 1
-				WHERE task_id = '{$properties['task_id']}'
+				WHERE id = '{$properties['id']}'
 					AND version = $this->version
 			"
 		);
@@ -394,7 +394,7 @@ class Task extends PinwheelModelObject
 		if ($pinsqli->errno)
 			throw new Exception($pinsqli->error, 1);
 		if ($pinsqli->affected_rows == 0) {
-			$resource = static:: load($this->task_id, $pinsqli);
+			$resource = static:: load($this->id, $pinsqli);
 			$resource = array_pop($resource);
 			if (!$resource)
 				throw new TaskDoesNotExist($this);
@@ -423,14 +423,14 @@ class Task extends PinwheelModelObject
 				SET
 					active = FALSE,
 					version = version + 1
-				WHERE task_id = '$this->task_id'
+				WHERE id = '$this->id'
 					AND version = $this->version
 			"
 		);
 		if ($pinsqli->errno)
 			throw new Exception($pinsqli->error, 1);
 		if ($pinsqli->affected_rows == 0) {
-			$resource = static:: load($this->task_id, $pinsqli);
+			$resource = static:: load($this->id, $pinsqli);
 			$resource = array_pop($resource);
 			if (!$resource)
 				throw new TaskDoesNotExist($this);

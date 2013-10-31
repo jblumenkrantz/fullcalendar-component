@@ -69,9 +69,9 @@ class ImportCalendar extends PinwheelModelObject
 			}
 			else{
 				$event = array(
-								'event_title'=>$value["SUMMARY"],
-								'event_start'=>@strtotime($value["DTSTART"]),
-								'event_end'=>@strtotime($value["DTEND"])
+								'title'=>$value["SUMMARY"],
+								'start'=>@strtotime($value["DTSTART"]),
+								'end'=>@strtotime($value["DTEND"])
 							);
 				array_push($this->events, $event);
 			}

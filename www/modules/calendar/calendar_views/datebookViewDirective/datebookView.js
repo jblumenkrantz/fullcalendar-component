@@ -9,7 +9,7 @@ angular.module('pinwheelApp')
 				$scope.thisWeeksEvents = function(item) {
 				 	var startOfWeek = $scope.getMonday(new Date($routeParams.month+'-'+$routeParams.day+'-'+$routeParams.year));
 				 	var endOfWeek = $scope.getSunday(new Date($routeParams.month+'-'+$routeParams.day+'-'+$routeParams.year));
-				 	var itemStart = new Date(item.event_start).getTime()/1000;
+				 	var itemStart = new Date(item.start).getTime()/1000;
 				 	
 				 	if(itemStart >= startOfWeek && itemStart < endOfWeek){
 				 		return true;

@@ -41,7 +41,7 @@ class TaskCtl
 	*	TaskCtl::create's query pattern is not atomic due to an INSERT followed
 	*	by a SELECT without locking. There does exist a posibility,
 	*	however unlikely, after the INSERT an update occurs before the following
-	*	SELECT on the newly created Task(s), and if the task_id and
+	*	SELECT on the newly created Task(s), and if the id and
 	*	last_modified where the only properties to be returned, the client's
 	*	cached/local view of the Task(s) would be improperly bound to the wrong
 	*	last_modified(s). As a result, the improperly bound last_modified(s) could
@@ -90,9 +90,9 @@ class TaskCtl
 			try {
 				$task = new Task($tsprop);
 
-				//strip off event_id for reminder prefs
-				if (isset($tsprop->event_id)) {
-					unset($tsprop->event_id);
+				//strip off id for reminder prefs
+				if (isset($tsprop->id)) {
+					unset($tsprop->id);
 				}
 				
 				//updated task is updating it's reminder
@@ -144,7 +144,7 @@ class TaskCtl
 	function delete(){
 		$task = Request:: parsePath();
 		$authUserID = Authorize:: sharedInstance()->userID();
-		$task['task_id'] = $task[2];
+		$task['id'] = $task[2];
 		$task['version'] = $task[3];
 		unset($task[0], $task[1], $task[2], $task[3]);
 		$task = new Task($task);

@@ -14,7 +14,7 @@ EVEnvironment:: set(MySQLConnection:: $NamesKey, array(
 		MySQLConnection:: $ServerKey   => 'brc.c5ecuyrmkbx8.us-east-1.rds.amazonaws.com',
 		MySQLConnection:: $UsernameKey => 'sdb_admin',
 		MySQLConnection:: $PasswordKey => 're4mation',
-		MySQLConnection:: $DatabaseKey => 'pinwheel',
+		MySQLConnection:: $DatabaseKey => 'pinwheel_v2',
 		MySQLConnection:: $PortKey => 6607 // Mandatory
 	)
 ));

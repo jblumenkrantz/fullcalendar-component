@@ -193,23 +193,23 @@ class User extends PinwheelModelObject
 
 				$calendar->events = array();
 				foreach($events as $event){
-					array_push($calendar->events, $event->event_id);
+					array_push($calendar->events, $event->id);
 				}
 
 				$calendar->tasks = array();
 				foreach($tasks as $task){
-					array_push($calendar->tasks, $task->task_id);
+					array_push($calendar->tasks, $task->id);
 				}
 
 				$dataRay['events'] = array_merge($dataRay['events'], $events);
 				$dataRay['tasks'] = array_merge($dataRay['tasks'],  $tasks);
 			}
 			elseif($calendar->subscribed && $calendar->adhoc_events){
-				$events = Event::getBatch(array("events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}')) AND (events.event_id in (SELECT event_id from event_subs where event_subs.user_id = '$userId' AND event_subs.calendar_id = '{$calendar->calendar_id}'))"));
+				$events = Event::getBatch(array("events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}')) AND (events.id in (SELECT id from event_subs where event_subs.user_id = '$userId' AND event_subs.calendar_id = '{$calendar->calendar_id}'))"));
 
 				$calendar->events = array();
 				foreach($events as $event){
-					array_push($calendar->events, $event->event_id);
+					array_push($calendar->events, $event->id);
 				}
 
 				$dataRay['events'] = array_merge($dataRay['events'], $events);
