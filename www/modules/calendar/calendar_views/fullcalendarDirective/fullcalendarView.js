@@ -5,7 +5,7 @@ angular.module('pinwheelApp')
 		return {
 			restrict: 'E',
 			templateUrl: 'modules/calendar/calendar_views/fullcalendarDirective/_fullcalendar_view.html',
-			controller: function($scope, $element, $attrs, $routeParams){
+			controller: function($scope, $filter, $element, $attrs, $routeParams){
 				$scope.thisMonthsEvents = function(item) {
 				 	var startOfMonth = new Date($routeParams.month+'-01-'+$routeParams.year).getTime()/1000;
 				 	var endOfMonth = new Date($routeParams.month*1+1+'-01-'+$routeParams.year).getTime()/1000;
@@ -23,6 +23,12 @@ angular.module('pinwheelApp')
 				}
 
 				$scope.eventSources = function(){
+					/*ret = array()
+					angular.forEach(each calendar){
+						ret.push($filter($scope.events)(calendar_id))
+						$filter('date')(modelValue, formDatetimeFormat);
+					}
+					return ret*/
 					return [$scope.events, $scope.tasks]
 				}
 
