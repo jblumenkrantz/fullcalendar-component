@@ -17,8 +17,8 @@ angular.module('pinwheelApp')
 			return item.id
 		}
 
-		$scope.events = [];
-		$scope.tasks  = [];
+		$scope.events = $scope.events || [];
+		$scope.tasks  = $scope.tasks || [];
 		$scope.init = function(){
 			User.get({}, function(user){
 				$scope.user = user;
@@ -91,16 +91,18 @@ angular.module('pinwheelApp')
 		$scope.logout = function(){
 			/* Delete protected data */
 			delete $scope.calendars;
-			delete $scope.events
 			delete $scope.user
 			delete $scope.initialUser;
 			delete $scope.contactPoints;
+			$scope.events = [];
+			$scope.tasks = [];
 			
 			/* Delete users access token */
 			delete localStorage['token'];
 			$http.defaults.headers.common['Authorization'] = null;
 
 			/* Redirect to login */
+
 			$location.path('/login');
 		}
 
@@ -145,5 +147,6 @@ angular.module('pinwheelApp')
 				$('#monthCalendar').fullCalendar('changeView','month');
 			}
 		};
+		
   });
 
