@@ -286,6 +286,10 @@ left: 110px !important;
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
 }
 
+input, textarea {
+	border-radius: 0px !important;
+}
+
 .without-offset {
 	width: 100%;
 }
@@ -297,6 +301,11 @@ left: 110px !important;
 	float: left;
 	width: 48.7%;
 	margin-right: 2.6%
+}
+#advancedEvent .on-date-right {
+	display: block;
+	float: left;
+	width: 48.7%;
 }
 #tasks .with-offset,
 #my-calendars .with-offset {

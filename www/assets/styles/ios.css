@@ -1,0 +1,14 @@
+.iOS input[type="datetime-local"],
+.iOS input[type="date"],
+.iOS input[type="time"] {
+	-webkit-appearance: none;
+}
+
+.iPad #advancedEvent .on-date.datetime {
+	width: 30%;
+}
+
+.iPad #advancedEvent .on-date-right {
+	width: 67.4%;
+	margin-right: 0;
+}

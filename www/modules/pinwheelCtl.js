@@ -1,9 +1,11 @@
 'use strict';
 
 angular.module('pinwheelApp')
-  .controller('PinwheelCtl', function ($scope, $location, $http, $timeout, $routeParams, Calendar, User, localStorage, Event, Task, Timezones, ContactPoints, $route) {
+  .controller('PinwheelCtl', function ($scope, $location, $http, $timeout, $routeParams, Calendar, User, localStorage, Event, Task, Timezones, ContactPoints, $route, DeviceService) {
 		$scope.calendarWatchers = {};
 		$scope.reminders = {};
+
+		$scope.device = DeviceService;
 
 		$scope.calendarColor = function(item) {
 			return $scope.calendarWatchers[item.calendar_id].color;
@@ -17,8 +19,8 @@ angular.module('pinwheelApp')
 			return item.id
 		}
 
-		$scope.events = [];
-		$scope.tasks  = [];
+		$scope.events = $scope.events || [];
+		$scope.tasks  = $scope.tasks || [];
 		$scope.init = function(){
 			User.get({}, function(user){
 				$scope.user = user;
@@ -91,16 +93,18 @@ angular.module('pinwheelApp')
 		$scope.logout = function(){
 			/* Delete protected data */
 			delete $scope.calendars;
-			delete $scope.events
 			delete $scope.user
 			delete $scope.initialUser;
 			delete $scope.contactPoints;
+			$scope.events = [];
+			$scope.tasks = [];
 			
 			/* Delete users access token */
 			delete localStorage['token'];
 			$http.defaults.headers.common['Authorization'] = null;
 
 			/* Redirect to login */
+
 			$location.path('/login');
 		}
 
@@ -145,5 +149,6 @@ angular.module('pinwheelApp')
 				$('#monthCalendar').fullCalendar('changeView','month');
 			}
 		};
+		
   });
 
