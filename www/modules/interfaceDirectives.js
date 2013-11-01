@@ -4,10 +4,10 @@ angular.module('pinwheelApp')
 .value("getHeight", function(element) {
 	return $(window).height() - $("#mainHeader").height() - element.siblings(".scroll-header").height() + "px";
 })
-.value("formDatetimeFormat", "M/d/yyyy @ h:mm a")
-.value("formDateFormat", "M/d/yyyy")
-.value("formTimeFormat", "h:mm a")
-.value("dbTimeFormat", "HH:mm:ss")
+.value("dateDisplayFormat", "M/d/yyyy")
+.value("timeDisplayFormat", "h:mm a")
+.value("dateFormat", "yyyy-MM-dd")
+.value("timeFormat", "HH:mm:ss")
 .directive('scrollPane', function(Debounce, getHeight, $timeout) {
 	return {
 		link: function(scope, element, attrs) {
@@ -52,43 +52,49 @@ angular.module('pinwheelApp')
 		}
 	}		
 })
-.directive('datetime', function($filter, formDatetimeFormat) {
+.directive('datetime', function($filter, dateDisplayFormat, timeDisplayFormat, dateFormat, timeFormat, DeviceService) {
 	return {
 		restrict: "E",
 		require: "ngModel",
-		template: "<input type='text' />",
+		template: (DeviceService.isTouch) ? "<input type='datetime-local' />" : "<input type='text' />",
 		replace: true,
 		link: function(scope, element, attrs, ngModelCtrl) {
+			var format = (DeviceService.isTouch) ? dateFormat+"T"+timeFormat : dateDisplayFormat+" @ "+timeDisplayFormat;
+
 			function display(modelValue) {
-				return $filter('date')(modelValue, formDatetimeFormat);
+				return $filter('date')(modelValue, format);
 			}
 
 			function save(viewValue) {
-				return new Date(viewValue);
+				var v = (DeviceService.isIOS) ? viewValue.replace("T", " ").replace(/-/g, "/") : viewValue;
+				return new Date(v);
 			}
 
 			ngModelCtrl.$formatters.push(display);
 			ngModelCtrl.$parsers.push(save);
 
-			element.datetimeEntry({
-				spinnerImage: '',
-				datetimeFormat: 'o/d/Y @ h:M a'
-			}).change(function() {
-				ngModelCtrl.$setViewValue($(this).val());
-				scope.$apply();
-			});
+			if (!DeviceService.isTouch) {
+				element.datetimeEntry({
+					spinnerImage: '',
+					datetimeFormat: 'o/d/Y @ h:M a'
+				}).change(function() {
+					ngModelCtrl.$setViewValue($(this).val());
+					scope.$apply();
+				});
+			}
 		}
 	}
 })
-.directive('date', function($filter, formDateFormat) {
+.directive('date', function($filter, dateDisplayFormat, dateFormat, DeviceService) {
 	return {
 		restrict: "E",
 		require: "ngModel",
-		template: "<input type='text' />",
+		template: (DeviceService.isTouch) ? "<input type='date' />" : "<input type='text' />",
 		replace: true,
 		link: function(scope, element, attrs, ngModelCtrl) {
+			var format = (DeviceService.isTouch) ? dateFormat : dateDisplayFormat;
 			function display(modelValue) {
-				return $filter('date')(modelValue, formDateFormat);
+				return $filter('date')(modelValue, format);
 			}
 
 			function save(viewValue) {
@@ -98,13 +104,15 @@ angular.module('pinwheelApp')
 			ngModelCtrl.$formatters.push(display);
 			ngModelCtrl.$parsers.push(save);
 
-			element.datetimeEntry({
-				spinnerImage: '',
-				datetimeFormat: 'o/d/Y'
-			}).change(function() {
-				ngModelCtrl.$setViewValue($(this).val());
-				scope.$apply();
-			});
+			if (!DeviceService.isTouch) {
+				element.datetimeEntry({
+					spinnerImage: '',
+					datetimeFormat: 'o/d/Y'
+				}).change(function() {
+					ngModelCtrl.$setViewValue($(this).val());
+					scope.$apply();
+				});
+			}
 		}
 	}
 })
@@ -116,32 +124,35 @@ Default usage: <time ng-model="xxx" />
 Optionally, if you use <time db='true' ng-model="xxx" /> it will save the value as the DB's TIME format HH:mm:ss.
 Use db='true' if the ng-model is directly saved in the database as a TIME type.
 */
-.directive('time', function($filter, formTimeFormat, dbTimeFormat) {
+.directive('time', function($filter, timeDisplayFormat, timeFormat, DeviceService) {
 	return {
 		restrict: "E",
 		require: "ngModel",
-		template: "<input type='text' />",
+		template: (DeviceService.isTouch) ? "<input type='time' />" : "<input type='text' />",
 		replace: true,
 		link: function(scope, element, attrs, ngModelCtrl) {
+			var format = (DeviceService.isTouch) ? timeFormat : timeDisplayFormat;
 			function display(modelValue) {
-				return $filter('date')((attrs.db=='true') ? new Date("1970-01-01 "+modelValue) : modelValue, formTimeFormat);
+				return $filter('date')((attrs.db=='true') ? new Date("1970-01-01 "+modelValue) : modelValue, format);
 			}
 
 			function save(viewValue) {
 				var date = new Date("1970-01-01 "+viewValue);
-				return (attrs.db=='true') ? $filter('date')(date, dbTimeFormat) : date;
+				return (attrs.db=='true') ? $filter('date')(date, timeFormat) : date;
 			}
 
 			ngModelCtrl.$formatters.push(display);
 			ngModelCtrl.$parsers.push(save);
 
-			element.datetimeEntry({
-				spinnerImage: '',
-				datetimeFormat: 'h:M a'
-			}).change(function() {
-				ngModelCtrl.$setViewValue($(this).val());
-				scope.$apply();
-			});
+			if (!DeviceService.isTouch) {
+				element.datetimeEntry({
+					spinnerImage: '',
+					datetimeFormat: 'h:M a'
+				}).change(function() {
+					ngModelCtrl.$setViewValue($(this).val());
+					scope.$apply();
+				});
+			}
 		}
 	}
 })

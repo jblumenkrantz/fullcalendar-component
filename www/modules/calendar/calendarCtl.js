@@ -40,12 +40,12 @@ angular.module('pinwheelApp')
 		$scope.previous = function(){
 			$('#monthCalendar').fullCalendar('prev');
    			$scope.routeDate = $('#monthCalendar').fullCalendar('getDate');
-			$scope.moveMonths(-1);
+			//$scope.moveMonths(-1);
 		}
 		$scope.next = function(){
 			$('#monthCalendar').fullCalendar('next');
 			$scope.routeDate = $('#monthCalendar').fullCalendar('getDate');
-			$scope.moveMonths(1);
+			//$scope.moveMonths(1);
 		}
   });
 

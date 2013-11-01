@@ -71,21 +71,22 @@ angular.module('pinwheelApp')
 				$scope.formEvent = new Event();
 			}
 			else {
-				$scope.reset();
+				$scope.reset(true);
+
 			}
 			$scope.addingEvent = continuing;
 			$scope.editingEvent = false;
 			$scope.quickAdding = false;
 		}
 
-		$scope.reset = function() {
-			if ($scope.addingEvent) {
+		//pass true to reset to load a brand new event object
+		//false if reloading existing event 
+		$scope.reset = function(loadNewEvent) {
+			if (loadNewEvent) {
 				$scope.formEvent = new Event($scope.defaultEvent());
 				$scope.formEvent.calendar_id = $scope.user.settings.default_calendar;
-				
 			}
-			
-			if ($scope.editingEvent) {
+			else {
 				angular.copy($scope.event, $scope.formEvent);
 			}
 
@@ -131,7 +132,7 @@ angular.module('pinwheelApp')
 		}
 
 		$scope.convertToAbsoluteReminder = function() {
-			var translated = ReminderService.relativeToAbsolute($scope.formEvent, $scope.formEvent.event_start);
+			var translated = ReminderService.relativeToAbsolute($scope.formEvent, $scope.formEvent.start);
 			$scope.formEvent.reminder_time = translated.date;
 			$scope.formEvent.offset = translated.offset;
 			$scope.formEvent.reminder_type = translated.type;
@@ -150,6 +151,12 @@ angular.module('pinwheelApp')
 			//if removing reminder
 			else {
 				$scope.checkCalendarReminder();
+			}
+		}
+
+		$scope.onDateSelected = function() {
+			if ($scope.formEvent.reminder_type == 3) {
+				$scope.formEvent.reminder_datetime = angular.copy($scope.formEvent.start);
 			}
 		}
 
@@ -177,11 +184,11 @@ angular.module('pinwheelApp')
 			function newEvents() {
 				//update start and end times
 				var format = ($scope.formEvent.allDay=="1") ? "M/d/yyyy" : "M/d/yyyy h:00 a";
-				var s = ($scope.formEvent.event_start) ? new Date($scope.formEvent.event_start) : new Date();
+				var s = ($scope.formEvent.start) ? new Date($scope.formEvent.start) : new Date();
 				var e = ($scope.formEvent.event_end) ? new Date($scope.formEvent.event_end) : new Date();
 				s.setHours((new Date()).addHours(1).getHours());
 				e.setHours((new Date()).addHours(2).getHours());
-				$scope.formEvent.event_start = new Date($filter('date')(s, format)); //get date object set to current hour
+				$scope.formEvent.start = new Date($filter('date')(s, format)); //get date object set to current hour
 				$scope.formEvent.event_end = new Date($filter('date')(e, format)); //get date object set to current hour + 1
 			}
 		}

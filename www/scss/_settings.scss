@@ -645,7 +645,7 @@ $button-radius: $global-radius;
 
 // We use this to control the background color
 
-// $f-dropdown-bg: #fff;
+$f-dropdown-bg: #eee;
 
 // We use this to set the border styles for dropdowns.
 
@@ -994,17 +994,17 @@ $button-radius: $global-radius;
 
 // We use these to control the style of the modal itself.
 
-// $reveal-modal-bg: #fff;
+$reveal-modal-bg: #eee;
 // $reveal-position-top: 50px;
 // $reveal-default-width: 80%;
-// $reveal-modal-padding: emCalc(20);
+$reveal-modal-padding: 0;
 // $reveal-box-shadow: 0 0 10px rgba(#000,.4);
 
 // We use these to style the reveal close button
 
 // $reveal-close-font-size: emCalc(22);
-// $reveal-close-top: emCalc(8);
-// $reveal-close-side: emCalc(11);
+$reveal-close-top: 0px;
+$reveal-close-side: 6px;
 // $reveal-close-color: #aaa;
 // $reveal-close-weight: bold;
 
@@ -1015,7 +1015,7 @@ $button-radius: $global-radius;
 // $reveal-border-color: #666;
 
 // $reveal-modal-class: "reveal-modal";
-$close-reveal-modal-class: "close-reveal-modal";
+// $close-reveal-modal-class: "close-reveal-modal";
 
 //
 // Section Variables
@@ -1293,8 +1293,8 @@ $topbar-breakpoint: emCalc(768); // Change to 9999px for always mobile layout
 
 // Divider Styles
 
-// $topbar-divider-border-bottom: solid 1px lighten($topbar-bg, 10%);
-// $topbar-divider-border-top: solid 1px darken($topbar-bg, 10%);
+$topbar-divider-border-bottom: solid 1px lighten($topbar-bg, 5%);
+$topbar-divider-border-top: solid 0px darken($topbar-bg, 10%);
 
 // Sticky Class
 
