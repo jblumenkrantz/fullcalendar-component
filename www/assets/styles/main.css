@@ -187,13 +187,17 @@ select {
 #settingsMenu {
 	position: absolute;
 	margin-left: 0 !important;
-	width: 125px !important;
+	width: 140px !important;
 	background: #FFF !important;
 	right: 0px;
-	padding: 5px;
+	padding: 0px;
+
+	-webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+
 }
 #settingsMenu.extended {
-	top:42px !important;
+	top:45px !important;
 }
 #settingsMenu.f-dropdown{
 	top:-400%;
@@ -201,6 +205,24 @@ select {
 #settingsMenu.f-dropdown:before{
 	display:none !important;
 }
+
+#settingsMenu.f-dropdown:after {
+left: 110px !important;
+}
+
+#settingsMenu li {
+	padding: 3px;
+	width: 100%;
+
+}
+#settingsMenu li.divider {
+	height: 1px;
+	padding: 0;
+}
+#settingsMenu li span {
+	padding: 0 3px;
+}
+
 /* Settings Tabs */
 .settings>dd {
 	float:left;
@@ -220,8 +242,16 @@ select {
 }
 .tabs dd.active {
 	border-top: 3px solid #2BA6CB;
-	margin-top: -3px;
+	margin-top: 0px;
 	border-bottom:0;
+	background: #dddddd; /* Old browsers */
+	background: -moz-linear-gradient(top,  #dddddd 0%, #eeeeee 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#dddddd)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #dddddd 0%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #dddddd 0%,#eeeeee 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #dddddd 0%,#eeeeee 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #dddddd 0%,#eeeeee 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dddddd', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
 }
 
 .tabs dd p {
@@ -237,7 +267,7 @@ select {
 .tabs dd.active p {
 	cursor: default;
 	color: #3C3C3C;
-	background: #FFF;
+	background: transparent;
 	border-left: 1px solid #E6E6E6;
 	border-right: 1px solid #E6E6E6;
 	font-weight: bold;

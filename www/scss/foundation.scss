@@ -320,7 +320,7 @@ overflow: hidden;
 }
 
 .subscription-gradient, .task-gradient {
-// background:  url('../images/white-gradient-30.png') top center repeat !important;
+background: #eeeeee; /* Old browsers */
 background: -moz-linear-gradient(top,  rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.3)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(top,  rgba(255,255,255,0.3) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
@@ -329,6 +329,8 @@ background: -ms-linear-gradient(top,  rgba(255,255,255,0.3) 0%,rgba(255,255,255,
 background: linear-gradient(to bottom,  rgba(255,255,255,0.3) 0%,rgba(255,255,255,0) 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4dffffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
 }
+
+
 
 .subscription-body, .task-body { //inside
 background: #eeeeee; /* Old browsers */
@@ -468,11 +470,10 @@ overflow: visible;
 .top-bar-section li a:not(.button) {
 background: none !important;
 }
-
 // tabs
 
 .tabs dd.active {
-border-top: 3px solid $primary-color;
+border-top: 0px solid $primary-color;
 }
 .top-bar-section ul li {
 	float: left !important;
@@ -498,5 +499,7 @@ and (max-device-width : 1024px) {
 	}
 }
 
+
 //comment out 'fugly' import below to disable marketing mode
 @import "fugly";
+

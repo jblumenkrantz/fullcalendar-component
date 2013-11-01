@@ -4966,8 +4966,8 @@ label.error {
 /* line 227, ../../bower_components/foundation/scss/foundation/components/_top-bar.scss */
 .top-bar-section .divider,
 .top-bar-section [role="separator"] {
-  border-bottom: solid 1px #f7f7f7;
-  border-top: solid 1px #c4c4c4;
+  border-bottom: solid 1px #eaeaea;
+  border-top: solid 0px #c4c4c4;
   clear: both;
   height: 1px;
   width: 100%;
@@ -5255,8 +5255,8 @@ label.error {
   .top-bar-section > ul > .divider, .top-bar-section > ul > [role="separator"] {
     border-bottom: none;
     border-top: none;
-    border-right: solid 1px #f7f7f7;
-    border-left: solid 1px #c4c4c4;
+    border-right: solid 1px #eaeaea;
+    border-left: solid 0px #c4c4c4;
     clear: none;
     height: 45px;
     width: 0px;
@@ -5650,8 +5650,8 @@ label.error {
   height: auto;
   margin-left: -40%;
   width: 80%;
-  background-color: white;
-  padding: 1.25em;
+  background-color: #eeeeee;
+  padding: 0;
   border: solid 1px #666666;
   -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
@@ -5675,8 +5675,8 @@ label.error {
   font-size: 1.375em;
   line-height: 1;
   position: absolute;
-  top: 0.5em;
-  right: 0.6875em;
+  top: 0px;
+  right: 6px;
   color: #aaaaaa;
   font-weight: bold;
   cursor: pointer;
@@ -7378,7 +7378,7 @@ a.th {
   width: 100%;
   max-height: none;
   height: auto;
-  background: white;
+  background: #eeeeee;
   border: solid 1px #cccccc;
   font-size: 16;
   z-index: 99;
@@ -7458,7 +7458,7 @@ a.th {
   width: 100%;
   height: auto;
   max-height: none;
-  background: white;
+  background: #eeeeee;
   border: solid 1px #cccccc;
   font-size: 16;
   z-index: 99;
@@ -7891,6 +7891,8 @@ ul.days, .calendar-day {
 
 /* line 322, ../../scss/foundation.scss */
 .subscription-gradient, .task-gradient {
+  background: #eeeeee;
+  /* Old browsers */
   background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
   /* FF3.6+ */
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.3)), color-stop(100%, rgba(255, 255, 255, 0)));
@@ -7907,7 +7909,7 @@ ul.days, .calendar-day {
   /* IE6-9 */
 }
 
-/* line 333, ../../scss/foundation.scss */
+/* line 335, ../../scss/foundation.scss */
 .subscription-body, .task-body {
   background: #eeeeee;
   /* Old browsers */
@@ -7927,21 +7929,21 @@ ul.days, .calendar-day {
   /* IE6-9 */
 }
 
-/* line 343, ../../scss/foundation.scss */
+/* line 345, ../../scss/foundation.scss */
 .subscription-body {
   min-height: 50px !important;
   padding: 5px 4px 5px 5px;
   margin-left: 8px;
 }
 
-/* line 349, ../../scss/foundation.scss */
+/* line 351, ../../scss/foundation.scss */
 .task-body {
   min-height: 50px !important;
   padding: 5px 4px 5px 5px;
   margin-left: 8px;
 }
 
-/* line 354, ../../scss/foundation.scss */
+/* line 356, ../../scss/foundation.scss */
 .task-body.add {
   min-height: none;
   background: #eeeeee;
@@ -7964,7 +7966,7 @@ ul.days, .calendar-day {
   margin-left: 8px;
 }
 
-/* line 370, ../../scss/foundation.scss */
+/* line 372, ../../scss/foundation.scss */
 .subscription-calendar-title {
   overflow: hidden;
   white-space: nowrap;
@@ -7977,7 +7979,7 @@ ul.days, .calendar-day {
   padding-top: 12px;
 }
 
-/* line 382, ../../scss/foundation.scss */
+/* line 384, ../../scss/foundation.scss */
 .subscription-panel .subscribed {
   position: absolute;
   top: -8px;
@@ -7998,22 +8000,22 @@ ul.days, .calendar-day {
   font-size: 16px;
 }
 
-/* line 400, ../../scss/foundation.scss */
+/* line 402, ../../scss/foundation.scss */
 .subscription-panel [class*="icon-"], .task-panel [class*="icon-"] {
   color: #999;
 }
 
-/* line 404, ../../scss/foundation.scss */
+/* line 406, ../../scss/foundation.scss */
 .subscription-panel [class*="icon-"]:hover, .task-panel [class*="icon-"]:hover {
   color: #666;
 }
 
-/* line 407, ../../scss/foundation.scss */
+/* line 409, ../../scss/foundation.scss */
 .subscription-panel [class*="icon-"]:active, .task-panel [class*="icon-"]:active {
   color: #23538a;
 }
 
-/* line 411, ../../scss/foundation.scss */
+/* line 413, ../../scss/foundation.scss */
 .close-panel {
   position: relative;
   float: right;
@@ -8021,17 +8023,17 @@ ul.days, .calendar-day {
   font-size: 20px;
 }
 
-/* line 418, ../../scss/foundation.scss */
+/* line 420, ../../scss/foundation.scss */
 .subscription > input[type=text]:first-of-type, .task > input[type=text]:first-of-type {
   width: calc(100% - 23px);
 }
 
-/* line 425, ../../scss/foundation.scss */
+/* line 427, ../../scss/foundation.scss */
 .button-group li {
   padding: 0 5px 0 0;
 }
 
-/* line 429, ../../scss/foundation.scss */
+/* line 431, ../../scss/foundation.scss */
 .button-group li div.button {
   padding: 6px;
   background: #eeeeee;
@@ -8055,7 +8057,7 @@ ul.days, .calendar-day {
   height: 36px;
 }
 
-/* line 444, ../../scss/foundation.scss */
+/* line 446, ../../scss/foundation.scss */
 .button-group li div.button:hover {
   background: #eeeeee;
   /* Old browsers */
@@ -8076,51 +8078,51 @@ ul.days, .calendar-day {
   margin: 0;
 }
 
-/* line 457, ../../scss/foundation.scss */
+/* line 459, ../../scss/foundation.scss */
 .button-group li [class*="icon-"] {
   color: #333;
 }
 
-/* line 463, ../../scss/foundation.scss */
+/* line 465, ../../scss/foundation.scss */
 .top-bar {
   background: rgba(221, 221, 221, 0.3) repeat !important;
   overflow: visible;
 }
 
-/* line 468, ../../scss/foundation.scss */
+/* line 470, ../../scss/foundation.scss */
 .top-bar-section li a:not(.button) {
   background: none !important;
 }
 
-/* line 474, ../../scss/foundation.scss */
+/* line 475, ../../scss/foundation.scss */
 .tabs dd.active {
-  border-top: 3px solid #23538a;
+  border-top: 0px solid #23538a;
 }
 
-/* line 477, ../../scss/foundation.scss */
+/* line 478, ../../scss/foundation.scss */
 .top-bar-section ul li {
   float: left !important;
 }
 
 /* iPads (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* line 486, ../../scss/foundation.scss */
+  /* line 487, ../../scss/foundation.scss */
   .task .body .title {
     font-size: 12px;
   }
 
-  /* line 489, ../../scss/foundation.scss */
+  /* line 490, ../../scss/foundation.scss */
   .task .body .due-date, .task .body .notes {
     font-size: 9px;
   }
 
-  /* line 492, ../../scss/foundation.scss */
+  /* line 493, ../../scss/foundation.scss */
   .edit-container input, textarea {
     padding: 1px;
     font-size: 9px !important;
   }
 
-  /* line 496, ../../scss/foundation.scss */
+  /* line 497, ../../scss/foundation.scss */
   .task .body .notes:hover, .task .body .due-date:hover, .task .body .title:hover {
     text-decoration: none;
   }
