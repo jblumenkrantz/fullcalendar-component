@@ -40,6 +40,7 @@ angular.module('pinwheelApp')
 					height:$scope.mainAreaHeight(),
 					viewRender: function(view,element) {
        					 console.warn('fullCalendar render');
+
     				}
 				};
 			}
