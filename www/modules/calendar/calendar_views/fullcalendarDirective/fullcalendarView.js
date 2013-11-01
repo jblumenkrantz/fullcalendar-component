@@ -4,7 +4,7 @@ angular.module('pinwheelApp')
 	.directive('fullcalendarView', function(){
 		return {
 			restrict: 'E',
-			templateUrl: 'modules/calendar/calendar_views/monthViewDirective/_month_view.html',
+			templateUrl: 'modules/calendar/calendar_views/fullcalendarDirective/_fullcalendar_view.html',
 			controller: function($scope, $element, $attrs, $routeParams){
 				$scope.thisMonthsEvents = function(item) {
 				 	var startOfMonth = new Date($routeParams.month+'-01-'+$routeParams.year).getTime()/1000;
@@ -22,8 +22,10 @@ angular.module('pinwheelApp')
 					return height;
 				}
 
-				console.log($scope.events);
-				$scope.eventSources = [[$scope.events]];
+				$scope.eventSources = function(){
+					return [$scope.events, $scope.tasks]
+				}
+
 				$scope.calendarOptions = {
 					editable: true,
 					header:{

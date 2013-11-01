@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pinwheelApp')
-	.directive('fullcalendarView', function(){
+	.directive('monthView', function(){
 		return {
 			restrict: 'E',
 			templateUrl: 'modules/calendar/calendar_views/monthViewDirective/_month_view.html',
