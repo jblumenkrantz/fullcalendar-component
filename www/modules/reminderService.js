@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('pinwheelApp').service('ReminderService', function($filter) {
+angular.module('pinwheelApp').service('ReminderService', function($filter, DeviceService) {
 	return {
 		offsetMultiplier: [1,60,1440],
 		setReminderProperties: function(resource) {
@@ -90,6 +90,7 @@ angular.module('pinwheelApp').service('ReminderService', function($filter) {
 			resource.reminder_type = (resource.all_day == '1') ? 5 : 1;
 			resource.reminder_offset = (resource.all_day == '1') ? null : 2;
 			resource.reminder_time = (resource.all_day == '1') ? new Date("1970-01-01 "+user.settings.start_of_day) : null;
+			resource.reminder_datetime = new Date($filter('date')((new Date()).addHours(1), "M/d/yyyy h:00 a"));
 			resource.relative = (resource.all_day == '1') ? 0 : 1;
 			resource.absolute_date = (resource.all_day == '1') ? null : 0;
 		},

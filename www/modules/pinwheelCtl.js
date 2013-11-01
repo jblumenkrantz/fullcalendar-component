@@ -1,9 +1,11 @@
 'use strict';
 
 angular.module('pinwheelApp')
-  .controller('PinwheelCtl', function ($scope, $location, $http, Calendar, User, localStorage, Event, Task, Timezones, ContactPoints, $route) {
+  .controller('PinwheelCtl', function ($scope, $location, $http, Calendar, User, localStorage, Event, Task, Timezones, ContactPoints, $route, DeviceService) {
 		$scope.calendarWatchers = {};
 		$scope.reminders = {};
+
+		$scope.device = DeviceService;
 
 		$scope.calendarColor = function(item) {
 			return $scope.calendarWatchers[item.calendar_id].color;
@@ -28,7 +30,6 @@ angular.module('pinwheelApp')
 				angular.copy(user, $scope.initialUser);
 				ContactPoints.query(function(contactPoints){
 					$scope.contactPoints = contactPoints;
-					console.warn(contactPoints);
 				});
 				Calendar.query({id: 'all'}, function(calendars){
 					$scope.loading_calendars = false;

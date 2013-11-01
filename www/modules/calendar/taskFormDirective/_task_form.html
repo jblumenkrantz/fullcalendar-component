@@ -6,7 +6,7 @@
 	<input type="text" class="on-date" ng-model="task.task_name" placeholder="Untitled task" />
 	<!-- CALENDAR -->
 	<select
-		ng-change="switchCalendar()"
+		ng-change="checkCalendarReminder()"
 		ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'"
 		ng-model="task.calendar_id"
 		class="on-date">

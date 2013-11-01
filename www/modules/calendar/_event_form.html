@@ -27,9 +27,9 @@
 	<!-- Start Time -->
 	<div class="large-6 columns calendar-picker-container">
 		<label>From<span ng-show="formEvent.all_day=='1'"> start of day</span>:</label>
-		<datetime ng-show="formEvent.all_day == '0'" ng-model="formEvent.event_start" name="event_start" placeholder="m/d/yyyy h:mm AM/PM" />
 		<date ng-show="formEvent.all_day == '1'" ng-model="formEvent.event_start" name="event_start" placeholder="m/d/yyyy" />
-		<button type="button" class="glyph-show"><span aria-hidden="true" class="icon-calendar-2"></span></button>
+		<datetime ng-show="formEvent.all_day == '0'" ng-model="formEvent.event_start" name="event_start" placeholder="m/d/yyyy h:mm AM/PM" />
+		<!--<button ng-hide="device.isTouch" type="button" class="glyph-show"><span aria-hidden="true" class="icon-calendar-2"></span></button>-->
 	</div>
 	<!-- / Start Time -->
 	<!-- End Time -->
@@ -37,7 +37,7 @@
 		<label>To<span ng-show="formEvent.all_day=='1'"> end of day</span>:</label>
 		<datetime ng-show="formEvent.all_day == '0'" ng-model="formEvent.event_end" name="event_end" placeholder="m/d/yyyy h:mm AM/PM" />
 		<date ng-show="formEvent.all_day == '1'" ng-model="formEvent.event_end" name="event_end" placeholder="m/d/yyyy" />
-		<button type="button" class="glyph-show"><span aria-hidden="true" class="icon-calendar-2"></span></button>
+		<!--<button ng-hide="device.isTouch" type="button" class="glyph-show"><span aria-hidden="true" class="icon-calendar-2"></span></button>-->
 	</div>
 	<!-- / End Time -->
 </div>
@@ -99,10 +99,11 @@
 					'on-date':	formEvent.reminder_type == 3 ||
 								formEvent.reminder_type == 4 ||
 								formEvent.reminder_type == 5 ||
-								formEvent.reminder_type == 6
+								formEvent.reminder_type == 6,
+					'datetime':		formEvent.reminder_type == 3
 				}"
 				ng-options="r.id as r.name for r in reminderTypes | filter:reminderTypeFilter"
-				ng-change="usingOwnReminder()"
+				ng-change="usingOwnReminder(); onDateSelected();"
 				ng-model="formEvent.reminder_type" >
 			</select>
 			<!-- All Day Reminder Time of day -->
@@ -117,7 +118,7 @@
 			/>
 			<!-- Absolute Reminder Datetime -->
 			<datetime
-				style="float: left; width: 48.7%;"
+				class="on-date-right"
 				ng-model="formEvent.reminder_datetime"
 				placeholder="m/d/yyyy h:mm AM/PM"
 				ng-show="formEvent.reminder_type == 3"
@@ -151,7 +152,7 @@
 	<div class="large-12 columns">
 		<ul class="button-group even-3">
 			<li>
-				<div class="button radius" ng-click="reset()">
+				<div class="button radius" ng-click="reset(addingEvent)">
 					<span aria-hidden="true" class="icon-reload-alt"> Reset</span>
 				</div>
 			</li>

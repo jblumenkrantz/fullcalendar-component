@@ -71,21 +71,22 @@ angular.module('pinwheelApp')
 				$scope.formEvent = new Event();
 			}
 			else {
-				$scope.reset();
+				$scope.reset(true);
+
 			}
 			$scope.addingEvent = continuing;
 			$scope.editingEvent = false;
 			$scope.quickAdding = false;
 		}
 
-		$scope.reset = function() {
-			if ($scope.addingEvent) {
+		//pass true to reset to load a brand new event object
+		//false if reloading existing event 
+		$scope.reset = function(loadNewEvent) {
+			if (loadNewEvent) {
 				$scope.formEvent = new Event($scope.defaultEvent());
 				$scope.formEvent.calendar_id = $scope.user.settings.default_calendar;
-				
 			}
-			
-			if ($scope.editingEvent) {
+			else {
 				angular.copy($scope.event, $scope.formEvent);
 			}
 
@@ -150,6 +151,12 @@ angular.module('pinwheelApp')
 			//if removing reminder
 			else {
 				$scope.checkCalendarReminder();
+			}
+		}
+
+		$scope.onDateSelected = function() {
+			if ($scope.formEvent.reminder_type == 3) {
+				$scope.formEvent.reminder_datetime = angular.copy($scope.formEvent.event_start);
 			}
 		}
 
