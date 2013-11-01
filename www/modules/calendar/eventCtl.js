@@ -132,7 +132,7 @@ angular.module('pinwheelApp')
 		}
 
 		$scope.convertToAbsoluteReminder = function() {
-			var translated = ReminderService.relativeToAbsolute($scope.formEvent, $scope.formEvent.event_start);
+			var translated = ReminderService.relativeToAbsolute($scope.formEvent, $scope.formEvent.start);
 			$scope.formEvent.reminder_time = translated.date;
 			$scope.formEvent.offset = translated.offset;
 			$scope.formEvent.reminder_type = translated.type;
@@ -155,8 +155,10 @@ angular.module('pinwheelApp')
 		}
 
 		$scope.onDateSelected = function() {
+			console.log("asdf");
 			if ($scope.formEvent.reminder_type == 3) {
-				$scope.formEvent.reminder_datetime = angular.copy($scope.formEvent.event_start);
+				console.log("Asdf");
+				$scope.formEvent.reminder_datetime = angular.copy($scope.formEvent.start);
 			}
 		}
 
@@ -184,11 +186,11 @@ angular.module('pinwheelApp')
 			function newEvents() {
 				//update start and end times
 				var format = ($scope.formEvent.allDay=="1") ? "M/d/yyyy" : "M/d/yyyy h:00 a";
-				var s = ($scope.formEvent.event_start) ? new Date($scope.formEvent.event_start) : new Date();
+				var s = ($scope.formEvent.start) ? new Date($scope.formEvent.start) : new Date();
 				var e = ($scope.formEvent.event_end) ? new Date($scope.formEvent.event_end) : new Date();
 				s.setHours((new Date()).addHours(1).getHours());
 				e.setHours((new Date()).addHours(2).getHours());
-				$scope.formEvent.event_start = new Date($filter('date')(s, format)); //get date object set to current hour
+				$scope.formEvent.start = new Date($filter('date')(s, format)); //get date object set to current hour
 				$scope.formEvent.event_end = new Date($filter('date')(e, format)); //get date object set to current hour + 1
 			}
 		}
