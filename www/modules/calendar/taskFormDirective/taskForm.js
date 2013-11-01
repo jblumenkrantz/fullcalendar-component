@@ -18,7 +18,8 @@ angular.module('pinwheelApp')
 				reminderTypeFilter: '&',
 				reminderTypes: '=',
 				usingOwnReminder: '&',
-				noReminder: "&"
+				noReminder: "&",
+				onDateSelected: "&"
 			}
 		}
 	});

@@ -478,25 +478,5 @@ border-top: 3px solid $primary-color;
 	float: left !important;
 }
 
-
-/* iPads (portrait and landscape) ----------- */
-@media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px) {
-	.task .body .title {
-		font-size: 12px;
-	}
-	.task .body .due-date, .task .body .notes {
-		font-size: 9px;
-	}
-	.edit-container input, textarea {
-		padding: 1px;
-		font-size: 9px !important;
-	}
-	.task .body .notes:hover, .task .body .due-date:hover, .task .body .title:hover  {
-		text-decoration: none;
-	}
-}
-
 //comment out 'fugly' import below to disable marketing mode
 @import "fugly";
