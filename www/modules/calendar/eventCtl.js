@@ -155,9 +155,7 @@ angular.module('pinwheelApp')
 		}
 
 		$scope.onDateSelected = function() {
-			console.log("asdf");
 			if ($scope.formEvent.reminder_type == 3) {
-				console.log("Asdf");
 				$scope.formEvent.reminder_datetime = angular.copy($scope.formEvent.start);
 			}
 		}
