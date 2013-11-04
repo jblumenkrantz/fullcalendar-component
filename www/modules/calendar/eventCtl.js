@@ -31,6 +31,7 @@ angular.module('pinwheelApp')
 
 		//open form for editing of existing event
 		$scope.edit = function(event) {
+			console.warn(event);
 			$scope.event = event;	//store the original event object
 			$scope.formEvent = new Event();
 			angular.copy(event, $scope.formEvent);
@@ -44,8 +45,10 @@ angular.module('pinwheelApp')
 		//update existing event
 		$scope.update = function() {
 			angular.copy($scope.formEvent, $scope.event);
+			console.warn($scope);
 			$scope.event.$update({id: $scope.event.id}, function(event) {
 				$scope.event = event;
+				$scope.pinwheel.fullCalendar('updateEvent',event);
 				$scope.cancel();
 			});
 		}
@@ -54,6 +57,7 @@ angular.module('pinwheelApp')
 		$scope.save = function(continuing) {
 			$scope.formEvent.$save({}, function(newEvent) {
 				$scope.events.push(newEvent);
+				$scope.pinwheel.fullCalendar('renderEvent',newEvent)
 				$scope.cancel(continuing);
 				(continuing && angular.copy(newEvent, $scope.formEvent));
 			});
@@ -61,7 +65,9 @@ angular.module('pinwheelApp')
 
 		//delete existing event
 		$scope.delete = function() {
+			$scope.pinwheel.fullCalendar('removeEvents',$scope.event.id);
 			$scope.event.$delete({id:$scope.event.id, version:$scope.event.version});
+
 			$scope.cancel();
 		}
 

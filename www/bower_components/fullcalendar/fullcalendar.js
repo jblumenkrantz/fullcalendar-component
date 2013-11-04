@@ -4074,7 +4074,7 @@ function AgendaEventRenderer() {
 										)
 									);
 									eventElement.draggable('option', 'grid', [colWidth, 1]);
-									allDay = false;
+									allDay = "false";
 								}
 							}else{
 								revert = true;

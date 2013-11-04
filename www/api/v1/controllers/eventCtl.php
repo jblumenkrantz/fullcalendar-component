@@ -154,6 +154,9 @@ class EventCtl
 				}
 				
 				$event->update($pinsqli);
+
+				$event->active = (bool)($event->active);
+				$event->allDay = (bool)($event->allDay);
 			
 				echo json_encode($event);
 			} catch (EventDataConflictException $e) {
