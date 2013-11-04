@@ -20,8 +20,8 @@
 </div>
 <!-- END Global confirm dialog box -->
 <!-- Settings -->
-<div id="account-settings-modal" class="reveal-modal [expand, xlarge, large, medium, small]" style="position:fixed; color:black; ">
-	<div class="settings-body">
+<div id="account-settings-modal" class="reveal-modal [expand, xlarge, large, medium, small]" style="position:fixed; color:black; padding: 0 0 20px 0;">
+	<div class="settings-body" >
 		<settings-interface user="user" ng-controller="SettingsCtl"></settings-interface>
 	</div>
 	<a class="close-reveal-modal"><span aria-hidden="true" class="icon-x-altx-alt"></span></a>
@@ -34,7 +34,7 @@
 		<dd ng-click="changeView('day')" ng-class="{active:view=='day'}"><a>D</a></dd>
 		<dd ng-click="changeView('week')" ng-class="{active:view=='week'}"><a>W</a></dd>
 		<dd ng-click="changeView('month')" ng-class="{active:view=='month'}"><a>M</a></dd>
-		<!-- <dd ng-click="changeView('year')" ng-class="{active:view=='year'}"><a>Y</a></dd> -->
+		<dd ng-click="changeView('year')" ng-class="{active:view=='year'}"><a>Y</a></dd>
 		<dd ng-click="changeView('list')" ng-class="{active:view=='list'}"><a>L</a></dd>
 	</dl>
 </section>
