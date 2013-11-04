@@ -167,7 +167,10 @@
 				</div>
 			</li>
 			<li style="padding-right: 0;">
-				<div class="button radius" ng-click="update()">
+				<div ng-show="addingEvent" class="button radius" ng-click="save()">
+					<span aria-hidden="true" class="icon-checkmark"> Done</span>
+				</div>
+				<div ng-show="editingEvent" class="button radius" ng-click="update()">
 					<span aria-hidden="true" class="icon-checkmark"> Done</span>
 				</div>
 			</li>
