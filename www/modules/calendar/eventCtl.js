@@ -114,6 +114,7 @@ angular.module('pinwheelApp')
 				$scope.addingEvent = false;
 				$scope.editingEvent = false;
 			}
+
 		}
 
 		//save new quickadded event
