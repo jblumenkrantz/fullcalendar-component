@@ -6,7 +6,7 @@
 <!-- SUBSCRIBED CALENDAR SECTION -->
 <div scroll-pane class="scroll-pane">
 	  <active-subscription
-	  ng-repeat="calendar in subscribedCalendars = (calendars | filter:{active: 1, subscribed: true} | orderBy:'calendar_name')" 
+	  	ng-repeat="calendar in subscribedCalendars = (calendars | filter:{active: 1, subscribed: true} | orderBy:'calendar_name')" 
 		watcher="calendarWatchers"
 		calendar="calendar"
 		user="user"
@@ -19,7 +19,7 @@
 	<div class="scroll-header">
     	<!-- calendar creation form -->
     	<div class="pane-header">
-	        <span class="pane-title">Add Calendars</span>
+	        <span class="pane-title">Create new</span>
 	        <span class="icon-x-altx-alt right" ng-click="add()" aria-hidden="true"></span>
 	    </div>
 		<div class="row">
@@ -34,7 +34,7 @@
 
 		<!-- RECENTLY CREATED/SUBSCRIBED CALENDAR SECTION -->
 		<div ng-show="recentCalendars.length" class="pane-header secondary" style="border-top: 1px solid #afafaf;">
-	        <span class="pane-title">Recently Added Calendars</span>
+	        <span class="pane-title">Recently Added</span>
 	    </div>
 
 		<!-- recently acquired calendars ng-repeat -->
@@ -42,11 +42,12 @@
 			ng-repeat="calendar in recentCalendars = (calendars | filter:{active: 1, recent: true, subscribed: true} | orderBy:'calendar_name')"
 			watcher="calendarWatchers"
 			user="user"
-			calendar="calendar">
+			calendar="calendar"
+			reminder-types="reminderTypes">
 		</active-subscription>
 		
-		<div ng-show="availabeCalendars.length || calFilter" class="pane-header secondary" style="border-top: 1px solid #afafaf;">
-	        <span class="pane-title">Available Calendars</span>
+		<div ng-show="availableCalendars.length || calFilter" class="pane-header secondary" style="border-top: 1px solid #afafaf;">
+	        <span class="pane-title">Available</span>
 	    </div>
 
 	    <div style="position: relative;">
@@ -57,7 +58,7 @@
 	<div scroll-pane-two watch="recentCalendars.length" style="overflow-y: auto;">
     	<!-- available calendars ng-repeat -->
 		<available-subscription
-			ng-repeat="calendar in availabeCalendars = (calendars | filter:{active: 1, subscribed: false} | filter:calFilter | orderBy:'calendar_name')"
+			ng-repeat="calendar in availableCalendars = (calendars | filter:{active: 1, subscribed: false} | filter:calFilter | orderBy:'calendar_name')"
 			watcher="calendarWatchers"
 			user="user"
 			calendar="calendar">

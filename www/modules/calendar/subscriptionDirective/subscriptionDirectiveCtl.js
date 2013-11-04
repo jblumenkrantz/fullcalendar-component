@@ -32,6 +32,7 @@ angular.module('pinwheelApp')
 
 		//subscribe to a calendar
 		$scope.subscribe = function() {
+			console.log($scope.calendar);
 			$scope.calendar.$update({id: "subscribe"}, function(calendar) {
 				$scope.calendar = calendar;
 				$scope.calendar.recent = true;
