@@ -71,7 +71,9 @@ angular.module('pinwheelApp')
 		}
 
 		$scope.switchCalendar = function() {
-			($scope.newTask.using_calendar_reminder && $scope.checkCalendarReminder());
+			if ((!$scope.newTask.has_reminder || $scope.newTask.using_calendar_reminder) && $scope.newTask.has_due_date) {
+				$scope.checkCalendarReminder();
+			}
 		}
 
 		$scope.checkCalendarReminder = function() {
