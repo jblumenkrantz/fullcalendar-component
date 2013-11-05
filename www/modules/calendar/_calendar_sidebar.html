@@ -28,8 +28,8 @@
 	    <div class="subscription-panel" ng-style="{background:newCalendar.color}">
 			<div class="subscription-gradient"> 
 				<div class="subscription-body">
-					<div class="subscription">
-					    <input type="text" ng-model="newCalendar.calendar_name" placeholder="Name (required)" class="on-date" style="width: 100%;" />
+					<form class="subscription" name="newCalendarForm" novalidate>
+					    <input focus-me="[addingSubscription]" delay="700" required type="text" ng-model="newCalendar.calendar_name" placeholder="Name (required)" class="on-date" style="width: 100%;" />
 						<div class="row">
 							<div class="large-6 columns" style='padding: 0;'>
 								<ui-colorpicker class="checkbox" ng-model="newCalendar.color"></ui-colorpicker>
@@ -57,7 +57,7 @@
 						</div>
 						<div class="row" ng-show="newCalendar.has_reminder">
 							<div style="float: left; width: 20%; margin-right: 2%;">
-								<input type='text' ng-model="newCalendar.reminder_offset" placeholder="2" />
+								<input ng-required="newCalendar.has_reminder" type='number' min="1" ng-model="newCalendar.reminder_offset" placeholder="2" />
 							</div>
 							<div style="float: left;" class="with-offset">
 								<!-- Relative Reminder Types -->
@@ -69,17 +69,17 @@
 						</div>
 						<ul class="button-group even-2">
 							<li>
-								<div class="button radius" ng-click="reset()">
+								<button class="button radius" ng-click="reset()">
 									<span aria-hidden="true" class="icon-reload-alt"> Reset</span>
-								</div>
+								</button>
 							</li>
 							<li>
-								<div class="button radius" ng-click="save()">
+								<button ng-disabled="newCalendarForm.$invalid" class="button radius" ng-click="save()">
 									<span aria-hidden="true" class="icon-checkmark"> Create</span> 
-								</div>
+								</button>
 							</li>
 						</ul>
-					</div>
+					</form>
 				</div>
 			</div>
 		</div>

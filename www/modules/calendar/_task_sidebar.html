@@ -15,15 +15,17 @@
 						task="newTask"
 						save="save()"
 						cancel="cancel()"
-						reminder-toggle="reminderToggle()"
-						switch-calendar="switchCalendar()"
-						check-calendar-reminder="checkCalendarReminder()"
-						due-date-toggle="dueDateToggle()"
+						reset="reset()"
 						calendars="calendars"
+						tasking="addingTask"
 						reminder-type-filter="reminderTypeFilter"
 						reminder-types="reminderTypes"
-						using-own-reminder="usingOwnReminder()"
-						no-reminder="noReminder()">
+						reminder-toggle="reminderToggle(newTask)"
+						switch-calendar="switchCalendar(newTask)"
+						check-calendar-reminder="checkCalendarReminder(newTask)"
+						due-date-toggle="dueDateToggle(newTask)"
+						using-own-reminder="usingOwnReminder(newTask)"
+						no-reminder="noReminder(newTask)">
 					</task-form>
 				</div>
 			</div>
@@ -37,7 +39,13 @@
 			calendars="calendars"
 			calendar-watchers="calendarWatchers"
 			ng-show="task.active"
-			reminder-types="reminderTypes">
+			reminder-types="reminderTypes"
+			reminder-toggle="reminderToggle"
+			switch-calendar="switchCalendar"
+			check-calendar-reminder="checkCalendarReminder"
+			due-date-toggle="dueDateToggle"
+			using-own-reminder="usingOwnReminder"
+			no-reminder="noReminder">
 		</view-task>
 	</div>
 </div>

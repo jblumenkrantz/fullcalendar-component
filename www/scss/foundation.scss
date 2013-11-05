@@ -420,7 +420,9 @@ font-size: 16px;
 padding: 0 5px 0 0;
 
 }
-.button-group li div.button {
+.button-group li div.button,
+.button-group li button
+ {
 padding: 6px;	
  background: #eeeeee; /* Old browsers */
 	background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
@@ -435,7 +437,9 @@ padding: 6px;
 height: 36px;
 }
 
-.button-group li div.button:hover {
+.button-group li div.button:hover:enabled,
+.button-group li button:hover:enabled
+ {
  background: #eeeeee; /* Old browsers */
 	background: -moz-linear-gradient(top,  #eeeeee 60%, #cccccc 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(60%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
@@ -448,8 +452,21 @@ height: 36px;
  margin: 0;
 }
 
+button:focus {
+	outline: none;
+}
+
+button.disabled, button[disabled], .button.disabled, .button[disabled] {
+	color: grey;
+	border-color: rgb(204, 204, 204) !important;
+}
+
 .button-group li [class*="icon-"]{
  color: #333;
+}
+
+.button-group li button:disabled [class*="icon-"]{
+ color: gray;
 }
 
 $topbar-link-color-active: $primary-color;
