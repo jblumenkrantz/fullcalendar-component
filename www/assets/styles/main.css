@@ -83,7 +83,7 @@ select {
 	background: rgb(238, 238, 238);
 	position: absolute;
 	width: 100%;
-	z-index: 4;
+	z-index: 10;
 }
 
  /* Add .full class to .sliding-drawer if you want

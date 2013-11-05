@@ -205,6 +205,8 @@ class Event extends PinwheelModelObject
 				unset($calendar->adhoc_events);
 			}
 			foreach($events as $event){
+				$event->active = (bool)($event->active);
+				$event->allDay = (bool)($event->allDay);
 				array_push($dataRay, $event);
 			}
 		}
@@ -360,6 +362,8 @@ class Event extends PinwheelModelObject
 		
 		$events = static:: load($eventIDs, $pinsqli);
 		foreach ($events as $event)
+			$event->active = (bool)($event->active);
+			$event->allDay = (bool)($event->allDay);
 			BRCDispatcher:: dispatchEventModification(new BRCEventModification($event, BRCEventModification:: $Created));
 		return $events;
 	}

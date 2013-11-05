@@ -1,12 +1,11 @@
-<div class="subscription-panel">
+<div class="subscription-panel" ng-style="{background:calendar.color}">
 	<div class="subscription-gradient">
-		<div class="subscription-body" >
+		<div class="subscription-body">
 			<div class="row">
-				<div class="large-12 columns">
-					<strong>
+				<div class="large-12 columns" style="padding: 0;">
+					<strong class="subscription-calendar-title">
 						{{calendar.calendar_name}}
 						<span ng-hide="calendar.recent" ng-click="subscribe()" class="icon-calendarPlus"></span>
-						<span ng-show="calendar.recent" ng-click="unsubscribe()" class="icon-calendarPlus"></span>
 					</strong>
 				</div>
 			</div>

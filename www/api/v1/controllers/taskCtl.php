@@ -85,20 +85,16 @@ class TaskCtl
 		if (is_object($tsprops))
 			$tsprops = array($tsprops);
 		$ntasks = count($tsprops);
-		error_log(print_r($tsprops,true));
+		//error_log(print_r($tsprops,true));
 		foreach ($tsprops as $tsprop) {
 			try {
 				$task = new Task($tsprop);
-
-				//strip off id for reminder prefs
-				if (isset($tsprop->id)) {
-					unset($tsprop->id);
-				}
 				
 				//updated task is updating it's reminder
 				if (@$tsprop->has_reminder && $tsprop->reminder_pref_id != null && !$tsprop->using_calendar_reminder) {
 					$tsprop->user_id = Authorize:: sharedInstance()->userID();
 					$tsprop->version = $tsprop->reminder_pref_version;
+					$tsprop->task_id = $tsprop->id;
 					$rpref = new ReminderPrefs($tsprop);
 					$rpref->update($pinsqli);
 				}

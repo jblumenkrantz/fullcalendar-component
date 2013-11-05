@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* line 264, ../../bower_components/foundation/scss/foundation/components/_global.scss */
 *,
 *:before,
@@ -7051,7 +7052,7 @@ header#content-header [class*="icon-"] {
   text-align: center;
   text-transform: uppercase;
   line-height: 20px;
-  border: none !important;
+  border: none!important;
   padding: 10px 0px;
   color: #666;
   font-size: 13px;
@@ -7070,12 +7071,12 @@ header#content-header [class*="icon-"] {
   border: 1px solid #ccc;
   margin-right: 0px;
   margin-bottom: -1px;
-  overflow: visible !important;
+  overflow: visible!important;
 }
 
 /* line 249, ../../scss/foundation.scss */
 .calendar .days:last-child li {
-  margin-bottom: 0px !important;
+  margin-bottom: 0px!important;
 }
 
 /* line 250, ../../scss/foundation.scss */
@@ -7161,8 +7162,8 @@ ul.days, .calendar-day {
 
 /* line 277, ../../scss/foundation.scss */
 .icon-calendarPlus {
-  top: -5px;
-  right: 5px;
+  top: 6px;
+  right: 4px;
   position: absolute;
   display: block;
   color: #555;

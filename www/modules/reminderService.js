@@ -17,10 +17,10 @@ angular.module('pinwheelApp').service('ReminderService', function($filter, Devic
 				resource.reminder_datetime = parseInt(resource.absolute_date)*1000;
 			}
 		},
-		setReminderData: function(resource, start) {
+		setReminderData: function(resource, type, start) {
 			//these reminder types translate to minutes before (relative)
-			resource.event_reminder_pref = (resource.hasOwnProperty("task_id")) ? 0 : 1; //should calendar.event_reminder_pref == 1?
-			resource.reminder_aggregate = (resource.hasOwnProperty("calendar_name")) ? 1 : 0;
+			resource.event_reminder_pref = (type=='task') ? 0 : 1; //should calendar.event_reminder_pref == 1?
+			resource.reminder_aggregate = (type=='calendar') ? 1 : 0;
 			if (resource.reminder_type == 0 ||
 				resource.reminder_type == 1 ||
 				resource.reminder_type == 2) {
@@ -111,7 +111,8 @@ angular.module('pinwheelApp').service('ReminderService', function($filter, Devic
 		},
 		getCalendarReminderProperties: function(calendar) {
 			var props = {
-				has_reminder: (calendar.reminder_pref_id!=null)
+				has_reminder: (calendar.reminder_pref_id!=null),
+				using_calendar_reminder: undefined
 			};
 
 			if (calendar.reminder_pref_id!=null) {
