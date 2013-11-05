@@ -5,13 +5,14 @@
 <div ng-show="loading_calendars" class="spinwheel"></div>
 <!-- SUBSCRIBED CALENDAR SECTION -->
 <div scroll-pane class="scroll-pane">
-	  <active-subscription
-	  	ng-repeat="calendar in subscribedCalendars = (calendars | filter:{active: 1, subscribed: true} | orderBy:'calendar_name')" 
+	<active-subscription
+		ng-repeat="calendar in subscribedCalendars = (calendars | filter:{active: 1, subscribed: true} | orderBy:'calendar_name')" 
 		watcher="calendarWatchers"
 		calendar="calendar"
 		user="user"
-		reminder-types="reminderTypes">
-	  </active-subscription>
+		reminder-types="reminderTypes"
+		adding-calendar="addingCalendar">
+	</active-subscription>
 </div>
 
 <!-- ADD CALENDAR SECTION -->
@@ -20,15 +21,66 @@
     	<!-- calendar creation form -->
     	<div class="pane-header">
 	        <span class="pane-title">Create new</span>
-	        <span class="icon-x-altx-alt right" ng-click="add()" aria-hidden="true"></span>
+	        <span class="icon-x-altx-alt right" ng-click="cancel()" aria-hidden="true"></span>
 	    </div>
-		<div class="row">
-			<input type="text" ng-model="newCalendar.calendar_name" placeholder="Name (required)" />
-			<input type="text" ng-model="newCalendar.color" placeholder="Color (required)" />
-		</div>
-		<div class="row">
-			<div class="large-12 columns">
-				<div class="expand small button" ng-click="save()" >create</div>
+
+	    <!-- NEW CALENDAR CREATION FORM -->
+	    <div class="subscription-panel" ng-style="{background:newCalendar.color}">
+			<div class="subscription-gradient"> 
+				<div class="subscription-body">
+					<div class="subscription">
+					    <input type="text" ng-model="newCalendar.calendar_name" placeholder="Name (required)" class="on-date" style="width: 100%;" />
+						<div class="row">
+							<div class="large-6 columns" style='padding: 0;'>
+								<ui-colorpicker class="checkbox" ng-model="newCalendar.color"></ui-colorpicker>
+							</div>
+							<div class="large-6 columns" style='padding: 0;'>
+								<label class="checkbox">
+									<input ng-model="newCalendar.viewing" type="checkbox" />
+									Show
+								</label>
+							</div>
+						</div>
+						<div class="row">
+							<div ng-class="{'large-6':hasPublic , 'large-12':!hasPublic }" class="columns" style='padding: 0;'>
+								<label class="checkbox" ng-class="{'on-date':newCalendar.has_reminder}">
+									<input type='checkbox' ng-model="newCalendar.has_reminder" ng-change="reminderToggle()" />
+									Add Reminder
+								</label>
+							</div>
+							<div class="large-6 columns" ng-show="isOrgAdmin(newCalendar)" style='padding: 0;'>
+								<label class=checkbox>
+									<input ng-model="newCalendar.public" type="checkbox" />
+									Public
+								</label>
+							</div>
+						</div>
+						<div class="row" ng-show="newCalendar.has_reminder">
+							<div style="float: left; width: 20%; margin-right: 2%;">
+								<input type='text' ng-model="newCalendar.reminder_offset" placeholder="2" />
+							</div>
+							<div style="float: left;" class="with-offset">
+								<!-- Relative Reminder Types -->
+								<select
+									ng-options="r.id as r.name for r in reminderTypes | filter:{type:'relative'}"
+									ng-model="newCalendar.reminder_type">
+								</select>
+							</div>
+						</div>
+						<ul class="button-group even-2">
+							<li>
+								<div class="button radius" ng-click="reset()">
+									<span aria-hidden="true" class="icon-reload-alt"> Reset</span>
+								</div>
+							</li>
+							<li>
+								<div class="button radius" ng-click="save()">
+									<span aria-hidden="true" class="icon-checkmark"> Create</span> 
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -43,7 +95,8 @@
 			watcher="calendarWatchers"
 			user="user"
 			calendar="calendar"
-			reminder-types="reminderTypes">
+			reminder-types="reminderTypes"
+			adding-calendar="addingCalendar">
 		</active-subscription>
 		
 		<div ng-show="availableCalendars.length || calFilter" class="pane-header secondary" style="border-top: 1px solid #afafaf;">

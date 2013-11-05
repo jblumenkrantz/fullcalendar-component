@@ -22,6 +22,7 @@ angular.module('pinwheelApp')
 			angular.copy($scope.editCalendar, $scope.calendar);
 			$scope.calendar.$update({id: $scope.calendar.calendar_id}, function(calendar) {
 				$scope.calendar = calendar;
+				$scope.calendar.recent = $scope.editCalendar.recent;
 				angular.extend($scope.watcher[$scope.calendar.calendar_id], {
 					color: $scope.calendar.color,
 					reminder: ReminderService.getCalendarReminderProperties($scope.calendar)
@@ -32,7 +33,6 @@ angular.module('pinwheelApp')
 
 		//subscribe to a calendar
 		$scope.subscribe = function() {
-			console.log($scope.calendar);
 			$scope.calendar.$update({id: "subscribe"}, function(calendar) {
 				$scope.calendar = calendar;
 				$scope.calendar.recent = true;
@@ -46,6 +46,7 @@ angular.module('pinwheelApp')
 				$scope.calendar = calendar;
 				$scope.calendar.recent = false;
 				$scope.calendar.viewing = false;
+				delete $scope.watcher[$scope.calendar.calendar_id];
 				$scope.cancel();
 			});
 		}
@@ -65,7 +66,7 @@ angular.module('pinwheelApp')
 		$scope.isCalendarAdmin = function(calendar){
 			return calendar.calendar_admin;
 		}
-		$scope.isCalendarCreator = function(calendar){
+		$scope.isCalendarCreator = function(calendar) {
 			return ($scope.user.user_id == calendar.creator_id);
 		}
 
