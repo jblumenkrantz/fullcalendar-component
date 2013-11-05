@@ -21,18 +21,20 @@
 			<div ng-show="editingTask">
 				<task-form
 					task="editTask"
-					reminder-toggle="reminderToggle()"
 					save="update()"
 					cancel="cancel()"
+					reset="reset()"
 					delete="delete()"
 					calendars="calendars"
-					switch-calendar="switchCalendar()"
-					check-calendar-reminder="checkCalendarReminder()"
-					due-date-toggle="dueDateToggle()"
+					tasking="editingTask"
 					reminder-type-filter="reminderTypeFilter"
 					reminder-types="reminderTypes"
-					using-own-reminder="usingOwnReminder()"
-					no-reminder="noReminder()">
+					reminder-toggle="reminderToggle(editTask)"
+					switch-calendar="switchCalendar(editTask)"
+					check-calendar-reminder="checkCalendarReminder(editTask)"
+					due-date-toggle="dueDateToggle(editTask)"
+					using-own-reminder="usingOwnReminder(editTask)"
+					no-reminder="noReminder(editTask)">
 				</task-form>
 			</div>
 		</div>

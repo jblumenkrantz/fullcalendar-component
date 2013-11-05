@@ -12,11 +12,11 @@
 					</div>
 				</div>
 			</div>
-			<div ng-show="editingCalendar" class="subscription">
+			<form name="editCalendarForm" ng-show="editingCalendar" class="subscription" novalidate>
 				<div ng-click="cancel()" class="close-panel">
 					<span aria-hidden="true" class="icon-x-altx-alt" ></span>
 				</div>
-				<input type="text" ng-model="editCalendar.calendar_name" placeholder="Name (required)" class="on-date" />
+				<input focus-me="[editingCalendar]" required type="text" ng-model="editCalendar.calendar_name" placeholder="Name (required)" class="on-date" />
 				<div class="row">
 					<div class="large-6 columns" style='padding: 0;'>
 						<ui-colorpicker class="checkbox" ng-model="editCalendar.color"></ui-colorpicker>
@@ -44,7 +44,7 @@
 				</div>
 				<div class="row" ng-show="editCalendar.has_reminder">
 					<div style="float: left; width: 20%; margin-right: 2%;">
-						<input type='text' ng-model="editCalendar.reminder_offset" placeholder="2" />
+						<input ng-required="editCalendar.has_reminder" type='number' min="1" ng-model="editCalendar.reminder_offset" placeholder="2" />
 					</div>
 					<div style="float: left;" class="with-offset">
 						<!-- Relative Reminder Types -->
@@ -55,11 +55,23 @@
 					</div>
 				</div>
 				<ul class="button-group even-3">
-					<li><div class="button radius" ng-click=""><span aria-hidden="true" class="icon-share"></span> <!-- cancel --></div></li>
-					<li><div class="button radius" ng-click="unsubscribe()"><span aria-hidden="true" class="icon-remove-2"></span> <!-- unsubscribe --></div></li>
-					<li style="padding-right: 0;"><div class="button radius" ng-click="update()"><span aria-hidden="true" class="icon-checkmark"></span> <!-- save --></div></li>
+					<li>
+						<button ng-disabled="editCalendarForm.$invalid" class="button radius" ng-click="">
+							<span aria-hidden="true" class="icon-share"></span> <!-- cancel -->
+						</button>
+					</li>
+					<li>
+						<button class="button radius" ng-click="unsubscribe()">
+							<span aria-hidden="true" class="icon-remove-2"></span> <!-- unsubscribe -->
+						</button>
+					</li>
+					<li style="padding-right: 0;">
+						<button ng-disabled="editCalendarForm.$invalid" class="button radius" ng-click="update()">
+							<span aria-hidden="true" class="icon-checkmark"></span> <!-- save -->
+						</button>
+					</li>
 				</ul>
-			</div>
+			</form>
 		</div>
 	</div>
 </div>

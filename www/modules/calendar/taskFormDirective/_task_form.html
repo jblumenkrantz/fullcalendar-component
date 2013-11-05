@@ -1,12 +1,12 @@
-<div class="task">
+<form name="taskForm" class="task" novalidate>
 	<!-- NAME -->
 	<div ng-click="cancel()" class="close-panel">
 		<span aria-hidden="true" class="icon-x-altx-alt" ></span>
 	</div>
-	<input type="text" class="on-date" ng-model="task.title" placeholder="Untitled task" />
+	<input focus-me="[tasking]" required type="text" class="on-date" ng-model="task.title" placeholder="Untitled task" />
 	<!-- CALENDAR -->
 	<select
-		ng-change="switchCalendar()"
+		ng-change="switchCalendar(task)"
 		ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'"
 		ng-model="task.calendar_id"
 		class="on-date">
@@ -15,13 +15,13 @@
 	<textarea ng-model="task.task_notes" placeholder="Add a note"></textarea>
 	<!-- DUE DATE CHECKBOX -->
 	<label class="checkbox" ng-class="{'on-date':task.has_due_date}">
-		<input type="checkbox" ng-model="task.has_due_date" ng-change="dueDateToggle()" />
+		<input type="checkbox" ng-model="task.has_due_date" ng-change="dueDateToggle(task);" />
 		Has a due date
 	</label>
-	<datetime ng-show="task.has_due_date" ng-model="task.start" placeholder="m/d/yyyy h:mm AM/PM" />
+	<datetime ng-required="task.has_due_date" ng-show="task.has_due_date" ng-model="task.start" placeholder="m/d/yyyy h:mm AM/PM" />
 	<!-- REMINDER CHECKBOX -->
 	<label class="checkbox" ng-class="{'on-date':task.has_reminder}">
-		<input type="checkbox" ng-model="task.has_reminder" ng-click="reminderToggle()" />
+		<input type="checkbox" ng-model="task.has_reminder" ng-click="reminderToggle(task)" />
 		Add Reminder
 	</label>
 	<!-- REMINDER SETTINGS -->
@@ -31,26 +31,28 @@
 		<div
 			ng-hide="
 				hideOffset =
-				task.reminder_type == 3 ||
-				task.reminder_type == 7
+				typeIsThree ||
+				task.reminder_type == 7 ||
+				task.reminder_type == null
 				"
 			style="float: left; width: 20%; margin-right: 2%;">
-			<input type='text' ng-change="usingOwnReminder()" ng-model="task.reminder_offset" placeholder="2" />
+			<input ng-required="!hideOffset" type='number' min="1" ng-change="usingOwnReminder(task)" ng-model="task.reminder_offset" placeholder="2" />
 		</div>
 
 		<div style="float: left;" ng-class="{'with-offset':!hideOffset, 'without-offset':hideOffset}">
 			<!-- Reminder Types -->
 			<select
-				ng-class="{'on-date':task.reminder_type==3}"
+				ng-class="{'on-date': typeIsThree}"
 				ng-options="r.id as r.name for r in reminderTypes | filter:reminderTypeFilter()"
 				ng-model="task.reminder_type"
-				ng-change="usingOwnReminder()">
+				ng-change="usingOwnReminder(task)">
 			</select>
 			<!-- Absolute Reminder Datetime -->
 			<datetime
 				ng-model="task.reminder_datetime"
 				placeholder="m/d/yyyy h:mm AM/PM"
-				ng-show="task.reminder_type == 3"
+				ng-show="typeIsThree = task.reminder_type == 3"
+				ng-required="typeIsThree"
 			/>
 		</div>
 
@@ -60,7 +62,7 @@
 			This task is using
 			<span ng-show="task.using_calendar_reminder">
 				its calendar's reminder.
-				<span style="cursor: pointer; text-decoration: underline;" ng-click="noReminder()">Don't remind me.</span>
+				<span style="cursor: pointer; text-decoration: underline;" ng-click="noReminder(task)">Don't remind me.</span>
 			</span>
 			<span ng-show="!task.using_calendar_reminder && task.reminder_type != 7">
 				its own reminder.
@@ -75,23 +77,26 @@
 	<!-- BUTTONS -->
 	<div class="row">
 		<div class="large-12 columns">
-			<ul class="button-group" ng-class="{'even-2':task.version == undefined, 'even-3':task.version != undefined}">
-				<li ng-show="task.version != undefined">
-					<div class="button radius" ng-click="share()">
-						<span aria-hidden="true" class="icon-share"></span>
-					</div>
-				</li>
+			<ul class="button-group" ng-class="{'even-2':!existingTask, 'even-3':existingTask}">
 				<li>
-					<div class="button radius" ng-click="delete()">
+					<button ng-show="existingTask = task.version != undefined" ng-disabled="taskForm.$invalid" class="button radius" ng-click="share()">
+						<span aria-hidden="true" class="icon-share"></span>
+					</button>
+					<button ng-hide="existingTask" class="button radius" ng-click="reset()">
+						<span aria-hidden="true" class="icon-reload-alt"></span>
+					</button>
+				</li>
+				<li ng-show="existingTask">
+					<button class="button radius" ng-click="delete()">
 						<span aria-hidden="true" class="icon-remove-2"></span>
-					</div>
+					</button>
 				</li>
 				<li style="padding-right: 0;">
-					<div class="button radius" ng-click="save()">
+					<button ng-disabled="taskForm.$invalid" class="button radius" ng-click="save()">
 						<span aria-hidden="true" class="icon-checkmark"></span>
-					</div>
+					</button>
 				</li>
 			</ul>
 		</div>
 	</div>
-</div>
+</form>

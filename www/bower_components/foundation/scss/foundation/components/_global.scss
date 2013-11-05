@@ -65,7 +65,7 @@ $experimental: true !default;
   }
   box-shadow: $shiny-edge-size $shiny-edge-color inset;
 
-  @if $active { &:active {
+  @if $active { &:active:enabled {
     @if $experimental {
       -webkit-box-shadow: $shiny-edge-size $shiny-edge-active-color inset;
     }
