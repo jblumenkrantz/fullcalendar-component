@@ -258,11 +258,6 @@ class Task extends PinwheelModelObject
 			if ($tp["has_reminder"] == true && !$tp['using_calendar_reminder']) {
 				$tp["id"] = $taskID;
 				$tp["user_id"] = $authUserID;
-
-				if (isset($tp['id'])) {
-					unset($tp['id']);
-				}
-
 				ReminderPrefs:: create($tp, $pinsqli);
 			}
 			array_push($taskIDs, $taskID);

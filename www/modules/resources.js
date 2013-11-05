@@ -20,10 +20,10 @@ angular.module('pinwheelApp')
 					method:'POST',
 					isArray: false,
 					transformRequest: function(data){
-						(data.has_reminder && ReminderService.setReminderData(data, data.start));
+						(data.has_reminder && ReminderService.setReminderData(data, "task", data.start));
 						if(data.has_due_date && data.start){
 							data.start = new Date(data.start).getTime()/1000;
-							data.hasDueDate = true;
+							data.has_due_date = true;
 						}
 						return angular.toJson(data);
 					},
@@ -32,7 +32,7 @@ angular.module('pinwheelApp')
 						(data.reminder_pref_id != null && ReminderService.setReminderProperties(data));
 						if(parseInt(data.start) && !data.has_due_date){
 							data.start = new Date(data.start*1000);
-							data.hasDueDate = true;
+							data.has_due_date = true;
 						}else{
 							delete data.start;
 						}
@@ -43,7 +43,7 @@ angular.module('pinwheelApp')
 					method:'PUT',
 					isArray: false,
 					transformRequest: function(data) {
-						(data.has_reminder && ReminderService.setReminderData(data, data.start));
+						(data.has_reminder && ReminderService.setReminderData(data, "task", data.start));
 						if(data.has_due_date) {
 							data.start = new Date(data.start).getTime()/1000;
 							data.has_due_date = true;
@@ -97,8 +97,7 @@ angular.module('pinwheelApp')
 				transformRequest: function(data){
 					// TODO: add if statements in case task does not have due time
 					// TODO: for save and update
-					//data.using_calendar_reminder = (data.using_calendar_reminder!=undefined);
-					(data.has_reminder && ReminderService.setReminderData(data, data.start));
+					(data.has_reminder && ReminderService.setReminderData(data, "event", data.start));
 					data.start = data.start.getTime()/1000;
 					data.end = data.end.getTime()/1000;
 					return angular.toJson(data);
@@ -115,8 +114,7 @@ angular.module('pinwheelApp')
 				method:'PUT',
 				isArray: false,
 				transformRequest: function(data) {
-					//data.using_calendar_reminder = (data.using_calendar_reminder!=undefined);
-					(data.has_reminder && ReminderService.setReminderData(data, data.start));
+					(data.has_reminder && ReminderService.setReminderData(data, "event", data.start));
 					data.start = data.start.getTime()/1000;
 					data.end = data.end.getTime()/1000;
 					return angular.toJson(data);
@@ -154,7 +152,7 @@ angular.module('pinwheelApp')
 					method:'POST',
 					isArray: false,
 					transformRequest: function(data) {
-						(data.has_reminder && ReminderService.setReminderData(data));
+						(data.has_reminder && ReminderService.setReminderData(data, "calendar"));
 						return angular.toJson(data);
 					},
 					transformResponse: function(data) {
@@ -167,7 +165,7 @@ angular.module('pinwheelApp')
 					method:'PUT',
 					isArray: false,
 					transformRequest: function(data) {
-						(data.has_reminder && ReminderService.setReminderData(data));
+						(data.has_reminder && ReminderService.setReminderData(data, "calendar"));
 						return angular.toJson(data);
 					},
 					transformResponse: function(data) {
