@@ -5,7 +5,7 @@ angular.module('pinwheelApp')
 		return {
 			restrict: 'E',
 			templateUrl: 'modules/calendar/calendar_views/fullcalendarDirective/_fullcalendar_view.html',
-			controller: function($scope, $filter, $element, $attrs, $routeParams){
+			controller: function($scope, $filter, $element, $attrs, $routeParams, Event){
 				console.log($scope);
 				$scope.thisMonthsEvents = function(item) {
 					var startOfMonth = new Date($routeParams.month+'-01-'+$routeParams.year).getTime()/1000;
@@ -47,11 +47,9 @@ angular.module('pinwheelApp')
 						$scope.$apply();
 					},
 					eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc) {
-						console.warn(event);
-						event.$update({id: event.id}, function(updatedEvent) {
-							console.warn(updatedEvent);
-							$scope.pinwheel.fullCalendar('updateEvent',event);
-							//$scope.pinwheel.fullCalendar('renderEvent',event);
+						var saveEvent = new Event(event);
+						saveEvent.$update({id: event.id}, function(updatedEvent) {
+							event.version = updatedEvent.version;
 						});
 						$scope.$apply();
 					},

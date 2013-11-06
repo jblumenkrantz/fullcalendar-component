@@ -48,9 +48,10 @@ console.log($scope);
 		$scope.update = function() {
 			angular.copy($scope.formEvent, $scope.event);
 			console.warn($scope);
-			$scope.event.$update({id: $scope.event.id}, function(event) {
-				$scope.event = event;
-				$scope.pinwheel.fullCalendar('updateEvent',event);
+			var saveEvent = new Event($scope.event);
+			$scope.event.$update({id: $scope.event.id}, function(updateEvent) {
+				$scope.event.version = updateEvent.version
+				$scope.pinwheel.fullCalendar('updateEvent', $scope.event);
 				$scope.cancel();
 			});
 		}
