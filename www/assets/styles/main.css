@@ -350,3 +350,12 @@ form input.ng-invalid {
 	-moz-box-shadow: 0 0 5px #FA787E !important;
 	box-shadow: 0 0 5px #FA787E !important;
 }
+
+/* POPUP SUMMARY STYLES */
+.summaryPopup {
+	position: absolute;
+	z-index: 99;
+	width: 400px;
+	height: 100px;
+	background-color: white;
+}

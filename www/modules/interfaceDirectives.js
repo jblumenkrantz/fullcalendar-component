@@ -187,6 +187,18 @@ Use db='true' if the ng-model is directly saved in the database as a TIME type.
 		}
 	}
 })
+.directive('summaryPopup', function() {
+	return {
+		restrict: "E",
+		template: 
+			"<div class='summaryPopup'>" +
+				"Test Test" +
+			"</div>",
+		link: function(scope, element, attrs) {
+			console.log("summaryPopup");
+		}
+	}
+})
 .directive('focusMe', function($timeout, $parse) {
 	return {
 		restrict: 'A',
