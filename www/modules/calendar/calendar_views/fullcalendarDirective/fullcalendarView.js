@@ -6,7 +6,6 @@ angular.module('pinwheelApp')
 			restrict: 'E',
 			templateUrl: 'modules/calendar/calendar_views/fullcalendarDirective/_fullcalendar_view.html',
 			controller: function($scope, $filter, $element, $attrs, $routeParams, Event){
-				console.log($scope);
 				$scope.thisMonthsEvents = function(item) {
 					var startOfMonth = new Date($routeParams.month+'-01-'+$routeParams.year).getTime()/1000;
 					var endOfMonth = new Date($routeParams.month*1+1+'-01-'+$routeParams.year).getTime()/1000;
@@ -42,7 +41,6 @@ angular.module('pinwheelApp')
 						 console.warn('fullCalendar render');
 					},
 					eventClick: function(calEvent, jsEvent, view) {
-						delete calEvent.source;
 						$scope.edit(calEvent);
 						$scope.$apply();
 					},

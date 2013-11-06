@@ -2,7 +2,6 @@
 
 angular.module('pinwheelApp')
 	.controller('CalendarCtl', function ($filter, $scope, $routeParams, $location, $timeout, Calendar, Event, Task) {
-		console.log($scope);
 		$scope.routeDate = new Date($routeParams.month+"/"+$routeParams.day+"/"+$routeParams.year);
 
 		$scope.navYear = parseInt($routeParams.year);
