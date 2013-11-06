@@ -42,6 +42,7 @@ angular.module('pinwheelApp')
 			$scope.addingEvent = false;
 			$scope.quickAdding = false;
 		}
+console.log($scope);
 
 		//update existing event
 		$scope.update = function() {

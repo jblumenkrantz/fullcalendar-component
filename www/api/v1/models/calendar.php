@@ -59,6 +59,7 @@ class Calendar extends PinwheelModelObject
 		if ($pinsqli->errno)
 			throw new Exception($pinsqli->error, 1);
 
+
 		return $subscription;
 	}
 
@@ -138,7 +139,7 @@ class Calendar extends PinwheelModelObject
 					IF(calendar_admins.calendar_id is not null, TRUE, FALSE) as calendar_admin
 				FROM calendars
 				LEFT OUTER JOIN reminder_prefs
-				ON calendars.calendar_id = reminder_prefs.calendar_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$authUserID' AND reminder_prefs.aggregate = TRUE
+				ON calendars.calendar_id = reminder_prefs.calendar_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$authUserID' AND reminder_prefs.id = '' AND reminder_prefs.id = ''
 				LEFT OUTER JOIN calendar_subs
 				ON calendar_subs.calendar_id = calendars.calendar_id AND calendar_subs.user_id = '$authUserID'
 				LEFT OUTER JOIN public_calendars
@@ -147,6 +148,12 @@ class Calendar extends PinwheelModelObject
 				ON 	calendars.calendar_id = calendar_admins.calendar_id AND calendar_admins.user_id = '$authUserID'
 				WHERE calendars.calendar_id IN ($id)
 			", $pinsqli);
+			
+			
+			/*
+			LEFT OUTER JOIN reminder_prefs
+			ON events.id = reminder_prefs.id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$authUserID'
+			*/
 	}
 
 	static public function loadUserCreatedCalendars($userId, $pinsqli=NULL){
@@ -329,14 +336,6 @@ class Calendar extends PinwheelModelObject
 					'{$id}'
 				)"
 			);
-
-			if ($tp["has_reminder"] == true) {
-				$tp["calendar_id"] = $calendarID;
-				$tp["user_id"] = $id;
-				$tp["aggregate"] = 1;
-				ReminderPrefs:: create($tp, $pinsqli);
-			}
-
 			array_push($calendarIDs, $calendarID);
 		}
 		$values = implode(',', $valueStrings);

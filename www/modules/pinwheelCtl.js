@@ -19,6 +19,7 @@ angular.module('pinwheelApp')
 			return item.id
 		}
 
+		$scope.calendars = $scope.calendars || [];
 		$scope.events = $scope.events || [];
 		$scope.tasks  = $scope.tasks || [];
 		$scope.init = function(){
@@ -36,14 +37,14 @@ angular.module('pinwheelApp')
 				Calendar.query({id: 'all'}, function(calendars){
 					$scope.loading_calendars = false;
 					$scope.calendars = calendars;			
-					Event.query({id: 'all'}, function(events){
+					/*Event.query({id: 'all'}, function(events){
 						$scope.loading_events = false;
 						$scope.events = events;
 						Task.query({id: 'all'}, function(tasks){
 							$scope.loading_tasks = false;
 							$scope.tasks = tasks;
 						});
-					});
+					});*/
 				});
 			}, function(error){
 				// TODO: update this and other requests

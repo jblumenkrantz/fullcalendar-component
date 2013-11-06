@@ -192,27 +192,26 @@ class Event extends PinwheelModelObject
 	}
 
 	/** USED BY PINWHEEL **/
-	static public function getUsersEvents($userId, $pinsqli=NULL) {
+	static public function getUserEventsForCalendar($userId, $calendarId, $pinsqli=NULL) {
 		$dataRay = $eventArray = array();
 
 		$cals = (object) array_merge((array) Calendar::loadUserCreatedCalendars($userId), (array) Calendar::loadUserSubscriptions($userId));
 		//error_log(print_r($cals,true));
-		foreach($cals as $calendar){
 
-			$events = Event::getBatch(array("events.active = true","events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}'))"));
+		$events = Event::getBatch(array("events.active = true","events.calendar_id='{$calendarId}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendarId}'))"));
 
-			if(property_exists($calendar, 'adhoc_events') && !$calendar->adhoc_events){
-				unset($calendar->adhoc_events);
-			}
-			foreach($events as $event){
-				$event->active = (bool)($event->active);
-				$event->allDay = (bool)($event->allDay);
-				array_push($dataRay, $event);
-			}
+		if(property_exists($calendar, 'adhoc_events') && !$calendar->adhoc_events){
+			unset($calendar->adhoc_events);
+		}
+		foreach($events as $event){
+			$event->active = (bool)($event->active);
+			$event->allDay = (bool)($event->allDay);
+			array_push($dataRay, $event);
 		}
 		return($dataRay);
 	}
 	
+
 	static public function getEventsBetween($userId, $start, $end, $pinsqli=NULL) {
 		$dataRay = $eventArray = array();
 
@@ -362,8 +361,6 @@ class Event extends PinwheelModelObject
 		
 		$events = static:: load($eventIDs, $pinsqli);
 		foreach ($events as $event)
-			$event->active = (bool)($event->active);
-			$event->allDay = (bool)($event->allDay);
 			BRCDispatcher:: dispatchEventModification(new BRCEventModification($event, BRCEventModification:: $Created));
 		return $events;
 	}

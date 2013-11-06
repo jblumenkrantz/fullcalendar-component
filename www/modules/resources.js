@@ -145,7 +145,7 @@ angular.module('pinwheelApp')
 	.factory('Reminder', function($resource){
 		return $resource('/api/v1/reminder/:id', {}, {update: {method:'PUT'}});
 	})
-	.factory('Calendar', function($resource, ReminderService){
+	.factory('Calendar', function($resource, ReminderService, Event){
 		return $resource('/api/v1/calendar/:id/:version', {},
 			{
 				save: {
@@ -181,6 +181,9 @@ angular.module('pinwheelApp')
 						var calendars = angular.fromJson(data);
 						angular.forEach(calendars, function(calendar, k) {
 							(calendars[k].reminder_pref_id != null && ReminderService.setReminderProperties(calendars[k]));
+							angular.forEach(calendar.events, function(e, i){
+								calendar.events[i] = new Event(e);
+							});
 						});
 						return calendars;
 					}

@@ -58,6 +58,9 @@ class CalendarCtl
 			}else{
 				$calendar->public = false;
 			}
+
+			$calendar->events = Event::getUserEventsForCalendar($authUserID, $calendar->calendar_id);
+			//array_merge($calendar->events, Event::getUserTasksForCalendar($authUserID, $calendar->calendar_id)); 
 			
 			if(property_exists($calendar, 'adhoc_events') && !$calendar->adhoc_events){
 				unset($calendar->adhoc_events);
