@@ -232,6 +232,7 @@ left: 110px !important;
 	font-weight:bolder !important;
 }
 .settings.tabs {
+	overflow: hidden;
 	margin-bottom:0px !important;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
@@ -275,7 +276,9 @@ left: 110px !important;
 }
 
 /* EVENT FORM STYLES */
-#advancedEvent, #quickEvent {
+#advancedEvent,
+#quickEvent,
+#account-settings-modal {
 	background: #eeeeee; /* Old browsers */
 	background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
@@ -330,6 +333,24 @@ input, textarea {
 .contactPoint.item {
 	background:#BADA55;
 	margin:2px 0;
+}
+
+/* SETTINGS INTERFACE STYLES  */
+.settings-body {
+	line-height: normal !important;
+}
+
+.settings-body input {
+	line-height: normal !important;
+	height: 2.3125em !important;
+	top: 0px !important;
+	padding: 0.5em !important;
+	margin: 0 0 1em 0 !important;
+}
+
+.settings-body button {
+	font-size: 16px !important;
+	height: 36px !important;
 }
 
 /* FORM VALIDATION STYLES */

@@ -20,9 +20,9 @@ angular.module('pinwheelApp')
 					buttonFloat:"@",
 					enforceDialog:"@"
 				},
-				template: '<div ng-click="openModal()" ng-disabled="disabled()" class="icon modalTrigger button {{buttonFloat}} {{buttonClass}}">'+
+				template: '<button ng-click="openModal()" ng-disabled="disabled()" class="icon modalTrigger button {{buttonFloat}} {{buttonClass}}">'+
 							'<span aria-hidden="true" class="{{buttonIcon}}" ng-transclude> </span>'+
-						'</div>',
+						'</button>',
 				link: function(scope, element, attrs, controller) {
 					// convert the green and red classes to the BRC classes save and cancel
 					// this is just here for ease of use
