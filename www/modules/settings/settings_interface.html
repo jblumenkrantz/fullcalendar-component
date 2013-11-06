@@ -1,60 +1,98 @@
-	<dl class="large-12 settings tabs" >
-		<dd settings-tab="account" user='user' activeTab='activeTab'><p><span aria-hidden="true" class="icon-cog"></span> Account</p></dd>
-		<dd settings-tab="contact_points" user='user' activeTab='activeTab'><p><span aria-hidden="true" class="icon-notebook"></span> Contact Points</p></dd>
-		<dd settings-tab="diagnostics" user='user' activeTab='activeTab'><p><span aria-hidden="true" class="icon-warning"></span> Application Diagnostics</p></dd>
-		
-		<!-- <dd settings-tab="calendars" ng-show="isOrgAdmin()" user='user' activeTab='activeTab'><p><span aria-hidden="true" class="icon-calendar-4"></span> Calendar Manager</p></dd>
-		<dd settings-tab="admin" ng-show="isOrgSuperAdmin()" user='user' activeTab='activeTab'><p><span aria-hidden="true" class="icon-star"></span> Administrator</p></dd> -->
-		<!-- uncomment next two dd's and comment out the two dd's above to test/dev on non-admin account -->
-		<dd settings-tab="calendars" user='user' activeTab='activeTab'><p><span aria-hidden="true" class="icon-calendar-4"></span> Calendar Manager</p></dd>
-		<dd settings-tab="admin"  user='user' activeTab='activeTab'><p><span aria-hidden="true" class="icon-star"></span> Administrator</p></dd>
-		
-		
-	</dl> 
+<dl class="large-12 settings tabs">
+	<dd settings-tab="account" user='user' activeTab='activeTab'>
+		<p>
+			<span aria-hidden="true" class="icon-cog"></span> Account
+		</p>
+	</dd>
+	<dd settings-tab="contact_points" user='user' activeTab='activeTab'>
+		<p>
+			<span aria-hidden="true" class="icon-notebook"></span> Contact Points
+		</p>
+	</dd>
+	<dd settings-tab="diagnostics" user='user' activeTab='activeTab'>
+		<p>
+			<span aria-hidden="true" class="icon-warning"></span> Application Diagnostics
+		</p>
+	</dd>
+	
+	<!-- <dd settings-tab="calendars" ng-show="isOrgAdmin()" user='user' activeTab='activeTab'><p><span aria-hidden="true" class="icon-calendar-4"></span> Calendar Manager</p></dd>
+	<dd settings-tab="admin" ng-show="isOrgSuperAdmin()" user='user' activeTab='activeTab'><p><span aria-hidden="true" class="icon-star"></span> Administrator</p></dd> -->
+	<!-- uncomment next two dd's and comment out the two dd's above to test/dev on non-admin account -->
+	<dd settings-tab="calendars" user='user' activeTab='activeTab'>
+		<p>
+			<span aria-hidden="true" class="icon-calendar-4"></span> Calendar Manager
+		</p>
+	</dd>
+	<dd settings-tab="admin"  user='user' activeTab='activeTab'>
+		<p>
+			<span aria-hidden="true" class="icon-star"></span> Administrator
+		</p>
+	</dd>
+</dl> 
 <!-- ********************* -->
 <!-- ** Account Section ** -->
 <!-- ********************* -->
 <div ng-show="activeTab.account">
-	<div class="row">
-		<div class="large-12 columns" >
-			Email: <input type="text" ng-model="user.email" >
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="large-6 columns">
-		Default Timezone:
-		<select ng-options="tz.zone as tz.zone for tz in timezones" ng-model="user.timezone" ></select>
-		</div>
-		<div class="large-6 columns">
-			Default Calendar:
-			<select ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'" ng-model="user.settings.default_calendar" ></select>
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="large-6 columns">
-		Start of Day:
-		<time db="true" ng-model="user.settings.start_of_day" placeholder="h:mm AM/PM" />
-	</div>
-	
-	<div class="large-6 columns">
-		End of Day:
-		<time db="true" ng-model="user.settings.end_of_day" placeholder="h:mm AM/PM" />
-	</div>
-		<!-- Primary Organization:
-		<select disabled ng-options="org.org_id as org.org_name for org in orgs" ng-model="user.settings.primary_org.org_id" ></select>
-		Access Level: {{user.settings.primary_org.user_role}} - {{user.settings.primary_org.org_id}} -->
-	<div class="row">
-		<div class="large-12 columns animate-show" ng-hide="userDiff()">
-			<div class="large-6 columns">
-				<div class="expand small alert button" ng-click="cancelUser()" >Cancel</div>
-			</div>
-			<div class="large-6 columns">
-				<confirm button-class="expand small success" header="Update Account Information" body="Are you sure you want to update your user settings?" footer="You are about to change your account settings, this could affect the way your information is displayed to you.  Are you sure you wnat to continue" affirmative-text="Save" negative-text="Cancel" affirmative-action="saveUser()" negative-action="cancelUser()">Save</confirm>
+	<form name="accountForm" novalidate>
+		<div class="row">
+			<div class="large-12 columns">
+				<label>Email:</label>
+				<input disabled type="email" ng-model="user.email" />
 			</div>
 		</div>
-	</div>
+
+		<div class="row">
+			<div class="large-6 columns">
+				<label>Default Timezone:</label>
+				<select ng-options="tz.zone as tz.zone for tz in timezones" ng-model="user.timezone" ></select>
+			</div>
+			<div class="large-6 columns">
+				<label>Default Calendar:</label>
+				<select ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'" ng-model="user.settings.default_calendar" ></select>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="large-6 columns">
+				<label>Start of Day:</label>
+				<time required db="true" ng-model="user.settings.start_of_day" placeholder="h:mm AM/PM" />
+			</div>
+		
+			<div class="large-6 columns">
+				<label>End of Day:</label>
+				<time required db="true" ng-model="user.settings.end_of_day" placeholder="h:mm AM/PM" />
+			</div>
+		</div>
+			<!-- Primary Organization:
+			<select disabled ng-options="org.org_id as org.org_name for org in orgs" ng-model="user.settings.primary_org.org_id" ></select>
+			Access Level: {{user.settings.primary_org.user_role}} - {{user.settings.primary_org.org_id}} -->
+		<div class="row">
+			<div class="large-12 columns">
+				<ul class="button-group even-2">
+					<li>
+						<button class="button radius" ng-click="resetUser()">
+							<span aria-hidden="true" class="icon-reload-alt"> Reset</span>
+						</button>
+					</li>
+					<li style="padding-right: 0;">
+						<confirm
+							disabled="accountForm.$invalid"
+							button-icon="icon-checkmark"
+							button-class="button radius"
+							header="Update Account Information"
+							body="Are you sure you want to update your user settings?"
+							footer="You are about to change your account settings, this could affect the way your information is displayed to you.  Are you sure you wnat to continue"
+							affirmative-text="Save"
+							negative-text="Cancel"
+							affirmative-action="saveUser()"
+							negative-action="cancelUser()">
+								Save
+						</confirm>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
 </div>
 <!-- END Account Section -->
 
