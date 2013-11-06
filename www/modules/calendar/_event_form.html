@@ -11,170 +11,175 @@
     <span class="icon-x-altx-alt right" ng-click="cancel()" aria-hidden="true"></span>
 </div>
 <!-- EVENT FIELDS -->
-<div class="row" style="padding-top: 1em;">
-	<!-- Event Title -->
-	<div class="large-6 columns">
-		<label>Title:</label>
-		<input type="text" ng-model="formEvent.title" placeholder="Untitled event" />
-	</div>
-	<!-- / Event Title -->
-	<!-- Calendar -->
-	<div class="large-6 columns">
-		<label>Calendar:</label>
-		<select ng-change="switchCalendar()" ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'" ng-model="formEvent.calendar_id" ></select>
-	</div>
-	<!-- / Calendar -->
-</div>
-<div class="row">
-	<!-- Start Time -->
-	<div class="large-6 columns calendar-picker-container">
-		<label>From<span ng-show="formEvent.allDay=='1'"> start of day</span>:</label>
-		<datetime ng-show="formEvent.allDay == '0'" ng-model="formEvent.start" name="start" placeholder="m/d/yyyy h:mm AM/PM" />
-		<date ng-show="formEvent.allDay == '1'" ng-model="formEvent.start" name="start" placeholder="m/d/yyyy" />
-		<!--<button ng-hide="device.isTouch" type="button" class="glyph-show"><span aria-hidden="true" class="icon-calendar-2"></span></button>-->
-	</div>
-	<!-- / Start Time -->
-	<!-- End Time -->
-	<div class="large-6 columns calendar-picker-container">
-		<label>To<span ng-show="formEvent.allDay=='1'"> end of day</span>:</label>
-		<datetime ng-show="formEvent.allDay == '0'" ng-model="formEvent.end" name="end" placeholder="m/d/yyyy h:mm AM/PM" />
-		<date ng-show="formEvent.allDay == '1'" ng-model="formEvent.end" name="end" placeholder="m/d/yyyy" />
-		<!--<button ng-hide="device.isTouch" type="button" class="glyph-show"><span aria-hidden="true" class="icon-calendar-2"></span></button>-->
-	</div>
-	<!-- / End Time -->
-</div>
-<!-- EVENT CHECKBOXES -->
-<div class="row">
-	<!-- All Day -->
-	<div class="large-4 columns">
-		<label class="checkbox">
-			<input type="checkbox" ng-model="formEvent.allDay" ng-true-value="1" ng-false-value="0" ng-click="allDayToggle()" />
-			All Day Event
-		</label>
-	</div>
-	<!-- / All Day -->
-	<!-- Reminder -->
-	<div class="large-4 columns">
-		<label class="checkbox">
-			<input type="checkbox" ng-model="formEvent.has_reminder" ng-click="reminderToggle()" />
-			Add Reminder
-		</label>
-	</div>
-	<!-- / Reminder -->
-	<!-- Repeating -->
-	<div class="large-4 columns">
-		<label class="checkbox">
-			<input type="checkbox" ng-model="formEvent.isRepeating" />
-			Repeating
-		</label>
-	</div>
-	<!-- / Repeating -->
-</div>
-<!-- Description -->
-<div class="row">
-	<div class="large-12 columns">
-		<textarea ng-model="formEvent.event_description" placeholder="Add a description"></textarea>
-	</div>
-</div>
-<!-- / Description -->
-<div class="row">
-	<!-- REMINDER SETTINGS -->
-	<div class="large-6 columns" ng-if="formEvent.has_reminder">
-		<label>Remind Me:</label>
-		<!-- Reminder Offset -->
-		<div
-			ng-hide="
-				hideOffset =
-				formEvent.reminder_type == 3 ||
-				formEvent.reminder_type == 4 ||
-				formEvent.reminder_type == 5 ||
-				formEvent.reminder_type == 7
-				"
-			style="float: left; width: 10%; margin-right: 2%;">
-			<input type='text' ng-model="formEvent.reminder_offset" placeholder="2" ng-change="usingOwnReminder()" />
+<form name="eventForm" novalidate>
+	<div class="row" style="padding-top: 1em;">
+		<!-- Event Title -->
+		<div class="large-6 columns">
+			<label>Title:</label>
+			<input required focus-me="[addingEvent, editingEvent]" type="text" ng-model="formEvent.title" placeholder="Untitled event" />
 		</div>
-
-		<div style="float: left;" ng-class="{'with-offset':!hideOffset, 'without-offset':hideOffset}">
-			<!-- Reminder Types -->
-			<select
-				ng-class="{
-					'on-date':	formEvent.reminder_type == 3 ||
-								formEvent.reminder_type == 4 ||
-								formEvent.reminder_type == 5 ||
-								formEvent.reminder_type == 6,
-					'datetime':		formEvent.reminder_type == 3
-				}"
-				ng-options="r.id as r.name for r in reminderTypes | filter:reminderTypeFilter"
-				ng-change="usingOwnReminder(); onDateSelected();"
-				ng-model="formEvent.reminder_type" >
-			</select>
-			<!-- All Day Reminder Time of day -->
-			<time
-				style="display: block; float: left; width: 48.7%"
-				ng-model="formEvent.reminder_time"
-				placeholder="h:mm AM/PM"
-				ng-show="
-					formEvent.allDay == '1' &&
-					formEvent.reminder_type != 3 &&
-					formEvent.reminder_type != 7"
-			/>
-			<!-- Absolute Reminder Datetime -->
-			<datetime
-				class="on-date-right"
-				ng-model="formEvent.reminder_datetime"
-				placeholder="m/d/yyyy h:mm AM/PM"
-				ng-show="formEvent.reminder_type == 3"
-			/>
+		<!-- / Event Title -->
+		<!-- Calendar -->
+		<div class="large-6 columns">
+			<label>Calendar:</label>
+			<select ng-change="switchCalendar()" ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'" ng-model="formEvent.calendar_id" ></select>
 		</div>
-
-		<div style="clear: both;"></div>
-
-		<div style="font-size: 12px; margin: -0.8em 0 1em 0;">
-			This event is using
-			<span ng-show="formEvent.using_calendar_reminder">
-				its calendar's reminder.
-				<span style="cursor: pointer; text-decoration: underline;" ng-click="noReminder()">Don't remind me.</span>
-			</span>
-			<span ng-show="!formEvent.using_calendar_reminder && formEvent.reminder_type != 7">
-				its own reminder.
-				<span ng-if="formEvent.using_calendar_reminder!=undefined" style="cursor: pointer; text-decoration: underline;" ng-click="checkCalendarReminder()">Use calendar reminder.</span></span>
-			<span ng-show="formEvent.reminder_type == 7">
-				no reminder.
-				<span ng-if="formEvent.using_calendar_reminder!=undefined" style="cursor: pointer; text-decoration: underline;" ng-click="checkCalendarReminder()">Use calendar reminder.</span></span>
-			</span>
+		<!-- / Calendar -->
+	</div>
+	<div class="row">
+		<!-- Start Time -->
+		<div class="large-6 columns calendar-picker-container">
+			<label>From<span ng-show="formEvent.allDay=='1'"> start of day</span>:</label>
+			<datetime ng-required="formEvent.allDay == '0'" ng-show="formEvent.allDay == '0'" ng-model="formEvent.start" name="start" placeholder="m/d/yyyy h:mm AM/PM" />
+			<date ng-required="formEvent.allDay == '1'" ng-show="formEvent.allDay == '1'" ng-model="formEvent.start" name="start" placeholder="m/d/yyyy" />
+			<!--<button ng-hide="device.isTouch" type="button" class="glyph-show"><span aria-hidden="true" class="icon-calendar-2"></span></button>-->
+		</div>
+		<!-- / Start Time -->
+		<!-- End Time -->
+		<div class="large-6 columns calendar-picker-container">
+			<label>To<span ng-show="formEvent.allDay=='1'"> end of day</span>:</label>
+			<datetime ng-required="formEvent.allDay == '0'" ng-show="formEvent.allDay == '0'" ng-model="formEvent.end" name="end" placeholder="m/d/yyyy h:mm AM/PM" />
+			<date ng-required="formEvent.allDay == '1'" ng-show="formEvent.allDay == '1'" ng-model="formEvent.end" name="end" placeholder="m/d/yyyy" />
+			<!--<button ng-hide="device.isTouch" type="button" class="glyph-show"><span aria-hidden="true" class="icon-calendar-2"></span></button>-->
+		</div>
+		<!-- / End Time -->
+	</div>
+	<!-- EVENT CHECKBOXES -->
+	<div class="row">
+		<!-- All Day -->
+		<div class="large-4 columns">
+			<label class="checkbox">
+				<input type="checkbox" ng-model="formEvent.allDay" ng-true-value="1" ng-false-value="0" ng-click="allDayToggle()" />
+				All Day Event
+			</label>
+		</div>
+		<!-- / All Day -->
+		<!-- Reminder -->
+		<div class="large-4 columns">
+			<label class="checkbox">
+				<input type="checkbox" ng-model="formEvent.has_reminder" ng-click="reminderToggle()" />
+				Add Reminder
+			</label>
+		</div>
+		<!-- / Reminder -->
+		<!-- Repeating -->
+		<div class="large-4 columns">
+			<label class="checkbox">
+				<input type="checkbox" ng-model="formEvent.isRepeating" />
+				Repeating
+			</label>
+		</div>
+		<!-- / Repeating -->
+	</div>
+	<!-- Description -->
+	<div class="row">
+		<div class="large-12 columns">
+			<textarea ng-model="formEvent.event_description" placeholder="Add a description"></textarea>
 		</div>
 	</div>
-	<!-- REPEAT SETTINGS -->
-	<div class="large-6 columns" ng-if="formEvent.isRepeating">
-		<label>Repeats:</label>
+	<!-- / Description -->
+	<div class="row">
+		<!-- REMINDER SETTINGS -->
+		<div class="large-6 columns" ng-if="formEvent.has_reminder">
+			<label>Remind Me:</label>
+			<!-- Reminder Offset -->
+			<div
+				ng-hide="
+					hideOffset =
+					typeIsThree ||
+					formEvent.reminder_type == 4 ||
+					formEvent.reminder_type == 5 ||
+					formEvent.reminder_type == 7
+					"
+				style="float: left; width: 10%; margin-right: 2%;">
+				<input ng-required="!hideOffset" type='number' min="1" ng-model="formEvent.reminder_offset" placeholder="2" ng-change="usingOwnReminder()" />
+			</div>
+
+			<div style="float: left;" ng-class="{'with-offset':!hideOffset, 'without-offset':hideOffset}">
+				<!-- Reminder Types -->
+				<select
+					ng-class="{
+						'on-date':	typeIsThree ||
+									formEvent.reminder_type == 4 ||
+									formEvent.reminder_type == 5 ||
+									formEvent.reminder_type == 6,
+						'datetime':	typeIsThree
+					}"
+					ng-options="r.id as r.name for r in reminderTypes | filter:reminderTypeFilter"
+					ng-change="usingOwnReminder(); onDateSelected();"
+					ng-model="formEvent.reminder_type" >
+				</select>
+				<!-- All Day Reminder Time of day -->
+				<time
+					style="display: block; float: left; width: 48.7%"
+					ng-model="formEvent.reminder_time"
+					placeholder="h:mm AM/PM"
+					ng-show="
+						showReminderTime = 
+						formEvent.allDay == '1' &&
+						!typeIsThree &&
+						formEvent.reminder_type != 7"
+					ng-required="showReminderTime"
+				/>
+				<!-- Absolute Reminder Datetime -->
+				<datetime
+					class="on-date-right"
+					ng-model="formEvent.reminder_datetime"
+					placeholder="m/d/yyyy h:mm AM/PM"
+					ng-show="typeIsThree = formEvent.reminder_type == 3"
+					ng-required="typeIsThree"
+				/>
+			</div>
+
+			<div style="clear: both;"></div>
+
+			<div style="font-size: 12px; margin: -0.8em 0 1em 0;">
+				This event is using
+				<span ng-show="formEvent.using_calendar_reminder">
+					its calendar's reminder.
+					<span style="cursor: pointer; text-decoration: underline;" ng-click="noReminder()">Don't remind me.</span>
+				</span>
+				<span ng-show="!formEvent.using_calendar_reminder && formEvent.reminder_type != 7">
+					its own reminder.
+					<span ng-if="formEvent.using_calendar_reminder!=undefined" style="cursor: pointer; text-decoration: underline;" ng-click="checkCalendarReminder()">Use calendar reminder.</span></span>
+				<span ng-show="formEvent.reminder_type == 7">
+					no reminder.
+					<span ng-if="formEvent.using_calendar_reminder!=undefined" style="cursor: pointer; text-decoration: underline;" ng-click="checkCalendarReminder()">Use calendar reminder.</span></span>
+				</span>
+			</div>
+		</div>
+		<!-- REPEAT SETTINGS -->
+		<div class="large-6 columns" ng-if="formEvent.isRepeating">
+			<label>Repeats:</label>
+		</div>
 	</div>
-</div>
-<!-- BUTTONS -->
-<div class="row">
-	<div class="large-12 columns">
-		<ul class="button-group even-3">
-			<li>
-				<div class="button radius" ng-click="reset(addingEvent)">
-					<span aria-hidden="true" class="icon-reload-alt"> Reset</span>
-				</div>
-			</li>
-			<li>
-				<div ng-show="editingEvent" class="button radius" ng-click="delete()">
-					<span aria-hidden="true" class="icon-remove-2"> Delete</span>
-				</div>
-				<div ng-show="addingEvent" class="button radius" ng-click="save(true)">
-					<span aria-hidden="true" class="icon-plus-alt"> Continue</span>
-				</div>
-			</li>
-			<li style="padding-right: 0;">
-				<div ng-show="addingEvent" class="button radius" ng-click="save()">
-					<span aria-hidden="true" class="icon-checkmark"> Done</span>
-				</div>
-				<div ng-show="editingEvent" class="button radius" ng-click="update()">
-					<span aria-hidden="true" class="icon-checkmark"> Save</span>
-				</div>
-			</li>
-		</ul>
-		<br>
+	<!-- BUTTONS -->
+	<div class="row">
+		<div class="large-12 columns">
+			<ul class="button-group even-3">
+				<li>
+					<button class="button radius" ng-click="reset(addingEvent)">
+						<span aria-hidden="true" class="icon-reload-alt"> Reset</span>
+					</button>
+				</li>
+				<li>
+					<button ng-show="editingEvent" class="button radius" ng-click="delete()">
+						<span aria-hidden="true" class="icon-remove-2"> Delete</span>
+					</button>
+					<button ng-disabled="eventForm.$invalid" ng-show="addingEvent" class="button radius" ng-click="save(true)">
+						<span aria-hidden="true" class="icon-plus-alt"> Continue</span>
+					</button>
+				</li>
+				<li style="padding-right: 0;">
+					<button ng-show="addingEvent" class="button radius" ng-click="save()" ng-disabled="eventForm.$invalid">
+						<span aria-hidden="true" class="icon-checkmark"> Done</span>
+					</button>
+					<button ng-show="editingEvent" class="button radius" ng-click="update()" ng-disabled="eventForm.$invalid">
+						<span aria-hidden="true" class="icon-checkmark"> Save</span>
+					</button>
+				</li>
+			</ul>
+			<br>
+		</div>
 	</div>
-</div>
+</form>

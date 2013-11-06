@@ -2219,7 +2219,7 @@ button.large, .button.large {
     transition: background-color 300ms ease-out;
   }
   /* line 68, ../../bower_components/foundation/scss/foundation/components/_global.scss */
-  button:active, .button:active {
+  button:active:enabled, .button:active:enabled {
     -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2) inset;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2) inset;
   }
@@ -7342,8 +7342,9 @@ ul.days, .calendar-day {
   padding: 0 5px 0 0;
 }
 
-/* line 423, ../../scss/foundation.scss */
-.button-group li div.button {
+/* line 425, ../../scss/foundation.scss */
+.button-group li div.button,
+.button-group li button {
   padding: 6px;
   background: #eeeeee;
   /* Old browsers */
@@ -7366,8 +7367,9 @@ ul.days, .calendar-day {
   height: 36px;
 }
 
-/* line 438, ../../scss/foundation.scss */
-.button-group li div.button:hover {
+/* line 442, ../../scss/foundation.scss */
+.button-group li div.button:hover:enabled,
+.button-group li button:hover:enabled {
   background: #eeeeee;
   /* Old browsers */
   background: -moz-linear-gradient(top, #eeeeee 60%, #cccccc 100%);
@@ -7387,51 +7389,67 @@ ul.days, .calendar-day {
   margin: 0;
 }
 
-/* line 451, ../../scss/foundation.scss */
+/* line 455, ../../scss/foundation.scss */
+button:focus {
+  outline: none;
+}
+
+/* line 459, ../../scss/foundation.scss */
+button.disabled, button[disabled], .button.disabled, .button[disabled] {
+  color: grey;
+  border-color: #cccccc !important;
+}
+
+/* line 464, ../../scss/foundation.scss */
 .button-group li [class*="icon-"] {
   color: #333;
 }
 
-/* line 457, ../../scss/foundation.scss */
+/* line 468, ../../scss/foundation.scss */
+.button-group li button:disabled [class*="icon-"] {
+  color: gray;
+}
+
+/* line 474, ../../scss/foundation.scss */
 .top-bar {
   background: rgba(221, 221, 221, 0.3) repeat !important;
   overflow: visible;
 }
 
-/* line 462, ../../scss/foundation.scss */
+/* line 479, ../../scss/foundation.scss */
 .top-bar-section li a:not(.button) {
   background: none !important;
 }
 
-/* line 467, ../../scss/foundation.scss */
+/* line 484, ../../scss/foundation.scss */
 .tabs dd.active {
   border-top: 0px solid #23538a;
 }
 
-/* line 470, ../../scss/foundation.scss */
+/* line 487, ../../scss/foundation.scss */
 .top-bar-section ul li {
   float: left !important;
 }
 
 /* iPads (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* line 479, ../../scss/foundation.scss */
+  /* line 496, ../../scss/foundation.scss */
   .task .body .title {
     font-size: 12px;
   }
 
-  /* line 482, ../../scss/foundation.scss */
+  /* line 499, ../../scss/foundation.scss */
   .task .body .due-date, .task .body .notes {
     font-size: 9px;
   }
 
-  /* line 485, ../../scss/foundation.scss */
+  /* line 502, ../../scss/foundation.scss */
   .edit-container input, textarea {
     padding: 1px;
     font-size: 9px !important;
   }
 
-  /* line 489, ../../scss/foundation.scss */
+  /* line 506, ../../scss/foundation.scss */
   .task .body .notes:hover, .task .body .due-date:hover, .task .body .title:hover {
     text-decoration: none;
   }

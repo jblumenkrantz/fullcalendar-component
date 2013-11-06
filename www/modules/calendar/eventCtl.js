@@ -13,7 +13,8 @@ angular.module('pinwheelApp')
 				end: new Date($filter('date')((new Date()).addHours(2), "M/d/yyyy h:00 a")), //get date object set to next hour + 1
 				allDay: "0",
 				has_reminder: false,
-				isRepeating: false
+				isRepeating: false,
+				reminder_offset: 2
 			};
 		}
 
@@ -67,7 +68,6 @@ angular.module('pinwheelApp')
 		$scope.delete = function() {
 			$scope.pinwheel.fullCalendar('removeEvents',$scope.event.id);
 			$scope.event.$delete({id:$scope.event.id, version:$scope.event.version});
-
 			$scope.cancel();
 		}
 
@@ -120,7 +120,6 @@ angular.module('pinwheelApp')
 				$scope.addingEvent = false;
 				$scope.editingEvent = false;
 			}
-
 		}
 
 		//save new quickadded event

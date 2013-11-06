@@ -186,4 +186,20 @@ Use db='true' if the ng-model is directly saved in the database as a TIME type.
 			input.spectrum(options);
 		}
 	}
+})
+.directive('focusMe', function($timeout, $parse) {
+	return {
+		restrict: 'A',
+		link: function(scope, element, attrs) {
+			var model = $parse(attrs.focusMe);
+			var delay = (attrs.delay) ? parseInt(attrs.delay) : 0;
+			scope.$watchCollection(model, function(value) {
+				if(value.indexOf(true) != -1) { 
+					$timeout(function() {
+						element.focus(); 
+					}, delay);
+				}
+			});
+		}
+	};
 });

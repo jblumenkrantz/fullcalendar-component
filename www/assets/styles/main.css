@@ -275,7 +275,7 @@ left: 110px !important;
 }
 
 /* EVENT FORM STYLES */
-#advancedEvent {
+#advancedEvent, #quickEvent {
 	background: #eeeeee; /* Old browsers */
 	background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
@@ -330,4 +330,23 @@ input, textarea {
 .contactPoint.item {
 	background:#BADA55;
 	margin:2px 0;
+}
+
+/* FORM VALIDATION STYLES */
+form {
+	margin: 0 !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+form input.ng-invalid {
+	border-color: #FA787E !important;
+	-webkit-box-shadow: 0 0 5px #FA787E !important;
+	-moz-box-shadow: 0 0 5px #FA787E !important;
+	box-shadow: 0 0 5px #FA787E !important;
 }

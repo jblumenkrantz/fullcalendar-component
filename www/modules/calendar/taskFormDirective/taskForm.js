@@ -8,18 +8,19 @@ angular.module('pinwheelApp')
 			scope: {
 				task: '=',
 				calendars: '=',
+				tasking: '=',
+				reminderTypes: '=',
+				reminderTypeFilter: '&',
 				save: '&',
 				cancel: '&',
+				reset: '&',
 				delete: '&',
 				reminderToggle: '&',
 				switchCalendar: '&',
 				checkCalendarReminder: '&',
 				dueDateToggle: '&',
-				reminderTypeFilter: '&',
-				reminderTypes: '=',
 				usingOwnReminder: '&',
-				noReminder: "&",
-				onDateSelected: "&"
+				noReminder: "&"
 			}
 		}
 	});
