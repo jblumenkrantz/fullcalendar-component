@@ -23,7 +23,6 @@ angular.module('pinwheelApp')
 					return height;
 				}
 				$scope.eventSources = function(){
-					console.log($scope.calendars);
 					return $scope.calendars
 				}
 				$scope.calendarOptions = {
@@ -48,24 +47,12 @@ angular.module('pinwheelApp')
 						$scope.$apply();
 					},
 					eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc) {
-						//source has to be pulled out for the resource to properly update.  it sucks and is what is causing a flashing when the event is updated
-						console.warn([event, dayDelta, minuteDelta, allDay, revertFunc]);
-						var bak = event.source;
-						delete event.source;
+						console.warn(event);
 						event.$update({id: event.id}, function(updatedEvent) {
-							updatedEvent.source = bak;
-							$scope.event = updatedEvent;
-							$scope.pinwheel.fullCalendar('updateEvent',updatedEvent);
+							console.warn(updatedEvent);
+							$scope.pinwheel.fullCalendar('updateEvent',event);
+							//$scope.pinwheel.fullCalendar('renderEvent',event);
 						});
-						if (allDay) {
-							alert("Event is now all-day");
-						}else{
-							alert("Event has a time-of-day");
-						}
-
-						if (!confirm("Are you sure about this change?")) {
-							revertFunc();
-						}
 						$scope.$apply();
 					},
 					dayClick: function(date, allDay, jsEvent, view) {
