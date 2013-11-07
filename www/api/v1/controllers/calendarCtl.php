@@ -168,6 +168,7 @@ class CalendarCtl
 					$calendar->subscribed = true;
 					$calendar->viewing = ($colorResult[0]->view_setting)? true:false;
 				}
+				$calendar->events = Event::getUserEventsForCalendar($authUserID, $calendar->calendar_id);
 				echo json_encode($calendar);
 				
 			} catch (CalendarDataConflictException $e) {

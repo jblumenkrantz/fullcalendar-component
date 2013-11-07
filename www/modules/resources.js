@@ -166,6 +166,7 @@ angular.module('pinwheelApp')
 					isArray: false,
 					transformRequest: function(data) {
 						(data.has_reminder && ReminderService.setReminderData(data, "calendar"));
+						delete data.events
 						return angular.toJson(data);
 					},
 					transformResponse: function(data) {
