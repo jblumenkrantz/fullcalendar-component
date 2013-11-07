@@ -187,6 +187,10 @@ angular.module('pinwheelApp')
 						var calendars = angular.fromJson(data);
 						angular.forEach(calendars, function(calendar, k) {
 							(calendars[k].reminder_pref_id != null && ReminderService.setReminderProperties(calendars[k]));
+							if(!calendars[k].viewing){
+								calendars[k].eventStore=calendars[k].events;
+								delete calendars[k].events
+							}
 							/*angular.forEach(calendar.events, function(e, i){
 								calendar.events[i] = new Event(e);
 							});*/
