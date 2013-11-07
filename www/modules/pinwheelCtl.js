@@ -103,7 +103,7 @@ angular.module('pinwheelApp')
 
 		$scope.logout = function(){
 			/* Delete protected data */
-			delete $scope.calendars;
+			$scope.calendars = [];
 			delete $scope.user
 			delete $scope.initialUser;
 			delete $scope.contactPoints;
