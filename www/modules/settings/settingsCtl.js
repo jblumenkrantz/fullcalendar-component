@@ -13,9 +13,9 @@ angular.module('pinwheelApp')
 			angular.copy($scope.user, $scope.initialUser);
 		});
 	}
-	$scope.userDiff = function(){
-		//console.warn([angular.toJson($scope.user),angular.toJson($scope.initialUser)]);
-		return (angular.toJson($scope.user) == angular.toJson($scope.initialUser));
+
+	$scope.resetUser = function() {
+		angular.copy($scope.initialUser, $scope.user);
 	}
   	
 	$scope.editContactPoint = function(point){
