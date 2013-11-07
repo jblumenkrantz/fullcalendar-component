@@ -361,6 +361,8 @@ class Event extends PinwheelModelObject
 		
 		$events = static:: load($eventIDs, $pinsqli);
 		foreach ($events as $event)
+			$event->active = (bool)($event->active);
+			$event->allDay = (bool)($event->allDay);
 			BRCDispatcher:: dispatchEventModification(new BRCEventModification($event, BRCEventModification:: $Created));
 		return $events;
 	}
@@ -486,6 +488,8 @@ class Event extends PinwheelModelObject
 			throw new EventDataConflictException($resource, array($this));
 		}
 		$this->reload($pinsqli);
+		$this->active = (bool)($this->active);
+		$this->allDay = (bool)($this->allDay);
 		BRCDispatcher:: dispatchEventModification(new BRCEventModification($this, BRCEventModification:: $Updated));
 	}
 
