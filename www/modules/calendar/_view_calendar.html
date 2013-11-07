@@ -1,5 +1,6 @@
 <!-- event view -->
 <div ng-controller="EventCtl" id="main-content" style="height: 100%; overflow: hidden; position: relative; z-index: 2" class="small-12 columns {{size}}">
+	<summary-popup></summary-popup>
 	<header id="content-header" class="scroll-header">
 		<ul class="small-block-grid-3">
 			<li class="text-left">
@@ -32,7 +33,7 @@
 		<div ng-include src="'modules/calendar/_event_form.html'"></div>
 	</div>
 
-  <div scroll-pane class="scroll-pane"  style="border-left: 1px solid #afafaf; border-right: 1px solid #afafaf;">
+  <div scroll-pane style="border-left: 1px solid #afafaf; border-right: 1px solid #afafaf;">
 		<!-- calendar views switch -->
 		<spinwheel class="spinwheel-holder"><div ng-show="loading_events" class="spinwheel"><div class="spinwheel"><div class="spinwheel"><div class="spinwheel"></div></div></div></div></spinwheel>
 <!-- 	<div ng-switch-when="day">
