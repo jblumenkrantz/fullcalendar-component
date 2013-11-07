@@ -195,7 +195,6 @@ class Event extends PinwheelModelObject
 	static public function getUserEventsForCalendar($userId, $calendarId, $pinsqli=NULL) {
 		$dataRay = $eventArray = array();
 
-		$cals = (object) array_merge((array) Calendar::loadUserCreatedCalendars($userId), (array) Calendar::loadUserSubscriptions($userId));
 		//error_log(print_r($cals,true));
 
 		$events = Event::getBatch(array("events.active = true","events.calendar_id='{$calendarId}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendarId}'))"));
