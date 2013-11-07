@@ -169,6 +169,7 @@ class CalendarCtl
 					$calendar->viewing = ($colorResult[0]->view_setting)? true:false;
 				}
 				$calendar->events = Event::getUserEventsForCalendar($authUserID, $calendar->calendar_id);
+				$calendar->events = array_merge($calendar->events, Task::getUserTasksForCalendar($authUserID, $calendar->calendar_id)); 
 				echo json_encode($calendar);
 				
 			} catch (CalendarDataConflictException $e) {
