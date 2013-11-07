@@ -16,7 +16,7 @@ angular.module('pinwheelApp')
 				scope.resetSummary();
 				scope.summaryStyle.visible = true;
 				scope.summaryStyle.style = getStyle(clickEvent);
-				angular.copy(resource, scope.summaryData);
+				angular.extend(scope.summaryData, resource);
 			}
 
 			//expand summary info

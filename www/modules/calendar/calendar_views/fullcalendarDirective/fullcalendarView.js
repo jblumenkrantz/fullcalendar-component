@@ -14,7 +14,7 @@ angular.module('pinwheelApp')
 				}
 				$scope.mainAreaHeight = function(){
 					var windowHeight = $(window).height();
-					var mainHeaderHeight = $(".top-bar").outerHeight();
+					var mainHeaderHeight = $("#mainHeader").outerHeight();
 					var contentHeadHeight = $("#content-header").outerHeight();
 					//var fcHeaderHeight = $(".fc-header").outerHeight();
 					var height = windowHeight - mainHeaderHeight - contentHeadHeight;
