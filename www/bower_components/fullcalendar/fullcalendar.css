@@ -534,6 +534,7 @@ table.fc-border-separate {
 
 .fc-event-vert {
 	border-width: 0 1px;
+	border-left-width:10px;
 	}
 
 .fc-event-vert.fc-event-start {
