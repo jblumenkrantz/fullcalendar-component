@@ -267,8 +267,13 @@ left: 110px !important;
 /* EVENT FORM STYLES */
 #advancedEvent,
 #quickEvent,
+<<<<<<< HEAD
 #account-settings-modal,
 #summaryPopup {
+=======
+#global-modal,
+#account-settings-modal {
+>>>>>>> dev
 	background: #eeeeee; /* Old browsers */
 	background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
@@ -321,7 +326,7 @@ input, textarea {
 }
 /* contact points */
 .contactPoint.item {
-	background:#BADA55;
+
 	margin:2px 0;
 }
 
@@ -373,4 +378,14 @@ form input.ng-invalid {
 	z-index: 9;
 	top: 5px;
 	right: 5px;
+}
+
+/* disable text selection */
+#content-header {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
