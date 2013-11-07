@@ -422,7 +422,8 @@ padding: 0 5px 0 0;
 }
 .button-group li div.button,
 .button-group li button
- {
+ { 
+ 	color: #333 !important;
 padding: 6px;	
  background: #eeeeee; /* Old browsers */
 	background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
@@ -439,7 +440,8 @@ height: 36px;
 
 .button-group li div.button:hover:enabled,
 .button-group li button:hover:enabled
- {
+ { 
+ 	color: #333 !important;
  background: #eeeeee; /* Old browsers */
 	background: -moz-linear-gradient(top,  #eeeeee 60%, #cccccc 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(60%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */

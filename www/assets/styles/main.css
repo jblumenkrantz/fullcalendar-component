@@ -278,6 +278,7 @@ left: 110px !important;
 /* EVENT FORM STYLES */
 #advancedEvent,
 #quickEvent,
+#global-modal,
 #account-settings-modal {
 	background: #eeeeee; /* Old browsers */
 	background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
@@ -331,7 +332,7 @@ input, textarea {
 }
 /* contact points */
 .contactPoint.item {
-	background:#BADA55;
+
 	margin:2px 0;
 }
 

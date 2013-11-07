@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /* line 264, ../../bower_components/foundation/scss/foundation/components/_global.scss */
 *,
 *:before,
@@ -7052,7 +7051,7 @@ header#content-header [class*="icon-"] {
   text-align: center;
   text-transform: uppercase;
   line-height: 20px;
-  border: none!important;
+  border: none !important;
   padding: 10px 0px;
   color: #666;
   font-size: 13px;
@@ -7071,12 +7070,12 @@ header#content-header [class*="icon-"] {
   border: 1px solid #ccc;
   margin-right: 0px;
   margin-bottom: -1px;
-  overflow: visible!important;
+  overflow: visible !important;
 }
 
 /* line 249, ../../scss/foundation.scss */
 .calendar .days:last-child li {
-  margin-bottom: 0px!important;
+  margin-bottom: 0px !important;
 }
 
 /* line 250, ../../scss/foundation.scss */
@@ -7345,6 +7344,7 @@ ul.days, .calendar-day {
 /* line 425, ../../scss/foundation.scss */
 .button-group li div.button,
 .button-group li button {
+  color: #333 !important;
   padding: 6px;
   background: #eeeeee;
   /* Old browsers */
@@ -7367,9 +7367,10 @@ ul.days, .calendar-day {
   height: 36px;
 }
 
-/* line 442, ../../scss/foundation.scss */
+/* line 443, ../../scss/foundation.scss */
 .button-group li div.button:hover:enabled,
 .button-group li button:hover:enabled {
+  color: #333 !important;
   background: #eeeeee;
   /* Old browsers */
   background: -moz-linear-gradient(top, #eeeeee 60%, #cccccc 100%);
@@ -7389,67 +7390,67 @@ ul.days, .calendar-day {
   margin: 0;
 }
 
-/* line 455, ../../scss/foundation.scss */
+/* line 457, ../../scss/foundation.scss */
 button:focus {
   outline: none;
 }
 
-/* line 459, ../../scss/foundation.scss */
+/* line 461, ../../scss/foundation.scss */
 button.disabled, button[disabled], .button.disabled, .button[disabled] {
   color: grey;
   border-color: #cccccc !important;
 }
 
-/* line 464, ../../scss/foundation.scss */
+/* line 466, ../../scss/foundation.scss */
 .button-group li [class*="icon-"] {
   color: #333;
 }
 
-/* line 468, ../../scss/foundation.scss */
+/* line 470, ../../scss/foundation.scss */
 .button-group li button:disabled [class*="icon-"] {
   color: gray;
 }
 
-/* line 474, ../../scss/foundation.scss */
+/* line 476, ../../scss/foundation.scss */
 .top-bar {
   background: rgba(221, 221, 221, 0.3) repeat !important;
   overflow: visible;
 }
 
-/* line 479, ../../scss/foundation.scss */
+/* line 481, ../../scss/foundation.scss */
 .top-bar-section li a:not(.button) {
   background: none !important;
 }
 
-/* line 484, ../../scss/foundation.scss */
+/* line 486, ../../scss/foundation.scss */
 .tabs dd.active {
   border-top: 0px solid #23538a;
 }
 
-/* line 487, ../../scss/foundation.scss */
+/* line 489, ../../scss/foundation.scss */
 .top-bar-section ul li {
   float: left !important;
 }
 
 /* iPads (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* line 496, ../../scss/foundation.scss */
+  /* line 498, ../../scss/foundation.scss */
   .task .body .title {
     font-size: 12px;
   }
 
-  /* line 499, ../../scss/foundation.scss */
+  /* line 501, ../../scss/foundation.scss */
   .task .body .due-date, .task .body .notes {
     font-size: 9px;
   }
 
-  /* line 502, ../../scss/foundation.scss */
+  /* line 504, ../../scss/foundation.scss */
   .edit-container input, textarea {
     padding: 1px;
     font-size: 9px !important;
   }
 
-  /* line 506, ../../scss/foundation.scss */
+  /* line 508, ../../scss/foundation.scss */
   .task .body .notes:hover, .task .body .due-date:hover, .task .body .title:hover {
     text-decoration: none;
   }
