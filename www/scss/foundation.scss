@@ -76,7 +76,9 @@ $letter-press:  1px 1px 2px #fff;
   box-shadow:  0px 1px 3px 1px rgba(0, 0, 0, .5);
   z-index: 100;
 }
-.top-bar-section ul {
+.top-bar-section ul,
+
+ {
 	height: auto;
 	background: none;
 	margin: 0;
@@ -420,9 +422,12 @@ font-size: 16px;
 padding: 0 5px 0 0;
 
 }
+.top-bar2 .button,
 .button-group li div.button,
 .button-group li button
- {
+
+ { 
+ 	color: #333 !important;
 padding: 6px;	
  background: #eeeeee; /* Old browsers */
 	background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
@@ -439,7 +444,8 @@ height: 36px;
 
 .button-group li div.button:hover:enabled,
 .button-group li button:hover:enabled
- {
+ { 
+ 	color: #333 !important;
  background: #eeeeee; /* Old browsers */
 	background: -moz-linear-gradient(top,  #eeeeee 60%, #cccccc 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(60%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
@@ -511,3 +517,51 @@ and (max-device-width : 1024px) {
 //comment out 'fugly' import below to disable marketing mode
 @import "fugly";
 
+#mainHeader {
+  overflow: hidden;
+  height: 45px;
+  line-height: 45px;
+  position: relative;
+  background: #dddddd;
+  margin-bottom: 0;
+}
+
+.menubar ul li{
+	display: inline;
+}
+
+.menubar ul li [class*="icon-"]{
+	color: #777;
+	height: 45px;
+}
+.menubar ul li [class*="icon-"]:hover{
+	color: #555;
+}
+
+.menubar ul li [class*="icon-"]:active{
+	color: $primary-color;
+}
+
+.menubar ul.left{
+	height: 45px;
+}
+
+//position topbar control icons
+.menubar ul li a span {
+	font-size: 20px;
+	height: 45px;
+	position: relative;
+	top: 8px;
+	margin: 0 12px;
+}
+// style main header bar and default content area with gradient
+#main-content, #mainHeader {
+	background: #eeeeee; /* Old browsers */
+	background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+}
