@@ -9,15 +9,6 @@
 			<span aria-hidden="true" class="icon-notebook"></span> Contact Points
 		</p>
 	</dd>
-	<dd settings-tab="diagnostics" user='user' activeTab='activeTab'>
-		<p>
-			<span aria-hidden="true" class="icon-warning"></span> Diagnostics
-		</p>
-	</dd>
-	
-	<!-- <dd settings-tab="calendars" ng-show="isOrgAdmin()" user='user' activeTab='activeTab'><p><span aria-hidden="true" class="icon-calendar-4"></span> Calendar Manager</p></dd>
-	<dd settings-tab="admin" ng-show="isOrgSuperAdmin()" user='user' activeTab='activeTab'><p><span aria-hidden="true" class="icon-star"></span> Administrator</p></dd> -->
-	<!-- uncomment next two dd's and comment out the two dd's above to test/dev on non-admin account -->
 	<dd settings-tab="calendars" user='user' activeTab='activeTab'>
 		<p>
 			<span aria-hidden="true" class="icon-calendar-4"></span> Calendar Manager
@@ -26,6 +17,19 @@
 	<dd settings-tab="admin"  user='user' activeTab='activeTab'>
 		<p>
 			<span aria-hidden="true" class="icon-star"></span> Administrator
+		</p>
+	</dd>	
+	<!-- <dd settings-tab="calendars" ng-show="isOrgAdmin()" user='user' activeTab='activeTab'><p><span aria-hidden="true" class="icon-calendar-4"></span> Calendar Manager</p></dd>
+	<dd settings-tab="admin" ng-show="isOrgSuperAdmin()" user='user' activeTab='activeTab'><p><span aria-hidden="true" class="icon-star"></span> Administrator</p></dd> -->
+	<!-- uncomment next two dd's and comment out the two dd's above to test/dev on non-admin account -->
+	<dd ng-click="clearMemory()" activeTab='activeTab'>
+		<p>
+			<span aria-hidden="true" class="icon-spinner" style="color: green;"> Clear</span> 
+		</p>
+	</dd>
+	<dd ng-click="logout()" activeTab='activeTab'>
+		<p>
+			<span aria-hidden="true" class="icon-spam" style="color: red;"> Log Out</span> 
 		</p>
 	</dd>
 </dl> 
