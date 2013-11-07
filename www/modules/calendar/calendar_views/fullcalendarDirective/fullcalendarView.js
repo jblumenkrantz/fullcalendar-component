@@ -44,11 +44,23 @@ angular.module('pinwheelApp')
 					height:$scope.mainAreaHeight(),
 					allDayDefault:false,
 					viewRender: function(view,element) {
-						 console.warn('fullCalendar render');
+						console.warn('fullCalendar render');
+						//on fullCalendar render, bind scroll event to close pop up summary
+						$(".fc-scroll", element).scroll(function() {
+							$scope.$apply($scope.resetSummary());
+						});
 					},
 					eventClick: function(calEvent, jsEvent, view) {
 						delete calEvent.source;
-						$scope.edit(calEvent);
+						$scope.openSummary(calEvent, jsEvent);
+						$scope.$apply();
+					},
+					eventDragStart: function() {
+						$scope.resetSummary();
+						$scope.$apply();
+					},
+					eventResizeStart: function() {
+						$scope.resetSummary();
 						$scope.$apply();
 					},
 					eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc) {
