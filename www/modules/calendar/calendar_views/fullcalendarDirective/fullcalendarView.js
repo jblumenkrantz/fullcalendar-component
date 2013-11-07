@@ -21,6 +21,7 @@ angular.module('pinwheelApp')
 					//console.warn([windowHeight,mainHeaderHeight,contentHeadHeight,fcHeaderHeight]);
 					return height;
 				}
+				
 				$scope.eventSources = function(){
 					return $scope.calendars
 				}
@@ -45,11 +46,17 @@ angular.module('pinwheelApp')
 						$scope.$apply();
 					},
 					eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc) {
+						$scope.edit(event,false);
+						$scope.update();
+						$scope.$apply();
+						/*$scope.bak = event.source;
+						delete event.source;
 						var saveEvent = new Event(event);
 						saveEvent.$update({id: event.id}, function(updatedEvent) {
+							event.source = $scope.bak;
 							event.version = updatedEvent.version;
 						});
-						$scope.$apply();
+						$scope.$apply();*/
 					},
 					dayClick: function(date, allDay, jsEvent, view) {
 						console.warn([date, allDay, jsEvent, view]);

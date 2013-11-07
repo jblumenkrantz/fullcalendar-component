@@ -957,7 +957,7 @@ function EventManager(options, _sources) {
 		_fetchEventSource(source, function(events) {
 
 			if(source.events){
-				delete source.events
+				//delete source.events
 			}
 
 			if (fetchID == currentFetchID) {
@@ -1014,7 +1014,7 @@ function EventManager(options, _sources) {
 			}
 			else if ($.isArray(events)) {
 				$.each(events, function(i, e){
-					delete e.source
+					//delete e.source
 				});
 				callback(events);
 			}
