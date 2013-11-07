@@ -20,5 +20,3 @@ angular.module('pinwheelApp', ['ui.calendar', 'ngDragDrop', 'ngResource', 'ui.da
 	        timeout = setTimeout(delayed, threshold || 100); 
 	    };
 	})
-	.filter("inCalendar", function(){
-	});

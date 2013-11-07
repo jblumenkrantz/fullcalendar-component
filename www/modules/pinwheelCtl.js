@@ -16,7 +16,17 @@ angular.module('pinwheelApp')
 		}
 
 		$scope.isTask = function(item){
-			return item.id
+			return item.hasOwnProperty("task_notes");
+		}
+
+		$scope.visibleCalendarTasks = function(){
+			var ray = [];
+			angular.forEach($scope.calendars, function(cal){
+				if(cal.events){
+					ray = ray.concat(cal.events)
+				}
+			});
+			return ray
 		}
 
 		$scope.calendars = $scope.calendars || [];
