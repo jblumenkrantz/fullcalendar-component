@@ -61,6 +61,7 @@ angular.module('pinwheelApp')
 			$scope.calendar.viewing = $scope.watcher[$scope.calendar.calendar_id].viewing;
 			$scope.calendar.$update({id: $scope.calendar.calendar_id}, function(calendar) {
 				$scope.calendar = calendar;
+				$("#monthCalendar").fullCalendar("refetchEvents");
 			});
 		}
 		$scope.isCalendarAdmin = function(calendar){
