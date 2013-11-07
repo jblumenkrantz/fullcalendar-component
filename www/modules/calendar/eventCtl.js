@@ -31,14 +31,15 @@ angular.module('pinwheelApp')
 		}
 
 		//open form for editing of existing event
-		$scope.edit = function(event) {
-			console.warn(event);
+		$scope.edit = function(event, dialog) {
+			$scope.bak = event.source;
+			delete event.source;
 			$scope.event = event;	//store the original event object
-			$scope.formEvent = new Event();
-			angular.copy(event, $scope.formEvent);
+			$scope.formEvent = new Event(event);
 			$scope.useReminderType = ($scope.formEvent.allDay=='1') ? 'absolute' : 'relative';
 			(!$scope.formEvent.has_reminder && $scope.checkCalendarReminder());
-			$scope.editingEvent = true;
+
+			$scope.editingEvent = (dialog == true || dialog == null)? true:false;
 			$scope.addingEvent = false;
 			$scope.quickAdding = false;
 		}
@@ -46,19 +47,26 @@ angular.module('pinwheelApp')
 		//update existing event
 		$scope.update = function() {
 			angular.copy($scope.formEvent, $scope.event);
-			console.warn($scope);
-			$scope.event.$update({id: $scope.event.id}, function(event) {
-				$scope.event = event;
-				$scope.pinwheel.fullCalendar('updateEvent',event);
+			$scope.event.$update({id: $scope.event.id}, function(updateEvent) {
+				$scope.event.source = $scope.bak;
+				$scope.event.version = updateEvent.version
+				$scope.pinwheel.fullCalendar('updateEvent', $scope.event);
 				$scope.cancel();
 			});
 		}
 
 		//save new event
 		$scope.save = function(continuing) {
+			var cals = $scope.$parent.$parent.calendars;
+			var event = angular.copy($scope.formEvent);
 			$scope.formEvent.$save({}, function(newEvent) {
-				$scope.events.push(newEvent);
-				$scope.pinwheel.fullCalendar('renderEvent',newEvent)
+				$.each(cals, function(i,cal){
+					if(cal.calendar_id == event.calendar_id){
+						cal.events.push(newEvent);
+						$scope.pinwheel.fullCalendar('refetchEvents');
+						console.warn(newEvent);
+					}
+				});
 				$scope.cancel(continuing);
 				(continuing && angular.copy(newEvent, $scope.formEvent));
 			});
@@ -66,6 +74,7 @@ angular.module('pinwheelApp')
 
 		//delete existing event
 		$scope.delete = function() {
+			angular.copy($scope.formEvent, $scope.event);
 			$scope.pinwheel.fullCalendar('removeEvents',$scope.event.id);
 			$scope.event.$delete({id:$scope.event.id, version:$scope.event.version});
 			$scope.cancel();
@@ -199,5 +208,13 @@ angular.module('pinwheelApp')
 				$scope.formEvent.start = new Date($filter('date')(s, format)); //get date object set to current hour
 				$scope.formEvent.event_end = new Date($filter('date')(e, format)); //get date object set to current hour + 1
 			}
+		}
+		$scope.previous = function(){
+			$scope.pinwheel.fullCalendar('prev');
+   			$scope.routeDate = $scope.pinwheel.fullCalendar('getDate');
+		}
+		$scope.next = function(){
+			$scope.pinwheel.fullCalendar('next');
+			$scope.routeDate = $scope.pinwheel.fullCalendar('getDate');
 		}
   });

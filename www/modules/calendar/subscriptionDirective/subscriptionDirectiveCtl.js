@@ -12,6 +12,7 @@ angular.module('pinwheelApp')
 		}
 		//open existing calendar for editing
 		$scope.edit = function() {
+			delete $scope.calendar.events;
 			$scope.editCalendar || ($scope.editCalendar = {});
 			angular.copy($scope.calendar, $scope.editCalendar);
 			$scope.editingCalendar = true;
@@ -27,6 +28,7 @@ angular.module('pinwheelApp')
 					color: $scope.calendar.color,
 					reminder: ReminderService.getCalendarReminderProperties($scope.calendar)
 				});
+				$("#monthCalendar").fullCalendar('refetchEvents');
 				$scope.cancel();
 			});
 		}
@@ -61,6 +63,7 @@ angular.module('pinwheelApp')
 			$scope.calendar.viewing = $scope.watcher[$scope.calendar.calendar_id].viewing;
 			$scope.calendar.$update({id: $scope.calendar.calendar_id}, function(calendar) {
 				$scope.calendar = calendar;
+				$("#monthCalendar").fullCalendar("refetchEvents");
 			});
 		}
 		$scope.isCalendarAdmin = function(calendar){

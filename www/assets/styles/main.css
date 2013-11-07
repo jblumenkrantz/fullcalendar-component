@@ -372,3 +372,13 @@ form input.ng-invalid {
 	-moz-box-shadow: 0 0 5px #FA787E !important;
 	box-shadow: 0 0 5px #FA787E !important;
 }
+
+/* disable text selection */
+#content-header {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}

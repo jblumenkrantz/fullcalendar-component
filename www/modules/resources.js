@@ -145,7 +145,7 @@ angular.module('pinwheelApp')
 	.factory('Reminder', function($resource){
 		return $resource('/api/v1/reminder/:id', {}, {update: {method:'PUT'}});
 	})
-	.factory('Calendar', function($resource, ReminderService){
+	.factory('Calendar', function($resource, ReminderService, Event){
 		return $resource('/api/v1/calendar/:id/:version', {},
 			{
 				save: {
@@ -166,11 +166,17 @@ angular.module('pinwheelApp')
 					isArray: false,
 					transformRequest: function(data) {
 						(data.has_reminder && ReminderService.setReminderData(data, "calendar"));
+						delete data.events
 						return angular.toJson(data);
 					},
 					transformResponse: function(data) {
 						data = angular.fromJson(data);
 						(data.reminder_pref_id != null && ReminderService.setReminderProperties(data));
+						if(!data.viewing){
+							data.eventStore=data.events;
+							delete data.events
+							
+						}
 						return data;
 					}
 				},
@@ -181,6 +187,13 @@ angular.module('pinwheelApp')
 						var calendars = angular.fromJson(data);
 						angular.forEach(calendars, function(calendar, k) {
 							(calendars[k].reminder_pref_id != null && ReminderService.setReminderProperties(calendars[k]));
+							if(!calendars[k].viewing){
+								calendars[k].eventStore=calendars[k].events;
+								delete calendars[k].events
+							}
+							/*angular.forEach(calendar.events, function(e, i){
+								calendar.events[i] = new Event(e);
+							});*/
 						});
 						return calendars;
 					}

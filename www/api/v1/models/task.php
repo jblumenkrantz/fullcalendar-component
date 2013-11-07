@@ -196,6 +196,15 @@ class Task extends PinwheelModelObject
 				$where_query", $pinsqli);
 	}
 
+	static public function getUserTasksForCalendar($userId, $calendarId, $pinsqli=NULL) {
+		$tasks =  array();
+
+		$tasks = Task::getBatch(array("tasks.active = true","tasks.calendar_id='{$calendarId}'","(tasks.creator_id='$userId' OR tasks.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendarId}'))"));
+		return($tasks);
+	}
+	
+
+
 	static public function loadByQuery($query, $pinsqli=NULL){
 		$pinsqli = $pinsqli === NULL? DistributedMySQLConnection:: readInstance(): $pinsqli;
 		$resulti = $pinsqli->query($query);

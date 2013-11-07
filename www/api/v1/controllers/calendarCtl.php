@@ -58,6 +58,9 @@ class CalendarCtl
 			}else{
 				$calendar->public = false;
 			}
+
+			$calendar->events = Event::getUserEventsForCalendar($authUserID, $calendar->calendar_id);
+			$calendar->events = array_merge($calendar->events, Task::getUserTasksForCalendar($authUserID, $calendar->calendar_id)); 
 			
 			if(property_exists($calendar, 'adhoc_events') && !$calendar->adhoc_events){
 				unset($calendar->adhoc_events);
@@ -165,6 +168,7 @@ class CalendarCtl
 					$calendar->subscribed = true;
 					$calendar->viewing = ($colorResult[0]->view_setting)? true:false;
 				}
+				$calendar->events = Event::getUserEventsForCalendar($authUserID, $calendar->calendar_id);
 				echo json_encode($calendar);
 				
 			} catch (CalendarDataConflictException $e) {

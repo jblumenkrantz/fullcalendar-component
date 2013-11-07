@@ -37,7 +37,7 @@ angular.module('pinwheelApp')
 			$location.path("/calendar/"+$routeParams.year+"/"+$routeParams.month+"/"+$routeParams.day);
 			$timeout(function(){$('#monthCalendar').fullCalendar('render')});
 		}
-		$scope.previous = function(){
+/*		$scope.previous = function(){
 			$('#monthCalendar').fullCalendar('prev');
    			$scope.routeDate = $('#monthCalendar').fullCalendar('getDate');
 			//$scope.moveMonths(-1);
@@ -46,7 +46,7 @@ angular.module('pinwheelApp')
 			$('#monthCalendar').fullCalendar('next');
 			$scope.routeDate = $('#monthCalendar').fullCalendar('getDate');
 			//$scope.moveMonths(1);
-		}
+		}*/
   });
 
 

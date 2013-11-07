@@ -33,7 +33,7 @@
 	</div>
 	<!-- / task entry form -->
 
-	<div ng-repeat="task in events | filter: isTask | filter: isCalendarShowing">
+	<div ng-repeat="task in visibleCalendarTasks() | filter:isTask">
 		<view-task
 			task="task"
 			calendars="calendars"

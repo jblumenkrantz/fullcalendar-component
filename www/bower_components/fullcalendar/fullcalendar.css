@@ -316,11 +316,12 @@ a.fc-event,
 .fc-event-hori {
 	border-width: 1px 0;
 	margin-bottom: 1px;
+	padding-left: 3px; /* Added By Deac */
 	}
 
 .fc-ltr .fc-event-hori.fc-event-start,
 .fc-rtl .fc-event-hori.fc-event-end {
-	border-left-width: 1px;
+	border-left-width: 10px;  /* increased to 10 by Deac */
 	border-top-left-radius: 3px;
 	border-bottom-left-radius: 3px;
 	}
@@ -533,6 +534,7 @@ table.fc-border-separate {
 
 .fc-event-vert {
 	border-width: 0 1px;
+	border-left-width:10px;
 	}
 
 .fc-event-vert.fc-event-start {

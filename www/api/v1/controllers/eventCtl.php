@@ -132,7 +132,6 @@ class EventCtl
 				if ($evprop->has_reminder && $evprop->reminder_pref_id != null && !$evprop->using_calendar_reminder) {
 					$evprop->user_id = Authorize:: sharedInstance()->userID();
 					$evprop->version = $evprop->reminder_pref_version;
-					$evprop->event_id = $evprop->id;
 					$rpref = new ReminderPrefs($evprop);
 					$rpref->update($pinsqli);
 				}
@@ -142,18 +141,19 @@ class EventCtl
 					$evprop->user_id = Authorize:: sharedInstance()->userID();
 					ReminderPrefs:: create($evprop, $pinsqli);
 				}
+				
+				error_log("---------------------------------------------------------------");
+				error_log($evprop->using_calendar_reminder);
 
 				//updated event is removing it's reminder
 				if (!$evprop->has_reminder && $evprop->reminder_pref_id != null && !$evprop->using_calendar_reminder) {
+					error_log("IFFFF");
 					$evprop->version = $evprop->reminder_pref_version;
 					$rpref = new ReminderPrefs($evprop);
 					$rpref->delete($pinsqli);
 				}
 				
 				$event->update($pinsqli);
-
-				$event->active = (bool)($event->active);
-				$event->allDay = (bool)($event->allDay);
 			
 				echo json_encode($event);
 			} catch (EventDataConflictException $e) {

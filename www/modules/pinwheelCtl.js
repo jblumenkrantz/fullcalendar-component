@@ -16,9 +16,20 @@ angular.module('pinwheelApp')
 		}
 
 		$scope.isTask = function(item){
-			return item.id
+			return item.hasOwnProperty("task_notes");
 		}
 
+		$scope.visibleCalendarTasks = function(){
+			var ray = [];
+			angular.forEach($scope.calendars, function(cal){
+				if(cal.events){
+					ray = ray.concat(cal.events)
+				}
+			});
+			return ray
+		}
+
+		$scope.calendars = $scope.calendars || [];
 		$scope.events = $scope.events || [];
 		$scope.tasks  = $scope.tasks || [];
 		$scope.init = function(){
@@ -36,14 +47,14 @@ angular.module('pinwheelApp')
 				Calendar.query({id: 'all'}, function(calendars){
 					$scope.loading_calendars = false;
 					$scope.calendars = calendars;			
-					Event.query({id: 'all'}, function(events){
+					/*Event.query({id: 'all'}, function(events){
 						$scope.loading_events = false;
 						$scope.events = events;
 						Task.query({id: 'all'}, function(tasks){
 							$scope.loading_tasks = false;
 							$scope.tasks = tasks;
 						});
-					});
+					});*/
 				});
 			}, function(error){
 				// TODO: update this and other requests
@@ -92,7 +103,7 @@ angular.module('pinwheelApp')
 
 		$scope.logout = function(){
 			/* Delete protected data */
-			delete $scope.calendars;
+			$scope.calendars = [];
 			delete $scope.user
 			delete $scope.initialUser;
 			delete $scope.contactPoints;

@@ -955,6 +955,11 @@ function EventManager(options, _sources) {
 	
 	function fetchEventSource(source, fetchID) {
 		_fetchEventSource(source, function(events) {
+
+			if(source.events){
+				//delete source.events
+			}
+
 			if (fetchID == currentFetchID) {
 				if (events) {
 
@@ -1008,6 +1013,9 @@ function EventManager(options, _sources) {
 				});
 			}
 			else if ($.isArray(events)) {
+				$.each(events, function(i, e){
+					//delete e.source
+				});
 				callback(events);
 			}
 			else {
@@ -1118,6 +1126,7 @@ function EventManager(options, _sources) {
 	
 	
 	function updateEvent(event) { // update an existing event
+		console.warn('updated');
 		var i, len = cache.length, e,
 			defaultEventEnd = getView().defaultEventEnd, // getView???
 			startDelta = event.start - event._start,
@@ -4074,7 +4083,7 @@ function AgendaEventRenderer() {
 										)
 									);
 									eventElement.draggable('option', 'grid', [colWidth, 1]);
-									allDay = "false";
+									allDay = false;
 								}
 							}else{
 								revert = true;

@@ -5,7 +5,7 @@ angular.module('pinwheelApp')
 		return {
 			restrict: 'E',
 			templateUrl: 'modules/calendar/calendar_views/fullcalendarDirective/_fullcalendar_view.html',
-			controller: function($scope, $filter, $element, $attrs, $routeParams){
+			controller: function($scope, $filter, $element, $attrs, $routeParams, Event){
 				$scope.thisMonthsEvents = function(item) {
 					var startOfMonth = new Date($routeParams.month+'-01-'+$routeParams.year).getTime()/1000;
 					var endOfMonth = new Date($routeParams.month*1+1+'-01-'+$routeParams.year).getTime()/1000;
@@ -21,14 +21,9 @@ angular.module('pinwheelApp')
 					//console.warn([windowHeight,mainHeaderHeight,contentHeadHeight,fcHeaderHeight]);
 					return height;
 				}
+				
 				$scope.eventSources = function(){
-					/*ret = array()
-					angular.forEach(each calendar){
-						ret.push($filter($scope.events)(calendar_id))
-						$filter('date')(modelValue, formDatetimeFormat);
-					}
-					return ret*/
-					return [$scope.events, $scope.tasks]
+					return $scope.calendars
 				}
 				$scope.calendarOptions = {
 					editable: true,
@@ -47,30 +42,21 @@ angular.module('pinwheelApp')
 						 console.warn('fullCalendar render');
 					},
 					eventClick: function(calEvent, jsEvent, view) {
-						delete calEvent.source;
 						$scope.edit(calEvent);
 						$scope.$apply();
 					},
 					eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc) {
-						//source has to be pulled out for the resource to properly update.  it sucks and is what is causing a flashing when the event is updated
-						console.warn([event, dayDelta, minuteDelta, allDay, revertFunc]);
-						var bak = event.source;
-						delete event.source;
-						event.$update({id: event.id}, function(updatedEvent) {
-							updatedEvent.source = bak;
-							$scope.event = updatedEvent;
-							$scope.pinwheel.fullCalendar('updateEvent',updatedEvent);
-						});
-						if (allDay) {
-							alert("Event is now all-day");
-						}else{
-							alert("Event has a time-of-day");
-						}
-
-						if (!confirm("Are you sure about this change?")) {
-							revertFunc();
-						}
+						$scope.edit(event,false);
+						$scope.update();
 						$scope.$apply();
+						/*$scope.bak = event.source;
+						delete event.source;
+						var saveEvent = new Event(event);
+						saveEvent.$update({id: event.id}, function(updatedEvent) {
+							event.source = $scope.bak;
+							event.version = updatedEvent.version;
+						});
+						$scope.$apply();*/
 					},
 					dayClick: function(date, allDay, jsEvent, view) {
 						console.warn([date, allDay, jsEvent, view]);
