@@ -32,14 +32,6 @@ angular.module('pinwheelApp')
 
 		//open form for editing of existing event
 		$scope.edit = function(event, dialog) {
-
-			/*
-			$scope.bak = event.source;
-			delete event.source;
-			$scope.event = event;	//store the original event object*/
-
-
-
 			$scope.formEvent = new Event(event);
 			$scope.useReminderType = ($scope.formEvent.allDay=='1') ? 'absolute' : 'relative';
 			(!$scope.formEvent.has_reminder && $scope.checkCalendarReminder());
