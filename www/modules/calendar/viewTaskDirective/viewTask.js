@@ -23,8 +23,8 @@ angular.module('pinwheelApp')
 			$scope.edit = function() {
 				$scope.taskSource = $scope.task.source;
 				delete $scope.task.source;
-				$scope.editTask || ($scope.editTask = {});
 				$scope.editTask = new Task($scope.task);
+				//$scope.editTask || ($scope.editTask = {});
 				$scope.useReminderType = ($scope.editTask.has_due_date) ? 'relative' : '';
 
 				//apply calendar reminder if task doesn't have one already AND has a due date
@@ -40,8 +40,9 @@ angular.module('pinwheelApp')
 			$scope.update = function() {
 				angular.copy($scope.editTask, $scope.task);
 				$scope.task.$update({id: $scope.task.id}, function(task){
-					$scope.task = task;
 					$scope.task.source = $scope.taskSource;
+					$scope.task.version = task.version;
+					$("#monthCalendar").fullCalendar('updateEvent', $scope.task);
 					delete $scope.taskSource;
 					$scope.cancel();
 				});
