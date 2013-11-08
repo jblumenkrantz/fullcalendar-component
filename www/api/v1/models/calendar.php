@@ -139,7 +139,7 @@ class Calendar extends PinwheelModelObject
 					IF(calendar_admins.calendar_id is not null, TRUE, FALSE) as calendar_admin
 				FROM calendars
 				LEFT OUTER JOIN reminder_prefs
-				ON calendars.calendar_id = reminder_prefs.calendar_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$authUserID' AND reminder_prefs.id = '' AND reminder_prefs.id = ''
+				ON calendars.calendar_id = reminder_prefs.calendar_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$authUserID' AND reminder_prefs.event_id = '' AND reminder_prefs.task_id = ''
 				LEFT OUTER JOIN calendar_subs
 				ON calendar_subs.calendar_id = calendars.calendar_id AND calendar_subs.user_id = '$authUserID'
 				LEFT OUTER JOIN public_calendars
