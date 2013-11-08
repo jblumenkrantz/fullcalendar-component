@@ -18,7 +18,7 @@ angular.module('pinwheelApp')
 				scope.summaryStyle.visible = true;
 				scope.summaryStyle.style = getStyle(clickEvent);
 
-				//scope event work
+				//event prep
 				scope.bak = event.source;
 				delete event.source;			
 				scope.event = event;

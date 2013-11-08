@@ -30,6 +30,14 @@ angular.module('pinwheelApp')
 			$scope.quickAdding = false;
 		}
 
+		/*
+		$scope.editPrep = function() {
+			//scope event work
+			$scope.bak = event.source;
+			delete event.source;			
+			$scope.event = event;
+		}*/
+
 		//open form for editing of existing event
 		$scope.edit = function(event, dialog) {
 			$scope.formEvent = new Event(event);
