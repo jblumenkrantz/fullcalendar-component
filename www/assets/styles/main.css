@@ -377,7 +377,7 @@ form input.ng-invalid {
 }
 
 /* disable text selection */
-#content-header {
+#content-header, .calendar-index, .pane-header {
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
