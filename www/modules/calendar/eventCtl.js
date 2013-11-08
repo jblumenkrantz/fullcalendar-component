@@ -73,10 +73,9 @@ angular.module('pinwheelApp')
 		}
 
 		//delete existing event
-		$scope.delete = function() {
-			angular.copy($scope.formEvent, $scope.event);
-			$scope.pinwheel.fullCalendar('removeEvents',$scope.event.id);
-			$scope.event.$delete({id:$scope.event.id, version:$scope.event.version});
+		$scope.delete = function(event) {
+			$scope.pinwheel.fullCalendar('removeEvents',event.id);
+			event.$delete({id:event.id, version:event.version});
 			$scope.cancel();
 		}
 
