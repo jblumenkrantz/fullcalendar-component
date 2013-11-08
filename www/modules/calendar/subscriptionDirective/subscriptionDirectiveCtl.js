@@ -35,10 +35,11 @@ angular.module('pinwheelApp')
 
 		//subscribe to a calendar
 		$scope.subscribe = function() {
+			$scope.calendar.viewing=true;
 			$scope.calendar.$update({id: "subscribe"}, function(calendar) {
 				$scope.calendar = calendar;
 				$scope.calendar.recent = true;
-				$scope.calendar.viewing = true;
+				$("#monthCalendar").fullCalendar('refetchEvents');
 			});
 		}	
 
@@ -50,6 +51,7 @@ angular.module('pinwheelApp')
 				$scope.calendar.viewing = false;
 				delete $scope.watcher[$scope.calendar.calendar_id];
 				$scope.cancel();
+				$("#monthCalendar").fullCalendar('refetchEvents');
 			});
 		}
 

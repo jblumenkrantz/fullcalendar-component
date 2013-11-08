@@ -191,9 +191,6 @@ angular.module('pinwheelApp')
 								calendars[k].eventStore=calendars[k].events;
 								delete calendars[k].events
 							}
-							/*angular.forEach(calendar.events, function(e, i){
-								calendar.events[i] = new Event(e);
-							});*/
 						});
 						return calendars;
 					}
