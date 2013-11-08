@@ -163,7 +163,7 @@
 					</button>
 				</li>
 				<li>
-					<button ng-show="editingEvent" class="button radius" ng-click="delete()">
+					<button ng-show="editingEvent" class="button radius" ng-click="delete(formEvent)">
 						<span aria-hidden="true" class="icon-remove-2"> Delete</span>
 					</button>
 					<button ng-disabled="eventForm.$invalid" ng-show="addingEvent" class="button radius" ng-click="save(true)">

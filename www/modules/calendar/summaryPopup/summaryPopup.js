@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pinwheelApp')
-.directive('summaryPopup', function($timeout) {
+.directive('summaryPopup', function($timeout, Event) {
 	return {
 		restrict: "E",
 		replace: true,
@@ -17,6 +17,7 @@ angular.module('pinwheelApp')
 				scope.summaryStyle.visible = true;
 				scope.summaryStyle.style = getStyle(clickEvent);
 				angular.extend(scope.summaryData, resource);
+				delete scope.summaryData.source;
 			}
 
 			//expand summary info
@@ -31,7 +32,7 @@ angular.module('pinwheelApp')
 
 			//reset summary to empty object
 			scope.resetSummary = function() {
-				scope.summaryData = {};
+				scope.summaryData = new Event();
 				scope.summaryStyle = {};
 			}
 
