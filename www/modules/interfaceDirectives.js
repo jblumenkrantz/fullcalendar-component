@@ -2,7 +2,7 @@
 
 angular.module('pinwheelApp')
 .value("getHeight", function(element) {
-	return $(window).height() - $("#mainHeader").height() - element.siblings(".scroll-header").height() + "px";
+	return $(window).height() - $("#mainHeader").outerHeight() - element.siblings(".scroll-header").outerHeight() + "px";
 })
 .value("dateDisplayFormat", "M/d/yyyy")
 .value("timeDisplayFormat", "h:mm a")
