@@ -374,7 +374,7 @@ class Task extends PinwheelModelObject
 			$resulti = $pinsqli->query(
 				"DELETE FROM tasks_complete
 					WHERE user_id = '$authUserID'
-					AND id = '{$properties['id']}'
+					AND task_id = '{$properties['id']}'
 				"
 			);
 			if ($pinsqli->errno)

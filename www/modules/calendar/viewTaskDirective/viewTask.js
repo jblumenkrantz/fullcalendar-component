@@ -17,18 +17,18 @@ angular.module('pinwheelApp')
 			usingOwnReminder: '=',
 			noReminder: "="
 		},
-		controller: function($scope, $element, $attrs, $routeParams){
+		controller: function($scope, $element, $attrs, $routeParams, Task){
 			$scope.task.has_due_date = $scope.task.hasOwnProperty("start");
 			$scope.useReminderType = '';
 			$scope.edit = function() {
+				$scope.taskSource = $scope.task.source;
+				delete $scope.task.source;
 				$scope.editTask || ($scope.editTask = {});
-				angular.copy($scope.task, $scope.editTask);
+				$scope.editTask = new Task($scope.task);
 				$scope.useReminderType = ($scope.editTask.has_due_date) ? 'relative' : '';
 
 				//apply calendar reminder if task doesn't have one already AND has a due date
-				(!$scope.editTask.has_reminder &&
-				$scope.editTask.has_due_date &&
-				$scope.checkCalendarReminder());
+				//(!$scope.editTask.has_reminder && $scope.editTask.has_due_date && $scope.checkCalendarReminder());
 
 				$scope.editingTask = true;
 			}
@@ -41,6 +41,8 @@ angular.module('pinwheelApp')
 				angular.copy($scope.editTask, $scope.task);
 				$scope.task.$update({id: $scope.task.id}, function(task){
 					$scope.task = task;
+					$scope.task.source = $scope.taskSource;
+					delete $scope.taskSource;
 					$scope.cancel();
 				});
 			}
