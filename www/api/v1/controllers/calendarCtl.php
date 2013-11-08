@@ -208,6 +208,8 @@ class CalendarCtl
 		$subscription->subscribed = true;
 
 		$subscribed = Calendar::subscribe($subscription, $authUserID);														
+		$subscribed->events = Event::getUserEventsForCalendar($authUserID, $subscribed->calendar_id);
+		$subscribed->events = array_merge($subscribed->events, Task::getUserTasksForCalendar($authUserID, $subscribed->calendar_id)); 
 		User:: incrementVersion($authUserID);
 		echo json_encode($subscribed);	
 	}
