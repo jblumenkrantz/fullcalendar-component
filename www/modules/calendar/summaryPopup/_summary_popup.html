@@ -5,12 +5,12 @@
 	<div class='close' ng-click='resetSummary()'>
 		<span class='icon-x-altx-alt' aria-hidden='true'></span>
 	</div> 
-	<div>{{summaryData.title}}</div>
+	<div>{{event.title}}</div>
 
 	<div ng-show="summaryStyle.expand">
-		{{summaryData.start | date}}<br />
-		{{summaryData.end | date}}<br />
-		{{summaryData.description}}
+		{{event.start | date}}<br />
+		{{event.end | date}}<br />
+		{{event.description}}
 	</div> 
 
 	<div class='row'> 
@@ -30,12 +30,12 @@
 					</button> 
 				</li> 
 				<li> 
-					<button class='button radius' ng-click='delete(summaryData); resetSummary();'> 
+					<button class='button radius' ng-click='summaryDelete(); resetSummary();'> 
 						<span aria-hidden='true' class='icon-remove-2'> Delete</span> 
 					</button> 
 				</li> 
 				<li> 
-					<button class='button radius' ng-click='edit(summaryData); resetSummary();'> 
+					<button class='button radius' ng-click='edit(event); resetSummary();'> 
 						<span aria-hidden='true' class='icon-pencil'> Edit</span> 
 					</button> 
 				</li> 

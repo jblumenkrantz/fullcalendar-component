@@ -12,12 +12,20 @@ angular.module('pinwheelApp')
 			var headerHeight = $("#mainHeader").height();
 			var mainContent = $("#main-content");
 			//open summary and copy resource data
-			scope.openSummary = function(resource, clickEvent) {
+			scope.openSummary = function(event, clickEvent) {
+				//summary popup scope variable work
 				scope.resetSummary();
 				scope.summaryStyle.visible = true;
 				scope.summaryStyle.style = getStyle(clickEvent);
-				angular.extend(scope.summaryData, resource);
-				delete scope.summaryData.source;
+
+				//scope event work
+				scope.bak = event.source;
+				delete event.source;			
+				scope.event = event;
+			}
+
+			scope.summaryDelete = function() {
+				scope.delete(new Event(scope.event));
 			}
 
 			//expand summary info
@@ -32,7 +40,6 @@ angular.module('pinwheelApp')
 
 			//reset summary to empty object
 			scope.resetSummary = function() {
-				scope.summaryData = new Event();
 				scope.summaryStyle = {};
 			}
 
