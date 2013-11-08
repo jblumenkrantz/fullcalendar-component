@@ -58,9 +58,6 @@ angular.module('pinwheelApp')
 						$scope.$apply();
 					},
 					eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc) {
-						$scope.bak = event.source;
-						delete event.source;			
-						$scope.event = event;
 						$scope.edit(event,false);
 						$scope.update();
 						$scope.$apply();

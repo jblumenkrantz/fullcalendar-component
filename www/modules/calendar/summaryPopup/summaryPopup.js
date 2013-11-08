@@ -17,14 +17,11 @@ angular.module('pinwheelApp')
 				scope.resetSummary();
 				scope.summaryStyle.visible = true;
 				scope.summaryStyle.style = getStyle(clickEvent);
-
-				//event prep
-				scope.bak = event.source;
-				delete event.source;			
 				scope.event = event;
 			}
 
 			scope.summaryDelete = function() {
+				delete scope.event.source;
 				scope.delete(new Event(scope.event));
 			}
 
