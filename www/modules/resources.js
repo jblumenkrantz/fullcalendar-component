@@ -158,6 +158,7 @@ angular.module('pinwheelApp')
 					transformResponse: function(data) {
 						data = angular.fromJson(data);
 						(data.reminder_pref_id != null && ReminderService.setReminderProperties(data));
+						data.events = [];
 						return data;
 					}
 				},
