@@ -38,6 +38,7 @@ angular.module('pinwheelApp')
 			$scope.bak = event.source;
 			delete event.source;
 			$scope.event = event;	//store the original event object
+
 			$scope.formEvent = new Event(event);
 			$scope.useReminderType = ($scope.formEvent.allDay=='1') ? 'absolute' : 'relative';
 			(!$scope.formEvent.has_reminder && $scope.checkCalendarReminder());
@@ -76,10 +77,9 @@ angular.module('pinwheelApp')
 		}
 
 		//delete existing event
-		$scope.delete = function() {
-			angular.copy($scope.formEvent, $scope.event);
-			$scope.pinwheel.fullCalendar('removeEvents',$scope.event.id);
-			$scope.event.$delete({id:$scope.event.id, version:$scope.event.version});
+		$scope.delete = function(event) {
+			$scope.pinwheel.fullCalendar('removeEvents',event.id);
+			event.$delete({id:event.id, version:event.version});
 			$scope.cancel();
 		}
 
@@ -89,8 +89,8 @@ angular.module('pinwheelApp')
 				$scope.formEvent = new Event();
 			}
 			else {
+				$scope.event.source = $scope.bak;
 				$scope.reset(true);
-
 			}
 			$scope.addingEvent = continuing;
 			$scope.editingEvent = false;
