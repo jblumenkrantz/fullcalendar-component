@@ -89,7 +89,9 @@ angular.module('pinwheelApp')
 				$scope.formEvent = new Event();
 			}
 			else {
-				$scope.event.source = $scope.bak;
+				if($scope.hasOwnProperty('bak')){
+					$scope.event.source = $scope.bak;
+				}
 				$scope.reset(true);
 			}
 			$scope.addingEvent = continuing;
