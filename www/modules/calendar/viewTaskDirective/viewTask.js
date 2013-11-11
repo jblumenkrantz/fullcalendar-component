@@ -49,7 +49,8 @@ angular.module('pinwheelApp')
 			}
 
 			$scope.delete = function() {
-				$scope.task.$delete({id: $scope.task.id, version: $scope.task.version});
+				$("#monthCalendar").fullCalendar('removeEvents',$scope.task.id);
+				new Task($scope.task).$delete({id: $scope.task.id, version: $scope.task.version});
 				$scope.cancel();
 			}
 

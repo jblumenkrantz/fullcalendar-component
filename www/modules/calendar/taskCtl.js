@@ -27,7 +27,12 @@ angular.module('pinwheelApp')
 		//save new task
 		$scope.save = function() {
 			$scope.newTask.$save({}, function(task) {
-				$scope.events.push(task);
+				$.each($scope.calendars, function(i,cal){
+					if(cal.calendar_id == task.calendar_id){
+						cal.events.push(task);
+						$("#monthCalendar").fullCalendar('refetchEvents');
+					}
+				});
 				$scope.cancel();
 			});
 		}

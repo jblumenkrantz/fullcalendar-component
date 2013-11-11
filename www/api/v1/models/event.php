@@ -199,7 +199,7 @@ class Event extends PinwheelModelObject
 
 		$events = Event::getBatch(array("events.active = true","events.calendar_id='{$calendarId}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendarId}'))"));
 
-		if(property_exists($calendar, 'adhoc_events') && !$calendar->adhoc_events){
+		if(isSet($calendar) && property_exists($calendar, 'adhoc_events') && !$calendar->adhoc_events){
 			unset($calendar->adhoc_events);
 		}
 		foreach($events as $event){
