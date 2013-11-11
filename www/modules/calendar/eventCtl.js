@@ -22,8 +22,11 @@ angular.module('pinwheelApp')
 		$scope.useReminderType = 'relative';
 		
 		//open form for adding of new event
-		$scope.add = function() {
+		$scope.add = function(defaults) {
 			$scope.formEvent.calendar_id = $scope.user.settings.default_calendar;
+			if(defaults){
+				angular.extend($scope.formEvent, defaults);
+			}
 			ReminderService.checkCalendarReminder($scope.formEvent, $scope.calendarWatchers);
 			$scope.addingEvent = true;
 			$scope.editingEvent = false;
