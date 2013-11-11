@@ -71,10 +71,12 @@ angular.module('pinwheelApp')
 						$scope.$apply();*/
 					},
 					dayClick: function(date, allDay, jsEvent, view) {
-						if(+($scope.selected) == +(date)){
+						if($(jsEvent.target).hasClass('fc-day-number')){
 							$scope.pinwheel.fullCalendar('gotoDate', date.getFullYear(), date.getMonth(), date.getDate());
 							$scope.pinwheel.fullCalendar('changeView', 'agendaDay');
 							$scope.$parent.$parent.view = 'day';
+						}else if(+($scope.selected) == +(date)){
+							$scope.add();
 						}else{
 							$scope.selected = date;
 						}
