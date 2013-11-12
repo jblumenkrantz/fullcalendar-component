@@ -61,14 +61,12 @@ angular.module('pinwheelApp')
 
 		//save new event
 		$scope.save = function(continuing) {
-			var cals = $scope.$parent.$parent.calendars;
 			var event = angular.copy($scope.formEvent);
 			$scope.formEvent.$save({}, function(newEvent) {
-				$.each(cals, function(i,cal){
+				$.each($scope.calendars, function(i,cal){
 					if(cal.calendar_id == event.calendar_id){
 						cal.events.push(newEvent);
 						$scope.pinwheel.fullCalendar('refetchEvents');
-						console.warn(newEvent);
 					}
 				});
 				$scope.cancel(continuing);

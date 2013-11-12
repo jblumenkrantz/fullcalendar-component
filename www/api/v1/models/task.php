@@ -171,12 +171,13 @@ class Task extends PinwheelModelObject
 		if($where_array && is_array($where_array) && sizeof($where_array) > 0){
 			$where_query = " WHERE ".implode(' AND ', $where_array);
 		}
+
 		return static:: loadByQuery(
 			"SELECT
 					tasks.id,
 					tasks.calendar_id,
 					title,
-					(select if(count(id) >= 1,1,0) from tasks_complete where tasks_complete.task_id = tasks.id AND tasks_complete.user_id = '$authUserID') as is_complete,
+					(select if(count(task_id) >= 1,1,0) from tasks_complete where tasks_complete.task_id = tasks.id AND tasks_complete.user_id = '$authUserID') as is_complete,
 					UNIX_TIMESTAMP(create_time) as create_time,
 					UNIX_TIMESTAMP(start) as start,
 					creator_id,
@@ -200,6 +201,14 @@ class Task extends PinwheelModelObject
 		$tasks =  array();
 
 		$tasks = Task::getBatch(array("tasks.active = true","tasks.calendar_id='{$calendarId}'","(tasks.creator_id='$userId' OR tasks.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendarId}'))"));
+		foreach($tasks as $i=>$task){
+			if($tasks[$i]->start == "0"){
+				$tasks[$i]->start = "";
+				$tasks[$i]->has_due_date = 0;
+			}else{
+				$tasks[$i]->has_due_date = 1;
+			}
+		}
 		return($tasks);
 	}
 	

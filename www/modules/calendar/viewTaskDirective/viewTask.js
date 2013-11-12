@@ -18,7 +18,6 @@ angular.module('pinwheelApp')
 			noReminder: "="
 		},
 		controller: function($scope, $element, $attrs, $routeParams, Task){
-			$scope.task.has_due_date = $scope.task.hasOwnProperty("start");
 			$scope.useReminderType = '';
 			$scope.edit = function() {
 				$scope.taskSource = $scope.task.source;
@@ -49,7 +48,8 @@ angular.module('pinwheelApp')
 			}
 
 			$scope.delete = function() {
-				$scope.task.$delete({id: $scope.task.id, version: $scope.task.version});
+				$("#monthCalendar").fullCalendar('removeEvents',$scope.task.id);
+				new Task($scope.task).$delete({id: $scope.task.id, version: $scope.task.version});
 				$scope.cancel();
 			}
 
