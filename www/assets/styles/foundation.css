@@ -7455,6 +7455,16 @@ button.disabled, button[disabled], .button.disabled, .button[disabled] {
   .task .body .notes:hover, .task .body .due-date:hover, .task .body .title:hover {
     text-decoration: none;
   }
+
+  /* line 515, ../../scss/foundation.scss */
+  #main-nav:target, #left-nav:target {
+    width: 50%;
+  }
+
+  /* line 518, ../../scss/foundation.scss */
+  #main-nav:target + .page-wrap, #left-nav:target + .page-wrap {
+    width: 50%;
+  }
 }
 /* line 9, ../../scss/_fugly.scss */
 header#content-header [class*="icon-"], .pane-header [class*="icon-"] {
@@ -7542,7 +7552,7 @@ header#content-header ul.small-block-grid-3 li {
   width: auto !important;
 }
 
-/* line 520, ../../scss/foundation.scss */
+/* line 526, ../../scss/foundation.scss */
 #mainHeader {
   overflow: hidden;
   height: 45px;
@@ -7552,33 +7562,33 @@ header#content-header ul.small-block-grid-3 li {
   margin-bottom: 0;
 }
 
-/* line 529, ../../scss/foundation.scss */
+/* line 535, ../../scss/foundation.scss */
 .menubar ul li {
   display: inline;
 }
 
-/* line 533, ../../scss/foundation.scss */
+/* line 539, ../../scss/foundation.scss */
 .menubar ul li [class*="icon-"] {
   color: #777;
   height: 45px;
 }
 
-/* line 537, ../../scss/foundation.scss */
+/* line 543, ../../scss/foundation.scss */
 .menubar ul li [class*="icon-"]:hover {
   color: #555;
 }
 
-/* line 541, ../../scss/foundation.scss */
+/* line 547, ../../scss/foundation.scss */
 .menubar ul li [class*="icon-"]:active {
   color: #23538a;
 }
 
-/* line 545, ../../scss/foundation.scss */
+/* line 551, ../../scss/foundation.scss */
 .menubar ul.left {
   height: 45px;
 }
 
-/* line 550, ../../scss/foundation.scss */
+/* line 556, ../../scss/foundation.scss */
 .menubar ul li a span {
   font-size: 20px;
   height: 45px;
@@ -7587,7 +7597,7 @@ header#content-header ul.small-block-grid-3 li {
   margin: 0 12px;
 }
 
-/* line 558, ../../scss/foundation.scss */
+/* line 564, ../../scss/foundation.scss */
 #main-content, #mainHeader {
   background: #eeeeee;
   /* Old browsers */
@@ -7605,4 +7615,99 @@ header#content-header ul.small-block-grid-3 li {
   /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );
   /* IE6-9 */
+}
+
+/* line 579, ../../scss/foundation.scss */
+.main-header {
+  text-align: center;
+  text-shadow: #222 0px -1px 1px;
+  left: 0;
+  transition: all 0.3s ease;
+}
+
+/* line 589, ../../scss/foundation.scss */
+.page-wrap {
+  float: right;
+  width: 100%;
+  transition: width .7s ease;
+}
+
+/* line 603, ../../scss/foundation.scss */
+.left-nav {
+  position: fixed;
+  top: 0;
+  width: 200px;
+  height: 100%;
+  background: #3B3B3B;
+  overflow-y: auto;
+  transition: width .7s ease;
+  -webkit-box-shadow: inset -3px 0px 3px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: inset -3px 0px 3px 0px rgba(0, 0, 0, 0.2);
+  color: #fff !important;
+  white-space: nowrap;
+}
+/* line 615, ../../scss/foundation.scss */
+.left-nav a {
+  display: block;
+  border-top: 1px solid #484848;
+  border-bottom: 1px solid #2E2E2E;
+  color: white;
+  padding: 0 20px;
+  white-space: nowrap;
+  width: 100%;
+  line-height: 32px;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+/* line 627, ../../scss/foundation.scss */
+F
+.left-nav a:hover, .left-nav a:focus {
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+}
+/* line 630, ../../scss/foundation.scss */
+.left-nav a [class*="icon-"] {
+  text-shadow: 1px 1px 2px #000;
+  font-size: 36px;
+  text-align: center;
+}
+/* line 636, ../../scss/foundation.scss */
+.left-nav:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 34px;
+  background: linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
+}
+/* line 645, ../../scss/foundation.scss */
+.left-nav label {
+  color: #fff;
+}
+/* line 646, ../../scss/foundation.scss */
+.left-nav h4 {
+  margin-left: 20px;
+}
+
+/* line 649, ../../scss/foundation.scss */
+.close-menu {
+  display: none;
+}
+
+/* line 653, ../../scss/foundation.scss */
+#left-nav:target {
+  width: 20%;
+}
+
+/* line 656, ../../scss/foundation.scss */
+#left-nav:target + .page-wrap {
+  width: 80%;
+}
+/* line 658, ../../scss/foundation.scss */
+#left-nav:target + .page-wrap .open-menu {
+  display: none;
+}
+/* line 661, ../../scss/foundation.scss */
+#left-nav:target + .page-wrap .close-menu {
+  display: block;
 }
