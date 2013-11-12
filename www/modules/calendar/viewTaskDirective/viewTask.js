@@ -18,7 +18,6 @@ angular.module('pinwheelApp')
 			noReminder: "="
 		},
 		controller: function($scope, $element, $attrs, $routeParams, Task){
-			$scope.task.has_due_date = $scope.task.hasOwnProperty("start");
 			$scope.useReminderType = '';
 			$scope.edit = function() {
 				$scope.taskSource = $scope.task.source;

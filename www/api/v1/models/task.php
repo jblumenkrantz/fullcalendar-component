@@ -200,8 +200,15 @@ class Task extends PinwheelModelObject
 	static public function getUserTasksForCalendar($userId, $calendarId, $pinsqli=NULL) {
 		$tasks =  array();
 
-		error_log("$calendarId $userId");
 		$tasks = Task::getBatch(array("tasks.active = true","tasks.calendar_id='{$calendarId}'","(tasks.creator_id='$userId' OR tasks.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendarId}'))"));
+		foreach($tasks as $i=>$task){
+			if($tasks[$i]->start == "0"){
+				$tasks[$i]->start = "";
+				$tasks[$i]->has_due_date = 0;
+			}else{
+				$tasks[$i]->has_due_date = 1;
+			}
+		}
 		return($tasks);
 	}
 	
