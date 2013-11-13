@@ -7636,7 +7636,7 @@ header#content-header ul.small-block-grid-3 li {
 .left-nav {
   position: fixed;
   top: 0;
-  width: 200px;
+  width: 0;
   height: 100%;
   background: #3B3B3B;
   overflow-y: auto;
@@ -7655,22 +7655,20 @@ header#content-header ul.small-block-grid-3 li {
   padding: 0 20px;
   white-space: nowrap;
   width: 100%;
-  line-height: 32px;
-  font-size: 16px;
+  font-size: 14px;
   text-transform: uppercase;
 }
-/* line 627, ../../scss/foundation.scss */
-F
+/* line 626, ../../scss/foundation.scss */
 .left-nav a:hover, .left-nav a:focus {
   background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
 }
-/* line 630, ../../scss/foundation.scss */
+/* line 629, ../../scss/foundation.scss */
 .left-nav a [class*="icon-"] {
   text-shadow: 1px 1px 2px #000;
   font-size: 36px;
   text-align: center;
 }
-/* line 636, ../../scss/foundation.scss */
+/* line 635, ../../scss/foundation.scss */
 .left-nav:after {
   content: "";
   position: absolute;
@@ -7680,34 +7678,34 @@ F
   width: 34px;
   background: linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
 }
-/* line 645, ../../scss/foundation.scss */
+/* line 644, ../../scss/foundation.scss */
 .left-nav label {
   color: #fff;
 }
-/* line 646, ../../scss/foundation.scss */
+/* line 645, ../../scss/foundation.scss */
 .left-nav h4 {
   margin-left: 20px;
 }
 
-/* line 649, ../../scss/foundation.scss */
+/* line 652, ../../scss/foundation.scss */
 .close-menu {
   display: none;
 }
 
-/* line 653, ../../scss/foundation.scss */
+/* line 656, ../../scss/foundation.scss */
 #left-nav:target {
   width: 20%;
 }
 
-/* line 656, ../../scss/foundation.scss */
+/* line 659, ../../scss/foundation.scss */
 #left-nav:target + .page-wrap {
   width: 80%;
 }
-/* line 658, ../../scss/foundation.scss */
+/* line 661, ../../scss/foundation.scss */
 #left-nav:target + .page-wrap .open-menu {
   display: none;
 }
-/* line 661, ../../scss/foundation.scss */
+/* line 664, ../../scss/foundation.scss */
 #left-nav:target + .page-wrap .close-menu {
   display: block;
 }

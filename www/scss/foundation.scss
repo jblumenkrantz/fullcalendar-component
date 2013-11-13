@@ -603,7 +603,7 @@ and (max-device-width : 1024px) {
 .left-nav {
   position: fixed;
   top: 0;
-  width: 200px;
+  width: 0;
   height: 100%;
   background: #3B3B3B;
   overflow-y: auto;
@@ -621,9 +621,8 @@ and (max-device-width : 1024px) {
     padding: 0 20px;
     white-space: nowrap;
     width: 100%;
-    line-height: 32px;
-    font-size: 16px;
-    text-transform: uppercase;F
+    font-size: 14px;
+    text-transform: uppercase;
     &:hover, &:focus {
       background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.2));
     }
@@ -644,6 +643,10 @@ and (max-device-width : 1024px) {
   }
   label {color:#fff;}
   h4 {margin-left: 20px;}
+}
+
+.content {
+
 }
 
 .close-menu {
