@@ -13,12 +13,25 @@
 	</select>
 	<!-- NOTES -->
 	<textarea ng-model="task.task_notes" placeholder="Add a note"></textarea>
-	<!-- DUE DATE CHECKBOX -->
+	<!-- HAS A DUE DATE CHECKBOX -->
 	<label class="checkbox" ng-class="{'on-date':task.has_due_date}">
 		<input type="checkbox" ng-model="task.has_due_date" ng-change="dueDateToggle(task);" />
 		Has a due date
 	</label>
-	<datetime ng-required="task.has_due_date" ng-show="task.has_due_date" ng-model="task.start" placeholder="m/d/yyyy h:mm AM/PM" />
+	<!-- DUE DATE -->
+	<div class="calendar-picker-container nolabel">
+		<datetime
+			ng-required="task.has_due_date"
+			ng-show="task.has_due_date"
+			ng-model="task.start"
+			placeholder="m/d/yyyy h:mm AM/PM"
+			date-format="MM/d/yyyy"
+			time-format="h:mm a"
+			divider="@"
+			dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y @ h:M a'}"
+			jqui-opts="{dateFormat: 'm/d/yy'}"
+		/>
+	</div>
 	<!-- REMINDER CHECKBOX -->
 	<label class="checkbox" ng-class="{'on-date':task.has_reminder}">
 		<input type="checkbox" ng-model="task.has_reminder" ng-click="reminderToggle(task)" />
@@ -48,12 +61,19 @@
 				ng-change="usingOwnReminder(task)">
 			</select>
 			<!-- Absolute Reminder Datetime -->
-			<datetime
-				ng-model="task.reminder_datetime"
-				placeholder="m/d/yyyy h:mm AM/PM"
-				ng-show="typeIsThree = task.reminder_type == 3"
-				ng-required="typeIsThree"
-			/>
+			<div class="calendar-picker-container nolabel">
+				<datetime
+					ng-model="task.reminder_datetime"
+					placeholder="m/d/yyyy h:mm AM/PM"
+					ng-show="typeIsThree = task.reminder_type == 3"
+					ng-required="typeIsThree"
+					date-format="MM/d/yyyy"
+					time-format="h:mm a"
+					divider="@"
+					dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y @ h:M a'}"
+					jqui-opts="{dateFormat: 'm/d/yy'}"
+				/>
+			</div>
 		</div>
 
 		<div style="clear: both;"></div>
