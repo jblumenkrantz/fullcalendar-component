@@ -52,14 +52,15 @@ angular.module('pinwheelApp')
 		}
 	}		
 })
-.directive('datetime', function($filter, dateDisplayFormat, timeDisplayFormat, dateFormat, timeFormat, DeviceService) {
+.directive('datetime', function($filter, dateFormat, timeFormat, DeviceService) {
 	return {
 		restrict: "E",
 		require: "ngModel",
 		template: (DeviceService.isTouch) ? "<input type='datetime-local' />" : "<input type='text' />",
 		replace: true,
 		link: function(scope, element, attrs, ngModelCtrl) {
-			var format = (DeviceService.isTouch) ? dateFormat+"T"+timeFormat : dateDisplayFormat+" @ "+timeDisplayFormat;
+			var divider = attrs.divider ? " "+ attrs.divider +" " : "";
+			var format = (DeviceService.isTouch) ? dateFormat+"T"+timeFormat : attrs.dateFormat + divider + attrs.timeFormat;
 
 			function display(modelValue) {
 				return $filter('date')(modelValue, format);
@@ -73,26 +74,51 @@ angular.module('pinwheelApp')
 			ngModelCtrl.$formatters.push(display);
 			ngModelCtrl.$parsers.push(save);
 
+			//apply plugins if NOT touch device
 			if (!DeviceService.isTouch) {
-				element.datetimeEntry({
-					spinnerImage: '',
-					datetimeFormat: 'o/d/Y @ h:M a'
-				}).change(function() {
-					ngModelCtrl.$setViewValue($(this).val());
-					scope.$apply();
+				//configure jquery-ui datepicker plugin
+				var datePickerOpts = angular.extend({
+					nextText: "",
+					prevText: "",
+					showOn: 'both',
+					buttonImage: 'assets/images/icon-calendar-2.png',
+					onSelect: function(value, inst) {
+						var time = inst.lastVal.substr(inst.lastVal.indexOf(attrs.divider)+1);
+						$(this).val(value+" "+attrs.divider+time).change();
+					},
+					onChangeMonthYear: function(year, month, inst) {
+						var time = inst.lastVal.substr(inst.lastVal.indexOf(attrs.divider)+1);
+						var val = month+"/"+inst.selectedDay+"/"+year+" "+attrs.divider+time;
+						$(this).val(val).change();
+					}
+				}, scope.$eval(attrs.jquiOpts));
+				element.datepicker(datePickerOpts);
+
+				//configure datetimeEntry plugin
+				var datetimeEntryOpts = angular.extend({},scope.$eval(attrs.dteOpts));
+				element.datetimeEntry(datetimeEntryOpts);
+
+				//bind change event to update model
+				element.change(function() {
+					scope.$apply(ngModelCtrl.$setViewValue($(this).val()));
+				});
+
+				//toggle picker button when element is hidden
+				scope.$watch(attrs.ngShow, function(isVisible) {
+					element.next(".ui-datepicker-trigger").toggle(isVisible);
 				});
 			}
 		}
 	}
 })
-.directive('date', function($filter, dateDisplayFormat, dateFormat, DeviceService) {
+.directive('date', function($filter, dateFormat, DeviceService) {
 	return {
 		restrict: "E",
 		require: "ngModel",
 		template: (DeviceService.isTouch) ? "<input type='date' />" : "<input type='text' />",
 		replace: true,
 		link: function(scope, element, attrs, ngModelCtrl) {
-			var format = (DeviceService.isTouch) ? dateFormat : dateDisplayFormat;
+			var format = (DeviceService.isTouch) ? dateFormat : attrs.dateFormat;
 			function display(modelValue) {
 				return $filter('date')(modelValue, format);
 			}
@@ -104,13 +130,36 @@ angular.module('pinwheelApp')
 			ngModelCtrl.$formatters.push(display);
 			ngModelCtrl.$parsers.push(save);
 
+			//apply plugins if NOT touch device
 			if (!DeviceService.isTouch) {
-				element.datetimeEntry({
-					spinnerImage: '',
-					datetimeFormat: 'o/d/Y'
-				}).change(function() {
-					ngModelCtrl.$setViewValue($(this).val());
-					scope.$apply();
+				//configure jquery-ui datepicker plugin
+				var datePickerOpts = angular.extend({
+					nextText: "",
+					prevText: "",
+					showOn: 'both',
+					buttonImage: 'assets/images/icon-calendar-2.png',
+					onSelect: function(value, inst) {
+						$(this).val(value).change();
+					},
+					onChangeMonthYear: function(year, month, inst) {
+						var val = month+"/"+inst.selectedDay+"/"+year;
+						$(this).val(val).change();
+					}
+				}, scope.$eval(attrs.jquiOpts));
+				element.datepicker(datePickerOpts);
+
+				//configure KW's datetimeEntry plugin
+				var datetimeEntryOpts = angular.extend({},scope.$eval(attrs.dteOpts));
+				element.datetimeEntry(datetimeEntryOpts);
+
+				//bind change event to update model
+				element.change(function() {
+					scope.$apply(ngModelCtrl.$setViewValue($(this).val()));
+				});
+
+				//toggle picker button when element is hidden
+				scope.$watch(attrs.ngShow, function(isVisible) {
+					element.next(".ui-datepicker-trigger").toggle(isVisible);
 				});
 			}
 		}
@@ -149,8 +198,7 @@ Use db='true' if the ng-model is directly saved in the database as a TIME type.
 					spinnerImage: '',
 					datetimeFormat: 'h:M a'
 				}).change(function() {
-					ngModelCtrl.$setViewValue($(this).val());
-					scope.$apply();
+					scope.$apply(ngModelCtrl.$setViewValue($(this).val()));
 				});
 			}
 		}

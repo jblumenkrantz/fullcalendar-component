@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* line 264, ../../bower_components/foundation/scss/foundation/components/_global.scss */
 *,
 *:before,
@@ -7051,7 +7052,7 @@ header#content-header [class*="icon-"] {
   text-align: center;
   text-transform: uppercase;
   line-height: 20px;
-  border: none !important;
+  border: none!important;
   padding: 10px 0px;
   color: #666;
   font-size: 13px;
@@ -7070,12 +7071,12 @@ header#content-header [class*="icon-"] {
   border: 1px solid #ccc;
   margin-right: 0px;
   margin-bottom: -1px;
-  overflow: visible !important;
+  overflow: visible!important;
 }
 
 /* line 251, ../../scss/foundation.scss */
 .calendar .days:last-child li {
-  margin-bottom: 0px !important;
+  margin-bottom: 0px!important;
 }
 
 /* line 252, ../../scss/foundation.scss */
@@ -7144,9 +7145,14 @@ ul.days, .calendar-day {
   width: 100%;
 }
 
-/* line 265, ../../scss/foundation.scss */
+/* line 263, ../../scss/foundation.scss */
+.calendar-picker-container {
+  position: relative;
+}
+
+/* line 267, ../../scss/foundation.scss */
 .calendar-picker-container button {
-  top: 20px;
+  top: 22px;
   right: 20px;
   position: absolute;
   display: block;
@@ -7159,7 +7165,13 @@ ul.days, .calendar-day {
   cursor: pointer;
 }
 
-/* line 279, ../../scss/foundation.scss */
+/* line 281, ../../scss/foundation.scss */
+.calendar-picker-container.nolabel button {
+  top: 5px;
+  right: 5px;
+}
+
+/* line 286, ../../scss/foundation.scss */
 .icon-calendarPlus {
   top: 6px;
   right: 4px;
@@ -7174,7 +7186,7 @@ ul.days, .calendar-day {
   cursor: pointer;
 }
 
-/* line 293, ../../scss/foundation.scss */
+/* line 300, ../../scss/foundation.scss */
 .icon-backspace:before {
   content: "\e037";
   background: #fff;
@@ -7191,13 +7203,13 @@ ul.days, .calendar-day {
   font-size: 20px;
 }
 
-/* line 311, ../../scss/foundation.scss */
+/* line 318, ../../scss/foundation.scss */
 .subscription-panel, .task-panel {
   border-bottom: 1px solid #999;
   overflow: hidden;
 }
 
-/* line 316, ../../scss/foundation.scss */
+/* line 323, ../../scss/foundation.scss */
 .subscription-gradient, .task-gradient {
   background: #eeeeee;
   /* Old browsers */
@@ -7217,7 +7229,7 @@ ul.days, .calendar-day {
   /* IE6-9 */
 }
 
-/* line 329, ../../scss/foundation.scss */
+/* line 336, ../../scss/foundation.scss */
 .subscription-body, .task-body {
   background: #eeeeee;
   /* Old browsers */
@@ -7237,21 +7249,21 @@ ul.days, .calendar-day {
   /* IE6-9 */
 }
 
-/* line 339, ../../scss/foundation.scss */
+/* line 346, ../../scss/foundation.scss */
 .subscription-body {
   min-height: 50px !important;
   padding: 5px 4px 5px 5px;
   margin-left: 8px;
 }
 
-/* line 345, ../../scss/foundation.scss */
+/* line 352, ../../scss/foundation.scss */
 .task-body {
   min-height: 50px !important;
   padding: 5px 4px 5px 5px;
   margin-left: 8px;
 }
 
-/* line 350, ../../scss/foundation.scss */
+/* line 357, ../../scss/foundation.scss */
 .task-body.add {
   min-height: none;
   background: #eeeeee;
@@ -7274,7 +7286,7 @@ ul.days, .calendar-day {
   margin-left: 8px;
 }
 
-/* line 366, ../../scss/foundation.scss */
+/* line 373, ../../scss/foundation.scss */
 .subscription-calendar-title {
   overflow: hidden;
   white-space: nowrap;
@@ -7287,7 +7299,7 @@ ul.days, .calendar-day {
   padding-top: 12px;
 }
 
-/* line 378, ../../scss/foundation.scss */
+/* line 385, ../../scss/foundation.scss */
 .subscription-panel .subscribed {
   position: absolute;
   top: -8px;
@@ -7308,22 +7320,22 @@ ul.days, .calendar-day {
   font-size: 16px;
 }
 
-/* line 396, ../../scss/foundation.scss */
+/* line 403, ../../scss/foundation.scss */
 .subscription-panel [class*="icon-"], .task-panel [class*="icon-"] {
   color: #999;
 }
 
-/* line 400, ../../scss/foundation.scss */
+/* line 407, ../../scss/foundation.scss */
 .subscription-panel [class*="icon-"]:hover, .task-panel [class*="icon-"]:hover {
   color: #666;
 }
 
-/* line 403, ../../scss/foundation.scss */
+/* line 410, ../../scss/foundation.scss */
 .subscription-panel [class*="icon-"]:active, .task-panel [class*="icon-"]:active {
   color: #23538a;
 }
 
-/* line 407, ../../scss/foundation.scss */
+/* line 414, ../../scss/foundation.scss */
 .close-panel {
   position: relative;
   float: right;
@@ -7331,17 +7343,17 @@ ul.days, .calendar-day {
   font-size: 20px;
 }
 
-/* line 414, ../../scss/foundation.scss */
+/* line 421, ../../scss/foundation.scss */
 .subscription > input[type=text]:first-of-type, .task > input[type=text]:first-of-type {
   width: calc(100% - 23px);
 }
 
-/* line 421, ../../scss/foundation.scss */
+/* line 428, ../../scss/foundation.scss */
 .button-group li {
   padding: 0 5px 0 0;
 }
 
-/* line 429, ../../scss/foundation.scss */
+/* line 436, ../../scss/foundation.scss */
 .top-bar2 .button,
 .button-group li div.button,
 .button-group li button {
@@ -7368,7 +7380,7 @@ ul.days, .calendar-day {
   height: 36px;
 }
 
-/* line 447, ../../scss/foundation.scss */
+/* line 454, ../../scss/foundation.scss */
 .button-group li div.button:hover:enabled,
 .button-group li button:hover:enabled {
   color: #333 !important;
@@ -7391,67 +7403,67 @@ ul.days, .calendar-day {
   margin: 0;
 }
 
-/* line 461, ../../scss/foundation.scss */
+/* line 468, ../../scss/foundation.scss */
 button:focus {
   outline: none;
 }
 
-/* line 465, ../../scss/foundation.scss */
+/* line 472, ../../scss/foundation.scss */
 button.disabled, button[disabled], .button.disabled, .button[disabled] {
   color: grey;
   border-color: #cccccc !important;
 }
 
-/* line 470, ../../scss/foundation.scss */
+/* line 477, ../../scss/foundation.scss */
 .button-group li [class*="icon-"] {
   color: #333;
 }
 
-/* line 474, ../../scss/foundation.scss */
+/* line 481, ../../scss/foundation.scss */
 .button-group li button:disabled [class*="icon-"] {
   color: gray;
 }
 
-/* line 480, ../../scss/foundation.scss */
+/* line 487, ../../scss/foundation.scss */
 .top-bar {
   background: rgba(221, 221, 221, 0.3) repeat !important;
   overflow: visible;
 }
 
-/* line 485, ../../scss/foundation.scss */
+/* line 492, ../../scss/foundation.scss */
 .top-bar-section li a:not(.button) {
   background: none !important;
 }
 
-/* line 490, ../../scss/foundation.scss */
+/* line 497, ../../scss/foundation.scss */
 .tabs dd.active {
   border-top: 0px solid #23538a;
 }
 
-/* line 493, ../../scss/foundation.scss */
+/* line 500, ../../scss/foundation.scss */
 .top-bar-section ul li {
   float: left !important;
 }
 
 /* iPads (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* line 502, ../../scss/foundation.scss */
+  /* line 509, ../../scss/foundation.scss */
   .task .body .title {
     font-size: 12px;
   }
 
-  /* line 505, ../../scss/foundation.scss */
+  /* line 512, ../../scss/foundation.scss */
   .task .body .due-date, .task .body .notes {
     font-size: 9px;
   }
 
-  /* line 508, ../../scss/foundation.scss */
+  /* line 515, ../../scss/foundation.scss */
   .edit-container input, textarea {
     padding: 1px;
     font-size: 9px !important;
   }
 
-  /* line 512, ../../scss/foundation.scss */
+  /* line 519, ../../scss/foundation.scss */
   .task .body .notes:hover, .task .body .due-date:hover, .task .body .title:hover {
     text-decoration: none;
   }
@@ -7552,7 +7564,11 @@ header#content-header ul.small-block-grid-3 li {
   width: auto !important;
 }
 
+<<<<<<< HEAD
 /* line 526, ../../scss/foundation.scss */
+=======
+/* line 527, ../../scss/foundation.scss */
+>>>>>>> picker
 #mainHeader {
   overflow: hidden;
   height: 45px;
@@ -7562,33 +7578,57 @@ header#content-header ul.small-block-grid-3 li {
   margin-bottom: 0;
 }
 
+<<<<<<< HEAD
 /* line 535, ../../scss/foundation.scss */
+=======
+/* line 536, ../../scss/foundation.scss */
+>>>>>>> picker
 .menubar ul li {
   display: inline;
 }
 
+<<<<<<< HEAD
 /* line 539, ../../scss/foundation.scss */
+=======
+/* line 540, ../../scss/foundation.scss */
+>>>>>>> picker
 .menubar ul li [class*="icon-"] {
   color: #777;
   height: 45px;
 }
 
+<<<<<<< HEAD
 /* line 543, ../../scss/foundation.scss */
+=======
+/* line 544, ../../scss/foundation.scss */
+>>>>>>> picker
 .menubar ul li [class*="icon-"]:hover {
   color: #555;
 }
 
+<<<<<<< HEAD
 /* line 547, ../../scss/foundation.scss */
+=======
+/* line 548, ../../scss/foundation.scss */
+>>>>>>> picker
 .menubar ul li [class*="icon-"]:active {
   color: #23538a;
 }
 
+<<<<<<< HEAD
 /* line 551, ../../scss/foundation.scss */
+=======
+/* line 552, ../../scss/foundation.scss */
+>>>>>>> picker
 .menubar ul.left {
   height: 45px;
 }
 
+<<<<<<< HEAD
 /* line 556, ../../scss/foundation.scss */
+=======
+/* line 557, ../../scss/foundation.scss */
+>>>>>>> picker
 .menubar ul li a span {
   font-size: 20px;
   height: 45px;
@@ -7597,7 +7637,11 @@ header#content-header ul.small-block-grid-3 li {
   margin: 0 12px;
 }
 
+<<<<<<< HEAD
 /* line 564, ../../scss/foundation.scss */
+=======
+/* line 565, ../../scss/foundation.scss */
+>>>>>>> picker
 #main-content, #mainHeader {
   background: #eeeeee;
   /* Old browsers */
