@@ -87,12 +87,12 @@ angular.module('pinwheelApp').service('ReminderService', function($filter, Devic
 			angular.extend(resource, calendarWatchers[resource.calendar_id].reminder);
 		},
 		reminderDefaultsEvent: function(resource, user) {
-			resource.reminder_type = (resource.allDay == '1') ? 5 : 1;
-			resource.reminder_offset = (resource.allDay == '1') ? null : 2;
-			resource.reminder_time = (resource.allDay == '1') ? new Date("1970-01-01 "+user.settings.start_of_day) : null;
+			resource.reminder_type = (resource.allDay) ? 5 : 1;
+			resource.reminder_offset = (resource.allDay) ? null : 2;
+			resource.reminder_time = (resource.allDay) ? new Date("1970-01-01 "+user.settings.start_of_day) : null;
 			resource.reminder_datetime = new Date($filter('date')((new Date()).addHours(1), "M/d/yyyy h:00 a"));
-			resource.relative = (resource.allDay == '1') ? 0 : 1;
-			resource.absolute_date = (resource.allDay == '1') ? null : 0;
+			resource.relative = (resource.allDay) ? 0 : 1;
+			resource.absolute_date = (resource.allDay) ? null : 0;
 		},
 		reminderDefaultsTask: function(resource, user) {
 			resource.reminder_type = (resource.has_due_date) ? 1 : 3;
