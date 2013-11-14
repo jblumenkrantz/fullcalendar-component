@@ -39,11 +39,11 @@
 	<div class="row">
 		<!-- Start Time -->
 		<div class="large-6 columns calendar-picker-container">
-			<label>From<span ng-show="formEvent.allDay=='1'"> start of day</span>:</label>
+			<label>From<span ng-show="formEvent.allDay"> start of day</span>:</label>
 			<!-- Non allDay event show datetime entry -->
 			<datetime
-				ng-required="formEvent.allDay == '0'"
-				ng-show="formEvent.allDay == '0'"
+				ng-required="!formEvent.allDay"
+				ng-show="!formEvent.allDay"
 				ng-model="formEvent.start"
 				name="start"
 				placeholder="m/d/yyyy h:mm AM/PM"
@@ -52,28 +52,29 @@
 				divider="@"
 				dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y @ h:M a'}"
 				jqui-opts="{dateFormat: 'm/d/yy'}"
-				ng-change="moveTime('end')"
+				ng-change="moveTime('end', 1)"
 			/>
 			<!--AllDay event show date entry -->
 			<date
-				ng-required="formEvent.allDay == '1'"
-				ng-show="formEvent.allDay == '1'"
+				ng-required="formEvent.allDay"
+				ng-show="formEvent.allDay"
 				ng-model="formEvent.start"
 				name="start"
 				placeholder="m/d/yyyy"
 				date-format="MM/d/yyyy"
 				dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y'}"
 				jqui-opts="{dateFormat: 'm/d/yy'}"
+				ng-change="moveTime('end', 0)"
 			/>
 		</div>
 		<!-- / Start Time -->
 		<!-- End Time -->
 		<div class="large-6 columns calendar-picker-container">
-			<label>To<span ng-show="formEvent.allDay=='1'"> end of day</span>:</label>
+			<label>To<span ng-show="formEvent.allDay"> end of day</span>:</label>
 			<!-- Non allDay event show datetime entry -->
 			<datetime
-				ng-required="formEvent.allDay == '0'"
-				ng-show="formEvent.allDay == '0'"
+				ng-required="!formEvent.allDay"
+				ng-show="!formEvent.allDay"
 				ng-model="formEvent.end"
 				name="end"
 				placeholder="m/d/yyyy h:mm AM/PM"
@@ -82,18 +83,19 @@
 				divider="@"
 				dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y @ h:M a'}"
 				jqui-opts="{dateFormat: 'm/d/yy'}"
-				ng-change="moveTime('start')"
+				ng-change="moveTime('start', -1)"
 			/>
 			<!--AllDay event show date entry -->
 			<date
-				ng-required="formEvent.allDay == '1'"
-				ng-show="formEvent.allDay == '1'"
+				ng-required="formEvent.allDay"
+				ng-show="formEvent.allDay"
 				ng-model="formEvent.end"
 				name="end"
 				placeholder="m/d/yyyy"
 				date-format="MM/d/yyyy"
 				dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y'}"
 				jqui-opts="{dateFormat: 'm/d/yy'}"
+				ng-change="moveTime('start', 0)"
 			/>
 		</div>
 		<!-- / End Time -->
@@ -103,7 +105,7 @@
 		<!-- All Day -->
 		<div class="large-4 columns">
 			<label class="checkbox">
-				<input type="checkbox" ng-model="formEvent.allDay" ng-true-value="1" ng-false-value="0" ng-click="allDayToggle()" />
+				<input type="checkbox" ng-model="formEvent.allDay" ng-click="allDayToggle()" />
 				All Day Event
 			</label>
 		</div>
@@ -170,7 +172,7 @@
 					placeholder="h:mm AM/PM"
 					ng-show="
 						showReminderTime = 
-						formEvent.allDay == '1' &&
+						formEvent.allDay &&
 						!typeIsThree &&
 						formEvent.reminder_type != 7"
 					ng-required="showReminderTime"
