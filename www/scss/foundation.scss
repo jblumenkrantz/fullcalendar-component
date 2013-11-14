@@ -46,7 +46,6 @@
 // example of a task
 // 
 
-
 // -----------------------------
 // SET CUSTOM VARIABLES HERE
 // -----------------------------
@@ -260,20 +259,27 @@ border-width: 1px 0 1px  0;
 .calendar li.out_of_range{background-color:#F5F5F5;color:#666;}
 ul.days, .calendar-day {padding: 0; margin: 0; width: 100%;}
 
-
+.calendar-picker-container {
+	position: relative;
+}
 
 .calendar-picker-container button {
-top: 20px;
-right: 20px;
-position: absolute;
-display: block;
-color: #555;
-font-size: 18px;
-border: 0;
-background: 0;
-padding: 0;
-margin: 0;
-cursor: pointer;
+	top: 22px;
+	right: 20px;
+	position: absolute;
+	display: block;
+	color: #555;
+	font-size: 18px;
+	border: 0;
+	background: 0;
+	padding: 0;
+	margin: 0;
+	cursor: pointer;
+}
+
+.calendar-picker-container.nolabel button {
+	top: 5px;
+	right: 5px;
 }
 
 .icon-calendarPlus {

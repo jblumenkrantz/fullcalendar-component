@@ -20,6 +20,7 @@ angular.module('pinwheelApp')
 
 		$scope.formEvent = new Event($scope.defaultEvent());
 		$scope.useReminderType = 'relative';
+		$scope.formats = ['MM/d/yyyy @ h:mm a', 'o/d/Y @ h:M a', 'm/d/yy'];
 		
 		//open form for adding of new event
 		$scope.add = function(defaults) {
@@ -219,5 +220,13 @@ angular.module('pinwheelApp')
 		$scope.next = function(){
 			$scope.pinwheel.fullCalendar('next');
 			$scope.routeDate = $scope.pinwheel.fullCalendar('getDate');
+		}
+		$scope.moveTime = function(position) {
+			var opp = (position=='start') ? 'end' : 'start';
+			var diff = (position=='start') ? -1 : 1;
+			$scope[opp+"TimeMoved"] = true;
+			if (!$scope[position+"TimeMoved"]) {
+				$scope.formEvent[position] = new Date($scope.formEvent[opp]).addHours(diff);
+			}
 		}
   });
