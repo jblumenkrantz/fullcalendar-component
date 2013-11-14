@@ -4,10 +4,11 @@ angular.module('pinwheelApp')
 .value("getHeight", function(element) {
 	return $(window).height() - $("#mainHeader").outerHeight() - element.siblings(".scroll-header").outerHeight() + "px";
 })
-.value("dateDisplayFormat", "M/d/yyyy")
-.value("timeDisplayFormat", "h:mm a")
-.value("dateFormat", "yyyy-MM-dd")
-.value("timeFormat", "HH:mm:ss")
+.value("longDisplayFormat", "EEE, MMMM d")	//Mon, October 14
+.value("dateDisplayFormat", "M/d/yyyy")		//8/7/2013
+.value("timeDisplayFormat", "h:mm a")		//4:05 AM
+.value("dateFormat", "yyyy-MM-dd")			//2013-08-07
+.value("timeFormat", "HH:mm:ss")			//16:00:00
 .directive('scrollPane', function(Debounce, getHeight, $timeout) {
 	return {
 		link: function(scope, element, attrs) {

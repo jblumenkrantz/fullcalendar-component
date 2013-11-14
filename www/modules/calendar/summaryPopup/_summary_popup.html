@@ -1,45 +1,42 @@
 <div 
 	id='summaryPopup'
 	ng-show='summaryStyle.visible'
-	ng-style='summaryStyle.style'>
-	<div class='close' ng-click='resetSummary()'>
-		<span class='icon-x-altx-alt' aria-hidden='true'></span>
-	</div> 
-	<div>{{event.title}}</div>
+	ng-style='summaryStyle.style'
+	class="subscription-panel"
+	>
+	<div class="subscription-gradient"> 
+		<div class="subscription-body" style="overflow: hidden;">
+			<div class="summary-left">
+				<div class="title">
+					<strong>{{event.title}}</strong>
+					<span ng-hide="summaryStyle.isTask" ng-click='edit(event); resetSummary();' aria-hidden='true' class='icon-pencil'></span>
+				</div>
 
-	<div ng-show="summaryStyle.expand">
-		{{event.start | date}}<br />
-		{{event.end | date}}<br />
-		{{event.description}}
-	</div> 
+				<div class="time">
+					{{summaryStyle.dateString}}
+				</div>
 
-	<div class='row'> 
-		<div class='large-12 columns'> 
-			<ul class='button-group even-4'> 
-				<li> 
-					<button ng-hide="summaryStyle.expand" class='button radius' ng-click='expandSummary()'> 
-						<span aria-hidden='true' class='icon-more'> More</span> 
-					</button>
-					<button ng-show="summaryStyle.expand" class='button radius' ng-click='collapseSummary()'> 
-						<span aria-hidden='true' class='icon-android'> Less</span> 
-					</button> 
-				</li> 
-				<li> 
-					<button class='button radius' ng-click='resetSummary();'> 
-						<span aria-hidden='true' class='icon-share'> Share</span> 
-					</button> 
-				</li> 
-				<li> 
-					<button class='button radius' ng-click='summaryDelete(); resetSummary();'> 
-						<span aria-hidden='true' class='icon-remove-2'> Delete</span> 
-					</button> 
-				</li> 
-				<li> 
-					<button class='button radius' ng-click='edit(event); resetSummary();'> 
-						<span aria-hidden='true' class='icon-pencil'> Edit</span> 
-					</button> 
-				</li> 
-			</ul> 
-		</div> 
+				<div class="description" ng-class="{'short':!summaryStyle.expand}" ng-click="toggleExpand();">
+					{{event.event_description}}
+				</div>
+			</div>
+			<div class="summary-right">
+				<div class='close' ng-click='resetSummary()'>
+					<span class='icon-x-altx-alt' aria-hidden='true'></span>
+				</div> 
+				<ul class='button-group' style="clear: both;"> 
+					<li> 
+						<button style="margin-bottom: 6px;" class='button radius' ng-click='resetSummary();'> 
+							<span aria-hidden='true' class='icon-share'></span> 
+						</button> 
+					</li> 
+					<li> 
+						<button class='button radius' ng-click='summaryDelete(); resetSummary();'> 
+							<span aria-hidden='true' class='icon-remove-2'></span> 
+						</button> 
+					</li>
+				</ul> 
+			</div>
+		</div>
 	</div>
 </div>

@@ -268,8 +268,7 @@ left: 110px !important;
 #advancedEvent,
 #quickEvent,
 #global-modal
-#account-settings-modal,
-#summaryPopup {
+#account-settings-modal {
 	background: #eeeeee; /* Old browsers */
 	background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
@@ -367,13 +366,61 @@ form input.ng-invalid {
 #summaryPopup {
 	position: absolute;
 	z-index: 99;
-	width: 450px;
+	width: 350px;
 }
 #summaryPopup .close {
-	position: absolute;
-	z-index: 9;
-	top: 5px;
-	right: 5px;
+	position: relative;
+	top: -5px;
+	float: right;
+	font-size: 20px;
+}
+
+#summaryPopup .summary-left {
+	font-size: 14px;
+	line-height: 16px;
+	float: left;
+	width: 85%;
+	padding-right: 5px;
+}
+#summaryPopup .summary-right {
+	float: left;
+	width: 15%;
+	overflow: hidden;
+}
+
+
+#summaryPopup .title strong {
+	font-size: 18px;
+}
+
+#summaryPopup .time {
+	font-size: 12px;
+	line-height: 13px;
+
+}
+
+#summaryPopup .description {
+	color: #4d4d4d;
+	cursor: pointer;
+	font-weight: 500;
+}
+
+#summaryPopup .description:hover {
+	text-decoration: underline;
+}
+
+#summaryPopup .description.short {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+#summaryPopup .button-group li {
+	float: right;
+}
+
+#summaryPopup .button-group button {
+	padding: 6px 10px;
 }
 
 /* disable text selection */

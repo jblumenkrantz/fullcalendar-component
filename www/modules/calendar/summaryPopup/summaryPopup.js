@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pinwheelApp')
-.directive('summaryPopup', function($timeout, Event) {
+.directive('summaryPopup', function($timeout, Event, timeDisplayFormat, longDisplayFormat) {
 	return {
 		restrict: "E",
 		replace: true,
@@ -13,26 +13,53 @@ angular.module('pinwheelApp')
 			var mainContent = $("#main-content");
 			//open summary and copy resource data
 			scope.openSummary = function(event, clickEvent) {
-				//summary popup scope variable work
-				scope.resetSummary();
-				scope.summaryStyle.visible = true;
-				scope.summaryStyle.style = getStyle(clickEvent);
 				scope.event = event;
+				scope.resetSummary();
+				scope.summaryStyle.isTask = event.hasOwnProperty('task_notes');
+				scope.summaryStyle.visible = true;
+				scope.summaryStyle.style = getStyle(clickEvent, event.source.color);
+				
+				//if normal same day
+				//Mon, October 14, 8:00 AM - 9:00 AM
+
+				//if normal multi day
+				//Mon, October 14, 8:00 AM - Mon, October 15, 9:00 AM
+				scope.summaryStyle.dateString = "Mon, October 14, 8:00 AM - 9:00 AM";
+
+				//if all day same day
+				//Mon, October 14 all day
+
+				//if all day multiday
+				//Mon, October 14 - Mon, October 16 all day
+
+
+
+
+
+
+
+				//scope.dateFormat = (event.allDay) ? longDisplayFormat : longDisplayFormat+", "+timeDisplayFormat;
+
+
+
+
+
+
+				console.log(event, scope.summaryStyle.isTask);
 			}
+
+			
 
 			scope.summaryDelete = function() {
 				delete scope.event.source;
 				scope.delete(new Event(scope.event));
+
+				//TODO if task do what
 			}
 
 			//expand summary info
-			scope.expandSummary = function() {
-				scope.summaryStyle.expand = true;
-			}
-			
-			//collapse summary info
-			scope.collapseSummary = function() {
-				scope.summaryStyle.expand = false;
+			scope.toggleExpand = function() {
+				scope.summaryStyle.expand = !scope.summaryStyle.expand;
 			}
 
 			//reset summary to empty object
@@ -43,11 +70,12 @@ angular.module('pinwheelApp')
 			scope.resetSummary(); //initialize summary popup
 
 			//returns position and color style for the event popup
-			function getStyle(clickEvent) {
+			function getStyle(clickEvent, color) {
 				var style = {};													//style object
 				var eventBlock = $(clickEvent.target).closest(".fc-event");		//event container
 				var eventBlockOffset = eventBlock.offset();						//event container offset relative to document
-				
+
+				style.background = color;
 				style.left = eventBlockOffset.left - mainContent.offset().left - 1;	
 				style.bottom = mainContent.outerHeight() - eventBlockOffset.top + headerHeight + popUpOffset;
 
