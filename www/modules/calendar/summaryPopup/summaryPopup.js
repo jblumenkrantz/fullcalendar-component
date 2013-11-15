@@ -20,6 +20,8 @@ angular.module('pinwheelApp')
 				scope.summaryStyle.description = (scope.summaryStyle.isTask) ? event.task_notes : event.event_description;
 				scope.summaryStyle.visible = true;
 				scope.summaryStyle.dateString =  getDateString(event, scope.summaryStyle.isTask);
+				scope.summaryStyle.hasEditPrivileges = false;	//TEST VALUE
+				scope.summaryStyle.hasReminder = (!!event.reminder_pref_id || !!event.source.reminder_pref_id);
 			}
 
 			scope.summaryEdit = function() {
@@ -50,7 +52,6 @@ angular.module('pinwheelApp')
 
 			//returns string to display dates
 			function getDateString(event, isTask) {
-				console.log(event);
 				var start, end, startFormat, endFormat, isMultiDay;
 
 				//multiple days if range is greater that 1 day (millis)
