@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pinwheelApp')
-.directive('summaryPopup', function($timeout, Event, timeDisplayFormat, longDisplayFormat) {
+.directive('summaryPopup', function($filter, Event, timeDisplayFormat, longDisplayFormat) {
 	return {
 		restrict: "E",
 		replace: true,
@@ -16,15 +16,18 @@ angular.module('pinwheelApp')
 				scope.event = event;
 				scope.resetSummary();
 				scope.summaryStyle.isTask = event.hasOwnProperty('task_notes');
+				scope.summaryStyle.description = (scope.summaryStyle.isTask) ? event.task_notes : event.event_description;
 				scope.summaryStyle.visible = true;
 				scope.summaryStyle.style = getStyle(clickEvent, event.source.color);
-			
-				scope.summaryStyle.dateString = "Mon, October 14, 8:00 AM - 9:00 AM";
-
-				console.log(event, scope.summaryStyle.isTask);
+				scope.summaryStyle.dateString =  getDateString(event, scope.summaryStyle.isTask);
 			}
 
-			
+			scope.summaryEdit = function() {
+				if (!scope.summaryStyle.isTask) {
+					scope.edit(scope.event);
+					scope.resetSummary();
+				}
+			}
 
 			scope.summaryDelete = function() {
 				delete scope.event.source;
@@ -44,6 +47,26 @@ angular.module('pinwheelApp')
 			}
 
 			scope.resetSummary(); //initialize summary popup
+
+			//returns string to display dates
+			function getDateString(event, isTask) {
+				console.log(event);
+				var start, end, startFormat, endFormat, isMultiDay;
+
+				//multiple days if range is greater that 1 day (millis)
+				isMultiDay = (event.end - event.start >= 86400000);
+
+				//form start of string
+				startFormat = (event.allDay) ? longDisplayFormat : longDisplayFormat+", "+timeDisplayFormat;
+				start = $filter('date')(event.start, startFormat);
+
+				//form end of string
+				endFormat = (isMultiDay) ? startFormat : timeDisplayFormat;
+				end = (isTask || (event.allDay && !isMultiDay)) ? "" : " - " + $filter('date')(event.end, endFormat);
+
+				//return whole string
+				return start + end;
+			}
 
 			//returns position and color style for the event popup
 			function getStyle(clickEvent, color) {
