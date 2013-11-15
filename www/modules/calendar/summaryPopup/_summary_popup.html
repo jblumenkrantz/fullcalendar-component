@@ -6,37 +6,35 @@
 	>
 	<div class="subscription-gradient"> 
 		<div class="subscription-body" style="overflow: hidden;">
-			<div class="summary-left">
-				<div class="title">
-					<strong>{{event.title}}</strong>
-					<span ng-hide="summaryStyle.isTask" ng-click='edit(event); resetSummary();' aria-hidden='true' class='icon-pencil'></span>
-				</div>
-
-				<div class="time">
-					{{summaryStyle.dateString}}
-				</div>
-
-				<div class="description" ng-class="{'short':!summaryStyle.expand}" ng-click="toggleExpand();">
-					{{event.event_description}}
-				</div>
+			<div class='close' ng-click='resetSummary()'>
+				<span class='icon-x-altx-alt' aria-hidden='true'></span>
 			</div>
-			<div class="summary-right">
-				<div class='close' ng-click='resetSummary()'>
-					<span class='icon-x-altx-alt' aria-hidden='true'></span>
-				</div> 
-				<ul class='button-group' style="clear: both;"> 
-					<li> 
-						<button style="margin-bottom: 6px;" class='button radius' ng-click='resetSummary();'> 
-							<span aria-hidden='true' class='icon-share'></span> 
-						</button> 
-					</li> 
-					<li> 
-						<button class='button radius' ng-click='summaryDelete(); resetSummary();'> 
-							<span aria-hidden='true' class='icon-remove-2'></span> 
-						</button> 
-					</li>
-				</ul> 
+
+			<div class="title">
+				<strong>{{event.title}}</strong>
+				<span ng-hide="summaryStyle.isTask" ng-click='edit(event); resetSummary();' aria-hidden='true' class='icon-pencil'></span>
 			</div>
+
+			<div class="time">
+				{{summaryStyle.dateString}}
+			</div>
+
+			<div class="description" ng-class="{'short':!summaryStyle.expand}" ng-click="toggleExpand();">
+				{{event.event_description}}
+			</div>
+			
+			<ul class='button-group' style="clear: both;"> 
+				<li> 
+					<button style="margin-bottom: 6px;" class='button radius' ng-click='resetSummary();'> 
+						<span aria-hidden='true' class='icon-share'></span> 
+					</button> 
+				</li> 
+				<li> 
+					<button class='button radius' ng-click='summaryDelete(); resetSummary();'> 
+						<span aria-hidden='true' class='icon-remove-2'></span> 
+					</button> 
+				</li>
+			</ul>
 		</div>
 	</div>
 </div>

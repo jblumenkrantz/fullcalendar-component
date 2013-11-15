@@ -375,20 +375,6 @@ form input.ng-invalid {
 	font-size: 20px;
 }
 
-#summaryPopup .summary-left {
-	font-size: 14px;
-	line-height: 16px;
-	float: left;
-	width: 85%;
-	padding-right: 5px;
-}
-#summaryPopup .summary-right {
-	float: left;
-	width: 15%;
-	overflow: hidden;
-}
-
-
 #summaryPopup .title strong {
 	font-size: 18px;
 }
