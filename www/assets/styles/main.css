@@ -370,16 +370,21 @@ form input.ng-invalid {
 	box-shadow: 0 0 5px #999999;
 }
 #summaryPopup .subscription-body {
-	border: 1px solid;
-	border-left: none;
+	position: relative;
+	overflow: hidden;
+	margin: 1px 1px 1px 8px;
+}
+#summaryPopup .subscription-gradient {
+	overflow: hidden;
+}
+#summaryPopup .summaryPopup-body {
+	overflow: hidden;
 }
 #summaryPopup .pointer {
 	position: absolute;
 	z-index: -1;
-	left: 4px;
-	bottom: -7px;
-	height: 14px;
-	width: 14px;
+	height: 18px;
+	width: 18px;
 	transform:rotate(45deg);
 	-moz-transform:rotate(45deg);
     -webkit-transform:rotate(45deg);
@@ -388,6 +393,15 @@ form input.ng-invalid {
     -webkit-box-shadow: 0 0 5px #999999;
 	-moz-box-shadow: 0 0 5px #999999;
 	box-shadow: 0 0 5px #999999;
+}
+#summaryPopup .pointer.top:after {
+	content: "";
+    position:absolute;
+    background: rgba(255,255,255,0.3);
+    left:0;
+    top:0;
+    width: 100%;
+    height: 100%;
 }
 #summaryPopup .close {
 	position: relative;
@@ -436,15 +450,16 @@ form input.ng-invalid {
 	font-weight: 300;
 }
 
-#summaryPopup .description:hover {
-	text-decoration: underline;
-}
+#summaryPopup .creator {
+	position: absolute;
+	bottom: 2px;
+	right: 0;
+	text-align: right;
+	font-weight: 300;
+	padding: 3px;
+	text-shadow: 1px 1px 2px white;
+} 
 
-#summaryPopup .description.short {
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
-}
 #summaryPopup .button-group {
 	margin: 6px 0 -3px 0;
 }
