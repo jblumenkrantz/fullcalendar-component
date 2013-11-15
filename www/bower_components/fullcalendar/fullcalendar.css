@@ -321,7 +321,7 @@ a.fc-event,
 
 .fc-ltr .fc-event-hori.fc-event-start,
 .fc-rtl .fc-event-hori.fc-event-end {
-	border-left-width: 10px;  /* increased to 10 by Deac */
+	border-left-width: 8px;  /* increased to 8 by Gabe */
 	border-top-left-radius: 3px;
 	border-bottom-left-radius: 3px;
 	}
@@ -534,7 +534,7 @@ table.fc-border-separate {
 
 .fc-event-vert {
 	border-width: 0 1px;
-	border-left-width:10px;
+	border-left-width:8px; /* decreased to 8px by gabe */
 	}
 
 .fc-event-vert.fc-event-start {
