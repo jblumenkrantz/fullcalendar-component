@@ -8,7 +8,7 @@ angular.module('pinwheelApp')
 		templateUrl: 'modules/calendar/summaryPopup/_summary_popup.html',
 		link: function(scope, element, attrs) {
 			var popUpWidth = element.outerWidth();
-			var popUpOffset = 10;
+			var popUpOffset = 7;
 			var headerHeight = $("#mainHeader").height();
 			var mainContent = $("#main-content");
 			//open summary and copy resource data

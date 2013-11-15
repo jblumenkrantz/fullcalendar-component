@@ -180,10 +180,8 @@ select {
 	background: #FFF !important;
 	right: 0px;
 	padding: 0px;
-
 	-webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
 	box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
-
 }
 #settingsMenu.extended {
 	top:45px !important;
@@ -372,15 +370,16 @@ form input.ng-invalid {
 	box-shadow: 0 0 5px #999999;
 }
 #summaryPopup .subscription-body {
-	border: 1px solid #999;
+	border: 1px solid;
+	border-left: none;
 }
 #summaryPopup .pointer {
 	position: absolute;
 	z-index: -1;
 	left: 4px;
-	bottom: -9px;
-	height: 18px;
-	width: 18px;
+	bottom: -7px;
+	height: 14px;
+	width: 14px;
 	transform:rotate(45deg);
 	-moz-transform:rotate(45deg);
     -webkit-transform:rotate(45deg);
