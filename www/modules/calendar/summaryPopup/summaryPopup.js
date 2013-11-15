@@ -8,7 +8,7 @@ angular.module('pinwheelApp')
 		templateUrl: 'modules/calendar/summaryPopup/_summary_popup.html',
 		link: function(scope, element, attrs) {
 			var popUpWidth = element.outerWidth();
-			var popUpOffset = 7;
+			var popUpOffset = 9;
 			var headerHeight = $("#mainHeader").height();
 			var mainContent = $("#main-content");
 			//open summary and copy resource data
@@ -75,20 +75,35 @@ angular.module('pinwheelApp')
 				var eventBlockOffset = eventBlock.offset();						//event container offset relative to document
 
 				style.color = color;
+
+				//set container position
 				style.position = {
-					left: eventBlockOffset.left - mainContent.offset().left - 1,
+					left: eventBlockOffset.left - mainContent.offset().left - 3,
 					bottom: mainContent.outerHeight() - eventBlockOffset.top + headerHeight + popUpOffset
 				};
 
-				//adjust if too close to top
+				//set pointer position/color
+				style.pointer = {
+					left: 4,
+					bottom: -9,
+					background: color
+				};
+
+				//adjust position if too close to top
 				if (eventBlockOffset.top <= 133) {
 					delete style.bottom;
+					delete style.pointer.bottom;
+
 					style.position.top = eventBlockOffset.top + eventBlock.outerHeight() - headerHeight + popUpOffset;
+					style.pointer.top = -9;
 				}
-				
-				//adjust if too close to right
-				if (eventBlockOffset.left+popUpWidth > mainContent.offset().left+mainContent.outerWidth()) {
-					style.position.left = style.position.left - popUpWidth + eventBlock.outerWidth();
+
+				var overByLeft = (eventBlockOffset.left+popUpWidth) - (mainContent.offset().left+mainContent.outerWidth());
+			
+				if (overByLeft > 0) {
+					delete style.position.left;
+					style.position.right = 0;
+					style.pointer.left += overByLeft;
 				} 
 
 				return style;

@@ -5,9 +5,9 @@
 	>
 	<div class="summaryPopup-body" style="background: {{summaryStyle.color}};">
 		<div class="subscription-gradient"> 
-			<div class="subscription-body" style="overflow: hidden; border-color: {{summaryStyle.color}};">
+			<div class="subscription-body">
 				<div class="summary-left">
-					<div class="title" ng-click='summaryEdit(); resetSummary();'>
+					<div class="title" ng-class="{'click':!summaryStyle.isTask}" ng-click='summaryEdit();'>
 						<strong>{{event.title}}</strong>
 						<span ng-hide="summaryStyle.isTask" aria-hidden='true' class='icon-pencil'></span>
 					</div>
@@ -16,7 +16,7 @@
 						{{summaryStyle.dateString}}
 					</div>
 
-					<div class="description" ng-class="{'short':!summaryStyle.expand}" ng-click="toggleExpand();">
+					<div ng-show="summaryStyle.description!=''" class="description" ng-class="{'short':!summaryStyle.expand}" ng-click="toggleExpand();">
 						{{summaryStyle.description}}
 					</div>
 				</div>
@@ -40,6 +40,6 @@
 			</div>
 		</div>
 	</div>
-	<div class="pointer" style="background: {{summaryStyle.color}};">
+	<div class="pointer" ng-class="{'top':summaryStyle.pointer.top}" ng-style="summaryStyle.pointer">
 	</div>
 </div>
