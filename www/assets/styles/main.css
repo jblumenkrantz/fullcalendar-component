@@ -386,9 +386,10 @@ form input.ng-invalid {
 }
 
 #summaryPopup .description {
-	color: #4d4d4d;
 	cursor: pointer;
-	font-weight: 500;
+	padding: 8px 3px 3px 0;
+	font-size: .875em;
+	font-weight: 300;
 }
 
 #summaryPopup .description:hover {
@@ -399,12 +400,11 @@ form input.ng-invalid {
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
+	width: 92%;
 }
-
-#summaryPopup .button-group li {
-	float: right;
+#summaryPopup .button-group {
+	margin: 6px 0 0 0;
 }
-
 #summaryPopup .button-group button {
 	height: auto;
 	padding: 0px 10px;
