@@ -7,6 +7,16 @@ angular.module('pinwheelApp')
 	.factory('User', function($resource){
 		return $resource('/api/v1/user/:id', {}, {update: {method:'PUT'}});
 	})
+	.factory('CalendarAdmins', function($resource){
+		return $resource('/api/v1/calendar/admins/:id', {},
+		 {
+		 	post: {method:'POST'},
+		 	query: {
+					method: 'GET',
+					isArray: true,
+				}
+		});
+	})
 	.factory('ContactPoints', function($resource){
 		return $resource('/api/v1/user/contactPoints/', {}, {update: {method:'PUT'}});
 	})	

@@ -122,6 +122,7 @@ class Calendar extends PinwheelModelObject
 		return static:: loadByQuery(
 			"SELECT 
 					calendars.calendar_id,
+					public_calendars.org_id,
 					if(count(public_calendars.calendar_id) = 1, true, false) AS public,
 					UNIX_TIMESTAMP(create_time) as create_time,
 					creator_id,
@@ -191,6 +192,7 @@ class Calendar extends PinwheelModelObject
 		return(static:: genericQuery(
 			"SELECT 
 					calendars.calendar_id,
+					public_calendars.org_id,
 					calendar_name,
 					UNIX_TIMESTAMP(create_time) as create_time,
 					creator_id,
@@ -204,20 +206,13 @@ class Calendar extends PinwheelModelObject
 					reminder_prefs.reminder_pref_id as has_reminder,
 					reminder_prefs.aggregate as reminder_aggregate,
 					IF(calendar_admins.calendar_id is not null, TRUE, FALSE) as calendar_admin
-				from
-					calendars
-				left outer join
-					reminder_prefs
-				ON 
-					calendars.calendar_id = reminder_prefs.calendar_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$userId' AND reminder_prefs.aggregate = TRUE
-				left outer join
-					public_calendars
-				ON
-					calendars.calendar_id = public_calendars.calendar_id
-				left outer join
-					calendar_admins
-				ON 
-					calendars.calendar_id = calendar_admins.calendar_id AND calendar_admins.user_id = '$userId'	
+				from calendars
+				left outer join	reminder_prefs
+				ON calendars.calendar_id = reminder_prefs.calendar_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$userId' AND reminder_prefs.aggregate = TRUE
+				left outer join	public_calendars
+				ON calendars.calendar_id = public_calendars.calendar_id
+				left outer join	calendar_admins
+				ON 	calendars.calendar_id = calendar_admins.calendar_id AND calendar_admins.user_id = '$authUserID'
 				where
 					calendars.creator_id = '$userId'
 				OR
@@ -282,8 +277,19 @@ class Calendar extends PinwheelModelObject
 						WHERE
 							calendars.creator_id = '$userId')
 ", $pinsqli));
-
-
+	}
+	static public function getCalendarAdmins($id,$pinsqli=NULL) {
+		return (static:: genericQuery(
+			"SELECT calendar_admins.user_id,
+				first_name,
+				last_name,
+				user_handle
+				FROM calendar_admins	
+				LEFT OUTER JOIN users
+				ON users.user_id = calendar_admins.user_id
+				WHERE calendar_admins.calendar_id = '{$id}'
+				And users.active = true
+	", $pinsqli));
 	}
 	static public function loadByQuery($query, $pinsqli=NULL){
 		$pinsqli = $pinsqli === NULL? DistributedMySQLConnection:: readInstance(): $pinsqli;
@@ -463,6 +469,7 @@ class Calendar extends PinwheelModelObject
 		$resulti = $pinsqli->query(
 			"SELECT 
 					calendars.calendar_id,
+					public_calendars.org_id,
 					UNIX_TIMESTAMP(create_time) as create_time,
 					creator_id,
 					UNIX_TIMESTAMP(calendars.last_modified) as last_modified,
@@ -479,6 +486,8 @@ class Calendar extends PinwheelModelObject
 					reminder_prefs.aggregate as reminder_aggregate,
 					IF(calendar_admins.calendar_id is not null, TRUE, FALSE) as calendar_admin
 				from calendars
+				left outer join	public_calendars
+				ON calendars.calendar_id = public_calendars.calendar_id
 				left outer join	reminder_prefs
 				ON calendars.calendar_id = reminder_prefs.calendar_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$authUserID' AND reminder_prefs.aggregate = TRUE
 				left outer join	calendar_subs
@@ -537,6 +546,30 @@ class Calendar extends PinwheelModelObject
 		//error_log(print_r($this,true));
 	}
 
+	public function addCalendarAdmin($admin, $calendar_id){
+		$pinsqli = DistributedMySQLConnection:: writeInstance();
+		$resulti = $pinsqli->query(
+			"INSERT INTO calendar_admins(calendar_id,user_id)
+				select '$calendar_id','{$admin->user_id}'	
+				from dual		
+				WHERE NOT EXISTS (
+					SELECT * FROM calendar_admins WHERE calendar_id = '$calendar_id' AND user_id = '{$admin->user_id}'
+				)"
+		);
+		if ($pinsqli->errno)
+			throw new Exception($pinsqli->error, 1);
+	}
+	public function deleteCalendarAdmin($admin, $calendar_id){
+		$pinsqli = DistributedMySQLConnection:: writeInstance();
+		$resulti = $pinsqli->query(
+			"DELETE from calendar_admins
+				WHERE user_id = '{$admin->user_id}'
+				AND calendar_id = '$calendar_id'
+				LIMIT 1"
+		);
+		if ($pinsqli->errno)
+			throw new Exception($pinsqli->error, 1);
+	}
 	public function updateSubscription($calendar_id, $calendar_view, $user_id){
 		$pinsqli = DistributedMySQLConnection:: writeInstance();
 		$resulti = $pinsqli->query(
@@ -584,5 +617,71 @@ class Calendar extends PinwheelModelObject
 		$this->active = FALSE;
 		$this->version += 1;
 	}
-}
+	public function sendNewAdminMessage($recipients,$calendar_name) {
+		$recipientString = implode(",", $recipients);
 
+		$messageBody = Calendar::generateMessageBody($calendar_name);
+		$share_id = MySQLConnection:: generateUID('new_admin');
+		$postAuth = sha1($recipients[0]."rainbowkitties");
+
+		$fields = array(
+								'BatchId' => $share_id,
+								'Destination' => $recipientString,
+								'Subject' => 'Pinwheel Adminstrator Access Granted',
+								'PlainBody' => $messageBody['plain'],
+								'HtmlBody' => $messageBody['html'],
+								'Auth' => $postAuth
+						);
+
+		$data = "";
+		foreach( $fields as $key => $value ) $data .= "$key=" . urlencode( $value ) . "&";
+
+		// run transaction
+		$ch = curl_init("https://messenger-brc.sdicgdev.com"); 
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_HEADER, 1); // set to 0 to eliminate header info from response
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); // Returns response data instead of TRUE(1)
+		curl_setopt($ch, CURLOPT_POSTFIELDS, rtrim( $data, "& " )); // use HTTP POST to send form data
+
+		$result = curl_exec($ch);
+	}
+	public function generateMessageBody($calendar_name) {
+
+		$authUserID = Authorize:: sharedInstance()->userID();
+		$user = User:: load($authUserID);
+		$user->first_name = ucfirst($user->first_name);
+		$user->last_name = ucfirst($user->last_name);
+
+		$messageBody = array();
+
+		$messageBody['html'] = "<html>
+									<body lang='en' style='background-color:#fff; color: #222'>
+										<div style='-moz-box-shadow: 0px 5px 16px #999;-webkit-box-shadow:0px 5px 16px #999;box-shadow: 0px 5px 16px #999;-ms-filter: 'progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=90, Color='#999999')';filter:progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=90, Color='#999999');'>
+											<div style='background:#AAA; margin-bottom:0px; padding:10px;'>
+												<h2 style='font-family: Helvetica Neue, Arial, Helvetica, sans-serif; font-size:18px; margin:0px; font-weight:normal'>
+												$user->first_name $user->last_name has added you as an Administrator to <strong>$calendar_name</strong>.
+											</h2>
+											</div>
+											<div style='font-family: Helvetica Neue, Arial, Helvetica, sans-serif; font-size:13px; padding: 14px; background:#DDD; position:relative'>
+											<p>
+												You have been given Administrator access to a Calendar that is owned or administered by $user->first_name $user->last_name.
+											</p>
+											<p>
+												Any changes you make to this calendar will be visible to anyone else that subscribers to this calendar.
+											</p>
+											<p style='font-family: Helvetica Neue, Arial, Helvetica, sans-serif;margin-top:5px;font-size:10px;color:#888888;'>
+												Please do not reply to this message; it was sent from an unmonitored email address.  This message is a service email related to your Pinwheel account.
+											</p>
+										</div>
+									</div>
+									</body>
+								</html>";
+		$messageBody['plain'] = $user->first_name." ".$user->last_name." has added you as an administrator to $calendar_name.
+								You have been given access to a calendar that is owned or administered by $user->first_name $user->last_name.
+
+								Any changes you make to this calendar will be visible to anyone else that subscribers to this calendar.
+
+								Please do not reply to this message; it was sent from an unmonitored email address. This message is a service email related to your Pinwheel account.";
+		return $messageBody;
+	}
+}
