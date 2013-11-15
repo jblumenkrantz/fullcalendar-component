@@ -19,10 +19,10 @@ angular.module('pinwheelApp')
 				scope.summaryStyle.isTask = event.hasOwnProperty('task_notes');
 				scope.summaryStyle.description = (scope.summaryStyle.isTask) ? event.task_notes : event.event_description;
 				scope.summaryStyle.visible = true;
-				scope.summaryStyle.dateString =  getDateString(event, scope.summaryStyle.isTask);
 				scope.summaryStyle.hasEditPrivileges = true;	//TEST VALUE
 				scope.summaryStyle.hasReminder = (!!event.reminder_pref_id || !!event.source.reminder_pref_id);
-				console.log(event, scope.summaryStyle);
+				scope.summaryStyle.dateString =  getDateString(event, scope.summaryStyle.isTask);
+				scope.summaryStyle.creatorString = getCreatorString(scope.summaryStyle.hasEditPrivileges, scope.summaryStyle.isTask);
 			}
 
 			scope.summaryEdit = function() {
@@ -50,6 +50,12 @@ angular.module('pinwheelApp')
 			}
 
 			scope.resetSummary(); //initialize summary popup
+
+
+			//returns authorship string
+			function getCreatorString(canEdit, isTask) {
+				return ["You are", (!canEdit) ? "not" : "", "this", (isTask) ? "task's" : "event's", "author."].join(" ");
+			}
 
 			//returns string to display dates
 			function getDateString(event, isTask) {
