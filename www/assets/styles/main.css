@@ -400,9 +400,10 @@ form input.ng-invalid {
 }
 
 #summaryPopup .description {
-	color: #4d4d4d;
 	cursor: pointer;
-	font-weight: 500;
+	padding: 8px 3px 3px 0;
+	font-size: .875em;
+	font-weight: 300;
 }
 
 #summaryPopup .description:hover {
