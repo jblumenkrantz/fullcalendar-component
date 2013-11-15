@@ -450,6 +450,16 @@ form input.ng-invalid {
 	font-weight: 300;
 }
 
+#summaryPopup .description:hover {
+	text-decoration: underline;
+}
+
+#summaryPopup .description.short {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
 #summaryPopup .creator {
 	position: absolute;
 	bottom: 2px;

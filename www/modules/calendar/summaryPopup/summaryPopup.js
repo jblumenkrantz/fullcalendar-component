@@ -22,6 +22,7 @@ angular.module('pinwheelApp')
 				scope.summaryStyle.dateString =  getDateString(event, scope.summaryStyle.isTask);
 				scope.summaryStyle.hasEditPrivileges = true;	//TEST VALUE
 				scope.summaryStyle.hasReminder = (!!event.reminder_pref_id || !!event.source.reminder_pref_id);
+				console.log(event, scope.summaryStyle);
 			}
 
 			scope.summaryEdit = function() {
