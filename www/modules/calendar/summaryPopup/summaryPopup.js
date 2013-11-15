@@ -18,32 +18,8 @@ angular.module('pinwheelApp')
 				scope.summaryStyle.isTask = event.hasOwnProperty('task_notes');
 				scope.summaryStyle.visible = true;
 				scope.summaryStyle.style = getStyle(clickEvent, event.source.color);
-				
-				//if normal same day
-				//Mon, October 14, 8:00 AM - 9:00 AM
-
-				//if normal multi day
-				//Mon, October 14, 8:00 AM - Mon, October 15, 9:00 AM
+			
 				scope.summaryStyle.dateString = "Mon, October 14, 8:00 AM - 9:00 AM";
-
-				//if all day same day
-				//Mon, October 14 all day
-
-				//if all day multiday
-				//Mon, October 14 - Mon, October 16 all day
-
-
-
-
-
-
-
-				//scope.dateFormat = (event.allDay) ? longDisplayFormat : longDisplayFormat+", "+timeDisplayFormat;
-
-
-
-
-
 
 				console.log(event, scope.summaryStyle.isTask);
 			}
