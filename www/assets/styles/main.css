@@ -420,7 +420,8 @@ form input.ng-invalid {
 }
 
 #summaryPopup .button-group button {
-	padding: 6px 10px;
+	height: auto;
+	padding: 0px 10px;
 }
 
 /* disable text selection */
