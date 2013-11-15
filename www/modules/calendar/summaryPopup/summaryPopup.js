@@ -15,10 +15,10 @@ angular.module('pinwheelApp')
 			scope.openSummary = function(event, clickEvent) {
 				scope.event = event;
 				scope.resetSummary();
+				scope.summaryStyle = getStyle(clickEvent, event.source.color);
 				scope.summaryStyle.isTask = event.hasOwnProperty('task_notes');
 				scope.summaryStyle.description = (scope.summaryStyle.isTask) ? event.task_notes : event.event_description;
 				scope.summaryStyle.visible = true;
-				scope.summaryStyle.style = getStyle(clickEvent, event.source.color);
 				scope.summaryStyle.dateString =  getDateString(event, scope.summaryStyle.isTask);
 			}
 
@@ -74,19 +74,21 @@ angular.module('pinwheelApp')
 				var eventBlock = $(clickEvent.target).closest(".fc-event");		//event container
 				var eventBlockOffset = eventBlock.offset();						//event container offset relative to document
 
-				style.background = color;
-				style.left = eventBlockOffset.left - mainContent.offset().left - 1;	
-				style.bottom = mainContent.outerHeight() - eventBlockOffset.top + headerHeight + popUpOffset;
+				style.color = color;
+				style.position = {
+					left: eventBlockOffset.left - mainContent.offset().left - 1,
+					bottom: mainContent.outerHeight() - eventBlockOffset.top + headerHeight + popUpOffset
+				};
 
 				//adjust if too close to top
 				if (eventBlockOffset.top <= 133) {
 					delete style.bottom;
-					style.top = eventBlockOffset.top + eventBlock.outerHeight() - headerHeight + popUpOffset;
+					style.position.top = eventBlockOffset.top + eventBlock.outerHeight() - headerHeight + popUpOffset;
 				}
 				
 				//adjust if too close to right
 				if (eventBlockOffset.left+popUpWidth > mainContent.offset().left+mainContent.outerWidth()) {
-					style.left = style.left - popUpWidth + eventBlock.outerWidth();
+					style.position.left = style.position.left - popUpWidth + eventBlock.outerWidth();
 				} 
 
 				return style;
