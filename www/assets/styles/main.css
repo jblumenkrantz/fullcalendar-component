@@ -402,8 +402,6 @@ form input.ng-invalid {
 	color: #666;
 }
 #summaryPopup .summary-left {
-	font-size: 14px;
-	line-height: 16px;
 	float: left;
 	width: 85%;
 	padding-right: 5px;
@@ -431,7 +429,6 @@ form input.ng-invalid {
 #summaryPopup .time {
 	font-size: 12px;
 	line-height: 13px;
-
 }
 
 #summaryPopup .description {
