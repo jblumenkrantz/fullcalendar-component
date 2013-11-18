@@ -6,19 +6,72 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>TryPinwheel.com | The Jedi Academy, Dantooine</title>
+    <title>Pinwheel - &beta;</title>
     <meta name="description" content="">
+    <meta content="yes" name="apple-mobile-web-app-capable">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- iPhone -->
+    <link href="assets/images/ios/touch-icon-iphone.png"
+        sizes="57x57"
+        rel="apple-touch-icon">
+    <link href="assets/images/ios/apple-touch-startup-image-320x460.png"
+        media="(device-width: 320px) and (device-height: 480px)
+            and (-webkit-device-pixel-ratio: 1)"
+        rel="apple-touch-startup-image">
+
+    <!-- iPhone (Retina) -->
+    <link href="assets/images/ios/touch-icon-iphone-retina.png"
+        sizes="114x114"
+        rel="apple-touch-icon">
+    <link href="assets/images/ios/apple-touch-startup-image-640x920.png"
+        media="(device-width: 320px) and (device-height: 480px)
+            and (-webkit-device-pixel-ratio: 2)"
+        rel="apple-touch-startup-image">
+
+    <!-- iPhone 5 -->
+    <link href="assets/images/ios/apple-touch-startup-image-640x1096.png"
+        media="(device-width: 320px) and (device-height: 568px)
+            and (-webkit-device-pixel-ratio: 2)"
+        rel="apple-touch-startup-image">
+
+    <!-- iPad -->
+    <link href="assets/images/ios/touch-icon-ipad.png"
+        sizes="72x72"
+        rel="apple-touch-icon">
+    <link href="assets/images/ios/apple-touch-startup-image-768x1004.png"
+        media="(device-width: 768px) and (device-height: 1024px)
+            and (orientation: portrait)
+            and (-webkit-device-pixel-ratio: 1)"
+         rel="apple-touch-startup-image">
+    <link href="assets/images/ios/apple-touch-startup-image-748x1024.png"
+        media="(device-width: 768px) and (device-height: 1024px)
+            and (orientation: landscape)
+            and (-webkit-device-pixel-ratio: 1)"
+        rel="apple-touch-startup-image">
+
+    <!-- iPad (Retina) -->
+    <link href="assets/images/ios/touch-icon-ipad-retina.png"
+        sizes="144x144"
+        rel="apple-touch-icon">
+    <link href="assets/images/ios/apple-touch-startup-image-1536x2008.png"
+        media="(device-width: 768px) and (device-height: 1024px)
+            and (orientation: portrait)
+            and (-webkit-device-pixel-ratio: 2)"
+        rel="apple-touch-startup-image">
+    <link href="assets/images/ios/apple-touch-startup-image-1496x2048.png"
+        media="(device-width: 768px) and (device-height: 1024px)
+            and (orientation: landscape)
+            and (-webkit-device-pixel-ratio: 2)"
+        rel="apple-touch-startup-image">
+    <ios-meta-data></ios-meta-data>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <!-- build:css({.tmp,app}) styles/main.css -->
-        <!-- <link rel="stylesheet" href="assets/styles/main.css"> -->
-        <link rel="stylesheet" href="assets/styles/foundation.css">
-        <link rel="stylesheet" href="assets/styles/glyphs.css">  
-        <!-- endbuild -->
-        
-        <!-- pinwheel favicon, using base64 encoding to eliminate need for favicon.ico file -jt -->
-        <link href="data:image/x-icon;base64,AAABAAEAEBAAAAAAAABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAExQUAAgIzwD1ZGkAUlL6AEPi+gASuCYAPO0vAABm/wBDqPoAegUJALgPFAAKlBoAFv8FADAW8gBDjPoA7S82ACML2QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAICAAAAAAAAAAAAAAAAAAACAhEAAAAAAAAAAAAAAAAAAgIRDgAAAAAAAAAAAAAAAAICEQ4EAAAAAAAAAAMDAwMCAhEOBAAAAAAAABAQEBAQAgIRDgQAAAAAAAsLCwsLCwICEQ4EAAAAAAoKCgoKCgoBAQwMDAwMDAwKCgoKCgoKAQEMDAwMDAwMAAAAAAUJDwgIBgYGBgYGAAAAAAAFCQ8ICAcHBwcHAAAAAAAABQkPCAgNDQ0NAAAAAAAAAAUJDwgIAAAAAAAAAAAAAAAACQ8ICAAAAAAAAAAAAAAAAAAPCAgAAAAAAAAAAAAAAAAAAAgIAAAAAAAAAP5/AAD+PwAA/h8AAP4PAADgDwAAwA8AAIAPAAAAAAAAAAAAAPABAADwAwAA8AcAAPB/AAD4fwAA/H8AAP5/AAA=" rel="icon" type="image/x-icon" />
+    <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="assets/styles/main.css">
+    <link rel="stylesheet" href="assets/styles/ios.css">
+    <link rel="stylesheet" href="assets/styles/glyphs.css">
+    <link rel="stylesheet" href="assets/styles/foundation.css">
+    <!-- endbuild -->
   </head>
   <body ng-app="pinwheelApp">
     <!--[if lt IE 7]>
@@ -31,274 +84,315 @@
     <![endif]-->
       
   <!-- Add your site or application content here -->
-    
-    <nav class="top-bar" style="">
-      <!--   <header id="org-name">
-          <ul class="small-block-grid-3">
-            <li class="text-left">
-              one
-              </li>
-            <li class="text-center">
-              two
-            </li>
-            <li class="text-right">
-              three
-            </li>
-          </ul>
-        </header> -->
-      <ul class="title-area">
-        <!-- Title Area -->
-        <li class="name"><h1><a href="#"></a></h1></li>
-        <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-        <li class="toggle-topbar menu-icon"><a href=""><span><!-- Menu --></span></a></li>
-      </ul>
-
-      <section class="top-bar-section left">
-        <dl class="sub-nav calendar-filter">
-          <dd class="active"><a href="#">DB</a></dd>
-          <dd><a href="#">D</a></dd>
-          <dd><a href="#">W</a></dd>
-          <dd><a href="#">M</a></dd>
-          <dd><a href="#">Y</a></dd>
-          <dd><a href="#">L</a></dd>
-        </dl>
-      </section>
-    
-      <div id="org-name-wrapper" style="position: absolute; left: 50%;">
-        <div class="org-name" style="position: relative; left: -50%;">
-            The Jedi Academy 
+    <nav class="left-nav" id="left-nav">
+      <!-- <h4 style="color: #fff;">Apps</h4> -->
+      <a href="#" ng-href="#/calendar"><span aria-hidden="true" class="icon-calendar"> </span>Calendar</a>
+      <a href="#" ng-href="#/messaging"><span aria-hidden="true" class="icon-bubble-notification"> </span>Reminders</a>
+      <a href="#" ng-href="#/hallpass"><span aria-hidden="true" class="icon-signup"> </span>Hall Pass</a>
+     
+      <a href="#" ng-href="#/handbook"><span aria-hidden="true" class="icon-book"> </span>Handbook</a>
+      <a href="#" ng-href="#/reference"><span aria-hidden="true" class="icon-books"> </span>Resources </a>
+      <a href="#" ng-href="#/reference"><span aria-hidden="true" class="icon-settings"> </span>Facilities </a>
+      <h4 style="color: #fff;">Account</h4>
+      <form name="accountForm" novalidate>
+        <div class="row">
+          <div class="large-12 columns">
+            <label>Email:</label>
+            <input disabled type="email" ng-model="user.email" />
+          </div>
         </div>
-      </div>
-      
-      <section class="top-bar-section right">
-        <!-- Right Nav Section -->
-        <ul>
-          <li class=""><a href="#"><span aria-hidden="true" class="icon-network"></span></a></li>
-          <li class=""><a href="#"><span aria-hidden="true" class="icon-bubble-notification"></span></a></li>
-          <li class=""><a href="#"><span aria-hidden="true" class="icon-calendar"></span></a></li>
-          <li class=""><a href="#"><span aria-hidden="true" class="icon-book"></span></a></li>
-          <li class=""><a href="#"><span aria-hidden="true" class="icon-books"></span></a></li>
-          <li class=""><a href="#"><span aria-hidden="true" class="icon-menu"></span></a></li>
-          <!-- original dropdown button with admin settings, my account, clear memory, logout etc that deac and jt made. might come in handy again. -->
-          <!-- <li class="">
-            <div href="#" class=" button dropdown" ng-click="toggleSettingsMenu()">
-              <span aria-hidden="true" class="icon-menu"></span>
-              <ul ng-show="settingsMenu">
-                <li ng-click="switchView('settings')"><span aria-hidden="true" class="icon-cog"></span> My Account</li>
-                <li ng-click="switchView('settings')"><span aria-hidden="true" class="icon-notebook"></span> Contact Points</li>
-                <li ng-click="switchView('settings')"><span aria-hidden="true" class="icon-settings"></span> Admin</li>
-                <li class="divider"></li>
-                <li ng-click="clearMemory()"><span aria-hidden="true" class="icon-spinner"></span> Clear Memory</li>
-                <li ng-click="logout()"><span aria-hidden="true" class="icon-close"></span> Log Out</li>
-              </ul>
-            </div>
-          </li> -->
-        </ul>
-      </section>
-    </nav>
-    <!-- Skip the usual 'row' container to make the app always be 100% of the browser window, while avoiding having to overwrite the defaults for margins, padding etc. Taking advantage of the 'mobile first' paradigm, we start with the desired order on mobile: #main-content panel first, then #tasks, then #my-calendars. Then we use push and pull classes to rearrange them for desktop. All this is acheived with default foundation classes, and works down to IE8. :)-->
-    <div class="outer-container">
-      <!-- push #main-content 2 columns to the right on desktop. -->
-      <div class="small-12 large-8 push-2 columns" id="main-content">
-        <header id="content-header">
-          <ul class="small-block-grid-3">
-            <li class="text-left"><span aria-hidden="true" class="icon-arrow-left"> <span aria-hidden="true" class="icon-calendar-2"></li>
-            <li><span aria-hidden="true" class="icon-arrow-left-2"> <span class="month-switcher">September</span> <span aria-hidden="true" class="icon-arrow-right-2"></li>
-            <li class="text-right"><span aria-hidden="true" class="icon-plus-alt"></span> <span aria-hidden="true" class="icon-arrow-right"></li>
-          </ul>
-        </header>
-        <div class="calendar-wrapper">
-          <div class="calendar">
-            <ul class="weekdays">
-              <li class="day_of_week Sunday">Sunday</li>
-              <li class="day_of_week Monday">Monday</li>
-              <li class="day_of_week Tuesday">Tuesday</li>
-              <li class="day_of_week Wednesday">Wednesday</li>
-              <li class="day_of_week Thursday">Thursday</li>
-              <li class="day_of_week Friday">Friday</li>
-              <li class="day_of_week Saturday">Saturday</li>
-            </ul>
-            <ul class="days">
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Sun,</span> <span class="month">Sep</span> 1</div>
+
+        <div class="row">
+          <div class="large-12 columns">
+            <label>Default Timezone:</label>
+            <select ng-options="tz.zone as tz.zone for tz in timezones" ng-model="user.timezone" ></select>
+          </div>
+          <div class="large-12 columns">
+            <label>Default Calendar:</label>
+            <select ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'" ng-model="user.settings.default_calendar" ></select>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="large-6 columns">
+            <label>Start of Day:</label>
+            <time required db="true" ng-model="user.settings.start_of_day" placeholder="h:mm AM/PM" />
+          </div>
+        
+          <div class="large-6 columns">
+            <label>End of Day:</label>
+            <time required db="true" ng-model="user.settings.end_of_day" placeholder="h:mm AM/PM" />
+          </div>
+        </div>
+          <!-- Primary Organization:
+          <select disabled ng-options="org.org_id as org.org_name for org in orgs" ng-model="user.settings.primary_org.org_id" ></select>
+          Access Level: {{user.settings.primary_org.user_role}} - {{user.settings.primary_org.org_id}} -->
+        <div class="row">
+          <div class="large-12 columns">
+            <br>
+            <ul class="button-group even-2">
+              <li>
+                <button class="button radius" ng-click="resetUser()">
+                  <span aria-hidden="true" class="icon-reload-alt"> Reset</span>
+                </button>
               </li>
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Mon,</span> <span class="month">Sep</span> 2</div>
-              </li>
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Tue,</span> <span class="month">Sep</span> 3</div>
-                <ul class="dayContainer events" id="">
-                  <li style="border: 0px solid green; border-left:8px solid green;width: 100%;" class="event normal"><span class="tinter" style="width: 100%;">Find out what the fox says</span>
-                  <li style="border: 0px solid green; border-left:8px solid green;width: 100%;" class="event normal"><span class="tinter" style="width: 100%;">Find out what the fox says</span>
-                  </li>
-  
-                  </ul>
-              </li>
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Wed,</span> <span class="month">Sep</span> 4</div>
-              </li>
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Thu,</span> <span class="month">Sep</span> 5</div>
-              </li>
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Fri,</span> <span class="month">Sep</span> 6</div>
-              </li>
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Sat,</span> <span class="month">Sep</span> 7</div>
-              </li>
-            </ul>
-            <ul class="days">
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Sun,</span> <span class="month">Sep</span> 8</div>
-                <div class="show-info">
-                  <a href="http://centre.atlantaballet.com/community-programs/healthy-living-day/" class="show-name">Lorem ipsum dolor sit amet...</a>
-                </div>
-              </li>
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Mon,</span> <span class="month">Sep</span> 9</div>
-              </li>
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Tue,</span> <span class="month">Sep</span> 10</div>
-              </li>
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Wed,</span> <span class="month">Sep</span> 11</div>
-              </li>
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Thu,</span> <span class="month">Sep</span> 12</div>
-              </li>
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Fri,</span> <span class="month">Sep</span> 13</div>
-              </li>
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Sat,</span> <span class="month">Sep</span> 14</div>
-              </li>
-            </ul>
-            <ul class="days">
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Sun,</span> <span class="month">Sep</span> 15</div>
-              </li>
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Mon,</span> <span class="month">Sep</span> 16</div>
-              </li>
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Tue,</span> <span class="month">Sep</span> 17</div>
-              </li>
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Wed,</span> <span class="month">Sep</span> 18</div>
-              </li>
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Thu,</span> <span class="month">Sep</span> 19</div>
-              </li>
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Fri,</span> <span class="month">Sep</span> 20</div>
-              </li>
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Sat,</span> <span class="month">Sep</span> 21</div>
-              </li>
-            </ul>
-            <ul class="days">
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Sun,</span> <span class="month">Sep</span> 22</div>
-              </li>
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Mon,</span> <span class="month">Sep</span> 23</div>
-                <div class="show-info">
-                  <a href="http://www.atlantaballet.com/get-involved/corps-de-ballet/" class="show-name">Lorem ipsum dolor sit amet...</a>
-                </div>
-              </li>
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Tue,</span> <span class="month">Sep</span> 24</div>
-              </li>
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Wed,</span> <span class="month">Sep</span> 25</div>
-              </li>
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Thu,</span> <span class="month">Sep</span> 26</div>
-              </li>
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Fri,</span> <span class="month">Sep</span> 27</div>
-                <div class="show-info">
-                 <a href="http://www.atlantaballet.com/get-involved/corps-de-ballet/" class="show-name">Lorem ipsum dolor sit amet...</a>
-                </div>
-              </li>
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Sat,</span> <span class="month">Sep</span> 28</div>
-              </li>
-            </ul>
-            <ul class="days">
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Sun,</span> <span class="month">Sep</span> 29</div>
-              </li>
-              <li class="calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Mon,</span> <span class="month">Sep</span> 30</div>
-              </li>
-              <li class="out_of_range calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Tue,</span> <span class="month">Oct</span> 1</div>
-              </li>
-              <li class="out_of_range calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Wed,</span> <span class="month">Oct</span> 2</div>
-              </li>
-              <li class="out_of_range calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Thu,</span> <span class="month">Oct</span> 3</div>
-              </li>
-              <li class="out_of_range calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Fri,</span> <span class="month">Oct</span> 4</div>
-              </li>
-              <li class="out_of_range calendar-day" style="height: 150px; overflow: auto;">
-                <div class="date day_cell"><span class="day">Sat,</span> <span class="month">Oct</span> 5</div>
+              <li>
+                <button class="button radius" ng-click="resetUser()">
+                  <span aria-hidden="true" class="icon-checkmark"> Reset</span>
+                </button>
+              <!--   <confirm
+                  disabled="accountForm.$invalid"
+                  button-icon="icon-checkmark"
+                  button-class="button radius"
+                  header="Update Account Information"
+                  body="Are you sure you want to update your user settings?"
+                  footer="You are about to change your account settings, this could affect the way your information is displayed to you.  Are you sure you wnat to continue"
+                  affirmative-text="Save"
+                  negative-text="Cancel"
+                  affirmative-action="saveUser()"
+                  negative-action="cancelUser()">
+                    Save
+                </confirm> -->
               </li>
             </ul>
           </div>
         </div>
-      </div>
-      <!-- #tasks gets pushed 2 columns, just like #main-content to make sure it remains all the way to the right of #main-content on desktop view.-->
-      <div class="small-12 large-2 push-2 columns" id="tasks">
-        <div class="pane-header">
-          <span class="pane-title">Tasks/To Do</span>
-          <span aria-hidden="true" class="icon-plus-alt right"></span>
-        </div>
-        
-        
-        <!-- Begin TASK PANEL -->
-        <div class="panel new task">
-          <form action="" id="newTaskForm" class="task-form">
-            <div class="edit-container">
-              <input class="input-text small-12" placeholder="Title (required)">
-              
-              <select class="select select2-offscreen" placeholder="Choose Calendar" tabindex="-1">
-                <option value=""></option>
-                <!-- ngRepeat: calendar in calendars | filter:{active: 1, subscribed: true} -->
-              </select>
-              <textarea placeholder="Add note" name="" class=""></textarea>
-              <label style="margin-top: 3px;" class="input-text-container" for="due-checkbox">
-                <input id="due-checkbox" type="checkbox" class="">
-                Has a due date
-              </label>
-              <label style="margin-top: 8px;" class="input-text-container" for="reminder-task">
-                <input id="reminder-task" type="checkbox" class="">
-                Add Reminder
-              </label>
-              <ul class="button-group radius even-2">
-                <li><a href="#" class="button small alert"><span aria-hidden="true" class="icon-close"></span></a></li>
-                <li><a href="#" class="button small success"><span aria-hidden="true" class="icon-checkmark"></span></a></li>
+      </form>
+    </nav>
+    <div class="page-wrap">
+      <nav id="mainHeader" class="main-header">
+        <!-- content of _topbar.html -->
+        <section class="menubar left">
+          <!-- Right Nav Section -->
+          <ul ng-show="user">
+            <li>
+              <a href="#left-nav" class="open-menu"><span aria-hidden="true" class="icon-menu"></span></a>
+              <a href="#" class="close-menu"><span aria-hidden="true" class="icon-menu"></span></a>
+            </li>
+            <li class="org-name"> The Jedi Academy </li>
+            <!-- <li><a href="#"></a><span aria-hidden="true" class="icon-settings"></span></li> -->
+            <!-- <li class=""><a ng-href="#/messaging"><span aria-hidden="true" class="icon-bubble-notification"></span></a></li> -->
+            <!-- <li class=""><a ng-href="#/hallpass"><span aria-hidden="true" class="icon-signup"></span></a></li> -->
+            <!-- <li class=""><a ng-href="#/calendar"><span aria-hidden="true" class="icon-calendar"></span></a></li> -->
+            <!-- <li class=""><a ng-href="#/handbook"><span aria-hidden="true" class="icon-book"></span></a></li> -->
+            <!-- <li class=""><a ng-href="#/reference"><span aria-hidden="true" class="icon-books"></span></a></li> -->
+            <!-- <li class=""><a settings-modal-trigger="account"><span aria-hidden="true" class="icon-cog"></span></a></li> -->
+            <!-- <settings-menu></settings-menu> -->
+          </ul>
+        </section>
+        <section class="menubar right" style="margin-right: 20px;">
+          <dl class="sub-nav calendar-filter" ng-show="user">
+            <dd ng-click="changeView('datebook')" ng-class="{active:view=='datebook'}"><a>DB</a></dd>
+            <dd ng-click="changeView('day')" ng-class="{active:view=='day'}"><a>D</a></dd>
+            <dd ng-click="changeView('week')" ng-class="{active:view=='week'}"><a>W</a></dd>
+            <dd ng-click="changeView('month')" ng-class="{active:view=='month'}"><a>M</a></dd>
+            <dd ng-click="changeView('year')" ng-class="{active:view=='year'}"><a>Y</a></dd>
+            <dd ng-click="changeView('list')" ng-class="{active:view=='list'}"><a>L</a></dd>
+          </dl>
+        </section>
+      </nav>
+      <div class="outer-container">
+        <!-- push #main-content 2 columns to the right on desktop. -->
+        <div class="small-12 large-8 push-2 columns" id="main-content">
+          <header id="content-header">
+            <ul class="small-block-grid-3">
+              <li class="text-left"><span aria-hidden="true" class="icon-arrow-left"> <span aria-hidden="true" class="icon-calendar-2"></li>
+              <li><span aria-hidden="true" class="icon-arrow-left-2"> <span class="month-switcher">September</span> <span aria-hidden="true" class="icon-arrow-right-2"></li>
+              <li class="text-right"><span aria-hidden="true" class="icon-plus-alt"></span> <span aria-hidden="true" class="icon-arrow-right"></li>
+            </ul>
+          </header>
+          <div class="calendar-wrapper">
+            <div class="calendar">
+              <ul class="weekdays">
+                <li class="day_of_week Sunday">Sunday</li>
+                <li class="day_of_week Monday">Monday</li>
+                <li class="day_of_week Tuesday">Tuesday</li>
+                <li class="day_of_week Wednesday">Wednesday</li>
+                <li class="day_of_week Thursday">Thursday</li>
+                <li class="day_of_week Friday">Friday</li>
+                <li class="day_of_week Saturday">Saturday</li>
+              </ul>
+              <ul class="days">
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Sun,</span> <span class="month">Sep</span> 1</div>
+                </li>
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Mon,</span> <span class="month">Sep</span> 2</div>
+                </li>
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Tue,</span> <span class="month">Sep</span> 3</div>
+                  <ul class="dayContainer events" id="">
+                    <li style="border: 0px solid green; border-left:8px solid green;width: 100%;" class="event normal"><span class="tinter" style="width: 100%;">Find out what the fox says</span>
+                    <li style="border: 0px solid green; border-left:8px solid green;width: 100%;" class="event normal"><span class="tinter" style="width: 100%;">Find out what the fox says</span>
+                    </li>
+    
+                    </ul>
+                </li>
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Wed,</span> <span class="month">Sep</span> 4</div>
+                </li>
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Thu,</span> <span class="month">Sep</span> 5</div>
+                </li>
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Fri,</span> <span class="month">Sep</span> 6</div>
+                </li>
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Sat,</span> <span class="month">Sep</span> 7</div>
+                </li>
+              </ul>
+              <ul class="days">
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Sun,</span> <span class="month">Sep</span> 8</div>
+                  <div class="show-info">
+                    <a href="http://centre.atlantaballet.com/community-programs/healthy-living-day/" class="show-name">Lorem ipsum dolor sit amet...</a>
+                  </div>
+                </li>
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Mon,</span> <span class="month">Sep</span> 9</div>
+                </li>
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Tue,</span> <span class="month">Sep</span> 10</div>
+                </li>
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Wed,</span> <span class="month">Sep</span> 11</div>
+                </li>
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Thu,</span> <span class="month">Sep</span> 12</div>
+                </li>
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Fri,</span> <span class="month">Sep</span> 13</div>
+                </li>
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Sat,</span> <span class="month">Sep</span> 14</div>
+                </li>
+              </ul>
+              <ul class="days">
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Sun,</span> <span class="month">Sep</span> 15</div>
+                </li>
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Mon,</span> <span class="month">Sep</span> 16</div>
+                </li>
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Tue,</span> <span class="month">Sep</span> 17</div>
+                </li>
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Wed,</span> <span class="month">Sep</span> 18</div>
+                </li>
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Thu,</span> <span class="month">Sep</span> 19</div>
+                </li>
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Fri,</span> <span class="month">Sep</span> 20</div>
+                </li>
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Sat,</span> <span class="month">Sep</span> 21</div>
+                </li>
+              </ul>
+              <ul class="days">
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Sun,</span> <span class="month">Sep</span> 22</div>
+                </li>
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Mon,</span> <span class="month">Sep</span> 23</div>
+                  <div class="show-info">
+                    <a href="http://www.atlantaballet.com/get-involved/corps-de-ballet/" class="show-name">Lorem ipsum dolor sit amet...</a>
+                  </div>
+                </li>
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Tue,</span> <span class="month">Sep</span> 24</div>
+                </li>
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Wed,</span> <span class="month">Sep</span> 25</div>
+                </li>
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Thu,</span> <span class="month">Sep</span> 26</div>
+                </li>
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Fri,</span> <span class="month">Sep</span> 27</div>
+                  <div class="show-info">
+                   <a href="http://www.atlantaballet.com/get-involved/corps-de-ballet/" class="show-name">Lorem ipsum dolor sit amet...</a>
+                  </div>
+                </li>
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Sat,</span> <span class="month">Sep</span> 28</div>
+                </li>
+              </ul>
+              <ul class="days">
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Sun,</span> <span class="month">Sep</span> 29</div>
+                </li>
+                <li class="calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Mon,</span> <span class="month">Sep</span> 30</div>
+                </li>
+                <li class="out_of_range calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Tue,</span> <span class="month">Oct</span> 1</div>
+                </li>
+                <li class="out_of_range calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Wed,</span> <span class="month">Oct</span> 2</div>
+                </li>
+                <li class="out_of_range calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Thu,</span> <span class="month">Oct</span> 3</div>
+                </li>
+                <li class="out_of_range calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Fri,</span> <span class="month">Oct</span> 4</div>
+                </li>
+                <li class="out_of_range calendar-day" style="height: 150px; overflow: auto;">
+                  <div class="date day_cell"><span class="day">Sat,</span> <span class="month">Oct</span> 5</div>
+                </li>
               </ul>
             </div>
-            <!-- /edit-container -->
-          </form>
+          </div>
         </div>
-        <!-- /end TASK PANEL -->
-        
-        
-        
-      </div>
-      <!-- #my-calendars gets pulled 10 columns from it's original position, all the way to the left. -->
-      <div class="small-12 large-2 pull-10 columns" id="my-calendars">
-        <div class="pane-header">
-          <span class="pane-title">My Calendars</span>
-          <span aria-hidden="true" class="icon-plus-alt right"></span>
+        <!-- #tasks gets pushed 2 columns, just like #main-content to make sure it remains all the way to the right of #main-content on desktop view.-->
+        <div class="small-12 large-2 push-2 columns" id="tasks">
+          <div class="pane-header">
+            <span class="pane-title">Tasks/To Do</span>
+            <span aria-hidden="true" class="icon-plus-alt right"></span>
+          </div>
+          
+          
+          <!-- Begin TASK PANEL -->
+          <div class="panel new task">
+            <form action="" id="newTaskForm" class="task-form">
+              <div class="edit-container">
+                <input class="input-text small-12" placeholder="Title (required)">
+                
+                <select class="select select2-offscreen" placeholder="Choose Calendar" tabindex="-1">
+                  <option value=""></option>
+                  <!-- ngRepeat: calendar in calendars | filter:{active: 1, subscribed: true} -->
+                </select>
+                <textarea placeholder="Add note" name="" class=""></textarea>
+                <label style="margin-top: 3px;" class="input-text-container" for="due-checkbox">
+                  <input id="due-checkbox" type="checkbox" class="">
+                  Has a due date
+                </label>
+                <label style="margin-top: 8px;" class="input-text-container" for="reminder-task">
+                  <input id="reminder-task" type="checkbox" class="">
+                  Add Reminder
+                </label>
+                <ul class="button-group radius even-2">
+                  <li><a href="#" class="button small alert"><span aria-hidden="true" class="icon-close"></span></a></li>
+                  <li><a href="#" class="button small success"><span aria-hidden="true" class="icon-checkmark"></span></a></li>
+                </ul>
+              </div>
+              <!-- /edit-container -->
+            </form>
+          </div>
+          <!-- /end TASK PANEL -->
+          
+          
+          
         </div>
+        <!-- #my-calendars gets pulled 10 columns from it's original position, all the way to the left. -->
+        <div class="small-12 large-2 pull-10 columns" id="my-calendars">
+          <div class="pane-header">
+            <span class="pane-title">My Calendars</span>
+            <span aria-hidden="true" class="icon-plus-alt right"></span>
+          </div>
+        </div>     
       </div>
-      
     </div>
 	<!-- / application content -->
 

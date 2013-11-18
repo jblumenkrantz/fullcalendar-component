@@ -6804,7 +6804,7 @@ a.th {
 }
 
 /* Each individual part that can be added in */
-/* line 55, ../../scss/foundation.scss */
+/* line 54, ../../scss/foundation.scss */
 #my-calendars, #main-content, #tasks {
   min-height: 822px;
   padding: 0 !important;
@@ -6812,43 +6812,43 @@ a.th {
   margin-right: -1px;
 }
 
-/* line 61, ../../scss/foundation.scss */
+/* line 60, ../../scss/foundation.scss */
 #my-calendars, #tasks {
   background: #eee;
 }
 
-/* line 65, ../../scss/foundation.scss */
+/* line 64, ../../scss/foundation.scss */
 #main-content {
   background: #fff;
   border-left: 1px solid #afafaf;
   border-right: 1px solid #afafaf;
 }
 
-/* line 71, ../../scss/foundation.scss */
+/* line 70, ../../scss/foundation.scss */
 #tasks {
   height: 100%;
 }
 
-/* line 74, ../../scss/foundation.scss */
+/* line 73, ../../scss/foundation.scss */
 #mainHeader {
   -webkit-box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.5);
   box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.5);
   z-index: 100;
 }
 
-/* line 81, ../../scss/foundation.scss */
+/* line 80, ../../scss/foundation.scss */
 .top-bar-section ul {
   height: auto;
   background: none;
   margin: 0;
 }
 
-/* line 86, ../../scss/foundation.scss */
+/* line 85, ../../scss/foundation.scss */
 .top-bar-section ul.left {
   height: 45px;
 }
 
-/* line 91, ../../scss/foundation.scss */
+/* line 90, ../../scss/foundation.scss */
 .top-bar ul li a span {
   font-size: 20px;
   height: 45px;
@@ -6857,7 +6857,7 @@ a.th {
   margin: 0 -3px;
 }
 
-/* line 100, ../../scss/foundation.scss */
+/* line 99, ../../scss/foundation.scss */
 dl.sub-nav.calendar-filter {
   display: inline;
   padding: 0;
@@ -6867,12 +6867,12 @@ dl.sub-nav.calendar-filter {
   margin-top: 10px;
 }
 
-/* line 108, ../../scss/foundation.scss */
+/* line 107, ../../scss/foundation.scss */
 dl.sub-nav.calendar-filter dd {
   margin-top: 12px;
 }
 
-/* line 116, ../../scss/foundation.scss */
+/* line 115, ../../scss/foundation.scss */
 .pane-header {
   background: #d0d0d0;
   width: 100%;
@@ -6883,30 +6883,30 @@ dl.sub-nav.calendar-filter dd {
   height: 37px !important;
 }
 
-/* line 125, ../../scss/foundation.scss */
+/* line 124, ../../scss/foundation.scss */
 .pane-header [class*="icon-"] {
   position: relative;
   top: 3px;
   cursor: pointer;
 }
 
-/* line 135, ../../scss/foundation.scss */
+/* line 134, ../../scss/foundation.scss */
 .pane-header span {
   position: relative;
   top: 8px;
 }
 
-/* line 139, ../../scss/foundation.scss */
+/* line 138, ../../scss/foundation.scss */
 .pane-header span.right {
   margin-right: 12px;
 }
 
-/* line 142, ../../scss/foundation.scss */
+/* line 141, ../../scss/foundation.scss */
 .pane-header .pane-title {
   margin-left: 6px;
 }
 
-/* line 152, ../../scss/foundation.scss */
+/* line 151, ../../scss/foundation.scss */
 header#content-header ul.small-block-grid-3 li {
   text-align: center;
   margin: 0 !important;
@@ -6916,33 +6916,36 @@ header#content-header ul.small-block-grid-3 li {
   padding-top: 4px;
 }
 
-/* line 161, ../../scss/foundation.scss */
+/* line 160, ../../scss/foundation.scss */
 header#content-header ul.small-block-grid-3 span.month-switcher {
   font-family: "Oswald", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
   position: relative;
   top: -1px;
 }
 
-/* line 167, ../../scss/foundation.scss */
+/* line 166, ../../scss/foundation.scss */
 header#content-header [class*="icon-"] {
   cursor: pointer;
 }
 
-/* line 171, ../../scss/foundation.scss */
+/* line 170, ../../scss/foundation.scss */
 #org-name-wrapper {
   position: absolute;
   left: 50%;
 }
 
-/* line 174, ../../scss/foundation.scss */
+/* line 173, ../../scss/foundation.scss */
 .org-name {
   font-size: 20px;
   font-weight: bold;
   text-shadow: 1px 1px 2px white;
+  position: relative;
+  top: 7px;
+  width: 300px;
 }
 
 @media only screen and (max-width: 768px) {
-  /* line 181, ../../scss/foundation.scss */
+  /* line 183, ../../scss/foundation.scss */
   ul.days {
     padding: 0;
     margin: 0;
@@ -6951,12 +6954,12 @@ header#content-header [class*="icon-"] {
     left: 2px;
   }
 }
-/* line 185, ../../scss/foundation.scss */
+/* line 187, ../../scss/foundation.scss */
 [class*="icon-"] {
   text-shadow: 1px 1px 2px white;
 }
 
-/* line 190, ../../scss/foundation.scss */
+/* line 192, ../../scss/foundation.scss */
 .calendar-index {
   position: absolute;
   left: 0;
@@ -6971,13 +6974,13 @@ header#content-header [class*="icon-"] {
   border-right: 1px solid #aaa;
 }
 
-/* line 203, ../../scss/foundation.scss */
+/* line 205, ../../scss/foundation.scss */
 .calendar-index ul.side-nav {
   margin: 0;
   padding: 0;
 }
 
-/* line 208, ../../scss/foundation.scss */
+/* line 210, ../../scss/foundation.scss */
 .calendar-index ul.side-nav li {
   list-style-type: none;
   margin: 0;
@@ -6988,24 +6991,24 @@ header#content-header [class*="icon-"] {
   cursor: pointer;
 }
 
-/* line 218, ../../scss/foundation.scss */
+/* line 220, ../../scss/foundation.scss */
 .calendar-index ul.side-nav li:hover {
   background: rgba(35, 83, 138, 0.1);
 }
 
-/* line 233, ../../scss/foundation.scss */
+/* line 235, ../../scss/foundation.scss */
 .calendar-index ul.side-nav li:nth-child(1) {
   background: #ccc;
   border-width: 0;
 }
 
-/* line 237, ../../scss/foundation.scss */
+/* line 239, ../../scss/foundation.scss */
 .calendar-index ul.side-nav li:nth-child(14) {
   background: #ccc;
   border-width: 1px 0 1px  0;
 }
 
-/* line 244, ../../scss/foundation.scss */
+/* line 246, ../../scss/foundation.scss */
 .calendar-wrapper {
   display: inline;
   overflow: hidden;
@@ -7014,13 +7017,13 @@ header#content-header [class*="icon-"] {
   width: auto;
 }
 
-/* line 245, ../../scss/foundation.scss */
+/* line 247, ../../scss/foundation.scss */
 .calendar {
   padding: 0;
   margin: 0 0 0 38px !important;
 }
 
-/* line 246, ../../scss/foundation.scss */
+/* line 248, ../../scss/foundation.scss */
 .calendar ul.month-browser li {
   width: 33.3%;
   padding: 0;
@@ -7031,7 +7034,7 @@ header#content-header [class*="icon-"] {
   margin: 20px 0;
 }
 
-/* line 247, ../../scss/foundation.scss */
+/* line 249, ../../scss/foundation.scss */
 .calendar ul {
   list-style: none;
   padding: 0;
@@ -7040,13 +7043,13 @@ header#content-header [class*="icon-"] {
   width: 100%;
 }
 
-/* line 248, ../../scss/foundation.scss */
+/* line 250, ../../scss/foundation.scss */
 .calendar ul.weekdays {
   height: 40px;
   width: 100%;
 }
 
-/* line 249, ../../scss/foundation.scss */
+/* line 251, ../../scss/foundation.scss */
 .calendar ul.weekdays li {
   text-align: center;
   text-transform: uppercase;
@@ -7057,7 +7060,7 @@ header#content-header [class*="icon-"] {
   font-size: 13px;
 }
 
-/* line 250, ../../scss/foundation.scss */
+/* line 252, ../../scss/foundation.scss */
 .calendar li {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -7073,23 +7076,23 @@ header#content-header [class*="icon-"] {
   overflow: visible !important;
 }
 
-/* line 251, ../../scss/foundation.scss */
+/* line 253, ../../scss/foundation.scss */
 .calendar .days:last-child li {
   margin-bottom: 0px !important;
 }
 
-/* line 252, ../../scss/foundation.scss */
+/* line 254, ../../scss/foundation.scss */
 .calendar li .day, .calendar li .month {
   display: none;
 }
 
-/* line 253, ../../scss/foundation.scss */
+/* line 255, ../../scss/foundation.scss */
 .calendar .date {
   text-align: right;
   margin-bottom: 5px;
 }
 
-/* line 254, ../../scss/foundation.scss */
+/* line 256, ../../scss/foundation.scss */
 .show-info {
   display: block;
   font-size: 13px;
@@ -7104,40 +7107,40 @@ header#content-header [class*="icon-"] {
   text-decoration: none;
 }
 
-/* line 255, ../../scss/foundation.scss */
+/* line 257, ../../scss/foundation.scss */
 .show-info:hover .venue {
   display: block;
 }
 
-/* line 256, ../../scss/foundation.scss */
+/* line 258, ../../scss/foundation.scss */
 .show-info .show-name {
   text-decoration: underline;
 }
 
-/* line 257, ../../scss/foundation.scss */
+/* line 259, ../../scss/foundation.scss */
 .show-info .show-time, .venue {
   color: #666;
   margin-top: 2px;
   text-decoration: none;
 }
 
-/* line 258, ../../scss/foundation.scss */
+/* line 260, ../../scss/foundation.scss */
 .calendar .no-shows {
   display: none;
 }
 
-/* line 259, ../../scss/foundation.scss */
+/* line 261, ../../scss/foundation.scss */
 .calendar .venue {
   display: none;
 }
 
-/* line 260, ../../scss/foundation.scss */
+/* line 262, ../../scss/foundation.scss */
 .calendar li.out_of_range {
   background-color: #F5F5F5;
   color: #666;
 }
 
-/* line 261, ../../scss/foundation.scss */
+/* line 263, ../../scss/foundation.scss */
 ul.days, .calendar-day {
   padding: 0;
   margin: 0;
@@ -7145,8 +7148,13 @@ ul.days, .calendar-day {
 }
 
 /* line 265, ../../scss/foundation.scss */
+.calendar-picker-container {
+  position: relative;
+}
+
+/* line 269, ../../scss/foundation.scss */
 .calendar-picker-container button {
-  top: 20px;
+  top: 22px;
   right: 20px;
   position: absolute;
   display: block;
@@ -7159,7 +7167,13 @@ ul.days, .calendar-day {
   cursor: pointer;
 }
 
-/* line 279, ../../scss/foundation.scss */
+/* line 283, ../../scss/foundation.scss */
+.calendar-picker-container.nolabel button {
+  top: 5px;
+  right: 5px;
+}
+
+/* line 288, ../../scss/foundation.scss */
 .icon-calendarPlus {
   top: 6px;
   right: 4px;
@@ -7174,7 +7188,7 @@ ul.days, .calendar-day {
   cursor: pointer;
 }
 
-/* line 293, ../../scss/foundation.scss */
+/* line 302, ../../scss/foundation.scss */
 .icon-backspace:before {
   content: "\e037";
   background: #fff;
@@ -7191,13 +7205,13 @@ ul.days, .calendar-day {
   font-size: 20px;
 }
 
-/* line 311, ../../scss/foundation.scss */
+/* line 320, ../../scss/foundation.scss */
 .subscription-panel, .task-panel {
   border-bottom: 1px solid #999;
   overflow: hidden;
 }
 
-/* line 316, ../../scss/foundation.scss */
+/* line 325, ../../scss/foundation.scss */
 .subscription-gradient, .task-gradient {
   background: #eeeeee;
   /* Old browsers */
@@ -7217,7 +7231,7 @@ ul.days, .calendar-day {
   /* IE6-9 */
 }
 
-/* line 329, ../../scss/foundation.scss */
+/* line 338, ../../scss/foundation.scss */
 .subscription-body, .task-body {
   background: #eeeeee;
   /* Old browsers */
@@ -7237,21 +7251,21 @@ ul.days, .calendar-day {
   /* IE6-9 */
 }
 
-/* line 339, ../../scss/foundation.scss */
+/* line 348, ../../scss/foundation.scss */
 .subscription-body {
   min-height: 50px !important;
   padding: 5px 4px 5px 5px;
   margin-left: 8px;
 }
 
-/* line 345, ../../scss/foundation.scss */
+/* line 354, ../../scss/foundation.scss */
 .task-body {
   min-height: 50px !important;
   padding: 5px 4px 5px 5px;
   margin-left: 8px;
 }
 
-/* line 350, ../../scss/foundation.scss */
+/* line 359, ../../scss/foundation.scss */
 .task-body.add {
   min-height: none;
   background: #eeeeee;
@@ -7274,7 +7288,7 @@ ul.days, .calendar-day {
   margin-left: 8px;
 }
 
-/* line 366, ../../scss/foundation.scss */
+/* line 375, ../../scss/foundation.scss */
 .subscription-calendar-title {
   overflow: hidden;
   white-space: nowrap;
@@ -7287,7 +7301,7 @@ ul.days, .calendar-day {
   padding-top: 12px;
 }
 
-/* line 378, ../../scss/foundation.scss */
+/* line 387, ../../scss/foundation.scss */
 .subscription-panel .subscribed {
   position: absolute;
   top: -8px;
@@ -7308,22 +7322,22 @@ ul.days, .calendar-day {
   font-size: 16px;
 }
 
-/* line 396, ../../scss/foundation.scss */
+/* line 405, ../../scss/foundation.scss */
 .subscription-panel [class*="icon-"], .task-panel [class*="icon-"] {
   color: #999;
 }
 
-/* line 400, ../../scss/foundation.scss */
+/* line 409, ../../scss/foundation.scss */
 .subscription-panel [class*="icon-"]:hover, .task-panel [class*="icon-"]:hover {
   color: #666;
 }
 
-/* line 403, ../../scss/foundation.scss */
+/* line 412, ../../scss/foundation.scss */
 .subscription-panel [class*="icon-"]:active, .task-panel [class*="icon-"]:active {
   color: #23538a;
 }
 
-/* line 407, ../../scss/foundation.scss */
+/* line 416, ../../scss/foundation.scss */
 .close-panel {
   position: relative;
   float: right;
@@ -7331,18 +7345,18 @@ ul.days, .calendar-day {
   font-size: 20px;
 }
 
-/* line 414, ../../scss/foundation.scss */
+/* line 423, ../../scss/foundation.scss */
 .subscription > input[type=text]:first-of-type, .task > input[type=text]:first-of-type {
   width: calc(100% - 23px);
 }
 
-/* line 421, ../../scss/foundation.scss */
+/* line 430, ../../scss/foundation.scss */
 .button-group li {
   padding: 0 5px 0 0;
 }
 
-/* line 429, ../../scss/foundation.scss */
-.top-bar2 .button,
+/* line 438, ../../scss/foundation.scss */
+#account-settings-modal button,
 .button-group li div.button,
 .button-group li button {
   color: #333 !important;
@@ -7368,7 +7382,7 @@ ul.days, .calendar-day {
   height: 36px;
 }
 
-/* line 447, ../../scss/foundation.scss */
+/* line 456, ../../scss/foundation.scss */
 .button-group li div.button:hover:enabled,
 .button-group li button:hover:enabled {
   color: #333 !important;
@@ -7391,69 +7405,79 @@ ul.days, .calendar-day {
   margin: 0;
 }
 
-/* line 461, ../../scss/foundation.scss */
+/* line 470, ../../scss/foundation.scss */
 button:focus {
   outline: none;
 }
 
-/* line 465, ../../scss/foundation.scss */
+/* line 474, ../../scss/foundation.scss */
 button.disabled, button[disabled], .button.disabled, .button[disabled] {
   color: grey;
   border-color: #cccccc !important;
 }
 
-/* line 470, ../../scss/foundation.scss */
+/* line 479, ../../scss/foundation.scss */
 .button-group li [class*="icon-"] {
   color: #333;
 }
 
-/* line 474, ../../scss/foundation.scss */
+/* line 483, ../../scss/foundation.scss */
 .button-group li button:disabled [class*="icon-"] {
   color: gray;
 }
 
-/* line 480, ../../scss/foundation.scss */
+/* line 489, ../../scss/foundation.scss */
 .top-bar {
   background: rgba(221, 221, 221, 0.3) repeat !important;
   overflow: visible;
 }
 
-/* line 485, ../../scss/foundation.scss */
+/* line 494, ../../scss/foundation.scss */
 .top-bar-section li a:not(.button) {
   background: none !important;
 }
 
-/* line 490, ../../scss/foundation.scss */
+/* line 499, ../../scss/foundation.scss */
 .tabs dd.active {
   border-top: 0px solid #23538a;
 }
 
-/* line 493, ../../scss/foundation.scss */
+/* line 502, ../../scss/foundation.scss */
 .top-bar-section ul li {
   float: left !important;
 }
 
 /* iPads (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* line 502, ../../scss/foundation.scss */
+  /* line 511, ../../scss/foundation.scss */
   .task .body .title {
     font-size: 12px;
   }
 
-  /* line 505, ../../scss/foundation.scss */
+  /* line 514, ../../scss/foundation.scss */
   .task .body .due-date, .task .body .notes {
     font-size: 9px;
   }
 
-  /* line 508, ../../scss/foundation.scss */
+  /* line 517, ../../scss/foundation.scss */
   .edit-container input, textarea {
     padding: 1px;
     font-size: 9px !important;
   }
 
-  /* line 512, ../../scss/foundation.scss */
+  /* line 521, ../../scss/foundation.scss */
   .task .body .notes:hover, .task .body .due-date:hover, .task .body .title:hover {
     text-decoration: none;
+  }
+
+  /* line 524, ../../scss/foundation.scss */
+  #main-nav:target, #left-nav:target {
+    width: 50%;
+  }
+
+  /* line 527, ../../scss/foundation.scss */
+  #main-nav:target + .page-wrap, #left-nav:target + .page-wrap {
+    width: 50%;
   }
 }
 /* line 9, ../../scss/_fugly.scss */
@@ -7542,7 +7566,7 @@ header#content-header ul.small-block-grid-3 li {
   width: auto !important;
 }
 
-/* line 520, ../../scss/foundation.scss */
+/* line 535, ../../scss/foundation.scss */
 #mainHeader {
   overflow: hidden;
   height: 45px;
@@ -7552,33 +7576,33 @@ header#content-header ul.small-block-grid-3 li {
   margin-bottom: 0;
 }
 
-/* line 529, ../../scss/foundation.scss */
+/* line 544, ../../scss/foundation.scss */
 .menubar ul li {
   display: inline;
 }
 
-/* line 533, ../../scss/foundation.scss */
+/* line 548, ../../scss/foundation.scss */
 .menubar ul li [class*="icon-"] {
   color: #777;
   height: 45px;
 }
 
-/* line 537, ../../scss/foundation.scss */
+/* line 552, ../../scss/foundation.scss */
 .menubar ul li [class*="icon-"]:hover {
   color: #555;
 }
 
-/* line 541, ../../scss/foundation.scss */
+/* line 556, ../../scss/foundation.scss */
 .menubar ul li [class*="icon-"]:active {
   color: #23538a;
 }
 
-/* line 545, ../../scss/foundation.scss */
+/* line 560, ../../scss/foundation.scss */
 .menubar ul.left {
   height: 45px;
 }
 
-/* line 550, ../../scss/foundation.scss */
+/* line 565, ../../scss/foundation.scss */
 .menubar ul li a span {
   font-size: 20px;
   height: 45px;
@@ -7587,7 +7611,7 @@ header#content-header ul.small-block-grid-3 li {
   margin: 0 12px;
 }
 
-/* line 558, ../../scss/foundation.scss */
+/* line 573, ../../scss/foundation.scss */
 #main-content, #mainHeader {
   background: #eeeeee;
   /* Old browsers */
@@ -7605,4 +7629,97 @@ header#content-header ul.small-block-grid-3 li {
   /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );
   /* IE6-9 */
+}
+
+/* line 588, ../../scss/foundation.scss */
+.main-header {
+  text-align: center;
+  text-shadow: #222 0px -1px 1px;
+  left: 0;
+  transition: all 0.3s ease;
+}
+
+/* line 598, ../../scss/foundation.scss */
+.page-wrap {
+  float: right;
+  width: 100%;
+  transition: width .7s ease;
+}
+
+/* line 612, ../../scss/foundation.scss */
+.left-nav {
+  position: fixed;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background: #3B3B3B;
+  overflow-y: auto;
+  transition: width .7s ease;
+  -webkit-box-shadow: inset -3px 0px 3px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: inset -3px 0px 3px 0px rgba(0, 0, 0, 0.2);
+  color: #fff !important;
+  white-space: nowrap;
+}
+/* line 624, ../../scss/foundation.scss */
+.left-nav a {
+  display: block;
+  border-top: 1px solid #484848;
+  border-bottom: 1px solid #2E2E2E;
+  color: white;
+  padding: 0 20px;
+  white-space: nowrap;
+  width: 100%;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+/* line 635, ../../scss/foundation.scss */
+.left-nav a:hover, .left-nav a:focus {
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+}
+/* line 638, ../../scss/foundation.scss */
+.left-nav a [class*="icon-"] {
+  text-shadow: 1px 1px 2px #000;
+  font-size: 36px;
+  text-align: center;
+}
+/* line 644, ../../scss/foundation.scss */
+.left-nav:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 34px;
+  background: linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
+}
+/* line 653, ../../scss/foundation.scss */
+.left-nav label {
+  color: #fff;
+}
+/* line 654, ../../scss/foundation.scss */
+.left-nav h4 {
+  margin-left: 20px;
+}
+
+/* line 661, ../../scss/foundation.scss */
+.close-menu {
+  display: none;
+}
+
+/* line 665, ../../scss/foundation.scss */
+#left-nav:target {
+  width: 20%;
+}
+
+/* line 668, ../../scss/foundation.scss */
+#left-nav:target + .page-wrap {
+  width: 80%;
+}
+/* line 670, ../../scss/foundation.scss */
+#left-nav:target + .page-wrap .open-menu {
+  display: none;
+}
+/* line 673, ../../scss/foundation.scss */
+#left-nav:target + .page-wrap .close-menu {
+  display: block;
 }

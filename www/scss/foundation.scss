@@ -46,7 +46,6 @@
 // example of a task
 // 
 
-
 // -----------------------------
 // SET CUSTOM VARIABLES HERE
 // -----------------------------
@@ -175,6 +174,9 @@ header#content-header [class*="icon-"] {
 font-size: 20px;
 font-weight: bold;
 text-shadow: $letter-press;
+position: relative;
+top: 7px;
+width: 300px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -260,20 +262,27 @@ border-width: 1px 0 1px  0;
 .calendar li.out_of_range{background-color:#F5F5F5;color:#666;}
 ul.days, .calendar-day {padding: 0; margin: 0; width: 100%;}
 
-
+.calendar-picker-container {
+	position: relative;
+}
 
 .calendar-picker-container button {
-top: 20px;
-right: 20px;
-position: absolute;
-display: block;
-color: #555;
-font-size: 18px;
-border: 0;
-background: 0;
-padding: 0;
-margin: 0;
-cursor: pointer;
+	top: 22px;
+	right: 20px;
+	position: absolute;
+	display: block;
+	color: #555;
+	font-size: 18px;
+	border: 0;
+	background: 0;
+	padding: 0;
+	margin: 0;
+	cursor: pointer;
+}
+
+.calendar-picker-container.nolabel button {
+	top: 5px;
+	right: 5px;
 }
 
 .icon-calendarPlus {
@@ -422,7 +431,7 @@ font-size: 16px;
 padding: 0 5px 0 0;
 
 }
-.top-bar2 .button,
+#account-settings-modal button,
 .button-group li div.button,
 .button-group li button
 
@@ -512,6 +521,12 @@ and (max-device-width : 1024px) {
 	.task .body .notes:hover, .task .body .due-date:hover, .task .body .title:hover  {
 		text-decoration: none;
 	}
+	#main-nav:target, #left-nav:target  {
+  width: 50%;
+	}
+	#main-nav:target + .page-wrap, #left-nav:target + .page-wrap {
+	  width: 50%;
+	}
 }
 
 //comment out 'fugly' import below to disable marketing mode
@@ -564,4 +579,101 @@ and (max-device-width : 1024px) {
 	background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
 	background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+}
+
+
+// OFF CANVAS MENU EXPERIMENT BELOW -JT
+
+
+.main-header {
+  // background: linear-gradient(#3F94BF, #246485);
+  // padding: 5px;
+  text-align: center;
+  text-shadow: #222 0px -1px 1px;
+
+  left: 0;
+  transition: all 0.3s ease;
+}
+
+.page-wrap {
+  float: right;
+  width: 100%;
+  transition: width .7s ease;
+  // -webkit-box-shadow:  -5px 0px 5px 0px rgba(0, 0, 0, .9);
+        
+  //       box-shadow:  -5px 0px 5px 0px rgba(0, 0, 0, .9);
+
+}
+.outer-container {
+	// -webkit-box-shadow:  -2px 0px 5px 0px rgba(0, 0, 0, .9);
+        
+ //        box-shadow:  -2px 0px 5px 0px rgba(0, 0, 0, .9);
+}
+.left-nav {
+  position: fixed;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background: #3B3B3B;
+  overflow-y: auto;
+  transition: width .7s ease;
+  -webkit-box-shadow: inset -3px 0px 3px 0px rgba(0, 0, 0, .2);
+	box-shadow: inset -3px 0px 3px 0px rgba(0, 0, 0, .2);
+	color: #fff !important;
+	white-space: nowrap;
+  a {
+    display: block;
+    // background: linear-gradient(#3E3E3E, #383838);
+    border-top: 1px solid #484848;
+    border-bottom: 1px solid #2E2E2E;
+    color: white;
+    padding: 0 20px;
+    white-space: nowrap;
+    width: 100%;
+    font-size: 14px;
+    text-transform: uppercase;
+    &:hover, &:focus {
+      background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.2));
+    }
+     [class*="icon-"] {
+    	text-shadow: 1px 1px 2px #000;
+    	font-size: 36px;
+    	text-align: center;
+    }
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 34px;
+    background: linear-gradient(left, rgba(black, 0), rgba(black, 0.4));
+  }
+  label {color:#fff;}
+  h4 {margin-left: 20px;}
+}
+
+.content {
+
+}
+
+.close-menu {
+  display: none;
+}
+
+#left-nav:target  {
+  width: 20%;
+}
+#left-nav:target + .page-wrap {
+  width: 80%;
+  .open-menu {
+     display: none; 
+  }
+  .close-menu {
+     display: block;
+  }
+  .main-header {
+ 
+  }
 }
