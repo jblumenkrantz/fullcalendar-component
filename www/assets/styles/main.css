@@ -180,10 +180,8 @@ select {
 	background: #FFF !important;
 	right: 0px;
 	padding: 0px;
-
 	-webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
 	box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
-
 }
 #settingsMenu.extended {
 	top:45px !important;
@@ -412,29 +410,31 @@ form input.ng-invalid {
 	font-size: 20px;
 	color: #999;
 }
+
 #summaryPopup .close:hover {
 	color: #666;
 }
-#summaryPopup .summary-left {
-	float: left;
-	width: 85%;
-	padding-right: 5px;
+
+#summaryPopup .title {
+	width: 87%;
+	cursor: pointer;
 }
-#summaryPopup .summary-right {
-	float: left;
-	width: 15%;
-	overflow: hidden;
+
+#summaryPopup .time,
+#summaryPopup .description {
+	width: 92%;
+}
+
+#summaryPopup .title .icon-pencil {
+	color: #222;
+	font-size: 14px;
 }
 #summaryPopup .title.click {
 	cursor: pointer;
 }
 
-#summaryPopup .title.click:hover {
+#summaryPopup .title:hover {
 	text-decoration: underline;
-}
-#summaryPopup .title .icon-pencil {
-	color: #222;
-	font-size: 14px;
 }
 
 #summaryPopup .title strong {
@@ -442,16 +442,16 @@ form input.ng-invalid {
 }
 
 #summaryPopup .time {
+	padding-bottom: 5px;
 	font-size: 12px;
 	line-height: 13px;
 }
 
 #summaryPopup .description {
 	cursor: pointer;
-	padding: 8px 3px 3px 0;
+	padding: 8px 3px 5px 0;
 	font-size: .875em;
 	font-weight: 300;
-	margin-bottom: 18px;
 }
 
 #summaryPopup .description:hover {
@@ -474,15 +474,11 @@ form input.ng-invalid {
 	padding: 3px;
 	text-shadow: 1px 1px 2px white;
 }
-
-#summaryPopup .button-group li {
-	float: right;
-	padding: 0;
+#summaryPopup .button-group {
+	margin: 12px 0 -3px 0;
 }
-
 #summaryPopup .button-group button {
-	height: auto;
-	padding: 0px 10px;
+	padding: 0px 15px;
 }
 
 /* disable text selection */
