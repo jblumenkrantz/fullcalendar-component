@@ -33,21 +33,18 @@
 				<div ng-show="summaryStyle.description!=''" class="description" ng-class="{'short':!summaryStyle.expand}" ng-click="toggleExpand();">
 					{{summaryStyle.description}}
 				</div>
-				<ul class='button-group' style="clear: both;"> 
+				<ul class='button-group even-2' style="clear: both;"> 
 					<li> 
-						<button style="margin-bottom: 6px;" class='button radius' ng-click='resetSummary();'> 
+						<button class='button radius' ng-click='resetSummary();'> 
 							<span aria-hidden='true' class='icon-share'></span> 
 						</button> 
 					</li> 
-					<li> 
+					<li style="padding: 0;"> 
 						<button class='button radius' ng-click='summaryDelete(); resetSummary();'> 
 							<span aria-hidden='true' class='icon-remove-2'></span> 
 						</button> 
 					</li>
 				</ul>
-				<div class="creator time">
-					{{summaryStyle.creatorString}}
-				</div>
 			</div>
 		</div>
 	</div>

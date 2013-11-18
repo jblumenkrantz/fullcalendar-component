@@ -439,13 +439,14 @@ form input.ng-invalid {
 }
 
 #summaryPopup .time {
+	padding-bottom: 5px;
 	font-size: 12px;
 	line-height: 13px;
 }
 
 #summaryPopup .description {
 	cursor: pointer;
-	padding: 8px 3px 3px 0;
+	padding: 8px 3px 5px 0;
 	font-size: .875em;
 	font-weight: 300;
 }
@@ -460,18 +461,8 @@ form input.ng-invalid {
 	overflow: hidden;
 }
 
-#summaryPopup .creator {
-	position: absolute;
-	bottom: 2px;
-	right: 0;
-	text-align: right;
-	font-weight: 300;
-	padding: 3px;
-	text-shadow: 1px 1px 2px white;
-} 
-
 #summaryPopup .button-group {
-	margin: 6px 0 -3px 0;
+	margin: 12px 0 -3px 0;
 }
 #summaryPopup .button-group button {
 	padding: 0px 15px;
