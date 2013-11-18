@@ -60,7 +60,7 @@ class CalendarCtl
 			}
 			$calendar->active = ($calendar->active)? true:false;
 			$calendar->calendar_admin = ($calendar->calendar_admin)? true:false;
-			$calendar->events = Event::getUserEventsForCalendar($authUserID, $calendar->calendar_id);
+			$calendar->events = Event::getUserEventsForCalendar($authUserID, $calendar);
 			$calendar->events = array_merge($calendar->events, Task::getUserTasksForCalendar($authUserID, $calendar->calendar_id)); 
 			
 			if(property_exists($calendar, 'adhoc_events') && !$calendar->adhoc_events){
@@ -176,7 +176,7 @@ class CalendarCtl
 				}
 				$calendar->active = ($calendar->active)? true:false;
 				$calendar->calendar_admin = ($calendar->calendar_admin)? true:false;
-				$calendar->events = Event::getUserEventsForCalendar($authUserID, $calendar->calendar_id);
+				$calendar->events = Event::getUserEventsForCalendar($authUserID, $calendar);
 				$calendar->events = array_merge($calendar->events, Task::getUserTasksForCalendar($authUserID, $calendar->calendar_id)); 
 				echo json_encode($calendar);
 				
@@ -216,7 +216,7 @@ class CalendarCtl
 		$subscription->subscribed = true;
 
 		$subscribed = Calendar::subscribe($subscription, $authUserID);														
-		$subscribed->events = Event::getUserEventsForCalendar($authUserID, $subscribed->calendar_id);
+		$subscribed->events = Event::getUserEventsForCalendar($authUserID, $subscribed);
 		$subscribed->events = array_merge($subscribed->events, Task::getUserTasksForCalendar($authUserID, $subscribed->calendar_id)); 
 		User:: incrementVersion($authUserID);
 		echo json_encode($subscribed);	

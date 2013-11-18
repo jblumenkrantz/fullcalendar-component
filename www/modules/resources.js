@@ -155,7 +155,7 @@ angular.module('pinwheelApp')
 	.factory('Reminder', function($resource){
 		return $resource('/api/v1/reminder/:id', {}, {update: {method:'PUT'}});
 	})
-	.factory('Calendar', function($resource, ReminderService, Event){
+	.factory('Calendar', function($resource, ReminderService, Event, User){
 		return $resource('/api/v1/calendar/:id/:version', {},
 			{
 				save: {
