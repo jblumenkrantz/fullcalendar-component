@@ -1,3 +1,4 @@
+
 <?php
 class Calendar extends PinwheelModelObject
 {
@@ -665,6 +666,9 @@ class Calendar extends PinwheelModelObject
 											<div style='font-family: Helvetica Neue, Arial, Helvetica, sans-serif; font-size:13px; padding: 14px; background:#DDD; position:relative'>
 											<p>
 												You have been given Administrator access to a Calendar that is owned or administered by $user->first_name $user->last_name.
+											</p>
+											<p>
+												You have automatically been subscribed to $calendar_name.  The calendar will show up in your calendar list by refreshing your current browser window or logging into pinwheel.
 											</p>
 											<p>
 												Any changes you make to this calendar will be visible to anyone else that subscribers to this calendar.

@@ -103,6 +103,8 @@ angular.module('pinwheelApp')
 
 		$scope.logout = function(){
 			/* Delete protected data */
+			angular.element('#account-settings-modal').hide().css('visibility','hidden');
+			angular.element('#global-modal-bg').hide();
 			$scope.calendars = [];
 			delete $scope.user
 			delete $scope.initialUser;

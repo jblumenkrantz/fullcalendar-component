@@ -245,10 +245,13 @@ class CalendarCtl
 		}else{
 			throw new UserDoesNotExist();
 		}
-
+		$subscription->calendar_id = $calendar_id;
+		$subscription->color = 'blue';
+		$subscription->adhoc_events = false;
 		// check the users permissions for this calendar
 		if($calendar->creator_id == $authUserID || $calendar->calendar_admin){
 			Calendar::addCalendarAdmin($admin, $calendar_id);
+			Calendar::subscribe($subscription, $admin->user_id);		
 			Calendar::sendNewAdminMessage(array($admin->email),$calendar->calendar_name);
 			unset($admin->active, $admin->email, $admin->last_modified, $admin->password, $admin->settings, $admin->timezone,$admin->version);
 			echo json_encode($admin);

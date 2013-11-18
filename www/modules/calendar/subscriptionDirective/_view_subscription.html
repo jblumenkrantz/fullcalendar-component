@@ -48,7 +48,7 @@
 								{{checkPermision('modify_public_calendars').orgs[0].org_name}}
 							</label>
 					</div>
-					<div class="large-12 columns" ng-show="checkPermision('modify_public_calendars',true) || isCalendarCreator(calendar)" style='padding: 0;'>
+					<div class="large-12 columns" ng-show="checkPermision('modify_public_calendars',true) || isCalendarCreator(calendar) || editCalendar.calendar_admin" style='padding: 0;'>
 						<ul class="button-group">
 							<li>
 								<button class="button radius" ng-show="editCalendar.calendar_admin || isCalendarCreator(calendar)">
