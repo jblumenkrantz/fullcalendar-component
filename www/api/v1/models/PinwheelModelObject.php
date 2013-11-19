@@ -69,4 +69,17 @@ class PinwheelModelObject
 		}
 		return $arr;
 	}
+	static public function convert_properties_to_boolean($obj)
+	{
+		$arrObj = is_object($obj) ? get_object_vars($obj) : $obj;
+		foreach ($arrObj as $key => $val) {
+			if(is_array($val) || is_object($val)) {
+				$val = static:: convert_properties_to_boolean($val);
+			}else{
+				$val = ($val == '0' || $val == '1')? (boolean)$val:$val;
+			}
+			$arr[$key] = $val;
+		}
+		return $arr;
+	}
 }

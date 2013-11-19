@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pinwheelApp')
-.directive('summaryPopup', function($filter, Event, timeDisplayFormat, longDisplayFormat, Debounce) {
+.directive('summaryPopup', function($filter, Event, Task, timeDisplayFormat, longDisplayFormat, Debounce) {
 	return {
 		restrict: "E",
 		replace: true,
@@ -11,44 +11,45 @@ angular.module('pinwheelApp')
 			var popUpOffset = 9;
 			var headerHeight = $("#mainHeader").height();
 			var mainContent = $("#main-content");
+
 			//open summary and copy resource data
 			scope.openSummary = function(event, clickEvent) {
 				scope.event = event;
-				scope.resetSummary();
-				scope.summaryStyle = getStyle(clickEvent, event.source.color, event.allDay, scope.view);
-				scope.summaryStyle.isTask = event.hasOwnProperty('task_notes');
-				scope.summaryStyle.description = (scope.summaryStyle.isTask) ? event.task_notes : event.event_description;
-				scope.summaryStyle.visible = true;
-				scope.summaryStyle.hasEditPrivileges = true;	//TEST VALUE
-				scope.summaryStyle.hasReminder = (!!event.reminder_pref_id || !!event.source.reminder_pref_id);
-				scope.summaryStyle.dateString =  getDateString(event.start, event.end, event.allDay, scope.summaryStyle.isTask);
+				scope.summaryPopup = angular.extend({}, {
+					isTask: event.hasOwnProperty('task_notes'),
+					description: (event.hasOwnProperty('task_notes')) ? event.task_notes : event.event_description,
+					hasReminder: (!!event.reminder_pref_id || !!event.source.reminder_pref_id),
+					dateString: getDateString(event.start, event.end, event.allDay, event.hasOwnProperty('task_notes'))
+				}, getStyle(clickEvent, event.source.color, event.allDay, scope.view));
 			}
 
-			scope.summaryEdit = function() {
-				if (!scope.summaryStyle.isTask) {
+			scope.summaryEdit = function(isTask) {
+				if (!isTask) {
 					scope.edit(scope.event);
 					scope.resetSummary();
 				}
 			}
 
-			scope.summaryDelete = function() {
+			scope.summaryDelete = function(isTask) {
 				delete scope.event.source;
-				scope.delete(new Event(scope.event));
-				
-				//TODO if task do what
+				if (isTask) {
+					$("#monthCalendar").fullCalendar('removeEvents',scope.event.id);
+					new Task(scope.event).$delete({id: scope.event.id, version: scope.event.version});
+				}
+				else {
+					scope.delete(new Event(scope.event));
+				}
 			}
 
 			//expand summary info
 			scope.toggleExpand = function() {
-				scope.summaryStyle.expand = !scope.summaryStyle.expand;
+				scope.summaryPopup.expand = !scope.summaryPopup.expand;
 			}
 
 			//reset summary to empty object
 			scope.resetSummary = function() {
-				scope.summaryStyle = {};
+				scope.summaryPopup = false;
 			}
-
-			scope.resetSummary(); //initialize summary popup
 
 			//returns string to display dates
 			function getDateString(start, end, allDay, isTask) {
