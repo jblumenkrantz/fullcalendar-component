@@ -46,7 +46,18 @@ angular.module('pinwheelApp')
 				});
 				Calendar.query({id: 'all'}, function(calendars){
 					$scope.loading_calendars = false;
-					$scope.calendars = calendars;			
+					$scope.calendars = calendars;
+					// IF not calendar creator OR NOT calendar Admin do not allow event drag/drop and resizing
+					/*angular.forEach(calendars, function(calendar){
+						if(!calendar.calendar_admin || !(calendar.creator_id == $scope.user.user_id)){
+							if(calendar.creator_id != $scope.user.user_id){
+								angular.forEach(calendar.events, function(event){
+									event.editable = false;
+									console.warn(event);
+								});
+							}
+						}
+					});*/
 					/*Event.query({id: 'all'}, function(events){
 						$scope.loading_events = false;
 						$scope.events = events;
@@ -103,6 +114,8 @@ angular.module('pinwheelApp')
 
 		$scope.logout = function(){
 			/* Delete protected data */
+			angular.element('#account-settings-modal').hide().css('visibility','hidden');
+			angular.element('#global-modal-bg').hide();
 			$scope.calendars = [];
 			delete $scope.user
 			delete $scope.initialUser;

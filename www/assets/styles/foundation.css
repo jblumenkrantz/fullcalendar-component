@@ -7356,6 +7356,7 @@ ul.days, .calendar-day {
 }
 
 /* line 438, ../../scss/foundation.scss */
+#calendar-admin-modal button,
 #account-settings-modal button,
 .button-group li div.button,
 .button-group li button {

@@ -28,9 +28,10 @@ class UserCtl
 		}
 		$user = User::loadActive($id === null? $authUserID: $id);
 		$user->settings = array_shift(User::loadSettings($id === null? $authUserID: $id));
-		$user->settings->primary_org = array_shift(MessagingGroup:: getPrimaryOrg($authUserID));
 		$user->settings->calendar_drawer_visible = ($user->settings->calendar_drawer_visible) ? true:false;
 		$user->settings->task_drawer_visible = ($user->settings->task_drawer_visible) ? true:false;
+		$user->permissions = PinwheelModelObject::convert_properties_to_boolean(User::loadPermissions($id === null? $authUserID: $id));
+
 		echo json_encode($user);
 	}
 

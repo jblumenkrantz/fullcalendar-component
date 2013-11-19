@@ -7,6 +7,16 @@ angular.module('pinwheelApp')
 	.factory('User', function($resource){
 		return $resource('/api/v1/user/:id', {}, {update: {method:'PUT'}});
 	})
+	.factory('CalendarAdmins', function($resource){
+		return $resource('/api/v1/calendar/admins/:id', {},
+		 {
+		 	post: {method:'POST'},
+		 	query: {
+					method: 'GET',
+					isArray: true,
+				}
+		});
+	})
 	.factory('ContactPoints', function($resource){
 		return $resource('/api/v1/user/contactPoints/', {}, {update: {method:'PUT'}});
 	})	
@@ -145,7 +155,7 @@ angular.module('pinwheelApp')
 	.factory('Reminder', function($resource){
 		return $resource('/api/v1/reminder/:id', {}, {update: {method:'PUT'}});
 	})
-	.factory('Calendar', function($resource, ReminderService, Event){
+	.factory('Calendar', function($resource, ReminderService, Event, User){
 		return $resource('/api/v1/calendar/:id/:version', {},
 			{
 				save: {
