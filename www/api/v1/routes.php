@@ -320,7 +320,22 @@ function routes () {
 			Route::Request("application/json"),
 			Route::Response("application/json")
 		),
-
+		
+		/* Hallpass API */
+		'/hallpass/?' => array(
+			Route::$get=>'HallpassCtl::getActivePasses',
+			Route::$put=>'HallpassCtl::checkIn',
+			Route::Authorize(),
+			Route::Request("application/json"),
+			Route::Response("application/json")
+		),
+		'/hallpass/:alpha/?' => array(
+			Route::$get=>'HallpassCtl::get',
+			Route::$put=>'HallpassCtl::checkIn',
+			Route::Authorize(),
+			Route::Request("application/json"),
+			Route::Response("application/json")
+		),
 
 		/* Task Api */
 		'/task/:alpha/:number' => array(

@@ -23,6 +23,9 @@ angular.module('pinwheelApp')
 	.factory('NewUser', function($resource){
 		return $resource('/api/v1/user/new/', {}, {post: {method:'POST'}});
 	})
+	.factory('Hallpass', function($resource){
+		return $resource('/api/v1/hallpass/', {}, {update: {method:'PUT'}});
+	})	
 	.factory('Task', function($resource, ReminderService){
 		return $resource('/api/v1/task/:id/:version', {},
 			{

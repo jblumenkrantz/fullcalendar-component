@@ -1,0 +1,87 @@
+<div id="main-content" style="height: 100%; overflow: hidden; position: relative; z-index: 3" class="small-12 columns large-12">
+	<div id="content" class="row">
+		<!-- <h1 class=""><span aria-hidden="true" class="icon-signup"></span> Hall-Pass</h1> -->       
+		<div class="row">
+			<div class="large-6 small-12 columns">
+				<!-- <h1 class=""><span aria-hidden="true" class="icon-signup"></span> Hall-Pass</h1> -->
+				<form>
+						<div class="row">
+							<div class="large-12 columns">
+								<br>
+								<label>Student Name</label>
+								<input type="text" placeholder="full student name">
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="large-4 columns">
+								<label>Time Out</label>
+								<input type="text" placeholder="ex: 10:15AM">
+							</div>
+							<div class="large-4 columns">
+								<label>Destination</label>
+								<select ng-change="switchCalendar()" ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'" ng-model="formEvent.calendar_id" class="ng-pristine ng-valid">
+									 <option value="0" selected="selected">Home Room</option>
+										<option value="1">Head Office</option>
+										<option value="2">Gym</option>
+										<option value="3">Library</option>
+										<option value="4">Photo Lab</option>
+										<option value="5">Track</option>
+										<option value="6">Study Hall</option>
+										<option value="7">Excused</option> 
+										<option value="8">...</option> 
+								</select>
+								<!-- <input type="text" placeholder="Pre-approved destination"> -->
+							</div>
+							<div class="large-4 columns">
+								<br>
+								<button class="button small success" style="width: 100%;"> <!-- <span aria-hidden="true" class="icon-checkmark"></span> --> <span aria-hidden="true" class="icon-"></span>Issue Pass</button>
+							</div>
+						</div>
+				</form>
+			</div>
+			<div class="large-6 small-12 columns"><br><h5><span aria-hidden="true" class="icon-signup"></span> Authorized personel must log every hallpass issued to students. Another authority will also log the student's arrival at their destination. Only students that are authorized to be outside of class will show up on this list. If a student is not on the list, they must be apprehended and immediately sent to the gulag for 20 years hard labor.</h5></div>
+			<hr>
+		</div>
+		<div class="large-12">
+			<table>
+				<thead>
+					<tr>
+						<th width="100">Name</th>
+						<th width="80">Time Out</th>
+						<th width="80">Time In</th>
+						<th width="200">Destination</th>
+						<th width="200">Authorized By</th>
+						<th width="100">Check-In</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Kid A.</td>
+						<td>10:15am</td>
+						<td>10:22am</td>
+						<td>Library</td>
+						<td>Mr. Smith</td>
+						<td><button class="button small success"><span aria-hidden="true" class="icon-checkmark"></span></button></td>
+					</tr>
+					<tr>
+						<td>Kid A.</td>
+						<td>10:15am</td>
+						<td>10:22am</td>
+						<td>Library</td>
+						<td>Mr. Smith</td>
+						<td><button class="button small success"><span aria-hidden="true" class="icon-checkmark"></span></button></td>
+					</tr>
+					<tr>
+						<td>Kid A.</td>
+						<td>10:15am</td>
+						<td>10:22am</td>
+						<td>Library</td>
+						<td>Mr. Smith</td>
+						<td><button class="button small success"><span aria-hidden="true" class="icon-checkmark"></span></button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

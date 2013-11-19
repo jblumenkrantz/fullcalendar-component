@@ -41,6 +41,8 @@ return array(
     'EventDoesNotExist' => $baseDir . '/www/api/v1/exceptions/EventDoesNotExist.php',
     'ExistingUserException' => $baseDir . '/www/api/v1/exceptions/ExistingUserException.php',
     'HTTPClient' => $baseDir . '/lib/HTTPClient.php',
+    'Hallpass' => $baseDir . '/www/api/v1/models/hallpass.php',
+    'HallpassCtl' => $baseDir . '/www/api/v1/controllers/hallpassCtl.php',
     'ImportCalendar' => $baseDir . '/www/api/v1/models/importCalendar.php',
     'ImportCalendarCtl' => $baseDir . '/www/api/v1/controllers/importCalendarCtl.php',
     'InsuficientEmergencyMessagingPriviledgesException' => $baseDir . '/www/api/v1/exceptions/InsuficientEmergencyMessagingPriviledgesException.php',
