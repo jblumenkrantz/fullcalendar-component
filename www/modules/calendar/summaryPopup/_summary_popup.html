@@ -12,17 +12,17 @@
 				<div class="title" ng-click='summaryEdit(summaryPopup.isTask);'>
 					<strong>{{event.title}}</strong>
 					<span
-						ng-hide="summaryPopup.isTask || !summaryPopup.hasEditPrivileges"
+						ng-hide="summaryPopup.isTask || !event.editable"
 						aria-hidden='true'
 						class='icon-pencil'>
 					</span>
 					<span
-						ng-hide="(summaryPopup.hasEditPrivileges && !summaryPopup.isTask) || summaryPopup.hasReminder"
+						ng-hide="(event.editable && !summaryPopup.isTask) || summaryPopup.hasReminder"
 						aria-hidden='true'
 						class='icon-alarm-plus'>
 					</span>
 					<span
-						ng-hide="(summaryPopup.hasEditPrivileges && !summaryPopup.isTask) || !summaryPopup.hasReminder"
+						ng-hide="(event.editable && !summaryPopup.isTask) || !summaryPopup.hasReminder"
 						aria-hidden='true'
 						class='icon-alarm-cancel'>
 					</span>

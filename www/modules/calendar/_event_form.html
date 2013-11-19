@@ -17,11 +17,12 @@
 		<div class="large-6 columns">
 			<label>Title:</label>
 			<input
-				required
-				focus-me="[addingEvent, editingEvent]"
 				type="text"
-				ng-model="formEvent.title"
 				placeholder="Untitled event"
+				required
+				ng-disabled="!formEvent.editable"
+				focus-me="[addingEvent, editingEvent]"
+				ng-model="formEvent.title"
 			/>
 		</div>
 		<!-- / Event Title -->
@@ -29,6 +30,7 @@
 		<div class="large-6 columns">
 			<label>Calendar:</label>
 			<select
+				ng-disabled="!formEvent.editable"
 				ng-change="switchCalendar()"
 				ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'"
 				ng-model="formEvent.calendar_id"
@@ -43,6 +45,7 @@
 			<!-- Non allDay event show datetime entry -->
 			<datetime
 				ng-required="!formEvent.allDay"
+				ng-disabled="!formEvent.editable"
 				ng-show="!formEvent.allDay"
 				ng-model="formEvent.start"
 				name="start"
@@ -57,6 +60,7 @@
 			<!--AllDay event show date entry -->
 			<date
 				ng-required="formEvent.allDay"
+				ng-disabled="!formEvent.editable"
 				ng-show="formEvent.allDay"
 				ng-model="formEvent.start"
 				name="start"
@@ -74,6 +78,7 @@
 			<!-- Non allDay event show datetime entry -->
 			<datetime
 				ng-required="!formEvent.allDay"
+				ng-disabled="!formEvent.editable"
 				ng-show="!formEvent.allDay"
 				ng-model="formEvent.end"
 				name="end"
@@ -89,6 +94,7 @@
 			<!--AllDay event show date entry -->
 			<date
 				ng-required="formEvent.allDay"
+				ng-disabled="!formEvent.editable"
 				ng-show="formEvent.allDay"
 				ng-model="formEvent.end"
 				name="end"
@@ -107,7 +113,14 @@
 		<!-- All Day -->
 		<div class="large-4 columns">
 			<label class="checkbox">
-				<input type="checkbox" ng-model="formEvent.allDay" ng-click="allDayToggle()" />
+				<input
+					type="checkbox"
+					ng-disabled="!formEvent.editable"
+					ng-model="formEvent.allDay"
+					ng-true-value="1"
+					ng-false-value="0"
+					ng-click="allDayToggle()"
+				/>
 				All Day Event
 			</label>
 		</div>
@@ -115,7 +128,11 @@
 		<!-- Reminder -->
 		<div class="large-4 columns">
 			<label class="checkbox">
-				<input type="checkbox" ng-model="formEvent.has_reminder" ng-click="reminderToggle()" />
+				<input
+					type="checkbox"
+					ng-model="formEvent.has_reminder"
+					ng-click="reminderToggle()"
+				/>
 				Add Reminder
 			</label>
 		</div>
@@ -123,7 +140,11 @@
 		<!-- Repeating -->
 		<div class="large-4 columns">
 			<label class="checkbox">
-				<input type="checkbox" ng-model="formEvent.isRepeating" />
+				<input
+					ng-disabled="!formEvent.editable"
+					type="checkbox"
+					ng-model="formEvent.isRepeating"
+				/>
 				Repeating
 			</label>
 		</div>

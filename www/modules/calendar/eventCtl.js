@@ -14,7 +14,8 @@ angular.module('pinwheelApp')
 				allDay: false,
 				has_reminder: false,
 				isRepeating: false,
-				reminder_offset: 2
+				reminder_offset: 2,
+				editable: true
 			};
 		}
 

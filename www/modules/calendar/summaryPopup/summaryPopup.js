@@ -14,12 +14,10 @@ angular.module('pinwheelApp')
 
 			//open summary and copy resource data
 			scope.openSummary = function(event, clickEvent) {
-				console.log(event);
 				scope.event = event;
 				scope.summaryPopup = angular.extend({}, {
 					isTask: event.hasOwnProperty('task_notes'),
 					description: (event.hasOwnProperty('task_notes')) ? event.task_notes : event.event_description,
-					hasEditPrivileges: true,	//TEST VALUE
 					hasReminder: (!!event.reminder_pref_id || !!event.source.reminder_pref_id),
 					dateString: getDateString(event.start, event.end, event.allDay, event.hasOwnProperty('task_notes'))
 				}, getStyle(clickEvent, event.source.color, event.allDay, scope.view));
