@@ -1,37 +1,37 @@
 <div 
 	id='summaryPopup'
-	ng-show='summaryStyle.visible'
-	ng-style='summaryStyle.position'
+	ng-show='summaryPopup'
+	ng-style='summaryPopup.position'
 	>
-	<div class="summaryPopup-body" style="background: {{summaryStyle.color}};">
+	<div class="summaryPopup-body" style="background: {{summaryPopup.color}};">
 		<div class="subscription-gradient">
 			<div class="subscription-body">
 				<div class='close' ng-click='resetSummary()'>
 					<span class='icon-x-altx-alt' aria-hidden='true'></span>
 				</div>
-				<div class="title" ng-click='summaryEdit(event);'>
+				<div class="title" ng-click='summaryEdit(summaryPopup.isTask);'>
 					<strong>{{event.title}}</strong>
 					<span
-						ng-hide="summaryStyle.isTask || !summaryStyle.hasEditPrivileges"
+						ng-hide="summaryPopup.isTask || !summaryPopup.hasEditPrivileges"
 						aria-hidden='true'
 						class='icon-pencil'>
 					</span>
 					<span
-						ng-hide="(summaryStyle.hasEditPrivileges && !summaryStyle.isTask) || summaryStyle.hasReminder"
+						ng-hide="(summaryPopup.hasEditPrivileges && !summaryPopup.isTask) || summaryPopup.hasReminder"
 						aria-hidden='true'
 						class='icon-alarm-plus'>
 					</span>
 					<span
-						ng-hide="(summaryStyle.hasEditPrivileges && !summaryStyle.isTask) || !summaryStyle.hasReminder"
+						ng-hide="(summaryPopup.hasEditPrivileges && !summaryPopup.isTask) || !summaryPopup.hasReminder"
 						aria-hidden='true'
 						class='icon-alarm-cancel'>
 					</span>
 				</div>
 				<div class="time">
-					{{summaryStyle.dateString}}
+					{{summaryPopup.dateString}}
 				</div>
-				<div ng-show="summaryStyle.description!=''" class="description" ng-class="{'short':!summaryStyle.expand}" ng-click="toggleExpand();">
-					{{summaryStyle.description}}
+				<div ng-show="summaryPopup.description!=''" class="description" ng-class="{'short':!summaryPopup.expand}" ng-click="toggleExpand();">
+					{{summaryPopup.description}}
 				</div>
 				<ul class='button-group even-2' style="clear: both;"> 
 					<li> 
@@ -40,7 +40,7 @@
 						</button> 
 					</li> 
 					<li style="padding: 0;"> 
-						<button class='button radius' ng-click='summaryDelete(); resetSummary();'> 
+						<button class='button radius' ng-click='summaryDelete(summaryPopup.isTask); resetSummary();'> 
 							<span aria-hidden='true' class='icon-remove-2'></span> 
 						</button> 
 					</li>
@@ -48,6 +48,6 @@
 			</div>
 		</div>
 	</div>
-	<div class="pointer" ng-class="{'top':summaryStyle.pointer.top}" ng-style="summaryStyle.pointer">
+	<div class="pointer" ng-class="{'top':summaryPopup.pointer.top}" ng-style="summaryPopup.pointer">
 	</div>
 </div>
