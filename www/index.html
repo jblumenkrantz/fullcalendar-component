@@ -138,6 +138,10 @@
 			this.setDate(this.getDate()+d);
 			return this;
 		}
+		Date.prototype.addMinutes = function(m){
+			this.setMinutes(this.getMinutes()+m);
+			return this;
+		}
 		Date.prototype.setTimeByString = function(str) {
 			var parts = str.match(/(\d+)\.(\d+) (\w+)/),
     			hours = /am/i.test(parts[3]) ? parseInt(parts[1], 10) : parseInt(parts[1], 10) + 12,

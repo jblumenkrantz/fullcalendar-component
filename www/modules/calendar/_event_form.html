@@ -47,12 +47,12 @@
 				ng-model="formEvent.start"
 				name="start"
 				placeholder="m/d/yyyy h:mm AM/PM"
-				date-format="MM/d/yyyy"
+				date-format="M/d/yyyy"
 				time-format="h:mm a"
 				divider="@"
 				dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y @ h:M a'}"
 				jqui-opts="{dateFormat: 'm/d/yy'}"
-				ng-change="moveTime('end', 1)"
+				ng-change="moveEndTime(1);"
 			/>
 			<!--AllDay event show date entry -->
 			<date
@@ -61,10 +61,10 @@
 				ng-model="formEvent.start"
 				name="start"
 				placeholder="m/d/yyyy"
-				date-format="MM/d/yyyy"
+				date-format="M/d/yyyy"
 				dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y'}"
 				jqui-opts="{dateFormat: 'm/d/yy'}"
-				ng-change="moveTime('end', 0)"
+				ng-change="moveEndTime(0);"
 			/>
 		</div>
 		<!-- / Start Time -->
@@ -78,12 +78,13 @@
 				ng-model="formEvent.end"
 				name="end"
 				placeholder="m/d/yyyy h:mm AM/PM"
-				date-format="MM/d/yyyy"
+				date-format="M/d/yyyy"
 				time-format="h:mm a"
+				min-watch="formEvent.start"
 				divider="@"
-				dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y @ h:M a'}"
-				jqui-opts="{dateFormat: 'm/d/yy'}"
-				ng-change="moveTime('start', -1)"
+				dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y @ h:M a', minDatetime: formEvent.start}"
+				jqui-opts="{dateFormat: 'm/d/yy', minDate: formEvent.start}"
+				ng-change="end.moved = true;"
 			/>
 			<!--AllDay event show date entry -->
 			<date
@@ -92,10 +93,11 @@
 				ng-model="formEvent.end"
 				name="end"
 				placeholder="m/d/yyyy"
-				date-format="MM/d/yyyy"
-				dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y'}"
-				jqui-opts="{dateFormat: 'm/d/yy'}"
-				ng-change="moveTime('start', 0)"
+				date-format="M/d/yyyy"
+				min-watch="formEvent.start"
+				dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y', minDateime: formEvent.start}"
+				jqui-opts="{dateFormat: 'm/d/yy', minDate: formEvent.start}"
+				ng-change="end.moved = true;"
 			/>
 		</div>
 		<!-- / End Time -->

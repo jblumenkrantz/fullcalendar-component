@@ -63,7 +63,7 @@ angular.module('pinwheelApp')
 		//save new event
 		$scope.save = function(continuing) {
 			var event = angular.copy($scope.formEvent);
-			$scope.formEvent.$save({}, function(newEvent) {
+			event.$save({}, function(newEvent) {
 				$.each($scope.calendars, function(i,cal) {
 					if(cal.calendar_id == event.calendar_id){
 						cal.events.push(newEvent);
@@ -96,6 +96,7 @@ angular.module('pinwheelApp')
 			$scope.addingEvent = continuing;
 			$scope.editingEvent = false;
 			$scope.quickAdding = false;
+			$scope.end.moved = false;
 		}
 
 		//pass true to reset to load a brand new event object
@@ -213,19 +214,20 @@ angular.module('pinwheelApp')
 				$scope.formEvent.end = new Date($filter('date')(e, format)); //get date object set to current hour + 1
 			}
 		}
-		$scope.previous = function(){
+		$scope.previous = function() {
 			$scope.pinwheel.fullCalendar('prev');
    			$scope.routeDate = $scope.pinwheel.fullCalendar('getDate');
 		}
-		$scope.next = function(){
+		$scope.next = function() {
 			$scope.pinwheel.fullCalendar('next');
 			$scope.routeDate = $scope.pinwheel.fullCalendar('getDate');
 		}
-		$scope.moveTime = function(position, hours) {
-			var opp = (position=='start') ? 'end' : 'start';
-			$scope[opp+"TimeMoved"] = true;
-			if (!$scope[position+"TimeMoved"]) {
-				$scope.formEvent[position] = new Date($scope.formEvent[opp]).addHours(hours);
+		$scope.end = {
+			moved: false
+		}
+		$scope.moveEndTime = function(hours) {
+			if (!$scope.end.moved || $scope.formEvent.start >= $scope.formEvent.end) {
+				$scope.formEvent.end = new Date($scope.formEvent.start).addHours(hours);
 			}
 		}
   });

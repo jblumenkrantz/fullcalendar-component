@@ -82,6 +82,7 @@ angular.module('pinwheelApp')
 					nextText: "",
 					prevText: "",
 					showOn: 'both',
+					preventUpdate: true,
 					buttonImage: 'assets/images/icon-calendar-2.png',
 					onSelect: function(value, inst) {
 						var time = inst.lastVal.substr(inst.lastVal.indexOf(attrs.divider)+1);
@@ -100,13 +101,22 @@ angular.module('pinwheelApp')
 				element.datetimeEntry(datetimeEntryOpts);
 
 				//bind change event to update model
-				element.change(function() {
+				element.change(function(e) {
 					scope.$apply(ngModelCtrl.$setViewValue($(this).val()));
-				});
+				}); 
 
-				//toggle picker button when element is hidden
+				//toggle picker button visibility when element is hidden
 				scope.$watch(attrs.ngShow, function(isVisible) {
 					element.next(".ui-datepicker-trigger").toggle(isVisible);
+				});
+
+				//prevent user from selecting an end time that is before start time
+				//minWatch is not passed to start time datetime directive
+				scope.$watch(attrs.minWatch, function(newVal, oldVal) {
+					if (angular.equals(oldVal, newVal) || scope.formEvent.allDay) return;		//prevent initial call
+					var min = (new Date(newVal)).addMinutes(1);
+					element.datetimeEntry("option", "minDatetime", min);
+					element.datepicker("option", "minDate", min);
 				});
 			}
 		}
@@ -138,6 +148,7 @@ angular.module('pinwheelApp')
 					nextText: "",
 					prevText: "",
 					showOn: 'both',
+					preventUpdate: true,
 					buttonImage: 'assets/images/icon-calendar-2.png',
 					onSelect: function(value, inst) {
 						$(this).val(value).change();
@@ -161,6 +172,15 @@ angular.module('pinwheelApp')
 				//toggle picker button when element is hidden
 				scope.$watch(attrs.ngShow, function(isVisible) {
 					element.next(".ui-datepicker-trigger").toggle(isVisible);
+				});
+
+				//prevent user from selecting an end time that is before start time
+				//minWatch is not passed to start time datetime directive
+				scope.$watch(attrs.minWatch, function(newVal, oldVal) {
+					if (angular.equals(oldVal, newVal) || !scope.formEvent.allDay) return;		//prevent initial call
+					var min = (new Date(newVal));
+					element.datetimeEntry("option", "minDatetime", min);
+					element.datepicker("option", "minDate", min);
 				});
 			}
 		}

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pinwheelApp')
-.directive('summaryPopup', function($filter, Event, timeDisplayFormat, longDisplayFormat) {
+.directive('summaryPopup', function($filter, Event, timeDisplayFormat, longDisplayFormat, Debounce) {
 	return {
 		restrict: "E",
 		replace: true,
@@ -15,14 +15,13 @@ angular.module('pinwheelApp')
 			scope.openSummary = function(event, clickEvent) {
 				scope.event = event;
 				scope.resetSummary();
-				scope.summaryStyle = getStyle(clickEvent, event.source.color);
+				scope.summaryStyle = getStyle(clickEvent, event.source.color, event.allDay, scope.view);
 				scope.summaryStyle.isTask = event.hasOwnProperty('task_notes');
 				scope.summaryStyle.description = (scope.summaryStyle.isTask) ? event.task_notes : event.event_description;
 				scope.summaryStyle.visible = true;
 				scope.summaryStyle.hasEditPrivileges = true;	//TEST VALUE
 				scope.summaryStyle.hasReminder = (!!event.reminder_pref_id || !!event.source.reminder_pref_id);
-				scope.summaryStyle.dateString =  getDateString(event, scope.summaryStyle.isTask);
-				scope.summaryStyle.creatorString = getCreatorString(scope.summaryStyle.hasEditPrivileges, scope.summaryStyle.isTask);
+				scope.summaryStyle.dateString =  getDateString(event.start, event.end, event.allDay, scope.summaryStyle.isTask);
 			}
 
 			scope.summaryEdit = function() {
@@ -35,7 +34,7 @@ angular.module('pinwheelApp')
 			scope.summaryDelete = function() {
 				delete scope.event.source;
 				scope.delete(new Event(scope.event));
-
+				
 				//TODO if task do what
 			}
 
@@ -51,68 +50,80 @@ angular.module('pinwheelApp')
 
 			scope.resetSummary(); //initialize summary popup
 
-
-			//returns authorship string
-			function getCreatorString(canEdit, isTask) {
-				return ["You are", (!canEdit) ? "not" : "", "this", (isTask) ? "task's" : "event's", "author."].join(" ");
-			}
-
 			//returns string to display dates
-			function getDateString(event, isTask) {
-				var start, end, startFormat, endFormat, isMultiDay;
-
-				//multiple days if range is greater that 1 day (millis)
-				isMultiDay = (event.end - event.start >= 86400000);
+			function getDateString(start, end, allDay, isTask) {
+				var startStr, endStr, startFormat, endFormat;
+				var isMultiDay = (end - start >= 86400000); //86400000 = 1 day in milliseconds
 
 				//form start of string
-				startFormat = (event.allDay) ? longDisplayFormat : longDisplayFormat+", "+timeDisplayFormat;
-				start = $filter('date')(event.start, startFormat);
+				startFormat = (allDay) ? longDisplayFormat : longDisplayFormat+", "+timeDisplayFormat;
+				startStr = $filter('date')(start, startFormat);
 
 				//form end of string
 				endFormat = (isMultiDay) ? startFormat : timeDisplayFormat;
-				end = (isTask || (event.allDay && !isMultiDay)) ? "" : " - " + $filter('date')(event.end, endFormat);
+				endStr = (isTask || (allDay && !isMultiDay)) ? "" : " - " + $filter('date')(end, endFormat);
 
 				//return whole string
-				return start + end;
+				return startStr + endStr;
 			}
 
 			//returns position and color style for the event popup
-			function getStyle(clickEvent, color) {
+			function getStyle(clickEvent, color, isAllDay, calendarView) {
 				var style = {};													//style object
 				var eventBlock = $(clickEvent.target).closest(".fc-event");		//event container
 				var eventBlockOffset = eventBlock.offset();						//event container offset relative to document
 
+				//for non-all day events that appear in the day/week view place even popup where the user clicked 
+				var placeWhereClicked = (!isAllDay && (calendarView == 'week' || calendarView == 'day'));			
+
+				//set color
 				style.color = color;
 
-				//set container position
-				style.position = {
-					left: eventBlockOffset.left - mainContent.offset().left - 3,
-					bottom: mainContent.outerHeight() - eventBlockOffset.top + headerHeight + popUpOffset
-				};
-
-				//set pointer position/color
+				//set pointer position/color defaults
 				style.pointer = {
 					left: 4,
 					bottom: -9,
 					background: color
 				};
 
-				//adjust position if too close to top
-				if (eventBlockOffset.top <= 133) {
-					delete style.bottom;
+				//set container position based on view
+				style.position = (placeWhereClicked) ? getClickPosition() : getEventPosition();
+
+				//if clicked within 300px of top of calendar area, have popup appear below event/click
+				if (clickEvent.pageY < 300) {
+					delete style.position.bottom;
 					delete style.pointer.bottom;
 
-					style.position.top = eventBlockOffset.top + eventBlock.outerHeight() - headerHeight + popUpOffset;
+					var top1 = eventBlockOffset.top + eventBlock.outerHeight() - headerHeight + popUpOffset;
+					var top2 = clickEvent.pageY - headerHeight + 14;
+
+					style.position.top = (placeWhereClicked) ? top2 : top1;
 					style.pointer.top = -9;
 				}
 
-				var overByLeft = (eventBlockOffset.left+popUpWidth) - (mainContent.offset().left+mainContent.outerWidth());
-			
-				if (overByLeft > 0) {
+				//if cut off on the left, adjust by amount cut off and reposition pointer
+				var leftOverlap = style.position.left + popUpWidth - mainContent.outerWidth();
+				if (leftOverlap > 0) {
 					delete style.position.left;
 					style.position.right = 0;
-					style.pointer.left += overByLeft;
-				} 
+					style.pointer.left += leftOverlap;
+				}
+
+				//returns position at top left corner of event block
+				function getEventPosition() {
+					return {
+						left: eventBlockOffset.left - mainContent.offset().left - 3,
+						bottom: mainContent.outerHeight() - eventBlockOffset.top + headerHeight + popUpOffset
+					};
+				}
+
+				//returns position where the user clicks
+				function getClickPosition() {
+					return {
+						left: clickEvent.pageX - mainContent.offset().left - 14,
+						bottom: $(window).height() - clickEvent.pageY + 14
+					}
+				}
 
 				return style;
 			}
@@ -123,6 +134,11 @@ angular.module('pinwheelApp')
 				var notClickingSummaryPopup = (element.has($(e.target)).length == 0);
 				(notClickingEvent && notClickingSummaryPopup && scope.$apply(scope.resetSummary()));
 			});
+
+			//hide popup on widow resize
+			$(window).resize(Debounce(function() {
+				scope.$apply(scope.resetSummary());
+			}, null, true));
 		}
 	}
 });
