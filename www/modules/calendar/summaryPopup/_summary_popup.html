@@ -1,45 +1,53 @@
 <div 
 	id='summaryPopup'
 	ng-show='summaryStyle.visible'
-	ng-style='summaryStyle.style'>
-	<div class='close' ng-click='resetSummary()'>
-		<span class='icon-x-altx-alt' aria-hidden='true'></span>
-	</div> 
-	<div>{{event.title}}</div>
-
-	<div ng-show="summaryStyle.expand">
-		{{event.start | date}}<br />
-		{{event.end | date}}<br />
-		{{event.description}}
-	</div> 
-
-	<div class='row'> 
-		<div class='large-12 columns'> 
-			<ul class='button-group even-4'> 
-				<li> 
-					<button ng-hide="summaryStyle.expand" class='button radius' ng-click='expandSummary()'> 
-						<span aria-hidden='true' class='icon-more'> More</span> 
-					</button>
-					<button ng-show="summaryStyle.expand" class='button radius' ng-click='collapseSummary()'> 
-						<span aria-hidden='true' class='icon-android'> Less</span> 
-					</button> 
-				</li> 
-				<li> 
-					<button class='button radius' ng-click='resetSummary();'> 
-						<span aria-hidden='true' class='icon-share'> Share</span> 
-					</button> 
-				</li> 
-				<li> 
-					<button class='button radius' ng-click='summaryDelete(); resetSummary();'> 
-						<span aria-hidden='true' class='icon-remove-2'> Delete</span> 
-					</button> 
-				</li> 
-				<li> 
-					<button class='button radius' ng-click='edit(event); resetSummary();'> 
-						<span aria-hidden='true' class='icon-pencil'> Edit</span> 
-					</button> 
-				</li> 
-			</ul> 
-		</div> 
+	ng-style='summaryStyle.position'
+	>
+	<div class="summaryPopup-body" style="background: {{summaryStyle.color}};">
+		<div class="subscription-gradient">
+			<div class="subscription-body">
+				<div class='close' ng-click='resetSummary()'>
+					<span class='icon-x-altx-alt' aria-hidden='true'></span>
+				</div>
+				<div class="title" ng-click='summaryEdit(event);'>
+					<strong>{{event.title}}</strong>
+					<span
+						ng-hide="summaryStyle.isTask || !summaryStyle.hasEditPrivileges"
+						aria-hidden='true'
+						class='icon-pencil'>
+					</span>
+					<span
+						ng-hide="(summaryStyle.hasEditPrivileges && !summaryStyle.isTask) || summaryStyle.hasReminder"
+						aria-hidden='true'
+						class='icon-alarm-plus'>
+					</span>
+					<span
+						ng-hide="(summaryStyle.hasEditPrivileges && !summaryStyle.isTask) || !summaryStyle.hasReminder"
+						aria-hidden='true'
+						class='icon-alarm-cancel'>
+					</span>
+				</div>
+				<div class="time">
+					{{summaryStyle.dateString}}
+				</div>
+				<div ng-show="summaryStyle.description!=''" class="description" ng-class="{'short':!summaryStyle.expand}" ng-click="toggleExpand();">
+					{{summaryStyle.description}}
+				</div>
+				<ul class='button-group even-2' style="clear: both;"> 
+					<li> 
+						<button class='button radius' ng-click='resetSummary();'> 
+							<span aria-hidden='true' class='icon-share'></span> 
+						</button> 
+					</li> 
+					<li style="padding: 0;"> 
+						<button class='button radius' ng-click='summaryDelete(); resetSummary();'> 
+							<span aria-hidden='true' class='icon-remove-2'></span> 
+						</button> 
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="pointer" ng-class="{'top':summaryStyle.pointer.top}" ng-style="summaryStyle.pointer">
 	</div>
 </div>

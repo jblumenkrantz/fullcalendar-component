@@ -150,7 +150,7 @@ $.extend(DatetimeEntry.prototype, {
 		$.extend(inst.options, options);
 		inst._field = 0;
 		this._decodeDatetimeFormat(inst);
-		if (currentDate) {
+		if (currentDate && options != 'minDatetime') {
 			this._setDatetime(inst, currentDate);
 		}
 		// Remove stuff dependent on old settings
