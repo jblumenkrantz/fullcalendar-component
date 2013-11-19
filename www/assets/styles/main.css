@@ -369,13 +369,8 @@ form input.ng-invalid {
 	-moz-box-shadow: 0 0 5px #999999;
 	box-shadow: 0 0 5px #999999;
 }
-#summaryPopup .subscription-body {
-	position: relative;
-	overflow: hidden;
+#summaryPopup .resource-body {
 	margin: 1px 1px 1px 8px;
-}
-#summaryPopup .subscription-gradient {
-	overflow: hidden;
 }
 #summaryPopup .summaryPopup-body {
 	overflow: hidden;

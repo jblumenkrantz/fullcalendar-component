@@ -104,10 +104,10 @@ dl.sub-nav.calendar-filter {
 	top: 12px;
 	margin-top: 10px;
 }
+
 dl.sub-nav.calendar-filter dd {
 	margin-top: 12px;
 }
-
 
 // --------------------------
 // header bar for sidebars
@@ -125,10 +125,6 @@ dl.sub-nav.calendar-filter dd {
 	position: relative;
 	top: 3px;
 	cursor:pointer;
-}
-
-.pane-header [class*="icon-"]:active{
-	
 }
 
 .pane-header span{
@@ -162,7 +158,6 @@ header#content-header ul.small-block-grid-3 span.month-switcher{
 	position: relative;
 	top: -1px;
 }
-
 header#content-header [class*="icon-"] {
 	cursor:pointer;
 }
@@ -170,13 +165,14 @@ header#content-header [class*="icon-"] {
 #org-name-wrapper {
 	position: absolute; left: 50%;
 }
+
 .org-name {
-font-size: 20px;
-font-weight: bold;
-text-shadow: $letter-press;
-position: relative;
-top: 7px;
-width: 50%;
+	font-size: 20px;
+	font-weight: bold;
+	text-shadow: $letter-press;
+	position: relative;
+	top: 7px;
+	width: 50%;
 }
 
 @media only screen and (max-width: 768px) {
@@ -286,17 +282,17 @@ ul.days, .calendar-day {padding: 0; margin: 0; width: 100%;}
 }
 
 .icon-calendarPlus {
-top: 6px;
-right: 4px;
-position: absolute;
-display: block;
-color: #555;
-font-size: 18px;
-border: 0;
-background: 0;
-padding: 0;
-margin: 0;
-cursor: pointer;
+	top: 6px;
+	right: 4px;
+	position: absolute;
+	display: block;
+	color: #555;
+	font-size: 18px;
+	border: 0;
+	background: 0;
+	padding: 0;
+	margin: 0;
+	cursor: pointer;
 }
 
 .icon-backspace:before {
@@ -304,15 +300,15 @@ cursor: pointer;
 	background: #fff;
 	text-shadow: 0px 0px 0px #000;
     filter: dropshadow(color=#000, offx=0, offy=0);
-  position: absolute;
-  top: 3px;
-  right: 2px;
-  height: auto;
-  padding-left: 5px;
-  line-height: 24px;
-  color: #555;
-  cursor: pointer !important; //make inline style
-  font-size: 20px;
+	position: absolute;
+	top: 3px;
+	right: 2px;
+	height: auto;
+	padding-left: 5px;
+	line-height: 24px;
+	color: #555;
+	cursor: pointer !important; //make inline style
+	font-size: 20px;
 }
 // -----------------------------
 // subscriptions & tasks
@@ -322,21 +318,23 @@ border-bottom: 1px solid #999;
 overflow: hidden;
 }
 
-.subscription-gradient, .task-gradient {
-background: #eeeeee; /* Old browsers */
-background: -moz-linear-gradient(top,  rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.3)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top,  rgba(255,255,255,0.3) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top,  rgba(255,255,255,0.3) 0%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top,  rgba(255,255,255,0.3) 0%,rgba(255,255,255,0) 100%); /* IE10+ */
-background: linear-gradient(to bottom,  rgba(255,255,255,0.3) 0%,rgba(255,255,255,0) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4dffffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
+.resource-gradient {
+	overflow: hidden;
+	background: #eeeeee; /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.3)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(255,255,255,0.3) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(255,255,255,0.3) 0%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(255,255,255,0.3) 0%,rgba(255,255,255,0) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(255,255,255,0.3) 0%,rgba(255,255,255,0) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4dffffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
 }
 
-
-
-.subscription-body, .task-body { //inside
-background: #eeeeee; /* Old browsers */
+.resource-body { //inside
+	position: relative;
+	overflow: hidden;
+	margin: 0 0 0 8px;
+	background: #eeeeee; /* Old browsers */
 	background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
 	background: -webkit-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
@@ -344,23 +342,14 @@ background: #eeeeee; /* Old browsers */
 	background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
 	background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
-}
-.subscription-body { //inside
-min-height: 50px !important;
-padding: 5px 4px 5px 5px;
-margin-left: 8px;
+	min-height: 50px !important;
+	padding: 5px 4px 5px 5px;
 }
 
-.task-body { //inside
-min-height: 50px !important;
-padding: 5px 4px 5px 5px;
-margin-left: 8px;
-}
-.task-body.add {
+.task .resource-body.add {
 	min-height: none;
-// background: rgba(255,255,255,.9);
-// same light gray gradient as topbar
-background: #eeeeee; /* Old browsers */
+	// same light gray gradient as topbar
+	background: #eeeeee; /* Old browsers */
 	background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
 	background: -webkit-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
@@ -368,38 +357,38 @@ background: #eeeeee; /* Old browsers */
 	background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
 	background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
-padding: 16px 4px 6px;
-margin-left: 8px;
+	padding: 16px 4px 6px;
+	margin-left: 8px;
 }
 
 .subscription-calendar-title {
 	overflow: hidden;
-white-space: nowrap;
-text-overflow: ellipsis;
-width: 90%;
-display: inline-block !important;
-cursor: pointer;
-color: #222;
-font-size: 14px;
-padding-top: 12px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	width: 90%;
+	display: inline-block !important;
+	cursor: pointer;
+	color: #222;
+	font-size: 14px;
+	padding-top: 12px;
 }
 
-.subscription-panel  .subscribed{
-position: absolute;
-top: -8px;
-right: -3px;
-display: block;
-color: #555;
-font-size: 18px;
-border: 0;
-background: 0;
-padding: 0;
-margin: 0;
-transform: rotate(180deg) !important;
--ms-transform: rotate(180deg) !important; /* IE 9 */
--webkit-transform: rotate(180deg) !important; /* Safari and Chrome */
-box-shadow: none;
-font-size: 16px;
+.subscription-panel  .subscribed {
+	position: absolute;
+	top: -8px;
+	right: -3px;
+	display: block;
+	color: #555;
+	font-size: 18px;
+	border: 0;
+	background: 0;
+	padding: 0;
+	margin: 0;
+	transform: rotate(180deg) !important;
+	-ms-transform: rotate(180deg) !important; /* IE 9 */
+	-webkit-transform: rotate(180deg) !important; /* Safari and Chrome */
+	box-shadow: none;
+	font-size: 16px;
 }
 
 .subscription-panel [class*="icon-"], .task-panel [class*="icon-"]{
@@ -427,19 +416,17 @@ font-size: 16px;
 
 
 
-.button-group li{
-padding: 0 5px 0 0;
-
+.button-group li {
+	padding: 0 5px 0 0;
 }
+
 #calendar-admin-modal button,
 #account-settings-modal button,
 .button-group li div.button,
-.button-group li button
-
- { 
+.button-group li button { 
  	color: #333 !important;
-padding: 6px;	
- background: #eeeeee; /* Old browsers */
+	padding: 6px;	
+	background: #eeeeee; /* Old browsers */
 	background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
 	background: -webkit-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
@@ -447,16 +434,15 @@ padding: 6px;
 	background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
 	background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
- border: 1px solid #ccc;
- margin: 0;
-height: 36px;
+	border: 1px solid #ccc;
+	margin: 0;
+	height: 36px;
 }
 
 .button-group li div.button:hover:enabled,
-.button-group li button:hover:enabled
- { 
+.button-group li button:hover:enabled { 
  	color: #333 !important;
- background: #eeeeee; /* Old browsers */
+	background: #eeeeee; /* Old browsers */
 	background: -moz-linear-gradient(top,  #eeeeee 60%, #cccccc 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(60%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
 	background: -webkit-linear-gradient(top,  #eeeeee 60%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
@@ -464,8 +450,7 @@ height: 36px;
 	background: -ms-linear-gradient(top,  #eeeeee 60%,#cccccc 100%); /* IE10+ */
 	background: linear-gradient(to bottom,  #eeeeee 60%,#cccccc 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
-
- margin: 0;
+	margin: 0;
 }
 
 button:focus {
@@ -509,19 +494,6 @@ border-top: 0px solid $primary-color;
 @media only screen 
 and (min-device-width : 768px) 
 and (max-device-width : 1024px) {
-	.task .body .title {
-		font-size: 12px;
-	}
-	.task .body .due-date, .task .body .notes {
-		font-size: 9px;
-	}
-	.edit-container input, textarea {
-		padding: 1px;
-		font-size: 9px !important;
-	}
-	.task .body .notes:hover, .task .body .due-date:hover, .task .body .title:hover  {
-		text-decoration: none;
-	}
 	#main-nav:target, #left-nav:target  {
   width: 50%;
 	}
@@ -567,14 +539,6 @@ and (max-device-width : 1024px) {
 	width: auto;
 }
 
-//position topbar control icons
-.menubar ul li a span {
-	font-size: 20px;
-	height: 45px;
-	position: relative;
-	top: 8px;
-	margin: 0 12px;
-}
 // style main header bar and default content area with gradient
 #main-content, #mainHeader {
 	background: #eeeeee; /* Old browsers */
@@ -587,6 +551,14 @@ and (max-device-width : 1024px) {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
 }
 
+//position topbar control icons
+.menubar ul li a span {
+	font-size: 20px;
+	height: 45px;
+	position: relative;
+	top: 8px;
+	margin: 0 12px;
+}
 
 // OFF CANVAS MENU EXPERIMENT BELOW -JT
 .main-header {
@@ -681,7 +653,6 @@ and (max-device-width : 1024px) {
  
   }
 }
-
 
 // HALLPASS STYLES
 #content {
