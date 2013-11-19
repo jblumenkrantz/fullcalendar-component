@@ -1,6 +1,7 @@
 <!-- HEADER -->
 <div class="pane-header">
-    <span ng-show="editingEvent" class="pane-title">Edit Event</span>
+	<span ng-show="editingEvent && !formEvent.editable" class="pane-title">Edit Reminder</span>
+    <span ng-show="editingEvent && formEvent.editable" class="pane-title">Edit Event</span>
     <span ng-show="addingEvent" class="pane-title">
     	Add New Event 
     	<label style="display: inline; font-size: 14px; color: inherit;" for="alwaysAdvanced">
@@ -16,13 +17,25 @@
 		<!-- Event Title -->
 		<div class="large-6 columns">
 			<label>Title:</label>
-			<input required focus-me="[addingEvent, editingEvent]" type="text" ng-model="formEvent.title" placeholder="Untitled event" />
+			<input
+				type="text"
+				placeholder="Untitled event"
+				required
+				ng-disabled="!formEvent.editable"
+				focus-me="[addingEvent, editingEvent]"
+				ng-model="formEvent.title"
+			/>
 		</div>
 		<!-- / Event Title -->
 		<!-- Calendar -->
 		<div class="large-6 columns">
 			<label>Calendar:</label>
-			<select ng-change="switchCalendar()" ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'" ng-model="formEvent.calendar_id" ></select>
+			<select
+				ng-disabled="!formEvent.editable"
+				ng-change="switchCalendar()"
+				ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'"
+				ng-model="formEvent.calendar_id"
+			></select>
 		</div>
 		<!-- / Calendar -->
 	</div>
@@ -33,6 +46,7 @@
 			<!-- Non allDay event show datetime entry -->
 			<datetime
 				ng-required="!formEvent.allDay"
+				ng-disabled="!formEvent.editable"
 				ng-show="!formEvent.allDay"
 				ng-model="formEvent.start"
 				name="start"
@@ -47,6 +61,7 @@
 			<!--AllDay event show date entry -->
 			<date
 				ng-required="formEvent.allDay"
+				ng-disabled="!formEvent.editable"
 				ng-show="formEvent.allDay"
 				ng-model="formEvent.start"
 				name="start"
@@ -64,6 +79,7 @@
 			<!-- Non allDay event show datetime entry -->
 			<datetime
 				ng-required="!formEvent.allDay"
+				ng-disabled="!formEvent.editable"
 				ng-show="!formEvent.allDay"
 				ng-model="formEvent.end"
 				name="end"
@@ -79,6 +95,7 @@
 			<!--AllDay event show date entry -->
 			<date
 				ng-required="formEvent.allDay"
+				ng-disabled="!formEvent.editable"
 				ng-show="formEvent.allDay"
 				ng-model="formEvent.end"
 				name="end"
@@ -97,7 +114,12 @@
 		<!-- All Day -->
 		<div class="large-4 columns">
 			<label class="checkbox">
-				<input type="checkbox" ng-model="formEvent.allDay" ng-true-value="1" ng-false-value="0" ng-click="allDayToggle()" />
+				<input
+					type="checkbox"
+					ng-disabled="!formEvent.editable"
+					ng-model="formEvent.allDay"
+					ng-click="allDayToggle()"
+				/>
 				All Day Event
 			</label>
 		</div>
@@ -105,7 +127,11 @@
 		<!-- Reminder -->
 		<div class="large-4 columns">
 			<label class="checkbox">
-				<input type="checkbox" ng-model="formEvent.has_reminder" ng-click="reminderToggle()" />
+				<input
+					type="checkbox"
+					ng-model="formEvent.has_reminder"
+					ng-click="reminderToggle()"
+				/>
 				Add Reminder
 			</label>
 		</div>
@@ -113,7 +139,11 @@
 		<!-- Repeating -->
 		<div class="large-4 columns">
 			<label class="checkbox">
-				<input type="checkbox" ng-model="formEvent.isRepeating" />
+				<input
+					ng-disabled="!formEvent.editable"
+					type="checkbox"
+					ng-model="formEvent.isRepeating"
+				/>
 				Repeating
 			</label>
 		</div>
@@ -143,7 +173,7 @@
 				<input ng-required="!hideOffset" type='number' min="1" ng-model="formEvent.reminder_offset" placeholder="2" ng-change="usingOwnReminder()" />
 			</div>
 
-			<div style="float: left;" ng-class="{'with-offset':!hideOffset, 'without-offset':hideOffset}">
+			<div style="float: left;" ng-class="{'with-offset':!hideOffset, 'without-offset':hideOffset}" class="calendar-picker-container nolabel">
 				<!-- Reminder Types -->
 				<select
 					ng-class="{
@@ -172,10 +202,15 @@
 				<!-- Absolute Reminder Datetime -->
 				<datetime
 					class="on-date-right"
-					ng-model="formEvent.reminder_datetime"
 					placeholder="m/d/yyyy h:mm AM/PM"
+					ng-model="formEvent.reminder_datetime"
 					ng-show="typeIsThree = formEvent.reminder_type == 3"
 					ng-required="typeIsThree"
+					date-format="M/d/yyyy"
+					time-format="h:mm a"
+					divider="@"
+					dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y @ h:M a'}"
+					jqui-opts="{dateFormat: 'm/d/yy'}"
 				/>
 			</div>
 
