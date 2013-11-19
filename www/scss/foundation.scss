@@ -655,7 +655,7 @@ and (max-device-width : 1024px) {
   button {
   	width: 160px;
   	margin: 20px !important;
-  	border-radius: 4px;
+  	border-radius: $global-radius;
   }
 }
 
