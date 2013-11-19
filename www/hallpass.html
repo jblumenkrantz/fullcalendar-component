@@ -1,0 +1,253 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Pinwheel - &beta;</title>
+    <meta name="description" content="">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- iPhone -->
+    <link href="assets/images/ios/touch-icon-iphone.png"
+        sizes="57x57"
+        rel="apple-touch-icon">
+    <link href="assets/images/ios/apple-touch-startup-image-320x460.png"
+        media="(device-width: 320px) and (device-height: 480px)
+            and (-webkit-device-pixel-ratio: 1)"
+        rel="apple-touch-startup-image">
+
+    <!-- iPhone (Retina) -->
+    <link href="assets/images/ios/touch-icon-iphone-retina.png"
+        sizes="114x114"
+        rel="apple-touch-icon">
+    <link href="assets/images/ios/apple-touch-startup-image-640x920.png"
+        media="(device-width: 320px) and (device-height: 480px)
+            and (-webkit-device-pixel-ratio: 2)"
+        rel="apple-touch-startup-image">
+
+    <!-- iPhone 5 -->
+    <link href="assets/images/ios/apple-touch-startup-image-640x1096.png"
+        media="(device-width: 320px) and (device-height: 568px)
+            and (-webkit-device-pixel-ratio: 2)"
+        rel="apple-touch-startup-image">
+
+    <!-- iPad -->
+    <link href="assets/images/ios/touch-icon-ipad.png"
+        sizes="72x72"
+        rel="apple-touch-icon">
+    <link href="assets/images/ios/apple-touch-startup-image-768x1004.png"
+        media="(device-width: 768px) and (device-height: 1024px)
+            and (orientation: portrait)
+            and (-webkit-device-pixel-ratio: 1)"
+         rel="apple-touch-startup-image">
+    <link href="assets/images/ios/apple-touch-startup-image-748x1024.png"
+        media="(device-width: 768px) and (device-height: 1024px)
+            and (orientation: landscape)
+            and (-webkit-device-pixel-ratio: 1)"
+        rel="apple-touch-startup-image">
+
+    <!-- iPad (Retina) -->
+    <link href="assets/images/ios/touch-icon-ipad-retina.png"
+        sizes="144x144"
+        rel="apple-touch-icon">
+    <link href="assets/images/ios/apple-touch-startup-image-1536x2008.png"
+        media="(device-width: 768px) and (device-height: 1024px)
+            and (orientation: portrait)
+            and (-webkit-device-pixel-ratio: 2)"
+        rel="apple-touch-startup-image">
+    <link href="assets/images/ios/apple-touch-startup-image-1496x2048.png"
+        media="(device-width: 768px) and (device-height: 1024px)
+            and (orientation: landscape)
+            and (-webkit-device-pixel-ratio: 2)"
+        rel="apple-touch-startup-image">
+    <ios-meta-data></ios-meta-data>
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="assets/styles/main.css">
+    <link rel="stylesheet" href="assets/styles/ios.css">
+    <link rel="stylesheet" href="assets/styles/glyphs.css">
+    <link rel="stylesheet" href="assets/styles/foundation.css">
+    <!-- endbuild -->
+  </head>
+  <body ng-app="pinwheelApp">
+    <!--[if lt IE 7]>
+      <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+    <![endif]-->
+
+    <!--[if lt IE 9]>
+      <script src="bower_components/es5-shim/es5-shim.js"></script>
+      <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+      
+  <!-- Add your site or application content here -->
+    <nav class="left-nav" id="apps">
+      <a href="wireframe.html" ng-href="#/calendar"><span aria-hidden="true" class="icon-calendar"> </span>Calendar </a>
+      <a  ng-href="#/messaging" class="locked"><span aria-hidden="true" class="icon-bubble-notification"> </span>Reminders </a>
+      <a href="hallpass.html" ng-href="#/hallpass"><span aria-hidden="true" class="icon-signup"> </span>Hall Pass </a>
+     
+      <a href="#" ng-href="#/handbook" class="locked"><span aria-hidden="true" class="icon-book"> </span>Handbook</a>
+      <a href="#" ng-href="#/reference"  class="locked"><span aria-hidden="true" class="icon-books"> </span>Resources </a>
+      <a href="#" ng-href="#/reference"  class="locked"><span aria-hidden="true" class="icon-settings"> </span>Facilities  </a>
+      <button class="small button alert" ng-click="logout()">
+        <span aria-hidden="true" class="icon-spam" style="text-shadow: none;"> </span> Log Out
+      </button>
+    </nav>
+
+    <div class="page-wrap">
+      <nav id="mainHeader" class="main-header">
+        <!-- content of _topbar.html -->
+        <section class="menubar">
+          <!-- Right Nav Section -->
+          <ul ng-show="user">
+            <li>
+              <a href="#apps" class="open-menu"><span aria-hidden="true" class="icon-menu"></span></a>
+              <a href="#" class="close-menu"><span aria-hidden="true" class="icon-menu"></span></a>
+            </li>
+            <li class="org-name"> The Jedi Academy: Hall Pass </li>
+            <!-- <li><a href="#"></a><span aria-hidden="true" class="icon-settings"></span></li> -->
+            <!-- <li class=""><a ng-href="#/messaging"><span aria-hidden="true" class="icon-bubble-notification"></span></a></li> -->
+            <!-- <li class=""><a ng-href="#/hallpass"><span aria-hidden="true" class="icon-signup"></span></a></li> -->
+            <!-- <li class=""><a ng-href="#/calendar"><span aria-hidden="true" class="icon-calendar"></span></a></li> -->
+            <!-- <li class=""><a ng-href="#/handbook"><span aria-hidden="true" class="icon-book"></span></a></li> -->
+            <!-- <li class=""><a ng-href="#/reference"><span aria-hidden="true" class="icon-books"></span></a></li> -->
+            <!-- <li class=""><a settings-modal-trigger="account"><span aria-hidden="true" class="icon-cog"></span></a></li> -->
+            <!-- <settings-menu></settings-menu> -->
+          </ul>
+        </section>
+       <!--  <section class="menubar right" style="margin-right: 20px;">
+          <dl class="sub-nav calendar-filter" ng-show="user">
+            <dd ng-click="changeView('datebook')" ng-class="{active:view=='datebook'}"><a>DB</a></dd>
+            <dd ng-click="changeView('day')" ng-class="{active:view=='day'}"><a>D</a></dd>
+            <dd ng-click="changeView('week')" ng-class="{active:view=='week'}"><a>W</a></dd>
+            <dd ng-click="changeView('month')" ng-class="{active:view=='month'}"><a>M</a></dd>
+            <dd ng-click="changeView('year')" ng-class="{active:view=='year'}"><a>Y</a></dd>
+            <dd ng-click="changeView('list')" ng-class="{active:view=='list'}"><a>L</a></dd>
+          </dl>
+        </section> -->
+      </nav>
+      <div id="content" class="row">
+        <!-- <h1 class=""><span aria-hidden="true" class="icon-signup"></span> Hall-Pass</h1> -->       
+        <div class="row">
+          <div class="large-6 small-12 columns">
+            <!-- <h1 class=""><span aria-hidden="true" class="icon-signup"></span> Hall-Pass</h1> -->
+            <form>
+                <div class="row">
+                  <div class="large-12 columns">
+                    <br>
+                    <label>Student Name</label>
+                    <input type="text" placeholder="full student name">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="large-4 columns">
+                    <label>Time Out</label>
+                    <input type="text" placeholder="ex: 10:15AM">
+                  </div>
+                  <div class="large-4 columns">
+                    <label>Destination</label>
+                    <select ng-change="switchCalendar()" ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'" ng-model="formEvent.calendar_id" class="ng-pristine ng-valid">
+                       <option value="0" selected="selected">Home Room</option>
+                        <option value="1">Head Office</option>
+                        <option value="2">Gym</option>
+                        <option value="3">Library</option>
+                        <option value="4">Photo Lab</option>
+                        <option value="5">Track</option>
+                        <option value="6">Study Hall</option>
+                        <option value="7">Excused</option> 
+                        <option value="8">...</option> 
+                    </select>
+                    <!-- <input type="text" placeholder="Pre-approved destination"> -->
+                  </div>
+                  <div class="large-4 columns">
+                    <br>
+                    <button class="button small success" style="width: 100%;"> <!-- <span aria-hidden="true" class="icon-checkmark"></span> --> <span aria-hidden="true" class="icon-"></span>Issue Pass</button>
+                  </div>
+                </div>
+            </form>
+          </div>
+          <div class="large-6 small-12 columns"><br><h5><span aria-hidden="true" class="icon-signup"></span> Authorized personel must log every hallpass issued to students. Another authority will also log the student's arrival at their destination. Only students that are authorized to be outside of class will show up on this list. If a student is not on the list, they must be apprehended and immediately sent to the gulag for 20 years hard labor.</h5></div>
+          <hr>
+        </div>
+        <div class="large-12">
+          <table>
+            <thead>
+              <tr>
+                <th width="100">Name</th>
+                <th width="80">Time Out</th>
+                <th width="80">Time In</th>
+                <th width="200">Destination</th>
+                <th width="200">Authorized By</th>
+                <th width="100">Check-In</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Kid A.</td>
+                <td>10:15am</td>
+                <td>10:22am</td>
+                <td>Library</td>
+                <td>Mr. Smith</td>
+                <td><button class="button small success"><span aria-hidden="true" class="icon-checkmark"></span></button></td>
+              </tr>
+              <tr>
+                <td>Kid A.</td>
+                <td>10:15am</td>
+                <td>10:22am</td>
+                <td>Library</td>
+                <td>Mr. Smith</td>
+                <td><button class="button small success"><span aria-hidden="true" class="icon-checkmark"></span></button></td>
+              </tr>
+              <tr>
+                <td>Kid A.</td>
+                <td>10:15am</td>
+                <td>10:22am</td>
+                <td>Library</td>
+                <td>Mr. Smith</td>
+                <td><button class="button small success"><span aria-hidden="true" class="icon-checkmark"></span></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+       
+        
+      </div>
+    </div>
+	<!-- / application content -->
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <script>
+      var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+      g.src='//www.google-analytics.com/ga.js';
+      s.parentNode.insertBefore(g,s)}(document,'script'));
+    </script>
+
+    <script src="bower_components/jquery/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+
+        <!-- build:js scripts/modules.js -->
+        <script src="bower_components/angular-resource/angular-resource.js"></script>
+        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="modules/app.js"></script>
+        <script src="modules/pinwheelCtl.js"></script>
+        <script src="modules/calendar/taskCtl.js"></script>
+        <script src="modules/calendar/subscriptionCtl.js"></script>
+        <script src="modules/calendar/calendarCtl.js"></script>
+        <script src="modules/calendar/viewTaskDirective/viewTask.js"></script>
+        <script src="modules/calendar/taskFormDirective/taskForm.js"></script>
+        <script src="modules/calendar/subscriptionDirective/subscription.js"></script>
+        <script src="modules/reference/referenceCtl.js"></script>
+        <script src="modules/messaging/messagingCtl.js"></script>
+        <script src="modules/handbook/handbookCtl.js"></script>
+        <!-- endbuild -->
+</body>
+</html>

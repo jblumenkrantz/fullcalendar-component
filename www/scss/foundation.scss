@@ -176,7 +176,7 @@ font-weight: bold;
 text-shadow: $letter-press;
 position: relative;
 top: 7px;
-width: 300px;
+width: 50%;
 }
 
 @media only screen and (max-width: 768px) {
@@ -540,7 +540,11 @@ and (max-device-width : 1024px) {
   background: #dddddd;
   margin-bottom: 0;
 }
-
+.menubar {
+	// width: auto;
+	text-align: left;
+	width: auto;
+}
 .menubar ul li{
 	display: inline;
 }
@@ -559,6 +563,7 @@ and (max-device-width : 1024px) {
 
 .menubar ul.left{
 	height: 45px;
+	width: auto;
 }
 
 //position topbar control icons
@@ -583,49 +588,34 @@ and (max-device-width : 1024px) {
 
 
 // OFF CANVAS MENU EXPERIMENT BELOW -JT
-
-
 .main-header {
-  // background: linear-gradient(#3F94BF, #246485);
-  // padding: 5px;
   text-align: center;
   text-shadow: #222 0px -1px 1px;
-
   left: 0;
-  transition: all 0.3s ease;
+  transition: all 0.7s ease;
 }
 
 .page-wrap {
   float: right;
   width: 100%;
   transition: width .7s ease;
-  // -webkit-box-shadow:  -5px 0px 5px 0px rgba(0, 0, 0, .9);
-        
-  //       box-shadow:  -5px 0px 5px 0px rgba(0, 0, 0, .9);
+}
 
-}
-.outer-container {
-	// -webkit-box-shadow:  -2px 0px 5px 0px rgba(0, 0, 0, .9);
-        
- //        box-shadow:  -2px 0px 5px 0px rgba(0, 0, 0, .9);
-}
 .left-nav {
   position: fixed;
   top: 0;
   width: 0;
   height: 100%;
-  background: #3B3B3B;
-  overflow-y: auto;
+  background: #333;
   transition: width .7s ease;
   -webkit-box-shadow: inset -3px 0px 3px 0px rgba(0, 0, 0, .2);
 	box-shadow: inset -3px 0px 3px 0px rgba(0, 0, 0, .2);
 	color: #fff !important;
 	white-space: nowrap;
+	overflow: hidden;
   a {
     display: block;
-    // background: linear-gradient(#3E3E3E, #383838);
-    border-top: 1px solid #484848;
-    border-bottom: 1px solid #2E2E2E;
+    border-bottom: 1px solid #222;
     color: white;
     padding: 0 20px;
     white-space: nowrap;
@@ -634,6 +624,9 @@ and (max-device-width : 1024px) {
     text-transform: uppercase;
     &:hover, &:focus {
       background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.2));
+    }
+     &:active {
+      background: rgba($primary-color, .5) !important;
     }
      [class*="icon-"] {
     	text-shadow: 1px 1px 2px #000;
@@ -650,30 +643,66 @@ and (max-device-width : 1024px) {
     width: 34px;
     background: linear-gradient(left, rgba(black, 0), rgba(black, 0.4));
   }
-  label {color:#fff;}
-  h4 {margin-left: 20px;}
-}
-
-.content {
-
+  a.locked {
+  	// background: #999;
+  	color: #999;
+  }
+  label {color:#fff; white-space: nowrap !important;}
+  h5 {color: #fff; margin-left: 20px;}
+  form * {
+  	white-space: nowrap !important;
+  }
+  button {
+  	width: 160px;
+  	margin: 20px !important;
+  	border-radius: 4px;
+  }
 }
 
 .close-menu {
   display: none;
 }
 
-#left-nav:target  {
-  width: 20%;
+#apps:target  {
+  width: 200px;
+  // width: calc(100% - 200px);
 }
-#left-nav:target + .page-wrap {
-  width: 80%;
+#apps:target + .page-wrap {
+  // width: 80%;
+  width: calc(100% - 200px);
   .open-menu {
      display: none; 
   }
   .close-menu {
-     display: block;
+     display: inline;
   }
   .main-header {
  
   }
 }
+
+
+// HALLPASS STYLES
+#content {
+	max-width: 98%;
+	// margin: 20px;
+	// background: #fff;
+}
+#content h1{
+	margin-bottom: emCalc(0);
+}
+
+#content table{
+	width: 100%;
+}
+
+#content table thead tr th {
+	text-align: center;
+	background-color: $primary-color;
+	color: #fff;
+}
+// center check-in boxes in the last column
+#content table tr td:last-of-type{
+	text-align: center;
+}
+

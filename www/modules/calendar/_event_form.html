@@ -16,87 +16,31 @@
 		<!-- Event Title -->
 		<div class="large-6 columns">
 			<label>Title:</label>
-			<input
-				required
-				focus-me="[addingEvent, editingEvent]"
-				type="text"
-				ng-model="formEvent.title"
-				placeholder="Untitled event"
-			/>
+			<input required focus-me="[addingEvent, editingEvent]" type="text" ng-model="formEvent.title" placeholder="Untitled event" />
 		</div>
 		<!-- / Event Title -->
 		<!-- Calendar -->
 		<div class="large-6 columns">
 			<label>Calendar:</label>
-			<select
-				ng-change="switchCalendar()"
-				ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'"
-				ng-model="formEvent.calendar_id"
-			></select>
+			<select ng-change="switchCalendar()" ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'" ng-model="formEvent.calendar_id" ></select>
 		</div>
 		<!-- / Calendar -->
 	</div>
 	<div class="row">
 		<!-- Start Time -->
 		<div class="large-6 columns calendar-picker-container">
-			<label>From<span ng-show="formEvent.allDay"> start of day</span>:</label>
-			<!-- Non allDay event show datetime entry -->
-			<datetime
-				ng-required="!formEvent.allDay"
-				ng-show="!formEvent.allDay"
-				ng-model="formEvent.start"
-				name="start"
-				placeholder="m/d/yyyy h:mm AM/PM"
-				date-format="MM/d/yyyy"
-				time-format="h:mm a"
-				divider="@"
-				dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y @ h:M a'}"
-				jqui-opts="{dateFormat: 'm/d/yy'}"
-				ng-change="moveTime('end', 1)"
-			/>
-			<!--AllDay event show date entry -->
-			<date
-				ng-required="formEvent.allDay"
-				ng-show="formEvent.allDay"
-				ng-model="formEvent.start"
-				name="start"
-				placeholder="m/d/yyyy"
-				date-format="MM/d/yyyy"
-				dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y'}"
-				jqui-opts="{dateFormat: 'm/d/yy'}"
-				ng-change="moveTime('end', 0)"
-			/>
+			<label>From<span ng-show="formEvent.allDay=='1'"> start of day</span>:</label>
+			<datetime ng-required="formEvent.allDay == '0'" ng-show="formEvent.allDay == '0'" ng-model="formEvent.start" name="start" placeholder="m/d/yyyy h:mm AM/PM" />
+			<date ng-required="formEvent.allDay == '1'" ng-show="formEvent.allDay == '1'" ng-model="formEvent.start" name="start" placeholder="m/d/yyyy" />
+			<!--<button ng-hide="device.isTouch" type="button" class="glyph-show"><span aria-hidden="true" class="icon-calendar-2"></span></button>-->
 		</div>
 		<!-- / Start Time -->
 		<!-- End Time -->
 		<div class="large-6 columns calendar-picker-container">
-			<label>To<span ng-show="formEvent.allDay"> end of day</span>:</label>
-			<!-- Non allDay event show datetime entry -->
-			<datetime
-				ng-required="!formEvent.allDay"
-				ng-show="!formEvent.allDay"
-				ng-model="formEvent.end"
-				name="end"
-				placeholder="m/d/yyyy h:mm AM/PM"
-				date-format="MM/d/yyyy"
-				time-format="h:mm a"
-				divider="@"
-				dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y @ h:M a'}"
-				jqui-opts="{dateFormat: 'm/d/yy'}"
-				ng-change="moveTime('start', -1)"
-			/>
-			<!--AllDay event show date entry -->
-			<date
-				ng-required="formEvent.allDay"
-				ng-show="formEvent.allDay"
-				ng-model="formEvent.end"
-				name="end"
-				placeholder="m/d/yyyy"
-				date-format="MM/d/yyyy"
-				dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y'}"
-				jqui-opts="{dateFormat: 'm/d/yy'}"
-				ng-change="moveTime('start', 0)"
-			/>
+			<label>To<span ng-show="formEvent.allDay=='1'"> end of day</span>:</label>
+			<datetime ng-required="formEvent.allDay == '0'" ng-show="formEvent.allDay == '0'" ng-model="formEvent.end" name="end" placeholder="m/d/yyyy h:mm AM/PM" />
+			<date ng-required="formEvent.allDay == '1'" ng-show="formEvent.allDay == '1'" ng-model="formEvent.end" name="end" placeholder="m/d/yyyy" />
+			<!--<button ng-hide="device.isTouch" type="button" class="glyph-show"><span aria-hidden="true" class="icon-calendar-2"></span></button>-->
 		</div>
 		<!-- / End Time -->
 	</div>
@@ -105,7 +49,7 @@
 		<!-- All Day -->
 		<div class="large-4 columns">
 			<label class="checkbox">
-				<input type="checkbox" ng-model="formEvent.allDay" ng-click="allDayToggle()" />
+				<input type="checkbox" ng-model="formEvent.allDay" ng-true-value="1" ng-false-value="0" ng-click="allDayToggle()" />
 				All Day Event
 			</label>
 		</div>
@@ -151,7 +95,7 @@
 				<input ng-required="!hideOffset" type='number' min="1" ng-model="formEvent.reminder_offset" placeholder="2" ng-change="usingOwnReminder()" />
 			</div>
 
-			<div style="float: left;" class="calendar-picker-container nolabel" ng-class="{'with-offset':!hideOffset, 'without-offset':hideOffset}">
+			<div style="float: left;" ng-class="{'with-offset':!hideOffset, 'without-offset':hideOffset}">
 				<!-- Reminder Types -->
 				<select
 					ng-class="{
@@ -172,7 +116,7 @@
 					placeholder="h:mm AM/PM"
 					ng-show="
 						showReminderTime = 
-						formEvent.allDay &&
+						formEvent.allDay == '1' &&
 						!typeIsThree &&
 						formEvent.reminder_type != 7"
 					ng-required="showReminderTime"
@@ -184,11 +128,6 @@
 					placeholder="m/d/yyyy h:mm AM/PM"
 					ng-show="typeIsThree = formEvent.reminder_type == 3"
 					ng-required="typeIsThree"
-					date-format="MM/d/yyyy"
-					time-format="h:mm a"
-					divider="@"
-					dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y @ h:M a'}"
-					jqui-opts="{dateFormat: 'm/d/yy'}"
 				/>
 			</div>
 
