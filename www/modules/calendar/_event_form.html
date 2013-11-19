@@ -175,7 +175,7 @@
 				<input ng-required="!hideOffset" type='number' min="1" ng-model="formEvent.reminder_offset" placeholder="2" ng-change="usingOwnReminder()" />
 			</div>
 
-			<div style="float: left;" class="calendar-picker-container nolabel" ng-class="{'with-offset':!hideOffset, 'without-offset':hideOffset}">
+			<div style="float: left;" ng-class="{'with-offset':!hideOffset, 'without-offset':hideOffset}">
 				<!-- Reminder Types -->
 				<select
 					ng-class="{
@@ -196,7 +196,7 @@
 					placeholder="h:mm AM/PM"
 					ng-show="
 						showReminderTime = 
-						formEvent.allDay &&
+						formEvent.allDay == '1' &&
 						!typeIsThree &&
 						formEvent.reminder_type != 7"
 					ng-required="showReminderTime"
@@ -208,11 +208,6 @@
 					placeholder="m/d/yyyy h:mm AM/PM"
 					ng-show="typeIsThree = formEvent.reminder_type == 3"
 					ng-required="typeIsThree"
-					date-format="MM/d/yyyy"
-					time-format="h:mm a"
-					divider="@"
-					dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y @ h:M a'}"
-					jqui-opts="{dateFormat: 'm/d/yy'}"
 				/>
 			</div>
 

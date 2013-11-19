@@ -312,7 +312,14 @@ function routes () {
 			Route::Request("application/json"),
 			Route::Response("application/json")
 		),
-		
+		'/calendar/admins/:alpha/?' => array(
+			Route::$get => 'CalendarCtl::getCalendarAdmins',
+			Route::$post => 'CalendarCtl::addCalendarAdmin',
+			Route::$delete => 'CalendarCtl::deleteCalendarAdmin',
+			Route::Authorize(),
+			Route::Request("application/json"),
+			Route::Response("application/json")
+		),
 
 
 		/* Task Api */

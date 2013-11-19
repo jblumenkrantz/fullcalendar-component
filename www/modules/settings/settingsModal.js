@@ -6,6 +6,7 @@ angular.module('pinwheelApp')
 		restrict:"A",
 		link: function(scope, element, attrs) {
 			element.bind('click', function(){
+				console.warn(scope);
 				scope.activeTab = {};
 				angular.element('#account-settings-modal').show().css('visibility','visible');
 				angular.element('#global-modal-bg').show();
@@ -53,6 +54,7 @@ angular.module('pinwheelApp')
 		restrict: "A",
 		link: function($scope, $element, $attrs, $parentCtl){
 			$element.bind('click', function(){
+				console.warn($scope);
 				$scope.test = 'new';
 				$element.addClass("active").siblings().removeClass("active");
 				angular.forEach($scope.activeTab, function(value, section){

@@ -58,8 +58,9 @@ class CalendarCtl
 			}else{
 				$calendar->public = false;
 			}
-
-			$calendar->events = Event::getUserEventsForCalendar($authUserID, $calendar->calendar_id);
+			$calendar->active = ($calendar->active)? true:false;
+			$calendar->calendar_admin = ($calendar->calendar_admin)? true:false;
+			$calendar->events = Event::getUserEventsForCalendar($authUserID, $calendar);
 			$calendar->events = array_merge($calendar->events, Task::getUserTasksForCalendar($authUserID, $calendar->calendar_id)); 
 			
 			if(property_exists($calendar, 'adhoc_events') && !$calendar->adhoc_events){
@@ -128,6 +129,7 @@ class CalendarCtl
 	*/
 	function update() {
 		$authUserID = Authorize:: sharedInstance()->userID();
+		//$userPermissions = User:: loadPermissions($authUserID);
 		$tsprops = json_decode(Request:: body());
 
 		if (is_object($tsprops))
@@ -142,15 +144,19 @@ class CalendarCtl
 				$calendar->update_subscriptions($pinsqli);
 				$calendar->update_reminders($pinsqli);
 				$calendar->updateSubscription($calendar->calendar_id, $calendar->viewing, $authUserID);
-				if($calendar->creator_id == $authUserID){
+				
+				$hasPermission = User:: checkPermissions('modify_public_calendars',$authUserID, $tsprop->org_id);
+				if($calendar->creator_id == $authUserID || $calendar->calendar_admin || $hasPermission){
 					$calendar->update($pinsqli);
 					if(property_exists($tsprop,'public') && $tsprop->public){
 						Admin::promoteToPublicCalendar($tsprop);
+						error_log(print_r('promote calendar',true));
 					}
 					else{
 						Admin::demoteFromPublicCalendar($tsprop);
+						error_log(print_r('demote calendar',true));
+
 					}
-					
 				}
 
 				$calendar->subscribed = false;
@@ -168,7 +174,9 @@ class CalendarCtl
 					$calendar->subscribed = true;
 					$calendar->viewing = ($colorResult[0]->view_setting)? true:false;
 				}
-				$calendar->events = Event::getUserEventsForCalendar($authUserID, $calendar->calendar_id);
+				$calendar->active = ($calendar->active)? true:false;
+				$calendar->calendar_admin = ($calendar->calendar_admin)? true:false;
+				$calendar->events = Event::getUserEventsForCalendar($authUserID, $calendar);
 				$calendar->events = array_merge($calendar->events, Task::getUserTasksForCalendar($authUserID, $calendar->calendar_id)); 
 				echo json_encode($calendar);
 				
@@ -208,7 +216,7 @@ class CalendarCtl
 		$subscription->subscribed = true;
 
 		$subscribed = Calendar::subscribe($subscription, $authUserID);														
-		$subscribed->events = Event::getUserEventsForCalendar($authUserID, $subscribed->calendar_id);
+		$subscribed->events = Event::getUserEventsForCalendar($authUserID, $subscribed);
 		$subscribed->events = array_merge($subscribed->events, Task::getUserTasksForCalendar($authUserID, $subscribed->calendar_id)); 
 		User:: incrementVersion($authUserID);
 		echo json_encode($subscribed);	
@@ -220,6 +228,53 @@ class CalendarCtl
 		Calendar::updateSubscription($calendar->calendar_id, $calendar->viewing, $authUserID);
 		echo json_encode($calendar);
 		User:: incrementVersion($authUserID);
+	}
+	function getCalendarAdmins($id) {
+		$authUserID = Authorize:: sharedInstance()->userID();
+		echo json_encode(Calendar::getCalendarAdmins($id));
+		//error_log(print_r("get cal admins for id $id",true));
+	}
+	function addCalendarAdmin($calendar_id){
+		$authUserID = Authorize:: sharedInstance()->userID();
+		$admin = json_decode(Request:: body());
+		$calendar = Calendar::load($calendar_id);
+
+		//check to see if the admin actually exists
+		if(User::validateUserName($admin->username,true)){
+			$admin = User::loadWithHandle($admin->username);
+		}else{
+			throw new UserDoesNotExist();
+		}
+		$subscription->calendar_id = $calendar_id;
+		$subscription->color = 'blue';
+		$subscription->adhoc_events = false;
+		// check the users permissions for this calendar
+		if($calendar->creator_id == $authUserID || $calendar->calendar_admin){
+			Calendar::addCalendarAdmin($admin, $calendar_id);
+			Calendar::subscribe($subscription, $admin->user_id);		
+			Calendar::sendNewAdminMessage(array($admin->email),$calendar->calendar_name);
+			unset($admin->active, $admin->email, $admin->last_modified, $admin->password, $admin->settings, $admin->timezone,$admin->version);
+			echo json_encode($admin);
+			// send email to new admin
+		}else{
+			$insuficientPrivileges = new InsuficientPriviledgesException();
+			echo $insuficientPrivileges->json_encode();
+			exit;
+		}
+	}
+	function deleteCalendarAdmin($calendar_id){
+		$authUserID = Authorize:: sharedInstance()->userID();
+		$admin = json_decode(Request:: body());
+		$calendar = Calendar::load($calendar_id);
+		if($calendar->creator_id == $authUserID || $calendar->calendar_admin){
+			Calendar::deleteCalendarAdmin($admin, $calendar_id);
+			echo json_encode($admin);
+			// send email to deleted admin
+		}else{
+			$insuficientPrivileges = new InsuficientPriviledgesException();
+			echo $insuficientPrivileges->json_encode();
+			exit;
+		}
 	}
 	/**
 	*	CalendarCtrl::delete provides an interface for deleting pre-existing calendars.

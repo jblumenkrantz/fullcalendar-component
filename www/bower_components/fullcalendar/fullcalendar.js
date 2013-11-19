@@ -1255,7 +1255,7 @@ function EventManager(options, _sources) {
 		event._start = cloneDate(event.start = parseDate(event.start, ignoreTimezone));
 		event.end = parseDate(event.end, ignoreTimezone);
 		if (event.end && event.end <= event.start) {
-			event.end = null;
+			//event.end = null;  // Commented out by Deac.  our all day events will always have start == end 
 		}
 		event._end = event.end ? cloneDate(event.end) : null;
 		if (event.allDay === undefined) {
