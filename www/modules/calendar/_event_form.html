@@ -1,6 +1,7 @@
 <!-- HEADER -->
 <div class="pane-header">
-    <span ng-show="editingEvent" class="pane-title">Edit Event</span>
+	<span ng-show="editingEvent && !formEvent.editable" class="pane-title">Edit Reminder</span>
+    <span ng-show="editingEvent && formEvent.editable" class="pane-title">Edit Event</span>
     <span ng-show="addingEvent" class="pane-title">
     	Add New Event 
     	<label style="display: inline; font-size: 14px; color: inherit;" for="alwaysAdvanced">
