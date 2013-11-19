@@ -14,7 +14,6 @@ angular.module('pinwheelApp')
 
 			//open summary and copy resource data
 			scope.openSummary = function(event, clickEvent) {
-				console.log(event);
 				scope.event = event;
 				scope.summaryPopup = angular.extend({}, {
 					isTask: event.hasOwnProperty('task_notes'),

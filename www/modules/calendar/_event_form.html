@@ -118,8 +118,6 @@
 					type="checkbox"
 					ng-disabled="!formEvent.editable"
 					ng-model="formEvent.allDay"
-					ng-true-value="1"
-					ng-false-value="0"
 					ng-click="allDayToggle()"
 				/>
 				All Day Event
@@ -175,7 +173,7 @@
 				<input ng-required="!hideOffset" type='number' min="1" ng-model="formEvent.reminder_offset" placeholder="2" ng-change="usingOwnReminder()" />
 			</div>
 
-			<div style="float: left;" ng-class="{'with-offset':!hideOffset, 'without-offset':hideOffset}">
+			<div style="float: left;" ng-class="{'with-offset':!hideOffset, 'without-offset':hideOffset}" class="calendar-picker-container nolabel">
 				<!-- Reminder Types -->
 				<select
 					ng-class="{
@@ -204,10 +202,15 @@
 				<!-- Absolute Reminder Datetime -->
 				<datetime
 					class="on-date-right"
-					ng-model="formEvent.reminder_datetime"
 					placeholder="m/d/yyyy h:mm AM/PM"
+					ng-model="formEvent.reminder_datetime"
 					ng-show="typeIsThree = formEvent.reminder_type == 3"
 					ng-required="typeIsThree"
+					date-format="M/d/yyyy"
+					time-format="h:mm a"
+					divider="@"
+					dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y @ h:M a'}"
+					jqui-opts="{dateFormat: 'm/d/yy'}"
 				/>
 			</div>
 
