@@ -29,18 +29,66 @@
 	<div class="row">
 		<!-- Start Time -->
 		<div class="large-6 columns calendar-picker-container">
-			<label>From<span ng-show="formEvent.allDay=='1'"> start of day</span>:</label>
-			<datetime ng-required="formEvent.allDay == '0'" ng-show="formEvent.allDay == '0'" ng-model="formEvent.start" name="start" placeholder="m/d/yyyy h:mm AM/PM" />
-			<date ng-required="formEvent.allDay == '1'" ng-show="formEvent.allDay == '1'" ng-model="formEvent.start" name="start" placeholder="m/d/yyyy" />
-			<!--<button ng-hide="device.isTouch" type="button" class="glyph-show"><span aria-hidden="true" class="icon-calendar-2"></span></button>-->
+			<label>From<span ng-show="formEvent.allDay"> start of day</span>:</label>
+			<!-- Non allDay event show datetime entry -->
+			<datetime
+				ng-required="!formEvent.allDay"
+				ng-show="!formEvent.allDay"
+				ng-model="formEvent.start"
+				name="start"
+				placeholder="m/d/yyyy h:mm AM/PM"
+				date-format="M/d/yyyy"
+				time-format="h:mm a"
+				divider="@"
+				dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y @ h:M a'}"
+				jqui-opts="{dateFormat: 'm/d/yy'}"
+				ng-change="moveEndTime(1);"
+			/>
+			<!--AllDay event show date entry -->
+			<date
+				ng-required="formEvent.allDay"
+				ng-show="formEvent.allDay"
+				ng-model="formEvent.start"
+				name="start"
+				placeholder="m/d/yyyy"
+				date-format="M/d/yyyy"
+				dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y'}"
+				jqui-opts="{dateFormat: 'm/d/yy'}"
+				ng-change="moveEndTime(0);"
+			/>
 		</div>
 		<!-- / Start Time -->
 		<!-- End Time -->
 		<div class="large-6 columns calendar-picker-container">
-			<label>To<span ng-show="formEvent.allDay=='1'"> end of day</span>:</label>
-			<datetime ng-required="formEvent.allDay == '0'" ng-show="formEvent.allDay == '0'" ng-model="formEvent.end" name="end" placeholder="m/d/yyyy h:mm AM/PM" />
-			<date ng-required="formEvent.allDay == '1'" ng-show="formEvent.allDay == '1'" ng-model="formEvent.end" name="end" placeholder="m/d/yyyy" />
-			<!--<button ng-hide="device.isTouch" type="button" class="glyph-show"><span aria-hidden="true" class="icon-calendar-2"></span></button>-->
+			<label>To<span ng-show="formEvent.allDay"> end of day</span>:</label>
+			<!-- Non allDay event show datetime entry -->
+			<datetime
+				ng-required="!formEvent.allDay"
+				ng-show="!formEvent.allDay"
+				ng-model="formEvent.end"
+				name="end"
+				placeholder="m/d/yyyy h:mm AM/PM"
+				date-format="M/d/yyyy"
+				time-format="h:mm a"
+				min-watch="formEvent.start"
+				divider="@"
+				dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y @ h:M a', minDatetime: formEvent.start}"
+				jqui-opts="{dateFormat: 'm/d/yy', minDate: formEvent.start}"
+				ng-change="end.moved = true;"
+			/>
+			<!--AllDay event show date entry -->
+			<date
+				ng-required="formEvent.allDay"
+				ng-show="formEvent.allDay"
+				ng-model="formEvent.end"
+				name="end"
+				placeholder="m/d/yyyy"
+				date-format="M/d/yyyy"
+				min-watch="formEvent.start"
+				dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y', minDateime: formEvent.start}"
+				jqui-opts="{dateFormat: 'm/d/yy', minDate: formEvent.start}"
+				ng-change="end.moved = true;"
+			/>
 		</div>
 		<!-- / End Time -->
 	</div>

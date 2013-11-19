@@ -1,38 +1,46 @@
 'use strict';
 
 angular.module('pinwheelApp')
-.directive('summaryPopup', function($timeout, Event) {
+.directive('summaryPopup', function($filter, Event, timeDisplayFormat, longDisplayFormat, Debounce) {
 	return {
 		restrict: "E",
 		replace: true,
 		templateUrl: 'modules/calendar/summaryPopup/_summary_popup.html',
 		link: function(scope, element, attrs) {
 			var popUpWidth = element.outerWidth();
-			var popUpOffset = 10;
+			var popUpOffset = 9;
 			var headerHeight = $("#mainHeader").height();
 			var mainContent = $("#main-content");
 			//open summary and copy resource data
 			scope.openSummary = function(event, clickEvent) {
-				//summary popup scope variable work
-				scope.resetSummary();
-				scope.summaryStyle.visible = true;
-				scope.summaryStyle.style = getStyle(clickEvent);
 				scope.event = event;
+				scope.resetSummary();
+				scope.summaryStyle = getStyle(clickEvent, event.source.color, event.allDay, scope.view);
+				scope.summaryStyle.isTask = event.hasOwnProperty('task_notes');
+				scope.summaryStyle.description = (scope.summaryStyle.isTask) ? event.task_notes : event.event_description;
+				scope.summaryStyle.visible = true;
+				scope.summaryStyle.hasEditPrivileges = true;	//TEST VALUE
+				scope.summaryStyle.hasReminder = (!!event.reminder_pref_id || !!event.source.reminder_pref_id);
+				scope.summaryStyle.dateString =  getDateString(event.start, event.end, event.allDay, scope.summaryStyle.isTask);
+			}
+
+			scope.summaryEdit = function() {
+				if (!scope.summaryStyle.isTask) {
+					scope.edit(scope.event);
+					scope.resetSummary();
+				}
 			}
 
 			scope.summaryDelete = function() {
 				delete scope.event.source;
 				scope.delete(new Event(scope.event));
+				
+				//TODO if task do what
 			}
 
 			//expand summary info
-			scope.expandSummary = function() {
-				scope.summaryStyle.expand = true;
-			}
-			
-			//collapse summary info
-			scope.collapseSummary = function() {
-				scope.summaryStyle.expand = false;
+			scope.toggleExpand = function() {
+				scope.summaryStyle.expand = !scope.summaryStyle.expand;
 			}
 
 			//reset summary to empty object
@@ -42,25 +50,80 @@ angular.module('pinwheelApp')
 
 			scope.resetSummary(); //initialize summary popup
 
+			//returns string to display dates
+			function getDateString(start, end, allDay, isTask) {
+				var startStr, endStr, startFormat, endFormat;
+				var isMultiDay = (end - start >= 86400000); //86400000 = 1 day in milliseconds
+
+				//form start of string
+				startFormat = (allDay) ? longDisplayFormat : longDisplayFormat+", "+timeDisplayFormat;
+				startStr = $filter('date')(start, startFormat);
+
+				//form end of string
+				endFormat = (isMultiDay) ? startFormat : timeDisplayFormat;
+				endStr = (isTask || (allDay && !isMultiDay)) ? "" : " - " + $filter('date')(end, endFormat);
+
+				//return whole string
+				return startStr + endStr;
+			}
+
 			//returns position and color style for the event popup
-			function getStyle(clickEvent) {
+			function getStyle(clickEvent, color, isAllDay, calendarView) {
 				var style = {};													//style object
 				var eventBlock = $(clickEvent.target).closest(".fc-event");		//event container
 				var eventBlockOffset = eventBlock.offset();						//event container offset relative to document
-				
-				style.left = eventBlockOffset.left - mainContent.offset().left - 1;	
-				style.bottom = mainContent.outerHeight() - eventBlockOffset.top + headerHeight + popUpOffset;
 
-				//adjust if too close to top
-				if (eventBlockOffset.top <= 133) {
-					delete style.bottom;
-					style.top = eventBlockOffset.top + eventBlock.outerHeight() - headerHeight + popUpOffset;
+				//for non-all day events that appear in the day/week view place even popup where the user clicked 
+				var placeWhereClicked = (!isAllDay && (calendarView == 'week' || calendarView == 'day'));			
+
+				//set color
+				style.color = color;
+
+				//set pointer position/color defaults
+				style.pointer = {
+					left: 4,
+					bottom: -9,
+					background: color
+				};
+
+				//set container position based on view
+				style.position = (placeWhereClicked) ? getClickPosition() : getEventPosition();
+
+				//if clicked within 300px of top of calendar area, have popup appear below event/click
+				if (clickEvent.pageY < 300) {
+					delete style.position.bottom;
+					delete style.pointer.bottom;
+
+					var top1 = eventBlockOffset.top + eventBlock.outerHeight() - headerHeight + popUpOffset;
+					var top2 = clickEvent.pageY - headerHeight + 14;
+
+					style.position.top = (placeWhereClicked) ? top2 : top1;
+					style.pointer.top = -9;
 				}
-				
-				//adjust if too close to right
-				if (eventBlockOffset.left+popUpWidth > mainContent.offset().left+mainContent.outerWidth()) {
-					style.left = style.left - popUpWidth + eventBlock.outerWidth();
-				} 
+
+				//if cut off on the left, adjust by amount cut off and reposition pointer
+				var leftOverlap = style.position.left + popUpWidth - mainContent.outerWidth();
+				if (leftOverlap > 0) {
+					delete style.position.left;
+					style.position.right = 0;
+					style.pointer.left += leftOverlap;
+				}
+
+				//returns position at top left corner of event block
+				function getEventPosition() {
+					return {
+						left: eventBlockOffset.left - mainContent.offset().left - 3,
+						bottom: mainContent.outerHeight() - eventBlockOffset.top + headerHeight + popUpOffset
+					};
+				}
+
+				//returns position where the user clicks
+				function getClickPosition() {
+					return {
+						left: clickEvent.pageX - mainContent.offset().left - 14,
+						bottom: $(window).height() - clickEvent.pageY + 14
+					}
+				}
 
 				return style;
 			}
@@ -71,6 +134,11 @@ angular.module('pinwheelApp')
 				var notClickingSummaryPopup = (element.has($(e.target)).length == 0);
 				(notClickingEvent && notClickingSummaryPopup && scope.$apply(scope.resetSummary()));
 			});
+
+			//hide popup on widow resize
+			$(window).resize(Debounce(function() {
+				scope.$apply(scope.resetSummary());
+			}, null, true));
 		}
 	}
 });
