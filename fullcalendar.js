@@ -753,7 +753,7 @@ function Header(calendar, options) {
 						.append(renderSection('center'))
 						.append(renderSection('right'))
 				);
-			return element;
+			//return element; // commented out by Deac to prevent the header from loading
 		}
 	}
 	
@@ -955,6 +955,11 @@ function EventManager(options, _sources) {
 	
 	function fetchEventSource(source, fetchID) {
 		_fetchEventSource(source, function(events) {
+
+			if(source.events){
+				//delete source.events
+			}
+
 			if (fetchID == currentFetchID) {
 				if (events) {
 
@@ -1008,6 +1013,9 @@ function EventManager(options, _sources) {
 				});
 			}
 			else if ($.isArray(events)) {
+				$.each(events, function(i, e){
+					//delete e.source
+				});
 				callback(events);
 			}
 			else {
@@ -1118,6 +1126,7 @@ function EventManager(options, _sources) {
 	
 	
 	function updateEvent(event) { // update an existing event
+		console.warn('updated');
 		var i, len = cache.length, e,
 			defaultEventEnd = getView().defaultEventEnd, // getView???
 			startDelta = event.start - event._start,
@@ -1246,7 +1255,7 @@ function EventManager(options, _sources) {
 		event._start = cloneDate(event.start = parseDate(event.start, ignoreTimezone));
 		event.end = parseDate(event.end, ignoreTimezone);
 		if (event.end && event.end <= event.start) {
-			event.end = null;
+			//event.end = null;  // Commented out by Deac.  our all day events will always have start == end 
 		}
 		event._end = event.end ? cloneDate(event.end) : null;
 		if (event.allDay === undefined) {
@@ -2978,7 +2987,7 @@ function AgendaView(element, calendar, viewName) {
 		}
 		
 		slotScroller =
-			$("<div style='position:absolute;width:100%;overflow-x:hidden;overflow-y:auto'/>")
+			$("<div class='fc-scroll' style='position:absolute;width:100%;overflow-x:hidden;overflow-y:auto'/>")
 				.appendTo(slotLayer);
 				
 		slotContainer =
