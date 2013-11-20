@@ -1,7 +1,7 @@
 @import "settings";
 @import "events";
 
-@import "../bower_components/foundation/scss/foundation";
+@import "../bower_components/foundation/scss/foundation/";
 
 /* Each individual part that can be added in */
 // FYI, turning off all unessential components (about half) only shaves about 50-60KB
@@ -58,7 +58,7 @@ $letter-press:  1px 1px 2px #fff;
 }
 
 #my-calendars, #tasks {
-	background: #888; 
+	background: #eee; 
 }
 
 #main-content {
@@ -167,21 +167,12 @@ header#content-header [class*="icon-"] {
 }
 
 .org-name {
-<<<<<<< HEAD
 font-size: 20px;
 font-weight: bold;
 text-shadow: $letter-press;
 position: relative;
 // top: 7px;
 // width: 50%;
-=======
-	font-size: 20px;
-	font-weight: bold;
-	text-shadow: $letter-press;
-	position: relative;
-	top: 7px;
-	width: 50%;
->>>>>>> 5dddbf8858c95d22bcc6cf955820be31cf291b8f
 }
 
 @media only screen and (max-width: 768px) {
