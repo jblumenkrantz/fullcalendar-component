@@ -3,4 +3,3 @@ dist
 vendor/composer
 .tmp
 .sass-cache
-bower_components
