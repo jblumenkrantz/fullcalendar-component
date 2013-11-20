@@ -15,7 +15,8 @@
     "angular-route": "1.2.0-rc.2",
     "angular-dragdrop": "~1.0.4",
     "sdi-angular-ui-calendar": "latest",
-    "sdi-fullcalendar": "latest"
+    "sdi-fullcalendar": "latest",
+    "sdi-jquery-ui": "latest"
   },
   "devDependencies": {
     "angular-mocks": "latest",
