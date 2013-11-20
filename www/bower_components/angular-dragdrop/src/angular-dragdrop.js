@@ -22,7 +22,7 @@
  * Implementing Drag and Drop functionality in AngularJS is easier than ever.
  * Demo: http://codef0rmer.github.com/angular-dragdrop/
  *
- * @version 1.0.4
+ * @version 1.0.5
  *
  * (c) 2013 Amit Gharat a.k.a codef0rmer <amit.2006.it@gmail.com> - amitgharat.wordpress.com
  */
@@ -32,17 +32,29 @@
 
 var jqyoui = angular.module('ngDragDrop', []).service('ngDragDropService', ['$timeout', '$parse', function($timeout, $parse) {
     this.callEventCallback = function (scope, callbackName, event, ui) {
-      if (!callbackName) {
-        return;
+      if (!callbackName) return;
+
+      var objExtract = extract(callbackName),
+          callback = objExtract.callback,
+          constructor = objExtract.constructor,
+          args = [event, ui].concat(objExtract.args);
+      
+      // call either $scoped method i.e. $scope.dropCallback or constructor's method i.e. this.dropCallback
+      scope.$apply((scope[callback] || scope[constructor][callback]).apply(scope, args));
+      
+      function extract(callbackName) {
+        var atStartBracket = callbackName.indexOf('(') !== -1 ? callbackName.indexOf('(') : callbackName.length,
+            atEndBracket = callbackName.lastIndexOf(')') !== -1 ? callbackName.lastIndexOf(')') : callbackName.length,
+            args = callbackName.substring(atStartBracket + 1, atEndBracket), // matching function arguments inside brackets
+            constructor = callbackName.match(/^[^.]+.\s*/)[0].slice(0, -1); // matching a string upto a dot to check ctrl as syntax
+            constructor = scope[constructor] && typeof scope[constructor].constructor === 'function' ? constructor : null;
+
+        return {
+          callback: callbackName.substring(constructor && constructor.length + 1 || 0, atStartBracket),
+          args: (args && args.split(',') || []).map(function(item) { return $parse(item)(scope); }),
+          constructor: constructor
+        }
       }
-      var args = [event, ui];
-      var match = callbackName.match(/^(.+)\((.+)\)$/);
-      if (match !== null) {
-        callbackName = match[1];
-        var values = eval('[' + match[0].replace(/^(.+)\(/, '').replace(/\)/, '') + ']');
-        args.push.apply(args, values);
-      }
-      scope[callbackName].apply(scope, args);
     };
 
     this.invokeDrop = function ($draggable, $droppable, event, ui) {
@@ -89,7 +101,9 @@ var jqyoui = angular.module('ngDragDrop', []).service('ngDragDropService', ['$ti
           $timeout(function() {
             // Do not move this into move() to avoid flickering issue
             $draggable.css({'position': 'relative', 'left': '', 'top': ''});
-            $droppableDraggable.css({'position': 'relative', 'left': '', 'top': ''});
+            // Angular v1.2 uses ng-hide to hide an element not display property
+            // so we've to manually remove display:none set in this.move()
+            $droppableDraggable.css({'position': 'relative', 'left': '', 'top': '', 'display': ''});
 
             this.mutateDraggable(draggableScope, dropSettings, dragSettings, dragModel, dropModel, dropItem, $draggable);
             this.mutateDroppable(droppableScope, dropSettings, dragSettings, dropModel, dragItem, jqyoui_pos);
@@ -117,7 +131,8 @@ var jqyoui = angular.module('ngDragDrop', []).service('ngDragDropService', ['$ti
 
       var zIndex = 9999,
         fromPos = $fromEl.offset(),
-        wasVisible = $toEl && $toEl.is(':visible');
+        wasVisible = $toEl && $toEl.is(':visible'),
+        hadNgHideCls = $toEl.hasClass('ng-hide');
 
       if (toPos === null && $toEl.length > 0) {
         if ($toEl.attr('jqyoui-draggable') !== undefined && $toEl.ngattr('ng-model') !== undefined && $toEl.is(':visible') && dropSettings && dropSettings.multiple) {
@@ -128,14 +143,22 @@ var jqyoui = angular.module('ngDragDrop', []).service('ngDragDropService', ['$ti
             toPos.top+= $toEl.outerHeight(true);
           }
         } else {
+          // Angular v1.2 uses ng-hide to hide an element 
+          // so we've to remove it in order to grab its position
+          if (hadNgHideCls) $toEl.removeClass('ng-hide');
           toPos = $toEl.css({'visibility': 'hidden', 'display': 'block'}).offset();
-          $toEl.css({'visibility': '','display': wasVisible ? '' : 'none'});
+          $toEl.css({'visibility': '','display': wasVisible ? 'block' : 'none'});
         }
       }
 
       $fromEl.css({'position': 'absolute', 'z-index': zIndex})
         .css(fromPos)
         .animate(toPos, duration, function() {
+          // Angular v1.2 uses ng-hide to hide an element
+          // and as we remove it above, we've to put it back to
+          // hide the element (while swapping) if it was hidden already
+          // because we remove the display:none in this.invokeDrop()
+          if (hadNgHideCls) $toEl.addClass('ng-hide');
           if (callback) callback();
         });
     };
@@ -143,7 +166,7 @@ var jqyoui = angular.module('ngDragDrop', []).service('ngDragDropService', ['$ti
     this.mutateDroppable = function(scope, dropSettings, dragSettings, dropModel, dragItem, jqyoui_pos) {
       var dropModelValue = scope.$eval(dropModel);
 
-      scope.__dragItem = dragItem;
+      scope.dndDragItem = dragItem;
 
       if (angular.isArray(dropModelValue)) {
         if (dropSettings && dropSettings.index >= 0) {
@@ -155,7 +178,7 @@ var jqyoui = angular.module('ngDragDrop', []).service('ngDragDropService', ['$ti
           dropModelValue[dropModelValue.length - 1]['jqyoui_pos'] = jqyoui_pos;
         }
       } else {
-        $parse(dropModel + ' = __dragItem')(scope);
+        $parse(dropModel + ' = dndDragItem')(scope);
         if (dragSettings && dragSettings.placeholder === true) {
           dropModelValue['jqyoui_pos'] = jqyoui_pos;
         }
@@ -166,14 +189,14 @@ var jqyoui = angular.module('ngDragDrop', []).service('ngDragDropService', ['$ti
       var isEmpty = angular.equals(angular.copy(dropItem), {}),
         dragModelValue = scope.$eval(dragModel);
 
-      scope.__dropItem = dropItem;
+      scope.dndDropItem = dropItem;
 
       if (dragSettings && dragSettings.placeholder) {
         if (dragSettings.placeholder != 'keep'){
           if (angular.isArray(dragModelValue) && dragSettings.index !== undefined) {
             dragModelValue[dragSettings.index] = dropItem;
           } else {
-            $parse(dragModel + ' = __dropItem')(scope);
+            $parse(dragModel + ' = dndDropItem')(scope);
           }
         }
       } else {
@@ -188,9 +211,9 @@ var jqyoui = angular.module('ngDragDrop', []).service('ngDragDropService', ['$ti
         } else {
           // Fix: LIST(object) to LIST(array) - model does not get updated using just scope[dragModel] = {...}
           // P.S.: Could not figure out why it happened
-          $parse(dragModel + ' = __dropItem')(scope);
+          $parse(dragModel + ' = dndDropItem')(scope);
           if (scope.$parent) {
-            $parse(dragModel + ' = __dropItem')(scope.$parent);
+            $parse(dragModel + ' = dndDropItem')(scope.$parent);
           }
         }
       }
