@@ -217,17 +217,6 @@ cursor: pointer;
 background: rgba($primary-color, .1); 
 }
 
-// .calendar-index ul.side-nav li:hover  {
-// list-style-type: none;
-// margin: 0;
-// text-align: center;
-// padding: 10px 0 ;
-// border: 1px solid #aaa;
-// border-width: 1px 0 0 0;
-// cursor: pointer;
-// background: rgba($primary-color, .1); 
-// }
-
 .calendar-index ul.side-nav li:nth-child(1) {
 background: #ccc;
 border-width: 0; 
@@ -294,7 +283,6 @@ ul.days, .calendar-day {padding: 0; margin: 0; width: 100%;}
 	margin: 0;
 	cursor: pointer;
 }
-
 .icon-backspace:before {
 	content: "\e037";
 	background: #fff;
@@ -313,11 +301,12 @@ ul.days, .calendar-day {padding: 0; margin: 0; width: 100%;}
 // -----------------------------
 // subscriptions & tasks
 // -----------------------------
-.subscription-panel, .task-panel{ //outside
-border-bottom: 1px solid #999;
-overflow: hidden;
+.resource-panel { //outside
+	height: 40px;
+	width: 100%;
+	border-bottom: 1px solid #999;
+	overflow: hidden;
 }
-
 .resource-gradient {
 	overflow: hidden;
 	background: #eeeeee; /* Old browsers */
@@ -342,8 +331,7 @@ overflow: hidden;
 	background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
 	background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
-	min-height: 50px !important;
-	padding: 5px 4px 5px 5px;
+	padding: 0 0 0 5px;
 }
 
 .task .resource-body.add {
@@ -373,7 +361,7 @@ overflow: hidden;
 	padding-top: 12px;
 }
 
-.subscription-panel  .subscribed {
+.resource-panel  .subscribed {
 	position: absolute;
 	top: -8px;
 	right: -3px;
@@ -391,14 +379,7 @@ overflow: hidden;
 	font-size: 16px;
 }
 
-.subscription-panel [class*="icon-"], .task-panel [class*="icon-"]{
-	color: #999;
-}
-
-.subscription-panel [class*="icon-"]:hover, .task-panel [class*="icon-"]:hover{
-	color: #666;
-}
-.subscription-panel [class*="icon-"]:active, .task-panel [class*="icon-"]:active{
+.resource-panel [class*="icon-"]:active {
 	color: $primary-color;
 }
 
@@ -408,13 +389,6 @@ overflow: hidden;
 	cursor:pointer;
 	font-size: 20px;
 }
-// target first input box in task-form and offset to make room for close button
-.subscription > input[type=text]:first-of-type, .task > input[type=text]:first-of-type {
-	// width: 90%;
-	width: calc(100% - 23px);
-}
-
-
 
 .button-group li {
 	padding: 0 5px 0 0;

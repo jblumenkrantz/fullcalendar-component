@@ -19,18 +19,6 @@ textarea {
 	resize: none;
 }
 
-label.checkbox {
-	height: 2.3125em;
-	font-size: 14px;
-	border: 1px solid #aaa;
-	padding: 0.5em;
-	color: #555;
-	margin: 0 0 1em 0;
-	color: rgba(0, 0, 0, 0.75);
-	-webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-}
-
 select {
 	font-family: 'Helvetica Neue', Helvetica, Helvetica, Arial, sans-serif;
 	display: inline-block;
@@ -49,7 +37,7 @@ select {
 		overflow: hidden !important;
 	}
 	.scroll-pane {
-		overflow-y: auto !important;
+		overflow-y: visible !important;
 	}
 	.drawer {
 		position: absolute !important;
@@ -485,3 +473,136 @@ form input.ng-invalid {
 	-ms-user-select: none;
 	user-select: none;
 }
+/* Open Close sidebar element */
+.pane-header.small {
+	height: 30px !important;
+	font-size: 18px;
+	background: none;
+}
+.pane-header.small .pane-title {
+	top: 6px;
+}
+.pane-header.small span.right {
+	top: 2px;
+	margin-right: 7px;
+	text-shadow: none !important;
+}
+.resource-panel.open {/*
+	margin: 15px 0;
+	width: 200%;
+	height: 360.625px;*/
+	border: none;
+	-webkit-box-shadow: 0 0 5px #999999;
+	-moz-box-shadow: 0 0 5px #999999;
+	box-shadow: 0 0 5px #999999;
+}
+
+.resource-panel .resource-header,
+.resource-panel .resource-edit,
+.resource-panel.open .resource-display {
+	display: none;
+}
+
+.resource-panel .resource-display,
+.resource-panel.open .resource-header,
+.resource-panel.open .resource-edit {
+	display: block;
+}
+
+.resource-panel.open .resource-body {
+	margin: 0 1px 1px 8px;
+	padding: 0 0 1em 0;
+}
+.resource-panel.open + .resource-panel {
+	border-top: 1px solid #999;
+}
+.resource-panel .subscription-name,
+.resource-panel .subscription-color {
+	float: left;
+}
+.resource-panel .subscription-name {
+	width: 90%; /* fallback if calc() not supported */
+	width: calc(100% - 2.3125em);
+}
+.resource-panel .subscription-color {
+	width: 2.3125em;
+}
+.reminders table {
+	position: relative;
+	width: 100%;
+}
+.reminders table td {
+	position: relative;
+	cursor: pointer;
+	font-size: 1em;
+}
+.reminders .reminder-offset,
+.reminders .reminder-type,
+.reminders .reminder-close {
+	float: left;
+}
+.reminders input,
+.reminders select {
+	margin: 0 !important;
+}
+.reminders .reminder-offset {
+	width: 10%;
+	margin-right: 2%;
+}
+.reminders .reminder-type {
+	width: 70%;
+}
+.reminders .icon-x-altx-alt,
+.reminders .icon-checkmark {
+	top: 17px !important;
+	font-size: 1.05em;
+}
+.reminders .icon-pencil,
+.reminders .icon-checkmark,
+.reminders .icon-remove-2,
+.reminders .icon-x-altx-alt {
+	position: absolute;
+	top: 5px;
+}
+.reminders .icon-checkmark,
+.reminders .icon-remove-2 {
+	right: 11px;
+}
+.reminders .icon-x-altx-alt,
+.reminders .icon-pencil {
+	right: 41px;
+}
+.reminders .description {
+	width: 85%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-size: 0.875em;
+}
+
+/* CHECKBOX DIRECTIVE */
+label.checkbox {
+	display: inline-block;
+	margin-bottom: 1em;
+}
+
+.checkbox span {
+	position: relative;
+	top: 2px;
+	margin-right: 5px;
+	font-size: 1.2em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

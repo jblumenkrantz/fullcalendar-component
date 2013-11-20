@@ -256,6 +256,30 @@ Use db='true' if the ng-model is directly saved in the database as a TIME type.
 		}
 	}
 })
+.directive('checkbox', function() {
+	return {
+		restrict: "E",
+		template: 	"<label class='checkbox'>" +
+						"<span class='icon-checkbox-{{icon}}' aria-hidden='true'></span>{{text}}" +
+					"</label>",
+		replace: true,
+		scope: {
+			model: "=ngModel",
+			text: "@",
+			clicker: "&ngClick"
+		},
+		link: function(scope, element, attrs) {
+			scope.$watch("model", function(newVal, oldVal) {
+				scope.icon = (newVal) ? 'checked' : 'unchecked';
+				if (!angular.equals(newVal, oldVal)) scope.clicker();
+			});
+
+			element.click(function() {
+				scope.model = !scope.model;
+			});
+		}
+	}
+})
 .directive('focusMe', function($timeout, $parse) {
 	return {
 		restrict: 'A',

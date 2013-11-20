@@ -3,6 +3,16 @@
 angular.module('pinwheelApp').service('ReminderService', function($filter, DeviceService) {
 	return {
 		offsetMultiplier: [1,60,1440],
+		reminderTypes: [
+			{id: 0, name: "Minutes before", type: "relative"},
+			{id: 1, name: "Hours before", type: "relative"},
+			{id: 2, name: "Days before", type: "relative"},
+			{id: 4, name: "The same day at:", type: "absolute"},
+			{id: 5, name: "The day before at:", type: "absolute"},
+			{id: 6, name: "Days before at:", type: "absolute"},
+			{id: 3, name: "On date:", type: "both"},
+			{id: 7, name: "No reminder", type: "both"}
+		],
 		setReminderProperties: function(resource) {
 			resource.has_reminder = true;
 			resource.reminder_type = parseInt(resource.reminder_type);
