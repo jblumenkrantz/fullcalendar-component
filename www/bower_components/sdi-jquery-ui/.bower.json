@@ -9,7 +9,6 @@
     "commit": "1fcadb8b3183a65666371cdec5b083f7eebab4dd"
   },
   "_source": "git://github.com/sdicgdev/jquery-ui.git",
-  "_target": "~1.10.4",
-  "_originalSource": "sdi-jquery-ui",
-  "_direct": true
+  "_target": "*",
+  "_originalSource": "sdi-jquery-ui"
 }
