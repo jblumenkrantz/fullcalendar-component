@@ -9,33 +9,32 @@
 							<div class="large-12 columns">
 								<br>
 								<label>Student Name</label>
-								<input type="text" placeholder="full student name">
+								<!-- <input type="text" ng-model="newHallpass.name" placeholder="full student name"> -->
+								<select ui-select2="{minimumInputLength: 2}" data-placeholder=" -- Students Name -- " ng-model="newHallpass.pass_holder_user_id">
+    								<option value=""></option>
+     								<option ng-repeat="user in orgUsers" value="{{user.user_id}}">{{user.first_name}} {{user.last_name}}</option>
+								</select>
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="large-4 columns">
 								<label>Time Out</label>
-								<input type="text" placeholder="ex: 10:15AM">
+								<time ng-model="newHallpassTime" placeholder="">
 							</div>
 							<div class="large-4 columns">
 								<label>Destination</label>
-								<select ng-change="switchCalendar()" ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'" ng-model="formEvent.calendar_id" class="ng-pristine ng-valid">
-									 <option value="0" selected="selected">Home Room</option>
-										<option value="1">Head Office</option>
-										<option value="2">Gym</option>
-										<option value="3">Library</option>
-										<option value="4">Photo Lab</option>
-										<option value="5">Track</option>
-										<option value="6">Study Hall</option>
-										<option value="7">Excused</option> 
-										<option value="8">...</option> 
+								<select ui-select2 data-placeholder="Destination" ng-model="newHallpass.destination_id">
+    								<option value=""></option>
+     								<option ng-repeat="destination in facilities" value="{{destination.location_id}}">{{destination.location_name}}</option>
 								</select>
-								<!-- <input type="text" placeholder="Pre-approved destination"> -->
+								<!-- <select ng-change="" ng-options="destination.location_id as destination.location_name for destination in facilities | orderBy: 'location_name'" ng-model="newHallpass.destination" class="ng-pristine ng-valid">
+									<option value="">-- Select Destination --</option>
+								</select> -->
 							</div>
 							<div class="large-4 columns">
 								<br>
-								<button class="button small success" style="width: 100%;"> <!-- <span aria-hidden="true" class="icon-checkmark"></span> --> <span aria-hidden="true" class="icon-"></span>Issue Pass</button>
+								<button ng-click="issuePass()" class="button small success" style="width: 100%;"> <!-- <span aria-hidden="true" class="icon-checkmark"></span> --> <span aria-hidden="true" class="icon-"></span>Issue Pass</button>
 							</div>
 						</div>
 				</form>
@@ -44,6 +43,7 @@
 			<hr>
 		</div>
 		<div class="large-12">
+			<h2>Active Hall Passes</h2>
 			<table>
 				<thead>
 					<tr>
@@ -56,30 +56,39 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>Kid A.</td>
-						<td>10:15am</td>
-						<td>10:22am</td>
-						<td>Library</td>
-						<td>Mr. Smith</td>
-						<td><button class="button small success"><span aria-hidden="true" class="icon-checkmark"></span></button></td>
+					<tr ng-repeat="pass in hallpasses | filter:{in_time:'!'}">
+						<td>{{pass.pass_holder_first_name}} {{pass.pass_holder_last_name}}</td>
+						<td>{{pass.out_time | date:'MMM d, y h:mm a'}}</td>
+						<td>{{pass.in_time | date:'MMM d, y h:mm a'}}</td>
+						<td>{{pass.destination_name}}</td>
+						<td>{{pass.authority_first_name}} {{pass.authority_last_name}}</td>
+						<td><button class="button small success" ng-click="check_in(pass)"><span aria-hidden="true" class="icon-checkmark"></span></button></td>
 					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="large-12">
+			<h2>Recent Hall Passes</h2>
+			<table>
+				<thead>
 					<tr>
-						<td>Kid A.</td>
-						<td>10:15am</td>
-						<td>10:22am</td>
-						<td>Library</td>
-						<td>Mr. Smith</td>
-						<td><button class="button small success"><span aria-hidden="true" class="icon-checkmark"></span></button></td>
+						<th width="100">Name</th>
+						<th width="80">Time Out</th>
+						<th width="80">Time In</th>
+						<th width="200">Destination</th>
+						<th width="200">Authorized By</th>
+						<th width="100">Check-In</th>
 					</tr>
-					<tr>
-						<td>Kid A.</td>
-						<td>10:15am</td>
-						<td>10:22am</td>
-						<td>Library</td>
-						<td>Mr. Smith</td>
-						<td><button class="button small success"><span aria-hidden="true" class="icon-checkmark"></span></button></td>
-					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="pass in hallpasses | filter:{in_time:'!!'}">
+						<td>{{pass.pass_holder_first_name}} {{pass.pass_holder_last_name}}</td>
+						<td>{{pass.out_time | date:'MMM d, y h:mm a'}}</td>
+						<td>{{pass.in_time | date:'MMM d, y h:mm a'}}</td>
+						<td>{{pass.destination_name}}</td>
+						<td>{{pass.authority_first_name}} {{pass.authority_last_name}}</td>
+						<td><span aria-hidden="true" class="icon-checkmark"></span></td>
+ 					</tr>
 				</tbody>
 			</table>
 		</div>

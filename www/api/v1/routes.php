@@ -323,15 +323,30 @@ function routes () {
 		
 		/* Hallpass API */
 		'/hallpass/?' => array(
-			Route::$get=>'HallpassCtl::getActivePasses',
+			Route::$get=>'HallpassCtl::getAllPasses',
 			Route::$put=>'HallpassCtl::checkIn',
+			Route::$post=>'HallpassCtl::createHallpass',
+			Route::Authorize(),
+			Route::Request("application/json"),
+			Route::Response("application/json")
+		),
+		'/hallpass/userlist/:alpha' => array(
+			Route::$get=>'HallpassCtl::getUserList',
 			Route::Authorize(),
 			Route::Request("application/json"),
 			Route::Response("application/json")
 		),
 		'/hallpass/:alpha/?' => array(
 			Route::$get=>'HallpassCtl::get',
-			Route::$put=>'HallpassCtl::checkIn',
+			Route::$put=>'HallpassCtl::checkInPass',
+			Route::Authorize(),
+			Route::Request("application/json"),
+			Route::Response("application/json")
+		),
+
+		/* Facilities API */
+		'/facilities/?' => array(
+			Route::$get=>'FacilitiesCtl::getLocations',
 			Route::Authorize(),
 			Route::Request("application/json"),
 			Route::Response("application/json")

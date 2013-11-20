@@ -40,6 +40,8 @@ return array(
     'EventDataConflictException' => $baseDir . '/www/api/v1/exceptions/EventDataConflictException.php',
     'EventDoesNotExist' => $baseDir . '/www/api/v1/exceptions/EventDoesNotExist.php',
     'ExistingUserException' => $baseDir . '/www/api/v1/exceptions/ExistingUserException.php',
+    'Facilities' => $baseDir . '/www/api/v1/models/facilities.php',
+    'FacilitiesCtl' => $baseDir . '/www/api/v1/controllers/facilitiesCtl.php',
     'HTTPClient' => $baseDir . '/lib/HTTPClient.php',
     'Hallpass' => $baseDir . '/www/api/v1/models/hallpass.php',
     'HallpassCtl' => $baseDir . '/www/api/v1/controllers/hallpassCtl.php',

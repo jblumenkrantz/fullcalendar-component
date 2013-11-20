@@ -5,18 +5,32 @@ class HallpassCtl
 	function getActivePasses($id = null) {
 		$authUserID = Authorize:: sharedInstance()->userID();
 		$hallpasses = Hallpass::loadActive();
+		$hallpass->in_time = (!$hallpass->in_time)? null:$hallpass->in_time;
+		echo json_encode($hallpasses);
+	}
+	function getAllPasses($id = null) {
+		$authUserID = Authorize:: sharedInstance()->userID();
+		$hallpasses = Hallpass::loadAll();
+		foreach ($hallpasses as $key => $hallpass) {
+			$hallpass->in_time = (!$hallpass->in_time)? null:$hallpass->in_time;
+		}
 		echo json_encode($hallpasses);
 	}
 
-	function getData () {
-		$authUserID = ($authUserID = Authorize:: sharedInstance()->userID());
-		//error_log($authUserID);
-		$user = User:: getData($authUserID);
-		echo json_encode($user);
+	function checkInPass ($id = null) {
+		$pass = array_shift(Hallpass::load($id));
+		$hallpass = array_shift(Hallpass::checkInPass($pass));
+		$hallpass->in_time = (!$hallpass->in_time)? null:$hallpass->in_time;
+		echo json_encode($hallpass);
 	}
 
-	function loadNewUserOptions () {
-		$options = User::loadNewUserOptions();
-		echo json_encode($options);
+	function createHallpass(){
+		$authUserID = Authorize:: sharedInstance()->userID();
+		$hallpass = array_shift(Hallpass:: create(json_decode(Request:: body())));
+		echo json_encode($hallpass);
 	}
+	function getUserList($id){		
+		echo json_encode(Hallpass::loadOrgUsers($id));
+	}
+
 }

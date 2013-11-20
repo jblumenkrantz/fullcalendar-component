@@ -3,3 +3,4 @@ dist
 vendor/composer
 .tmp
 .sass-cache
+www/bower_components/

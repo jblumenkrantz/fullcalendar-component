@@ -14,10 +14,17 @@
     "angular-ui-date": "latest",
     "angular-route": "1.2.0-rc.2",
     "angular-dragdrop": "~1.0.4",
-    "angular-ui-calendar": "~0.1.3"
+    "sdi-angular-ui-calendar": "latest",
+    "sdi-fullcalendar": "latest",
+    "sdi-jquery-ui": "latest",
+    "angular-ui-select2": "~0.0.2"
   },
   "devDependencies": {
     "angular-mocks": "latest",
     "angular-scenario": "latest"
+  },
+  "resolutions": {
+    "angular": "1.2.0-rc.2",
+    "jquery": "~2.0.3"
   }
 }
