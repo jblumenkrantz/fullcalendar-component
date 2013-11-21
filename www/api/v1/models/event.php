@@ -77,125 +77,13 @@ class Event extends PinwheelModelObject
 		return $events;
 	}
 
-
-	/**
-	*	Event::load builds Event from datastore.
-	*
-	*	@param $id  Array of event-id-string(s) or a single event-id-string.
-	*	@param $pinsqli  MySQLConnection instance used to process queue.
-	*	@return Array of Event(s).
-	*/
-	static public function load ($id, $pinsqli = NULL) {
-		$authUserID = Authorize:: sharedInstance()->userID();
-		$id = is_array($id)? "'".implode("','", $id)."'": "'$id'";
-		return static:: loadByQuery(
-			"SELECT 
-					events.id,
-					title,
-					event_description,
-					events.calendar_id,
-					UNIX_TIMESTAMP(start) as start,
-					UNIX_TIMESTAMP(end) as end,
-					opponent_id,
-					location_id,
-					creator_id,
-					repeat_id,
-					UNIX_TIMESTAMP(stops_repeating) as stops_repeating,
-					repeat_by,
-					repeat_on,
-					repeat_interval,
-					events.active,
-					allDay,
-					UNIX_TIMESTAMP(events.last_modified) as last_modified,
-					events.version,
-					reminder_prefs.mins_before,
-					UNIX_TIMESTAMP(reminder_prefs.absolute_date) as absolute_date,
-					reminder_prefs.reminder_type,
-					reminder_prefs.reminder_pref_id,
-					reminder_prefs.version as reminder_pref_version
-				FROM events
-				LEFT OUTER JOIN reminder_prefs
-				ON events.id = reminder_prefs.event_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$authUserID'
-				WHERE events.id IN ($id)
-			"
-		, $pinsqli);
-	}
-	
-	static public function loadByUser($userId, $pinsqli=NULL){
-		return static:: loadByQuery(
-			"SELECT
-					events.id,
-					title,
-					event_description,
-					events.calendar_id,
-					UNIX_TIMESTAMP(start) as start,
-					UNIX_TIMESTAMP(end) as end,
-					opponent_id,
-					location_id,
-					creator_id,
-					repeat_id,
-					UNIX_TIMESTAMP(stops_repeating) as stops_repeating,
-					repeat_by,
-					repeat_on,
-					repeat_interval,
-					events.active,
-					allDay,
-					UNIX_TIMESTAMP(events.last_modified) as last_modified,
-					events.version,
-					reminder_prefs.mins_before,
-					UNIX_TIMESTAMP(reminder_prefs.absolute_date) as absolute_date,
-					reminder_prefs.reminder_type,
-					reminder_prefs.reminder_pref_id,
-					reminder_prefs.version as reminder_pref_version
-				FROM events
-				LEFT OUTER JOIN reminder_prefs
-				ON events.id = reminder_prefs.event_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$userId' 
-				WHERE events.creator_id = '$userId'
-			", $pinsqli);
-	}
-
-	static public function loadActive ($id, $pinsqli = NULL) {
-		$authUserID = Authorize:: sharedInstance()->userID();
-		$id = is_array($id)? "'".implode("','", $id)."'": "'$id'";
-		return static:: loadByQuery(
-			"SELECT
-					events.id,
-					title,
-					event_description,
-					events.calendar_id,
-					UNIX_TIMESTAMP(start) as start,
-					UNIX_TIMESTAMP(end) as end,
-					opponent_id,
-					location_id,
-					creator_id,
-					repeat_id,
-					UNIX_TIMESTAMP(stops_repeating) as stops_repeating,
-					repeat_by,
-					repeat_on,
-					repeat_interval,
-					events.active,
-					allDay,
-					UNIX_TIMESTAMP(events.last_modified) as last_modified,
-					events.version,
-					reminder_prefs.mins_before,
-					UNIX_TIMESTAMP(reminder_prefs.absolute_date) as absolute_date,
-					reminder_prefs.reminder_type,
-					reminder_prefs.reminder_pref_id,
-					reminder_prefs.version as reminder_pref_version
-				FROM events
-				LEFT OUTER JOIN reminder_prefs
-				ON events.id = reminder_prefs.event_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$authUserID' 
-				WHERE events.id IN ($id)
-					AND events.active = TRUE
-			"
-		, $pinsqli);
-	}
-
 	/** USED BY PINWHEEL **/
 	static public function getUserEventsForCalendar($userId, $calendar, $pinsqli=NULL) {
 		$dataRay = $eventArray = array();
 
 		//error_log(print_r($calendar,true));
+
+		//$events = Event::getBatch(array("events.active = true","start > FROM_UNIXTIME('$start')","start < FROM_UNIXTIME('$end')","events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}'))"));
 
 		$events = Event::getBatch(array("events.active = true","events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}'))"));
 
@@ -212,38 +100,6 @@ class Event extends PinwheelModelObject
 		return($dataRay);
 	}
 	
-
-	static public function getEventsBetween($userId, $start, $end, $pinsqli=NULL) {
-		$dataRay = $eventArray = array();
-
-		$cals = (object) array_merge((array) Calendar::loadUserCreatedCalendars($userId), (array) Calendar::loadUserSubscriptions($userId));
-
-		foreach($cals as $calendar){
-
-			$events = Event::getBatch(array("events.active = true","start > FROM_UNIXTIME('$start')","start < FROM_UNIXTIME('$end')","events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}'))"));
-
-			if(property_exists($calendar, 'adhoc_events') && !$calendar->adhoc_events){
-				unset($calendar->adhoc_events);
-			}
-			foreach($events as $event){
-				array_push($dataRay, $event);
-			}
-		}
-		return($dataRay);
-	}
-	static public function loadByQuery ($query, $pinsqli = NULL) {
-		$pinsqli = $pinsqli === NULL? DistributedMySQLConnection:: readInstance(): $pinsqli;
-		$resulti = $pinsqli->query($query);
-		$events = array();
-		if (!$pinsqli->errno) {
-			while (($object = $resulti->fetch_object()))
-			array_push($events, new Event($object));
-				//array_push($events, new Event($object));  // why were we doing it this way?
-		} else
-			throw new Exception($pinsqli->error, 1);
-		return $events;
-	}
-
 	/**
 	*	Event::create stores event(s) properties into datastore.
 	*
@@ -532,26 +388,6 @@ class Event extends PinwheelModelObject
 		$this->active = FALSE;
 		BRCDispatcher:: dispatchEventModification(new BRCEventModification($this, BRCEventModification:: $Deleted));
 	}
-
-
-	/**
-	*	Event::allBetween wraps Event::getBatch with convenience for temporal 
-	*	window condition.
-	*
-	*	@param $start  Start time (string) of window.
-	*	@param $end  End time (string) of window.
-	*	@return Array of Event(s).
-	*/
-	static public function allBetween($start, $end, $calendar_id=NULL){
-		$where_array = array();
-		$where_array[] = "start > FROM_UNIXTIME('$start')";
-		$where_array[] = "start < FROM_UNIXTIME('$end')";
-		if($calendar_id){
-			$where_array[] = "events.calendar_id = '$calendar_id'";
-		}
-		return(Event::getBatch($where_array, array('id_only'=>false)));
-	}
-
 
 	/**
 	*	Event::getBatch will load Event derived from datastore conditioned
