@@ -54,6 +54,12 @@ select {
 .transition-07 {
 	transition-duration: 0.7s;
 }
+.transition-05 {
+	transition-duration: 0.5s;
+}
+.transition-03 {
+	transition-duration: 0.3s;
+}
 
  /* sliding drawer basic styles */
 .slide-drawer {

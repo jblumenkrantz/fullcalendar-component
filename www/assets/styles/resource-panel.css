@@ -1,0 +1,128 @@
+.resource-panel,
+.resource-gradient,
+.resource-body,
+.resource-display,
+.resource-edit,
+.resource-header {
+	position: relative;
+}
+
+.resource-gradient,
+.resource-edit {
+	width: 100%;
+	height: 100%;
+}
+
+.resource-panel {
+	overflow: hidden;
+	width: 100%;
+}
+
+.resource-panel.transition-07 {
+	transition-property:width,height,margin;
+	-webkit-transition-property:width,height,margin;
+	-moz-transition-property:width,height,margin;
+	-o-transition-property:width,height,margin;
+}
+
+.resource-gradient {
+	overflow: hidden;
+}
+
+.resource-body {
+	overflow: visible;
+	height: 100%;
+}
+
+.resource-display {
+	overflow: hidden;
+	z-index: 2;
+}
+
+.resource-edit {
+	position: absolute;
+}
+
+.resource-header {
+
+}
+
+
+.resource-name,
+.resource-color {
+	float: left;
+}
+
+.resource-name {
+	width: 90%; /* fallback if calc() not supported */
+	width: calc(100% - 2.3125em);
+}
+
+.resource-color {
+	width: 2.3125em;
+}
+
+/* transition changes */
+.resource-panel.open {
+	margin: 15px;
+	width: 200%;
+	height: 360.625px;
+	border: none;
+	-webkit-box-shadow: 0 0 5px #999999;
+	-moz-box-shadow: 0 0 5px #999999;
+	box-shadow: 0 0 5px #999999;
+}
+
+.resource-panel.open .resource-body {
+	height: calc(100% - 30px);
+	margin: 30px 1px 1px 8px;
+	padding: 0 0 1em 0;
+}
+.resource-panel.open + .resource-panel {
+	border-top: 1px solid #999;
+}
+
+/* VISIBILITY SETTINGS
+Reference:
+.resource-panel.open 			 //open start / opening
+.resource-panel.open.done 		 //open done
+.resource-panel.done.close 		 //close start / closing
+.resource-panel.close:not(.done) //close done
+*/
+
+/* keep display hidden during opening/closing */
+.resource-panel.open .resource-display {
+	opacity: 0;
+	z-index: -1;
+}
+
+/* bring edit to top when open */
+.resource-panel.open .resource-edit {
+	top: -30px;
+}
+
+/* fadein display when close */
+.resource-panel.close .resource-display {
+	opacity: 1;
+}
+
+/* fadeout edit when close */
+.resource-panel.close .resource-edit {
+	opacity: 0;
+}
+
+/* PANE HEADER stuff that probably shouldn't be here */
+.pane-header.small {
+	height: 30px !important;
+	font-size: 18px;
+	background: none;
+}
+.pane-header.small .pane-title {
+	top: 6px;
+	margin-left: 0;
+}
+.pane-header.small span.right {
+	top: 2px;
+	margin-right: 7px;
+	text-shadow: none !important;
+}
