@@ -22,24 +22,6 @@ angular.module('pinwheelApp')
 					//console.warn([windowHeight,mainHeaderHeight,contentHeadHeight,fcHeaderHeight]);
 					return height;
 				}
-
-				$scope.eventSources = [[]];
-				$scope.calendarOptions = {
-					editable: true,
-					header:{
-						left:null,
-						center:null,
-						right:null
-					},
-					month:$routeParams.month -1,
-					year:$routeParams.year,
-					date:$routeParams.day,
-					weekMode:'liquid',
-					height:$scope.mainAreaHeight(),
-					viewRender: function(view,element) {
-       					 console.warn('fullCalendar render');
-    				}
-				};
 			}
 		}
 	});

@@ -6,7 +6,6 @@ angular.module('pinwheelApp')
 		$scope.reminders = {};
 
 		$scope.device = DeviceService;
-
 		$scope.calendarColor = function(item) {
 			return $scope.calendarWatchers[item.calendar_id].color;
 		}
@@ -47,25 +46,6 @@ angular.module('pinwheelApp')
 				Calendar.query({id: 'all'}, function(calendars){
 					$scope.loading_calendars = false;
 					$scope.calendars = calendars;
-					// IF not calendar creator OR NOT calendar Admin do not allow event drag/drop and resizing
-					/*angular.forEach(calendars, function(calendar){
-						if(!calendar.calendar_admin || !(calendar.creator_id == $scope.user.user_id)){
-							if(calendar.creator_id != $scope.user.user_id){
-								angular.forEach(calendar.events, function(event){
-									event.editable = false;
-									console.warn(event);
-								});
-							}
-						}
-					});*/
-					/*Event.query({id: 'all'}, function(events){
-						$scope.loading_events = false;
-						$scope.events = events;
-						Task.query({id: 'all'}, function(tasks){
-							$scope.loading_tasks = false;
-							$scope.tasks = tasks;
-						});
-					});*/
 				});
 			}, function(error){
 				// TODO: update this and other requests
