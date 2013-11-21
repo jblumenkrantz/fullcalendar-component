@@ -1,12 +1,13 @@
 <div
+	resource-panel="editingCalendar"
 	class="resource-panel transition-07"
-	ng-style="{background:calendar.color}"
-	ng-class="{'open':editingCalendar}">
+	ng-class="{'open':editingCalendar, 'close':!editingCalendar}"
+	ng-style="{background:calendar.color}">
 	<div class="resource-gradient">
-		<div class="resource-body">
+		<div class="resource-body transition-07">
 			<!-- DISPLAY CALENDAR -->
 
-			<div class="resource-display">
+			<div class="resource-display transition-07">
 				<div class="row">
 					<div class="large-12 columns" style="padding: 0;">
 						<div class="subscribed" ng-hide="isCalendarCreator(calendar)" type="button"><span aria-hidden="true" class="icon-rss-alt" ng-style="{color:calendar.color}"></span></div>
@@ -20,8 +21,8 @@
 
 			<!-- EDIT CALENDAR -->
 
-			<form name="editCalendarForm" class="subscription resource-edit" novalidate>
-				<div class="pane-header small">
+			<form name="editCalendarForm" class="subscription resource-edit transition-07" novalidate>
+				<div class="resource-header pane-header small">
 				    <span class="pane-title">Edit Calendar</span>
 				    <span class="icon-x-altx-alt right" ng-click="cancel()" aria-hidden="true"></span>
 				</div>
@@ -29,10 +30,10 @@
 				<div class="row" style="padding-top: 1em;">
 					<div class="large-12 columns">
 						<label>Calendar:</label>
-						<div class="subscription-name">
-							<input focus-me="[editingCalendar]" required type="text" ng-model="editCalendar.calendar_name" placeholder="Name (required)" />
+						<div class="resource-name">
+							<input required type="text" focus-me="[editingCalendar]" delay="700" ng-model="editCalendar.calendar_name" placeholder="Name (required)" />
 						</div>
-						<div class="subscription-color">
+						<div class="resource-color">
 							<ui-colorpicker ng-model="editCalendar.color"></ui-colorpicker>
 						</div>
 					</div>

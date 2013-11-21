@@ -52,7 +52,7 @@ select {
 
 /* define transition speed as .7 seconds for your animation */
 .transition-07 {
-	transition: 0.7s;
+	transition-duration: 0.7s;
 }
 
  /* sliding drawer basic styles */
@@ -473,60 +473,7 @@ form input.ng-invalid {
 	-ms-user-select: none;
 	user-select: none;
 }
-/* Open Close sidebar element */
-.pane-header.small {
-	height: 30px !important;
-	font-size: 18px;
-	background: none;
-}
-.pane-header.small .pane-title {
-	top: 6px;
-}
-.pane-header.small span.right {
-	top: 2px;
-	margin-right: 7px;
-	text-shadow: none !important;
-}
-.resource-panel.open {/*
-	margin: 15px 0;
-	width: 200%;
-	height: 360.625px;*/
-	border: none;
-	-webkit-box-shadow: 0 0 5px #999999;
-	-moz-box-shadow: 0 0 5px #999999;
-	box-shadow: 0 0 5px #999999;
-}
 
-.resource-panel .resource-header,
-.resource-panel .resource-edit,
-.resource-panel.open .resource-display {
-	display: none;
-}
-
-.resource-panel .resource-display,
-.resource-panel.open .resource-header,
-.resource-panel.open .resource-edit {
-	display: block;
-}
-
-.resource-panel.open .resource-body {
-	margin: 0 1px 1px 8px;
-	padding: 0 0 1em 0;
-}
-.resource-panel.open + .resource-panel {
-	border-top: 1px solid #999;
-}
-.resource-panel .subscription-name,
-.resource-panel .subscription-color {
-	float: left;
-}
-.resource-panel .subscription-name {
-	width: 90%; /* fallback if calc() not supported */
-	width: calc(100% - 2.3125em);
-}
-.resource-panel .subscription-color {
-	width: 2.3125em;
-}
 .reminders table {
 	position: relative;
 	width: 100%;
