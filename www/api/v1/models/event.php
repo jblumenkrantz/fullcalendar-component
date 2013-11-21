@@ -10,14 +10,15 @@ class Event extends PinwheelModelObject
 	public $opponent_id;
 	public $location_id;
 	public $creator_id;
-	public $repeat_id;
 	public $active;
 	public $last_modified;
 	public $version;
 	public $allDay;
   public $stops_repeating;
-  public $repeat_by;
-  public $repeat_on;
+  public $repeat_by_day;
+  public $repeat_by_month;
+  public $repeat_by_monthday;
+  public $repeat_frequency;
   public $repeat_interval;
 	public $mins_before;
 	public $absolute_date;
@@ -41,9 +42,10 @@ class Event extends PinwheelModelObject
 			'opponent_id' => '',
 			'location_id' => '',
 			'creator_id' => '',
-			'repeat_id' => null,
-			'repeat_by' => null,
-			'repeat_on' => null,
+			'repeat_by_day' => null,
+			'repeat_by_month' => null,
+			'repeat_by_monthday' => null,
+			'repeat_frequency' => null,
 			'repeat_interval' => null,
 			'allDay' => 0,
 			'last_modified' => NULL,
@@ -78,14 +80,38 @@ class Event extends PinwheelModelObject
 	}
 
 	/** USED BY PINWHEEL **/
-	static public function getUserEventsForCalendar($userId, $calendar, $pinsqli=NULL) {
+	static public function getUserEventsForCalendar($userId, $calendar, $start, $end, $pinsqli=NULL) {
 		$dataRay = $eventArray = array();
 
 		//error_log(print_r($calendar,true));
 
 		//$events = Event::getBatch(array("events.active = true","start > FROM_UNIXTIME('$start')","start < FROM_UNIXTIME('$end')","events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}'))"));
 
-		$events = Event::getBatch(array("events.active = true","events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}'))"));
+		$events    = Event::getBatch(array("events.repeat_addendum = '0'", "events.repeat_interval IS NULL OR events.repeat_interval = '0'", "events.active = true","events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}'))"));
+		
+		$repeaters = Event::getBatch(array("events.repeat_addendum = '0'", "events.repeat_interval > 0", "events.active = true","events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}'))"));
+
+		$addendums = Event::getBatch(array("events.repeat_addendum = '1'", "events.active = true","events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}'))"), array("order" => "events.start asc"));
+
+		$onDate = $start;
+		while($onDate <= $end){
+			foreach($repeaters as $repeater){
+				switch($repeater->repeat_frequency){
+					case 'DAILY':
+						break;
+					case 'WEEKLY':
+						break;
+					case 'MONTHLY':
+						break;
+					case 'YEARLY':
+						break;
+				}
+				// does this date apply to this repeater?
+				//
+				// if so, make an event in $events
+			}
+			$onDate = strtotime("+1 day", $onDate);
+		}
 
 
 		/*if(isSet($calendar) && property_exists($calendar, 'adhoc_events') && !$calendar->adhoc_events){
@@ -160,9 +186,6 @@ class Event extends PinwheelModelObject
 			$ep = array_map(array($pinsqli, 'real_escape_string'), $ep);
 			$eventID = MySQLConnection::generateUID('event');
 			$ep['creator_id'] = $authUserID;
-			if($ep['repeat_id'] == $ep['id']){
-				$ep['repeat_id'] = $eventID;
-			}
 			array_push($valueStrings,
 				"(
 					'$eventID',
@@ -175,11 +198,12 @@ class Event extends PinwheelModelObject
 					'{$ep['location_id']}',
 					'{$ep['creator_id']}',
 					'{$ep['allDay']}',
-					'{$ep['repeat_id']}',
 					FROM_UNIXTIME('{$ep['stops_repeating']}'),
 					'{$ep['repeat_interval']}',
-					'{$ep['repeat_on']}',
-					'{$ep['repeat_by']}'
+					'{$ep['repeat_frequency']}',
+					'{$ep['repeat_by_day']}',
+					'{$ep['repeat_by_month']}',
+					'{$ep['repeat_by_monthday']}'
 				)"
 			);
 			if ($ep["has_reminder"] == true && !$ep['using_calendar_reminder']) {
@@ -203,11 +227,12 @@ class Event extends PinwheelModelObject
 					location_id,
 					creator_id,
 					allDay,
-					repeat_id,
 					stops_repeating,
 					repeat_interval,
-					repeat_on,
-					repeat_by
+					repeat_frequency,
+					repeat_by_day,
+					repeat_by_month,
+					repeat_by_monthday,
 				)
 				Values $values
 			"
@@ -242,10 +267,11 @@ class Event extends PinwheelModelObject
 					opponent_id,
 					location_id,
 					creator_id,
-					repeat_id,
 					UNIX_TIMESTAMP(stops_repeating) as stops_repeating,
-					repeat_by,
-					repeat_on,
+					repeat_by_month,
+					repeat_by_day,
+					repeat_by_monthday,
+					repeat_frequency,
 					repeat_interval,
 					events.active,
 					allDay,
@@ -303,7 +329,6 @@ class Event extends PinwheelModelObject
 					location_id = '{$properties['location_id']}',
 					creator_id  = '{$properties['creator_id']}',
 					allDay     = '{$properties['allDay']}',
-					repeat_id   = '{$properties['repeat_id']}',
 					stops_repeating = FROM_UNIXTIME('{$properties['stops_repeating']}'),
 					repeat_interval = '{$properties['repeat_interval']}',
 					repeat_on   = '{$properties['repeat_on']}',
@@ -326,7 +351,6 @@ class Event extends PinwheelModelObject
 					location_id = '{$properties['location_id']}',
 					creator_id  = '{$properties['creator_id']}',
 					allDay  = {$properties['allDay']},
-					repeat_id   = '{$properties['repeat_id']}',
 					stops_repeating = FROM_UNIXTIME('{$properties['stops_repeating']}'),
 					repeat_interval = '{$properties['repeat_interval']}',
 					repeat_on   = '{$properties['repeat_on']}',
@@ -414,7 +438,6 @@ class Event extends PinwheelModelObject
 				opponent_id,
 				location_id,
 				creator_id,
-        repeat_id,
         repeat_interval,
         repeat_on,
         repeat_by,
@@ -440,6 +463,10 @@ class Event extends PinwheelModelObject
 		}
 
 		$query .= $where_query;
+
+		if(IsSet($opts['order'])){
+			$query .= "ORDER BY "+$opts['order'];
+		}
 		//error_log(print_r(preg_replace('~[\r\n\t]+~','',$query),true));
 		// Query Datastore
 		$pinsqli = DistributedMySQLConnection:: readInstance();
