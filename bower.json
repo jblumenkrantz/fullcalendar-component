@@ -18,7 +18,6 @@
     "sdi-fullcalendar": "latest",
     "sdi-jquery-ui": "latest",
     "angular-ui-select2": "~0.0.2"
->>>>>>> hallpass
   },
   "devDependencies": {
     "angular-mocks": "latest",
