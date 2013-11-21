@@ -3,10 +3,58 @@
     <span class="icon-plus-alt right" ng-click="add()" aria-hidden="true"></span>
 </div>
 <div ng-show="loading_calendars" class="spinwheel"></div>
+<!-- Calendar Admin box -->
+<div id="calendar-admin-modal-bg" class="reveal-modal-bg"></div>
+<div id="calendar-admin-modal" class="reveal-modal medium" style="position:fixed; color:black; padding: 0 0 20px 0;">
+<h2>Calendar Administration</h2>
+	<h3>{{calendar.calendar_name}}</h3>
+	<div class="large-4 columns left">
+		<div ng-repeat="admin in calendar.admins">
+			<div class="large-8 small-12 columns" style="line-height:42px; white-space:nowrap;">
+				{{admin.first_name}} {{admin.last_name}} : {{admin.user_handle}}			
+			</div>
+			<div class="large-2 small-12 columns">
+				<button ng-click="deleteCalendarAdmin(admin)" class="icon modalTrigger button radius" button-icon="icon-remove-2">
+					<span aria-hidden="true" class="icon-remove-2"></span>
+				</button>
+<!-- 			<confirm
+					button-icon="icon-remove-2"
+					button-class="button radius"
+					header="Delete Calendar Administrator"
+					body="Are you sure you want to delete this calendar adminstrator?"
+					footer="You are about to delete a calendar adminstrator.  Are you sure you wnat to continue?"
+					affirmative-text="Confirm"
+					negative-text="Cancel"
+					affirmative-action="deleteCalendarAdmin(admin)"
+					negative-action="cancelDeleteCalendarAdmin()">
+				</confirm> -->
+			</div>
+		</div>
+	</div>
+	<div class="large-8 columns right">
+		<div class="large-12 columns" ng-show="createNewCalendarAdmin">
+			<div class="large-4 columns clear left">Username:</div><div class="large-8 columns right"><input type="text" ng-model="newAdmin.username" /></div>
+			<div class="large-12 columns centered alert" ng-show="existingAdmin"><span class='error'>User is already a Calendar Administrator</span></div>
+			<div class="large-6 columns">
+				<div class="expand small alert button" ng-click="createNewCalendarAdmin = false" >Cancel</div>
+			</div>
+			<div class="large-6 columns">
+				<div class="expand small success button" ng-click="addCalendarAdmin()" >Add</div>
+			</div>
+		</div>
+		<div class="large-12 columns" ng-show="!createNewCalendarAdmin">
+			<div class="button" ng-click="createNewCalendarAdmin = true">
+				<span aria-hidden="true" class="icon-plus-alt"> Add new Contact Point</span>
+			</div> 
+		</div>
+	</div>
+	<a class="close-reveal-modal"><span aria-hidden="true" class="icon-x-altx-alt"></span></a>
+</div> 
+<!-- END Calendar Admin box -->
 <!-- SUBSCRIBED CALENDAR SECTION -->
 <div scroll-pane class="scroll-pane">
 	<active-subscription
-		ng-repeat="calendar in subscribedCalendars = (calendars | filter:{active: 1, subscribed: true} | orderBy:'calendar_name')" 
+		ng-repeat="calendar in subscribedCalendars = (calendars | filter:{active: true, subscribed: true} | orderBy:'calendar_name')" 
 		watcher="calendarWatchers"
 		calendar="calendar"
 		user="user"
@@ -26,8 +74,8 @@
 
 	    <!-- NEW CALENDAR CREATION FORM -->
 	    <div class="subscription-panel" ng-style="{background:newCalendar.color}">
-			<div class="subscription-gradient"> 
-				<div class="subscription-body">
+			<div class="resource-gradient"> 
+				<div class="resource-body">
 					<form class="subscription" name="newCalendarForm" novalidate>
 					    <input focus-me="[addingSubscription]" delay="700" required type="text" ng-model="newCalendar.calendar_name" placeholder="Name (required)" class="on-date" style="width: 100%;" />
 						<div class="row">
@@ -91,7 +139,7 @@
 
 		<!-- recently acquired calendars ng-repeat -->
 		<active-subscription
-			ng-repeat="calendar in recentCalendars = (calendars | filter:{active: 1, recent: true, subscribed: true} | orderBy:'calendar_name')"
+			ng-repeat="calendar in recentCalendars = (calendars | filter:{active: true, recent: true, subscribed: true} | orderBy:'calendar_name')"
 			watcher="calendarWatchers"
 			user="user"
 			calendar="calendar"
@@ -111,7 +159,7 @@
 	<div scroll-pane-two watch="recentCalendars.length" style="overflow-y: auto;">
     	<!-- available calendars ng-repeat -->
 		<available-subscription
-			ng-repeat="calendar in availableCalendars = (calendars | filter:{active: 1, subscribed: false} | filter:calFilter | orderBy:'calendar_name')"
+			ng-repeat="calendar in availableCalendars = (calendars | filter:{active: true, subscribed: false} | filter:calFilter | orderBy:'calendar_name')"
 			watcher="calendarWatchers"
 			user="user"
 			calendar="calendar">

@@ -96,6 +96,27 @@ class User extends PinwheelModelObject
 			"
 		, $pinsqli));
 	}
+	static public function loadPermissions ($id, $pinsqli = NULL) {
+		return(static:: genericQuery(
+			"SELECT
+				permissions.org_id,
+				modify_public_calendars,
+				message_calendar_subscribers,
+				modify_handbook,
+				modify_theme,
+				view_hallpass_history,
+				org_wide_messaging,
+				org_wide_emergency_alerts,
+				advanced_messaging,
+				modify_org_admins,
+				org_name
+				FROM permissions
+				LEFT OUTER JOIN organizations
+				ON organizations.org_id = permissions.org_id
+				WHERE user_id = '$id'
+			"
+		, $pinsqli));
+	}
 
 	static public function loadPasswordResetSettings ($user_id, $pinsqli = NULL) {
 		return(static:: genericQuery(
@@ -672,5 +693,17 @@ class User extends PinwheelModelObject
 		if ($pinsqli->affected_rows == 0) {
 			throw new UserDoesNotExist();
 		}
+	}
+	static function checkPermissions($p,$userID,$orgID){
+		$hasPermission = false;
+		$perms = static:: loadPermissions($userID);
+		foreach ($perms as $key => $value) {
+			if($value->$p && $value->org_id == $orgID){
+				//error_log(print_r($p,true));
+				//error_log(print_r($value->$p,true));
+				$hasPermission = true;
+			}
+		}
+		return $hasPermission;
 	}
 }

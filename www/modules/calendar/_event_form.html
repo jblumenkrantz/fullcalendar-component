@@ -1,6 +1,7 @@
 <!-- HEADER -->
 <div class="pane-header">
-    <span ng-show="editingEvent" class="pane-title">Edit Event</span>
+	<span ng-show="editingEvent && !formEvent.editable" class="pane-title">Edit Reminder</span>
+    <span ng-show="editingEvent && formEvent.editable" class="pane-title">Edit Event</span>
     <span ng-show="addingEvent" class="pane-title">
     	Add New Event 
     	<label style="display: inline; font-size: 14px; color: inherit;" for="alwaysAdvanced">
@@ -16,31 +17,95 @@
 		<!-- Event Title -->
 		<div class="large-6 columns">
 			<label>Title:</label>
-			<input required focus-me="[addingEvent, editingEvent]" type="text" ng-model="formEvent.title" placeholder="Untitled event" />
+			<input
+				type="text"
+				placeholder="Untitled event"
+				required
+				ng-disabled="!formEvent.editable"
+				focus-me="[addingEvent, editingEvent]"
+				ng-model="formEvent.title"
+			/>
 		</div>
 		<!-- / Event Title -->
 		<!-- Calendar -->
 		<div class="large-6 columns">
 			<label>Calendar:</label>
-			<select ng-change="switchCalendar()" ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'" ng-model="formEvent.calendar_id" ></select>
+			<select
+				ng-disabled="!formEvent.editable"
+				ng-change="switchCalendar()"
+				ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'"
+				ng-model="formEvent.calendar_id"
+			></select>
 		</div>
 		<!-- / Calendar -->
 	</div>
 	<div class="row">
 		<!-- Start Time -->
 		<div class="large-6 columns calendar-picker-container">
-			<label>From<span ng-show="formEvent.allDay=='1'"> start of day</span>:</label>
-			<datetime ng-required="formEvent.allDay == '0'" ng-show="formEvent.allDay == '0'" ng-model="formEvent.start" name="start" placeholder="m/d/yyyy h:mm AM/PM" />
-			<date ng-required="formEvent.allDay == '1'" ng-show="formEvent.allDay == '1'" ng-model="formEvent.start" name="start" placeholder="m/d/yyyy" />
-			<!--<button ng-hide="device.isTouch" type="button" class="glyph-show"><span aria-hidden="true" class="icon-calendar-2"></span></button>-->
+			<label>From<span ng-show="formEvent.allDay"> start of day</span>:</label>
+			<!-- Non allDay event show datetime entry -->
+			<datetime
+				ng-required="!formEvent.allDay"
+				ng-disabled="!formEvent.editable"
+				ng-show="!formEvent.allDay"
+				ng-model="formEvent.start"
+				name="start"
+				placeholder="m/d/yyyy h:mm AM/PM"
+				date-format="M/d/yyyy"
+				time-format="h:mm a"
+				divider="@"
+				dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y @ h:M a'}"
+				jqui-opts="{dateFormat: 'm/d/yy'}"
+				ng-change="moveEndTime(1);"
+			/>
+			<!--AllDay event show date entry -->
+			<date
+				ng-required="formEvent.allDay"
+				ng-disabled="!formEvent.editable"
+				ng-show="formEvent.allDay"
+				ng-model="formEvent.start"
+				name="start"
+				placeholder="m/d/yyyy"
+				date-format="M/d/yyyy"
+				dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y'}"
+				jqui-opts="{dateFormat: 'm/d/yy'}"
+				ng-change="moveEndTime(0);"
+			/>
 		</div>
 		<!-- / Start Time -->
 		<!-- End Time -->
 		<div class="large-6 columns calendar-picker-container">
-			<label>To<span ng-show="formEvent.allDay=='1'"> end of day</span>:</label>
-			<datetime ng-required="formEvent.allDay == '0'" ng-show="formEvent.allDay == '0'" ng-model="formEvent.end" name="end" placeholder="m/d/yyyy h:mm AM/PM" />
-			<date ng-required="formEvent.allDay == '1'" ng-show="formEvent.allDay == '1'" ng-model="formEvent.end" name="end" placeholder="m/d/yyyy" />
-			<!--<button ng-hide="device.isTouch" type="button" class="glyph-show"><span aria-hidden="true" class="icon-calendar-2"></span></button>-->
+			<label>To<span ng-show="formEvent.allDay"> end of day</span>:</label>
+			<!-- Non allDay event show datetime entry -->
+			<datetime
+				ng-required="!formEvent.allDay"
+				ng-disabled="!formEvent.editable"
+				ng-show="!formEvent.allDay"
+				ng-model="formEvent.end"
+				name="end"
+				placeholder="m/d/yyyy h:mm AM/PM"
+				date-format="M/d/yyyy"
+				time-format="h:mm a"
+				min-watch="formEvent.start"
+				divider="@"
+				dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y @ h:M a', minDatetime: formEvent.start}"
+				jqui-opts="{dateFormat: 'm/d/yy', minDate: formEvent.start}"
+				ng-change="end.moved = true;"
+			/>
+			<!--AllDay event show date entry -->
+			<date
+				ng-required="formEvent.allDay"
+				ng-disabled="!formEvent.editable"
+				ng-show="formEvent.allDay"
+				ng-model="formEvent.end"
+				name="end"
+				placeholder="m/d/yyyy"
+				date-format="M/d/yyyy"
+				min-watch="formEvent.start"
+				dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y', minDateime: formEvent.start}"
+				jqui-opts="{dateFormat: 'm/d/yy', minDate: formEvent.start}"
+				ng-change="end.moved = true;"
+			/>
 		</div>
 		<!-- / End Time -->
 	</div>
@@ -49,7 +114,12 @@
 		<!-- All Day -->
 		<div class="large-4 columns">
 			<label class="checkbox">
-				<input type="checkbox" ng-model="formEvent.allDay" ng-true-value="1" ng-false-value="0" ng-click="allDayToggle()" />
+				<input
+					type="checkbox"
+					ng-disabled="!formEvent.editable"
+					ng-model="formEvent.allDay"
+					ng-click="allDayToggle()"
+				/>
 				All Day Event
 			</label>
 		</div>
@@ -57,7 +127,11 @@
 		<!-- Reminder -->
 		<div class="large-4 columns">
 			<label class="checkbox">
-				<input type="checkbox" ng-model="formEvent.has_reminder" ng-click="reminderToggle()" />
+				<input
+					type="checkbox"
+					ng-model="formEvent.has_reminder"
+					ng-click="reminderToggle()"
+				/>
 				Add Reminder
 			</label>
 		</div>
@@ -65,7 +139,11 @@
 		<!-- Repeating -->
 		<div class="large-4 columns">
 			<label class="checkbox">
-				<input type="checkbox" ng-model="formEvent.isRepeating" />
+				<input
+					ng-disabled="!formEvent.editable"
+					type="checkbox"
+					ng-model="formEvent.isRepeating"
+				/>
 				Repeating
 			</label>
 		</div>
@@ -95,7 +173,7 @@
 				<input ng-required="!hideOffset" type='number' min="1" ng-model="formEvent.reminder_offset" placeholder="2" ng-change="usingOwnReminder()" />
 			</div>
 
-			<div style="float: left;" ng-class="{'with-offset':!hideOffset, 'without-offset':hideOffset}">
+			<div style="float: left;" ng-class="{'with-offset':!hideOffset, 'without-offset':hideOffset}" class="calendar-picker-container nolabel">
 				<!-- Reminder Types -->
 				<select
 					ng-class="{
@@ -124,10 +202,15 @@
 				<!-- Absolute Reminder Datetime -->
 				<datetime
 					class="on-date-right"
-					ng-model="formEvent.reminder_datetime"
 					placeholder="m/d/yyyy h:mm AM/PM"
+					ng-model="formEvent.reminder_datetime"
 					ng-show="typeIsThree = formEvent.reminder_type == 3"
 					ng-required="typeIsThree"
+					date-format="M/d/yyyy"
+					time-format="h:mm a"
+					divider="@"
+					dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y @ h:M a'}"
+					jqui-opts="{dateFormat: 'm/d/yy'}"
 				/>
 			</div>
 
