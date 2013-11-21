@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('pinwheelApp', ['ui.calendar', 'ngDragDrop', 'ngResource', 'ui.date', 'ngRoute', 'ngAnimate'])
+angular.module('pinwheelApp', ['ui.calendar', 'ngDragDrop', 'ngResource', 'ui.date', 'ngRoute', 'ngAnimate', 'ui.select2'])
 	.value("localStorage", localStorage)
 	.value("Debounce", function(func, threshold, execAsap) {
 		var timeout;

@@ -1,0 +1,96 @@
+<div id="main-content" style="height: 100%; overflow: hidden; position: relative; z-index: 3" class="small-12 columns large-12">
+	<div id="content" class="row">
+		<!-- <h1 class=""><span aria-hidden="true" class="icon-signup"></span> Hall-Pass</h1> -->       
+		<div class="row">
+			<div class="large-6 small-12 columns">
+				<!-- <h1 class=""><span aria-hidden="true" class="icon-signup"></span> Hall-Pass</h1> -->
+				<form>
+						<div class="row">
+							<div class="large-12 columns">
+								<br>
+								<label>Student Name</label>
+								<!-- <input type="text" ng-model="newHallpass.name" placeholder="full student name"> -->
+								<select ui-select2="{minimumInputLength: 2}" data-placeholder=" -- Students Name -- " ng-model="newHallpass.pass_holder_user_id">
+    								<option value=""></option>
+     								<option ng-repeat="user in orgUsers" value="{{user.user_id}}">{{user.first_name}} {{user.last_name}}</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="large-4 columns">
+								<label>Time Out</label>
+								<time ng-model="newHallpassTime" placeholder="">
+							</div>
+							<div class="large-4 columns">
+								<label>Destination</label>
+								<select ui-select2 data-placeholder="Destination" ng-model="newHallpass.destination_id">
+    								<option value=""></option>
+     								<option ng-repeat="destination in facilities" value="{{destination.location_id}}">{{destination.location_name}}</option>
+								</select>
+								<!-- <select ng-change="" ng-options="destination.location_id as destination.location_name for destination in facilities | orderBy: 'location_name'" ng-model="newHallpass.destination" class="ng-pristine ng-valid">
+									<option value="">-- Select Destination --</option>
+								</select> -->
+							</div>
+							<div class="large-4 columns">
+								<br>
+								<button ng-click="issuePass()" class="button small success" style="width: 100%;"> <!-- <span aria-hidden="true" class="icon-checkmark"></span> --> <span aria-hidden="true" class="icon-"></span>Issue Pass</button>
+							</div>
+						</div>
+				</form>
+			</div>
+			<div class="large-6 small-12 columns"><br><h5><span aria-hidden="true" class="icon-signup"></span> Authorized personel must log every hallpass issued to students. Another authority will also log the student's arrival at their destination. Only students that are authorized to be outside of class will show up on this list. If a student is not on the list, they must be apprehended and immediately sent to the gulag for 20 years hard labor.</h5></div>
+			<hr>
+		</div>
+		<div class="large-12">
+			<h2>Active Hall Passes</h2>
+			<table>
+				<thead>
+					<tr>
+						<th width="100">Name</th>
+						<th width="80">Time Out</th>
+						<th width="80">Time In</th>
+						<th width="200">Destination</th>
+						<th width="200">Authorized By</th>
+						<th width="100">Check-In</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="pass in hallpasses | filter:{in_time:'!'}">
+						<td>{{pass.pass_holder_first_name}} {{pass.pass_holder_last_name}}</td>
+						<td>{{pass.out_time | date:'MMM d, y h:mm a'}}</td>
+						<td>{{pass.in_time | date:'MMM d, y h:mm a'}}</td>
+						<td>{{pass.destination_name}}</td>
+						<td>{{pass.authority_first_name}} {{pass.authority_last_name}}</td>
+						<td><button class="button small success" ng-click="check_in(pass)"><span aria-hidden="true" class="icon-checkmark"></span></button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="large-12">
+			<h2>Recent Hall Passes</h2>
+			<table>
+				<thead>
+					<tr>
+						<th width="100">Name</th>
+						<th width="80">Time Out</th>
+						<th width="80">Time In</th>
+						<th width="200">Destination</th>
+						<th width="200">Authorized By</th>
+						<th width="100">Check-In</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="pass in hallpasses | filter:{in_time:'!!'}">
+						<td>{{pass.pass_holder_first_name}} {{pass.pass_holder_last_name}}</td>
+						<td>{{pass.out_time | date:'MMM d, y h:mm a'}}</td>
+						<td>{{pass.in_time | date:'MMM d, y h:mm a'}}</td>
+						<td>{{pass.destination_name}}</td>
+						<td>{{pass.authority_first_name}} {{pass.authority_last_name}}</td>
+						<td><span aria-hidden="true" class="icon-checkmark"></span></td>
+ 					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

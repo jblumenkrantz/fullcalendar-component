@@ -1,7 +1,7 @@
 @import "settings";
 @import "events";
 
-@import "../bower_components/foundation/scss/foundation";
+@import "../bower_components/foundation/scss/foundation/";
 
 /* Each individual part that can be added in */
 // FYI, turning off all unessential components (about half) only shaves about 50-60KB
@@ -167,12 +167,12 @@ header#content-header [class*="icon-"] {
 }
 
 .org-name {
-	font-size: 20px;
-	font-weight: bold;
-	text-shadow: $letter-press;
-	position: relative;
-	top: 7px;
-	width: 50%;
+font-size: 20px;
+font-weight: bold;
+text-shadow: $letter-press;
+position: relative;
+// top: 7px;
+// width: 50%;
 }
 
 @media only screen and (max-width: 768px) {
@@ -628,7 +628,7 @@ and (max-device-width : 1024px) {
   button {
   	width: 160px;
   	margin: 20px !important;
-  	border-radius: 4px;
+  	border-radius: $global-radius;
   }
 }
 

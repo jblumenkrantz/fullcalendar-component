@@ -109,7 +109,7 @@
               <a href="#apps" class="open-menu"><span aria-hidden="true" class="icon-menu"></span></a>
               <a href="#" class="close-menu"><span aria-hidden="true" class="icon-menu"></span></a>
             </li>
-            <li class="org-name"> <a href="The Jedi Academy">The Jedi Academy</a> </li>
+            <li class="org-name" style="top: 7px; width: 50%;"> <a href="The Jedi Academy">The Jedi Academy</a> </li>
             <!-- <li><a href="#"></a><span aria-hidden="true" class="icon-settings"></span></li> -->
             <!-- <li class=""><a ng-href="#/messaging"><span aria-hidden="true" class="icon-bubble-notification"></span></a></li> -->
             <!-- <li class=""><a ng-href="#/hallpass"><span aria-hidden="true" class="icon-signup"></span></a></li> -->
@@ -331,6 +331,52 @@
             <span class="pane-title">My Calendars</span>
             <span aria-hidden="true" class="icon-plus-alt right"></span>
           </div>
+          <div id='summaryPopup' style="color: #222 !important;">
+            <div class="summaryPopup-body" style="background: green;">
+              <div class="subscription-gradient">
+                <div class="subscription-body">
+                  <div class='close' ng-click='resetSummary()'>
+                    <span class='icon-x-altx-alt' aria-hidden='true'></span>
+                  </div>
+                  <div class="title" ng-click='summaryEdit(summaryPopup.isTask);'>
+                    <strong>A Fake Calendar Name<!-- {{event.title}} --></strong>
+                   <!--  <span class='icon-pencil'>
+                    </span>
+                    <span aria-hidden='true' class='icon-alarm-plus'>
+                    </span>
+                    <span aria-hidden='true' class='icon-alarm-cancel'>
+                    </span> -->
+                  </div>
+                  <div class="time">
+                    {{summaryPopup.dateString}}
+                  </div>
+                  <div ng-show="summaryPopup.description!=''" class="description" ng-class="{'short':!summaryPopup.expand}" ng-click="toggleExpand();">
+                    {{summaryPopup.description}}
+                    <br>
+                    <br>
+             
+                  </div>
+                  <ul class='button-group even-2' style="clear: both;"> 
+                    <li> 
+                      <button class='button radius' ng-click='resetSummary();'> 
+                        <span aria-hidden='true' class='icon-share'></span> 
+                      </button> 
+                    </li> 
+                    <li style="padding: 0;"> 
+                      <button class='button radius' ng-click='summaryDelete(summaryPopup.isTask); resetSummary();'> 
+                        <span aria-hidden='true' class='icon-remove-2'></span> 
+                      </button> 
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="pointer" ng-class="{'top':summaryPopup.pointer.top}" ng-style="summaryPopup.pointer" style="left: 4px; bottom: -9px; background-color: green; background-position: initial initial; background-repeat: initial initial;">
+            </div>
+          </div> 
+          
+           
+             
         </div>     
       </div>
     </div>
