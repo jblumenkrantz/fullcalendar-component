@@ -12,7 +12,9 @@ Note:	The property changes that initiate transitions are contextual
 default transition class:	applied for overriding purposes
 							but does not define anything by itself
 */
-.transition {} 
+.transition {
+	-webkit-transform: translate3d(0,0,0);
+} 
 
 /*
 duration-<milliseconds> class:	define transition duration in milliseconds
