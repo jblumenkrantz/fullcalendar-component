@@ -23,6 +23,25 @@
 .resource-panel {
 	max-height: 40px;
 	border-bottom: 1px solid #999;
+	-webkit-animation-duration: 0.7s;
+	-webkit-animation-timing-function: ease;
+	-webkit-animation-iteration-count: 1;
+}
+
+.resource-panel.open {
+	margin: 15px;
+	/*width: 200%;*/
+	border: none;
+	-webkit-box-shadow: 0 0 5px #999999;
+	-moz-box-shadow: 0 0 5px #999999;
+	box-shadow: 0 0 5px #999999;
+	-webkit-animation-name: open;
+	-webkit-transform: translate3d(0,0,0); 
+}
+
+@-webkit-keyframes open {
+	0% 	 { -webkit-transform: scale(1); }
+	100% { -webkit-transform: scale(2); }
 }
 
 .resource-gradient {
@@ -79,16 +98,7 @@
 	width: 2em;
 }
 
-/* transition changes */
-.resource-panel.open {
-	margin: 15px;
-	width: 200%;
-	border: none;
-	-webkit-box-shadow: 0 0 5px #999999;
-	-moz-box-shadow: 0 0 5px #999999;
-	box-shadow: 0 0 5px #999999;
-}
-
+/* transition changes 
 .resource-panel.open .resource-body {
 	height: 100%;
 	margin: 0px 1px 1px 8px;
@@ -99,14 +109,14 @@
 	border-top: 1px solid #999;
 }
 
-/* keep display hidden during opening/closing */
+/* keep display hidden during opening/closing 
 .resource-panel.open .resource-display {
 	position: absolute;
 	opacity: 0;
 	z-index: -1;
 }
 
-/* bring edit to top when open */
+/* bring edit to top when open 
 .resource-panel.open .resource-header {
 	height: 30px !important;
 }
@@ -115,7 +125,7 @@
 	height: auto;
 }
 
-/* keep display absolute when closing */
+/* keep display absolute when closing 
 .resource-panel.done.close .resource-display {
 	position: absolute;
 }
@@ -128,7 +138,7 @@
 	-ms-transform: none;
 	-moz-transform: none;
 	-o-transform: none;
-}
+}*/
 
 /* from foundation scss to deal with at some point */
 .subscription-calendar-title {
