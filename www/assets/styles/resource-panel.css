@@ -23,25 +23,30 @@
 .resource-panel {
 	max-height: 40px;
 	border-bottom: 1px solid #999;
+	-webkit-animation-delay: 0;
 	-webkit-animation-duration: 0.7s;
-	-webkit-animation-timing-function: ease;
 	-webkit-animation-iteration-count: 1;
 }
 
 .resource-panel.open {
 	margin: 15px;
-	/*width: 200%;*/
+	width: 200%;
 	border: none;
 	-webkit-box-shadow: 0 0 5px #999999;
 	-moz-box-shadow: 0 0 5px #999999;
 	box-shadow: 0 0 5px #999999;
 	-webkit-animation-name: open;
-	-webkit-transform: translate3d(0,0,0); 
 }
 
 @-webkit-keyframes open {
-	0% 	 { -webkit-transform: scale(1); }
-	100% { -webkit-transform: scale(2); }
+	0% {
+		margin: 0px;
+		width: 100%
+	}
+	100% {
+		margin: 15px;
+		width: 200%;
+	}
 }
 
 .resource-gradient {
@@ -98,7 +103,7 @@
 	width: 2em;
 }
 
-/* transition changes 
+/* transition changes */
 .resource-panel.open .resource-body {
 	height: 100%;
 	margin: 0px 1px 1px 8px;
@@ -138,7 +143,7 @@
 	-ms-transform: none;
 	-moz-transform: none;
 	-o-transform: none;
-}*/
+}
 
 /* from foundation scss to deal with at some point */
 .subscription-calendar-title {
