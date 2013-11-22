@@ -8,6 +8,10 @@
 	-webkit-transition: none !important;
 }
 
+.iOS .pane-header.small {
+	line-height: 22px;
+}
+
 .iPad #advancedEvent .on-date.datetime {
 	width: 30%;
 }
