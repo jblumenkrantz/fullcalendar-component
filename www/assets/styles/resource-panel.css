@@ -152,6 +152,7 @@
 /* PANE HEADER stuff that probably shouldn't be here */
 .pane-header.small {
 	font-size: 18px;
+	line-height: 20px;
 	background: none;
 }
 .pane-header.small .pane-title {
