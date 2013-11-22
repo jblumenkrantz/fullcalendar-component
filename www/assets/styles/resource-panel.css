@@ -20,6 +20,23 @@
 	width: 100%;
 }
 
+.resource-gradient {
+	height: 100%;
+}
+
+/* ACCELERATION ENABLE */
+.resource-panel,
+.resource-body,
+.resource-header,
+.resource-display,
+.resour-edit {
+	-webkit-transform: translateZ(0);
+	-webkit-perspective: 1000;
+	-webkit-backface-visibility: hidden;
+}
+
+/* PANEL */
+
 .resource-panel {
 	max-height: 40px;
 	border-bottom: 1px solid #999;
@@ -33,12 +50,12 @@
 	-webkit-box-shadow: 0 0 5px #999999;
 	-moz-box-shadow: 0 0 5px #999999;
 	box-shadow: 0 0 5px #999999;
-	-webkit-animation-name: open-horiz,open-vert;
-	-webkit-animation-duration: 0.7s,1.4s;
-	-webkit-animation-timing-function: ease, ;
+	-webkit-animation-name: panel-open-h, panel-open-v;
+	-webkit-animation-duration: 0.7s, 1.4s;
+	-webkit-animation-timing-function: ease, linear;
 }
 
-@-webkit-keyframes open-horiz {
+@-webkit-keyframes panel-open-h {
 	0% {
 		margin: 0px;
 		width: 100%;
@@ -49,7 +66,7 @@
 	}
 }
 
-@-webkit-keyframes open-vert {
+@-webkit-keyframes panel-open-v {
 	0% {
 		max-height: 40px;
 	}
@@ -58,9 +75,35 @@
 	}
 }
 
-.resource-gradient {
-	height: 100%;
+.resource-panel.done.close {
+	-webkit-animation-name: panel-close-h, panel-close-v;
+	-webkit-animation-duration: 0.7s, 0.4s;
+	-webkit-animation-timing-function: ease, ease-out;
 }
+
+@-webkit-keyframes panel-close-h {
+	0% {
+		margin: 15px;
+		width: 200%;
+	}
+	100% {
+		margin: 0px;
+		width: 100%;
+	}
+}
+
+@-webkit-keyframes panel-close-v {
+	0% {
+		max-height: 999px;
+	}
+	100% {
+		max-height: 40px;
+	}
+}
+
+/* END PANEL */
+
+/* BODY */
 
 .resource-body {
 	margin: 0 0 0 8px;
@@ -69,20 +112,173 @@
 	overflow: hidden;
 }
 
+.resource-panel.open .resource-body {
+	height: 100%;
+	margin: 0px 1px 1px 8px;
+	padding: 0 0 1em 0;
+	-webkit-animation-name: body-open;
+	-webkit-animation-duration: 0.7s;
+}
+
+@-webkit-keyframes body-open {
+	0% {
+		margin: 0 0 0 8px;
+		padding: 0 0 0 5px;
+		height: 40px;
+	}
+	100% {
+		margin: 0px 1px 1px 8px;
+		padding: 0 0 1em 0;
+		height: 100%;
+	}
+}
+
+.resource-panel.done.close .resource-body {
+	-webkit-animation-name: body-close;
+	-webkit-animation-duration: 0.7s;
+}
+
+@-webkit-keyframes body-close {
+	0% {
+		margin: 0px 1px 1px 8px;
+		padding: 0 0 1em 0;
+		height: 100%;
+	}
+	100% {
+		margin: 0 0 0 8px;
+		padding: 0 0 0 5px;
+		height: 40px;
+	}
+}
+
+/* END BODY */
+
+/* HEADER */
+
+.resource-header {
+	padding-left: 8px !important;
+	height: 0 !important;
+}
+
+.resource-panel.open .resource-header {
+	height: 30px !important;
+	-webkit-animation-name: header-open;
+	-webkit-animation-duration: 0.7s;
+}
+
+@-webkit-keyframes header-open {
+	0% {
+		height: 0;
+	}
+	100% {
+		height: 30px;
+	}
+}
+
+.resource-panel.done.close .resource-header {
+	-webkit-animation-name: header-close;
+	-webkit-animation-duration: 0.7s;
+}
+
+@-webkit-keyframes header-close {
+	0% {
+		height: 30px;
+	}
+	100% {
+		height: 0px;
+	}
+}
+
+/* END HEADER */
+
+/* DISPLAY */
+
 .resource-display {
+	opacity: 1;
 	height: 100%;
 	z-index: 2;
 }
 
+/* keep display hidden during opening/closing */
+.resource-panel.open .resource-display {
+	position: absolute;
+	opacity: 0;
+	z-index: -1;
+	-webkit-animation-name: display-open;
+	-webkit-animation-duration: 0.7s;
+}
+
+@-webkit-keyframes display-open {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+/* keep display absolute when closing */
+.resource-panel.done.close .resource-display {
+	position: absolute;
+	-webkit-animation-name: display-close;
+	-webkit-animation-duration: 0.7s;
+}
+
+@-webkit-keyframes display-close {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+/* END DISPLAY */
+
+/* EDIT */
+
 .resource-edit {
-	height: 0;
+	height: 0px;
 	opacity: 0
 }
 
-.resource-header {
-	padding-left: 8px !important;
-	height: 0  !important;
+/* bring edit to top when open */
+.resource-panel.open .resource-edit {
+	opacity: 1;
+	height: auto;
+	-webkit-animation-name: edit-open;
+	-webkit-animation-duration: 0.7s;
 }
+
+@-webkit-keyframes edit-open {
+	0% {
+		opacity: 0;
+		height: 0px;
+	}
+	100% {
+		opacity: 1;
+		height: auto;
+	}
+}
+
+.resource-panel.done.close .resource-edit {
+	-webkit-animation-name: edit-close;
+	-webkit-animation-duration: 0.7s;
+}
+
+@-webkit-keyframes edit-close {
+	0% {
+		opacity: 1;
+		height: auto;
+	}
+	100% {
+		opacity: 0;
+		height: 0px;
+	}
+}
+
+
+/* END EDIT */
 
 .resource-panel .subscribed {
 	height: 20px;
@@ -113,35 +309,8 @@
 }
 
 /* transition changes */
-.resource-panel.open .resource-body {
-	height: 100%;
-	margin: 0px 1px 1px 8px;
-	padding: 0 0 1em 0;
-}
-
 .resource-panel.open + .resource-panel {
 	border-top: 1px solid #999;
-}
-
-/* keep display hidden during opening/closing */
-.resource-panel.open .resource-display {
-	position: absolute;
-	opacity: 0;
-	z-index: -1;
-}
-
-/* bring edit to top when open */
-.resource-panel.open .resource-header {
-	height: 30px !important;
-}
-.resource-panel.open .resource-edit {
-	opacity: 1;
-	height: auto;
-}
-
-/* keep display absolute when closing */
-.resource-panel.done.close .resource-display {
-	position: absolute;
 }
 
 .resource-panel.open .subscribed {
@@ -160,6 +329,7 @@
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	width: 90%;
+	width: calc(100% - 24px);
 	display: inline-block !important;
 	cursor: pointer;
 	color: #222;
