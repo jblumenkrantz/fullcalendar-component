@@ -23,7 +23,7 @@
 .resource-panel {
 	max-height: 40px;
 	border-bottom: 1px solid #999;
-	-webkit-transition: max-height 1.4s, margin 0.7s, width 0.7s;
+	-webkit-transition: max-height 0.6s, margin 0.3s, width 0.3s;
 }
 
 .resource-gradient {
@@ -117,7 +117,7 @@
 }
 
 .resource-panel.done {
-	-webkit-transition: max-height 0.45s ease-out, margin 0.7s, width 0.7s;
+	-webkit-transition: max-height 0.2s ease-out, margin 0.3s, width 0.3s;
 }
 
 /* keep display absolute when closing */
@@ -141,6 +141,7 @@
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	width: 90%;
+	width: calc(100% - 24px);
 	display: inline-block !important;
 	cursor: pointer;
 	color: #222;

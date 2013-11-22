@@ -1,21 +1,21 @@
 <div
 	resource-panel="editingCalendar"
-	class="resource-panel transition duration-700"
+	class="resource-panel transition duration-300"
 	ng-class="{'open':editingCalendar, 'close':!editingCalendar}"
 	ng-style="{background:calendar.color}">
 	<div class="resource-gradient">
-		<div class="resource-header pane-header small transition duration-700">
-		    <span class="pane-title">{{editCalendar.calendar_name}}</span>
+		<div class="resource-header pane-header small transition duration-300">
+		    <span class="pane-title">Sit {{editCalendar.calendar_name}}</span>
 		    <span class="icon-x-altx-alt right" ng-click="cancel()" aria-hidden="true"></span>
 		</div>
-		<div class="resource-body transition duration-700">
+		<div class="resource-body transition duration-300">
 			<div class="subscribed" ng-hide="isCalendarCreator(calendar)">
 				<span aria-hidden="true" class="icon-rss-alt" ng-style="{color:calendar.color}">
 				</span>
 			</div>
 			<!-- DISPLAY CALENDAR -->
 
-			<div class="resource-display transition duration-700">
+			<div class="resource-display transition duration-300">
 				<div class="row">
 					<div class="large-12 columns" style="padding: 0;">
 						<input type='checkbox' ng-model="watcher[calendar.calendar_id].viewing" ng-click="setShowState()" ng-false-state="false" />
@@ -28,12 +28,12 @@
 
 			<!-- EDIT CALENDAR -->
 
-			<form name="editCalendarForm" class="subscription resource-edit transition duration-700" novalidate>
+			<form name="editCalendarForm" class="subscription resource-edit transition duration-300" novalidate>
 				<!-- Name -->
 				<div class="row" style="padding-top: 1em;">
 					<div class="large-12 columns">
 						<div class="resource-name">
-							<input required type="text" focus-me="[editingCalendar]" delay="700" ng-model="editCalendar.calendar_name" placeholder="Name (required)" />
+							<input required type="text" focus-me="[editingCalendar]" delay="300" ng-model="editCalendar.calendar_name" placeholder="Name (required)" />
 						</div>
 						<div class="resource-color">
 							<ui-colorpicker ng-model="editCalendar.color"></ui-colorpicker>
