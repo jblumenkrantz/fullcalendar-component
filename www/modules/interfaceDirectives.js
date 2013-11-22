@@ -280,6 +280,24 @@ Use db='true' if the ng-model is directly saved in the database as a TIME type.
 		}
 	}
 })
+.directive('resourcePanel', function($timeout) {
+	return {
+		restrict: 'A',
+		link: function(scope, element, attrs) {
+			element.on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', function(e) {
+				if (e.originalEvent.propertyName=='max-height') element.toggleClass("done");
+			});
+
+			var height = element.parent().height();
+			
+			scope.$watch(attrs.resourcePanel, function(newVal, oldVal) {
+				if (angular.equals(newVal, oldVal)) return;
+				element.css("max-height", (newVal ? height+"px" : ""));
+			});	 
+			
+		}
+	};
+})
 .directive('focusMe', function($timeout, $parse) {
 	return {
 		restrict: 'A',

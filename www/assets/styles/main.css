@@ -50,73 +50,9 @@ select {
 /* Used to alter styles for screens at least 1440px wide. */
 @media only screen and (min-width: 1440px) {}
 
-/* define transition speed as .7 seconds for your animation */
-.transition-07 {
-	transition-duration: 0.7s;
-}
-.transition-05 {
-	transition-duration: 0.5s;
-}
-.transition-03 {
-	transition-duration: 0.3s;
-}
-
- /* sliding drawer basic styles */
-.slide-drawer {
-	background: rgb(238, 238, 238);
-	position: absolute;
-	width: 100%;
-	z-index: 10;
-}
-
- /* Add .full class to .sliding-drawer if you want
- 	the drawer to cover the contents of its parent
- 	container. Otherwise height = auto.
- */
-.slide-drawer.full {
-	height: 100%;
-}
-
- /* define starting position as bottom of parent container (out of view) */
-.slide-drawer.bottom-up {
-	top: 100%;
-}
-
- /* define starting position as top of parent container (out of view) */
-.slide-drawer.top-down {
-	top: -100%;
-}
-
- /* define ending position for all top/bottom sliding drawers (in view).
- 	36px is height of pane-headers 
- */
-.slide-drawer.open {
-	top: 0;
-}
-
  /* rotate icon 45 degrees (make plus icons into x icons) */
 .rotate-45 {
 	-webkit-transform: rotate(45deg);
-}
-
-
-/* Fade in animaiton for the user settings save/cancel buttons */
-.animate-show.ng-hide-remove {
-  -webkit-transition:all linear 0.5s;
-  -moz-transition:all linear 0.5s;
-  -o-transition:all linear 0.5s;
-  transition:all linear 0.5s;
-  display:block!important;
-}
-
-.animate-show.ng-hide-add.ng-hide-add-active,
-.animate-show.ng-hide-remove {
-  opacity:0;
-}
-
-.animate-show.ng-hide-add,
-.animate-show.ng-hide-remove.ng-hide-remove-active {
-  opacity:1;
 }
 
 /* Loading Spinners */

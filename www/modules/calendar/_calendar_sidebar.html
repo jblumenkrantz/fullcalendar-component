@@ -59,12 +59,12 @@
 		calendar="calendar"
 		user="user"
 		reminder-types="reminderTypes"
-		adding-calendar="addingCalendar">
+		reminders="reminders[$index]">
 	</active-subscription>
 </div>
 
 <!-- ADD CALENDAR SECTION -->
-<div id="add-calendar" class="transition-07 slide-drawer full bottom-up" ng-class="{open: addingSubscription}">
+<div id="add-calendar" class="transition duration-700 slide-drawer full bottom-up" ng-class="{open: addingSubscription}">
 	<div class="scroll-header">
     	<!-- calendar creation form -->
     	<div class="pane-header">
@@ -143,8 +143,7 @@
 			watcher="calendarWatchers"
 			user="user"
 			calendar="calendar"
-			reminder-types="reminderTypes"
-			adding-calendar="addingCalendar">
+			reminder-types="reminderTypes">
 		</active-subscription>
 		
 		<div ng-show="availableCalendars.length || calFilter" class="pane-header secondary" style="border-top: 1px solid #afafaf;">

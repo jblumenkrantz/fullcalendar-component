@@ -1,16 +1,23 @@
 <div
 	resource-panel="editingCalendar"
-	class="resource-panel transition-07"
+	class="resource-panel transition duration-700"
 	ng-class="{'open':editingCalendar, 'close':!editingCalendar}"
 	ng-style="{background:calendar.color}">
 	<div class="resource-gradient">
-		<div class="resource-body transition-07">
+		<div class="resource-header pane-header small transition duration-700">
+		    <span class="pane-title">{{editCalendar.calendar_name}}</span>
+		    <span class="icon-x-altx-alt right" ng-click="cancel()" aria-hidden="true"></span>
+		</div>
+		<div class="resource-body transition duration-700">
+			<div class="subscribed" ng-hide="isCalendarCreator(calendar)">
+				<span aria-hidden="true" class="icon-rss-alt" ng-style="{color:calendar.color}">
+				</span>
+			</div>
 			<!-- DISPLAY CALENDAR -->
 
-			<div class="resource-display transition-03">
+			<div class="resource-display transition duration-700">
 				<div class="row">
 					<div class="large-12 columns" style="padding: 0;">
-						<div class="subscribed" ng-hide="isCalendarCreator(calendar)" type="button"><span aria-hidden="true" class="icon-rss-alt" ng-style="{color:calendar.color}"></span></div>
 						<input type='checkbox' ng-model="watcher[calendar.calendar_id].viewing" ng-click="setShowState()" ng-false-state="false" />
 						<strong class="subscription-calendar-title" ng-click="edit()">
 							{{calendar.calendar_name}}
@@ -21,15 +28,10 @@
 
 			<!-- EDIT CALENDAR -->
 
-			<form name="editCalendarForm" class="subscription resource-edit transition-05" novalidate>
-				<div class="resource-header pane-header small">
-				    <span class="pane-title">Edit Calendar</span>
-				    <span class="icon-x-altx-alt right" ng-click="cancel()" aria-hidden="true"></span>
-				</div>
+			<form name="editCalendarForm" class="subscription resource-edit transition duration-700" novalidate>
 				<!-- Name -->
 				<div class="row" style="padding-top: 1em;">
 					<div class="large-12 columns">
-						<label>Calendar:</label>
 						<div class="resource-name">
 							<input required type="text" focus-me="[editingCalendar]" delay="700" ng-model="editCalendar.calendar_name" placeholder="Name (required)" />
 						</div>
@@ -40,8 +42,8 @@
 				</div>
 
 				<!-- Public Checkbox -->
-				<div class="row">
-					<div class="large-12 columns" ng-show="hasPublic = checkPermision('modify_public_calendars',true)">
+				<div class="row" ng-show="hasPublic = checkPermision('modify_public_calendars',true)">
+					<div class="large-12 columns">
 						<checkbox
 							ng-model="editCalendar.public"
 							text="This is a public calendar" 
@@ -78,22 +80,6 @@
 					</div>
 				</div>
 				<!-- End of Check for Permissions section -->
-				<!--
-				<div class="row" ng-show="editCalendar.has_reminder">
-					<div class="large-12 columns">
-						<div style="float: left; width: 20%; margin-right: 2%;">
-							<input ng-required="editCalendar.has_reminder" type='number' min="1" ng-model="editCalendar.reminder_offset" placeholder="2" />
-						</div>
-						<div style="float: left;" class="with-offset">
-							<!-- Relative Reminder Types 
-							<select
-								ng-options="r.id as r.name for r in reminderTypes | filter:{type:'relative'}"
-								ng-model="editCalendar.reminder_type">
-							</select>
-						</div>
-					</div>
-				</div>
-				-->
 
 				<div class="row">
 					<div class="large-12 columns">

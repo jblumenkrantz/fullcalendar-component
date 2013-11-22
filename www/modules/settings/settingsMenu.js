@@ -6,7 +6,7 @@ angular.module('pinwheelApp')
 			transclude:true,
 			template:'<li>' +
 						'<a><span aria-hidden="true" class="icon-menu"></span></a>'+
-						'<ul id="settingsMenu" class="f-dropdown settingsMenu slide-drawer top-down transition-07">'+
+						'<ul id="settingsMenu" class="f-dropdown settingsMenu slide-drawer top-down transition duration-700">'+
 						    '<li settings-modal-trigger="account"><span aria-hidden="true" class="icon-cog"></span> My Account</li>'+
 						    '<li settings-modal-trigger="contact_points"><span aria-hidden="true" class="icon-notebook"></span> Contact Points</li>'+
 						    '<li ng-show="isOrgAdmin()" settings-modal-trigger="calendars"><span aria-hidden="true" class="icon-calendar"></span> Calendar Manager</li>'+

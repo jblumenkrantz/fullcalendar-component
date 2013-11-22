@@ -301,14 +301,7 @@ ul.days, .calendar-day {padding: 0; margin: 0; width: 100%;}
 // -----------------------------
 // subscriptions & tasks
 // -----------------------------
-.resource-panel { //outside
-	height: 40px;
-	width: 100%;
-	border-bottom: 1px solid #999;
-	overflow: hidden;
-}
 .resource-gradient {
-	overflow: hidden;
 	background: #eeeeee; /* Old browsers */
 	background: -moz-linear-gradient(top,  rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.3)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
@@ -320,9 +313,6 @@ ul.days, .calendar-day {padding: 0; margin: 0; width: 100%;}
 }
 
 .resource-body { //inside
-	position: relative;
-	overflow: hidden;
-	margin: 0 0 0 8px;
 	background: #eeeeee; /* Old browsers */
 	background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
@@ -331,7 +321,6 @@ ul.days, .calendar-day {padding: 0; margin: 0; width: 100%;}
 	background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
 	background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
-	padding: 0 0 0 5px;
 }
 
 .task .resource-body.add {
@@ -347,36 +336,6 @@ ul.days, .calendar-day {padding: 0; margin: 0; width: 100%;}
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
 	padding: 16px 4px 6px;
 	margin-left: 8px;
-}
-
-.subscription-calendar-title {
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	width: 90%;
-	display: inline-block !important;
-	cursor: pointer;
-	color: #222;
-	font-size: 14px;
-	padding-top: 12px;
-}
-
-.resource-panel  .subscribed {
-	position: absolute;
-	top: -8px;
-	right: -3px;
-	display: block;
-	color: #555;
-	font-size: 18px;
-	border: 0;
-	background: 0;
-	padding: 0;
-	margin: 0;
-	transform: rotate(180deg) !important;
-	-ms-transform: rotate(180deg) !important; /* IE 9 */
-	-webkit-transform: rotate(180deg) !important; /* Safari and Chrome */
-	box-shadow: none;
-	font-size: 16px;
 }
 
 .resource-panel [class*="icon-"]:active {
@@ -443,7 +402,6 @@ button.disabled, button[disabled], .button.disabled, .button[disabled] {
 .button-group li button:disabled [class*="icon-"]{
  color: gray;
 }
-
 $topbar-link-color-active: $primary-color;
 
 .top-bar{
@@ -461,19 +419,6 @@ border-top: 0px solid $primary-color;
 }
 .top-bar-section ul li {
 	float: left !important;
-}
-
-
-/* iPads (portrait and landscape) ----------- */
-@media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px) {
-	#main-nav:target, #left-nav:target  {
-  width: 50%;
-	}
-	#main-nav:target + .page-wrap, #left-nav:target + .page-wrap {
-	  width: 50%;
-	}
 }
 
 //comment out 'fugly' import below to disable marketing mode

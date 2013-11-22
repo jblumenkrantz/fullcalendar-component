@@ -57,6 +57,7 @@ angular.module('pinwheelApp')
 				$scope.cancel();
 			}
 			$scope.delete = function() {
+				$element.remove();
 				$scope.cancel();
 			}
 			$scope.cancel = function() {

@@ -1,52 +1,67 @@
 .resource-panel,
 .resource-gradient,
 .resource-body,
-.resource-display,
 .resource-edit,
 .resource-header {
 	position: relative;
 }
 
+.resource-panel,
 .resource-gradient,
 .resource-edit {
 	width: 100%;
-	height: 100%;
 }
 
 .resource-panel {
+	max-height: 40px;
+	border-bottom: 1px solid #999;
 	overflow: hidden;
-	width: 100%;
-}
-
-.resource-panel.transition-07 {
-	transition-property:width,height,margin;
-	-webkit-transition-property:width,height,margin;
-	-moz-transition-property:width,height,margin;
-	-o-transition-property:width,height,margin;
+	-webkit-transition: max-height 1.4s, margin 0.7s, width 0.7s;
 }
 
 .resource-gradient {
+	height: 100%;
 	overflow: hidden;
 }
 
 .resource-body {
-	overflow: visible;
-	height: 100%;
+	margin: 0 0 0 8px;
+	padding: 0 0 0 5px;
+	height: 40px;
+	overflow: hidden;
 }
 
 .resource-display {
+	width: 100%;
+	height: 100%;
 	overflow: hidden;
 	z-index: 2;
 }
 
 .resource-edit {
-	position: absolute;
+	height: 0;
+	opacity: 0
 }
 
 .resource-header {
-
+	padding-left: 8px !important;
+	height: 0  !important;
+	overflow: hidden;
 }
 
+.resource-panel .subscribed {
+	height: 20px;
+	width: 20px;
+	overflow: hidden;
+	position: absolute;
+	left: calc(100% -  20px);
+	left: calc(100% -  20px);
+	transform: rotate(180deg);
+	-ms-transform: rotate(180deg); 
+	-mox-transform: rotate(180deg); 
+	-webkit-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
+}
 
 .resource-name,
 .resource-color {
@@ -55,18 +70,17 @@
 
 .resource-name {
 	width: 90%; /* fallback if calc() not supported */
-	width: calc(100% - 2.3125em);
+	width: calc(100% - 2em);
 }
 
 .resource-color {
-	width: 2.3125em;
+	width: 2em;
 }
 
 /* transition changes */
 .resource-panel.open {
 	margin: 15px;
 	width: 200%;
-	height: 360.625px;
 	border: none;
 	-webkit-box-shadow: 0 0 5px #999999;
 	-moz-box-shadow: 0 0 5px #999999;
@@ -74,55 +88,80 @@
 }
 
 .resource-panel.open .resource-body {
-	height: calc(100% - 30px);
-	margin: 30px 1px 1px 8px;
+	height: 100%;
+	margin: 0px 1px 1px 8px;
 	padding: 0 0 1em 0;
 }
+
 .resource-panel.open + .resource-panel {
 	border-top: 1px solid #999;
 }
 
-/* VISIBILITY SETTINGS
-Reference:
-.resource-panel.open 			 //open start / opening
-.resource-panel.open.done 		 //open done
-.resource-panel.done.close 		 //close start / closing
-.resource-panel.close:not(.done) //close done
-*/
-
 /* keep display hidden during opening/closing */
 .resource-panel.open .resource-display {
+	position: absolute;
 	opacity: 0;
 	z-index: -1;
 }
 
 /* bring edit to top when open */
+.resource-panel.open .resource-header {
+	height: 30px !important;
+}
 .resource-panel.open .resource-edit {
-	top: -30px;
-}
-
-/* fadein display when close */
-.resource-panel.close .resource-display {
 	opacity: 1;
+	height: auto;
 }
 
-/* fadeout edit when close */
-.resource-panel.close .resource-edit {
-	opacity: 0;
+.resource-panel.done {
+	-webkit-transition: max-height 0.45s ease-out, margin 0.7s, width 0.7s;
+}
+
+/* keep display absolute when closing */
+.resource-panel.done.close .resource-display {
+	position: absolute;
+}
+
+.resource-panel.open .subscribed {
+	left:  0px;
+	bottom: 0px;
+	transform: none;
+	-webkit-transform: none;
+	-ms-transform: none;
+	-moz-transform: none;
+	-o-transform: none;
+}
+
+/* from foundation scss to deal with at some point */
+.subscription-calendar-title {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	width: 90%;
+	display: inline-block !important;
+	cursor: pointer;
+	color: #222;
+	font-size: 14px;
+	padding-top: 12px;
 }
 
 /* PANE HEADER stuff that probably shouldn't be here */
 .pane-header.small {
-	height: 30px !important;
 	font-size: 18px;
 	background: none;
 }
 .pane-header.small .pane-title {
+	display: block;
+	width: 90%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 	top: 6px;
 	margin-left: 0;
 }
 .pane-header.small span.right {
+	position: absolute;
+	right: -5px;
 	top: 2px;
-	margin-right: 7px;
 	text-shadow: none !important;
 }

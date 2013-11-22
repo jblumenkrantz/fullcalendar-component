@@ -46,4 +46,21 @@ angular.module('pinwheelApp')
 		$scope.reminderToggle = function() {
 			($scope.newCalendar.has_reminder && ReminderService.reminderDefaultsEvent($scope.newCalendar, $scope.user));
 		}
+
+		//DUMMY REMINDERS
+		$scope.reminders = [
+			[
+				{reminder_pref_id: "123", reminder_type: 0, mins_before: 30},
+				{reminder_pref_id: "456", reminder_type: 1, mins_before: 120},
+				{reminder_pref_id: "789", reminder_type: 2, mins_before: 1440}
+			],
+			[
+				{reminder_pref_id: "123", reminder_type: 0, mins_before: 30},
+				{reminder_pref_id: "456", reminder_type: 1, mins_before: 120}
+			],
+			[
+				{reminder_pref_id: "123", reminder_type: 0, mins_before: 30}
+			],
+			[]
+		];
   });

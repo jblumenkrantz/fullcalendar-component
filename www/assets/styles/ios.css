@@ -1,7 +1,11 @@
 .iOS input[type="datetime-local"],
 .iOS input[type="date"],
 .iOS input[type="time"] {
-	-webkit-appearance: none;
+	-webkit-appearance: none; /* disables iOS webkit's ugly default rendering */
+}
+
+.iPad .transition {
+	-webkit-transition: none;
 }
 
 .iPad #advancedEvent .on-date.datetime {

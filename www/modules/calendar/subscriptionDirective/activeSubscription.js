@@ -10,7 +10,8 @@ angular.module('pinwheelApp')
 			calendar: '=',
 			watcher: '=',
 			user:'=',
-			reminderTypes:"="
+			reminderTypes:"=",
+			reminders:"="
 		},
 		controller: 'SubscriptionDirectiveCtl'
 	}

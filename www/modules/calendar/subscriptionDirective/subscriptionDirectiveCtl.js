@@ -12,8 +12,6 @@ angular.module('pinwheelApp')
 			};
 		}
 
-
-
 		//open existing calendar for editing
 		$scope.edit = function() {
 			delete $scope.calendar.events;
@@ -122,23 +120,4 @@ angular.module('pinwheelApp')
 			$scope.editCalendar.reminder_pref_id == null &&
 			ReminderService.reminderDefaultsEvent($scope.editCalendar, $scope.user));
 		}
-
-		//DUMMY REMINDERS
-		$scope.reminders = [
-			{
-				reminder_pref_id: "123",
-				reminder_type: 0,
-				mins_before: 30
-			},
-			{
-				reminder_pref_id: "456",
-				reminder_type: 1,
-				mins_before: 120
-			},
-			{
-				reminder_pref_id: "789",
-				reminder_type: 2,
-				mins_before: 1440
-			}
-		];
 });
