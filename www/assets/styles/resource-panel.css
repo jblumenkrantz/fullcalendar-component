@@ -23,29 +23,38 @@
 .resource-panel {
 	max-height: 40px;
 	border-bottom: 1px solid #999;
-	-webkit-animation-delay: 0;
-	-webkit-animation-duration: 0.7s;
-	-webkit-animation-iteration-count: 1;
 }
 
 .resource-panel.open {
 	margin: 15px;
 	width: 200%;
+	max-height: 999px;
 	border: none;
 	-webkit-box-shadow: 0 0 5px #999999;
 	-moz-box-shadow: 0 0 5px #999999;
 	box-shadow: 0 0 5px #999999;
-	-webkit-animation-name: open;
+	-webkit-animation-name: open-horiz,open-vert;
+	-webkit-animation-duration: 0.7s,1.4s;
+	-webkit-animation-timing-function: ease, ;
 }
 
-@-webkit-keyframes open {
+@-webkit-keyframes open-horiz {
 	0% {
 		margin: 0px;
-		width: 100%
+		width: 100%;
 	}
 	100% {
 		margin: 15px;
 		width: 200%;
+	}
+}
+
+@-webkit-keyframes open-vert {
+	0% {
+		max-height: 40px;
+	}
+	100% {
+		max-height: 999px;
 	}
 }
 
@@ -114,14 +123,14 @@
 	border-top: 1px solid #999;
 }
 
-/* keep display hidden during opening/closing 
+/* keep display hidden during opening/closing */
 .resource-panel.open .resource-display {
 	position: absolute;
 	opacity: 0;
 	z-index: -1;
 }
 
-/* bring edit to top when open 
+/* bring edit to top when open */
 .resource-panel.open .resource-header {
 	height: 30px !important;
 }
@@ -130,7 +139,7 @@
 	height: auto;
 }
 
-/* keep display absolute when closing 
+/* keep display absolute when closing */
 .resource-panel.done.close .resource-display {
 	position: absolute;
 }

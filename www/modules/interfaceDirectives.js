@@ -284,7 +284,7 @@ Use db='true' if the ng-model is directly saved in the database as a TIME type.
 	return {
 		restrict: 'A',
 		link: function(scope, element, attrs) {
-			element.on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', function(e) {
+			/*element.on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', function(e) {
 				if (e.originalEvent.propertyName=='max-height') element.toggleClass("done");
 			});
 
@@ -293,7 +293,7 @@ Use db='true' if the ng-model is directly saved in the database as a TIME type.
 			scope.$watch(attrs.resourcePanel, function(newVal, oldVal) {
 				if (angular.equals(newVal, oldVal)) return;
 				element.css("max-height", (newVal ? height+"px" : ""));
-			});	 
+			});	 */
 			
 		}
 	};
