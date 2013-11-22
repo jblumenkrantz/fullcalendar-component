@@ -23,7 +23,6 @@
 .resource-panel {
 	max-height: 40px;
 	border-bottom: 1px solid #999;
-	-webkit-transition: max-height 1.4s, margin 0.7s, width 0.7s;
 }
 
 .resource-gradient {
@@ -114,10 +113,6 @@
 .resource-panel.open .resource-edit {
 	opacity: 1;
 	height: auto;
-}
-
-.resource-panel.done {
-	-webkit-transition: max-height 0.45s ease-out, margin 0.7s, width 0.7s;
 }
 
 /* keep display absolute when closing */
