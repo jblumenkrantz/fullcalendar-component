@@ -8,20 +8,26 @@
 
 .resource-panel,
 .resource-gradient,
-.resource-edit {
+.resource-body,
+.resource-header {
+	overflow: hidden;
+}
+
+.resource-panel,
+.resource-gradient,
+.resource-edit,
+.resource-display {
 	width: 100%;
 }
 
 .resource-panel {
 	max-height: 40px;
 	border-bottom: 1px solid #999;
-	overflow: hidden;
 	-webkit-transition: max-height 1.4s, margin 0.7s, width 0.7s;
 }
 
 .resource-gradient {
 	height: 100%;
-	overflow: hidden;
 }
 
 .resource-body {
@@ -32,9 +38,7 @@
 }
 
 .resource-display {
-	width: 100%;
 	height: 100%;
-	overflow: hidden;
 	z-index: 2;
 }
 
@@ -46,7 +50,6 @@
 .resource-header {
 	padding-left: 8px !important;
 	height: 0  !important;
-	overflow: hidden;
 }
 
 .resource-panel .subscribed {
