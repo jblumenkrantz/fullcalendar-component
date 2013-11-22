@@ -5,7 +5,7 @@
 }
 
 .iPad .transition {
-	-webkit-transition: none;
+	-webkit-transition: none !important;
 }
 
 .iPad #advancedEvent .on-date.datetime {

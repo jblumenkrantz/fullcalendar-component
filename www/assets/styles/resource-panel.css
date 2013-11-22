@@ -345,6 +345,7 @@
 .pane-header.small .pane-title {
 	display: block;
 	width: 90%;
+	width: calc(100% - 24px);
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
