@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('pinwheelApp')
-  .controller('HallpassCtl', function ($scope, $http, Hallpass, Facilities, OrgUserList) {
+  .controller('HallpassCtl', function ($scope, $timeout, $http, Hallpass, Facilities, OrgUserList) {
   	  	$scope.activeTab = {activePasses:true};
+  	  	angular.element("#hallpass-tabs").find("dd[settings-tab='activePasses']").addClass("active").siblings().removeClass("active");
   	  	$scope.viewing_history = [];
   	  	Hallpass.query({}, function(hallpasses){
 			$scope.hallpasses = hallpasses;
@@ -62,12 +63,14 @@ angular.module('pinwheelApp')
 			if(!$scope.activeTab.hasOwnProperty(pass.pass_holder_user_id)){
 				$scope.viewing_history.push(pass);
 			}
-			angular.element("#hallpass-tabs").siblings().removeClass("active");
+			angular.element("#hallpass-tabs").children().removeClass("active");
+			
 			angular.forEach($scope.activeTab, function(value, section){
-				 //set all activeTab properties to false 
+				//set all activeTab properties to false
 				$scope.activeTab[section] = false;
 			});
 			$scope.activeTab[pass.pass_holder_user_id] = true;
+			$timeout(function(){angular.element("#hallpass-tabs").find("dd[settings-tab="+pass.pass_holder_user_id+"]").addClass("active")});
 		}
 		$scope.closeUserHistory = function(pass){
 			angular.forEach($scope.viewing_history, function(user,key){
