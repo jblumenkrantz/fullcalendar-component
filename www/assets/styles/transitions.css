@@ -12,11 +12,7 @@ Note:	The property changes that initiate transitions are contextual
 default transition class:	applied for overriding purposes
 							but does not define anything by itself
 */
-.transition {
-	-webkit-transform: translateZ(0);/*
-	-webkit-perspective: 1000;
-	-webkit-backface-visibility: hidden;*/
-} 
+.transition {} 
 
 /*
 duration-<milliseconds> class:	define transition duration in milliseconds

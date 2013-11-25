@@ -285,16 +285,17 @@ Use db='true' if the ng-model is directly saved in the database as a TIME type.
 		restrict: 'A',
 		link: function(scope, element, attrs) {
 			element.on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', function(e) {
-				if (e.originalEvent.propertyName=='max-height') element.toggleClass("done");
-			});
+				if (e.originalEvent.propertyName=='max-height') {
+					element.toggleClass("done");
+					var sp = element.closest(".scroll-pane");
+					sp.toggleClass("scrolling", (sp[0].scrollHeight > sp[0].offsetHeight));
 
-			var height = element.parent().height();
-			
-			scope.$watch(attrs.resourcePanel, function(newVal, oldVal) {
-				if (angular.equals(newVal, oldVal)) return;
-				element.css("max-height", (newVal ? height+"px" : ""));
-			});	 
-			
+					//bind cancel button
+					$(".resource-close", element).unbind().click(function() {
+						scope.cancel();
+					});	
+				} 
+			});
 		}
 	};
 })
