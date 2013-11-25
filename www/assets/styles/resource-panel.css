@@ -24,15 +24,17 @@
 	height: 100%;
 }
 
-/* ACCELERATION ENABLE */
-.resource-panel,
-.resource-body,
-.resource-header,
-.resource-display,
-.resour-edit {
-	-webkit-transform: translateZ(0);
-	-webkit-perspective: 1000;
-	-webkit-backface-visibility: hidden;
+.resource-panel.open,
+.resource-panel.done.close,
+.resource-panel.open .resource-body,
+.resource-panel.done.close .resource-body,
+.resource-panel.open .resource-header,
+.resource-panel.done.close .resource-header,
+.resource-panel.open .resource-display,
+.resource-panel.done.close .resource-display,
+.resource-panel.open .resource-edit,
+.resource-panel.done.close .resource-edit {
+	-webkit-animation-duration: 0.5s;
 }
 
 /* PANEL */
@@ -51,8 +53,6 @@
 	-moz-box-shadow: 0 0 5px #999999;
 	box-shadow: 0 0 5px #999999;
 	-webkit-animation-name: panel-open-h, panel-open-v;
-	-webkit-animation-duration: 0.3s, 0.6s;
-	-webkit-animation-timing-function: ease, linear;
 }
 
 @-webkit-keyframes panel-open-h {
@@ -71,14 +71,12 @@
 		max-height: 40px;
 	}
 	100% {
-		max-height: 999px;
+		max-height: 500px;
 	}
 }
 
 .resource-panel.done.close {
 	-webkit-animation-name: panel-close-h, panel-close-v;
-	-webkit-animation-duration: 0.3s, 0.2s;
-	-webkit-animation-timing-function: ease, ease-out;
 }
 
 @-webkit-keyframes panel-close-h {
@@ -94,7 +92,7 @@
 
 @-webkit-keyframes panel-close-v {
 	0% {
-		max-height: 999px;
+		max-height: 500px;
 	}
 	100% {
 		max-height: 40px;
@@ -117,7 +115,6 @@
 	margin: 0px 1px 1px 8px;
 	padding: 0 0 1em 0;
 	-webkit-animation-name: body-open;
-	-webkit-animation-duration: 0.3s;
 }
 
 @-webkit-keyframes body-open {
@@ -135,7 +132,6 @@
 
 .resource-panel.done.close .resource-body {
 	-webkit-animation-name: body-close;
-	-webkit-animation-duration: 0.3s;
 }
 
 @-webkit-keyframes body-close {
@@ -163,7 +159,6 @@
 .resource-panel.open .resource-header {
 	height: 30px !important;
 	-webkit-animation-name: header-open;
-	-webkit-animation-duration: 0.3s;
 }
 
 @-webkit-keyframes header-open {
@@ -177,7 +172,6 @@
 
 .resource-panel.done.close .resource-header {
 	-webkit-animation-name: header-close;
-	-webkit-animation-duration: 0.3s;
 }
 
 @-webkit-keyframes header-close {
@@ -205,7 +199,6 @@
 	opacity: 0;
 	z-index: -1;
 	-webkit-animation-name: display-open;
-	-webkit-animation-duration: 0.3s;
 }
 
 @-webkit-keyframes display-open {
@@ -221,7 +214,6 @@
 .resource-panel.done.close .resource-display {
 	position: absolute;
 	-webkit-animation-name: display-close;
-	-webkit-animation-duration: 0.3s;
 }
 
 @-webkit-keyframes display-close {
@@ -247,7 +239,6 @@
 	opacity: 1;
 	height: auto;
 	-webkit-animation-name: edit-open;
-	-webkit-animation-duration: 0.3s;
 }
 
 @-webkit-keyframes edit-open {
@@ -263,7 +254,6 @@
 
 .resource-panel.done.close .resource-edit {
 	-webkit-animation-name: edit-close;
-	-webkit-animation-duration: 0.3s;
 }
 
 @-webkit-keyframes edit-close {
