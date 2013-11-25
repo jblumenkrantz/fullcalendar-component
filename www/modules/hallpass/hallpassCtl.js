@@ -64,13 +64,13 @@ angular.module('pinwheelApp')
 				$scope.viewing_history.push(pass);
 			}
 			angular.element("#hallpass-tabs").children().removeClass("active");
-			
+			$timeout(function(){angular.element("#hallpass-tabs").find("dd[settings-tab="+pass.pass_holder_user_id+"]").addClass("active")});
 			angular.forEach($scope.activeTab, function(value, section){
 				//set all activeTab properties to false
 				$scope.activeTab[section] = false;
 			});
 			$scope.activeTab[pass.pass_holder_user_id] = true;
-			$timeout(function(){angular.element("#hallpass-tabs").find("dd[settings-tab="+pass.pass_holder_user_id+"]").addClass("active")});
+			
 		}
 		$scope.closeUserHistory = function(pass){
 			angular.forEach($scope.viewing_history, function(user,key){
