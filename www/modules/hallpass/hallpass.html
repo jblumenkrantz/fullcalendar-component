@@ -42,7 +42,24 @@
 			<div class="large-6 small-12 columns"><br><h5><span aria-hidden="true" class="icon-signup"></span> Authorized personel must log every hallpass issued to students. Another authority will also log the student's arrival at their destination. Only students that are authorized to be outside of class will show up on this list. If a student is not on the list, they must be apprehended and immediately sent to the gulag for 20 years hard labor.</h5></div>
 			<hr>
 		</div>
-		<div class="large-12">
+		<dl id="hallpass-tabs" class="large-12 settings tabs">
+			<dd settings-tab="activePasses" activeTab='activeTab'>
+				<p>
+					<span aria-hidden="true" class="icon-cog"></span> Active Hall Passes
+				</p>
+			</dd>
+			<dd settings-tab="recentPasses" activeTab='activeTab'>
+				<p>
+					<span aria-hidden="true" class="icon-notebook"></span> Recent Hall Passes
+				</p>
+			</dd>
+			<dd ng-repeat="user in viewing_history" settings-tab="{{user.pass_holder_user_id}}" activeTab='activeTab'>
+				<p>
+					<span ng-click="closeUserHistory(user)" aria-hidden="true" class="right icon-close-2"></span> {{user.pass_holder_first_name}} {{user.pass_holder_last_name}}
+				</p>
+			</dd>
+		</dl> 
+		<div class="large-12" ng-show="activeTab.activePasses">
 			<h2>Active Hall Passes</h2>
 			<table>
 				<thead>
@@ -57,17 +74,17 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="pass in hallpasses | filter:{in_time:'!'}">
-						<td>{{pass.pass_holder_first_name}} {{pass.pass_holder_last_name}}</td>
+						<td ng-click="viewUserHistory(pass)">{{pass.pass_holder_first_name}} {{pass.pass_holder_last_name}} <span aria-hidden="true" class="right icon-poop-1"></span></td>
 						<td>{{pass.out_time | date:'MMM d, y h:mm a'}}</td>
 						<td>{{pass.in_time | date:'MMM d, y h:mm a'}}</td>
 						<td>{{pass.destination_name}}</td>
 						<td>{{pass.authority_first_name}} {{pass.authority_last_name}}</td>
-						<td><button class="button small success" ng-click="check_in(pass)"><span aria-hidden="true" class="icon-checkmark"></span></button></td>
+						<td><button ng-show="checkPermission('check_in_hall_pass',true)"class="button small success" ng-click="check_in(pass)"><span aria-hidden="true" class="icon-checkmark"></span></button></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
-		<div class="large-12">
+		<div class="large-12" ng-show="activeTab.recentPasses">
 			<h2>Recent Hall Passes</h2>
 			<table>
 				<thead>
@@ -82,6 +99,31 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="pass in hallpasses | filter:{in_time:'!!'}">
+						<td ng-click="viewUserHistory(pass)">{{pass.pass_holder_first_name}} {{pass.pass_holder_last_name}} <span aria-hidden="true" class="right icon-poop-1"></span></td>
+						<td>{{pass.out_time | date:'MMM d, y h:mm a'}}</td>
+						<td>{{pass.in_time | date:'MMM d, y h:mm a'}}</td>
+						<td>{{pass.destination_name}}</td>
+						<td>{{pass.authority_first_name}} {{pass.authority_last_name}}</td>
+						<td><span aria-hidden="true" class="icon-checkmark"></span></td>
+ 					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div ng-repeat="user in viewing_history" class="large-12" ng-show="activeTab[user.pass_holder_user_id]">
+			<h2>{{user.pass_holder_first_name}} {{user.pass_holder_last_name}}</h2>
+			<table>
+				<thead>
+					<tr>
+						<th width="100">Name</th>
+						<th width="80">Time Out</th>
+						<th width="80">Time In</th>
+						<th width="200">Destination</th>
+						<th width="200">Authorized By</th>
+						<th width="100">Check-In</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="pass in hallpasses | filter:{pass_holder_user_id:user.pass_holder_user_id}">
 						<td>{{pass.pass_holder_first_name}} {{pass.pass_holder_last_name}}</td>
 						<td>{{pass.out_time | date:'MMM d, y h:mm a'}}</td>
 						<td>{{pass.in_time | date:'MMM d, y h:mm a'}}</td>
