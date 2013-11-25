@@ -1,7 +1,11 @@
-<div class="resource-panel" ng-style="{background: calendarWatchers[task.calendar_id].color}">
+<div
+	resource-panel
+	ng-class="{'open':editingTask, 'close':!editingTask}"
+	class="resource-panel"
+	ng-style="{background: calendarWatchers[task.calendar_id].color}">
 	<div class="resource-gradient">
 		<div class="resource-body">
-			<div ng-hide="editingTask" >
+			<div class="resource-display">
 				<div class="row" ng-click="edit()">
 					<div class="large-12 columns">
 						<strong>{{task.title}}</strong>
@@ -18,7 +22,7 @@
 					</div>
 				</div>
 			</div>
-			<div ng-show="editingTask">
+			<div class="resource-edit">
 				<task-form
 					task="editTask"
 					save="update()"

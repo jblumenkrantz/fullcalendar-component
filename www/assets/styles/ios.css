@@ -36,6 +36,8 @@
 .iOS .resource-panel.open .resource-display,
 .iOS .resource-panel.done.close .resource-display,
 .iOS .resource-panel.open .resource-edit,
-.iOS .resource-panel.done.close .resource-edit {
+.iOS .resource-panel.done.close .resource-edit,
+.iOS .resource-panel.open .subscribed,
+.iOS .resource-panel.done.close .subscribed {
 	-webkit-animation-duration: 0.3s;
 }
