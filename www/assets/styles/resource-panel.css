@@ -282,10 +282,10 @@
 	position: absolute;
 	top: 0;
 	right: 0;
-	height: 20px;
-	width: 20px;
-	overflow: hidden;
+	height: 16px;
+	width: 16px;
 	z-index: 1;
+	font-size: 16px;
 	
 	transform: rotate(180deg);
 	-ms-transform: rotate(180deg); 
@@ -294,15 +294,29 @@
 	-o-transform: rotate(180deg);
 }
 
-.resource-panel .subscribed span {
-	text-shadow: none;
+.resource-panel.open .subscribed {
+	height: 100px;
+	width: 100px;
+	font-size: 100px;
+	opacity: 0.5;
+	z-index: 0;
 }
+
+.resource-panel.open .subscribed span {
+	color: white !important;
+}
+
 
 /* END SUBSCRIBE */
 
 .resource-name,
 .resource-color {
 	float: left;
+}
+
+.resource-panel .subscribed span {
+	text-shadow: none;
+	line-height: 100%;
 }
 
 .resource-name {
