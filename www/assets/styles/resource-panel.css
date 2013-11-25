@@ -294,6 +294,10 @@
 	-o-transform: rotate(180deg);
 }
 
+.resource-panel .subscribed span {
+	text-shadow: none;
+}
+
 /* END SUBSCRIBE */
 
 .resource-name,
