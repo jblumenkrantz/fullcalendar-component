@@ -19,22 +19,96 @@
 .resource-display {
 	width: 100%;
 }
-.resource-panel {
-	width: 50%;
-	margin-right: 50%;
-	max-height: 40px;
-	border-bottom: 1px solid #999;
-	-webkit-transition: max-height 1.0s, margin 0.5s, width 0.5s;
-}
-
-.scroll-pane.scrolling .resource-panel {
-	width: calc(50% - 8px);
-	margin-right: calc(50% + 8px);
-}
 
 .resource-gradient {
 	height: 100%;
 }
+
+.resource-panel.open,
+.resource-panel.done.close,
+.resource-panel.open .resource-body,
+.resource-panel.done.close .resource-body,
+.resource-panel.open .resource-header,
+.resource-panel.done.close .resource-header,
+.resource-panel.open .resource-display,
+.resource-panel.done.close .resource-display,
+.resource-panel.open .resource-edit,
+.resource-panel.done.close .resource-edit {
+	-webkit-animation-duration: 0.5s;
+}
+
+/* PANEL */
+
+.resource-panel {
+	width: 50%;
+	margin: 0 50% 0 0;
+	max-height: 40px;
+	border-bottom: 1px solid #999;
+}
+
+.scroll-pane.scrolling .resource-panel {
+	width: calc(50% - 8px);
+	margin: 0 calc(50% + 8px) 0 0;
+}
+
+.resource-panel.open {
+	margin: 15px 0 !important;
+	width: 100% !important;
+	max-height: 999px;
+	border: none;
+	-webkit-box-shadow: 0 0 5px #999999;
+	-moz-box-shadow: 0 0 5px #999999;
+	box-shadow: 0 0 5px #999999;
+	-webkit-animation-name: panel-open-h, panel-open-v;
+}
+
+@-webkit-keyframes panel-open-h {
+	0% {
+		margin: 0 50% 0 0;
+		width: 50%;
+	}
+	100% {
+		margin: 15px 0;
+		width: 100%;
+	}
+}
+
+@-webkit-keyframes panel-open-v {
+	0% {
+		max-height: 40px;
+	}
+	100% {
+		max-height: 500px;
+	}
+}
+
+.resource-panel.done.close {
+	-webkit-animation-name: panel-close-h, panel-close-v;
+}
+
+@-webkit-keyframes panel-close-h {
+	0% {
+		margin: 15px 0;
+		width: 100%;
+	}
+	100% {
+		margin: 0 50% 0 0;
+		width: 50%;
+	}
+}
+
+@-webkit-keyframes panel-close-v {
+	0% {
+		max-height: 500px;
+	}
+	100% {
+		max-height: 40px;
+	}
+}
+
+/* END PANEL */
+
+/* BODY */
 
 .resource-body {
 	margin: 0 0 0 8px;
@@ -43,20 +117,164 @@
 	overflow: hidden;
 }
 
+.resource-panel.open .resource-body {
+	height: 100%;
+	margin: 0px 1px 1px 8px;
+	padding: 0 0 1em 0;
+	-webkit-animation-name: body-open;
+}
+
+@-webkit-keyframes body-open {
+	0% {
+		margin: 0 0 0 8px;
+		padding: 0 0 0 5px;
+		height: 40px;
+	}
+	100% {
+		margin: 0px 1px 1px 8px;
+		padding: 0 0 1em 0;
+		height: 100%;
+	}
+}
+
+.resource-panel.done.close .resource-body {
+	-webkit-animation-name: body-close;
+}
+
+@-webkit-keyframes body-close {
+	0% {
+		margin: 0px 1px 1px 8px;
+		padding: 0 0 1em 0;
+		height: 100%;
+	}
+	100% {
+		margin: 0 0 0 8px;
+		padding: 0 0 0 5px;
+		height: 40px;
+	}
+}
+
+/* END BODY */
+
+/* HEADER */
+
+.resource-header {
+	padding-left: 8px !important;
+	height: 0 !important;
+}
+
+.resource-panel.open .resource-header {
+	height: 30px !important;
+	-webkit-animation-name: header-open;
+}
+
+@-webkit-keyframes header-open {
+	0% {
+		height: 0;
+	}
+	100% {
+		height: 30px;
+	}
+}
+
+.resource-panel.done.close .resource-header {
+	-webkit-animation-name: header-close;
+}
+
+@-webkit-keyframes header-close {
+	0% {
+		height: 30px;
+	}
+	100% {
+		height: 0px;
+	}
+}
+
+/* END HEADER */
+
+/* DISPLAY */
+
 .resource-display {
+	opacity: 1;
 	height: 100%;
 	z-index: 2;
 }
 
+/* keep display hidden during opening/closing */
+.resource-panel.open .resource-display {
+	position: absolute;
+	opacity: 0;
+	z-index: -1;
+	-webkit-animation-name: display-open;
+}
+
+@-webkit-keyframes display-open {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+/* keep display absolute when closing */
+.resource-panel.done.close .resource-display {
+	position: absolute;
+	-webkit-animation-name: display-close;
+}
+
+@-webkit-keyframes display-close {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+/* END DISPLAY */
+
+/* EDIT */
+
 .resource-edit {
-	height: 0;
+	height: 0px;
 	opacity: 0
 }
 
-.resource-header {
-	padding-left: 8px !important;
-	height: 0  !important;
+/* bring edit to top when open */
+.resource-panel.open .resource-edit {
+	opacity: 1;
+	height: auto;
+	-webkit-animation-name: edit-open;
 }
+
+@-webkit-keyframes edit-open {
+	0% {
+		opacity: 0;
+		height: 0px;
+	}
+	100% {
+		opacity: 1;
+		height: auto;
+	}
+}
+
+.resource-panel.done.close .resource-edit {
+	-webkit-animation-name: edit-close;
+}
+
+@-webkit-keyframes edit-close {
+	0% {
+		opacity: 1;
+		height: auto;
+	}
+	100% {
+		opacity: 0;
+		height: 0px;
+	}
+}
+
+/* END EDIT */
 
 .resource-panel .subscribed {
 	height: 20px;
@@ -84,62 +302,6 @@
 
 .resource-color {
 	width: 2em;
-}
-
-/* transition changes */
-.resource-panel.open {
-	margin: 15px 0 !important;
-	width: 100% !important;
-	max-height: 999px;
-	border: none;
-	-webkit-box-shadow: 0 0 5px #999999;
-	-moz-box-shadow: 0 0 5px #999999;
-	box-shadow: 0 0 5px #999999;
-}
-
-.resource-panel.open .resource-body {
-	height: 100%;
-	margin: 0px 1px 1px 8px;
-	padding: 0 0 1em 0;
-}
-
-.resource-panel.open + .resource-panel {
-	border-top: 1px solid #999;
-}
-
-/* keep display hidden during opening/closing */
-.resource-panel.open .resource-display {
-	position: absolute;
-	opacity: 0;
-	z-index: -1;
-}
-
-/* bring edit to top when open */
-.resource-panel.open .resource-header {
-	height: 30px !important;
-}
-.resource-panel.open .resource-edit {
-	opacity: 1;
-	height: auto;
-}
-
-.resource-panel.done {
-	-webkit-transition: max-height 0.3s ease-out, margin 0.5s, width 0.5s;
-}
-
-/* keep display absolute when closing */
-.resource-panel.done.close .resource-display {
-	position: absolute;
-}
-
-.resource-panel.open .subscribed {
-	left:  0px;
-	bottom: 0px;
-	transform: none;
-	-webkit-transform: none;
-	-ms-transform: none;
-	-moz-transform: none;
-	-o-transform: none;
 }
 
 /* from foundation scss to deal with at some point */

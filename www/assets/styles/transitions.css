@@ -12,19 +12,20 @@ Note:	The property changes that initiate transitions are contextual
 default transition class:	applied for overriding purposes
 							but does not define anything by itself
 */
-.transition {} 
+.transition {}
+.animation {} 
 
 /*
 duration-<milliseconds> class:	define transition duration in milliseconds
 */
 .duration-700 {
-	transition-duration: 0.7s;
+	animation-duration: 0.7s;
 }
 .duration-500 {
-	transition-duration: 0.5s;
+	-webkit-animation-duration: 0.5s;
 }
 .duration-300 {
-	transition-duration: 0.3s;
+	animation-duration: 0.3s;
 }
 
 /*

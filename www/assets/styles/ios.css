@@ -22,32 +22,20 @@
 	margin-right: 0;
 }
 
-/* iPad transition class overrides */
-
-.iPad .transition {
-	-webkit-transform: translateZ(0);
+/* ios animation classes */
+.iOS .transition {
+	-webkit-transition: none !important; /* disable transitions on ios */
 }
 
-/*
-duration-<milliseconds> iPad class:	define transition duration in milliseconds
-									for the iPad, speed things up faster than pc
-									by subtracting 200ms
-*/
-.iPad .duration-700 {
-	transition-duration: 0.5s;
+.iOS .resource-panel.open,
+.iOS .resource-panel.done.close,
+.iOS .resource-panel.open .resource-body,
+.iOS .resource-panel.done.close .resource-body,
+.iOS .resource-panel.open .resource-header,
+.iOS .resource-panel.done.close .resource-header,
+.iOS .resource-panel.open .resource-display,
+.iOS .resource-panel.done.close .resource-display,
+.iOS .resource-panel.open .resource-edit,
+.iOS .resource-panel.done.close .resource-edit {
+	-webkit-animation-duration: 0.3s;
 }
-.iPad .duration-500 {
-	transition-duration: 0.7s;
-}
-.iPad .duration-300 {
-	transition-duration: 0.1s;
-}
-
-.iPad .resource-panel {
-	-webkit-transition: max-height 0.6s, margin 0.3s, width 0.3s;
-}
-
-.iPad .resource-panel.done {
-	-webkit-transition: max-height 0.2s ease-out, margin 0.3s, width 0.3s;
-}
-
