@@ -41,12 +41,13 @@
 
 .resource-panel {
 	max-height: 40px;
+	width: 50%;
 	border-bottom: 1px solid #999;
 }
 
 .resource-panel.open {
-	margin: 15px;
-	width: 200%;
+	margin: 15px 0;
+	width: calc(100% - 8px);
 	max-height: 999px;
 	border: none;
 	-webkit-box-shadow: 0 0 5px #999999;

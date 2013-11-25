@@ -33,11 +33,18 @@ select {
 
 /* Used to alter styles for screens at least 768px wide. This is where the grid changes. */
 @media only screen and (min-width: 768px) {
-	body {
+	html {
 		overflow: hidden !important;
 	}
+	body {
+		overflow-y: hidden !important;
+	}
 	.scroll-pane {
-		overflow-y: visible !important;
+		width: 200%;
+		overflow-y: auto !important;
+	}
+	#my-calendars .scroll-pane {
+		direction: rtl;
 	}
 	.drawer {
 		position: absolute !important;
