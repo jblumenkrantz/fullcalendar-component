@@ -276,19 +276,25 @@
 
 /* END EDIT */
 
+/* SUBSCRIBE */
+
 .resource-panel .subscribed {
+	position: absolute;
+	top: 0;
+	right: 0;
 	height: 20px;
 	width: 20px;
 	overflow: hidden;
-	position: absolute;
-	left: calc(100% -  20px);
-	left: calc(100% -  20px);
+	z-index: 1;
+	
 	transform: rotate(180deg);
 	-ms-transform: rotate(180deg); 
 	-mox-transform: rotate(180deg); 
 	-webkit-transform: rotate(180deg);
 	-o-transform: rotate(180deg);
 }
+
+/* END SUBSCRIBE */
 
 .resource-name,
 .resource-color {

@@ -290,11 +290,11 @@ Use db='true' if the ng-model is directly saved in the database as a TIME type.
 				var sp = element.closest(".scroll-pane");
 				sp.toggleClass("scrolling", (sp[0].scrollHeight > sp[0].offsetHeight));
 
-				if (e.originalEvent.animationName=='panel-open-v') {
+				if (e.originalEvent.animationName=='display-open') {
 					console.log("add done");
 					element.addClass("done");
 				} 
-				if (e.originalEvent.animationName=='panel-close-v') {
+				if (e.originalEvent.animationName=='display-close') {
 					console.log("remove done");
 					element.removeClass("done");
 				} 
