@@ -7715,6 +7715,9 @@ header#content-header ul.small-block-grid-3 li {
   color: #fff !important;
   white-space: nowrap;
   overflow: hidden;
+  z-index:99;   /* Jared, fix this shit */
+  transition:width .7s; /* Jared, fix this shit */
+  -webkit-transition:width .7s; /* Jared, fix this shit */
 }
 /* line 589, ../../scss/foundation.scss */
 .left-nav a {
@@ -7774,29 +7777,6 @@ header#content-header ul.small-block-grid-3 li {
   width: 160px;
   margin: 20px !important;
   border-radius: 3px;
-}
-
-/* line 635, ../../scss/foundation.scss */
-.close-menu {
-  display: none;
-}
-
-/* line 639, ../../scss/foundation.scss */
-#apps:target {
-  width: 200px;
-}
-
-/* line 643, ../../scss/foundation.scss */
-#apps:target + .page-wrap {
-  width: calc(100% - 200px);
-}
-/* line 646, ../../scss/foundation.scss */
-#apps:target + .page-wrap .open-menu {
-  display: none;
-}
-/* line 649, ../../scss/foundation.scss */
-#apps:target + .page-wrap .close-menu {
-  display: inline;
 }
 
 /* line 658, ../../scss/foundation.scss */
