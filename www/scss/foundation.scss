@@ -131,8 +131,9 @@ dl.sub-nav.calendar-filter dd {
 	position: relative;
 	top: 8px;
 }
-.pane-header span.right{
+.pane-header span.right{ 
 	margin-right: 12px;
+	margin-top: 6px;
 }
 .pane-header .pane-title{ 
 	margin-left: 6px;
@@ -520,6 +521,7 @@ and (max-device-width : 1024px) {
 }
 .menubar ul li{
 	display: inline;
+	
 }
 
 .menubar ul li [class*="icon-"]{
@@ -590,7 +592,7 @@ and (max-device-width : 1024px) {
     display: block;
     border-bottom: 1px solid #222;
     color: white;
-    padding: 0 20px;
+    padding: 10px 20px;
     white-space: nowrap;
     width: 100%;
     font-size: 14px;
