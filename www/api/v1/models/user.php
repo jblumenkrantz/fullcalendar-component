@@ -105,6 +105,8 @@ class User extends PinwheelModelObject
 				modify_handbook,
 				modify_theme,
 				view_hallpass_history,
+				issue_hall_pass,
+				check_in_hall_pass,
 				org_wide_messaging,
 				org_wide_emergency_alerts,
 				advanced_messaging,

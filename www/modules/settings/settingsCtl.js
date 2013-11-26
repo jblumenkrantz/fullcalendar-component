@@ -67,6 +67,7 @@ angular.module('pinwheelApp')
 			}
 		});
 	}
+
 	$scope.toggle_drawer = function(){
 		if($(".left-nav").width() > 0){
 			$(".page-wrap").css('width','100%');
@@ -76,5 +77,23 @@ angular.module('pinwheelApp')
 			$(".left-nav").css('width','200px');
 		}
 		$timeout(function(){$('#monthCalendar').fullCalendar('render')},700); // Timout must be the same duration as the transiton in milliseconds.
+	}
+
+	$scope.checkPermission = function(p,expectBoolean){
+		// If expectBoolean is true the function will only return a boolean value 
+		// otherwise it will return an object with the definitive boolean value 
+		// alongside an array of orgs that have that permission set to true 
+		var permission = {};
+		permission.orgs = [];
+		permission.definitive = false;
+		if($scope.user != undefined){
+			angular.forEach($scope.user.permissions, function(v,k){
+				if(v[p]){
+					permission.definitive = true;
+					permission.orgs.push({org_name:v.org_name, org_id:v.org_id});
+				}
+			});
+		}
+		return (expectBoolean)? permission.definitive:permission;
 	}
 });

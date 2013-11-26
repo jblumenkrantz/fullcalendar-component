@@ -54,7 +54,7 @@ angular.module('pinwheelApp')
 		restrict: "A",
 		link: function($scope, $element, $attrs, $parentCtl){
 			$element.bind('click', function(){
-				console.warn($scope);
+				//console.warn($scope);
 				$scope.test = 'new';
 				$element.addClass("active").siblings().removeClass("active");
 				angular.forEach($scope.activeTab, function(value, section){
