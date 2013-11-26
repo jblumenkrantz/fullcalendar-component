@@ -18,8 +18,9 @@ class HallpassCtl
 	}
 
 	function checkInPass ($id = null) {
+		$authUserID = Authorize:: sharedInstance()->userID();
 		$pass = array_shift(Hallpass::load($id));
-		$hallpass = array_shift(Hallpass::checkInPass($pass));
+		$hallpass = array_shift(Hallpass::checkInPass($pass, $authUserID));
 		$hallpass->in_time = (!$hallpass->in_time)? null:$hallpass->in_time;
 		echo json_encode($hallpass);
 	}
@@ -29,7 +30,7 @@ class HallpassCtl
 		$hallpass = array_shift(Hallpass:: create(json_decode(Request:: body())));
 		echo json_encode($hallpass);
 	}
-	function getUserList($id){		
+	function getUserList($id){
 		echo json_encode(Hallpass::loadOrgUsers($id));
 	}
 

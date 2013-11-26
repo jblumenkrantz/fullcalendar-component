@@ -4,6 +4,7 @@ class Hallpass extends PinwheelModelObject
 	public $hallpass_id;
 	public $out_time;
 	public $in_time;
+	public $checked_in_by;
 	public $pass_holder_user_id;
 	public $pass_holder_first_name;
 	public $pass_holder_last_name;
@@ -23,6 +24,7 @@ class Hallpass extends PinwheelModelObject
 			'hallpass_id' => NULL,
 			'out_time'=>NULL,
 			'in_time' => NULL,
+			'checked_in_by' => NULL,
 			'pass_holder_user_id' => NULL,
 			'pass_holder_first_name' => NULL,
 			'pass_holder_last_name' => NULL,
@@ -59,11 +61,29 @@ class Hallpass extends PinwheelModelObject
 	static public function load ($id, $pinsqli = NULL) {
 		return(static:: loadByQuery(
 			"SELECT
-				hallpass_id, UNIX_TIMESTAMP(out_time) as out_time, UNIX_TIMESTAMP(in_time) as in_time, pass_holder_user_id, pass_holder_first_name, pass_holder_last_name, destination_id, location_name as destination_name, authority_user_id, authority_first_name, authority_last_name, version
-				FROM hallpass
-				LEFT OUTER JOIN locations
-				ON hallpass.destination_id = locations.location_id
-				WHERE hallpass_id = '$id'
+				hallpass_id,
+				UNIX_TIMESTAMP(out_time) as out_time,
+				UNIX_TIMESTAMP(in_time) as in_time,
+				pass_holder_user_id,
+				pass_holder_last_name,
+				pass_holder_first_name,
+				destination_id,
+				location_name as destination_name,
+				authority_user_id,
+				(select 
+					concat(first_name,' ', last_name)
+					FROM users 
+					where user_id = checked_in_by
+				) as checked_in_by,
+				authority_first_name,
+				authority_last_name,
+				hallpass.version
+			FROM hallpass
+			LEFT OUTER JOIN locations
+			ON hallpass.destination_id = locations.location_id
+			LEFT OUTER JOIN users
+			on authority_user_id = users.user_id
+			WHERE hallpass_id = '$id'
 			"
 		, $pinsqli));
 	}
@@ -71,21 +91,59 @@ class Hallpass extends PinwheelModelObject
 	static public function loadActive ($pinsqli = NULL) {
 		return(static:: loadByQuery(
 			"SELECT
-				hallpass_id, UNIX_TIMESTAMP(out_time) as out_time, UNIX_TIMESTAMP(in_time) as in_time, pass_holder_user_id, pass_holder_first_name, pass_holder_last_name, destination_id, location_name as destination_name, authority_user_id, authority_first_name, authority_last_name, version
-				FROM hallpass
-				LEFT OUTER JOIN locations
-				ON hallpass.destination_id = locations.location_id
-				WHERE (in_time IS NULL OR in_time='')
+				hallpass_id,
+				UNIX_TIMESTAMP(out_time) as out_time,
+				UNIX_TIMESTAMP(in_time) as in_time,
+				pass_holder_user_id,
+				pass_holder_last_name,
+				pass_holder_first_name,
+				destination_id,
+				location_name as destination_name,
+				authority_user_id,
+				(select 
+					concat(first_name,' ', last_name)
+					FROM users 
+					where user_id = checked_in_by
+				) as checked_in_by,
+				authority_first_name,
+				authority_last_name,
+				hallpass.version
+			FROM hallpass
+			LEFT OUTER JOIN locations
+			ON hallpass.destination_id = locations.location_id
+			LEFT OUTER JOIN users
+			on authority_user_id = users.user_id
+			WHERE (in_time IS NULL OR in_time='')
+			order by out_time DESC
 			"
 		, $pinsqli));
 	}
 	static public function loadAll ($pinsqli = NULL) {
 		return(static:: loadByQuery(
 			"SELECT
-				hallpass_id, UNIX_TIMESTAMP(out_time) as out_time, UNIX_TIMESTAMP(in_time) as in_time, pass_holder_user_id, pass_holder_first_name, pass_holder_last_name, destination_id, location_name as destination_name, authority_user_id, authority_first_name, authority_last_name, version
-				FROM hallpass
-				LEFT OUTER JOIN locations
-				ON hallpass.destination_id = locations.location_id
+				hallpass_id,
+				UNIX_TIMESTAMP(out_time) as out_time,
+				UNIX_TIMESTAMP(in_time) as in_time,
+				pass_holder_user_id,
+				pass_holder_last_name,
+				pass_holder_first_name,
+				destination_id,
+				location_name as destination_name,
+				authority_user_id,
+				(select 
+					concat(first_name,' ', last_name)
+					FROM users 
+					where user_id = checked_in_by
+				) as checked_in_by,
+				authority_first_name,
+				authority_last_name,
+				hallpass.version
+			FROM hallpass
+			LEFT OUTER JOIN locations
+			ON hallpass.destination_id = locations.location_id
+			LEFT OUTER JOIN users
+			on authority_user_id = users.user_id
+			order by out_time DESC
 			"
 		, $pinsqli));
 	}
@@ -108,10 +166,28 @@ class Hallpass extends PinwheelModelObject
 		$pinsqli = $pinsqli === NULL? DistributedMySQLConnection:: readInstance(): $pinsqli;
 		$resulti = $pinsqli->query(
 			"SELECT
-				hallpass_id, UNIX_TIMESTAMP(out_time) as out_time, UNIX_TIMESTAMP(in_time) as in_time, pass_holder_user_id, pass_holder_first_name, pass_holder_last_name, destination_id, location_name as destination_name, authority_user_id, authority_first_name, authority_last_name, version
-				FROM hallpass
-				LEFT OUTER JOIN locations
-				ON hallpass.destination_id = locations.location_id
+				hallpass_id,
+				UNIX_TIMESTAMP(out_time) as out_time,
+				UNIX_TIMESTAMP(in_time) as in_time,
+				pass_holder_user_id,
+				pass_holder_last_name,
+				pass_holder_first_name,
+				destination_id,
+				location_name as destination_name,
+				authority_user_id,
+				(select 
+					concat(first_name,' ', last_name)
+					FROM users 
+					where user_id = checked_in_by
+				) as checked_in_by,
+				authority_first_name,
+				authority_last_name,
+				hallpass.version
+			FROM hallpass
+			LEFT OUTER JOIN locations
+			ON hallpass.destination_id = locations.location_id
+			LEFT OUTER JOIN users
+			on authority_user_id = users.user_id
 				WHERE hallpass_id = '$this->hallpass_id'
 			"
 		);
@@ -134,12 +210,13 @@ class Hallpass extends PinwheelModelObject
 		return $data;
 	}
 
-	static public function checkInPass($pass){
+	static public function checkInPass($pass, $id){
 		$pinsqli = DistributedMySQLConnection:: writeInstance();
 		$resulti = $pinsqli->query(
 			"UPDATE hallpass
 				SET
 					in_time = NOW(),
+					checked_in_by = '$id',
 					version 	= version + 1
 				WHERE hallpass_id = '{$pass->hallpass_id}'
 					AND version = '{$pass->version}'
