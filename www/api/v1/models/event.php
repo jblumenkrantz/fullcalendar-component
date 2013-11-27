@@ -20,6 +20,7 @@ class Event extends PinwheelModelObject
   public $repeat_by_monthday;
   public $repeat_frequency;
   public $repeat_interval;
+  public $repeat_stop;
 	public $mins_before;
 	public $absolute_date;
 	public $reminder_type;
@@ -47,6 +48,7 @@ class Event extends PinwheelModelObject
 			'repeat_by_monthday' => null,
 			'repeat_frequency' => null,
 			'repeat_interval' => null,
+			'repeat_stop' => null,
 			'allDay' => 0,
 			'last_modified' => NULL,
 			'version' => 0,
@@ -81,34 +83,77 @@ class Event extends PinwheelModelObject
 
 	/** USED BY PINWHEEL **/
 	static public function getUserEventsForCalendar($userId, $calendar, $start, $end, $pinsqli=NULL) {
+
+		// start date should go to previous sunday (unless it is a sunday)
+		// end date should go to next saturday
+
 		$dataRay = $eventArray = array();
 
 		//error_log(print_r($calendar,true));
 
 		//$events = Event::getBatch(array("events.active = true","start > FROM_UNIXTIME('$start')","start < FROM_UNIXTIME('$end')","events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}'))"));
 
-		$events    = Event::getBatch(array("events.repeat_addendum = '0'", "events.repeat_interval IS NULL OR events.repeat_interval = '0'", "events.active = true","events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}'))"));
+		$events    = static::getBatch(array("events.active = true","events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}'))"));
 		
-		$repeaters = Event::getBatch(array("events.repeat_addendum = '0'", "events.repeat_interval > 0", "events.active = true","events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}'))"));
+		$repeaters = static::getBatch(array("events.active = true","events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}'))"), array("repeaters"=>true));
 
-		$addendums = Event::getBatch(array("events.repeat_addendum = '1'", "events.active = true","events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}'))"), array("order" => "events.start asc"));
+		$addendums = static::getBatch(array( "events.active = true","events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}'))"), array("addendums"=>true));
+
+		$addRay = array();
+		// loop over addendums, assemble into arrays of repeaters
+		foreach($addendums as $addendum){
+			if(!IsSet($addRay[$addendum->repeat_id])){
+				$addRay[$addendum->repeat_id] = array();
+			}
+			$addRay[$addendum->repeat_id][] = $addendum;
+		}
 
 		$onDate = $start;
 		while($onDate <= $end){
 			foreach($repeaters as $repeater){
-				switch($repeater->repeat_frequency){
-					case 'DAILY':
-						break;
-					case 'WEEKLY':
-						break;
-					case 'MONTHLY':
-						break;
-					case 'YEARLY':
-						break;
+				// find addendums for this repeaters
+				// if one applies to this onDate, apply it and skip the switch
+				if(IsSet($addRay[$repeater->id]) && static:: isOnDay($onDate, $addRay[$repeater->id][0]->start)){
+					// knock the first event off the array
+					$event = array_shift($addRay[$repeater->id]);
+					if($event->repeat_blackout == 0){
+						//apply the addendum if it isn't a blackout
+					}
+				}else{
+					switch($repeater->repeat_frequency){
+						case 'DAILY':
+							// find number of days between start date and onDate
+							// take that number and modulus against repeat_interval
+							if(($daysSince = static::daysSince($onDate, $repeater->start))%$repeater->repeat_interval == 0){
+								if($onDate > $repeater->start && $onDate <= $repeater->repeat_stop){
+									$eventStart = strtotime("+$daysSince day", $repeater->start);
+									$eventEnd   = $start+($repeater->start-$repeater->end);
+									$events[] = Event::makeFrom($repeater, array('start'=>$eventStart, 'end'=>$eventEnd));
+								}
+							}
+							break;
+						case 'WEEKLY':
+							if(static::weeksSince($onDate, $repeater->start)==0 || static::weeksSince($onDate, $repeater->start)%$repeater->repeat_interval == 0){
+								if(strtoupper(date('D', $onDate))==$repeater->repeat_by_day){
+									$daysSince = static::daysSince($onDate, $repeater->start);
+									$eventStart = strtotime("+$daysSince day", $repeater->start);
+									$eventEnd   = $start+($repeater->start-$repeater->end);
+									$events[] = Event::makeFrom($repeater, array('start'=>$eventStart, 'end'=>$eventEnd));
+								}
+								// check if this is a day in that week that applies
+								// then add the event
+							}
+							break;
+						case 'MONTHLY':
+							if(weeksSince($repeater->start)%$repeater->repeat_interval == 0){
+								// check if this is a day in that week that applies
+								// then add the event
+							}
+							break;
+						case 'YEARLY':
+							break;
+					}
 				}
-				// does this date apply to this repeater?
-				//
-				// if so, make an event in $events
 			}
 			$onDate = strtotime("+1 day", $onDate);
 		}
@@ -124,6 +169,45 @@ class Event extends PinwheelModelObject
 			array_push($dataRay, $event);
 		}
 		return($dataRay);
+	}
+
+	static public function makeFrom($event, $updateWith=array()){
+		$event = clone $event;
+		foreach($updateWith as $key => $value){
+			$event->{$key} = $value;
+		}
+		unset($event->repeat_interval);
+		unset($event->repeat_on);
+		unset($event->repeat_by_day);
+		unset($event->repeat_by_month);
+		unset($event->repeat_by_monthday);
+		unset($event->repeat_frequency);
+		unset($event->repeat_stop);
+		return $event;
+	}
+
+	static private function isOnDay($start, $test){
+		$test  = strtotime($test);
+		$end   = strtotime("+1 day", $start);
+		
+		return($test > $start && $test < $end);
+	}
+
+	static protected function weeksSince($start, $end){
+		$startDaysSinceSunday = +(date('N', $start));
+		if($startDaysSinceSunday!=7){
+			$start = strtotime("-$startDaysSinceSunday days", $start);
+		}
+		return(floor(static::daysSince($start, $end)/7));
+	}
+
+	static protected function daysSince($onDate, $eventStart){
+		$end = new DateTime();
+		$end->setTimestamp($onDate);
+		$start = new DateTime();
+		$start->setTimestamp($eventStart);
+
+		return $start->diff($end)->format("%a");
 	}
 	
 	/**
@@ -423,6 +507,19 @@ class Event extends PinwheelModelObject
 	*	@return Array of Event(s).
 	*/
 	static public function getBatch($where_array=array(), $opts=array()){
+		if(IsSet($opts['repeaters'])){
+			$where_array[] = "events.repeat_addendum = '0'";
+			$where_array[] = "events.repeat_interval > 0";
+		}
+		if(IsSet($opts['addendums'])){
+			$where_array[] = "events.repeat_addendum = '1'";
+			$opts['order'] = "events.start asc";
+		}
+		if(!IsSet($opts['addendums']) && !IsSet($opts['reminders'])){
+			$where_array[] = "events.repeat_addendum = '0'";
+			$where_array[] = "events.repeat_interval IS NULL OR events.repeat_interval = '0'";
+		}
+
 		$authUserID = Authorize:: sharedInstance()->userID();
 		$query = "SELECT ";
 
@@ -439,6 +536,7 @@ class Event extends PinwheelModelObject
 				location_id,
 				creator_id,
         repeat_interval,
+        UNIX_TIMESTAMP(repeat_stop) as repeat_stop,
         repeat_on,
         repeat_by,
 				UNIX_TIMESTAMP(events.last_modified) as last_modified,
@@ -461,6 +559,7 @@ class Event extends PinwheelModelObject
 		if($where_array && is_array($where_array) && sizeof($where_array) > 0){
 			$where_query = " WHERE ".implode(' AND ', $where_array);
 		}
+
 
 		$query .= $where_query;
 
