@@ -1,7 +1,10 @@
 'use strict';
 
 angular.module('pinwheelApp')
-  .controller('HallpassCtl', function ($scope, $timeout, $http, Hallpass, Facilities, OrgUserList) {
+  .controller('HallpassCtl', function ($scope, $location, $timeout, $http, Hallpass, Facilities, OrgUserList) {
+  		if(!$scope.checkPermission('view_hallpass_history',true)){
+  			$location.path('calendar');
+  		}
   	  	$scope.activeTab = {activePasses:true};
   	  	angular.element("#hallpass-tabs").find("dd[settings-tab='activePasses']").addClass("active").siblings().removeClass("active");
   	  	$scope.viewing_history = [];
@@ -42,23 +45,7 @@ angular.module('pinwheelApp')
 				$scope.hallpasses.push(hallpass);
 			});
 		}
-		$scope.checkPermission = function(p,expectBoolean){
-			// If expectBoolean is true the function will only return a boolean value 
-			// otherwise it will return an object with the definitive boolean value 
-			// alongside an array of orgs that have that permission set to true 
-			var permission = {};
-			permission.orgs = [];
-			permission.definitive = false;
-			if($scope.user != undefined){
-				angular.forEach($scope.user.permissions, function(v,k){
-					if(v[p]){
-						permission.definitive = true;
-						permission.orgs.push({org_name:v.org_name, org_id:v.org_id});
-					}
-				});
-			}
-			return (expectBoolean)? permission.definitive:permission;
-		}
+
 		$scope.viewUserHistory = function(pass){
 			if(!$scope.activeTab.hasOwnProperty(pass.pass_holder_user_id)){
 				$scope.viewing_history.push(pass);
