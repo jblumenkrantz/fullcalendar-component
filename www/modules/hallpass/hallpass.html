@@ -133,7 +133,7 @@
 						<td>{{(pass.in_time == null)? 'Active':pass.in_time | date:'MMM d, y h:mm a'}}</td>
 						<td>{{pass.destination_name}}</td>
 						<td>{{pass.authority_first_name}} {{pass.authority_last_name}}</td>
-						<td><span ng-show="pass.in_time != null" aria-hidden="true">{{pass.checked_in_by}}</span><button ng-show="checkPermission('check_in_hall_pass',true) && pass.in_time == null"class="button small success" ng-click="check_in(pass)"><span aria-hidden="true" class="icon-checkmark"></span></button></td>
+						<td><span ng-show="pass.in_time != null" aria-hidden="true">{{pass.checked_in_by}}</span><input type="checkbox" ng-show="checkPermission('check_in_hall_pass',true) && pass.in_time == null" ng-click="check_in(pass)"></td>
  					</tr>
 				</tbody>
 			</table>

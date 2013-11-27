@@ -79,7 +79,8 @@ angular.module('pinwheelApp')
 		$timeout(function(){$('#monthCalendar').fullCalendar('render')},700); // Timout must be the same duration as the transiton in milliseconds.
 	}
 
-	$scope.checkPermission = function(p,expectBoolean){
+/*	$scope.checkPermission = function(p,expectBoolean){
+		console.warn('check permission');
 		// If expectBoolean is true the function will only return a boolean value 
 		// otherwise it will return an object with the definitive boolean value 
 		// alongside an array of orgs that have that permission set to true 
@@ -95,5 +96,5 @@ angular.module('pinwheelApp')
 			});
 		}
 		return (expectBoolean)? permission.definitive:permission;
-	}
+	}*/
 });
