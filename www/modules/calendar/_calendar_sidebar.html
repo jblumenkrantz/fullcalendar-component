@@ -69,6 +69,22 @@
 <!-- ADD CALENDAR SECTION -->
 <div id="add-calendar" class="transition duration-700 slide-drawer show-header full bottom-up" ng-class="{open: addingSubscription}">
 	<div scroll-pane class="scroll-pane left">
+		<!-- RECENTLY CREATED/SUBSCRIBED CALENDAR SECTION
+		<div ng-show="recentCalendars.length" class="pane-header small" style="border-top: 1px solid #afafaf;">
+	        <span class="pane-title">Recently Added</span>
+	    </div> -->
+
+		<!-- recently acquired calendars ng-repeat -->
+		<active-subscription
+			ng-repeat="calendar in recentCalendars = (calendars | filter:{active: true, recent: true, subscribed: true} | orderBy:'calendar_name')"
+			watcher="calendarWatchers"
+			user="user"
+			calendar="calendar"
+			reminder-types="reminderTypes">
+		</active-subscription>
+
+		<!-- / RECENTLY CREATED/SUBSCRIBED CALENDAR SECTION -->
+
 	    <!-- NEW CALENDAR CREATION FORM -->
 	    <div
 		    resource-panel="addingCalendar"
@@ -146,29 +162,27 @@
 		</div>
 		<!-- / NEW CALENDAR CREATION FORM -->
 
-		<!-- RECENTLY CREATED/SUBSCRIBED CALENDAR SECTION 
-		<div ng-show="recentCalendars.length" class="pane-header small" style="border-top: 1px solid #afafaf;">
-	        <span class="pane-title">Recently Added</span>
-	    </div>
-
-		<!-- recently acquired calendars ng-repeat
-		<active-subscription
-			ng-repeat="calendar in recentCalendars = (calendars | filter:{active: true, recent: true, subscribed: true} | orderBy:'calendar_name')"
-			watcher="calendarWatchers"
-			user="user"
-			calendar="calendar"
-			reminder-types="reminderTypes">
-		</active-subscription>
-
-		<!-- / RECENTLY CREATED/SUBSCRIBED CALENDAR SECTION -->
-
 		<!-- AVAILABLE CALENDAR SECTION -->
 		<div style="position: relative; width: 50%; margin-right: 50%;">
-			<div ng-show="availableCalendars.length || calFilter" class="pane-header small" style="border-top: 1px solid #afafaf;">
+			<div class="pane-header small" style="border-top: 1px solid #afafaf;">
 		        <span class="pane-title">Available</span>
 		    </div>
 			<input style="margin: 0;" type="text" ng-model="calFilter" placeholder="Search Calendars" />
 			<span style="position: absolute; top: 30px; right: 6px; font-size: 24px; color: #d4d4d4;" aria-hidden="true" class="icon-backspace" ng-click="calFilter=''"></span>
+		</div>
+
+		<div class="resource-panel" style="background: black;" ng-hide="availableCalendars.length">
+			<div class="resource-gradient">
+				<div class="resource-body">
+					<div class="resource-display">
+						<div class="resource-data">
+							<strong class="resource-title">
+								None
+							</strong>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<available-subscription
@@ -177,7 +191,6 @@
 			user="user"
 			calendar="calendar">
 		</available-subscription>
-
 		<!-- / AVAILABLE CALENDAR SECTION -->
 	</div><!--
 	<div scroll-pane-two class="scroll-pane" watch="recentCalendars.length" style="overflow-y: auto;">
