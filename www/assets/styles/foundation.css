@@ -7730,12 +7730,20 @@ header#content-header ul.small-block-grid-3 li {
   background: rgba(35, 83, 138, 0.5) !important;
 }
 /* line 612, ../../scss/foundation.scss */
+.left-nav a.logout {
+  background: rgba(136, 0, 0, 0.3) !important;
+}
+/* line 615, ../../scss/foundation.scss */
+.left-nav a.logout:hover, .left-nav a.logout:focus {
+  background: rgba(136, 0, 0, 0.8) !important;
+}
+/* line 618, ../../scss/foundation.scss */
 .left-nav a [class*="icon-"] {
   text-shadow: 1px 1px 2px #000;
   font-size: 36px;
   text-align: center;
 }
-/* line 618, ../../scss/foundation.scss */
+/* line 624, ../../scss/foundation.scss */
 .left-nav:after {
   content: "";
   position: absolute;
@@ -7745,55 +7753,63 @@ header#content-header ul.small-block-grid-3 li {
   width: 34px;
   background: linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
 }
-/* line 627, ../../scss/foundation.scss */
+/* line 633, ../../scss/foundation.scss */
 .left-nav a.locked {
   color: #999;
 }
-/* line 631, ../../scss/foundation.scss */
+/* line 637, ../../scss/foundation.scss */
 .left-nav label {
   color: #fff;
   white-space: nowrap !important;
 }
-/* line 632, ../../scss/foundation.scss */
+/* line 638, ../../scss/foundation.scss */
 .left-nav h5 {
   color: #fff;
   margin-left: 20px;
 }
-/* line 633, ../../scss/foundation.scss */
+/* line 639, ../../scss/foundation.scss */
 .left-nav form * {
   white-space: nowrap !important;
 }
-/* line 636, ../../scss/foundation.scss */
+/* line 642, ../../scss/foundation.scss */
 .left-nav button {
   width: 160px;
   margin: 20px !important;
   border-radius: 3px;
 }
 
-/* line 643, ../../scss/foundation.scss */
+/* line 649, ../../scss/foundation.scss */
 .close-menu {
   display: none;
 }
 
-/* line 666, ../../scss/foundation.scss */
+/* line 672, ../../scss/foundation.scss */
 #content {
   max-width: 98%;
 }
 
-/* line 671, ../../scss/foundation.scss */
+/* line 677, ../../scss/foundation.scss */
 #content label {
   font-weight: bold;
   cursor: default !important;
 }
 
-/* line 675, ../../scss/foundation.scss */
-#content input {
+/* line 681, ../../scss/foundation.scss */
+#content input[type=text] {
   border-radius: 4px !important;
   border: 1px solid #aaa !important;
   height: 26px !important;
 }
 
-/* line 681, ../../scss/foundation.scss */
+/* line 686, ../../scss/foundation.scss */
+#content input[type=checkbox] {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  top: 2px;
+}
+
+/* line 690, ../../scss/foundation.scss */
 #hallpass-tabs dd p span.icon-close2 {
   position: relative;
   top: -8px;
@@ -7802,35 +7818,45 @@ header#content-header ul.small-block-grid-3 li {
   font-size: 16px;
 }
 
-/* line 689, ../../scss/foundation.scss */
+/* line 698, ../../scss/foundation.scss */
+.tabs dd.active p {
+  color: #23538a !important;
+}
+
+/* line 702, ../../scss/foundation.scss */
 #content table {
   width: 100%;
 }
 
-/* line 693, ../../scss/foundation.scss */
+/* line 706, ../../scss/foundation.scss */
 #content table thead tr th {
   text-align: center;
   background-color: #23538a;
   color: #fff;
 }
 
-/* line 699, ../../scss/foundation.scss */
+/* line 712, ../../scss/foundation.scss */
 #content table tr td:last-of-type {
   text-align: center;
 }
 
-/* line 703, ../../scss/foundation.scss */
+/* line 716, ../../scss/foundation.scss */
 .admin-table tr {
   padding: 0px;
   margin: 0px;
 }
 
-/* line 708, ../../scss/foundation.scss */
+/* line 720, ../../scss/foundation.scss */
+.admin-table td span.student {
+  border-bottom: 1px dotted #222;
+}
+
+/* line 723, ../../scss/foundation.scss */
 .admin-table td span.student, .admin-table tr td span[class*="icon-"] {
   cursor: pointer !important;
 }
 
-/* line 711, ../../scss/foundation.scss */
+/* line 726, ../../scss/foundation.scss */
 .admin-table tr td input {
   position: relative;
   top: 5px;

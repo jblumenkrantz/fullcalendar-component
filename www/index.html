@@ -93,16 +93,17 @@
 	<!-- Add your site or application content here -->
 	<div ng-controller="PinwheelCtl" class="{{device.describeDevice(true)}}">
 		<nav class="left-nav" id="apps">
-			<a href="wireframe.html" ng-href="#/calendar"><span aria-hidden="true" class="icon-calendar"> </span>Calendar </a>
-			<a href="#" ng-href="#/messaging" class="locked"><span aria-hidden="true" class="icon-bubble-notification"> </span>Reminders </a>
-			<a ng-show="checkPermission('view_hallpass_history',true)" href="hallpass.html" ng-href="#/hallpass"><span aria-hidden="true" class="icon-signup"> </span>Hall Pass </a>
+			<a ng-href="#/calendar"><span aria-hidden="true" class="icon-calendar"> </span>Calendar </a>
+			<a ng-href="#/messaging" class="locked"><span aria-hidden="true" class="icon-bubble-notification"> </span>Reminders </a>
+			<a ng-show="checkPermission('view_hallpass_history',true)" href="hallpass.html" ng-href="#/hallpass"><span aria-hidden="true" class="icon-vcard"> </span>Hall Pass </a>
 			<a href="#" ng-href="#/handbook" class="locked"><span aria-hidden="true" class="icon-book"> </span>Handbook</a>
-			<a href="#" ng-href="#/reference"  class="locked"><span aria-hidden="true" class="icon-books"> </span>Resources </a>
-			<a href="#" ng-href="#/reference"  class="locked"><span aria-hidden="true" class="icon-building"> </span>Facilities </a>
-			<a href="#" ng-href="#/settings"  class="locked"><span aria-hidden="true" class="icon-cog"> </span>Settings </a>
-			<button class="small button alert" ng-click="logout()">
+			<a ng-href="#/reference" class="locked"><span aria-hidden="true" class="icon-books"> </span>Resources </a>
+			<a ng-href="#/reference" class="locked"><span aria-hidden="true" class="icon-building"> </span>Facilities </a>
+			<a ng-href="#/settings" class="locked"><span aria-hidden="true" class="icon-cog"> </span>Settings </a>
+			<a ng-click="logout()" class="logout"><span aria-hidden="true" class="icon-spam"> </span>Logout</a>
+		<!-- 	<button class="small button alert" >
 				<span aria-hidden="true" class="icon-spam" style="text-shadow: none;"> </span> Log Out
-			</button>
+			</button> -->
 		</nav>
 		<!-- .page-wrap gets wrapped around ALL content including topbar/menubar -->
 		<div class="page-wrap">

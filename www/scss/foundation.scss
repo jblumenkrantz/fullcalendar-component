@@ -609,7 +609,13 @@ and (max-device-width : 1024px) {
      &:active {
       background: rgba($primary-color, .5) !important;
     }
-     [class*="icon-"] {
+    &.logout {
+    	background: rgba(#880000, .3) !important;
+	  }
+	  &.logout:hover, &.logout:focus {
+	     background: rgba(#880000, .8) !important;
+	  }
+   	[class*="icon-"] {
     	text-shadow: 1px 1px 2px #000;
     	font-size: 36px;
     	text-align: center;
@@ -672,10 +678,13 @@ and (max-device-width : 1024px) {
 	font-weight: bold;
 	cursor: default !important;
 }
-#content input{
+#content input[type=text]{
 	border-radius: 4px !important;
 	border: 1px solid #aaa !important;
-	height: 26px !important;;
+	height: 26px !important;
+}
+#content input[type=checkbox]{
+	margin: 0;padding: 0;position: relative;top: 2px;
 }
 
 #hallpass-tabs dd p span.icon-close2{
@@ -684,6 +693,10 @@ and (max-device-width : 1024px) {
 	right: -12px;
 	cursor: pointer !important;
 	font-size: 16px;
+}
+
+.tabs dd.active p {
+	color: $primary-color !important;
 }
 
 #content table{
@@ -704,7 +717,9 @@ and (max-device-width : 1024px) {
 	padding: 0px;
 	margin: 0px;
 }
-
+.admin-table td span.student{
+	border-bottom: 1px dotted #222;
+}
 .admin-table td span.student, .admin-table tr td span[class*="icon-"]{
   cursor: pointer !important;
 }
