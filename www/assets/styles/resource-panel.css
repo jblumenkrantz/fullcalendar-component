@@ -507,11 +507,11 @@
 	height: 16px !important;
 	width: 21px !important;
 	margin-bottom: 0 !important;
-	padding-top: 6px;
+	padding-top: 10px;
 }
 
 #tasks .resource-checkbox {
-	padding-top: 0;
+	padding-top: 4px;
 }
 
 .resource-checkbox span {
@@ -547,6 +547,10 @@
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+}
+
+.resource-panel button {
+	border: none !important;
 }
 
 
