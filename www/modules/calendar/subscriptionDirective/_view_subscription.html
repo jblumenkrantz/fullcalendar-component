@@ -1,54 +1,80 @@
-<div class="subscription-panel" ng-style="{background:calendar.color}">
+<div
+	resource-panel="watcher[calendar.calendar_id].editingCalendar"
+	class="resource-panel existing"
+	ng-class="{'open':watcher[calendar.calendar_id].editingCalendar, 'close':!watcher[calendar.calendar_id].editingCalendar}"
+	ng-style="{background:calendar.color}">
 	<div class="resource-gradient">
+		<div class="resource-header pane-header small">
+		    <span class="pane-title">{{editCalendar.calendar_name}}</span>
+		    <span class="icon-x-altx-alt right" ng-click="cancel()" aria-hidden="true"></span>
+		</div>
 		<div class="resource-body">
-			<div ng-hide="editingCalendar">
-				<div class="row">
-					<div class="large-12 columns" style="padding: 0;">
-						<div class="subscribed" ng-hide="isCalendarCreator(calendar)" type="button"><span aria-hidden="true" class="icon-rss-alt" ng-style="{color:calendar.color}"></span></div>
-						<input type='checkbox' ng-model="watcher[calendar.calendar_id].viewing" ng-click="setShowState()" ng-false-state="false" />
-						<strong class="subscription-calendar-title" ng-click="edit()">
-							{{calendar.calendar_name}}
-						</strong>
-					</div>
+			<div class="subscribed" ng-hide="isCalendarCreator(calendar)">
+				<span aria-hidden="true" class="icon-rss-alt" ng-style="{color:calendar.color}">
+				</span>
+			</div>
+
+			<!-- DISPLAY CALENDAR -->
+
+			<div class="resource-display">
+				<checkbox
+					class="resource-checkbox"
+					ng-model="watcher[calendar.calendar_id].viewing"
+					ng-click="setShowState();"
+					icon-if-true="icon-eye"
+					icon-if-false="icon-eye-blocked"
+				/>
+				<div class="resource-data" ng-click="edit()">
+					<strong class="resource-title">
+						{{calendar.calendar_name}}
+					</strong>
 				</div>
 			</div>
-			<form name="editCalendarForm" ng-show="editingCalendar" class="subscription" novalidate>
-				<div ng-click="cancel()" class="close-panel">
-					<span aria-hidden="true" class="icon-x-altx-alt" ></span>
+
+			<!-- EDIT CALENDAR -->
+
+			<form name="editCalendarForm" class="subscription resource-edit" novalidate>
+				<!-- Name -->
+				<div class="row" style="padding-top: 1em;">
+					<div class="large-12 columns">
+						<div class="resource-name">
+							<input required type="text" focus-me="[watcher[calendar.calendar_id].editingCalendar]" delay="500" ng-model="editCalendar.calendar_name" placeholder="Name (required)" />
+						</div>
+						<div class="color-selector">
+							<ui-colorpicker ng-model="editCalendar.color"></ui-colorpicker>
+						</div>
+					</div>
 				</div>
-				<input focus-me="[editingCalendar]" required type="text" ng-model="editCalendar.calendar_name" placeholder="Name (required)" class="on-date" />
-				<div class="row">
-					<div class="large-6 columns" style='padding: 0;'>
-						<ui-colorpicker class="checkbox" ng-model="editCalendar.color"></ui-colorpicker>
-					</div>
-					<div class="large-6 columns" style='padding: 0;'>
-						<label class="checkbox">
-							<input ng-model="watcher[calendar.calendar_id].viewing" type="checkbox" />
-							Show 
-						</label>
+
+				<!-- Public Checkbox -->
+				<div class="row" ng-show="hasPublic = checkPermision('modify_public_calendars',true)">
+					<div class="large-12 columns">
+						<checkbox
+							ng-model="editCalendar.public"
+							text="This is a public calendar" 
+						/>
 					</div>
 				</div>
-				<div class="row">
-					<div ng-class="{'large-6':hasPublic , 'large-12':!hasPublic }" class="columns" style='padding: 0;'>
-						<label class="checkbox" ng-class="{'on-date':editCalendar.has_reminder}">
-							<input type='checkbox' ng-model="editCalendar.has_reminder" ng-change="reminderToggle()" />
-							Reminder
+
+				<!-- Reminders -->
+				<reminder-list reminders="reminders"></reminder-list>
+
+				<!-- Check for permissions for all these elements -->
+				<div class="row" style="display: none;">
+					<div class="large-12 columns" ng-show="checkPermision('modify_public_calendars',true)" >
+						<select
+							ng-show="checkPermision('modify_public_calendars').orgs.length > 1 && editCalendar.public"
+							ng-options="permission.org_id as permission.org_name for permission in user.permissions | filter:{modify_public_calendars: true}"
+							ng-model="editCalendar.org_id"
+							class="ng-pristine ng-valid"
+						>
+							<option value="">-- Select Org --</option>
+						</select>
+						<label class=checkbox ng-show="checkPermision('modify_public_calendars').orgs.length == 1 && editCalendar.public">
+							{{checkPermision('modify_public_calendars').orgs[0].org_name}}
 						</label>
 					</div>
-					<div class="large-6 columns" ng-show="hasPublic = checkPermision('modify_public_calendars',true)" style='padding: 0;'>
-						<label class=checkbox>
-							<input ng-model="editCalendar.public" type="checkbox" />
-							Public
-						</label>
-					</div>
-					<!-- Check for permissions for all these elements -->
-					<div class="large-12 columns" ng-show="checkPermision('modify_public_calendars',true)" style='padding: 0;'>
-							<select  ng-show="checkPermision('modify_public_calendars').orgs.length > 1 && editCalendar.public" ng-options="permission.org_id as permission.org_name for permission in user.permissions | filter:{modify_public_calendars: true}" ng-model="editCalendar.org_id" class="ng-pristine ng-valid"><option value="">-- Select Org --</option></select>
-							<label class=checkbox ng-show="checkPermision('modify_public_calendars').orgs.length == 1 && editCalendar.public">
-								{{checkPermision('modify_public_calendars').orgs[0].org_name}}
-							</label>
-					</div>
-					<div class="large-12 columns" ng-show="checkPermision('modify_public_calendars',true) || isCalendarCreator(calendar) || editCalendar.calendar_admin" style='padding: 0;'>
+					<div class="large-12 columns" ng-show="checkPermision('modify_public_calendars',true) || isCalendarCreator(calendar) || editCalendar.calendar_admin" >
 						<ul class="button-group">
 							<li>
 								<button class="button radius" ng-show="editCalendar.calendar_admin || isCalendarCreator(calendar)">
@@ -57,38 +83,30 @@
 							</li>
 						</ul>
 					</div>
+				</div>
+				<!-- End of Check for Permissions section -->
 
-					<!-- End of Check for Permissions section -->
-				</div>
-				<div class="row" ng-show="editCalendar.has_reminder">
-					<div style="float: left; width: 20%; margin-right: 2%;">
-						<input ng-required="editCalendar.has_reminder" type='number' min="1" ng-model="editCalendar.reminder_offset" placeholder="2" />
+				<div class="row">
+					<div class="large-12 columns">
+						<ul class="button-group even-3">
+							<li>
+								<button ng-disabled="editCalendarForm.$invalid" class="button radius">
+									<span aria-hidden="true" class="icon-share"></span> <!-- cancel -->
+								</button>
+							</li>
+							<li>
+								<button class="button radius" ng-click="unsubscribe()">
+									<span aria-hidden="true" class="icon-remove2"></span> <!-- unsubscribe -->
+								</button>
+							</li>
+							<li style="padding-right: 0;">
+								<button ng-disabled="editCalendarForm.$invalid" class="button radius" ng-click="update()">
+									<span aria-hidden="true" class="icon-checkmark"></span> <!-- save -->
+								</button>
+							</li>
+						</ul>
 					</div>
-					<div style="float: left;" class="with-offset">
-						<!-- Relative Reminder Types -->
-						<select
-							ng-options="r.id as r.name for r in reminderTypes | filter:{type:'relative'}"
-							ng-model="editCalendar.reminder_type">
-						</select>
-					</div>
 				</div>
-				<ul class="button-group even-3">
-					<li>
-						<button ng-disabled="editCalendarForm.$invalid" class="button radius" ng-click="">
-							<span aria-hidden="true" class="icon-share"></span> <!-- cancel -->
-						</button>
-					</li>
-					<li>
-						<button class="button radius" ng-click="unsubscribe()">
-							<span aria-hidden="true" class="icon-remove2"></span> <!-- unsubscribe -->
-						</button>
-					</li>
-					<li style="padding-right: 0;">
-						<button ng-disabled="editCalendarForm.$invalid" class="button radius" ng-click="update()">
-							<span aria-hidden="true" class="icon-checkmark"></span> <!-- save -->
-						</button>
-					</li>
-				</ul>
 			</form>
 		</div>
 	</div>

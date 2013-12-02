@@ -4,12 +4,22 @@ angular.module('pinwheelApp')
 .value("getHeight", function(element) {
 	return $(window).height() - $("#mainHeader").outerHeight() - element.siblings(".scroll-header").outerHeight() + "px";
 })
+.value("adjustZ", function(element, jsEvent) {
+	var drawer = element.closest(".drawer"),					//parent drawer (ng-controller level)
+		openCount = $(".resource-panel.open", element).length,	//number of open resource forms in drawer
+		z = 2;													//default z index = 2 (ABOVE main calendar so forms are visible)
+
+	//if there are no open forms set z index to BELOW main calendar
+	if (openCount == 0) z = 1;				
+
+	drawer.css("z-index", z);
+})
 .value("longDisplayFormat", "EEE, MMMM d")	//Mon, October 14
 .value("dateDisplayFormat", "M/d/yyyy")		//8/7/2013
 .value("timeDisplayFormat", "h:mm a")		//4:05 AM
 .value("dateFormat", "yyyy-MM-dd")			//2013-08-07
 .value("timeFormat", "HH:mm:ss")			//16:00:00
-.directive('scrollPane', function(Debounce, getHeight, $timeout) {
+.directive('scrollPane', function(Debounce, getHeight, adjustZ) {
 	return {
 		link: function(scope, element, attrs) {
 			function adjustHeight() {
@@ -24,6 +34,15 @@ angular.module('pinwheelApp')
 
 			adjustHeight();
 	 		$(window).resize(Debounce(adjustHeight));
+
+	 		$(".add-new", element.siblings(".pane-header")).click(function(e) {
+				adjustZ(element, e);
+			});
+
+	 		element.on('webkitAnimationEnd oanimationend msAnimationEnd animationend', '.resource-display', function(e) {
+	 			element.toggleClass("scrolling", (element[0].scrollHeight > element[0].offsetHeight));
+	 			if (/close/.test(e.originalEvent.animationName)) adjustZ(element, e);
+	 		});
 		}
 	}
 })
@@ -106,12 +125,12 @@ angular.module('pinwheelApp')
 				}); 
 
 				//toggle picker button visibility when element is hidden
-				scope.$watch(attrs.ngShow, function(isVisible) {
-					element.next(".ui-datepicker-trigger").toggle(isVisible);
+				scope.$watch(attrs.ngShow, function(newVal, oldVal) {
+					if (newVal==undefined) newVal = true;
+					element.next(".ui-datepicker-trigger").toggle(newVal);
 				});
 
 				//prevent user from selecting an end time that is before start time
-				//minWatch is not passed to start time datetime directive
 				scope.$watch(attrs.minWatch, function(newVal, oldVal) {
 					if (angular.equals(oldVal, newVal) || scope.formEvent.allDay) return;		//prevent initial call
 					var min = (new Date(newVal)).addMinutes(1);
@@ -170,12 +189,12 @@ angular.module('pinwheelApp')
 				});
 
 				//toggle picker button when element is hidden
-				scope.$watch(attrs.ngShow, function(isVisible) {
-					element.next(".ui-datepicker-trigger").toggle(isVisible);
+				scope.$watch(attrs.ngShow, function(newVal, oldVal) {
+					if (newVal==undefined) newVal = true;
+					element.next(".ui-datepicker-trigger").toggle(newVal);
 				});
 
 				//prevent user from selecting an end time that is before start time
-				//minWatch is not passed to start time datetime directive
 				scope.$watch(attrs.minWatch, function(newVal, oldVal) {
 					if (angular.equals(oldVal, newVal) || !scope.formEvent.allDay) return;		//prevent initial call
 					var min = (new Date(newVal));
@@ -255,6 +274,45 @@ Use db='true' if the ng-model is directly saved in the database as a TIME type.
 			input.spectrum(options);
 		}
 	}
+})
+.directive('checkbox', function() {
+	return {
+		restrict: "E",
+		template: 	"<label class='checkbox'>" +
+						"<span class='{{icon}}' aria-hidden='true'></span>{{text}}" +
+					"</label>",
+		replace: true,
+		scope: {
+			model: "=ngModel",
+			text: "@",
+			clicker: "&ngClick",
+			iconIfTrue: "@",
+			iconIfFalse: "@"
+		},
+		link: function(scope, element, attrs) {
+			scope.$watch("model", function(newVal, oldVal) {
+				scope.icon = (newVal) ? scope.iconIfTrue : scope.iconIfFalse;
+				if (!angular.equals(newVal, oldVal)) scope.clicker();
+			});
+
+			element.click(function() {
+				scope.model = !scope.model;
+			});
+		}
+	}
+})
+.directive('resourcePanel', function(adjustZ) {
+	return {
+		restrict: 'A',
+		link: function(scope, element, attrs) {
+			$(".resource-data", element).click(function(e) {
+				adjustZ(element.closest(".scroll-pane"), e);
+			});
+			element.on('webkitAnimationEnd oanimationend msAnimationEnd animationend', '.resource-display', function(e) {		
+				element.toggleClass("done", /open/.test(e.originalEvent.animationName));
+			});
+		}
+	};
 })
 .directive('focusMe', function($timeout, $parse) {
 	return {

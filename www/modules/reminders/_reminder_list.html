@@ -1,0 +1,25 @@
+<div class="row reminders">
+	<div class="large-12 columns">
+		<label>Reminder:</label>
+		<table>
+			<tbody>
+				<tr ng-repeat="r in reminders" reminder="r"></tr>
+				<tr>
+					<td class="add">
+						<div ng-show="!adding" ng-click="add()">
+							<span class="icon-plus-alt" aria-hidden="true"></span>
+							Add reminder
+						</div>
+						<div ng-show="adding" class="row">
+							<reminder-form
+								form-reminder="newReminder"
+								save="save()"
+								cancel="cancel()">
+							</reminder-form>
+						</div>
+					</td>
+				</tr>
+			<tbody>
+		</table>
+	</div>
+</div>

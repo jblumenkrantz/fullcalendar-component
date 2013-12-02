@@ -6,7 +6,7 @@
 <!-- Calendar Admin box -->
 <div id="calendar-admin-modal-bg" class="reveal-modal-bg"></div>
 <div id="calendar-admin-modal" class="reveal-modal medium" style="position:fixed; color:black; padding: 0 0 20px 0;">
-<h2>Calendar Administration</h2>
+	<h2>Calendar Administration</h2>
 	<h3>{{calendar.calendar_name}}</h3>
 	<div class="large-4 columns left">
 		<div ng-repeat="admin in calendar.admins">
@@ -18,7 +18,7 @@
 					<span aria-hidden="true" class="icon-remove2"></span>
 				</button>
 <!-- 			<confirm
-					button-icon="icon-remove-2"
+					button-icon="icon-remove2"
 					button-class="button radius"
 					header="Delete Calendar Administrator"
 					body="Are you sure you want to delete this calendar adminstrator?"
@@ -52,117 +52,157 @@
 </div> 
 <!-- END Calendar Admin box -->
 <!-- SUBSCRIBED CALENDAR SECTION -->
-<div scroll-pane class="scroll-pane">
+<div scroll-pane class="scroll-pane left">
+	<!-- existing calendars ng-repeat -->
 	<active-subscription
-		ng-repeat="calendar in subscribedCalendars = (calendars | filter:{active: true, subscribed: true} | orderBy:'calendar_name')" 
+		ng-repeat="calendar in subscribedCalendars = (calendars | filter:{active: true, subscribed: true, recent: false} | orderBy:'calendar_name')" 
 		watcher="calendarWatchers"
 		calendar="calendar"
 		user="user"
 		reminder-types="reminderTypes"
-		adding-calendar="addingCalendar">
+		reminders="reminders[$index]"
+		close="closeAll()">
 	</active-subscription>
+	<!-- / existing calendars ng-repeat -->
 </div>
 
 <!-- ADD CALENDAR SECTION -->
-<div id="add-calendar" class="transition-07 slide-drawer full bottom-up" ng-class="{open: addingSubscription}">
-	<div class="scroll-header">
-    	<!-- calendar creation form -->
-    	<div class="pane-header">
-	        <span class="pane-title">Create new</span>
-	        <span class="icon-x-altx-alt right" ng-click="cancel()" aria-hidden="true"></span>
-	    </div>
-
-	    <!-- NEW CALENDAR CREATION FORM -->
-	    <div class="subscription-panel" ng-style="{background:newCalendar.color}">
-			<div class="resource-gradient"> 
-				<div class="resource-body">
-					<form class="subscription" name="newCalendarForm" novalidate>
-					    <input focus-me="[addingSubscription]" delay="700" required type="text" ng-model="newCalendar.calendar_name" placeholder="Name (required)" class="on-date" style="width: 100%;" />
-						<div class="row">
-							<div class="large-6 columns" style='padding: 0;'>
-								<ui-colorpicker class="checkbox" ng-model="newCalendar.color"></ui-colorpicker>
-							</div>
-							<div class="large-6 columns" style='padding: 0;'>
-								<label class="checkbox">
-									<input ng-model="newCalendar.viewing" type="checkbox" />
-									Show
-								</label><!-- eyeball show/hide -->
-							</div>
-						</div>
-						<div class="row">
-							<div ng-class="{'large-6':hasPublic , 'large-12':!hasPublic }" class="columns" style='padding: 0;'>
-								<label class="checkbox" ng-class="{'on-date':newCalendar.has_reminder}">
-									<input type='checkbox' ng-model="newCalendar.has_reminder" ng-change="reminderToggle()" />
-									Add Reminder
-								</label>
-							</div>
-							<div class="large-6 columns" ng-show="isOrgAdmin(newCalendar)" style='padding: 0;'>
-								<label class=checkbox>
-									<input ng-model="newCalendar.public" type="checkbox" />
-									Public
-								</label>
-							</div>
-						</div>
-						<div class="row" ng-show="newCalendar.has_reminder">
-							<div style="float: left; width: 20%; margin-right: 2%;">
-								<input ng-required="newCalendar.has_reminder" type='number' min="1" ng-model="newCalendar.reminder_offset" placeholder="2" />
-							</div>
-							<div style="float: left;" class="with-offset">
-								<!-- Relative Reminder Types -->
-								<select
-									ng-options="r.id as r.name for r in reminderTypes | filter:{type:'relative'}"
-									ng-model="newCalendar.reminder_type">
-								</select>
-							</div>
-						</div>
-						<ul class="button-group even-2">
-							<li>
-								<button class="button radius" ng-click="reset()">
-									<span aria-hidden="true" class="icon-reload-alt"> Reset</span>
-								</button>
-							</li>
-							<li>
-								<button ng-disabled="newCalendarForm.$invalid" class="button radius" ng-click="save()">
-									<span aria-hidden="true" class="icon-checkmark"> Create</span> 
-								</button>
-							</li>
-						</ul>
-					</form>
-				</div>
-			</div>
-		</div>
-
+<div id="add-calendar" class="transition duration-700 slide-drawer full bottom-up" ng-class="{open: addingSubscription}">
+	<div scroll-pane class="scroll-pane left">
 		<!-- RECENTLY CREATED/SUBSCRIBED CALENDAR SECTION -->
-		<div ng-show="recentCalendars.length" class="pane-header secondary" style="border-top: 1px solid #afafaf;">
-	        <span class="pane-title">Recently Added</span>
-	    </div>
-
+		<div style="position: relative; width: 50%; margin-right: 50%;">
+			<div class="pane-header small" style="border-top: 1px solid #afafaf;">
+	        	<span class="pane-title">Recently Added</span>
+    			<span class="icon-x-altx-alt right" ng-click="cancel()" aria-hidden="true"></span>
+    		</div>
+		</div>
+		
 		<!-- recently acquired calendars ng-repeat -->
 		<active-subscription
 			ng-repeat="calendar in recentCalendars = (calendars | filter:{active: true, recent: true, subscribed: true} | orderBy:'calendar_name')"
 			watcher="calendarWatchers"
 			user="user"
 			calendar="calendar"
-			reminder-types="reminderTypes"
-			adding-calendar="addingCalendar">
+			reminder-types="reminderTypes">
 		</active-subscription>
-		
-		<div ng-show="availableCalendars.length || calFilter" class="pane-header secondary" style="border-top: 1px solid #afafaf;">
-	        <span class="pane-title">Available</span>
-	    </div>
+		<!-- / RECENTLY CREATED/SUBSCRIBED CALENDAR SECTION -->
 
-	    <div style="position: relative;">
-			<input style="margin: 0;" type="text" ng-model="calFilter" placeholder="Search Calendars" />
-			<span style="position: absolute; top: 4px; right: 6px; font-size: 24px; color: #d4d4d4;" aria-hidden="true" class="icon-backspace" ng-click="calFilter=''"></span>
+	    <!-- NEW CALENDAR CREATION FORM -->
+	    <div
+		    resource-panel="addingCalendar"
+		    class="resource-panel existing"
+		    ng-class="{'open':addingCalendar, 'close':!addingCalendar}"
+		    ng-style="{background:newCalendar.color}"
+		    style="border-bottom: 0 !important;">
+			<div class="resource-gradient">
+				<div class="resource-header pane-header small">
+				    <span ng-hide="newCalendar.calendar_name" class="pane-title">New Calendar</span>
+				    <span ng-show="newCalendar.calendar_name" class="pane-title">{{newCalendar.calendar_name}}</span>
+				    <span class="icon-x-altx-alt right" ng-click="cancelNew()" aria-hidden="true"></span>
+				</div>
+				<div class="resource-body">
+					<!-- DISPLAY -->
+					<div class="resource-display">
+						<label class="checkbox resource-checkbox">
+							<span class="icon-calendarPlus" aria-hidden="true"></span>
+						</label>
+						<div class="resource-data" ng-click="addNew()">
+							<strong class="resource-title">
+								New Calendar
+							</strong>
+						</div>
+					</div>
+					<!-- / DISPLAY -->
+
+					<!-- EDIT -->
+					<form name="newCalendarForm" class="subscription resource-edit" novalidate>
+						<!-- Name -->
+						<div class="row" style="padding-top: 1em;">
+							<div class="large-12 columns">
+								<div class="resource-name">
+									<input required type="text" focus-me="[editingCalendar]" delay="500" ng-model="newCalendar.calendar_name" placeholder="Name (required)" />
+								</div>
+								<div class="color-selector">
+									<ui-colorpicker ng-model="newCalendar.color"></ui-colorpicker>
+								</div>
+							</div>
+						</div>
+
+						<!-- Public Checkbox -->
+						<div class="row" ng-show="hasPublic = checkPermision('modify_public_calendars',true)">
+							<div class="large-12 columns">
+								<checkbox
+									ng-model="newCalendar.public"
+									text="This is a public calendar" 
+									icon-if-true="icon-checkbox-checked"
+									icon-if-false="icon-checkbox-unchecked"
+								/>
+							</div>
+						</div>
+
+						<!-- Reminders -->
+						<reminder-list reminders="reminders"></reminder-list>
+
+						<div class="row">
+							<div class="large-12 columns">
+								<ul class="button-group even-2">
+									<li>
+										<button class="button radius" ng-click="cancelNew()">
+											<span aria-hidden="true" class="icon-remove2"></span> <!-- unsubscribe -->
+										</button>
+									</li>
+									<li style="padding-right: 0;">
+										<button class="button radius" ng-click="save()">
+											<span aria-hidden="true" class="icon-checkmark"></span> <!-- save -->
+										</button>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</form>
+					<!-- / EDIT -->
+				</div>
+			</div>
 		</div>
-	</div>
-	<div scroll-pane-two watch="recentCalendars.length" style="overflow-y: auto;">
-    	<!-- available calendars ng-repeat -->
+		<!-- / NEW CALENDAR CREATION FORM -->
+
+		<!-- AVAILABLE CALENDAR SECTION -->
+		<div style="position: relative; width: 50%; margin-right: 50%;">
+			<div class="pane-header small" style="border-top: 1px solid #afafaf;">
+		        <span class="pane-title">Available</span>
+		    </div>
+			<input style="margin: 0;" type="text" ng-model="calFilter" placeholder="Search Calendars" />
+			<span style="position: absolute; top: 30px; right: 6px; font-size: 24px; color: #d4d4d4;" aria-hidden="true" class="icon-backspace" ng-click="calFilter=''"></span>
+		</div>
+
+		<div class="resource-panel" style="background: black;" ng-hide="availableCalendars.length">
+			<div class="resource-gradient">
+				<div class="resource-body">
+					<div class="resource-display">
+						<div class="resource-data">
+							<strong class="resource-title">
+								None
+							</strong>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<available-subscription
 			ng-repeat="calendar in availableCalendars = (calendars | filter:{active: true, subscribed: false} | filter:calFilter | orderBy:'calendar_name')"
 			watcher="calendarWatchers"
 			user="user"
 			calendar="calendar">
 		</available-subscription>
-	</div>
+		<!-- / AVAILABLE CALENDAR SECTION -->
+	</div><!--
+	<div scroll-pane-two class="scroll-pane" watch="recentCalendars.length" style="overflow-y: auto;">
+		<available-subscription
+			ng-repeat="calendar in availableCalendars = (calendars | filter:{active: true, subscribed: false} | filter:calFilter | orderBy:'calendar_name')"
+			watcher="calendarWatchers"
+			user="user"
+			calendar="calendar">
+		</available-subscription>
+	</div>-->
 </div>

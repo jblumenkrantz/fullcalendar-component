@@ -1,25 +1,15 @@
-<form name="taskForm" class="task" novalidate>
+<form name="taskForm" class="task resource-edit" novalidate>
 	<!-- NAME -->
-	<div ng-click="cancel()" class="close-panel">
-		<span aria-hidden="true" class="icon-x-altx-alt" ></span>
+	<div class="row" style="padding-top: 1em;">
+		<div class="large-12 columns">
+			<div class="resource-name">
+				<input focus-me="[task.editing]" delay="500" required type="text" ng-model="task.title" placeholder="Untitled task" />
+			</div>
+		</div>
 	</div>
-	<input focus-me="[tasking]" required type="text" class="on-date" ng-model="task.title" placeholder="Untitled task" />
-	<!-- CALENDAR -->
-	<select
-		ng-change="switchCalendar(task)"
-		ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'"
-		ng-model="task.calendar_id"
-		class="on-date">
-	</select>
-	<!-- NOTES -->
-	<textarea ng-model="task.task_notes" placeholder="Add a note"></textarea>
-	<!-- HAS A DUE DATE CHECKBOX -->
-	<label class="checkbox" ng-class="{'on-date':task.has_due_date}">
-		<input type="checkbox" ng-model="task.has_due_date" ng-change="dueDateToggle(task);" />
-		Has a due date
-	</label>
-	<!-- DUE DATE -->
-	<div class="calendar-picker-container nolabel">
+
+	<!-- DUE DATE
+	<div class=" nolabel">
 		<datetime
 			ng-required="task.has_due_date"
 			ng-show="task.has_due_date"
@@ -32,68 +22,63 @@
 			jqui-opts="{dateFormat: 'm/d/yy'}"
 		/>
 	</div>
-	<!-- REMINDER CHECKBOX -->
-	<label class="checkbox" ng-class="{'on-date':task.has_reminder}">
-		<input type="checkbox" ng-model="task.has_reminder" ng-click="reminderToggle(task)" />
-		Add Reminder
-	</label>
-	<!-- REMINDER SETTINGS -->
+	-->
 	<div class="row">
-		<div class="large-12 columns" ng-show="task.has_reminder" style="padding: 0;">
-		<!-- Reminder Offset -->
-		<div
-			ng-hide="
-				hideOffset =
-				typeIsThree ||
-				task.reminder_type == 7 ||
-				task.reminder_type == null
-				"
-			style="float: left; width: 20%; margin-right: 2%;">
-			<input ng-required="!hideOffset" type='number' min="1" ng-change="usingOwnReminder(task)" ng-model="task.reminder_offset" placeholder="2" />
-		</div>
-
-		<div style="float: left;" ng-class="{'with-offset':!hideOffset, 'without-offset':hideOffset}">
-			<!-- Reminder Types -->
-			<select
-				ng-class="{'on-date': typeIsThree}"
-				ng-options="r.id as r.name for r in reminderTypes | filter:reminderTypeFilter()"
-				ng-model="task.reminder_type"
-				ng-change="usingOwnReminder(task)">
-			</select>
-			<!-- Absolute Reminder Datetime -->
-			<div class="calendar-picker-container nolabel">
-				<datetime
-					ng-model="task.reminder_datetime"
-					placeholder="m/d/yyyy h:mm AM/PM"
-					ng-show="typeIsThree = task.reminder_type == 3"
-					ng-required="typeIsThree"
-					date-format="MM/d/yyyy"
-					time-format="h:mm a"
-					divider="@"
-					dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y @ h:M a'}"
-					jqui-opts="{dateFormat: 'm/d/yy'}"
-				/>
-			</div>
-		</div>
-
-		<div style="clear: both;"></div>
-
-		<div style="font-size: 12px; margin: -0.8em 0 1em 0;">
-			This task is using
-			<span ng-show="task.using_calendar_reminder">
-				its calendar's reminder.
-				<span style="cursor: pointer; text-decoration: underline;" ng-click="noReminder(task)">Don't remind me.</span>
-			</span>
-			<span ng-show="!task.using_calendar_reminder && task.reminder_type != 7">
-				its own reminder.
-				<span ng-if="task.using_calendar_reminder!=undefined" style="cursor: pointer; text-decoration: underline;" ng-click="checkCalendarReminder()">Use calendar reminder.</span></span>
-			</span>
-			<span ng-show="task.reminder_type == 7">
-				no reminder.
-				<span ng-if="task.using_calendar_reminder!=undefined" style="cursor: pointer; text-decoration: underline;" ng-click="checkCalendarReminder()">Use calendar reminder.</span></span>
-			</span>
+		<div class="large-12 columns calendar-picker-container nolabel">
+			<datetime
+				ng-required="task.has_due_date"
+				ng-model="task.start"
+				placeholder="Due date"
+				date-format="MM/d/yyyy"
+				time-format="h:mm a"
+				divider="@"
+				dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y @ h:M a'}"
+				jqui-opts="{dateFormat: 'm/d/yy'}"
+				name="due"
+			/>
 		</div>
 	</div>
+	
+	<!-- CALENDAR -->
+
+	<div class="row">
+		<div class="large-12 columns">
+			<select
+				ng-change="switchCalendar(task)"
+				ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'"
+				ng-model="task.calendar_id">
+			</select>
+		</div>
+	</div>
+
+	<!-- NOTES -->
+	<div class="row">
+		<div class="large-12 columns">
+			<textarea ng-model="task.task_notes" placeholder="Add a note"></textarea>
+		</div>
+	</div>
+
+
+
+	<!-- HAS A DUE DATE CHECKBOX
+	<label class="checkbox" ng-class="{'on-date':task.has_due_date}">
+		<input type="checkbox" ng-model="task.has_due_date" ng-change="dueDateToggle(task);" />
+		Has a due date
+	</label>
+	<div class="row">
+		<div class="large-12 columns">
+			<checkbox
+				ng-model="task.has_due_date"
+				text="Has a due date"
+				ng-click="dueDateToggle(task);"
+			/>
+		</div>
+	</div>
+	-->
+	
+	<!-- REMINDER SETTINGS -->
+	<reminder-list reminders="reminders"></reminder-list>
+
 	<!-- BUTTONS -->
 	<div class="row">
 		<div class="large-12 columns">

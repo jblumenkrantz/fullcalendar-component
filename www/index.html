@@ -67,9 +67,11 @@
 
 	<!-- build:css({.tmp,app}) styles/main.css -->
 	<link rel="stylesheet" href="assets/styles/main.css">
+	<link rel="stylesheet" href="assets/styles/transitions.css">
 	<link rel="stylesheet" href="assets/styles/ios.css">
 	<link rel="stylesheet" href="assets/styles/glyphs.css">
 	<link rel="stylesheet" href="assets/styles/foundation.css">
+	<link rel="stylesheet" href="assets/styles/resource-panel.css">
 	
 	<link rel="stylesheet" href="assets/styles/datetimeentry.css">
 	<link rel="stylesheet" href="assets/styles/spectrum.css"> 
@@ -93,16 +95,19 @@
 	<!-- Add your site or application content here -->
 	<div ng-controller="PinwheelCtl" class="{{device.describeDevice(true)}}">
 		<nav class="left-nav" id="apps">
-			<a href="wireframe.html" ng-href="#/calendar"><span aria-hidden="true" class="icon-calendar"> </span>Calendar </a>
-			<a href="#" ng-href="#/messaging" class="locked"><span aria-hidden="true" class="icon-bubble-notification"> </span>Reminders </a>
-			<a ng-show="checkPermission('view_hallpass_history',true)" href="hallpass.html" ng-href="#/hallpass"><span aria-hidden="true" class="icon-signup"> </span>Hall Pass </a>
+			<a ng-href="#/calendar"><span aria-hidden="true" class="icon-calendar"> </span>Calendar </a>
+			<a ng-href="#/messaging" class="locked"><span aria-hidden="true" class="icon-bubble-notification"> </span>Reminders </a>
+			<a ng-show="checkPermission('view_hallpass_history',true)" ng-href="#/hallpass"><span aria-hidden="true" class="icon-vcard"> </span>Hall Pass </a>
 			<a href="#" ng-href="#/handbook" class="locked"><span aria-hidden="true" class="icon-book"> </span>Handbook</a>
-			<a href="#" ng-href="#/reference"  class="locked"><span aria-hidden="true" class="icon-books"> </span>Resources </a>
-			<a href="#" ng-href="#/reference"  class="locked"><span aria-hidden="true" class="icon-building"> </span>Facilities </a>
+			<a ng-href="#/reference" class="locked"><span aria-hidden="true" class="icon-books"> </span>Resources </a>
+			<a ng-href="#/facilities" class="locked"><span aria-hidden="true" class="icon-building"> </span>Facilities </a>
+			<a ng-href="#/settings" class="locked"><span aria-hidden="true" class="icon-cog"> </span>Settings </a>
+			<a ng-click="logout()" class="logout"><span aria-hidden="true" class="icon-spam"> </span>Logout</a>
+		<!-- 	<button class="small button alert" >
 			<a href="#" ng-href="#/settings"  class=""><span aria-hidden="true" class="icon-cog"> </span>Settings </a>
 			<button class="small button alert" ng-click="logout()">
 				<span aria-hidden="true" class="icon-spam" style="text-shadow: none;"> </span> Log Out
-			</button>
+			</button> -->
 		</nav>
 		<!-- .page-wrap gets wrapped around ALL content including topbar/menubar -->
 		<div class="page-wrap">
@@ -124,7 +129,7 @@
 				<div
 					ng-controller="TaskCtl"
 					id="tasks"
-					style="height: 100%; overflow: hidden; right: 0px; z-index: 1;"
+					style="height: 100%; z-index: 1; right: 0px;"
 					class="small-12 large-2 columns drawer"
 					ng-include src="'modules/calendar/_task_sidebar.html'">
 				</div>
@@ -134,7 +139,7 @@
 				<div
 					ng-controller="SubscriptionCtl"
 					id="my-calendars"
-					style="height: 100%; overflow: hidden; z-index: 1;"
+					style="height: 100%; z-index: 1;"
 					class="small-12 large-2 columns drawer"
 					ng-include src="'modules/calendar/_calendar_sidebar.html'">
 				</div>
@@ -228,6 +233,8 @@
 	<script src="modules/calendar/subscriptionDirective/activeSubscription.js"></script>
 	<script src="modules/calendar/subscriptionDirective/availableSubscription.js"></script>
 	<script src="modules/calendar/subscriptionDirective/subscriptionDirectiveCtl.js"></script>
+	<script src="modules/reminders/reminderService.js"></script>
+	<script src="modules/reminders/reminderDirective.js"></script>
 	<script src="modules/confirm/confirmCtl.js"></script>
 	<script src="modules/reference/referenceCtl.js"></script>
 	<script src="modules/messaging/messagingCtl.js"></script>
@@ -235,7 +242,6 @@
 	<script src="modules/settings/settingsTabs.js"></script>
 	<script src="modules/settings/settingsCtl.js"></script>
 	<script src="modules/quickAddParser.js"></script>
-	<script src="modules/reminderService.js"></script>
 	<script src="modules/deviceService.js"></script>
 	<script src="modules/interfaceDirectives.js"></script>
 	<script src="modules/contact_points/contactPoint.js"></script>

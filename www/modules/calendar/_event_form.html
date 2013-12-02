@@ -113,39 +113,36 @@
 	<div class="row">
 		<!-- All Day -->
 		<div class="large-4 columns">
-			<label class="checkbox">
-				<input
-					type="checkbox"
-					ng-disabled="!formEvent.editable"
-					ng-model="formEvent.allDay"
-					ng-click="allDayToggle()"
-				/>
-				All Day Event
-			</label>
+			<checkbox
+				ng-click="allDayToggle()"
+				ng-disabled="!formEvent.editable"
+				ng-model="$parent.formEvent.allDay"
+				icon-if-true="icon-checkbox-checked"
+				icon-if-false="icon-checkbox-unchecked"
+				text="All day event"
+			/>
 		</div>
 		<!-- / All Day -->
 		<!-- Reminder -->
 		<div class="large-4 columns">
-			<label class="checkbox">
-				<input
-					type="checkbox"
-					ng-model="formEvent.has_reminder"
-					ng-click="reminderToggle()"
-				/>
-				Add Reminder
-			</label>
+			<checkbox
+				ng-click="reminderToggle()"
+				ng-model="$parent.formEvent.has_reminder"
+				icon-if-true="icon-checkbox-checked"
+				icon-if-false="icon-checkbox-unchecked"
+				text="Add Reminder"
+			/>
 		</div>
 		<!-- / Reminder -->
 		<!-- Repeating -->
 		<div class="large-4 columns">
-			<label class="checkbox">
-				<input
-					ng-disabled="!formEvent.editable"
-					type="checkbox"
-					ng-model="formEvent.isRepeating"
-				/>
-				Repeating
-			</label>
+			<checkbox
+				ng-disabled="!formEvent.editable"
+				ng-model="$parent.formEvent.isRepeating"
+				icon-if-true="icon-checkbox-checked"
+				icon-if-false="icon-checkbox-unchecked"
+				text="Repeating"
+			/>
 		</div>
 		<!-- / Repeating -->
 	</div>

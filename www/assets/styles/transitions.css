@@ -1,0 +1,90 @@
+/*
+Transitions.css
+
+Sets up default transition classes
+These can be overridden in any other file
+
+Note:	The property changes that initiate transitions are contextual 
+		and are found in other .css files or applied via angularjs
+*/
+
+/*
+default transition class:	applied for overriding purposes
+							but does not define anything by itself
+*/
+.transition {}
+.animation {} 
+
+/*
+duration-<milliseconds> class:	define transition duration in milliseconds
+*/
+.duration-700 {
+	transition-duration: 0.7s;
+	-webkit-transition-duration: 0.7s;
+	-moz-transition-duration: 0.7s;
+	-o-transition-duration: 0.7s;
+	-ms-transition-duration: 0.7s;
+}
+.duration-500 {
+	transition-duration: 0.5s;
+	-webkit-transition-duration: 0.5s;
+	-moz-transition-duration: 0.5s;
+	-o-transition-duration: 0.5s;
+	-ms-transition-duration: 0.5s;
+}
+.duration-300 {
+	transition-duration: 0.3s;
+	-webkit-transition-duration: 0.3s;
+	-moz-transition-duration: 0.3s;
+	-o-transition-duration: 0.3s;
+	-ms-transition-duration: 0.3s;
+}
+
+/*
+find and replace
+transition-07 -> transition duration-700
+transition-05 -> transition duration-500
+transition-03 -> transition duration-300
+*/
+
+ /* sliding drawer basic styles */
+.slide-drawer {
+	background: rgb(238, 238, 238);
+	position: absolute;
+	width: 100%;
+	z-index: 10;
+}
+
+ /* Add .full class to .sliding-drawer if you want
+ 	the drawer to cover the contents of its parent
+ 	container. Otherwise height = auto.
+ */
+.slide-drawer.full {
+	height: 100%;
+}
+
+.slide-drawer.show-header.full {
+	height: 90%;
+	height: calc(100% - 37px);
+}
+
+ /* define starting position as bottom of parent container (out of view) */
+.slide-drawer.bottom-up {
+	top: 100%;
+}
+
+ /* define starting position as top of parent container (out of view) */
+.slide-drawer.top-down {
+	top: -100%;
+}
+
+ /* define ending position for all top/bottom sliding drawers (in view).
+ 	36px is height of pane-headers 
+ */
+.slide-drawer.open {
+	top: 0 !important;
+}
+
+.slide-drawer.show-header.open {
+	top: 37px !important;
+}
