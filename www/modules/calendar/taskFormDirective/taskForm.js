@@ -4,11 +4,11 @@ angular.module('pinwheelApp')
 	.directive('taskForm', function(){
 		return {
 			restrict: 'E',
+			replace: true,
 			templateUrl: 'modules/calendar/taskFormDirective/_task_form.html',
 			scope: {
 				task: '=',
 				calendars: '=',
-				tasking: '=',
 				reminderTypes: '=',
 				reminderTypeFilter: '&',
 				save: '&',

@@ -6,6 +6,14 @@
 	position: relative;
 }
 
+.resource-panel span[class*="icon-"] {
+	text-shadow: none !important;
+}
+
+.resource-panel .button-group span[class*="icon-"] {
+	text-shadow: 1px 1px 2px white !important;
+}
+
 .resource-panel,
 .resource-gradient,
 .resource-body,
@@ -22,6 +30,10 @@
 
 .resource-gradient {
 	height: 100%;
+}
+
+.resource-panel.open + .resource-panel {
+	border-top: 1px solid #999;
 }
 
 .resource-panel.open,
@@ -41,41 +53,96 @@
 
 /* PANEL */
 
-.resource-panel {
+.resource-panel.existing {
 	width: 50%;
-	margin: 0 50% 0 0;
 	max-height: 40px;
 	border-bottom: 1px solid #999;
 }
 
-.scroll-pane.scrolling .resource-panel {
-	width: calc(50% - 8px);
-	margin: 0 calc(50% + 8px) 0 0;
+#tasks .resource-panel.existing {
+	max-height: 60px;
+}
+
+.resource-panel.add-new {
+	max-height: 0px;
 }
 
 .resource-panel.open {
 	margin: 15px 0 !important;
 	width: 100% !important;
-	max-height: 999px;
+	max-height: 999px !important;
 	border: none;
 	-webkit-box-shadow: 0 0 5px #999999;
 	-moz-box-shadow: 0 0 5px #999999;
 	box-shadow: 0 0 5px #999999;
-	-webkit-animation-name: panel-open-h, panel-open-v;
 }
 
-@-webkit-keyframes panel-open-h {
+.scroll-pane.scrolling .resource-panel {
+	width: calc(50% - 8px);
+}
+
+/* left panel */
+
+.scroll-pane.left .resource-panel {
+	margin: 0 50% 0 0;
+}
+
+.scroll-pane.left.scrolling .resource-panel {
+	margin: 0 calc(50% + 8px) 0 0;
+}
+
+.scroll-pane.left .resource-panel.existing.open {
+	-webkit-animation-name: panel-open-width,
+							panel-open-height-40,
+							panel-open-margin-r;
+}
+
+.scroll-pane.right .resource-panel.existing.open {
+	-webkit-animation-name: panel-open-width,
+							panel-open-height-60,
+							panel-open-margin-l;
+}
+
+.scroll-pane.left .resource-panel.add-new.open {
+	-webkit-animation-name: panel-open-width,
+							panel-open-height-0,
+							panel-open-margin-r;
+}
+
+.scroll-pane.right .resource-panel.add-new.open {
+	-webkit-animation-name: panel-open-width,
+							panel-open-height-0,
+							panel-open-margin-l;
+}
+
+/* right panel */
+.scroll-pane.right .resource-panel {
+	margin: 0 0 0 50%;
+}
+
+.scroll-pane.right.scrolling .resource-panel {
+	margin: 0 0 0 calc(50% + 8px);
+}
+
+@-webkit-keyframes panel-open-width {
 	0% {
-		margin: 0 50% 0 0;
 		width: 50%;
 	}
 	100% {
-		margin: 15px 0;
 		width: 100%;
 	}
 }
 
-@-webkit-keyframes panel-open-v {
+@-webkit-keyframes panel-open-height-0 {
+	0% {
+		max-height: 0px;
+	}
+	100% {
+		max-height: 500px;
+	}
+}
+
+@-webkit-keyframes panel-open-height-40 {
 	0% {
 		max-height: 40px;
 	}
@@ -84,27 +151,108 @@
 	}
 }
 
-.resource-panel.done.close {
-	-webkit-animation-name: panel-close-h, panel-close-v;
+@-webkit-keyframes panel-open-height-60 {
+	0% {
+		max-height: 60px;
+	}
+	100% {
+		max-height: 500px;
+	}
 }
 
-@-webkit-keyframes panel-close-h {
+@-webkit-keyframes panel-open-margin-r {
 	0% {
+		margin: 0 50% 0 0;
+	}
+	100% {
 		margin: 15px 0;
+	}
+}
+
+@-webkit-keyframes panel-open-margin-l {
+	0% {
+		margin: 0 0 0 50%;
+	}
+	100% {
+		margin: 15px 0;
+	}
+}
+
+.scroll-pane.left .resource-panel.done.close {
+	-webkit-animation-name: panel-close-width,
+							panel-close-height-40,
+							panel-close-margin-r;
+}
+
+.scroll-pane.right .resource-panel.done.close {
+	-webkit-animation-name: panel-close-width,
+							panel-close-height-60,
+							panel-close-margin-l;
+}
+
+.scroll-pane.left .resource-panel.add-new.done.close {
+	-webkit-animation-name: panel-close-width,
+							panel-close-height-0,
+							panel-close-margin-r;
+}
+
+.scroll-pane.right .resource-panel.add-new.done.close {
+	-webkit-animation-name: panel-close-width,
+							panel-close-height-0,
+							panel-close-margin-l;
+}
+
+@-webkit-keyframes panel-close-width {
+	0% {
 		width: 100%;
 	}
 	100% {
-		margin: 0 50% 0 0;
 		width: 50%;
 	}
 }
 
-@-webkit-keyframes panel-close-v {
+@-webkit-keyframes panel-close-height-0 {
+	0% {
+		max-height: 500px;
+	}
+	100% {
+		max-height: 0px;
+	}
+}
+
+@-webkit-keyframes panel-close-height-40 {
 	0% {
 		max-height: 500px;
 	}
 	100% {
 		max-height: 40px;
+	}
+}
+
+@-webkit-keyframes panel-close-height-60 {
+	0% {
+		max-height: 500px;
+	}
+	100% {
+		max-height: 60px;
+	}
+}
+
+@-webkit-keyframes panel-close-margin-r {
+	0% {
+		margin: 15px 0;
+	}
+	100% {
+		margin: 0 50% 0 0;
+	}
+}
+
+@-webkit-keyframes panel-close-margin-l {
+	0% {
+		margin: 15px 0;
+	}
+	100% {
+		margin: 0 0 0 50%;
 	}
 }
 
@@ -119,8 +267,12 @@
 	overflow: hidden;
 }
 
+#tasks .resource-panel.existing .resource-body {
+	height: 60px;
+}
+
 .resource-panel.open .resource-body {
-	height: 100%;
+	height: 100% !important;
 	margin: 0px 1px 1px 8px;
 	padding: 0 0 1em 0;
 	-webkit-animation-name: body-open;
@@ -161,6 +313,7 @@
 /* HEADER */
 
 .resource-header {
+	background: none;
 	padding-left: 8px !important;
 	height: 0 !important;
 }
@@ -200,6 +353,7 @@
 	opacity: 1;
 	height: 100%;
 	z-index: 2;
+	padding: 0 5px 0 0;
 }
 
 /* keep display hidden during opening/closing */
@@ -286,8 +440,9 @@
 	right: 0;
 	height: 16px;
 	width: 16px;
-	z-index: 1;
+	z-index: 0;
 	font-size: 16px;
+	opacity: 0.8;
 	
 	transform: rotate(180deg);
 	-ms-transform: rotate(180deg); 
@@ -301,7 +456,6 @@
 	width: 100px;
 	font-size: 100px;
 	opacity: 0.1;
-	z-index: 0;
 	-webkit-animation-name: subscribed-open;
 }
 
@@ -310,7 +464,7 @@
 		height: 16px;
 		width: 16px;
 		font-size: 16px;
-		opacity: 1;
+		opacity: 0.8;
 	}
 	100% {
 		height: 100px;
@@ -321,12 +475,11 @@
 }
 
 .resource-panel.done.close .subscribed {
-	height: 100px;
-	width: 100px;
-	font-size: 100px;
-	opacity: 0.1;
-	z-index: 0;
 	-webkit-animation-name: subscribed-close;
+}
+
+.resource-panel .subscribed span {
+	line-height: 100%;
 }
 
 @-webkit-keyframes subscribed-close {
@@ -340,50 +493,79 @@
 		height: 16px;
 		width: 16px;
 		font-size: 16px;
-		opacity: 1;
+		opacity: 0.8;
 	}
 }
 
 /* END SUBSCRIBE */
 
-.resource-name,
-.resource-color {
+/* MUCKING AROUND */
+
+.resource-checkbox {
+	display: block !important;
 	float: left;
+	height: 16px !important;
+	width: 21px !important;
+	margin-bottom: 0 !important;
+	padding-top: 6px;
 }
 
-.resource-panel .subscribed span {
-	text-shadow: none;
-	line-height: 100%;
+#tasks .resource-checkbox {
+	padding-top: 0;
 }
 
-.resource-name {
+.resource-checkbox span {
+	font-size: 16px !important;
+}
+
+.resource-data {
+	float: left;
+	width: 80%;
+	width: calc(100% - 21px);
+	padding-top: 13px;
+	cursor: pointer;
+}
+
+#tasks .resource-data {
+	padding-top: 7px;
+}
+
+.resource-title {
+	display: block;
+	font-size: 14px;
+	/* ellipsis */
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.resource-display .due,
+.resource-display .notes {
+	font-size: 12px;
+	line-height: 13px;
+	/* ellipsis */
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+
+#my-calendars .resource-name {
+	float: left;
 	width: 90%; /* fallback if calc() not supported */
 	width: calc(100% - 2em);
 }
 
-.resource-color {
-	width: 2em;
-}
-
-/* from foundation scss to deal with at some point */
-.subscription-calendar-title {
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	width: 90%;
-	width: calc(100% - 24px);
-	display: inline-block !important;
-	cursor: pointer;
-	color: #222;
-	font-size: 14px;
-	padding-top: 12px;
+.scroll-pane.right .resource-panel .calendar-picker-container.nolabel button {
+	right: 20px;
 }
 
 /* PANE HEADER stuff that probably shouldn't be here */
 .pane-header.small {
+	height: 30px;
+	position: relative;
 	font-size: 18px;
 	line-height: 20px;
-	background: none;
 }
 .pane-header.small .pane-title {
 	display: block;
@@ -392,11 +574,18 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	top: 6px;
+}
+.resource-panel .pane-title {
 	margin-left: 0;
 }
 .pane-header.small span.right {
 	position: absolute;
 	right: -5px;
 	top: 2px;
-	text-shadow: none !important;
+}
+
+/* color selector */
+.color-selector {
+	float: left;
+	width: 2em;
 }

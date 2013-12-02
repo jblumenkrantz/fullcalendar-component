@@ -83,6 +83,22 @@ angular.module('pinwheelApp')
 
 		//list of reminder types for use in reminder <select ng-model='reminder_type'> 
 		$scope.reminderTypes = ReminderService.reminderTypes;
+		//DUMMY REMINDERS
+		$scope.reminders = [
+			[
+				{reminder_pref_id: "123", reminder_type: 0, mins_before: 30},
+				{reminder_pref_id: "456", reminder_type: 1, mins_before: 120},
+				{reminder_pref_id: "789", reminder_type: 2, mins_before: 1440}
+			],
+			[
+				{reminder_pref_id: "123", reminder_type: 0, mins_before: 30},
+				{reminder_pref_id: "456", reminder_type: 1, mins_before: 120}
+			],
+			[
+				{reminder_pref_id: "123", reminder_type: 0, mins_before: 30}
+			],
+			[]
+		];
 
 		Timezones.query({}, function(timezones){
 			$scope.timezones = timezones;

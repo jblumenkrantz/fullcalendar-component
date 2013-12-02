@@ -3,7 +3,7 @@
 		overflow-y: auto;
 	}
 	.scroll-pane {
-	 	overflow-y: hidden;
+	 	overflow: hidden;
 	}
 	.drawer {
 		position: relative;
@@ -37,13 +37,17 @@ select {
 		overflow: hidden !important;
 	}
 	body {
-		overflow-y: hidden !important;
+		overflow: hidden !important;
 	}
 	.scroll-pane {
 		width: 200%;
 		overflow-y: auto !important;
 	}
-	#my-calendars .scroll-pane {
+	.scroll-pane.right {
+		float: none;
+		position: relative;
+	}
+	.scroll-pane.left {
 		direction: rtl;
 	}
 	.drawer {
@@ -488,17 +492,3 @@ label.checkbox {
 	margin-right: 5px;
 	font-size: 1.2em;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

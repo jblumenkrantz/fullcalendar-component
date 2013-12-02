@@ -19,13 +19,25 @@ default transition class:	applied for overriding purposes
 duration-<milliseconds> class:	define transition duration in milliseconds
 */
 .duration-700 {
-	animation-duration: 0.7s;
+	transition-duration: 0.7s;
+	-webkit-transition-duration: 0.7s;
+	-moz-transition-duration: 0.7s;
+	-o-transition-duration: 0.7s;
+	-ms-transition-duration: 0.7s;
 }
 .duration-500 {
-	-webkit-animation-duration: 0.5s;
+	transition-duration: 0.5s;
+	-webkit-transition-duration: 0.5s;
+	-moz-transition-duration: 0.5s;
+	-o-transition-duration: 0.5s;
+	-ms-transition-duration: 0.5s;
 }
 .duration-300 {
-	animation-duration: 0.3s;
+	transition-duration: 0.3s;
+	-webkit-transition-duration: 0.3s;
+	-moz-transition-duration: 0.3s;
+	-o-transition-duration: 0.3s;
+	-ms-transition-duration: 0.3s;
 }
 
 /*
@@ -51,6 +63,11 @@ transition-03 -> transition duration-300
 	height: 100%;
 }
 
+.slide-drawer.show-header.full {
+	height: 90%;
+	height: calc(100% - 37px);
+}
+
  /* define starting position as bottom of parent container (out of view) */
 .slide-drawer.bottom-up {
 	top: 100%;
@@ -65,5 +82,9 @@ transition-03 -> transition duration-300
  	36px is height of pane-headers 
  */
 .slide-drawer.open {
-	top: 0;
+	top: 0 !important;
+}
+
+.slide-drawer.show-header.open {
+	top: 37px !important;
 }

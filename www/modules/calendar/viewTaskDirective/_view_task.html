@@ -1,46 +1,53 @@
 <div
-	resource-panel
-	ng-class="{'open':editingTask, 'close':!editingTask}"
-	class="resource-panel"
+	resource-panel="task.editing"
+	ng-class="{'open':task.editing, 'close':!task.editing}"
+	class="resource-panel existing"
 	ng-style="{background: calendarWatchers[task.calendar_id].color}">
 	<div class="resource-gradient">
+		<div class="resource-header pane-header small">
+		    <span class="pane-title">{{editTask.title}}</span>
+		    <span class="icon-x-altx-alt right" ng-click="cancel()" aria-hidden="true"></span>
+		</div>
 		<div class="resource-body">
+
+			<!-- DISPLAY -->
 			<div class="resource-display">
-				<div class="row" ng-click="edit()">
-					<div class="large-12 columns">
-						<strong>{{task.title}}</strong>
+				<checkbox
+					class="resource-checkbox"
+					ng-model="task.complete"
+				/>
+				<div class="resource-data" ng-click="edit()">
+					<strong class="resource-title">
+						{{task.title}} 
+					</strong>
+					<div class="due" ng-show="task.start">
+						<span class="icon-signup" aria-hidden="true"></span> {{task.start | date:'M/d/yyyy h:mm a'}}
 					</div>
-				</div>
-				<div class="row">
-					<div class="large-12 columns">
-						{{task.start | date:'M/d/yyyy h:mm a'}}
-					</div>
-				</div>
-				<div class="row">
-					<div class="large-12 columns">
+					<div class="notes" ng-show="task.task_notes">
 						{{task.task_notes}}
 					</div>
 				</div>
 			</div>
-			<div class="resource-edit">
-				<task-form
-					task="editTask"
-					save="update()"
-					cancel="cancel()"
-					reset="reset()"
-					delete="delete()"
-					calendars="calendars"
-					tasking="editingTask"
-					reminder-type-filter="reminderTypeFilter"
-					reminder-types="reminderTypes"
-					reminder-toggle="reminderToggle(editTask)"
-					switch-calendar="switchCalendar(editTask)"
-					check-calendar-reminder="checkCalendarReminder(editTask)"
-					due-date-toggle="dueDateToggle(editTask)"
-					using-own-reminder="usingOwnReminder(editTask)"
-					no-reminder="noReminder(editTask)">
-				</task-form>
-			</div>
+			<!-- / DISPLAY -->
+
+			<!-- EDIT TASK FORM -->
+			<task-form
+				task="editTask"
+				save="update()"
+				cancel="cancel()"
+				reset="reset()"
+				delete="delete()"
+				calendars="calendars"
+				reminder-type-filter="reminderTypeFilter"
+				reminder-types="reminderTypes"
+				reminder-toggle="reminderToggle(editTask)"
+				switch-calendar="switchCalendar(editTask)"
+				check-calendar-reminder="checkCalendarReminder(editTask)"
+				due-date-toggle="dueDateToggle(editTask)"
+				using-own-reminder="usingOwnReminder(editTask)"
+				no-reminder="noReminder(editTask)">
+			</task-form>
+			<!-- / EDIT TASK FORM -->
 		</div>
 	</div>
 </div>

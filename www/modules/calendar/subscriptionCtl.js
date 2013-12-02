@@ -8,7 +8,7 @@ angular.module('pinwheelApp')
 
 		$scope.defaultCalendar = function() {
 			return {
-				color: "blue",
+				color: "#222",
 				viewing: true,
 				has_reminder: false
 			};
@@ -18,7 +18,22 @@ angular.module('pinwheelApp')
 
 		//open calendar add/subscribe drawer
 		$scope.add = function() {
+			$scope.closeAll(); //close all calendar forms
 			$scope.addingSubscription = true;
+		}
+
+		$scope.addNew = function() {
+			$scope.addingCalendar = true; //open this one
+		}
+
+		$scope.closeAll = function() {
+			$scope.addingCalendar = false;
+			angular.forEach($scope.calendarWatchers, function(calObj, calID) {
+				if (calObj.editingCalendar) {
+					calObj.editingCalendar = false;
+					return;
+				}
+			});
 		}
 
 		//save a newly created calendar
@@ -43,24 +58,11 @@ angular.module('pinwheelApp')
 			$scope.addingSubscription = false;
 		}
 
+		$scope.cancelNew = function() {
+			$scope.addingCalendar = false;
+		}
+
 		$scope.reminderToggle = function() {
 			($scope.newCalendar.has_reminder && ReminderService.reminderDefaultsEvent($scope.newCalendar, $scope.user));
 		}
-
-		//DUMMY REMINDERS
-		$scope.reminders = [
-			[
-				{reminder_pref_id: "123", reminder_type: 0, mins_before: 30},
-				{reminder_pref_id: "456", reminder_type: 1, mins_before: 120},
-				{reminder_pref_id: "789", reminder_type: 2, mins_before: 1440}
-			],
-			[
-				{reminder_pref_id: "123", reminder_type: 0, mins_before: 30},
-				{reminder_pref_id: "456", reminder_type: 1, mins_before: 120}
-			],
-			[
-				{reminder_pref_id: "123", reminder_type: 0, mins_before: 30}
-			],
-			[]
-		];
   });

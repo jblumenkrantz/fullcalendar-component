@@ -17,7 +17,7 @@ angular.module('pinwheelApp')
 			delete $scope.calendar.events;
 			$scope.editCalendar || ($scope.editCalendar = {});
 			angular.copy($scope.calendar, $scope.editCalendar);
-			$scope.editingCalendar = true;
+			$scope.watcher[$scope.calendar.calendar_id].editingCalendar = true;
 		}
 
 		//update existing calendar
@@ -62,7 +62,7 @@ angular.module('pinwheelApp')
 
 		//cancel editing of calendar
 		$scope.cancel = function() {
-			$scope.editingCalendar = false;
+			$scope.watcher[$scope.calendar.calendar_id].editingCalendar = false;
 		}
 
 		//set if a calendar's events and tasks are visible
@@ -73,7 +73,6 @@ angular.module('pinwheelApp')
 					$scope.calendar = calendar;
 					$("#monthCalendar").fullCalendar("refetchEvents");
 				}
-				
 			});
 		}
 		$scope.isCalendarAdmin = function(calendar){
