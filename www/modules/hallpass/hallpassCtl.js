@@ -2,9 +2,7 @@
 
 angular.module('pinwheelApp')
   .controller('HallpassCtl', function ($scope, $location, $timeout, $http, Hallpass, Facilities, OrgUserList) {
-  		if(!$scope.checkPermission('view_hallpass_history',true)){
-  			$location.path('calendar');
-  		}
+
   	  	$scope.activeTab = {activePasses:true};
   	  	angular.element("#hallpass-tabs").find("dd[settings-tab='activePasses']").addClass("active").siblings().removeClass("active");
   	  	$scope.viewing_history = [];
@@ -19,6 +17,10 @@ angular.module('pinwheelApp')
 
 		$scope.$watch('user',function(){
 			if($scope.user){
+				// Check user permissions
+				if(!$scope.checkPermission('view_hallpass_history',true)){
+  					$location.path('calendar');
+  				}
 				OrgUserList.query({id:$scope.user.permissions[0].org_id}, function(users){
 					$scope.orgUsers = users;
 					console.warn(['OrgUsers loaded',$scope.orgUsers]);

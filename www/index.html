@@ -95,18 +95,24 @@
 		<nav class="left-nav" id="apps">
 			<a ng-href="#/calendar"><span aria-hidden="true" class="icon-calendar"> </span>Calendar </a>
 			<a ng-href="#/messaging" class="locked"><span aria-hidden="true" class="icon-bubble-notification"> </span>Reminders </a>
-			<a ng-show="checkPermission('view_hallpass_history',true)" href="hallpass.html" ng-href="#/hallpass"><span aria-hidden="true" class="icon-vcard"> </span>Hall Pass </a>
+			<a ng-show="checkPermission('view_hallpass_history',true)" ng-href="#/hallpass"><span aria-hidden="true" class="icon-vcard"> </span>Hall Pass </a>
 			<a href="#" ng-href="#/handbook" class="locked"><span aria-hidden="true" class="icon-book"> </span>Handbook</a>
 			<a ng-href="#/reference" class="locked"><span aria-hidden="true" class="icon-books"> </span>Resources </a>
-			<a ng-href="#/reference" class="locked"><span aria-hidden="true" class="icon-building"> </span>Facilities </a>
+			<a ng-href="#/facilities" class="locked"><span aria-hidden="true" class="icon-building"> </span>Facilities </a>
 			<a ng-href="#/settings" class="locked"><span aria-hidden="true" class="icon-cog"> </span>Settings </a>
 			<a ng-click="logout()" class="logout"><span aria-hidden="true" class="icon-spam"> </span>Logout</a>
 		<!-- 	<button class="small button alert" >
+			<a href="#" ng-href="#/settings"  class=""><span aria-hidden="true" class="icon-cog"> </span>Settings </a>
+			<button class="small button alert" ng-click="logout()">
 				<span aria-hidden="true" class="icon-spam" style="text-shadow: none;"> </span> Log Out
 			</button> -->
 		</nav>
 		<!-- .page-wrap gets wrapped around ALL content including topbar/menubar -->
 		<div class="page-wrap">
+			<!-- global confirm dialog -->
+			<div ng-include src="'modules/confirm/confirm.html'"></div>
+			<!-- / confirm dialog -->
+
 			<!-- header -->
 			<nav id="mainHeader" ng-include src="'modules/_topbar.html'"></nav>
 			<!-- / header -->
@@ -229,9 +235,8 @@
 	<script src="modules/reference/referenceCtl.js"></script>
 	<script src="modules/messaging/messagingCtl.js"></script>
 	<script src="modules/handbook/handbookCtl.js"></script>
-	<script src="modules/settings/settingsMenu.js"></script>
+	<script src="modules/settings/settingsTabs.js"></script>
 	<script src="modules/settings/settingsCtl.js"></script>
-	<script src="modules/settings/settingsModal.js"></script>
 	<script src="modules/quickAddParser.js"></script>
 	<script src="modules/reminderService.js"></script>
 	<script src="modules/deviceService.js"></script>

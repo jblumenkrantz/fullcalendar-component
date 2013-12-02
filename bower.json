@@ -9,7 +9,7 @@
     "angular-animate": "1.2.0-rc.2",
     "angular-cookies": "1.2.0-rc.2",
     "angular-sanitize": "1.2.0-rc.2",
-    "foundation": "~4.3.1",
+    "foundation": "latest",
     "jquery": "~2.0.3",
     "angular-ui-date": "latest",
     "angular-route": "1.2.0-rc.2",
@@ -17,7 +17,8 @@
     "sdi-angular-ui-calendar": "latest",
     "sdi-fullcalendar": "latest",
     "sdi-jquery-ui": "latest",
-    "angular-ui-select2": "~0.0.2"
+    "angular-ui-select2": "~0.0.2",
+    "sdi-select2": "~3.4.5"
   },
   "devDependencies": {
     "angular-mocks": "latest",

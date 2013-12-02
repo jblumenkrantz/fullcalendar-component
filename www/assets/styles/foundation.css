@@ -7422,8 +7422,7 @@ ul.days, .calendar-day {
 }
 
 /* line 428, ../../scss/foundation.scss */
-#calendar-admin-modal button,
-#account-settings-modal button,
+#main-content button,
 .button-group li div.button,
 .button-group li button {
   color: #333 !important;
