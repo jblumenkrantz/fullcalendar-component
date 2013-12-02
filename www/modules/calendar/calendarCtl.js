@@ -1,11 +1,17 @@
 'use strict';
 
 angular.module('pinwheelApp')
-	.controller('CalendarCtl', function ($filter, $scope, $routeParams, $location, $timeout, Calendar, Event, Task) {
+	.controller('CalendarCtl', function ($filter, $scope, $routeParams, $location, $timeout, Calendar) {
 		$scope.routeDate = new Date($routeParams.month+"/"+$routeParams.day+"/"+$routeParams.year);
 
 		$scope.navYear = parseInt($routeParams.year);
 
+		Calendar.query({id: 'all'}, function(calendars){
+			$scope.loading_calendars = false;
+			$scope.calendars = calendars;
+			$('#monthCalendar').fullCalendar('render');
+		});
+		
 		$scope.makeNavYear = function(year){
 			$scope.navYear = year;
 		}
@@ -37,16 +43,6 @@ angular.module('pinwheelApp')
 			$location.path("/calendar/"+$routeParams.year+"/"+$routeParams.month+"/"+$routeParams.day);
 			$timeout(function(){$('#monthCalendar').fullCalendar('render')});
 		}
-/*		$scope.previous = function(){
-			$('#monthCalendar').fullCalendar('prev');
-   			$scope.routeDate = $('#monthCalendar').fullCalendar('getDate');
-			//$scope.moveMonths(-1);
-		}
-		$scope.next = function(){
-			$('#monthCalendar').fullCalendar('next');
-			$scope.routeDate = $('#monthCalendar').fullCalendar('getDate');
-			//$scope.moveMonths(1);
-		}*/
   });
 
 
