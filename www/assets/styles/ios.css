@@ -1,7 +1,16 @@
 .iOS input[type="datetime-local"],
 .iOS input[type="date"],
 .iOS input[type="time"] {
-	-webkit-appearance: none;
+	-webkit-appearance: none; /* disables iOS webkit's ugly default rendering */
+}
+
+.iOS .pane-header.small {
+	line-height: 22px;
+}
+
+.iOS .scroll-pane.scrolling .resource-panel {
+	width: 50%;
+	margin-right: 50%
 }
 
 .iPad #advancedEvent .on-date.datetime {
@@ -11,4 +20,24 @@
 .iPad #advancedEvent .on-date-right {
 	width: 67.4%;
 	margin-right: 0;
+}
+
+/* ios animation classes */
+.iOS .transition {
+	-webkit-transition: none !important; /* disable transitions on ios */
+}
+
+.iOS .resource-panel.open,
+.iOS .resource-panel.done.close,
+.iOS .resource-panel.open .resource-body,
+.iOS .resource-panel.done.close .resource-body,
+.iOS .resource-panel.open .resource-header,
+.iOS .resource-panel.done.close .resource-header,
+.iOS .resource-panel.open .resource-display,
+.iOS .resource-panel.done.close .resource-display,
+.iOS .resource-panel.open .resource-edit,
+.iOS .resource-panel.done.close .resource-edit,
+.iOS .resource-panel.open .subscribed,
+.iOS .resource-panel.done.close .subscribed {
+	-webkit-animation-duration: 0.3s;
 }

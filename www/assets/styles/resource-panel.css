@@ -1,0 +1,595 @@
+.resource-panel,
+.resource-gradient,
+.resource-body,
+.resource-edit,
+.resource-header {
+	position: relative;
+}
+
+.resource-panel span[class*="icon-"] {
+	text-shadow: none !important;
+}
+
+.resource-panel .button-group span[class*="icon-"] {
+	text-shadow: 1px 1px 2px white !important;
+}
+
+.resource-panel,
+.resource-gradient,
+.resource-body,
+.resource-header {
+	overflow: hidden;
+}
+
+.resource-panel,
+.resource-gradient,
+.resource-edit,
+.resource-display {
+	width: 100%;
+}
+
+.resource-gradient {
+	height: 100%;
+}
+
+.resource-panel.open + .resource-panel {
+	border-top: 1px solid #999;
+}
+
+.resource-panel.open,
+.resource-panel.done.close,
+.resource-panel.open .resource-body,
+.resource-panel.done.close .resource-body,
+.resource-panel.open .resource-header,
+.resource-panel.done.close .resource-header,
+.resource-panel.open .resource-display,
+.resource-panel.done.close .resource-display,
+.resource-panel.open .resource-edit,
+.resource-panel.done.close .resource-edit,
+.resource-panel.open .subscribed,
+.resource-panel.done.close .subscribed {
+	-webkit-animation-duration: 0.5s;
+}
+
+/* PANEL */
+
+.resource-panel.existing {
+	width: 50%;
+	max-height: 40px;
+	border-bottom: 1px solid #999;
+}
+
+#tasks .resource-panel.existing {
+	max-height: 60px;
+}
+
+.resource-panel.add-new {
+	max-height: 0px;
+}
+
+.resource-panel.open {
+	margin: 15px 0 !important;
+	width: 100% !important;
+	max-height: 999px !important;
+	border: none;
+	-webkit-box-shadow: 0 0 5px #999999;
+	-moz-box-shadow: 0 0 5px #999999;
+	box-shadow: 0 0 5px #999999;
+}
+
+.scroll-pane.scrolling .resource-panel {
+	width: calc(50% - 8px);
+}
+
+/* left panel */
+
+.scroll-pane.left .resource-panel {
+	margin: 0 50% 0 0;
+}
+
+.scroll-pane.left.scrolling .resource-panel {
+	margin: 0 calc(50% + 8px) 0 0;
+}
+
+.scroll-pane.left .resource-panel.existing.open {
+	-webkit-animation-name: panel-open-width,
+							panel-open-height-40,
+							panel-open-margin-r;
+}
+
+.scroll-pane.right .resource-panel.existing.open {
+	-webkit-animation-name: panel-open-width,
+							panel-open-height-60,
+							panel-open-margin-l;
+}
+
+.scroll-pane.left .resource-panel.add-new.open {
+	-webkit-animation-name: panel-open-width,
+							panel-open-height-0,
+							panel-open-margin-r;
+}
+
+.scroll-pane.right .resource-panel.add-new.open {
+	-webkit-animation-name: panel-open-width,
+							panel-open-height-0,
+							panel-open-margin-l;
+}
+
+/* right panel */
+.scroll-pane.right .resource-panel {
+	margin: 0 0 0 50%;
+}
+
+.scroll-pane.right.scrolling .resource-panel {
+	margin: 0 0 0 calc(50% + 8px);
+}
+
+@-webkit-keyframes panel-open-width {
+	0% {
+		width: 50%;
+	}
+	100% {
+		width: 100%;
+	}
+}
+
+@-webkit-keyframes panel-open-height-0 {
+	0% {
+		max-height: 0px;
+	}
+	100% {
+		max-height: 500px;
+	}
+}
+
+@-webkit-keyframes panel-open-height-40 {
+	0% {
+		max-height: 40px;
+	}
+	100% {
+		max-height: 500px;
+	}
+}
+
+@-webkit-keyframes panel-open-height-60 {
+	0% {
+		max-height: 60px;
+	}
+	100% {
+		max-height: 500px;
+	}
+}
+
+@-webkit-keyframes panel-open-margin-r {
+	0% {
+		margin: 0 50% 0 0;
+	}
+	100% {
+		margin: 15px 0;
+	}
+}
+
+@-webkit-keyframes panel-open-margin-l {
+	0% {
+		margin: 0 0 0 50%;
+	}
+	100% {
+		margin: 15px 0;
+	}
+}
+
+.scroll-pane.left .resource-panel.done.close {
+	-webkit-animation-name: panel-close-width,
+							panel-close-height-40,
+							panel-close-margin-r;
+}
+
+.scroll-pane.right .resource-panel.done.close {
+	-webkit-animation-name: panel-close-width,
+							panel-close-height-60,
+							panel-close-margin-l;
+}
+
+.scroll-pane.left .resource-panel.add-new.done.close {
+	-webkit-animation-name: panel-close-width,
+							panel-close-height-0,
+							panel-close-margin-r;
+}
+
+.scroll-pane.right .resource-panel.add-new.done.close {
+	-webkit-animation-name: panel-close-width,
+							panel-close-height-0,
+							panel-close-margin-l;
+}
+
+@-webkit-keyframes panel-close-width {
+	0% {
+		width: 100%;
+	}
+	100% {
+		width: 50%;
+	}
+}
+
+@-webkit-keyframes panel-close-height-0 {
+	0% {
+		max-height: 500px;
+	}
+	100% {
+		max-height: 0px;
+	}
+}
+
+@-webkit-keyframes panel-close-height-40 {
+	0% {
+		max-height: 500px;
+	}
+	100% {
+		max-height: 40px;
+	}
+}
+
+@-webkit-keyframes panel-close-height-60 {
+	0% {
+		max-height: 500px;
+	}
+	100% {
+		max-height: 60px;
+	}
+}
+
+@-webkit-keyframes panel-close-margin-r {
+	0% {
+		margin: 15px 0;
+	}
+	100% {
+		margin: 0 50% 0 0;
+	}
+}
+
+@-webkit-keyframes panel-close-margin-l {
+	0% {
+		margin: 15px 0;
+	}
+	100% {
+		margin: 0 0 0 50%;
+	}
+}
+
+/* END PANEL */
+
+/* BODY */
+
+.resource-body {
+	margin: 0 0 0 8px;
+	padding: 0 0 0 5px;
+	height: 40px;
+	overflow: hidden;
+}
+
+#tasks .resource-panel.existing .resource-body {
+	height: 60px;
+}
+
+.resource-panel.open .resource-body {
+	height: 100% !important;
+	margin: 0px 1px 1px 8px;
+	padding: 0 0 1em 0;
+	-webkit-animation-name: body-open;
+}
+
+@-webkit-keyframes body-open {
+	0% {
+		margin: 0 0 0 8px;
+		padding: 0 0 0 5px;
+		height: 40px;
+	}
+	100% {
+		margin: 0px 1px 1px 8px;
+		padding: 0 0 1em 0;
+		height: 100%;
+	}
+}
+
+.resource-panel.done.close .resource-body {
+	-webkit-animation-name: body-close;
+}
+
+@-webkit-keyframes body-close {
+	0% {
+		margin: 0px 1px 1px 8px;
+		padding: 0 0 1em 0;
+		height: 100%;
+	}
+	100% {
+		margin: 0 0 0 8px;
+		padding: 0 0 0 5px;
+		height: 40px;
+	}
+}
+
+/* END BODY */
+
+/* HEADER */
+
+.resource-header {
+	background: none;
+	padding-left: 8px !important;
+	height: 0 !important;
+}
+
+.resource-panel.open .resource-header {
+	height: 30px !important;
+	-webkit-animation-name: header-open;
+}
+
+@-webkit-keyframes header-open {
+	0% {
+		height: 0;
+	}
+	100% {
+		height: 30px;
+	}
+}
+
+.resource-panel.done.close .resource-header {
+	-webkit-animation-name: header-close;
+}
+
+@-webkit-keyframes header-close {
+	0% {
+		height: 30px;
+	}
+	100% {
+		height: 0px;
+	}
+}
+
+/* END HEADER */
+
+/* DISPLAY */
+
+.resource-display {
+	opacity: 1;
+	height: 100%;
+	z-index: 2;
+	padding: 0 5px 0 0;
+}
+
+/* keep display hidden during opening/closing */
+.resource-panel.open .resource-display {
+	position: absolute;
+	opacity: 0;
+	z-index: -1;
+	-webkit-animation-name: display-open;
+}
+
+@-webkit-keyframes display-open {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+/* keep display absolute when closing */
+.resource-panel.done.close .resource-display {
+	position: absolute;
+	-webkit-animation-name: display-close;
+}
+
+@-webkit-keyframes display-close {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+/* END DISPLAY */
+
+/* EDIT */
+
+.resource-edit {
+	height: 0px;
+	opacity: 0
+}
+
+/* bring edit to top when open */
+.resource-panel.open .resource-edit {
+	opacity: 1;
+	height: auto;
+	-webkit-animation-name: edit-open;
+}
+
+@-webkit-keyframes edit-open {
+	0% {
+		opacity: 0;
+		height: 0px;
+	}
+	100% {
+		opacity: 1;
+		height: auto;
+	}
+}
+
+.resource-panel.done.close .resource-edit {
+	-webkit-animation-name: edit-close;
+}
+
+@-webkit-keyframes edit-close {
+	0% {
+		opacity: 1;
+		height: auto;
+	}
+	100% {
+		opacity: 0;
+		height: 0px;
+	}
+}
+
+/* END EDIT */
+
+/* SUBSCRIBE */
+
+.resource-panel .subscribed {
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 16px;
+	width: 16px;
+	z-index: 0;
+	font-size: 16px;
+	opacity: 0.8;
+	
+	transform: rotate(180deg);
+	-ms-transform: rotate(180deg); 
+	-mox-transform: rotate(180deg); 
+	-webkit-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
+}
+
+.resource-panel.open .subscribed {
+	height: 100px;
+	width: 100px;
+	font-size: 100px;
+	opacity: 0.1;
+	-webkit-animation-name: subscribed-open;
+}
+
+@-webkit-keyframes subscribed-open {
+	0% {
+		height: 16px;
+		width: 16px;
+		font-size: 16px;
+		opacity: 0.8;
+	}
+	100% {
+		height: 100px;
+		width: 100px;
+		font-size: 100px;
+		opacity: 0.1;
+	}
+}
+
+.resource-panel.done.close .subscribed {
+	-webkit-animation-name: subscribed-close;
+}
+
+.resource-panel .subscribed span {
+	line-height: 100%;
+}
+
+@-webkit-keyframes subscribed-close {
+	0% {
+		height: 100px;
+		width: 100px;
+		font-size: 100px;
+		opacity: 0.1;
+	}
+	100% {
+		height: 16px;
+		width: 16px;
+		font-size: 16px;
+		opacity: 0.8;
+	}
+}
+
+/* END SUBSCRIBE */
+
+/* MUCKING AROUND */
+
+.resource-checkbox {
+	display: block !important;
+	float: left;
+	height: 16px !important;
+	width: 21px !important;
+	margin-bottom: 0 !important;
+	padding-top: 10px;
+}
+
+#tasks .resource-checkbox {
+	padding-top: 4px;
+}
+
+.resource-checkbox span {
+	font-size: 16px !important;
+}
+
+.resource-data {
+	float: left;
+	width: 80%;
+	width: calc(100% - 21px);
+	padding-top: 13px;
+	cursor: pointer;
+}
+
+#tasks .resource-data {
+	padding-top: 7px;
+}
+
+.resource-title {
+	display: block;
+	font-size: 14px;
+	/* ellipsis */
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.resource-display .due,
+.resource-display .notes {
+	font-size: 12px;
+	line-height: 13px;
+	/* ellipsis */
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.resource-panel button {
+	border: none !important;
+}
+
+
+#my-calendars .resource-name {
+	float: left;
+	width: 90%; /* fallback if calc() not supported */
+	width: calc(100% - 2em);
+}
+
+.scroll-pane.right .resource-panel .calendar-picker-container.nolabel button {
+	right: 20px;
+}
+
+/* PANE HEADER stuff that probably shouldn't be here */
+.pane-header.small {
+	height: 30px;
+	position: relative;
+	font-size: 18px;
+	line-height: 20px;
+}
+.pane-header.small .pane-title {
+	display: block;
+	width: 90%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	top: 6px;
+}
+.resource-panel .pane-title {
+	margin-left: 0;
+}
+.pane-header.small span.right {
+	position: absolute;
+	right: -5px;
+	top: 2px;
+}
+
+/* color selector */
+.color-selector {
+	float: left;
+	width: 2em;
+}

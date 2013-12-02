@@ -3,7 +3,7 @@
 		overflow-y: auto;
 	}
 	.scroll-pane {
-	 	overflow-y: hidden;
+	 	overflow: hidden;
 	}
 	.drawer {
 		position: relative;
@@ -17,18 +17,6 @@ body {
 
 textarea {
 	resize: none;
-}
-
-label.checkbox {
-	height: 2.3125em;
-	font-size: 14px;
-	border: 1px solid #aaa;
-	padding: 0.5em;
-	color: #555;
-	margin: 0 0 1em 0;
-	color: rgba(0, 0, 0, 0.75);
-	-webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 select {
@@ -45,11 +33,22 @@ select {
 
 /* Used to alter styles for screens at least 768px wide. This is where the grid changes. */
 @media only screen and (min-width: 768px) {
+	html {
+		overflow: hidden !important;
+	}
 	body {
 		overflow: hidden !important;
 	}
 	.scroll-pane {
+		width: 200%;
 		overflow-y: auto !important;
+	}
+	.scroll-pane.right {
+		float: none;
+		position: relative;
+	}
+	.scroll-pane.left {
+		direction: rtl;
 	}
 	.drawer {
 		position: absolute !important;
@@ -62,67 +61,9 @@ select {
 /* Used to alter styles for screens at least 1440px wide. */
 @media only screen and (min-width: 1440px) {}
 
-/* define transition speed as .7 seconds for your animation */
-.transition-07 {
-	transition: 0.7s;
-}
-
- /* sliding drawer basic styles */
-.slide-drawer {
-	background: rgb(238, 238, 238);
-	position: absolute;
-	width: 100%;
-	z-index: 10;
-}
-
- /* Add .full class to .sliding-drawer if you want
- 	the drawer to cover the contents of its parent
- 	container. Otherwise height = auto.
- */
-.slide-drawer.full {
-	height: 100%;
-}
-
- /* define starting position as bottom of parent container (out of view) */
-.slide-drawer.bottom-up {
-	top: 100%;
-}
-
- /* define starting position as top of parent container (out of view) */
-.slide-drawer.top-down {
-	top: -100%;
-}
-
- /* define ending position for all top/bottom sliding drawers (in view).
- 	36px is height of pane-headers 
- */
-.slide-drawer.open {
-	top: 0;
-}
-
  /* rotate icon 45 degrees (make plus icons into x icons) */
 .rotate-45 {
 	-webkit-transform: rotate(45deg);
-}
-
-
-/* Fade in animaiton for the user settings save/cancel buttons */
-.animate-show.ng-hide-remove {
-  -webkit-transition:all linear 0.5s;
-  -moz-transition:all linear 0.5s;
-  -o-transition:all linear 0.5s;
-  transition:all linear 0.5s;
-  display:block!important;
-}
-
-.animate-show.ng-hide-add.ng-hide-add-active,
-.animate-show.ng-hide-remove {
-  opacity:0;
-}
-
-.animate-show.ng-hide-add,
-.animate-show.ng-hide-remove.ng-hide-remove-active {
-  opacity:1;
 }
 
 /* Loading Spinners */
@@ -484,4 +425,70 @@ form input.ng-invalid {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+}
+
+.reminders table {
+	position: relative;
+	width: 100%;
+}
+.reminders table td {
+	position: relative;
+	cursor: pointer;
+	font-size: 1em;
+}
+.reminders .reminder-offset,
+.reminders .reminder-type,
+.reminders .reminder-close {
+	float: left;
+}
+.reminders input,
+.reminders select {
+	margin: 0 !important;
+}
+.reminders .reminder-offset {
+	width: 10%;
+	margin-right: 2%;
+}
+.reminders .reminder-type {
+	width: 70%;
+}
+.reminders .icon-x-altx-alt,
+.reminders .icon-checkmark {
+	top: 17px !important;
+	font-size: 1.05em;
+}
+.reminders .icon-pencil,
+.reminders .icon-checkmark,
+.reminders .icon-remove2,
+.reminders .icon-x-altx-alt {
+	position: absolute;
+	top: 5px;
+}
+.reminders .icon-checkmark,
+.reminders .icon-remove2 {
+	right: 11px;
+}
+.reminders .icon-x-altx-alt,
+.reminders .icon-pencil {
+	right: 41px;
+}
+.reminders .description {
+	width: 85%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-size: 0.875em;
+}
+
+/* CHECKBOX DIRECTIVE */
+label.checkbox {
+	display: inline-block;
+	margin-bottom: 1em;
+}
+
+.checkbox span {
+	position: relative;
+	top: 2px;
+	margin-right: 5px;
+	font-size: 1.2em;
 }

@@ -40,7 +40,6 @@
 // @import "../bower_components/foundation/scss/foundation/components/thumbs";
 // @import "../bower_components/foundation/scss/foundation/components/tooltips";
 // @import "../bower_components/foundation/scss/foundation/components/dropdown";
-
 // WIREFRAME TODO
 // 
 // example of a task
@@ -112,16 +111,7 @@ dl.sub-nav.calendar-filter dd {
 // --------------------------
 // header bar for sidebars
 // --------------------------
-.pane-header {
-	background: darken($topbar-bg, 5%);
-	width: 100%;
-	margin: 0 !important;
-	padding: 0 !important;
-	background: darken($topbar-bg, 5%);
-	font-size: 20px;
-	height: 36px !important;
-}
-.pane-header [class*="icon-"]{
+.pane-header [class*="icon-"] {
 	position: relative;
 	top: 3px;
 	cursor:pointer;
@@ -219,17 +209,6 @@ cursor: pointer;
 background: rgba($primary-color, .1); 
 }
 
-// .calendar-index ul.side-nav li:hover  {
-// list-style-type: none;
-// margin: 0;
-// text-align: center;
-// padding: 10px 0 ;
-// border: 1px solid #aaa;
-// border-width: 1px 0 0 0;
-// cursor: pointer;
-// background: rgba($primary-color, .1); 
-// }
-
 .calendar-index ul.side-nav li:nth-child(1) {
 background: #ccc;
 border-width: 0; 
@@ -263,7 +242,6 @@ ul.days, .calendar-day {padding: 0; margin: 0; width: 100%;}
 .calendar-picker-container {
 	position: relative;
 }
-
 .calendar-picker-container button {
 	top: 22px;
 	right: 20px;
@@ -281,20 +259,6 @@ ul.days, .calendar-day {padding: 0; margin: 0; width: 100%;}
 .calendar-picker-container.nolabel button {
 	top: 5px;
 	right: 5px;
-}
-
-.icon-calendarPlus {
-	top: 6px;
-	right: 4px;
-	position: absolute;
-	display: block;
-	color: #555;
-	font-size: 18px;
-	border: 0;
-	background: 0;
-	padding: 0;
-	margin: 0;
-	cursor: pointer;
 }
 
 .icon-backspace:before {
@@ -315,13 +279,7 @@ ul.days, .calendar-day {padding: 0; margin: 0; width: 100%;}
 // -----------------------------
 // subscriptions & tasks
 // -----------------------------
-.subscription-panel, .task-panel{ //outside
-border-bottom: 1px solid #999;
-overflow: hidden;
-}
-
 .resource-gradient {
-	overflow: hidden;
 	background: #eeeeee; /* Old browsers */
 	background: -moz-linear-gradient(top,  rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.3)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
@@ -333,9 +291,6 @@ overflow: hidden;
 }
 
 .resource-body { //inside
-	position: relative;
-	overflow: hidden;
-	margin: 0 0 0 8px;
 	background: #eeeeee; /* Old browsers */
 	background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
@@ -344,8 +299,6 @@ overflow: hidden;
 	background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
 	background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
-	min-height: 50px !important;
-	padding: 5px 4px 5px 5px;
 }
 
 .task .resource-body.add {
@@ -363,44 +316,7 @@ overflow: hidden;
 	margin-left: 8px;
 }
 
-.subscription-calendar-title {
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	width: 90%;
-	display: inline-block !important;
-	cursor: pointer;
-	color: #222;
-	font-size: 14px;
-	padding-top: 12px;
-}
-
-.subscription-panel  .subscribed {
-	position: absolute;
-	top: -8px;
-	right: -3px;
-	display: block;
-	color: #555;
-	font-size: 18px;
-	border: 0;
-	background: 0;
-	padding: 0;
-	margin: 0;
-	transform: rotate(180deg) !important;
-	-ms-transform: rotate(180deg) !important; /* IE 9 */
-	-webkit-transform: rotate(180deg) !important; /* Safari and Chrome */
-	box-shadow: none;
-	font-size: 16px;
-}
-
-.subscription-panel [class*="icon-"], .task-panel [class*="icon-"]{
-	color: #999;
-}
-
-.subscription-panel [class*="icon-"]:hover, .task-panel [class*="icon-"]:hover{
-	color: #666;
-}
-.subscription-panel [class*="icon-"]:active, .task-panel [class*="icon-"]:active{
+.resource-panel [class*="icon-"]:active {
 	color: $primary-color;
 }
 
@@ -410,13 +326,6 @@ overflow: hidden;
 	cursor:pointer;
 	font-size: 20px;
 }
-// target first input box in task-form and offset to make room for close button
-.subscription > input[type=text]:first-of-type, .task > input[type=text]:first-of-type {
-	// width: 90%;
-	width: calc(100% - 23px);
-}
-
-
 
 .button-group li {
 	padding: 0 5px 0 0;
@@ -470,7 +379,6 @@ button.disabled, button[disabled], .button.disabled, .button[disabled] {
 .button-group li button:disabled [class*="icon-"]{
  color: gray;
 }
-
 $topbar-link-color-active: $primary-color;
 
 .top-bar{
@@ -488,19 +396,6 @@ border-top: 0px solid $primary-color;
 }
 .top-bar-section ul li {
 	float: left !important;
-}
-
-
-/* iPads (portrait and landscape) ----------- */
-@media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px) {
-	#main-nav:target, #left-nav:target  {
-  width: 50%;
-	}
-	#main-nav:target + .page-wrap, #left-nav:target + .page-wrap {
-	  width: 50%;
-	}
 }
 
 //comment out 'fugly' import below to disable marketing mode

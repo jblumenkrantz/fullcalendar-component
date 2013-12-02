@@ -12,14 +12,13 @@ angular.module('pinwheelApp')
 			};
 		}
 
-
-
 		//open existing calendar for editing
 		$scope.edit = function() {
 			delete $scope.calendar.events;
 			$scope.editCalendar || ($scope.editCalendar = {});
 			angular.copy($scope.calendar, $scope.editCalendar);
-			$scope.editingCalendar = true;
+			$scope.close();
+			$scope.watcher[$scope.calendar.calendar_id].editingCalendar = true;
 		}
 
 		//update existing calendar
@@ -57,14 +56,13 @@ angular.module('pinwheelApp')
 				$scope.calendar.recent = false;
 				$scope.calendar.viewing = false;
 				delete $scope.watcher[$scope.calendar.calendar_id];
-				$scope.cancel();
 				$("#monthCalendar").fullCalendar('refetchEvents');
 			});
 		}
 
 		//cancel editing of calendar
 		$scope.cancel = function() {
-			$scope.editingCalendar = false;
+			$scope.watcher[$scope.calendar.calendar_id].editingCalendar = false;
 		}
 
 		//set if a calendar's events and tasks are visible
@@ -75,7 +73,6 @@ angular.module('pinwheelApp')
 					$scope.calendar = calendar;
 					$("#monthCalendar").fullCalendar("refetchEvents");
 				}
-				
 			});
 		}
 		$scope.isCalendarAdmin = function(calendar){
