@@ -117,6 +117,8 @@
 				ng-click="allDayToggle()"
 				ng-disabled="!formEvent.editable"
 				ng-model="$parent.formEvent.allDay"
+				icon-if-true="icon-checkbox-checked"
+				icon-if-false="icon-checkbox-unchecked"
 				text="All day event"
 			/>
 		</div>
@@ -126,6 +128,8 @@
 			<checkbox
 				ng-click="reminderToggle()"
 				ng-model="$parent.formEvent.has_reminder"
+				icon-if-true="icon-checkbox-checked"
+				icon-if-false="icon-checkbox-unchecked"
 				text="Add Reminder"
 			/>
 		</div>
@@ -135,6 +139,8 @@
 			<checkbox
 				ng-disabled="!formEvent.editable"
 				ng-model="$parent.formEvent.isRepeating"
+				icon-if-true="icon-checkbox-checked"
+				icon-if-false="icon-checkbox-unchecked"
 				text="Repeating"
 			/>
 		</div>

@@ -21,6 +21,8 @@
 					class="resource-checkbox"
 					ng-model="watcher[calendar.calendar_id].viewing"
 					ng-click="setShowState();"
+					icon-if-true="icon-eye"
+					icon-if-false="icon-eye-blocked"
 				/>
 				<div class="resource-data" ng-click="edit()">
 					<strong class="resource-title">

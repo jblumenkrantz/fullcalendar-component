@@ -17,6 +17,7 @@ angular.module('pinwheelApp')
 			delete $scope.calendar.events;
 			$scope.editCalendar || ($scope.editCalendar = {});
 			angular.copy($scope.calendar, $scope.editCalendar);
+			$scope.close();
 			$scope.watcher[$scope.calendar.calendar_id].editingCalendar = true;
 		}
 
@@ -55,7 +56,6 @@ angular.module('pinwheelApp')
 				$scope.calendar.recent = false;
 				$scope.calendar.viewing = false;
 				delete $scope.watcher[$scope.calendar.calendar_id];
-				$scope.cancel();
 				$("#monthCalendar").fullCalendar('refetchEvents');
 			});
 		}

@@ -279,17 +279,19 @@ Use db='true' if the ng-model is directly saved in the database as a TIME type.
 	return {
 		restrict: "E",
 		template: 	"<label class='checkbox'>" +
-						"<span class='icon-checkbox-{{icon}}' aria-hidden='true'></span>{{text}}" +
+						"<span class='{{icon}}' aria-hidden='true'></span>{{text}}" +
 					"</label>",
 		replace: true,
 		scope: {
 			model: "=ngModel",
 			text: "@",
-			clicker: "&ngClick"
+			clicker: "&ngClick",
+			iconIfTrue: "@",
+			iconIfFalse: "@"
 		},
 		link: function(scope, element, attrs) {
 			scope.$watch("model", function(newVal, oldVal) {
-				scope.icon = (newVal) ? 'checked' : 'unchecked';
+				scope.icon = (newVal) ? scope.iconIfTrue : scope.iconIfFalse;
 				if (!angular.equals(newVal, oldVal)) scope.clicker();
 			});
 

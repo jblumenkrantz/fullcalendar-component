@@ -11,7 +11,8 @@ angular.module('pinwheelApp')
 			watcher: '=',
 			user:'=',
 			reminderTypes:"=",
-			reminders:"="
+			reminders:"=",
+			close:"&"
 		},
 		controller: 'SubscriptionDirectiveCtl'
 	}

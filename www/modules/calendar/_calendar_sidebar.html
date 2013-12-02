@@ -1,7 +1,6 @@
 <div class="pane-header scroll-header">
     <span class="pane-title">My Calendars</span>
-    <span ng-hide="addingSubscription" class="icon-plus-alt right" ng-click="add()" aria-hidden="true"></span>
-    <span ng-show="addingSubscription" class="icon-x-altx-alt right" ng-click="cancel()" aria-hidden="true"></span>
+    <span class="icon-plus-alt right" ng-click="add()" aria-hidden="true"></span>
 </div>
 <div ng-show="loading_calendars" class="spinwheel"></div>
 <!-- Calendar Admin box -->
@@ -19,7 +18,7 @@
 					<span aria-hidden="true" class="icon-remove2"></span>
 				</button>
 <!-- 			<confirm
-					button-icon="icon-remove-2"
+					button-icon="icon-remove2"
 					button-class="button radius"
 					header="Delete Calendar Administrator"
 					body="Are you sure you want to delete this calendar adminstrator?"
@@ -56,24 +55,28 @@
 <div scroll-pane class="scroll-pane left">
 	<!-- existing calendars ng-repeat -->
 	<active-subscription
-		ng-repeat="calendar in subscribedCalendars = (calendars | filter:{active: true, subscribed: true} | orderBy:'calendar_name')" 
+		ng-repeat="calendar in subscribedCalendars = (calendars | filter:{active: true, subscribed: true, recent: false} | orderBy:'calendar_name')" 
 		watcher="calendarWatchers"
 		calendar="calendar"
 		user="user"
 		reminder-types="reminderTypes"
-		reminders="reminders[$index]">
+		reminders="reminders[$index]"
+		close="closeAll()">
 	</active-subscription>
 	<!-- / existing calendars ng-repeat -->
 </div>
 
 <!-- ADD CALENDAR SECTION -->
-<div id="add-calendar" class="transition duration-700 slide-drawer show-header full bottom-up" ng-class="{open: addingSubscription}">
+<div id="add-calendar" class="transition duration-700 slide-drawer full bottom-up" ng-class="{open: addingSubscription}">
 	<div scroll-pane class="scroll-pane left">
-		<!-- RECENTLY CREATED/SUBSCRIBED CALENDAR SECTION
-		<div ng-show="recentCalendars.length" class="pane-header small" style="border-top: 1px solid #afafaf;">
-	        <span class="pane-title">Recently Added</span>
-	    </div> -->
-
+		<!-- RECENTLY CREATED/SUBSCRIBED CALENDAR SECTION -->
+		<div style="position: relative; width: 50%; margin-right: 50%;">
+			<div class="pane-header small" style="border-top: 1px solid #afafaf;">
+	        	<span class="pane-title">Recently Added</span>
+    			<span class="icon-x-altx-alt right" ng-click="cancel()" aria-hidden="true"></span>
+    		</div>
+		</div>
+		
 		<!-- recently acquired calendars ng-repeat -->
 		<active-subscription
 			ng-repeat="calendar in recentCalendars = (calendars | filter:{active: true, recent: true, subscribed: true} | orderBy:'calendar_name')"
@@ -82,7 +85,6 @@
 			calendar="calendar"
 			reminder-types="reminderTypes">
 		</active-subscription>
-
 		<!-- / RECENTLY CREATED/SUBSCRIBED CALENDAR SECTION -->
 
 	    <!-- NEW CALENDAR CREATION FORM -->
@@ -113,7 +115,7 @@
 					<!-- / DISPLAY -->
 
 					<!-- EDIT -->
-					<form class="subscription resource-edit" name="newCalendarForm" novalidate>
+					<form name="newCalendarForm" class="subscription resource-edit" novalidate>
 						<!-- Name -->
 						<div class="row" style="padding-top: 1em;">
 							<div class="large-12 columns">
@@ -132,6 +134,8 @@
 								<checkbox
 									ng-model="newCalendar.public"
 									text="This is a public calendar" 
+									icon-if-true="icon-checkbox-checked"
+									icon-if-false="icon-checkbox-unchecked"
 								/>
 							</div>
 						</div>
@@ -144,11 +148,11 @@
 								<ul class="button-group even-2">
 									<li>
 										<button class="button radius" ng-click="cancelNew()">
-											<span aria-hidden="true" class="icon-remove-2"></span> <!-- unsubscribe -->
+											<span aria-hidden="true" class="icon-remove2"></span> <!-- unsubscribe -->
 										</button>
 									</li>
 									<li style="padding-right: 0;">
-										<button ng-disabled="newCalendarForm.$invalid" class="button radius" ng-click="update()">
+										<button class="button radius" ng-click="save()">
 											<span aria-hidden="true" class="icon-checkmark"></span> <!-- save -->
 										</button>
 									</li>

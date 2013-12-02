@@ -459,13 +459,13 @@ form input.ng-invalid {
 }
 .reminders .icon-pencil,
 .reminders .icon-checkmark,
-.reminders .icon-remove-2,
+.reminders .icon-remove2,
 .reminders .icon-x-altx-alt {
 	position: absolute;
 	top: 5px;
 }
 .reminders .icon-checkmark,
-.reminders .icon-remove-2 {
+.reminders .icon-remove2 {
 	right: 11px;
 }
 .reminders .icon-x-altx-alt,
