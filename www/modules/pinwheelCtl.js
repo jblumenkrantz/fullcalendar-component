@@ -170,5 +170,15 @@ angular.module('pinwheelApp')
 			}
 			return (expectBoolean)? permission.definitive:permission;
 		}
+		$scope.toggle_drawer = function(){
+			if($(".left-nav").width() > 0){
+				$(".page-wrap").css('width','100%');
+				$(".left-nav").css('width','0px');
+			}else{
+				$(".page-wrap").css('width','calc(100% - 200px)');
+				$(".left-nav").css('width','200px');
+			}
+			$timeout(function(){$('#monthCalendar').fullCalendar('render')},700); // Timout must be the same duration as the transiton in milliseconds.
+		}
   });
 
