@@ -1,7 +1,11 @@
 'use strict';
 
 angular.module('pinwheelApp')
-  .controller('HallpassCtl', function ($scope, $http, Hallpass, Facilities, OrgUserList) {
+  .controller('HallpassCtl', function ($scope, $location, $timeout, $http, Hallpass, Facilities, OrgUserList) {
+
+  	  	$scope.activeTab = {activePasses:true};
+  	  	angular.element("#hallpass-tabs").find("dd[settings-tab='activePasses']").addClass("active").siblings().removeClass("active");
+  	  	$scope.viewing_history = [];
   	  	Hallpass.query({}, function(hallpasses){
 			$scope.hallpasses = hallpasses;
 			  	console.warn(['Hallpasses loaded',$scope.hallpasses]);
@@ -13,6 +17,10 @@ angular.module('pinwheelApp')
 
 		$scope.$watch('user',function(){
 			if($scope.user){
+				// Check user permissions
+				if(!$scope.checkPermission('view_hallpass_history',true)){
+  					$location.path('calendar');
+  				}
 				OrgUserList.query({id:$scope.user.permissions[0].org_id}, function(users){
 					$scope.orgUsers = users;
 					console.warn(['OrgUsers loaded',$scope.orgUsers]);
@@ -38,5 +46,32 @@ angular.module('pinwheelApp')
 			pass.$save({}, function(hallpass){
 				$scope.hallpasses.push(hallpass);
 			});
+		}
+
+		$scope.viewUserHistory = function(pass){
+			if(!$scope.activeTab.hasOwnProperty(pass.pass_holder_user_id)){
+				$scope.viewing_history.push(pass);
+			}
+			angular.element("#hallpass-tabs").children().removeClass("active");
+			$timeout(function(){angular.element("#hallpass-tabs").find("dd[settings-tab="+pass.pass_holder_user_id+"]").addClass("active")});
+			angular.forEach($scope.activeTab, function(value, section){
+				//set all activeTab properties to false
+				$scope.activeTab[section] = false;
+			});
+			$scope.activeTab[pass.pass_holder_user_id] = true;
+			
+		}
+		$scope.closeUserHistory = function(pass){
+			angular.forEach($scope.viewing_history, function(user,key){
+				if(user.pass_holder_user_id == pass.pass_holder_user_id){
+					$scope.viewing_history.splice(key,1);
+					delete $scope.activeTab[user.pass_holder_user_id];
+				}
+			});
+			angular.forEach($scope.activeTab, function(value, section){
+				 //set all activeTab properties to false 
+				$scope.activeTab[section] = false;
+			});
+			$scope.activeTab.activePasses = true;
 		}
   });

@@ -15,10 +15,10 @@ class Event extends PinwheelModelObject
 	public $last_modified;
 	public $version;
 	public $allDay;
-  public $stops_repeating;
-  public $repeat_by;
-  public $repeat_on;
-  public $repeat_interval;
+	public $stops_repeating;
+	public $repeat_by;
+	public $repeat_on;
+	public $repeat_interval;
 	public $mins_before;
 	public $absolute_date;
 	public $reminder_type;
