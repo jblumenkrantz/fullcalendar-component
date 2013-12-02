@@ -55,7 +55,7 @@
 <div scroll-pane class="scroll-pane left">
 	<!-- existing calendars ng-repeat -->
 	<active-subscription
-		ng-repeat="calendar in subscribedCalendars = (calendars | filter:{active: true, subscribed: true, recent: false} | orderBy:'calendar_name')" 
+		ng-repeat="calendar in subscribedCalendars = (calendars | filter:{active: true, subscribed: true, recent: false} | orderBy:'calendar_name')"
 		watcher="calendarWatchers"
 		calendar="calendar"
 		user="user"
@@ -79,7 +79,7 @@
 		
 		<!-- recently acquired calendars ng-repeat -->
 		<active-subscription
-			ng-repeat="calendar in recentCalendars = (calendars | filter:{active: true, recent: true, subscribed: true} | orderBy:'calendar_name')"
+			ng-repeat="calendar in recentCalendars = (calendars | filter:{active: true, subscribed: true, recent: true} | orderBy:'calendar_name')"
 			watcher="calendarWatchers"
 			user="user"
 			calendar="calendar"

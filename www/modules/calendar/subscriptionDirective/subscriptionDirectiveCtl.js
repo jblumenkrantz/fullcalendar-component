@@ -67,9 +67,11 @@ angular.module('pinwheelApp')
 
 		//set if a calendar's events and tasks are visible
 		$scope.setShowState = function() {
+			var recent = $scope.calendar.recent;
 			$scope.calendar.viewing = $scope.watcher[$scope.calendar.calendar_id].viewing;
 			$scope.calendar.$update({id: $scope.calendar.calendar_id}, function(calendar) {
 				if(!calendar.hasOwnProperty('errno')){
+					calendar.recent = recent;
 					$scope.calendar = calendar;
 					$("#monthCalendar").fullCalendar("refetchEvents");
 				}
