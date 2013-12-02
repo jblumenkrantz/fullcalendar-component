@@ -133,16 +133,16 @@ class Event extends PinwheelModelObject
 							}
 							break;
 						case 'WEEKLY':
-							if(static::weeksSince($onDate, $repeater->start)==0 || static::weeksSince($onDate, $repeater->start)%$repeater->repeat_interval == 0){
-								if(strtoupper(date('D', $onDate))==$repeater->repeat_by_day){
-									$daysSince = static::daysSince($onDate, $repeater->start);
-									$eventStart = strtotime("+$daysSince day", $repeater->start);
+							if(
+									($onDate > $repeater->start && $onDate <= $repeater->repeat_stop) &&
+									(static::weeksSince($onDate, $repeater->start)%$repeater->repeat_interval == 0) &&
+									(strtoupper(date('D', $onDate))==$repeater->repeat_by_day)
+								){
+									echo(date("m-d-Y", $onDate)."\n");
+									$eventStart = $onDate;
 									$eventEnd   = $start+($repeater->start-$repeater->end);
 									$events[] = Event::makeFrom($repeater, array('start'=>$eventStart, 'end'=>$eventEnd));
 								}
-								// check if this is a day in that week that applies
-								// then add the event
-							}
 							break;
 						case 'MONTHLY':
 							if(weeksSince($repeater->start)%$repeater->repeat_interval == 0){

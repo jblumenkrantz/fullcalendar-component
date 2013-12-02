@@ -117,10 +117,9 @@
 		})->
 		the("right number of events should come back", function($scene){
 			expect(sizeof($scene->events))->toBe(13);
+		})->
+		the("first week to be at the right time", function($scene){
+			expect(TestEvent::timeOf($scene->events[0]->start))->toBe("9/18/2013 5:00PM");
 		});
 	});
-
-
-	
-
 ?>
