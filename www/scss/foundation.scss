@@ -496,6 +496,7 @@ border-top: 0px solid $primary-color;
     width: 100%;
     font-size: 14px;
     text-transform: uppercase;
+    text-shadow: 1px 1px 2px #000;
     &:hover, &:focus {
       background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.2));
     }
@@ -506,7 +507,7 @@ border-top: 0px solid $primary-color;
     	background: rgba(#880000, .3) !important;
 	  }
 	  &.logout:hover, &.logout:focus {
-	     background: rgba(#880000, .8) !important;
+	     background: rgba(#880000, .7) !important;
 	  }
    	[class*="icon-"] {
     	text-shadow: 1px 1px 2px #000;
@@ -520,13 +521,18 @@ border-top: 0px solid $primary-color;
     top: 0;
     right: 0;
     height: 100%;
-    width: 34px;
+    // width: 34px;
     background: linear-gradient(left, rgba(black, 0), rgba(black, 0.4));
   }
   a.locked {
   	// background: #999;
   	color: #999;
   }
+  a span:nth-of-type(2) { // select 2nd span inside to v. center app title
+    position: relative;
+		top: -9px;
+		font-size: 18px !important;
+    }
   label {color:#fff; white-space: nowrap !important;}
   h5 {color: #fff; margin-left: 20px;}
   form * {
