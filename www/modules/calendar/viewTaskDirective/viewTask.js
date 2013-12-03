@@ -21,17 +21,16 @@ angular.module('pinwheelApp')
 		},
 		controller: function($scope, $element, $attrs, $routeParams, Task){
 
-			$scope.editTask = false;
-
 			$scope.edit = function() {
 				$scope.close();
 				$scope.taskSource = $scope.task.source;
 				delete $scope.task.source;
 				$scope.editTask = new Task($scope.task);
+				$scope.task.editing = true;
 			}
 
 			$scope.cancel = function() {
-				$scope.editTask = false;
+				$scope.task.editing = false;
 			}
 
 			$scope.update = function() {

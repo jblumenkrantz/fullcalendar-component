@@ -1,6 +1,6 @@
 <div
 	resource-panel
-	ng-class="{'open':editTask!=false, 'close':editTask==false}"
+	ng-class="{'open':task.editing, 'close':!task.editing}"
 	class="resource-panel existing"
 	ng-style="{background: calendarWatchers[task.calendar_id].color}">
 	<div class="resource-gradient">

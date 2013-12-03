@@ -1,7 +1,7 @@
 <div
 	resource-panel
 	class="resource-panel existing"
-	ng-class="{'open':editCalendar!=false, 'close':editCalendar==false}"
+	ng-class="{'open':calendar.editing, 'close':!calendar.editing}"
 	ng-style="{background:calendar.color}">
 	<div class="resource-gradient">
 		<div class="resource-header pane-header small">

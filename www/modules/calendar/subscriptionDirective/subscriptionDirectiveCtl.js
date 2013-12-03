@@ -13,13 +13,12 @@ angular.module('pinwheelApp')
 			};
 		}
 
-		$scope.editCalendar = false;
-
 		//open existing calendar for editing
 		$scope.edit = function() {
 			delete $scope.calendar.events;
 			$scope.editCalendar = angular.extend({}, $scope.calendar);
 			$scope.close(); //close all other open calendars
+			$scope.calendar.editing = true;
 		}
 
 		//update existing calendar
@@ -63,7 +62,7 @@ angular.module('pinwheelApp')
 
 		//cancel editing of calendar
 		$scope.cancel = function() {
-			$scope.editCalendar = false;
+			$scope.calendar.editing = false;
 		}
 
 		//set if a calendar's events and tasks are visible
