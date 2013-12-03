@@ -21,7 +21,6 @@ angular.module('pinwheelApp')
 
 		$scope.formEvent = new Event($scope.defaultEvent());
 		$scope.useReminderType = 'relative';
-		$scope.formats = ['MM/d/yyyy @ h:mm a', 'o/d/Y @ h:M a', 'm/d/yy'];
 		
 		//open form for adding of new event
 		$scope.add = function(defaults) {
@@ -215,6 +214,7 @@ angular.module('pinwheelApp')
 				$scope.formEvent.end = new Date($filter('date')(e, format)); //get date object set to current hour + 1
 			}
 		}
+
 		$scope.previous = function() {
 			$scope.pinwheel.fullCalendar('prev');
    			$scope.routeDate = $scope.pinwheel.fullCalendar('getDate');

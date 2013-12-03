@@ -10,9 +10,9 @@
 				<!-- <span aria-hidden="true" class="icon-poop-1"></span> -->
 			</li>
 			<li>
-				<span aria-hidden="true" class="icon-arrow-left-2" ng-click="previous()"></span></a>
+				<span aria-hidden="true" class="icon-arrow-left2" ng-click="previous()"></span></a>
 				<span class="month-switcher">{{routeDate | date: 'MMMM y'}}</span>
-				<span aria-hidden="true" class="icon-arrow-right-2" ng-click="next()"></span>
+				<span aria-hidden="true" class="icon-arrow-right2" ng-click="next()"></span>
 			</li>
 			<li class="text-right">
 				<span class="icon-plus-alt" ng-click="quickAdd()" aria-hidden="true"></span>
@@ -24,12 +24,12 @@
     </header>
 
     <!-- event quickAdd form -->
-	<div id="quickEvent" class="transition-07 slide-drawer top-down" ng-class="{open:quickAdding}">
+	<div id="quickEvent" class="transition duration-700 slide-drawer top-down" ng-class="{open:quickAdding}">
 		<div ng-include src="'modules/calendar/_quickadd_event_form.html'"></div>
 	</div>
 
 	<!-- event add/edit form -->
-	<div id="advancedEvent" class="transition-07 slide-drawer top-down" ng-class="{open:(addingEvent || editingEvent)}">
+	<div id="advancedEvent" class="transition duration-700 slide-drawer top-down" ng-class="{open:(addingEvent || editingEvent)}">
 		<div ng-include src="'modules/calendar/_event_form.html'"></div>
 	</div>
 

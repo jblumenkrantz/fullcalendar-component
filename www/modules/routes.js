@@ -24,6 +24,14 @@ angular.module('pinwheelApp')
 				templateUrl: 'modules/login/login.html',
 				controller: 'LoginCtl'
 			})
+			.when("/hallpass", {
+				templateUrl: 'modules/hallpass/hallpass.html',
+				controller: 'HallpassCtl'
+			})
+			.when("/settings", {
+				templateUrl: 'modules/settings/settings.html',
+				controller: 'SettingsCtl'
+			})
 			.when("/new_user", {
 				templateUrl: 'modules/new_user/new_user.html',
 				controller: 'NewUserCtl'

@@ -4,6 +4,7 @@ angular.module('pinwheelApp')
 .directive('availableSubscription', function() {
 	return {
 		restrict: 'E',
+		replace: true,
 		templateUrl: 'modules/calendar/subscriptionDirective/_view_available_subscription.html',
 		scope: {
 			calendar: '=',

@@ -1,12 +1,11 @@
 'use strict';
 
 angular.module('pinwheelApp')
-  .controller('PinwheelCtl', function ($scope, $location, $http, $timeout, $routeParams, Calendar, User, localStorage, Event, Task, Timezones, ContactPoints, $route, DeviceService) {
+  .controller('PinwheelCtl', function ($scope, $location, $http, $timeout, $routeParams, Calendar, User, localStorage, Event, Task, Timezones, ContactPoints, $route, DeviceService, ReminderService) {
 		$scope.calendarWatchers = {};
 		$scope.reminders = {};
 
 		$scope.device = DeviceService;
-
 		$scope.calendarColor = function(item) {
 			return $scope.calendarWatchers[item.calendar_id].color;
 		}
@@ -47,25 +46,6 @@ angular.module('pinwheelApp')
 				Calendar.query({id: 'all'}, function(calendars){
 					$scope.loading_calendars = false;
 					$scope.calendars = calendars;
-					// IF not calendar creator OR NOT calendar Admin do not allow event drag/drop and resizing
-					/*angular.forEach(calendars, function(calendar){
-						if(!calendar.calendar_admin || !(calendar.creator_id == $scope.user.user_id)){
-							if(calendar.creator_id != $scope.user.user_id){
-								angular.forEach(calendar.events, function(event){
-									event.editable = false;
-									console.warn(event);
-								});
-							}
-						}
-					});*/
-					/*Event.query({id: 'all'}, function(events){
-						$scope.loading_events = false;
-						$scope.events = events;
-						Task.query({id: 'all'}, function(tasks){
-							$scope.loading_tasks = false;
-							$scope.tasks = tasks;
-						});
-					});*/
 				});
 			}, function(error){
 				// TODO: update this and other requests
@@ -82,15 +62,22 @@ angular.module('pinwheelApp')
 		$scope.init();
 
 		//list of reminder types for use in reminder <select ng-model='reminder_type'> 
-		$scope.reminderTypes = [
-			{id: 0, name: "Minutes before", type: "relative"},
-			{id: 1, name: "Hours before", type: "relative"},
-			{id: 2, name: "Days before", type: "relative"},
-			{id: 4, name: "The same day at:", type: "absolute"},
-			{id: 5, name: "The day before at:", type: "absolute"},
-			{id: 6, name: "Days before at:", type: "absolute"},
-			{id: 3, name: "On date:", type: "both"},
-			{id: 7, name: "No reminder", type: "both"}
+		$scope.reminderTypes = ReminderService.reminderTypes;
+		//DUMMY REMINDERS
+		$scope.reminders = [
+			[
+				{reminder_pref_id: "123", reminder_type: 0, mins_before: 30},
+				{reminder_pref_id: "456", reminder_type: 1, mins_before: 120},
+				{reminder_pref_id: "789", reminder_type: 2, mins_before: 1440}
+			],
+			[
+				{reminder_pref_id: "123", reminder_type: 0, mins_before: 30},
+				{reminder_pref_id: "456", reminder_type: 1, mins_before: 120}
+			],
+			[
+				{reminder_pref_id: "123", reminder_type: 0, mins_before: 30}
+			],
+			[]
 		];
 
 		Timezones.query({}, function(timezones){
@@ -173,6 +160,32 @@ angular.module('pinwheelApp')
 				$('#monthCalendar').fullCalendar('changeView','month');
 			}
 		};
-		
+		$scope.checkPermission = function(p,expectBoolean){
+			// If expectBoolean is true the function will only return a boolean value 
+			// otherwise it will return an object with the definitive boolean value 
+			// alongside an array of orgs that have that permission set to true 
+			var permission = {};
+			permission.orgs = [];
+			permission.definitive = false;
+			if($scope.user != undefined){
+				angular.forEach($scope.user.permissions, function(v,k){
+					if(v[p]){
+						permission.definitive = true;
+						permission.orgs.push({org_name:v.org_name, org_id:v.org_id});
+					}
+				});
+			}
+			return (expectBoolean)? permission.definitive:permission;
+		}
+		$scope.toggle_drawer = function(){
+			if($(".left-nav").width() > 0){
+				$(".page-wrap").css('width','100%');
+				$(".left-nav").css('width','0px');
+			}else{
+				$(".page-wrap").css('width','calc(100% - 200px)');
+				$(".left-nav").css('width','200px');
+			}
+			$timeout(function(){$('#monthCalendar').fullCalendar('render')},700); // Timout must be the same duration as the transiton in milliseconds.
+		}
   });
 

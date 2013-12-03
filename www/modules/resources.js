@@ -23,6 +23,51 @@ angular.module('pinwheelApp')
 	.factory('NewUser', function($resource){
 		return $resource('/api/v1/user/new/', {}, {post: {method:'POST'}});
 	})
+	.factory('Facilities', function($resource){
+		return $resource('/api/v1/facilities/');
+	})
+	.factory('OrgUserList', function($resource){
+		return $resource('/api/v1//hallpass/userlist/:id');
+	})
+	.factory('Hallpass', function($resource){
+		return $resource('/api/v1/hallpass/:id', {},
+			{		
+				save: {
+					method:'POST',
+					isArray: false,
+					transformResponse: function(data){
+						var hallpass = angular.fromJson(data);
+						hallpass.out_time = hallpass.out_time*1000;
+						hallpass.in_time = (hallpass.in_time)? hallpass.in_time*1000:null;
+				
+						return hallpass;
+					}
+				},
+				update: {
+					method:'PUT',
+					transformResponse: function(data){
+						var hallpass = angular.fromJson(data);
+						hallpass.out_time = hallpass.out_time*1000;
+						hallpass.in_time = (hallpass.in_time)? hallpass.in_time*1000:null;
+					
+						return hallpass;
+					}
+				},
+				query: {
+					method: 'GET',
+					isArray: true,
+					transformResponse: function(data){
+						var hallpasses = angular.fromJson(data);
+						angular.forEach(hallpasses, function(pass,k){
+							hallpasses[k].out_time = pass.out_time*1000;
+							hallpasses[k].in_time = (pass.in_time)? pass.in_time*1000:null;
+						});
+						return hallpasses;
+					}
+				},
+			}
+		);
+	})	
 	.factory('Task', function($resource, ReminderService){
 		return $resource('/api/v1/task/:id/:version', {},
 			{
@@ -198,6 +243,7 @@ angular.module('pinwheelApp')
 						var calendars = angular.fromJson(data);
 						angular.forEach(calendars, function(calendar, k) {
 							(calendars[k].reminder_pref_id != null && ReminderService.setReminderProperties(calendars[k]));
+							calendars[k].recent = false;
 							if(!calendars[k].viewing){
 								calendars[k].eventStore=calendars[k].events;
 								delete calendars[k].events

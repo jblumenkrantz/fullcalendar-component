@@ -20,8 +20,20 @@ angular.module('pinwheelApp')
 
 		//open form for new task adding
 		$scope.add = function() {
+			$scope.closeAll();
 			$scope.newTask.calendar_id = $scope.user.settings.default_calendar;
-			$scope.addingTask = true;
+			$scope.newTask.color = $scope.calendarWatchers[$scope.newTask.calendar_id].color;
+			$scope.newTask.editing = true;
+		}
+
+		$scope.closeAll = function() {/*
+			$scope.newTask.editing = false;
+			angular.forEach($scope.$$childHead.visibleTasks, function(taskObj, taskID) {
+				if (taskObj.editing) {
+					taskObj.editing = false;
+					return;
+				}
+			});*/
 		}
 		
 		//save new task
@@ -39,7 +51,7 @@ angular.module('pinwheelApp')
 
 		//cancel new task form
 		$scope.cancel = function() {
-			$scope.addingTask = false;
+			$scope.newTask.editing = false;
 			$scope.reset();
 		}
 

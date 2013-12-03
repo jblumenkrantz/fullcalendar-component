@@ -67,9 +67,11 @@
 
 	<!-- build:css({.tmp,app}) styles/main.css -->
 	<link rel="stylesheet" href="assets/styles/main.css">
+	<link rel="stylesheet" href="assets/styles/transitions.css">
 	<link rel="stylesheet" href="assets/styles/ios.css">
 	<link rel="stylesheet" href="assets/styles/glyphs.css">
 	<link rel="stylesheet" href="assets/styles/foundation.css">
+	<link rel="stylesheet" href="assets/styles/resource-panel.css">
 	
 	<link rel="stylesheet" href="assets/styles/datetimeentry.css">
 	<link rel="stylesheet" href="assets/styles/spectrum.css"> 
@@ -77,6 +79,7 @@
 	<link rel="stylesheet" href="assets/styles/ui-datepicker-custom.css">
 	<link rel="stylesheet" href="bower_components/sdi-fullcalendar/fullcalendar.css">
 	<link rel="stylesheet" href="bower_components/sdi-fullcalendar/fullcalendar.print.css">
+	<link rel="stylesheet" href="bower_components/select2/select2.css">
 	<!-- endbuild -->
 </head>
   <body ng-app="pinwheelApp">
@@ -91,37 +94,59 @@
 
 	<!-- Add your site or application content here -->
 	<div ng-controller="PinwheelCtl" class="{{device.describeDevice(true)}}">
-		<!-- header -->
-		<nav id="mainHeader" ng-include src="'modules/_topbar.html'"></nav>
-		<!-- / header -->
+		<nav class="left-nav" id="apps">
+			<a ng-href="#/calendar"><span aria-hidden="true" class="icon-calendar"> </span>Calendar </a>
+			<a ng-href="#/messaging" class="locked"><span aria-hidden="true" class="icon-bubble-notification"> </span>Reminders </a>
+			<a ng-show="checkPermission('view_hallpass_history',true)" ng-href="#/hallpass"><span aria-hidden="true" class="icon-vcard"> </span>Hall Pass </a>
+			<a href="#" ng-href="#/handbook" class="locked"><span aria-hidden="true" class="icon-book"> </span>Handbook</a>
+			<a ng-href="#/reference" class="locked"><span aria-hidden="true" class="icon-books"> </span>Resources </a>
+			<a ng-href="#/facilities" class="locked"><span aria-hidden="true" class="icon-building"> </span>Facilities </a>
+			<a ng-href="#/settings" class="locked"><span aria-hidden="true" class="icon-cog"> </span>Settings </a>
+			<a ng-click="logout()" class="logout"><span aria-hidden="true" class="icon-spam"> </span>Logout</a>
+		<!-- 	<button class="small button alert" >
+			<a href="#" ng-href="#/settings"  class=""><span aria-hidden="true" class="icon-cog"> </span>Settings </a>
+			<button class="small button alert" ng-click="logout()">
+				<span aria-hidden="true" class="icon-spam" style="text-shadow: none;"> </span> Log Out
+			</button> -->
+		</nav>
+		<!-- .page-wrap gets wrapped around ALL content including topbar/menubar -->
+		<div class="page-wrap">
+			<!-- global confirm dialog -->
+			<div ng-include src="'modules/confirm/confirm.html'"></div>
+			<!-- / confirm dialog -->
 
-		<!-- main content -->
-		<!-- route pane -->
-		<div class="large-12 columns" style="padding: 0;" ng-view=""></div>
-		<!-- / route pane -->
-		<!-- / main content -->
+			<!-- header -->
+			<nav id="mainHeader" ng-include src="'modules/_topbar.html'"></nav>
+			<!-- / header -->
+			<div class="outer-container">
+				<!-- main content -->
+				<!-- route pane -->
+				<div class="large-12 columns" style="padding: 0;" ng-view=""></div>
+				<!-- / route pane -->
+				<!-- / main content -->
 
-        <!-- task view -->
-        <div
-            ng-controller="TaskCtl"
-            id="tasks"
-            style="height: 100%; overflow: hidden; right: 0px; z-index: 1;"
-            class="small-12 large-2 columns drawer"
-            ng-include src="'modules/calendar/_task_sidebar.html'">
-        </div>
-        <!-- / task view -->
+				<!-- task view -->
+				<div
+					ng-controller="TaskCtl"
+					id="tasks"
+					style="height: 100%; z-index: 1; right: 0px;"
+					class="small-12 large-2 columns drawer"
+					ng-include src="'modules/calendar/_task_sidebar.html'">
+				</div>
+				<!-- / task view -->
 
-        <!-- subscription view  gets pulled 10 columns from it's original position, all the way to the left. -->
-        <div
-            ng-controller="SubscriptionCtl"
-            id="my-calendars"
-            style="height: 100%; overflow: hidden; left: 0px; z-index: 2;"
-            class="small-12 large-2 columns drawer"
-            ng-include src="'modules/calendar/_calendar_sidebar.html'">
-        </div>
-        <!-- / subscription view -->
-	</div>
-	<!-- / application content -->
+				<!-- subscription view  gets pulled 10 columns from it's original position, all the way to the left. -->
+				<div
+					ng-controller="SubscriptionCtl"
+					id="my-calendars"
+					style="height: 100%; z-index: 1;"
+					class="small-12 large-2 columns drawer"
+					ng-include src="'modules/calendar/_calendar_sidebar.html'">
+				</div>
+				<!-- / subscription view -->
+			</div> <!-- / outer container --> 
+		</div> <!-- /page_wrap -->
+	</div> <!-- / application content -->
 
 	<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 	<script>
@@ -143,8 +168,8 @@
 		}
 		Date.prototype.setTimeByString = function(str) {
 			var parts = str.match(/(\d+)\.(\d+) (\w+)/),
-    			hours = /am/i.test(parts[3]) ? parseInt(parts[1], 10) : parseInt(parts[1], 10) + 12,
-    			minutes = parseInt(parts[2], 10);
+				hours = /am/i.test(parts[3]) ? parseInt(parts[1], 10) : parseInt(parts[1], 10) + 12,
+				minutes = parseInt(parts[2], 10);
 			
 			this.setHours(hours);
 			this.setMinutes(minutes);
@@ -170,6 +195,9 @@
 	<script src="bower_components/angular-animate/angular-animate.min.js"></script>
 	<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 	<script src="bower_components/sdi-angular-ui-calendar/src/calendar.js"></script>
+	<script src="bower_components/angular-ui-select2/src/select2.js"></script>
+	<script src="bower_components/select2/select2.js"></script>
+
 	<script src="assets/js/datetimeentry/datetimeentry.min.js"></script>
 	<script src="assets/js/spectrum/spectrum.min.js"></script>
 	<script src="assets/js/jquery.ui.touch-punch.min.js"></script>
@@ -188,6 +216,7 @@
 	<script src="modules/reset_password/resetPasswordCtl.js"></script>
 	<script src="modules/activate_contact_point/activateContactPointCtl.js"></script>
 	<script src="modules/calendar/taskCtl.js"></script>
+	<script src="modules/hallpass/hallpassCtl.js"></script>
 	<script src="modules/calendar/eventCtl.js"></script>
 	<script src="modules/calendar/subscriptionCtl.js"></script>
 	<script src="modules/calendar/calendarCtl.js"></script>
@@ -204,15 +233,15 @@
 	<script src="modules/calendar/subscriptionDirective/activeSubscription.js"></script>
 	<script src="modules/calendar/subscriptionDirective/availableSubscription.js"></script>
 	<script src="modules/calendar/subscriptionDirective/subscriptionDirectiveCtl.js"></script>
+	<script src="modules/reminders/reminderService.js"></script>
+	<script src="modules/reminders/reminderDirective.js"></script>
 	<script src="modules/confirm/confirmCtl.js"></script>
 	<script src="modules/reference/referenceCtl.js"></script>
 	<script src="modules/messaging/messagingCtl.js"></script>
 	<script src="modules/handbook/handbookCtl.js"></script>
-	<script src="modules/settings/settingsMenu.js"></script>
+	<script src="modules/settings/settingsTabs.js"></script>
 	<script src="modules/settings/settingsCtl.js"></script>
-	<script src="modules/settings/settingsModal.js"></script>
 	<script src="modules/quickAddParser.js"></script>
-	<script src="modules/reminderService.js"></script>
 	<script src="modules/deviceService.js"></script>
 	<script src="modules/interfaceDirectives.js"></script>
 	<script src="modules/contact_points/contactPoint.js"></script>

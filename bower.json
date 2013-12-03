@@ -16,7 +16,9 @@
     "angular-dragdrop": "~1.0.4",
     "sdi-angular-ui-calendar": "latest",
     "sdi-fullcalendar": "latest",
-    "sdi-jquery-ui": "latest"
+    "sdi-jquery-ui": "latest",
+    "angular-ui-select2": "~0.0.2",
+    "sdi-select2": "~3.4.5"
   },
   "devDependencies": {
     "angular-mocks": "latest",
