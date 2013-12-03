@@ -4,19 +4,21 @@
 			<h1>LOGIN</h1>
 		</div>
 	</div>
-	<div class="row">
-		<div class="large-6 large-centered columns">
-			<input type="text" autocorrect="off" autocapitalize="off" placeholder="user name" ng-model="username" />
+	<form ng-submit="authenticate()">
+		<div class="row">
+			<div class="large-6 large-centered columns">
+				<input type="text" autocorrect="off" autocapitalize="off" placeholder="user name" ng-model="username" />
+			</div>
+			<div class="large-6 large-centered columns">
+				<input type="password" placeholder="password" ng-model="password" />
+			</div>
 		</div>
-		<div class="large-6 large-centered columns">
-			<input type="password" placeholder="password" ng-model="password" />
+		<div class="row">
+			<div class="large-6 large-centered end columns">
+				<input type='submit' class="expand small button" ng-click="authenticate()" value="Login">
+			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div class="large-6 large-centered end columns">
-			<div class="expand small button" ng-click="authenticate()" >Login</div>
-		</div>
-	</div>
+	</form>
 	<div class="row">
 		<div class="large-6 large-centered end columns">
 			<div class="expand small button" ng-click="showNewUserForm()" >Create New Account</div>
