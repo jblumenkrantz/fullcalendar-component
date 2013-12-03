@@ -135,7 +135,7 @@ class Event extends PinwheelModelObject
 							case 'WEEKLY':
 								$by_day = explode(",", $repeater->repeat_by_day);
 								if(
-										(static::weeksSince($onDate, $repeater->start)%$repeater->repeat_interval == 0) &&
+										(static::weeksSince($repeater->start, $onDate)%$repeater->repeat_interval == 0) &&
 										(in_array(strtoupper(date('D', $onDate)), $by_day))
 									){
 										$eventStart = strtotime("+".($daysSince+1)." day", $repeater->start);
@@ -195,6 +195,11 @@ class Event extends PinwheelModelObject
 	}
 
 	static protected function weeksSince($start, $end){
+		if($start > $end){
+			$tmp = $end;
+			$end = $start;
+			$start = $tmp;
+		}
 		$startDaysSinceSunday = +(date('N', $start));
 		if($startDaysSinceSunday!=7){
 			$start = strtotime("-$startDaysSinceSunday days", $start);

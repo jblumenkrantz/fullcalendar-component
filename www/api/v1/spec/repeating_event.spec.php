@@ -8,51 +8,6 @@
 
 	Fixture::at('spec/fixtures');
 
-	Scenario::when("testing ancillary methods for repeating events", function($then){
-		$then->beforeEach("when altering a repeating event", function($scene){
-			$eventList    = Fixture::get('events', true);
-			$updateWith   = array("start"=>"frank", "end"=>"paul");
-			$baseEvent    = TestEvent::eventFromFixture($eventList['repeat_daily']);
-			$scene->event = TestEvent::makeFrom($baseEvent, $updateWith);
-		})->
-		the("event should be of the proper type", function($scene){
-			expect($scene->event)->toBeTypeOf('TestEvent');
-		})->
-		the("attributes should be updated", function($scene){
-			expect($scene->event->start)->toBe('frank');
-			expect($scene->event->end)->toBe('paul');
-		})->
-		the("repeat related attributes should be removed", function($scene){
-			expect($scene->event)->not()->toHaveProperty('repeat_interval');
-			expect($scene->event)->not()->toHaveProperty('repeat_frequency');
-			expect($scene->event)->not()->toHaveProperty('repeat_stop');
-			expect($scene->event)->not()->toHaveProperty('repeat_by_day');
-			expect($scene->event)->not()->toHaveProperty('repeat_by_month');
-			expect($scene->event)->not()->toHaveProperty('repeat_by_monthday');
-		});
-
-		$then->beforeEach("finding how many weeks have passed between two dates", function($scene){
-			$scene->date = array();
-			$scene->date[] = strtotime("10/1/2013");  // Tuesday
-			$scene->date[] = strtotime("10/3/2013");  // Thursday
-			$scene->date[] = strtotime("10/7/2013");  // Monday
-			$scene->date[] = strtotime("10/10/2013"); // Thursday
-			$scene->date[] = strtotime("10/17/2013"); // Thursday
-			$scene->date[] = strtotime("10/20/2013"); // Sunday
-			$scene->date[] = strtotime("10/27/2013"); // Sunday
-		})->
-		the("number should change based on the sunday/monday transitions that have passed", function($scene){
-			expect(TestEvent::findWeeksSince($scene->date[0], $scene->date[1]))->toBe(0);
-			expect(TestEvent::findWeeksSince($scene->date[0], $scene->date[2]))->toBe(1);
-			expect(TestEvent::findWeeksSince($scene->date[1], $scene->date[2]))->toBe(1);
-			expect(TestEvent::findWeeksSince($scene->date[0], $scene->date[6]))->toBe(4);
-			expect(TestEvent::findWeeksSince($scene->date[5], $scene->date[6]))->toBe(1);
-			expect(TestEvent::findWeeksSince($scene->date[2], $scene->date[4]))->toBe(1);
-			expect(TestEvent::findWeeksSince($scene->date[2], $scene->date[5]))->toBe(2);
-			expect(TestEvent::findWeeksSince($scene->date[2], $scene->date[6]))->toBe(3);
-		});
-	});
-
 	Scenario::when("specs for getUserEventsForCalendar", function($then){
 		$then->beforeEach("with two static events", function($scene){
 			$scene->eventList  = Fixture::get('events', true);
