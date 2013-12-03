@@ -427,6 +427,7 @@ form input.ng-invalid {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+	white-space: nowrap;
 }
 
 .reminders table {

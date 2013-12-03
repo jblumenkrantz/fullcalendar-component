@@ -10,6 +10,7 @@ angular.module('pinwheelApp')
 			return $scope.calendarWatchers[item.calendar_id].color;
 		}
 
+
 		$scope.isCalendarShowing = function(item) {
 			return $scope.calendarWatchers[item.calendar_id] && $scope.calendarWatchers[item.calendar_id].viewing;
 		}
@@ -59,7 +60,12 @@ angular.module('pinwheelApp')
 		}
 		/* resource queries were put into an init funciton */
 		/* to accomidate the user login functions */
-		$scope.init();
+		$scope.$on('$routeChangeSuccess', function (ev, data) {
+			if(data.controller == 'CalendarCtl'){
+				$scope.init();
+				$timeout(function(){$('#monthCalendar').fullCalendar('render')});
+			}
+		});
 
 		//list of reminder types for use in reminder <select ng-model='reminder_type'> 
 		$scope.reminderTypes = ReminderService.reminderTypes;
@@ -113,9 +119,13 @@ angular.module('pinwheelApp')
 			/* Delete users access token */
 			delete localStorage['token'];
 			$http.defaults.headers.common['Authorization'] = null;
+			
+			/* Close the app slider drawer if its open */
+			if($(".left-nav").width() > 0){
+				$scope.toggle_drawer();
+			}
 
 			/* Redirect to login */
-
 			$location.path('/login');
 		}
 
