@@ -464,7 +464,7 @@ form input.ng-invalid {
 .reminders .icon-remove2,
 .reminders .icon-x-altx-alt {
 	position: absolute;
-	top: 5px;
+	top: 10px;
 }
 .reminders .icon-checkmark,
 .reminders .icon-remove2 {
