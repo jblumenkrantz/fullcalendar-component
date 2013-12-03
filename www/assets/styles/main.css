@@ -311,7 +311,9 @@ form input.ng-invalid {
 	box-shadow: 0 0 5px #999999;
 }
 #summaryPopup .resource-body {
+	padding: 5px;
 	margin: 1px 1px 1px 8px;
+	height: auto !important;
 }
 #summaryPopup .summaryPopup-body {
 	overflow: hidden;
@@ -340,9 +342,9 @@ form input.ng-invalid {
     height: 100%;
 }
 #summaryPopup .close {
-	position: relative;
-	top: -5px;
-	float: right;
+	position: absolute;
+	top: 2px;
+	right: 2px;
 	font-size: 20px;
 	color: #999;
 }
