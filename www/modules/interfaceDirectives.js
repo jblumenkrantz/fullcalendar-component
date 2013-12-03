@@ -266,9 +266,6 @@ Use db='true' if the ng-model is directly saved in the database as a TIME type.
 						ngModel.$setViewValue(color.toHexString());
 					});
 				},
-				hide: function(color) {
-
-				},
 				show: function(color) {
 					var c = input.spectrum('container');
 					var leftDiff = "-=" + (c.outerWidth() - 32.375) + "px";
