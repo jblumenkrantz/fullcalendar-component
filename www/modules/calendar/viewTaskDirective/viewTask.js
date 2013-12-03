@@ -9,7 +9,6 @@ angular.module('pinwheelApp')
 		scope: {
 			task: '=',
 			calendars: '=',
-			calendarWatchers: '=',
 			reminderTypes: '=',
 			reminderToggle: '=',
 			switchCalendar: '=',
@@ -21,22 +20,16 @@ angular.module('pinwheelApp')
 		},
 		controller: function($scope, $element, $attrs, $routeParams, Task){
 			$scope.useReminderType = '';
+			$scope.editTask = false;
 			$scope.edit = function() {
 				$scope.close();
 				$scope.taskSource = $scope.task.source;
 				delete $scope.task.source;
 				$scope.editTask = new Task($scope.task);
-				//$scope.editTask || ($scope.editTask = {});
-				$scope.useReminderType = ($scope.editTask.has_due_date) ? 'relative' : '';
-
-				//apply calendar reminder if task doesn't have one already AND has a due date
-				//(!$scope.editTask.has_reminder && $scope.editTask.has_due_date && $scope.checkCalendarReminder());
-
-				$scope.task.editing = true;
 			}
 
 			$scope.cancel = function() {
-				$scope.task.editing = false;
+				$scope.editTask = false;
 			}
 
 			$scope.update = function() {
