@@ -585,7 +585,7 @@
 .pane-header.small span.right {
 	position: absolute;
 	right: -5px;
-	top: 2px;
+	top: 0px;
 }
 
 /* color selector */
