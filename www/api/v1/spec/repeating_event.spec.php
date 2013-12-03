@@ -162,6 +162,28 @@
 			expect(TestEvent::timeOf($scene->events[19]->start))->toBe("11/21/2013 5:00PM");
 			expect(TestEvent::timeOf($scene->events[20]->start))->toBe("11/27/2013 5:00PM");
 			expect(TestEvent::timeOf($scene->events[21]->start))->toBe("11/28/2013 5:00PM");
+		})->
+		beforeEach("if the event is repeated twice a week biweekly", function($scene){
+			$scene->eventList['repeat_weekly']['repeat_interval'] = '2';
+			TestEvent::setBatch($scene->eventList['repeat_weekly']);
+			$scene->events = TestEvent::getUserEventsForCalendar('frank', $scene->calendar, strtotime("9/1/2013"), strtotime("12/1/2013"));
+		})->
+		the("event should happen twice as often", function($scene){
+			expect(sizeof($scene->events))->toBe(12);
+		})->
+		the("event should happen at the right times", function($scene){
+			expect(TestEvent::timeOf($scene->events[0]->start))->toBe("09/18/2013 5:00PM");
+			expect(TestEvent::timeOf($scene->events[1]->start))->toBe("09/19/2013 5:00PM");
+			expect(TestEvent::timeOf($scene->events[2]->start))->toBe("10/02/2013 5:00PM");
+			expect(TestEvent::timeOf($scene->events[3]->start))->toBe("10/03/2013 5:00PM");
+			expect(TestEvent::timeOf($scene->events[4]->start))->toBe("10/16/2013 5:00PM");
+			expect(TestEvent::timeOf($scene->events[5]->start))->toBe("10/17/2013 5:00PM");
+			expect(TestEvent::timeOf($scene->events[6]->start))->toBe("10/30/2013 5:00PM");
+			expect(TestEvent::timeOf($scene->events[7]->start))->toBe("10/31/2013 5:00PM");
+			expect(TestEvent::timeOf($scene->events[8]->start))->toBe("11/13/2013 5:00PM");
+			expect(TestEvent::timeOf($scene->events[9]->start))->toBe("11/14/2013 5:00PM");
+			expect(TestEvent::timeOf($scene->events[10]->start))->toBe("11/27/2013 5:00PM");
+			expect(TestEvent::timeOf($scene->events[11]->start))->toBe("11/28/2013 5:00PM");
 		});
 	});
 ?>
