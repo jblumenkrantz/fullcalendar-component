@@ -30,7 +30,7 @@
 						</div>
 						<div class="large-3 columns">
 							<br>
-							<button ng-click="issuePass()" class="button small success" style="width: 100%;"> <!-- <span aria-hidden="true" class="icon-checkmark"></span> --> <span aria-hidden="true" class="icon-"></span>Issue Pass</button>
+							<button ng-click="issuePass()" class="button small success" style="width: 100%;"></span> Issue Pass</button>
 						</div>
 					</div>
 				</form>
@@ -56,7 +56,7 @@
 				</p>
 			</dd>
 		</dl> 
-		<div class="large-12" ng-show="activeTab.activePasses">
+		<div class="large-12" ng-show="activeTab.activePasses" style="overflow-y: scroll; min-height: 500px;">
 			<!-- <h2>Active Hall Passes</h2> -->
 			<table class="admin-table">
 				<thead>
@@ -86,7 +86,7 @@
 			</table>
 		</div>
 
-		<div class="large-12" ng-show="activeTab.recentPasses">
+		<div class="large-12" ng-show="activeTab.recentPasses" style="overflow-y: scroll; min-height: 500px; ">
 			<!-- <h2>Recent Hall Passes</h2> -->
 
 			<table>
@@ -113,7 +113,7 @@
 			</table>
 		</div>
 		
-		<div ng-repeat="user in viewing_history" class="large-12" ng-show="activeTab[user.pass_holder_user_id]">
+		<div ng-repeat="user in viewing_history" class="large-12" ng-show="activeTab[user.pass_holder_user_id]" style="overflow-y: scroll; height: 500px;">
 			<h5 style="padding: 0; margin: 0;">{{user.pass_holder_first_name}} {{user.pass_holder_last_name}}</h5>
 			<table>
 				<thead>
