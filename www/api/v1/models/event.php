@@ -111,51 +111,52 @@ class Event extends PinwheelModelObject
 		$onDate = $start;
 		while($onDate <= $end){
 			foreach($repeaters as $repeater){
-				// find addendums for this repeaters
-				// if one applies to this onDate, apply it and skip the switch
-				if(IsSet($addRay[$repeater->id]) && static:: isOnDay($onDate, $addRay[$repeater->id][0]->start)){
-					// knock the first event off the array
-					$event = array_shift($addRay[$repeater->id]);
-					if($event->repeat_blackout == 0){
-						//apply the addendum if it isn't a blackout
-					}
-				}else{
-					switch($repeater->repeat_frequency){
-						case 'DAILY':
-							// find number of days between start date and onDate
-							// take that number and modulus against repeat_interval
-							if(($daysSince = static::daysSince($onDate, $repeater->start))%$repeater->repeat_interval == 0){
-								if($onDate > $repeater->start && $onDate <= $repeater->repeat_stop){
-									$eventStart = strtotime("+$daysSince day", $repeater->start);
-									$eventEnd   = $start+($repeater->start-$repeater->end);
-									$events[] = Event::makeFrom($repeater, array('start'=>$eventStart, 'end'=>$eventEnd));
+				$daysSince = static::daysSince($onDate, $repeater->start);
+				if($onDate > $repeater->start && $onDate <= $repeater->repeat_stop){
+					// find addendums for this repeaters
+					// if one applies to this onDate, apply it and skip the switch
+					if(IsSet($addRay[$repeater->id]) && static:: isOnDay($onDate, $addRay[$repeater->id][0]->start)){
+						// knock the first event off the array
+						$event = array_shift($addRay[$repeater->id]);
+						if($event->repeat_blackout == 0){
+							//apply the addendum if it isn't a blackout
+						}
+					}else{
+						switch($repeater->repeat_frequency){
+							case 'DAILY':
+								if($daysSince%$repeater->repeat_interval == 0){
+									if($onDate > $repeater->start && $onDate <= $repeater->repeat_stop){
+										$eventStart = strtotime("+$daysSince day", $repeater->start);
+										$eventEnd   = $start+($repeater->start-$repeater->end);
+										$events[] = Event::makeFrom($repeater, array('start'=>$eventStart, 'end'=>$eventEnd));
+									}
 								}
-							}
-							break;
-						case 'WEEKLY':
-							if(
-									($onDate > $repeater->start && $onDate <= $repeater->repeat_stop) &&
-									(static::weeksSince($onDate, $repeater->start)%$repeater->repeat_interval == 0) &&
-									(strtoupper(date('D', $onDate))==$repeater->repeat_by_day)
-								){
-									echo(date("m-d-Y", $onDate)."\n");
-									$eventStart = $onDate;
-									$eventEnd   = $start+($repeater->start-$repeater->end);
-									$events[] = Event::makeFrom($repeater, array('start'=>$eventStart, 'end'=>$eventEnd));
+								break;
+							case 'WEEKLY':
+								$by_day = explode(",", $repeater->repeat_by_day);
+								if(
+										(static::weeksSince($onDate, $repeater->start)%$repeater->repeat_interval == 0) &&
+										(in_array(strtoupper(date('D', $onDate)), $by_day))
+									){
+										$eventStart = strtotime("+".($daysSince+1)." day", $repeater->start);
+										$eventEnd   = $start+($repeater->start-$repeater->end);
+										$events[] = Event::makeFrom($repeater, array('start'=>$eventStart, 'end'=>$eventEnd));
+									}
+								break;
+							case 'MONTHLY':
+								if(weeksSince($repeater->start)%$repeater->repeat_interval == 0){
+									// check if this is a day in that week that applies
+									// then add the event
 								}
-							break;
-						case 'MONTHLY':
-							if(weeksSince($repeater->start)%$repeater->repeat_interval == 0){
-								// check if this is a day in that week that applies
-								// then add the event
-							}
-							break;
-						case 'YEARLY':
-							break;
+								break;
+							case 'YEARLY':
+								break;
+						}
 					}
 				}
 			}
 			$onDate = strtotime("+1 day", $onDate);
+
 		}
 
 
