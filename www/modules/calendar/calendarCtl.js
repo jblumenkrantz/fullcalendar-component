@@ -6,11 +6,11 @@ angular.module('pinwheelApp')
 
 		$scope.navYear = parseInt($routeParams.year);
 
-		Calendar.query({id: 'all'}, function(calendars){
+/*		Calendar.query({id: 'all'}, function(calendars){
 			$scope.loading_calendars = false;
 			$scope.calendars = calendars;
 			$('#monthCalendar').fullCalendar('render');
-		});
+		});*/
 		
 		$scope.makeNavYear = function(year){
 			$scope.navYear = year;

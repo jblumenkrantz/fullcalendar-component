@@ -18,7 +18,7 @@
     "sdi-fullcalendar": "latest",
     "sdi-jquery-ui": "latest",
     "angular-ui-select2": "~0.0.2",
-    "sdi-select2": "~3.4.5"
+    "sdi-select2": "~3.4.51"
   },
   "devDependencies": {
     "angular-mocks": "latest",
