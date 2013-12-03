@@ -63,6 +63,7 @@ angular.module('pinwheelApp')
 		$scope.$on('$routeChangeSuccess', function (ev, data) {
 			if(data.controller == 'CalendarCtl'){
 				$scope.init();
+				$timeout(function(){$('#monthCalendar').fullCalendar('render')});
 			}
 		});
 
@@ -118,9 +119,13 @@ angular.module('pinwheelApp')
 			/* Delete users access token */
 			delete localStorage['token'];
 			$http.defaults.headers.common['Authorization'] = null;
+			
+			/* Close the app slider drawer if its open */
+			if($(".left-nav").width() > 0){
+				$scope.toggle_drawer();
+			}
 
 			/* Redirect to login */
-
 			$location.path('/login');
 		}
 

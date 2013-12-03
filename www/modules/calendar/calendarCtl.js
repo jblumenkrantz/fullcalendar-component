@@ -3,16 +3,7 @@
 angular.module('pinwheelApp')
 	.controller('CalendarCtl', function ($filter, $scope, $routeParams, $location, $timeout, Calendar) {
 		$scope.routeDate = new Date($routeParams.month+"/"+$routeParams.day+"/"+$routeParams.year);
-
 		$scope.navYear = parseInt($routeParams.year);
-
-/*		Calendar.query({id: 'all'}, function(calendars){
-			$scope.loading_calendars = false;
-			$scope.calendars = calendars;
-			$('#monthCalendar').fullCalendar('render');
-		});*/
-
-		console.log("wat da fuxes");
 		
 		$scope.makeNavYear = function(year){
 			$scope.navYear = year;
