@@ -9,6 +9,7 @@ angular.module('pinwheelApp')
 		scope: {
 			task: '=',
 			calendars: '=',
+			calendarWatchers: '=',
 			reminderTypes: '=',
 			reminderToggle: '=',
 			switchCalendar: '=',
@@ -19,8 +20,9 @@ angular.module('pinwheelApp')
 			close: "&"
 		},
 		controller: function($scope, $element, $attrs, $routeParams, Task){
-			$scope.useReminderType = '';
+
 			$scope.editTask = false;
+
 			$scope.edit = function() {
 				$scope.close();
 				$scope.taskSource = $scope.task.source;

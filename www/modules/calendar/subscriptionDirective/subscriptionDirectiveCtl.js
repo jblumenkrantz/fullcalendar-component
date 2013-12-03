@@ -6,14 +6,12 @@ angular.module('pinwheelApp')
 		$scope.CalendarAdmins = CalendarAdmins;
 
 		//build calendarWatcher array
-		/*
 		if ($scope.watcher != undefined) {
 			$scope.watcher[$scope.calendar.calendar_id] = {
-				viewing: $scope.calendar.viewing,
 				color: $scope.calendar.color,
-				reminder: ReminderService.getCalendarReminderProperties($scope.calendar)
+				//reminder: ReminderService.getCalendarReminderProperties($scope.calendar)
 			};
-		}*/
+		}
 
 		$scope.editCalendar = false;
 
@@ -33,10 +31,10 @@ angular.module('pinwheelApp')
 			$scope.calendar.$update({id: $scope.calendar.calendar_id}, function(calendar) {
 				$scope.calendar = calendar;
 				$scope.calendar.recent = $scope.editCalendar.recent;
-				/*angular.extend($scope.watcher[$scope.calendar.calendar_id], {
+				angular.extend($scope.watcher[$scope.calendar.calendar_id], {
 					color: $scope.calendar.color,
-					reminder: ReminderService.getCalendarReminderProperties($scope.calendar)
-				});*/
+					//reminder: ReminderService.getCalendarReminderProperties($scope.calendar)
+				});
 				$("#monthCalendar").fullCalendar('refetchEvents');
 				$scope.cancel();
 			});
@@ -58,7 +56,7 @@ angular.module('pinwheelApp')
 				$scope.calendar = calendar;
 				$scope.calendar.recent = false;
 				$scope.calendar.viewing = false;
-				//delete $scope.watcher[$scope.calendar.calendar_id];
+				delete $scope.watcher[$scope.calendar.calendar_id];
 				$("#monthCalendar").fullCalendar('refetchEvents');
 			});
 		}
@@ -66,13 +64,11 @@ angular.module('pinwheelApp')
 		//cancel editing of calendar
 		$scope.cancel = function() {
 			$scope.editCalendar = false;
-			//$scope.calendar.editing = false;
 		}
 
 		//set if a calendar's events and tasks are visible
 		$scope.setShowState = function() {
 			var recent = $scope.calendar.recent;
-			//$scope.calendar.viewing = $scope.watcher[$scope.calendar.calendar_id].viewing;
 			$scope.calendar.$update({id: $scope.calendar.calendar_id}, function(calendar) {
 				if(!calendar.hasOwnProperty('errno')){
 					calendar.recent = recent;

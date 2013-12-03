@@ -39,9 +39,7 @@ angular.module('pinwheelApp')
 			$scope.bak = event.source;
 			delete event.source;
 			$scope.event = event;	//store the original event object
-
-			console.log($scope.bak);
-
+			
 			$scope.formEvent = new Event(event);
 			$scope.useReminderType = ($scope.formEvent.allDay) ? 'absolute' : 'relative';
 			(!$scope.formEvent.has_reminder && $scope.checkCalendarReminder());
