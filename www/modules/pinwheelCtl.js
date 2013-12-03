@@ -10,6 +10,7 @@ angular.module('pinwheelApp')
 			return $scope.calendarWatchers[item.calendar_id].color;
 		}
 
+
 		$scope.isCalendarShowing = function(item) {
 			return $scope.calendarWatchers[item.calendar_id] && $scope.calendarWatchers[item.calendar_id].viewing;
 		}
@@ -59,7 +60,11 @@ angular.module('pinwheelApp')
 		}
 		/* resource queries were put into an init funciton */
 		/* to accomidate the user login functions */
-		$scope.init();
+		$scope.$on('$routeChangeSuccess', function (ev, data) {
+			if(data.controller == 'CalendarCtl'){
+				$scope.init();
+			}
+		});
 
 		//list of reminder types for use in reminder <select ng-model='reminder_type'> 
 		$scope.reminderTypes = ReminderService.reminderTypes;

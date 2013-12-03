@@ -11,6 +11,8 @@ angular.module('pinwheelApp')
 			$scope.calendars = calendars;
 			$('#monthCalendar').fullCalendar('render');
 		});*/
+
+		console.log("wat da fuxes");
 		
 		$scope.makeNavYear = function(year){
 			$scope.navYear = year;
