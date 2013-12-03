@@ -111,8 +111,8 @@ class Event extends PinwheelModelObject
 		$onDate = $start;
 		while($onDate <= $end){
 			foreach($repeaters as $repeater){
-				$daysSince = static::daysSince($onDate, $repeater->start);
 				if($onDate > $repeater->start && $onDate <= $repeater->repeat_stop){
+					$daysSince = static::daysSince($onDate, $repeater->start);
 					// find addendums for this repeaters
 					// if one applies to this onDate, apply it and skip the switch
 					if(IsSet($addRay[$repeater->id]) && static:: isOnDay($onDate, $addRay[$repeater->id][0]->start)){
@@ -523,14 +523,13 @@ class Event extends PinwheelModelObject
 		}
 		if(!IsSet($opts['addendums']) && !IsSet($opts['reminders'])){
 			$where_array[] = "events.repeat_addendum = '0'";
-			$where_array[] = "events.repeat_interval IS NULL OR events.repeat_interval = '0'";
+			$where_array[] = "(events.repeat_interval IS NULL OR events.repeat_interval = '0')";
 		}
 
 		$authUserID = Authorize:: sharedInstance()->userID();
 		$query = "SELECT ";
 
 		if(!isSet($opts['id_only']) || $opts['id_only'] == false){
-			$opts = array_keys(get_class_vars('Event'));
 			$query .= "
 				events.id,
 				title,
@@ -570,15 +569,17 @@ class Event extends PinwheelModelObject
 		$query .= $where_query;
 
 		if(IsSet($opts['order'])){
-			$query .= "ORDER BY "+$opts['order'];
+			$query .= "ORDER BY ".$opts['order'];
 		}
 		//error_log(print_r(preg_replace('~[\r\n\t]+~','',$query),true));
 		// Query Datastore
 		$pinsqli = DistributedMySQLConnection:: readInstance();
 		//return $query;
 		$resulti = $pinsqli->query($query);
-		if ($pinsqli->errno)
+		if ($pinsqli->errno){
+			die($query);
 			throw new Exception($pinsqli->error, 1);
+		}
 
 		// Unpack Result
 		$events = array();
@@ -589,7 +590,6 @@ class Event extends PinwheelModelObject
 				$returnedEvent = $event['id'];
 			}
 			array_push($events, $returnedEvent);
-			//$events[$event['id']] = $returnedEvent;
 		}
 		return($events);
 	}
