@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pinwheelApp')
-	.controller('SubscriptionDirectiveCtl', function ($scope, $routeParams, ReminderService, CalendarAdmins) {
+	.controller('SubscriptionDirectiveCtl', function ($scope, $routeParams, ReminderService, CalendarAdmins, Calendar) {
 		
 		$scope.CalendarAdmins = CalendarAdmins;
 
@@ -12,6 +12,12 @@ angular.module('pinwheelApp')
 				//reminder: ReminderService.getCalendarReminderProperties($scope.calendar)
 			};
 		}
+
+		//this watch makes it so that color changes while in edit mode are display immediately
+		//but they are only accepted when the user hits save
+		$scope.$watch("editCalendar.color", function(newVal, oldVal) {
+			$scope.color = ($scope.calendar.editing) ? newVal : $scope.calendar.color;
+		});
 
 		//open existing calendar for editing
 		$scope.edit = function() {
@@ -62,6 +68,7 @@ angular.module('pinwheelApp')
 
 		//cancel editing of calendar
 		$scope.cancel = function() {
+			$scope.editCalendar.color = $scope.calendar.color;
 			$scope.calendar.editing = false;
 		}
 

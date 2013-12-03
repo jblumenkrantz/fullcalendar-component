@@ -255,20 +255,35 @@ Use db='true' if the ng-model is directly saved in the database as a TIME type.
 			var input = element.find('input');
 			var options = angular.extend({
 				color: ngModel.$viewValue,
+				showButtons: false,
 				showPalette: true,
 				showSelectionPalette: true,
 				preferredFormat: "hex6",
-				palette: [ ],
-				localStorageKey: "spectrum.brc", // Any Spectrum with the same string will share selection
+				palette: [],
+				localStorageKey: "spectrum.pinwheel", // Any Spectrum with the same string will share selection
 				change: function(color) {
 					scope.$apply(function() {
 						ngModel.$setViewValue(color.toHexString());
+					});
+				},
+				hide: function(color) {
+
+				},
+				show: function(color) {
+					var c = input.spectrum('container');
+					var leftDiff = "-=" + (c.outerWidth() - 32.375) + "px";
+					
+					//reposition and set color
+					c.css({
+						top: "+=17px",
+						left: leftDiff,
+						border: "1px solid "+color.toHexString()
 					});
 				}
 			}, scope.$eval(attrs.options));
 			
 			ngModel.$render = function() {
-			  input.spectrum('set', ngModel.$viewValue || '');
+				input.spectrum('set', ngModel.$viewValue || '');
 			}
 			
 			input.spectrum(options);
