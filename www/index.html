@@ -95,14 +95,14 @@
 	<!-- Add your site or application content here -->
 	<div ng-controller="PinwheelCtl" class="{{device.describeDevice(true)}}">
 		<nav class="left-nav" id="apps">
-			<a ng-href="#/calendar"><span aria-hidden="true" class="icon-calendar"> </span>Calendar </a>
-			<a ng-href="#/messaging" class="locked"><span aria-hidden="true" class="icon-bubble-notification"> </span>Reminders </a>
-			<a ng-show="checkPermission('view_hallpass_history',true)" ng-href="#/hallpass"><span aria-hidden="true" class="icon-vcard"> </span>Hall Pass </a>
-			<a href="#" ng-href="#/handbook" class="locked"><span aria-hidden="true" class="icon-book"> </span>Handbook</a>
-			<a ng-href="#/reference" class="locked"><span aria-hidden="true" class="icon-books"> </span>Resources </a>
-			<a ng-href="#/facilities" class="locked"><span aria-hidden="true" class="icon-building"> </span>Facilities </a>
-			<a ng-href="#/settings" class="locked"><span aria-hidden="true" class="icon-cog"> </span>Settings </a>
-			<a ng-click="logout()" class="logout"><span aria-hidden="true" class="icon-spam"> </span>Logout</a>
+			<a ng-href="#/calendar"><span aria-hidden="true" class="icon-calendar"> </span><span>Calendar</span> </a>
+			<a ng-show="checkPermission('view_hallpass_history',true)" ng-href="#/hallpass"><span aria-hidden="true" class="icon-vcard"> </span><span>Hall Pass</span> </a>
+			<a ng-href="#/handbook" class="locked"><span aria-hidden="true" class="icon-book"> </span><span>Handbook</span></a>
+			<a ng-href="#/reference" class="locked"><span aria-hidden="true" class="icon-books"> </span><span>Resources</span> </a>
+			<a ng-href="#/settings" class="locked"><span aria-hidden="true" class="icon-cog"> </span><span>Settings</span> </a>
+			<a ng-href="#/facilities" class="locked"><span aria-hidden="true" class="icon-building"> </span><span>Facilities</span> </a>
+<!-- 			<a ng-href="#/admin" class="locked"><span aria-hidden="true" class="icon-star2"> </span><span>Admin</span> </a> -->
+			<a ng-click="logout()" class="logout"><span aria-hidden="true" class="icon-spam"> </span><span>Logout</span></a>
 		<!-- 	<button class="small button alert" >
 			<a href="#" ng-href="#/settings"  class=""><span aria-hidden="true" class="icon-cog"> </span>Settings </a>
 			<button class="small button alert" ng-click="logout()">

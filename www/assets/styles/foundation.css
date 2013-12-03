@@ -7068,7 +7068,7 @@ header#content-header [class*="icon-"] {
 /* line 215, ../../scss/foundation.scss */
 .calendar-index ul.side-nav li:nth-child(14) {
   background: #ccc;
-  border-width: 1px 0 1px 0;
+  border-width: 1px 0 1px  0;
 }
 
 /* line 222, ../../scss/foundation.scss */
@@ -7620,88 +7620,94 @@ header#content-header ul.small-block-grid-3 li {
   width: 100%;
   font-size: 14px;
   text-transform: uppercase;
+  text-shadow: 1px 1px 2px #000;
 }
-/* line 499, ../../scss/foundation.scss */
+/* line 500, ../../scss/foundation.scss */
 .left-nav a:hover, .left-nav a:focus {
   background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
 }
-/* line 502, ../../scss/foundation.scss */
+/* line 503, ../../scss/foundation.scss */
 .left-nav a:active {
   background: rgba(35, 83, 138, 0.5) !important;
 }
-/* line 505, ../../scss/foundation.scss */
+/* line 506, ../../scss/foundation.scss */
 .left-nav a.logout {
   background: rgba(136, 0, 0, 0.3) !important;
 }
-/* line 508, ../../scss/foundation.scss */
+/* line 509, ../../scss/foundation.scss */
 .left-nav a.logout:hover, .left-nav a.logout:focus {
-  background: rgba(136, 0, 0, 0.8) !important;
+  background: rgba(136, 0, 0, 0.7) !important;
 }
-/* line 511, ../../scss/foundation.scss */
+/* line 512, ../../scss/foundation.scss */
 .left-nav a [class*="icon-"] {
   text-shadow: 1px 1px 2px #000;
   font-size: 36px;
   text-align: center;
 }
-/* line 517, ../../scss/foundation.scss */
+/* line 518, ../../scss/foundation.scss */
 .left-nav:after {
   content: "";
   position: absolute;
   top: 0;
   right: 0;
   height: 100%;
-  width: 34px;
   background: linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
 }
-/* line 526, ../../scss/foundation.scss */
+/* line 527, ../../scss/foundation.scss */
 .left-nav a.locked {
   color: #999;
 }
-/* line 530, ../../scss/foundation.scss */
+/* line 531, ../../scss/foundation.scss */
+.left-nav a span:nth-of-type(2) {
+  position: relative;
+  top: -9px;
+  font-size: 18px !important;
+}
+/* line 536, ../../scss/foundation.scss */
 .left-nav label {
   color: #fff;
   white-space: nowrap !important;
 }
-/* line 531, ../../scss/foundation.scss */
+/* line 537, ../../scss/foundation.scss */
 .left-nav h5 {
   color: #fff;
   margin-left: 20px;
 }
-/* line 532, ../../scss/foundation.scss */
+/* line 538, ../../scss/foundation.scss */
 .left-nav form * {
   white-space: nowrap !important;
 }
-/* line 535, ../../scss/foundation.scss */
+/* line 541, ../../scss/foundation.scss */
 .left-nav button {
   width: 160px;
   margin: 20px !important;
   border-radius: 3px;
 }
 
-/* line 542, ../../scss/foundation.scss */
+/* line 548, ../../scss/foundation.scss */
 .close-menu {
   display: none;
 }
 
-/* line 565, ../../scss/foundation.scss */
+/* line 571, ../../scss/foundation.scss */
 #content {
   max-width: 98%;
 }
 
-/* line 570, ../../scss/foundation.scss */
+/* line 576, ../../scss/foundation.scss */
 #content label {
   font-weight: bold;
   cursor: default !important;
 }
 
-/* line 574, ../../scss/foundation.scss */
+/* line 580, ../../scss/foundation.scss */
 #content input[type=text] {
   border-radius: 4px !important;
   border: 1px solid #aaa !important;
   height: 26px !important;
 }
 
-/* line 579, ../../scss/foundation.scss */
+/* line 585, ../../scss/foundation.scss */
 #content input[type=checkbox] {
   margin: 0;
   padding: 0;
@@ -7709,7 +7715,7 @@ header#content-header ul.small-block-grid-3 li {
   top: 2px;
 }
 
-/* line 583, ../../scss/foundation.scss */
+/* line 589, ../../scss/foundation.scss */
 #hallpass-tabs dd p span.icon-close2 {
   position: relative;
   top: -8px;
@@ -7718,45 +7724,45 @@ header#content-header ul.small-block-grid-3 li {
   font-size: 16px;
 }
 
-/* line 591, ../../scss/foundation.scss */
+/* line 597, ../../scss/foundation.scss */
 .tabs dd.active p {
   color: #23538a !important;
 }
 
-/* line 595, ../../scss/foundation.scss */
+/* line 601, ../../scss/foundation.scss */
 #content table {
   width: 100%;
 }
 
-/* line 599, ../../scss/foundation.scss */
+/* line 605, ../../scss/foundation.scss */
 #content table thead tr th {
   text-align: center;
   background-color: #23538a;
   color: #fff;
 }
 
-/* line 605, ../../scss/foundation.scss */
+/* line 611, ../../scss/foundation.scss */
 #content table tr td:last-of-type {
   text-align: center;
 }
 
-/* line 609, ../../scss/foundation.scss */
+/* line 615, ../../scss/foundation.scss */
 .admin-table tr {
   padding: 0px;
   margin: 0px;
 }
 
-/* line 613, ../../scss/foundation.scss */
+/* line 619, ../../scss/foundation.scss */
 .admin-table td span.student {
   border-bottom: 1px dotted #222;
 }
 
-/* line 616, ../../scss/foundation.scss */
+/* line 622, ../../scss/foundation.scss */
 .admin-table td span.student, .admin-table tr td span[class*="icon-"] {
   cursor: pointer !important;
 }
 
-/* line 619, ../../scss/foundation.scss */
+/* line 625, ../../scss/foundation.scss */
 .admin-table tr td input {
   position: relative;
   top: 5px;
