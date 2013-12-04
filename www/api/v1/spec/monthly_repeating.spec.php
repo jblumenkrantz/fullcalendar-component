@@ -83,5 +83,29 @@
 			expect($scene->events[20]->start)->toBeTimestamp("11/12/2013 5:00PM");
 			expect($scene->events[21]->start)->toBeTimestamp("11/13/2013 5:00PM");
 		});
+
+		$then->beforeEach("every other month", function($scene){
+			$scene->eventList['repeat_monthly']['repeat_by_monthday'] = '12,13';
+			$scene->eventList['repeat_monthly']['repeat_interval'] = '2';
+			TestEvent::setBatch($scene->eventList['repeat_monthly']);
+			$scene->events = TestEvent::getUserEventsForCalendar('frank', $scene->calendar, strtotime("1/1/2013"), strtotime("12/1/2013"));
+		})->
+		the("event should happen the right number of times", function($scene){
+			expect(sizeof($scene->events))->toBe(12);
+		})->
+		the("should happen at the right time", function($scene){
+			expect($scene->events[0]->start)->toBeTimestamp("01/12/2013 5:00PM");
+			expect($scene->events[1]->start)->toBeTimestamp("01/13/2013 5:00PM");
+			expect($scene->events[2]->start)->toBeTimestamp("03/12/2013 5:00PM");
+			expect($scene->events[3]->start)->toBeTimestamp("03/13/2013 5:00PM");
+			expect($scene->events[4]->start)->toBeTimestamp("05/12/2013 5:00PM");
+			expect($scene->events[5]->start)->toBeTimestamp("05/13/2013 5:00PM");
+			expect($scene->events[6]->start)->toBeTimestamp("07/12/2013 5:00PM");
+			expect($scene->events[7]->start)->toBeTimestamp("07/13/2013 5:00PM");
+			expect($scene->events[8]->start)->toBeTimestamp("09/12/2013 5:00PM");
+			expect($scene->events[9]->start)->toBeTimestamp("09/13/2013 5:00PM");
+			expect($scene->events[10]->start)->toBeTimestamp("11/12/2013 5:00PM");
+			expect($scene->events[11]->start)->toBeTimestamp("11/13/2013 5:00PM");
+		});
 	});
 ?>

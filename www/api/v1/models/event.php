@@ -111,6 +111,9 @@ class Event extends PinwheelModelObject
 		$onDate = $start;
 		while($onDate <= $end){
 			foreach($repeaters as $repeater){
+				if($repeater->repeat_stop == null){
+					$repeater->repeat_stop = INF;
+				}
 				$daysSince = static::daysSince($onDate, $repeater->start);
 				$eventStart = strtotime("+$daysSince day", $repeater->start);
 				if($onDate >= static::beginningOf($repeater->start) && $eventStart <= $repeater->repeat_stop){
@@ -125,7 +128,7 @@ class Event extends PinwheelModelObject
 					}else{
 						switch($repeater->repeat_frequency){
 							case 'DAILY':
-								if($daysSince%$repeater->repeat_interval == 0 && $eventStart < $repeater->repeat_stop){
+								if($daysSince%$repeater->repeat_interval == 0){
 									$eventEnd = $eventStart+($repeater->end-$repeater->start);
 									$events[] = Event::makeFrom($repeater, array('start'=>$eventStart, 'end'=>$eventEnd));
 								}
