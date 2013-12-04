@@ -111,8 +111,9 @@ class Event extends PinwheelModelObject
 		$onDate = $start;
 		while($onDate <= $end){
 			foreach($repeaters as $repeater){
-				if($onDate > $repeater->start && $onDate <= $repeater->repeat_stop){
-					$daysSince = static::daysSince($onDate, $repeater->start);
+				$daysSince = static::daysSince($onDate, $repeater->start);
+				$eventStart = strtotime("+$daysSince day", $repeater->start);
+				if($onDate >= static::beginningOf($repeater->start) && $eventStart <= $repeater->repeat_stop){
 					// find addendums for this repeaters
 					// if one applies to this onDate, apply it and skip the switch
 					if(IsSet($addRay[$repeater->id]) && static:: isOnDay($onDate, $addRay[$repeater->id][0]->start)){
@@ -124,12 +125,9 @@ class Event extends PinwheelModelObject
 					}else{
 						switch($repeater->repeat_frequency){
 							case 'DAILY':
-								if($daysSince%$repeater->repeat_interval == 0){
-									if($onDate > $repeater->start && $onDate <= $repeater->repeat_stop){
-										$eventStart = strtotime("+$daysSince day", $repeater->start);
-										$eventEnd   = $start+($repeater->start-$repeater->end);
-										$events[] = Event::makeFrom($repeater, array('start'=>$eventStart, 'end'=>$eventEnd));
-									}
+								if($daysSince%$repeater->repeat_interval == 0 && $eventStart < $repeater->repeat_stop){
+									$eventEnd = $eventStart+($repeater->end-$repeater->start);
+									$events[] = Event::makeFrom($repeater, array('start'=>$eventStart, 'end'=>$eventEnd));
 								}
 								break;
 							case 'WEEKLY':
@@ -138,16 +136,21 @@ class Event extends PinwheelModelObject
 										(static::weeksSince($repeater->start, $onDate)%$repeater->repeat_interval == 0) &&
 										(in_array(strtoupper(date('D', $onDate)), $by_day))
 									){
-										$eventStart = strtotime("+".($daysSince+1)." day", $repeater->start);
-										$eventEnd   = $start+($repeater->start-$repeater->end);
+										$eventStart = strtotime("+$daysSince day", $repeater->start);
+										$eventEnd = $eventStart+($repeater->end-$repeater->start);
 										$events[] = Event::makeFrom($repeater, array('start'=>$eventStart, 'end'=>$eventEnd));
 									}
 								break;
 							case 'MONTHLY':
-								if(weeksSince($repeater->start)%$repeater->repeat_interval == 0){
-									// check if this is a day in that week that applies
-									// then add the event
-								}
+								$by_day = explode(",", $repeater->repeat_by_monthday);
+								if(
+										(static::monthsSince($repeater->start, $onDate)%$repeater->repeat_interval == 0) &&
+										(in_array(strtoupper(date('d', $onDate)), $by_day))
+									){
+										$eventStart = strtotime("+$daysSince day", $repeater->start);
+										$eventEnd = $eventStart+($repeater->end-$repeater->start);
+										$events[] = Event::makeFrom($repeater, array('start'=>$eventStart, 'end'=>$eventEnd));
+									}
 								break;
 							case 'YEARLY':
 								break;
@@ -172,6 +175,16 @@ class Event extends PinwheelModelObject
 		return($dataRay);
 	}
 
+	static protected function beginningOf($date){
+		return strtotime(strftime("%Y/%m/%d ", $date));
+	}
+
+	static protected function endOf($date){
+		$date = static::beginningOf($date);
+		$date = strtotime("+1 day", $date);
+		return $date-1;
+	}
+
 	static public function makeFrom($event, $updateWith=array()){
 		$event = clone $event;
 		foreach($updateWith as $key => $value){
@@ -194,6 +207,15 @@ class Event extends PinwheelModelObject
 		return($test > $start && $test < $end);
 	}
 
+	static protected function monthsSince($start, $end){
+		if($start > $end){
+			$tmp = $end;
+			$end = $start;
+			$start = $tmp;
+		}
+		return date('m', $end)-date('m', $start);
+	}
+
 	static protected function weeksSince($start, $end){
 		if($start > $end){
 			$tmp = $end;
@@ -208,6 +230,8 @@ class Event extends PinwheelModelObject
 	}
 
 	static protected function daysSince($onDate, $eventStart){
+		$onDate = static::beginningOf($onDate);
+		$eventStart = static::beginningOf($eventStart);
 		$end = new DateTime();
 		$end->setTimestamp($onDate);
 		$start = new DateTime();

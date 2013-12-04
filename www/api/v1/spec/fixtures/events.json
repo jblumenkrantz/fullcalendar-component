@@ -38,20 +38,16 @@
 		"end" : "9/15/2013 7:00PM",
 		"creator_id" : "frank"
 	},
-	"repeat_bidaily": {
+	"repeat_monthly": {
 		"id" : "event_5",
 		"title" : "repeating event one",
 		"calendar_id" : "cal_1",
-		"start" : "10/15/2013 5:00PM",
-		"end" : "10/15/2013 7:00PM",
-		"creator_id" : "frank"
-	},
-	"repeat_triweekly": {
-		"id" : "event_6",
-		"title" : "repeating event one",
-		"calendar_id" : "cal_1",
-		"start" : "10/15/2013 5:00PM",
-		"end" : "10/15/2013 7:00PM",
+		"start" : "1/12/2013 5:00PM",
+		"end" : "1/12/2013 7:00PM",
+		"repeat_frequency": "MONTHLY",
+		"repeat_interval": 1,
+		"repeat_by_monthday": "12",
+		"repeat_stop": "11/31/2013",
 		"creator_id" : "frank"
 	}
 }

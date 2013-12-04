@@ -71,6 +71,34 @@
 		the("dates should be the right time apart", function($scene){
 			expect(TestEvent::findWeeksSince($scene->eventstart, $scene->weektest))->toBe(1);
 		});
+
+		$then->beforeEach("finding how many months have passed between two dates", function($scene){
+			$scene->date = array();
+			$scene->date[] = strtotime("1/1/2013");  // Tuesday
+			$scene->date[] = strtotime("1/15/2013");  // Thursday
+			$scene->date[] = strtotime("2/7/2013");  // Monday
+			$scene->date[] = strtotime("2/20/2013"); // Thursday
+			$scene->date[] = strtotime("3/1/2013"); // Thursday
+			$scene->date[] = strtotime("3/25/2013"); // Sunday
+			$scene->date[] = strtotime("4/27/2013"); // Sunday
+		})->
+		the("number should change based on the first day of a new month", function($scene){
+			expect(TestEvent::findMonthsSince($scene->date[1], $scene->date[0]))->toBe(0);
+			expect(TestEvent::findMonthsSince($scene->date[2], $scene->date[0]))->toBe(1);
+			expect(TestEvent::findMonthsSince($scene->date[2], $scene->date[1]))->toBe(1);
+			expect(TestEvent::findMonthsSince($scene->date[6], $scene->date[0]))->toBe(3);
+			expect(TestEvent::findMonthsSince($scene->date[6], $scene->date[5]))->toBe(1);
+			expect(TestEvent::findMonthsSince($scene->date[4], $scene->date[2]))->toBe(1);
+			expect(TestEvent::findMonthsSince($scene->date[5], $scene->date[1]))->toBe(2);
+			expect(TestEvent::findMonthsSince($scene->date[6], $scene->date[0]))->toBe(3);
+		});
+
+		$then->the("suite should be able to find the beginning of a day", function($scene){
+			expect(TestEvent::findDayBeginning($scene->eventstart))->toBeTimestamp("9/15/2013 12:00AM");
+		});
+		$then->the("suite should be able to find the end of a day", function($scene){
+			expect(TestEvent::findDayEnd($scene->eventstart))->toBeTimestamp("9/15/2013 11:59:59PM");
+		});
 	});
 
 ?>

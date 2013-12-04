@@ -36,12 +36,18 @@
 			return $event;
 		}
 
-		static public function timeOf($time){
-			return strftime("%m/%d/%Y%l:%M%p", $time);
+		static public function findMonthsSince($first, $second){
+			return static::monthsSince($first, $second);
 		}
 
 		static public function findWeeksSince($first, $second){
 			return static::weeksSince($first, $second);
+		}
+		static public function findDayBeginning($day){
+			return static::beginningOf($day);
+		}
+		static public function findDayEnd($day){
+			return static::endOf($day);
 		}
 	}
 ?>
