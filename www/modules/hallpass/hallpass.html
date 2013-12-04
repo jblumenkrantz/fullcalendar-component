@@ -30,7 +30,7 @@
 						</div>
 						<div class="large-3 columns">
 							<br>
-							<button ng-click="issuePass()" class="button small success" style="width: 100%;"></span> Issue Pass</button>
+							<button ng-click="issuePass()" class="button small success" style="width: 100%;"> Issue Pass</button>
 						</div>
 					</div>
 				</form>
@@ -56,40 +56,41 @@
 				</p>
 			</dd>
 		</dl> 
-		<div class="large-12" ng-show="activeTab.activePasses" style="overflow-y: scroll; min-height: 500px;">
-			<!-- <h2>Active Hall Passes</h2> -->
-			<table class="admin-table">
+		<div class="large-12" ng-show="activeTab.activePasses" style="height: 100%;">
+			<table style="margin: 0;">
 				<thead>
 					<tr>
-						<th width="100">Name</th>
-						<th width="130">Time Out</th>
-						<th width="110">Time In</th>
-						<th width="180">Destination</th>
-						<th width="100">Authorized By</th>
-						<th width="100">Check-In</th>
+						<th>Name</th>
+						<th>Time Out</th>
+						<th>Time In</th>
+						<th>Destination</th>
+						<th>Authorized By</th>
+						<th>Check-In</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr ng-repeat="pass in hallpasses | filter:{in_time:'!'}">
-						<td ng-click="viewUserHistory(pass)"><span class="student">{{pass.pass_holder_first_name}} {{pass.pass_holder_last_name}}</span> <span aria-hidden="true" class="right icon-history2"></span></td>
-						<td>{{pass.out_time | date:'MMM d, y h:mm a'}}</td>
-						<td>{{(pass.in_time == null)? 'Active':pass.in_time | date:'MMM d, y h:mm a'}}</td>
-						<td>{{pass.destination_name}}</td>
-						<td>{{pass.authority_first_name}} {{pass.authority_last_name}}</td>
-						<td>
-							<!-- <button ng-show="checkPermission('check_in_hall_pass',true)"class="button tiny success" ng-click="check_in(pass)"><span aria-hidden="true" class="icon-checkmark"></span></button>
-						 -->
-						<input type="checkbox" ng-show="checkPermission('check_in_hall_pass',true)" ng-click="check_in(pass)" class="">
-						</td>
-					</tr>
-				</tbody>
 			</table>
+			<div style="overflow-y: scroll !important; max-height: 500px;">
+				<table>
+					<tbody>
+						<tr ng-repeat="pass in hallpasses | filter:{in_time:'!'}">
+							<td ng-click="viewUserHistory(pass)"><span class="student">{{pass.pass_holder_first_name}} {{pass.pass_holder_last_name}}</span> <span aria-hidden="true" class="right icon-history2"></span></td>
+							<td>{{pass.out_time | date:'MMM d, y h:mm a'}}</td>
+							<td>{{(pass.in_time == null)? 'Active':pass.in_time | date:'MMM d, y h:mm a'}}</td>
+							<td>{{pass.destination_name}}</td>
+							<td>{{pass.authority_first_name}} {{pass.authority_last_name}}</td>
+							<td>
+								<!-- <button ng-show="checkPermission('check_in_hall_pass',true)"class="button tiny success" ng-click="check_in(pass)"><span aria-hidden="true" class="icon-checkmark"></span></button>
+							 -->
+							<input type="checkbox" ng-show="checkPermission('check_in_hall_pass',true)" ng-click="check_in(pass)" class="">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 
-		<div class="large-12" ng-show="activeTab.recentPasses" style="overflow-y: scroll; min-height: 500px; ">
-			<!-- <h2>Recent Hall Passes</h2> -->
-
-			<table>
+		<div class="large-12" ng-show="activeTab.recentPasses">
+			<table style="margin: 0;">
 				<thead>
 					<tr>
 						<th width="100">Name</th>
@@ -100,43 +101,52 @@
 						<th width="100">Check-In</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr ng-repeat="pass in hallpasses | filter:{in_time:'!!'}">
-						<td ng-click="viewUserHistory(pass)">{{pass.pass_holder_first_name}} {{pass.pass_holder_last_name}} <span aria-hidden="true" class="right icon-history2"></span></td>
-						<td>{{pass.out_time | date:'MMM d, y h:mm a'}}</td>
-						<td>{{pass.in_time | date:'MMM d, y h:mm a'}}</td>
-						<td>{{pass.destination_name}}</td>
-						<td>{{pass.authority_first_name}} {{pass.authority_last_name}}</td>
-						<td>{{pass.checked_in_by}}</td>
- 					</tr>
-				</tbody>
 			</table>
+			<div style="overflow-y: scroll !important; height: 500px !important;">
+				<table>
+					
+					<tbody>
+						<tr ng-repeat="pass in hallpasses | filter:{in_time:'!!'}">
+							<td ng-click="viewUserHistory(pass)">{{pass.pass_holder_first_name}} {{pass.pass_holder_last_name}} <span aria-hidden="true" class="right icon-history2"></span></td>
+							<td>{{pass.out_time | date:'MMM d, y h:mm a'}}</td>
+							<td>{{pass.in_time | date:'MMM d, y h:mm a'}}</td>
+							<td>{{pass.destination_name}}</td>
+							<td>{{pass.authority_first_name}} {{pass.authority_last_name}}</td>
+							<td>{{pass.checked_in_by}}</td>
+	 					</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 		
-		<div ng-repeat="user in viewing_history" class="large-12" ng-show="activeTab[user.pass_holder_user_id]" style="overflow-y: scroll; height: 500px;">
-			<h5 style="padding: 0; margin: 0;">{{user.pass_holder_first_name}} {{user.pass_holder_last_name}}</h5>
-			<table>
+		<div ng-repeat="user in viewing_history" class="large-12" ng-show="activeTab[user.pass_holder_user_id]">
+			<!-- <h5 style="padding: 0; margin: 0;">{{user.pass_holder_first_name}} {{user.pass_holder_last_name}}</h5> -->
+			<table style="margin: 0;">
 				<thead>
 					<tr>
 						<th width="100">Name</th>
 						<th width="130">Time Out</th>
 						<th width="110">Time In</th>
-						<th width="180">Destination</th>
+						<th width="160">Destination</th>
 						<th width="100">Authorized By</th>
 						<th width="100">Check-In</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr ng-repeat="pass in hallpasses | filter:{pass_holder_user_id:user.pass_holder_user_id}">
-						<td>{{pass.pass_holder_first_name}} {{pass.pass_holder_last_name}}</td>
-						<td>{{pass.out_time | date:'MMM d, y h:mm a'}}</td>
-						<td>{{(pass.in_time == null)? 'Active':pass.in_time | date:'MMM d, y h:mm a'}}</td>
-						<td>{{pass.destination_name}}</td>
-						<td>{{pass.authority_first_name}} {{pass.authority_last_name}}</td>
-						<td><span ng-show="pass.in_time != null" aria-hidden="true">{{pass.checked_in_by}}</span><button ng-show="checkPermission('check_in_hall_pass',true) && pass.in_time == null"class="button small success" ng-click="check_in(pass)"><span aria-hidden="true" class="icon-checkmark"></span></button></td>
- 					</tr>
-				</tbody>
 			</table>
+			<div style="overflow-y: scroll !important; height: 500px !important;">
+				<table>
+					<tbody>
+						<tr ng-repeat="pass in hallpasses | filter:{pass_holder_user_id:user.pass_holder_user_id}">
+							<td width="100">{{pass.pass_holder_first_name}} {{pass.pass_holder_last_name}}</td>
+							<td width="130">{{pass.out_time | date:'MMM d, y h:mm a'}}</td>
+							<td width="110">{{(pass.in_time == null)? 'Active':pass.in_time | date:'MMM d, y h:mm a'}}</td>
+							<td width="160">{{pass.destination_name}}</td>
+							<td width="100">{{pass.authority_first_name}} {{pass.authority_last_name}}</td>
+							<td width="100"><span ng-show="pass.in_time != null" aria-hidden="true">{{pass.checked_in_by}}</span><button ng-show="checkPermission('check_in_hall_pass',true) && pass.in_time == null"class="button small success" ng-click="check_in(pass)"><span aria-hidden="true" class="icon-checkmark"></span></button></td>
+	 					</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 </div>
