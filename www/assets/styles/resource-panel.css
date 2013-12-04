@@ -32,7 +32,7 @@
 	height: 100%;
 }
 
-.resource-panel.open + .resource-panel {
+.resource-panel.open + .resource-panel.close {
 	border-top: 1px solid #999;
 }
 

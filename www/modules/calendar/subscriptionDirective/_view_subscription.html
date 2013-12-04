@@ -1,8 +1,8 @@
 <div
-	resource-panel="watcher[calendar.calendar_id].editingCalendar"
+	resource-panel
 	class="resource-panel existing"
-	ng-class="{'open':watcher[calendar.calendar_id].editingCalendar, 'close':!watcher[calendar.calendar_id].editingCalendar}"
-	ng-style="{background:calendar.color}">
+	ng-class="{'open':calendar.editing, 'close':!calendar.editing}"
+	ng-style="{background:color}">
 	<div class="resource-gradient">
 		<div class="resource-header pane-header small">
 		    <span class="pane-title">{{editCalendar.calendar_name}}</span>
@@ -10,7 +10,7 @@
 		</div>
 		<div class="resource-body">
 			<div class="subscribed" ng-hide="isCalendarCreator(calendar)">
-				<span aria-hidden="true" class="icon-rss-alt" ng-style="{color:calendar.color}">
+				<span aria-hidden="true" class="icon-rss-alt" ng-style="{color:color}">
 				</span>
 			</div>
 
@@ -19,7 +19,7 @@
 			<div class="resource-display">
 				<checkbox
 					class="resource-checkbox"
-					ng-model="watcher[calendar.calendar_id].viewing"
+					ng-model="calendar.viewing"
 					ng-click="setShowState();"
 					icon-if-true="icon-eye"
 					icon-if-false="icon-eye-blocked"
@@ -38,7 +38,7 @@
 				<div class="row" style="padding-top: 1em;">
 					<div class="large-12 columns">
 						<div class="resource-name">
-							<input required type="text" focus-me="[watcher[calendar.calendar_id].editingCalendar]" delay="500" ng-model="editCalendar.calendar_name" placeholder="Name (required)" />
+							<input required type="text" focus-me="[editCalendar]" delay="500" ng-model="editCalendar.calendar_name" placeholder="Name (required)" />
 						</div>
 						<div class="color-selector">
 							<ui-colorpicker ng-model="editCalendar.color"></ui-colorpicker>

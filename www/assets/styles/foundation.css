@@ -7703,7 +7703,9 @@ header#content-header ul.small-block-grid-3 li {
 
 /* line 585, ../../scss/foundation.scss */
 #content input[type=text] {
+  border-radius: 4px !important;
   border: 1px solid #aaa !important;
+  height: 26px !important;
 }
 
 /* line 590, ../../scss/foundation.scss */
@@ -7731,9 +7733,12 @@ header#content-header ul.small-block-grid-3 li {
 /* line 606, ../../scss/foundation.scss */
 #content table {
   width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 0;
+  height: auto;
 }
 
-/* line 610, ../../scss/foundation.scss */
+/* line 613, ../../scss/foundation.scss */
 #content table thead tr th {
   text-align: center;
   background-color: #23538a;
@@ -7741,28 +7746,38 @@ header#content-header ul.small-block-grid-3 li {
   font-weight: 300;
 }
 
-/* line 617, ../../scss/foundation.scss */
+/* line 620, ../../scss/foundation.scss */
+#content table thead tr th, #content div table tbody tr td {
+  width: 14.289%;
+}
+
+/* line 623, ../../scss/foundation.scss */
+#content div table tbody tr td {
+  text-align: center;
+}
+
+/* line 653, ../../scss/foundation.scss */
 #content table tr td:last-of-type {
   text-align: center;
 }
 
-/* line 621, ../../scss/foundation.scss */
+/* line 657, ../../scss/foundation.scss */
 .admin-table tr {
   padding: 0px;
   margin: 0px;
 }
 
-/* line 625, ../../scss/foundation.scss */
+/* line 661, ../../scss/foundation.scss */
 .admin-table td span.student {
   border-bottom: 1px dotted #222;
 }
 
-/* line 628, ../../scss/foundation.scss */
+/* line 664, ../../scss/foundation.scss */
 .admin-table td span.student, .admin-table tr td span[class*="icon-"] {
   cursor: pointer !important;
 }
 
-/* line 631, ../../scss/foundation.scss */
+/* line 667, ../../scss/foundation.scss */
 .admin-table tr td input {
   position: relative;
   top: 5px;
