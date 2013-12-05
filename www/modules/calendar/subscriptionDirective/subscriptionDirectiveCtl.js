@@ -3,8 +3,6 @@
 angular.module('pinwheelApp')
 	.controller('SubscriptionDirectiveCtl', function ($scope, $routeParams, ReminderService, CalendarAdmins, Calendar) {
 		
-		$scope.CalendarAdmins = CalendarAdmins;
-
 		//build calendarWatcher array
 		if ($scope.watcher != undefined) {
 			$scope.watcher[$scope.calendar.calendar_id] = {
@@ -21,7 +19,7 @@ angular.module('pinwheelApp')
 
 		//open existing calendar for editing
 		$scope.edit = function() {
-			delete $scope.calendar.events;
+			//delete $scope.calendar.events;
 			$scope.editCalendar = angular.extend({}, $scope.calendar);
 			$scope.close(); //close all other open calendars
 			$scope.calendar.editing = true;
@@ -36,6 +34,9 @@ angular.module('pinwheelApp')
 			$scope.calendar.$update({id: $scope.calendar.calendar_id}, function(calendar) {
 				$scope.calendar = calendar;
 				$scope.calendar.recent = $scope.editCalendar.recent;
+				CalendarAdmins.query({id: $scope.calendar.calendar_id}, function(admins){
+					$scope.calendar.admins = admins;
+				});
 				angular.extend($scope.watcher[$scope.calendar.calendar_id], {
 					color: $scope.calendar.color,
 					//reminder: ReminderService.getCalendarReminderProperties($scope.calendar)
@@ -51,6 +52,9 @@ angular.module('pinwheelApp')
 			$scope.calendar.$update({id: "subscribe"}, function(calendar) {
 				$scope.calendar = calendar;
 				$scope.calendar.recent = true;
+				CalendarAdmins.query({id: $scope.calendar.calendar_id}, function(admins){
+					$scope.calendar.admins = admins;
+				});
 				$("#monthCalendar").fullCalendar('refetchEvents');
 			});
 		}	
@@ -75,10 +79,12 @@ angular.module('pinwheelApp')
 		//set if a calendar's events and tasks are visible
 		$scope.setShowState = function() {
 			var recent = $scope.calendar.recent;
+			var storeAdmins = $scope.calendar.admins;
 			$scope.calendar.$update({id: $scope.calendar.calendar_id}, function(calendar) {
 				if(!calendar.hasOwnProperty('errno')){
 					calendar.recent = recent;
 					$scope.calendar = calendar;
+					$scope.calendar.admins = storeAdmins;
 					$("#monthCalendar").fullCalendar("refetchEvents");
 				}
 			});
