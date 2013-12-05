@@ -39,23 +39,23 @@
 			<!-- <hr> -->
 		</div>
 
-		<dl id="hallpass-tabs" class="large-12 settings tabs">
-			<dd settings-tab="activePasses" activeTab='activeTab'>
+ 		<dl id="hallpass-tabs" class="large-12 settings tabs">
+			<dd hallpass-tab="activePasses" activeTab='activeTab'>
 				<p>
 					<span aria-hidden="true" class="icon-cog"></span> Active Hall Passes
 				</p>
 			</dd>
-			<dd settings-tab="recentPasses" activeTab='activeTab'>
+			<dd hallpass-tab="recentPasses" activeTab='activeTab'>
 				<p>
 					<span aria-hidden="true" class="icon-notebook"></span> Recent Hall Passes
 				</p>
 			</dd>
-			<dd ng-repeat="user in viewing_history" settings-tab="{{user.pass_holder_user_id}}" activeTab='activeTab'>
+			<dd ng-repeat="user in viewing_history" hallpass-tab="{{user.pass_holder_user_id}}" activeTab='activeTab'>
 				<p>
 					 {{user.pass_holder_first_name}} {{user.pass_holder_last_name}} <span ng-click="closeUserHistory(user)" aria-hidden="true" class="icon-close2" title="Close Tab"></span>
 				</p>
 			</dd>
-		</dl> 
+		</dl>
 		<div class="large-12" ng-show="activeTab.activePasses">
 			<!-- <h2>Active Hall Passes</h2> -->
 			<table class="admin-table">

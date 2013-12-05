@@ -3,8 +3,8 @@
 angular.module('pinwheelApp')
   .controller('HallpassCtl', function ($scope, $location, $timeout, $http, Hallpass, Facilities, OrgUserList) {
 
-  	  	$scope.activeTab = {activePasses:true};
-  	  	angular.element("#hallpass-tabs").find("dd[settings-tab='activePasses']").addClass("active").siblings().removeClass("active");
+  	  	//$scope.activeTab = {activePasses:true};
+  	  	angular.element("#hallpass-tabs").find("dd[hallpass-tab='activePasses']").addClass("active").siblings().removeClass("active");
   	  	$scope.viewing_history = [];
   	  	Hallpass.query({}, function(hallpasses){
 			$scope.hallpasses = hallpasses;
@@ -28,7 +28,6 @@ angular.module('pinwheelApp')
 			}
 		});
 		
-
 		$scope.newHallpassTime = new Date(); //get date object set to next hour
 			
 		$scope.check_in = function(pass){
@@ -53,7 +52,7 @@ angular.module('pinwheelApp')
 				$scope.viewing_history.push(pass);
 			}
 			angular.element("#hallpass-tabs").children().removeClass("active");
-			$timeout(function(){angular.element("#hallpass-tabs").find("dd[settings-tab="+pass.pass_holder_user_id+"]").addClass("active")});
+			$timeout(function(){angular.element("#hallpass-tabs").find("dd[hallpass-tab="+pass.pass_holder_user_id+"]").addClass("active")});
 			angular.forEach($scope.activeTab, function(value, section){
 				//set all activeTab properties to false
 				$scope.activeTab[section] = false;

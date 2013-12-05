@@ -1,6 +1,5 @@
 <div class="row reminders">
 	<div class="large-12 columns">
-		<label>Reminder:</label>
 		<table>
 			<tbody>
 				<tr ng-repeat="r in reminders" reminder="r"></tr>
@@ -14,7 +13,7 @@
 							<reminder-form
 								form-reminder="newReminder"
 								save="save()"
-								cancel="cancel()">
+								cancel="cancelAddReminder()">
 							</reminder-form>
 						</div>
 					</td>

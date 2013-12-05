@@ -55,9 +55,24 @@
 						/>
 					</div>
 				</div>
-
+				<tabs default="reminders" ng-init="list = [{name:'reminders',icon:'icon-notebook'},{name:'admins',icon:'icon-cog'}]"></tabs>
+				<!-- <dl class="large-12 settings tabs">
+					<dd settings-tab="reminders" activeTab='activeTab'>
+						<p>
+							<span aria-hidden="true" class="icon-notebook"></span> Reminders
+						</p>
+					</dd>
+					<dd settings-tab="admins" activeTab='activeTab'>
+						<p>
+							<span aria-hidden="true" class="icon-cog"></span> Admins
+						</p>
+					</dd>
+				</dl>  -->
 				<!-- Reminders -->
-				<reminder-list reminders="reminders"></reminder-list>
+				<reminder-list ng-show="activeTab.reminders"></reminder-list>
+
+				<!-- Calendar Admins -->
+				<calendar-admin-list ng-show="activeTab.admins"></calendar-admin-list>
 
 				<!-- Check for permissions for all these elements -->
 				<div class="row" style="display: none;">

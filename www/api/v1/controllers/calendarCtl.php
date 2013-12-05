@@ -229,6 +229,7 @@ class CalendarCtl
 		echo json_encode($calendar);
 		User:: incrementVersion($authUserID);
 	}
+
 	function getCalendarAdmins($id) {
 		$authUserID = Authorize:: sharedInstance()->userID();
 		echo json_encode(Calendar::getCalendarAdmins($id));
@@ -240,8 +241,8 @@ class CalendarCtl
 		$calendar = Calendar::load($calendar_id);
 
 		//check to see if the admin actually exists
-		if(User::validateUserName($admin->username,true)){
-			$admin = User::loadWithHandle($admin->username);
+		if(User::validateUserName($admin->user_handle,true)){
+			$admin = User::loadWithHandle($admin->user_handle);
 		}else{
 			throw new UserDoesNotExist();
 		}

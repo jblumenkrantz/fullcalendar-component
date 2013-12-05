@@ -6,10 +6,7 @@ angular.module('pinwheelApp')
 		restrict: "E",
 		replace: true,
 		templateUrl: 'modules/reminders/_reminder_list.html',
-		scope: {
-			reminders: "="
-		},
-		controller: function($scope, $element, $attrs) {
+		link: function($scope, $element, $attrs) {
 			$scope.defaultReminder = function() {
 				return {
 					reminder_pref_id: "000",
@@ -25,9 +22,9 @@ angular.module('pinwheelApp')
 				$scope.adding = true;
 			}
 			$scope.save = function() {
-				$scope.cancel();
+				$scope.cancelAddReminder();
 			}
-			$scope.cancel = function() {
+			$scope.cancelAddReminder = function() {
 				$scope.newReminder = $scope.defaultReminder();
 				$scope.adding = false;
 			}
@@ -78,7 +75,7 @@ angular.module('pinwheelApp')
 		},
 		controller: function($scope, $element, $attrs) {
 			$scope.reminderTypes = ReminderService.reminderTypes;
-			$scope.reminder.reminder_offset = ReminderService.getOffsetFromMinsBefore($scope.reminder);
+			//$scope.reminder.reminder_offset = ReminderService.getOffsetFromMinsBefore($scope.reminder);
 		}
 	}
 });
