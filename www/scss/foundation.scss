@@ -49,6 +49,10 @@
 // -----------------------------
 $letter-press:  1px 1px 2px #fff;
 // $primary-color: #658929; //org primary color
+
+body {
+
+}
 #my-calendars, #main-content, #tasks {
 	min-height: 822px; // min-height for simulation purposes -jt
 	padding: 0 !important; 
@@ -105,6 +109,7 @@ dl.sub-nav.calendar-filter {
 
 dl.sub-nav.calendar-filter dd {
 	margin-top: 12px;
+	border-radius: $global-radius;
 }
 
 // --------------------------
@@ -500,7 +505,7 @@ border-top: 0px solid $primary-color;
     &:hover, &:focus {
       background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.2));
     }
-     &:active {
+    &:active {
       background: rgba($primary-color, .5) !important;
     }
     &.logout {
@@ -600,13 +605,50 @@ border-top: 0px solid $primary-color;
 
 #content table{
 	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 0;
+	height: auto;
 }
 
 #content table thead tr th {
 	text-align: center;
 	background-color: $primary-color;
 	color: #fff;
+	font-weight: 300;
+
 }
+#content table thead tr th, #content div table tbody tr td {
+	width: 14.289%;
+}
+#content div table tbody tr td {
+	text-align: center;
+}
+
+// #content div table tbody tr td:nth-of-type(1) {
+// 	width: 14.28%;
+// }
+
+// #content div table tbody tr td:nth-of-type(2) {
+// 	width: 14.28%;
+// }
+
+// #content div table tbody tr td:nth-of-type(3) {
+// 	text-align: center;
+// }
+
+// #content div table tbody tr td:nth-of-type(4) {
+// 	width: 28.49%;
+// }
+
+// #content div table tbody tr td:nth-of-type(5) {
+// 	width: 14.28%;
+// }
+
+// #content div table tbody tr td:nth-of-type(6) {
+// 	width: 14.28%;
+// }
+
+
 // center check-in boxes in the last column
 #content table tr td:last-of-type{
 	text-align: center;

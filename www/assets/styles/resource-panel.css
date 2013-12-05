@@ -32,7 +32,7 @@
 	height: 100%;
 }
 
-.resource-panel.open + .resource-panel {
+.resource-panel.open + .resource-panel.close {
 	border-top: 1px solid #999;
 }
 
@@ -537,6 +537,8 @@
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+	font-weight: 400;
+	line-height: 16px;
 }
 
 .resource-display .due,

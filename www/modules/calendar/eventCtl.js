@@ -28,7 +28,7 @@ angular.module('pinwheelApp')
 			if(defaults){
 				angular.extend($scope.formEvent, defaults);
 			}
-			ReminderService.checkCalendarReminder($scope.formEvent, $scope.calendarWatchers);
+			//ReminderService.checkCalendarReminder($scope.formEvent, $scope.calendarWatchers);
 			$scope.addingEvent = true;
 			$scope.editingEvent = false;
 			$scope.quickAdding = false;
@@ -39,7 +39,7 @@ angular.module('pinwheelApp')
 			$scope.bak = event.source;
 			delete event.source;
 			$scope.event = event;	//store the original event object
-
+			
 			$scope.formEvent = new Event(event);
 			$scope.useReminderType = ($scope.formEvent.allDay) ? 'absolute' : 'relative';
 			(!$scope.formEvent.has_reminder && $scope.checkCalendarReminder());
@@ -111,7 +111,7 @@ angular.module('pinwheelApp')
 			}
 
 			$scope.useReminderType = ($scope.formEvent.allDay) ? 'absolute' : 'relative';
-			ReminderService.checkCalendarReminder($scope.formEvent, $scope.calendarWatchers);
+			//ReminderService.checkCalendarReminder($scope.formEvent, $scope.calendarWatchers);
 		}
 
 		$scope.usingOwnReminder = function() {
@@ -149,7 +149,7 @@ angular.module('pinwheelApp')
 		}
 
 		$scope.checkCalendarReminder = function() {
-			ReminderService.checkCalendarReminder($scope.formEvent, $scope.calendarWatchers);
+			//ReminderService.checkCalendarReminder($scope.formEvent, $scope.calendarWatchers);
 			($scope.formEvent.allDay && $scope.formEvent.using_calendar_reminder && $scope.convertToAbsoluteReminder());
 		}
 

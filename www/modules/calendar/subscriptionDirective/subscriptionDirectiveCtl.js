@@ -1,38 +1,44 @@
 'use strict';
 
 angular.module('pinwheelApp')
-	.controller('SubscriptionDirectiveCtl', function ($scope, $routeParams, ReminderService, CalendarAdmins) {
-		//build calendarWatcher array
+	.controller('SubscriptionDirectiveCtl', function ($scope, $routeParams, ReminderService, CalendarAdmins, Calendar) {
+		
 		$scope.CalendarAdmins = CalendarAdmins;
+
+		//build calendarWatcher array
 		if ($scope.watcher != undefined) {
 			$scope.watcher[$scope.calendar.calendar_id] = {
-				viewing: $scope.calendar.viewing,
 				color: $scope.calendar.color,
-				reminder: ReminderService.getCalendarReminderProperties($scope.calendar)
+				//reminder: ReminderService.getCalendarReminderProperties($scope.calendar)
 			};
 		}
+
+		//this watch makes it so that color changes while in edit mode are display immediately
+		//but they are only accepted when the user hits save
+		$scope.$watch("editCalendar.color", function(newVal, oldVal) {
+			$scope.color = ($scope.calendar.editing) ? newVal : $scope.calendar.color;
+		});
 
 		//open existing calendar for editing
 		$scope.edit = function() {
 			delete $scope.calendar.events;
-			$scope.editCalendar || ($scope.editCalendar = {});
-			angular.copy($scope.calendar, $scope.editCalendar);
-			$scope.close();
-			$scope.watcher[$scope.calendar.calendar_id].editingCalendar = true;
+			$scope.editCalendar = angular.extend({}, $scope.calendar);
+			$scope.close(); //close all other open calendars
+			$scope.calendar.editing = true;
 		}
 
 		//update existing calendar
 		$scope.update = function() {
-			if($scope.editCalendar.org_id == null){
-				$scope.editCalendar.org_id = $scope.checkPermision('modify_public_calendars').orgs[0].org_id;
-			}
+			//if($scope.editCalendar.org_id == null){
+				//$scope.editCalendar.org_id = $scope.checkPermision('modify_public_calendars').orgs[0].org_id;
+			//}
 			angular.copy($scope.editCalendar, $scope.calendar);
 			$scope.calendar.$update({id: $scope.calendar.calendar_id}, function(calendar) {
 				$scope.calendar = calendar;
 				$scope.calendar.recent = $scope.editCalendar.recent;
 				angular.extend($scope.watcher[$scope.calendar.calendar_id], {
 					color: $scope.calendar.color,
-					reminder: ReminderService.getCalendarReminderProperties($scope.calendar)
+					//reminder: ReminderService.getCalendarReminderProperties($scope.calendar)
 				});
 				$("#monthCalendar").fullCalendar('refetchEvents');
 				$scope.cancel();
@@ -62,13 +68,13 @@ angular.module('pinwheelApp')
 
 		//cancel editing of calendar
 		$scope.cancel = function() {
-			$scope.watcher[$scope.calendar.calendar_id].editingCalendar = false;
+			$scope.editCalendar.color = $scope.calendar.color;
+			$scope.calendar.editing = false;
 		}
 
 		//set if a calendar's events and tasks are visible
 		$scope.setShowState = function() {
 			var recent = $scope.calendar.recent;
-			$scope.calendar.viewing = $scope.watcher[$scope.calendar.calendar_id].viewing;
 			$scope.calendar.$update({id: $scope.calendar.calendar_id}, function(calendar) {
 				if(!calendar.hasOwnProperty('errno')){
 					calendar.recent = recent;
