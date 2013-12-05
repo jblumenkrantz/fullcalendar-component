@@ -8,7 +8,7 @@
 			$ret = array();
 			foreach(static::$batch as $event){
 				if((IsSet($opts['repeaters']) && IsSet($event->repeat_interval) && $event->repeat_interval > 0) ||
-						(IsSet($opts['addendums']) && IsSet($event->repeat_id)) ||
+						(IsSet($opts['addendums']) && IsSet($event->repeat_addendum) && $event->repeat_addendum==1) ||
 						(!IsSet($opts['addendums']) && !IsSet($opts['repeaters']) && !IsSet($event->repeat_id) && (!IsSet($event->repeat_interval) || $event->repeat_interval==0))){
 							$event->repeat_stop   = strtotime($event->repeat_stop);
 							$event->start = strtotime($event->start);

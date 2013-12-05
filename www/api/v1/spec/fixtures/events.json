@@ -49,5 +49,15 @@
 		"repeat_by_monthday": "12",
 		"repeat_stop": "11/31/2013",
 		"creator_id" : "frank"
+	},
+	"daily_addendum": {
+		"id" : "event_6",
+		"title" : "repeating event one",
+		"calendar_id" : "cal_1",
+		"start" : "10/17/2013 5:00PM",
+		"end" : "10/17/2013 7:00PM",
+		"repeat_addendum": 1,
+		"repeat_id": "event_3",
+		"creator_id" : "frank"
 	}
 }

@@ -42,24 +42,24 @@
 			$scene->date[] = strtotime("10/27/2013"); // Sunday
 		})->
 		the("number should change based on the sunday/monday transitions that have passed", function($scene){
-			expect(TestEvent::findWeeksSince($scene->date[0], $scene->date[1]))->toBe(0);
-			expect(TestEvent::findWeeksSince($scene->date[0], $scene->date[2]))->toBe(1);
-			expect(TestEvent::findWeeksSince($scene->date[1], $scene->date[2]))->toBe(1);
-			expect(TestEvent::findWeeksSince($scene->date[0], $scene->date[6]))->toBe(4);
-			expect(TestEvent::findWeeksSince($scene->date[5], $scene->date[6]))->toBe(1);
-			expect(TestEvent::findWeeksSince($scene->date[2], $scene->date[4]))->toBe(1);
-			expect(TestEvent::findWeeksSince($scene->date[2], $scene->date[5]))->toBe(2);
-			expect(TestEvent::findWeeksSince($scene->date[2], $scene->date[6]))->toBe(3);
+			expect(TestEvent::findWeeksSince($scene->date[0], $scene->date[1]))->toEqual(0);
+			expect(TestEvent::findWeeksSince($scene->date[0], $scene->date[2]))->toEqual(1);
+			expect(TestEvent::findWeeksSince($scene->date[1], $scene->date[2]))->toEqual(1);
+			expect(TestEvent::findWeeksSince($scene->date[0], $scene->date[6]))->toEqual(4);
+			expect(TestEvent::findWeeksSince($scene->date[5], $scene->date[6]))->toEqual(1);
+			expect(TestEvent::findWeeksSince($scene->date[2], $scene->date[4]))->toEqual(1);
+			expect(TestEvent::findWeeksSince($scene->date[2], $scene->date[5]))->toEqual(2);
+			expect(TestEvent::findWeeksSince($scene->date[2], $scene->date[6]))->toEqual(3);
 		})->
 		the("reverse should be true as well", function($scene){
-			expect(TestEvent::findWeeksSince($scene->date[1], $scene->date[0]))->toBe(0);
-			expect(TestEvent::findWeeksSince($scene->date[2], $scene->date[0]))->toBe(1);
-			expect(TestEvent::findWeeksSince($scene->date[2], $scene->date[1]))->toBe(1);
-			expect(TestEvent::findWeeksSince($scene->date[6], $scene->date[0]))->toBe(4);
-			expect(TestEvent::findWeeksSince($scene->date[6], $scene->date[5]))->toBe(1);
-			expect(TestEvent::findWeeksSince($scene->date[4], $scene->date[2]))->toBe(1);
-			expect(TestEvent::findWeeksSince($scene->date[5], $scene->date[2]))->toBe(2);
-			expect(TestEvent::findWeeksSince($scene->date[6], $scene->date[2]))->toBe(3);
+			expect(TestEvent::findWeeksSince($scene->date[1], $scene->date[0]))->toEqual(0);
+			expect(TestEvent::findWeeksSince($scene->date[2], $scene->date[0]))->toEqual(1);
+			expect(TestEvent::findWeeksSince($scene->date[2], $scene->date[1]))->toEqual(1);
+			expect(TestEvent::findWeeksSince($scene->date[6], $scene->date[0]))->toEqual(4);
+			expect(TestEvent::findWeeksSince($scene->date[6], $scene->date[5]))->toEqual(1);
+			expect(TestEvent::findWeeksSince($scene->date[4], $scene->date[2]))->toEqual(1);
+			expect(TestEvent::findWeeksSince($scene->date[5], $scene->date[2]))->toEqual(2);
+			expect(TestEvent::findWeeksSince($scene->date[6], $scene->date[2]))->toEqual(3);
 		});
 
 			;
@@ -69,7 +69,7 @@
 			$scene->weektest   = strtotime("9/25/2013 5:00PM");
 		})->
 		the("dates should be the right time apart", function($scene){
-			expect(TestEvent::findWeeksSince($scene->eventstart, $scene->weektest))->toBe(1);
+			expect(TestEvent::findWeeksSince($scene->eventstart, $scene->weektest))->toEqual(1);
 		});
 
 		$then->beforeEach("finding how many months have passed between two dates", function($scene){
