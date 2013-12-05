@@ -21,6 +21,13 @@ angular.module('pinwheelApp')
 			});
 		}
 
+		if(!$scope.user){
+			User.get({}, function(user){
+				console.warn(['User Reloaded',user]);
+				$scope.$parent.user = user;
+			});
+		}
+
 		$scope.$watch('user',function(){
 			if($scope.user != undefined){
 				if($scope.user.permissions != undefined){
