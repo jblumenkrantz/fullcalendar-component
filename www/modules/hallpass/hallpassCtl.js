@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pinwheelApp')
-  .controller('HallpassCtl', function ($scope, $location, $timeout, $http, Hallpass, Facilities, OrgUserList) {
+  .controller('HallpassCtl', function ($scope, $location, $timeout, $http, Hallpass, Facilities, OrgUserList, User) {
 
   	  	$scope.activeTab = {activePasses:true};
   	  	angular.element("#hallpass-tabs").find("dd[settings-tab='activePasses']").addClass("active").siblings().removeClass("active");
@@ -14,6 +14,13 @@ angular.module('pinwheelApp')
 			$scope.facilities = facilities;
 			  	console.warn(['Facilities loaded',$scope.facilities]);
 		});
+
+		if(!$scope.user){
+			User.get({}, function(user){
+				console.warn(['User Reloaded',user]);
+				$scope.$parent.user = user;
+			});
+		}
 
 		$scope.$watch('user',function(){
 			if($scope.user){
