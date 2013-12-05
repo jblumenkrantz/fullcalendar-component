@@ -7782,3 +7782,33 @@ header#content-header ul.small-block-grid-3 li {
   position: relative;
   top: 5px;
 }
+
+/* line 675, ../../scss/foundation.scss */
+.main-wrap {
+  position: absolute;
+  top: 100px;
+  bottom: 50px;
+  width: 98%;
+  background-color: silver;
+  overflow: auto;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 685, ../../scss/foundation.scss */
+.container2 {
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+
+/* line 690, ../../scss/foundation.scss */
+.content2 {
+  display: table-cell;
+  height: 100%;
+  width: 98%;
+  vertical-align: middle;
+  bottom: 60px;
+  margin: 0;
+  padding: 0;
+}

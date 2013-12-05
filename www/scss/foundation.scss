@@ -671,3 +671,29 @@ border-top: 0px solid $primary-color;
 // // .admin-table tr td button [class*="icon-"] {
 // //   text-shadow: none;
 // // }
+
+.main-wrap {
+    position: absolute;
+    top: 100px;
+    bottom: 50px;
+    width: 98%;
+    background-color: silver;
+    overflow: auto;
+       margin: 0;
+    padding: 0;
+}
+.container2{
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+.content2 {
+    // border: 1px solid blue;
+    display: table-cell;
+    height: 100%;
+    width: 98%;
+    vertical-align: middle;
+    bottom: 60px;
+    margin: 0;
+    padding: 0;
+}
