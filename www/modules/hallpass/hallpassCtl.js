@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('pinwheelApp')
-  .controller('HallpassCtl', function ($scope, $location, $timeout, $http, Hallpass, Facilities, OrgUserList) {
+  .controller('HallpassCtl', function ($scope, $location, $timeout, $http, Hallpass, Facilities, OrgUserList, User) {
 
-  	  	//$scope.activeTab = {activePasses:true};
+  	  	$scope.activeTab = {activePasses:true};
   	  	angular.element("#hallpass-tabs").find("dd[hallpass-tab='activePasses']").addClass("active").siblings().removeClass("active");
   	  	$scope.viewing_history = [];
   	  	Hallpass.query({}, function(hallpasses){
@@ -14,20 +14,29 @@ angular.module('pinwheelApp')
 			$scope.facilities = facilities;
 			  	console.warn(['Facilities loaded',$scope.facilities]);
 		});
+		if(!$scope.user){
+			User.get({}, function(user){
+				console.warn(['User Reloaded',user]);
+				$scope.$parent.user = user;
+			});
+		}
 
 		$scope.$watch('user',function(){
-			if($scope.user){
-				// Check user permissions
-				if(!$scope.checkPermission('view_hallpass_history',true)){
-  					$location.path('calendar');
-  				}
-				OrgUserList.query({id:$scope.user.permissions[0].org_id}, function(users){
-					$scope.orgUsers = users;
-					console.warn(['OrgUsers loaded',$scope.orgUsers]);
-				});
+			if($scope.user != undefined){
+				if($scope.user.permissions != undefined){
+					// Check user permissions
+					if(!$scope.checkPermission('view_hallpass_history',true)){
+	  					$location.path('calendar');
+	  				}
+					OrgUserList.query({id:$scope.user.permissions[0].org_id}, function(users){
+						$scope.orgUsers = users;
+						console.warn(['OrgUsers loaded',$scope.orgUsers]);
+					});
+				}
 			}
 		});
 		
+
 		$scope.newHallpassTime = new Date(); //get date object set to next hour
 			
 		$scope.check_in = function(pass){

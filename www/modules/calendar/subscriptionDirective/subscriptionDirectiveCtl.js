@@ -83,17 +83,11 @@ angular.module('pinwheelApp')
 				}
 			});
 		}
-		$scope.isCalendarAdmin = function(calendar){
-			return calendar.calendar_admin;
-		}
-		$scope.isCalendarCreator = function(calendar) {
-			return ($scope.user.user_id == calendar.creator_id);
-		}
 
-		$scope.checkPermision = function(p,expectBoolean){
-			/* If expectBoolean is true the function will only return a boolean value  */
-			/* otherwise it will return an object with the definitive boolean value */
-			/* alongside an array of orgs that have that permission set to true */
+		$scope.checkPermission = function(p,expectBoolean,calendar){
+			// If expectBoolean is true the function will only return a boolean value
+			// otherwise it will return an object with the definitive boolean value
+			// alongside an array of orgs that have that permission set to true
 			var permission = {};
 			permission.orgs = [];
 			permission.definitive = false;
@@ -103,23 +97,13 @@ angular.module('pinwheelApp')
 					permission.orgs.push({org_name:v.org_name, org_id:v.org_id});
 				}
 			});
+			if(p == 'calendar_admin'){
+				permission.definitive = calendar.calendar_admin;
+			}
+			if(p == 'calendar_creator'){
+				permission.definitive = ($scope.user.user_id == calendar.creator_id);
+			}
 			return (expectBoolean)? permission.definitive:permission;
-		}
-		$scope.isOrgSuperAdmin = function() {
-			var exp =  /super-admin/g;
-			if(exp.test($scope.user.settings.primary_org.user_role)){
-				return true;
-			}else{
-				return false;
-			}	
-		}
-		$scope.isOrgAdmin = function() {
-/*			var exp =  /admin/g;
-			if(exp.test($scope.user.settings.primary_org.user_role)){*/
-				return true;
-/*			}else{
-				return false;
-			}	*/
 		}
 
 		$scope.reminderToggle = function() {

@@ -15,6 +15,19 @@ angular.module('pinwheelApp')
 	return {
 		restrict: "A",
 		link: function($scope, $element, $attrs){
+			// Check permissions
+			if($scope.item.hasOwnProperty('permission')){
+				var permission = false;
+				angular.forEach($scope.item.permission, function(v){
+					if(!permission){
+						permission = $scope.checkPermission(v,true,$scope.calendar)
+					}
+				});
+				if(!permission){
+					$element.hide();
+				}
+			}
+
 			if($scope.$parent.activeTab[$scope.item.name]){
 				$element.addClass('active');
 			}

@@ -170,10 +170,11 @@ angular.module('pinwheelApp')
 				$('#monthCalendar').fullCalendar('changeView','month');
 			}
 		};
-		$scope.checkPermission = function(p,expectBoolean){
+		$scope.checkPermission = function(p,expectBoolean,calendar){
 			// If expectBoolean is true the function will only return a boolean value 
 			// otherwise it will return an object with the definitive boolean value 
 			// alongside an array of orgs that have that permission set to true 
+
 			var permission = {};
 			permission.orgs = [];
 			permission.definitive = false;
@@ -184,9 +185,18 @@ angular.module('pinwheelApp')
 						permission.orgs.push({org_name:v.org_name, org_id:v.org_id});
 					}
 				});
+
 			}
+			if(p == 'calendar_admin'){
+				permission.definitive = calendar.calendar_admin;
+			}
+			if(p == 'calendar_creator'){
+				permission.definitive = ($scope.user.user_id == calendar.creator_id);
+			}
+			
 			return (expectBoolean)? permission.definitive:permission;
 		}
+		
 		$scope.toggle_drawer = function(){
 			if($(".left-nav").width() > 0){
 				$(".page-wrap").css('width','100%');

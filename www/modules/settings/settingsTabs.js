@@ -5,7 +5,6 @@ angular.module('pinwheelApp')
 	return {
 		restrict: "A",
 		link: function($scope, $element, $attrs, $parentCtl){
-			$scope.activeTab = {admins:true};
 			$element.bind('click', function(){
 				$element.addClass("active").siblings().removeClass("active");
 				angular.forEach($scope.activeTab, function(value, section){
@@ -13,7 +12,7 @@ angular.module('pinwheelApp')
 					$scope.activeTab[section] = false;
 				});
 				/* set the clicked tabs property to true in activeTab */
-				$scope.activeTab[$attrs.settingsTab] = true;
+				$scope.activeTab[$attrs.hallpassTab] = true;
 				$scope.$apply();
 			});
 		}

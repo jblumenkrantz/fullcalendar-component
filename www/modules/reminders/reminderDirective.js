@@ -73,9 +73,9 @@ angular.module('pinwheelApp')
 			save: "&",
 			cancel: "&"
 		},
-		controller: function($scope, $element, $attrs) {
+		link: function($scope, $element, $attrs) {
 			$scope.reminderTypes = ReminderService.reminderTypes;
-			//$scope.reminder.reminder_offset = ReminderService.getOffsetFromMinsBefore($scope.reminder);
+			$scope.reminder.reminder_offset = 1;
 		}
 	}
 });
