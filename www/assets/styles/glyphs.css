@@ -335,10 +335,10 @@
 .icon-hide-left:before {
 	content: "\e60a";
 }
-.icon-show-left:before {
+.icon-hide-right:before {
 	content: "\e60b";
 }
-.icon-hide-right:before {
+.icon-show-left:before {
 	content: "\e609";
 }
 .icon-show-right:before {
