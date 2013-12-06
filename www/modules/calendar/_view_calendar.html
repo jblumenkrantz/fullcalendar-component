@@ -5,19 +5,19 @@
 		<ul class="small-block-grid-3">
 			<li class="text-left">
 				<span>
-					<span class="hide-for-small" ng-click="toggleSidebar('calendarDrawer')" aria-hidden="true" ng-class="{'icon-arrow-left':calendarDrawer, 'icon-arrow-right':!calendarDrawer}" style="margin-left: 4px;"></span>
+					<span class="hide-for-small" ng-click="toggleSidebar('calendarDrawer')" aria-hidden="true" ng-class="{'icon-hide-left':calendarDrawer, 'icon-hide-right':!calendarDrawer}" style="margin-left: 4px;"></span>
 				</span>
 				<!-- <span aria-hidden="true" class="icon-poop-1"></span> -->
 			</li>
 			<li>
-				<span aria-hidden="true" class="icon-arrow-left2" ng-click="previous()"></span></a>
+				<span aria-hidden="true" class="icon-hide-left2" ng-click="previous()"></span></a>
 				<span class="month-switcher">{{routeDate | date: 'MMMM y'}}</span>
-				<span aria-hidden="true" class="icon-arrow-right2" ng-click="next()"></span>
+				<span aria-hidden="true" class="icon-hide-right2" ng-click="next()"></span>
 			</li>
 			<li class="text-right">
 				<span class="icon-plus-alt" ng-click="quickAdd()" aria-hidden="true"></span>
 				<span>
-					<span class="hide-for-small" ng-click="toggleSidebar('taskDrawer')" aria-hidden="true" ng-class="{'icon-arrow-right':taskDrawer, 'icon-arrow-left':!taskDrawer}" style="margin-right: 4px;"></span>
+					<span class="hide-for-small" ng-click="toggleSidebar('taskDrawer')" aria-hidden="true" ng-class="{'icon-hide-right':taskDrawer, 'icon-hide-left':!taskDrawer}" style="margin-right: 4px;"></span>
 				</span>
 			</li>
 		</ul>

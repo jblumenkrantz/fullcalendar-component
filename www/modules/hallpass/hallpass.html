@@ -70,10 +70,10 @@
 				</thead>
 			</table>
 			<div style="overflow-y: scroll !important; max-height: 490px;">
-				<table>
+				<table class="admin-table">
 					<tbody>
 						<tr ng-repeat="pass in hallpasses | filter:{in_time:'!'}">
-							<td ng-click="viewUserHistory(pass)"><span class="student">{{pass.pass_holder_first_name}} {{pass.pass_holder_last_name}}</span> <span aria-hidden="true" class="right icon-history2"></span></td>
+							<td ng-click="viewUserHistory(pass)"><span aria-hidden="true" class="icon-history2" title="History"></span><span class="student" title="History">{{pass.pass_holder_first_name}} {{pass.pass_holder_last_name}}</span> </td>
 							<td>{{pass.out_time | date:'MMM d, y h:mm a'}}</td>
 							<td>{{(pass.in_time == null)? 'Active':pass.in_time | date:'MMM d, y h:mm a'}}</td>
 							<td>{{pass.destination_name}}</td>
@@ -93,18 +93,17 @@
 			<table style="margin: 0;">
 				<thead>
 					<tr>
-						<th width="100">Name</th>
-						<th width="130">Time Out</th>
-						<th width="110">Time In</th>
-						<th width="180">Destination</th>
-						<th width="100">Authorized By</th>
-						<th width="100">Check-In</th>
+						<th>Name</th>
+						<th>Time Out</th>
+						<th>Time In</th>
+						<th>Destination</th>
+						<th>Authorized By</th>
+						<th>Check-In</th>
 					</tr>
 				</thead>
 			</table>
 			<div style="overflow-y: scroll !important; height: 490px !important;">
-				<table>
-					
+				<table class="admin-table">
 					<tbody>
 						<tr ng-repeat="pass in hallpasses | filter:{in_time:'!!'}">
 							<td ng-click="viewUserHistory(pass)">{{pass.pass_holder_first_name}} {{pass.pass_holder_last_name}} <span aria-hidden="true" class="right icon-history2"></span></td>
@@ -124,12 +123,12 @@
 			<table style="margin: 0;">
 				<thead>
 					<tr>
-						<th width="100">Name</th>
-						<th width="130">Time Out</th>
-						<th width="110">Time In</th>
-						<th width="160">Destination</th>
-						<th width="100">Authorized By</th>
-						<th width="100">Check-In</th>
+						<th>Name</th>
+						<th>Time Out</th>
+						<th>Time In</th>
+						<th>Destination</th>
+						<th>Authorized By</th>
+						<th>Check-In</th>
 					</tr>
 				</thead>
 			</table>
@@ -137,12 +136,12 @@
 				<table>
 					<tbody>
 						<tr ng-repeat="pass in hallpasses | filter:{pass_holder_user_id:user.pass_holder_user_id}">
-							<td width="100">{{pass.pass_holder_first_name}} {{pass.pass_holder_last_name}}</td>
-							<td width="130">{{pass.out_time | date:'MMM d, y h:mm a'}}</td>
-							<td width="110">{{(pass.in_time == null)? 'Active':pass.in_time | date:'MMM d, y h:mm a'}}</td>
-							<td width="160">{{pass.destination_name}}</td>
-							<td width="100">{{pass.authority_first_name}} {{pass.authority_last_name}}</td>
-							<td width="100"><span ng-show="pass.in_time != null" aria-hidden="true">{{pass.checked_in_by}}</span><button ng-show="checkPermission('check_in_hall_pass',true) && pass.in_time == null"class="button small success" ng-click="check_in(pass)"><span aria-hidden="true" class="icon-checkmark"></span></button></td>
+							<td>{{pass.pass_holder_first_name}} {{pass.pass_holder_last_name}}</td>
+							<td>{{pass.out_time | date:'MMM d, y h:mm a'}}</td>
+							<td>{{(pass.in_time == null)? 'Active':pass.in_time | date:'MMM d, y h:mm a'}}</td>
+							<td>{{pass.destination_name}}</td>
+							<td>{{pass.authority_first_name}} {{pass.authority_last_name}}</td>
+							<td><span ng-show="pass.in_time != null" aria-hidden="true">{{pass.checked_in_by}}</span><button ng-show="checkPermission('check_in_hall_pass',true) && pass.in_time == null"class="button small success" ng-click="check_in(pass)"><span aria-hidden="true" class="icon-checkmark"></span></button></td>
 	 					</tr>
 					</tbody>
 				</table>
