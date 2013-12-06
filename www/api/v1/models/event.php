@@ -20,6 +20,9 @@ class Event extends PinwheelModelObject
   public $repeat_by_monthday;
   public $repeat_frequency;
   public $repeat_interval;
+  public $repeat_addendum;
+  public $repeat_blackout;
+  public $repeat_id;
   public $repeat_stop;
 	public $mins_before;
 	public $absolute_date;
@@ -48,6 +51,9 @@ class Event extends PinwheelModelObject
 			'repeat_by_monthday' => null,
 			'repeat_frequency' => null,
 			'repeat_interval' => null,
+			'repeat_addendum' => null,
+			'repeat_blackout' => null,
+			'repeat_id' => null,
 			'repeat_stop' => null,
 			'allDay' => 0,
 			'last_modified' => NULL,
@@ -84,14 +90,7 @@ class Event extends PinwheelModelObject
 	/** USED BY PINWHEEL **/
 	static public function getUserEventsForCalendar($userId, $calendar, $start, $end, $pinsqli=NULL) {
 
-		// start date should go to previous sunday (unless it is a sunday)
-		// end date should go to next saturday
-
 		$dataRay = $eventArray = array();
-
-		//error_log(print_r($calendar,true));
-
-		//$events = Event::getBatch(array("events.active = true","start > FROM_UNIXTIME('$start')","start < FROM_UNIXTIME('$end')","events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}'))"));
 
 		$events    = static::getBatch(array("events.active = true","events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}'))"));
 		
@@ -117,13 +116,15 @@ class Event extends PinwheelModelObject
 				$daysSince = static::daysSince($onDate, $repeater->start);
 				$eventStart = strtotime("+$daysSince day", $repeater->start);
 				if($onDate >= static::beginningOf($repeater->start) && $eventStart <= $repeater->repeat_stop){
+
 					// find addendums for this repeaters
 					// if one applies to this onDate, apply it and skip the switch
-					if(IsSet($addRay[$repeater->id]) && static:: isOnDay($onDate, $addRay[$repeater->id][0]->start)){
+					if(IsSet($addRay[$repeater->id]) && IsSet($addRay[$repeater->id][0]) && static:: isOnDay($onDate, $addRay[$repeater->id][0]->start)){
 						// knock the first event off the array
 						$event = array_shift($addRay[$repeater->id]);
-						if($event->repeat_blackout == 0){
+						if(!IsSet($event->repeat_blackout) && !$event->repeat_blackout){
 							//apply the addendum if it isn't a blackout
+							$events[] = $event;
 						}
 					}else{
 						switch($repeater->repeat_frequency){
@@ -203,10 +204,8 @@ class Event extends PinwheelModelObject
 		return $event;
 	}
 
-	static private function isOnDay($start, $test){
-		$test  = strtotime($test);
+	static protected function isOnDay($start, $test){
 		$end   = strtotime("+1 day", $start);
-		
 		return($test > $start && $test < $end);
 	}
 

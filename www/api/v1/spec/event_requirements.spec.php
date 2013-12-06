@@ -8,7 +8,46 @@
 
 	Fixture::at('spec/fixtures');
 
+	Scenario::when("passing values to set batch", function($then){
+
+
+
+		$then->beforeEach("when addendums and repeaters are added", function($scene){
+			$scene->eventList  = Fixture::get('events', true);
+			$calendar = new Calendar();
+			$calendar->calendar_id = 'cal_1';
+			$calendar->creator_id  = 'frank';
+			$calendar->calendar_admin = 'frank';
+			$scene->calendar=$calendar;
+			$scene->startPeriod=strtotime("10/10/2013");
+			$scene->endPeriod= strtotime("10/31/2013");
+			TestEvent::setBatch($scene->eventList['daily_addendum'], $scene->eventList['repeat_daily']);
+			//$scene->events = TestEvent::getUserEventsForCalendar('frank', $scene->calendar, strtotime("9/1/2013"), strtotime("12/1/2013"));
+
+			$scene->addendums = TestEvent::getBatch(array(), array('addendums'=>1));
+			$scene->repeaters = TestEvent::getBatch(array(), array('repeaters'=>1));
+		})->
+		the("repeaters should be returned appropriately", function($scene){
+			expect($scene->repeaters[0])->toBeTypeOf('TestEvent');
+			expect($scene->repeaters[0]->id)->toBe('event_3');
+		})->
+		the("addendums should be returned appropriately", function($scene){
+			expect($scene->addendums[0])->toBeTypeOf('TestEvent');
+			expect($scene->addendums[0]->id)->toBe('event_6');
+		});
+	});
+
 	Scenario::when("testing ancillary methods for repeating events", function($then){
+		$then->the("event model should be able to tell if a timestamp occurs within a specific day", function($scene){
+			$date = strtotime("9/23/1982");
+			$test = strtotime("9/23/1982 8:00AM");
+			expect(TestEvent::tellIsOnDay($date, $test))->toBe(true);
+		})->the("event model should be able to tell if a timestamp does not occur within a specific day", function($scene){
+			$date = strtotime("9/24/1982");
+			$test = strtotime("9/23/1982 8:00AM");
+			expect(TestEvent::tellIsOnDay($date, $test))->toBe(false);
+		});
+
 		$then->beforeEach("when altering a repeating event", function($scene){
 			$eventList    = Fixture::get('events', true);
 			$updateWith   = array("start"=>"frank", "end"=>"paul");

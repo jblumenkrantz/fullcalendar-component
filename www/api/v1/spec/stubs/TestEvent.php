@@ -7,9 +7,10 @@
 		static public function getBatch($where=array(), $opts=array()){
 			$ret = array();
 			foreach(static::$batch as $event){
-				if((IsSet($opts['repeaters']) && IsSet($event->repeat_interval) && $event->repeat_interval > 0) ||
-						(IsSet($opts['addendums']) && IsSet($event->repeat_addendum) && $event->repeat_addendum==1) ||
-						(!IsSet($opts['addendums']) && !IsSet($opts['repeaters']) && !IsSet($event->repeat_id) && (!IsSet($event->repeat_interval) || $event->repeat_interval==0))){
+				if((IsSet($opts['repeaters']) && IsSet($event->repeat_interval)) ||
+					 (IsSet($opts['addendums']) && IsSet($event->repeat_addendum)) ||
+					 (!IsSet($opts['addendums']) && !IsSet($opts['repeaters']) && !IsSet($event->repeat_addendum) && !IsSet($event->repeat_interval))
+					){
 							$event->repeat_stop   = strtotime($event->repeat_stop);
 							$event->start = strtotime($event->start);
 							$event->end   = strtotime($event->end);
@@ -34,6 +35,10 @@
 			$event->start = strtotime($event->start);
 			$event->end   = strtotime($event->end);
 			return $event;
+		}
+
+		static public function tellIsOnDay($day, $test){
+			return static::isOnDay($day, $test);
 		}
 
 		static public function findMonthsSince($first, $second){
