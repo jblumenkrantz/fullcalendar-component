@@ -6,20 +6,26 @@ angular.module('pinwheelApp')
 	$("#contact-points").height($("#account-settings").height());
 
 	// Load Required data if this view is the landing page
-	if(!$scope.$parent.user){
+	if(!$scope.user){
+		User.get({}, function(user){
+			console.warn(['User Reloaded',user]);
+			$scope.$parent.user = user;
+			$scope.$parent.initialUser = {};
+				angular.copy(user, $scope.$parent.initialUser);
+		});
+	}
+	if(!$scope.calendars || ($scope.calendars.length < 1)){
 		Calendar.query({id: 'all'}, function(calendars){
 			console.warn(['Calendars Reloaded',calendars]);
 			$scope.$parent.calendars = calendars;
 		});
-		User.get({}, function(user){
-			console.warn(['User Reloaded',user]);
-			$scope.$parent.user = user;
-		});
+	}
+	if(!$scope.contactPoints){
 		ContactPoints.query(function(contactPoints){
-			$scope.contactPoints = contactPoints;
+			console.warn(['Contact Points Reloaded',contactPoints]);
+			$scope.$parent.contactPoints = contactPoints;
 		});
 	}
-
 	$scope.cancelUser = function(name){
 		angular.extend($scope.user, $scope.initialUser);
 	}
@@ -34,6 +40,7 @@ angular.module('pinwheelApp')
 
 	$scope.resetUser = function() {
 		angular.copy($scope.initialUser, $scope.user);
+		//$scope.accountForm.$pristine = true;
 	}
   	
 	$scope.editContactPoint = function(point){
@@ -50,9 +57,10 @@ angular.module('pinwheelApp')
 	}
 	$scope.cancel = function(){
 		delete $scope.point;
-		$scope.editPoint = {};
+		delete $scope.editPoint;
 		$scope.editingPoint = false;
 		$scope.addingPoint = false;
+		//$scope.contactForm.$pristine = true;
 	}
 	$scope.save = function(){
 		if($scope.addingPoint){

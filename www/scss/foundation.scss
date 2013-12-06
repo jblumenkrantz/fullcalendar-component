@@ -624,32 +624,6 @@ border-top: 0px solid $primary-color;
 	text-align: center;
 }
 
-// #content div table tbody tr td:nth-of-type(1) {
-// 	width: 14.28%;
-// }
-
-// #content div table tbody tr td:nth-of-type(2) {
-// 	width: 14.28%;
-// }
-
-// #content div table tbody tr td:nth-of-type(3) {
-// 	text-align: center;
-// }
-
-// #content div table tbody tr td:nth-of-type(4) {
-// 	width: 28.49%;
-// }
-
-// #content div table tbody tr td:nth-of-type(5) {
-// 	width: 14.28%;
-// }
-
-// #content div table tbody tr td:nth-of-type(6) {
-// 	width: 14.28%;
-// }
-
-
-// center check-in boxes in the last column
 #content table tr td:last-of-type{
 	text-align: center;
 }
@@ -664,10 +638,15 @@ border-top: 0px solid $primary-color;
 .admin-table td span.student, .admin-table tr td span[class*="icon-"]{
   cursor: pointer !important;
 }
-.admin-table tr td input{
+.admin-table tr td span[class*="icon-"]{
+  color: #ccc;
+  padding-right: 5px;
+}
+.admin-table tr td span[class*="icon-"]:hover{
+  color: #222;
+}
+.admin-table tbody tr td input{ //bump checkbox to the left
 	position: relative;
 	top: 5px;
+	left: 18px; 
 }
-// // .admin-table tr td button [class*="icon-"] {
-// //   text-shadow: none;
-// // }
