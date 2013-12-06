@@ -1,20 +1,9 @@
 <div id="main-content" style="height: 100%; overflow: hidden; position: relative; z-index: 3" class="small-12 columns large-12">
-	<dl class="large-12 settings tabs">
-		<dd settings-tab="account" user='user' activeTab='activeTab'>
-			<p>
-				<span aria-hidden="true" class="icon-cog"></span> Account
-			</p>
-		</dd>
-		<dd settings-tab="contact_points" user='user' activeTab='activeTab'>
-			<p>
-				<span aria-hidden="true" class="icon-notebook"></span> Contact Points
-			</p>
-		</dd>
-	</dl> 
 	<!-- ********************* -->
 	<!-- ** Account Section ** -->
 	<!-- ********************* -->
-	<div ng-show="activeTab.account">
+	<div id="account-settings" class="large-6 columns panel">
+	<h2>Account Settings</h2>
 		<form name="accountForm" novalidate>
 			<div class="row">
 				<div class="large-12 columns">
@@ -58,7 +47,7 @@
 						</li>
 						<li>
 							<confirm
-								disabled="accountForm.$invalid"
+								disabled="accountForm.$pristine"
 								button-icon="icon-checkmark"
 								button-class="button radius"
 								header="Update Account Information"
@@ -81,52 +70,57 @@
 	<!-- ***************************** -->
 	<!-- **  Contact Points Section ** -->
 	<!-- ***************************** -->
-	<div ng-show="activeTab.contact_points" class="large-12 columns">
+	<div id="contact-points" class="large-6 columns panel">
 		<h2>Contact Points</h2>
-		<div class="large-4 columns left">
-			<div class="large-12 columns left contactPoint item" ng-repeat="point in contactPoints">
-				<contact-point></contact-point>
+		
+			<div class="large-12 columns left" ng-show="!editingPoint">
+				<div class="large-12 columns left contactPoint item" ng-repeat="point in contactPoints">
+					<contact-point></contact-point>
+				</div>
+				<div class="large-12 columns">
+					<button class="button radius" ng-click="newContactPoint()">
+						<span aria-hidden="true" class="icon-plus-alt"> Add new Contact Point</span>
+					</button>
+				</div>
 			</div>
-		</div>
-		<div class="large-8 columns right">
 			<div class="large-12 columns" ng-show="editingPoint">
+			<form name="contactForm" novalidate>
 				<div class="large-4 columns clear left">Name:</div><div class="large-8 columns right"><input type="text" ng-model="editPoint.point_name" /></div>
 				<div class="large-4 columns clear left">Address:</div><div class="large-8 columns right"> <input type="text" ng-model="editPoint.address" /></div>
 				<div class="large-4 columns clear left">Point Type:</div><div class="large-8 columns right"><select ng-options="type for type in ['email','phone']" ng-model="editPoint.point_type" ></select></div>
 				<div class="large-4 columns clear left">Activated:</div><div class="large-8 columns right"><input type="checkbox" disabled ng-model="editPoint.activated" /></div>
 				<div class="large-4 columns clear left">Emergency Only:</div><div class="large-8 columns right"><input type="checkbox" ng-model="editPoint.emergency_only" /></div>
 				
-				<ul class="button-group even-2">
-					<li>
-						<button ng-click="cancel()" class="button radius">
-							<span aria-hidden="true" class="icon-close"></span> Cancel
-						</button>
-					</li>
-					<li>
-						<confirm 
-							button-class="button radius"
-							button-icon="icon-checkmark"
-							header="Update Contact Point"
-							body="Are you sure you want to update this contact point?"
-							footer="You are about to modify a contact point.  By confirming this action you may need to activate the contact point again in order to receive alert messages.  Are you sure you wnat to continue?"
-							enforce-dialog="{{!addingPoint}}"
-							affirmative-text="Save"
-							negative-text="Cancel"
-							affirmative-action="save()"
-							negative-action="cancel()">
-								Save
-						</confirm>
-				</ul>
-				<confirm button-class="alert expand" button-float="right" header="Delete Contact Point" body="Are you sure you want to delete this contact point?"	footer="You are about to delete a contact point.  This action can not be undone, and you will no longer receive alerts to this contact point.  Are you sure you wnat to continue?" affirmative-text="Continue" negative-text="Cancel" affirmative-action="deletePoint()" negative-action="cancel()">
-					<span aria-hidden="true" class="icon-remove">Delete</span>
-				</confirm>
+				<div class="row">
+					<div class="large-12 columns">
+						<ul class="button-group even-2">
+							<li>
+								<button ng-click="cancel()" class="button radius">
+									<span aria-hidden="true" class="icon-close"></span> Cancel
+								</button>
+							</li>
+							<li>
+								<confirm 
+									disabled="contactForm.$pristine"
+									button-class="button radius"
+									button-icon="icon-checkmark"
+									header="Update Contact Point"
+									body="Are you sure you want to update this contact point?"
+									footer="You are about to modify a contact point.  By confirming this action you may need to activate the contact point again in order to receive alert messages.  Are you sure you wnat to continue?"
+									enforce-dialog="{{!addingPoint}}"
+									affirmative-text="Save"
+									negative-text="Cancel"
+									affirmative-action="save()"
+									negative-action="cancel()">
+										Save
+								</confirm>
+							</li>
+						</ul>
+					</div>
+				</div>
+				</form>
 			</div>
-			<div class="large-12 columns button-group" ng-show="!editingPoint">
-				<button class="button radius" ng-click="newContactPoint()">
-					<span aria-hidden="true" class="icon-plus-alt"> Add new Contact Point</span>
-				</button>
-			</div>
-		</div>
+		
 	</div>
 	<!-- END Contact Points Section -->
 </div>

@@ -6,15 +6,18 @@ angular.module('pinwheelApp')
   	  	$scope.activeTab = {activePasses:true};
   	  	angular.element("#hallpass-tabs").find("dd[settings-tab='activePasses']").addClass("active").siblings().removeClass("active");
   	  	$scope.viewing_history = [];
-  	  	Hallpass.query({}, function(hallpasses){
-			$scope.hallpasses = hallpasses;
-			  	console.warn(['Hallpasses loaded',$scope.hallpasses]);
-		});
-		Facilities.query({}, function(facilities){
-			$scope.facilities = facilities;
-			  	console.warn(['Facilities loaded',$scope.facilities]);
-		});
-
+  	  	if(!$scope.hallpasses){
+	  		Hallpass.query({}, function(hallpasses){
+				$scope.$parent.hallpasses = hallpasses;
+					console.warn(['Hallpasses loaded',$scope.hallpasses]);
+			});
+  	  	}
+		if(!$scope.facilities){
+			Facilities.query({}, function(facilities){
+				$scope.$parent.facilities = facilities;
+				  	console.warn(['Facilities loaded',$scope.facilities]);
+			});
+		}
 		if(!$scope.user){
 			User.get({}, function(user){
 				console.warn(['User Reloaded',user]);
@@ -28,10 +31,12 @@ angular.module('pinwheelApp')
 				if(!$scope.checkPermission('view_hallpass_history',true)){
   					$location.path('calendar');
   				}
-				OrgUserList.query({id:$scope.user.permissions[0].org_id}, function(users){
-					$scope.orgUsers = users;
-					console.warn(['OrgUsers loaded',$scope.orgUsers]);
-				});
+  				if(!$scope.orgUsers){
+					OrgUserList.query({id:$scope.user.permissions[0].org_id}, function(users){
+						$scope.$parent.orgUsers = users;
+						console.warn(['OrgUsers loaded',$scope.orgUsers]);
+					});
+				}
 			}
 		});
 		
