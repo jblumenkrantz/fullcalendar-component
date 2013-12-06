@@ -7756,29 +7756,41 @@ header#content-header ul.small-block-grid-3 li {
   text-align: center;
 }
 
-/* line 653, ../../scss/foundation.scss */
+/* line 627, ../../scss/foundation.scss */
 #content table tr td:last-of-type {
   text-align: center;
 }
 
-/* line 657, ../../scss/foundation.scss */
+/* line 631, ../../scss/foundation.scss */
 .admin-table tr {
   padding: 0px;
   margin: 0px;
 }
 
-/* line 661, ../../scss/foundation.scss */
+/* line 635, ../../scss/foundation.scss */
 .admin-table td span.student {
   border-bottom: 1px dotted #222;
 }
 
-/* line 664, ../../scss/foundation.scss */
+/* line 638, ../../scss/foundation.scss */
 .admin-table td span.student, .admin-table tr td span[class*="icon-"] {
   cursor: pointer !important;
 }
 
-/* line 667, ../../scss/foundation.scss */
-.admin-table tr td input {
+/* line 641, ../../scss/foundation.scss */
+.admin-table tr td span[class*="icon-"] {
+  color: #ccc;
+  padding-right: 5px;
+}
+
+/* line 645, ../../scss/foundation.scss */
+.admin-table tr td span[class*="icon-"]:hover {
+  color: #222;
+}
+
+/* line 648, ../../scss/foundation.scss */
+.admin-table tbody tr td input {
   position: relative;
   top: 5px;
+  left: 18px;
 }
