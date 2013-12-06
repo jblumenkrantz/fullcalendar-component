@@ -10,7 +10,7 @@
           </ul>
         </section>
         <section class="menubar right" style="margin-right: 20px;">
-          <dl class="sub-nav calendar-filter" ng-show="user">
+          <dl class="sub-nav calendar-filter" ng-show="user && calViewNavigator">
             <dd ng-click="changeView('datebook')" ng-class="{active:view=='datebook'}"><a>DB</a></dd>
             <dd ng-click="changeView('day')" ng-class="{active:view=='day'}"><a>D</a></dd>
             <dd ng-click="changeView('week')" ng-class="{active:view=='week'}"><a>W</a></dd>

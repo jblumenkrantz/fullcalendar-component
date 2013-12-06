@@ -2,7 +2,23 @@
 
 angular.module('pinwheelApp')
 .controller('SettingsCtl', function ($scope, $timeout, $http, User, Calendar, Timezones, ContactPoints) {
-	$scope.activeTab = {'account':true};
+	// Set the size of the contact points panel to match that of the account settings panel	
+	$("#contact-points").height($("#account-settings").height());
+
+	// Load Required data if this view is the landing page
+	if(!$scope.$parent.user){
+		Calendar.query({id: 'all'}, function(calendars){
+			console.warn(['Calendars Reloaded',calendars]);
+			$scope.$parent.calendars = calendars;
+		});
+		User.get({}, function(user){
+			console.warn(['User Reloaded',user]);
+			$scope.$parent.user = user;
+		});
+		ContactPoints.query(function(contactPoints){
+			$scope.contactPoints = contactPoints;
+		});
+	}
 
 	$scope.cancelUser = function(name){
 		angular.extend($scope.user, $scope.initialUser);
@@ -69,25 +85,4 @@ angular.module('pinwheelApp')
 			}
 		});
 	}
-
-
-
-/*	$scope.checkPermission = function(p,expectBoolean){
-		console.warn('check permission');
-		// If expectBoolean is true the function will only return a boolean value 
-		// otherwise it will return an object with the definitive boolean value 
-		// alongside an array of orgs that have that permission set to true 
-		var permission = {};
-		permission.orgs = [];
-		permission.definitive = false;
-		if($scope.user != undefined){
-			angular.forEach($scope.user.permissions, function(v,k){
-				if(v[p]){
-					permission.definitive = true;
-					permission.orgs.push({org_name:v.org_name, org_id:v.org_id});
-				}
-			});
-		}
-		return (expectBoolean)? permission.definitive:permission;
-	}*/
 });
