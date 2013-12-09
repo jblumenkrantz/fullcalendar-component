@@ -10,7 +10,6 @@ angular.module('pinwheelApp')
 			task: '=',
 			calendars: '=',
 			calendarWatchers: '=',
-			reminderTypes: '=',
 			reminderToggle: '=',
 			switchCalendar: '=',
 			checkCalendarReminder: '=',

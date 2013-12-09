@@ -3,54 +3,7 @@
     <span class="icon-plus-alt right" ng-click="add()" aria-hidden="true"></span>
 </div>
 <div ng-show="loading_calendars" class="spinwheel"></div>
-<!-- Calendar Admin box -->
-<div id="calendar-admin-modal-bg" class="reveal-modal-bg"></div>
-<div id="calendar-admin-modal" class="reveal-modal medium" style="position:fixed; color:black; padding: 0 0 20px 0;">
-	<h2>Calendar Administration</h2>
-	<h3>{{calendar.calendar_name}}</h3>
-	<div class="large-4 columns left">
-		<div ng-repeat="admin in calendar.admins">
-			<div class="large-8 small-12 columns" style="line-height:42px; white-space:nowrap;">
-				{{admin.first_name}} {{admin.last_name}} : {{admin.user_handle}}			
-			</div>
-			<div class="large-2 small-12 columns">
-				<button ng-click="deleteCalendarAdmin(admin)" class="icon modalTrigger button radius" button-icon="icon-remove2">
-					<span aria-hidden="true" class="icon-remove2"></span>
-				</button>
-<!-- 			<confirm
-					button-icon="icon-remove2"
-					button-class="button radius"
-					header="Delete Calendar Administrator"
-					body="Are you sure you want to delete this calendar adminstrator?"
-					footer="You are about to delete a calendar adminstrator.  Are you sure you wnat to continue?"
-					affirmative-text="Confirm"
-					negative-text="Cancel"
-					affirmative-action="deleteCalendarAdmin(admin)"
-					negative-action="cancelDeleteCalendarAdmin()">
-				</confirm> -->
-			</div>
-		</div>
-	</div>
-	<div class="large-8 columns right">
-		<div class="large-12 columns" ng-show="createNewCalendarAdmin">
-			<div class="large-4 columns clear left">Username:</div><div class="large-8 columns right"><input type="text" ng-model="newAdmin.username" /></div>
-			<div class="large-12 columns centered alert" ng-show="existingAdmin"><span class='error'>User is already a Calendar Administrator</span></div>
-			<div class="large-6 columns">
-				<div class="expand small alert button" ng-click="createNewCalendarAdmin = false" >Cancel</div>
-			</div>
-			<div class="large-6 columns">
-				<div class="expand small success button" ng-click="addCalendarAdmin()" >Add</div>
-			</div>
-		</div>
-		<div class="large-12 columns" ng-show="!createNewCalendarAdmin">
-			<div class="button" ng-click="createNewCalendarAdmin = true">
-				<span aria-hidden="true" class="icon-plus-alt"> Add new Contact Point</span>
-			</div> 
-		</div>
-	</div>
-	<a class="close-reveal-modal"><span aria-hidden="true" class="icon-x-altx-alt"></span></a>
-</div> 
-<!-- END Calendar Admin box -->
+
 <!-- SUBSCRIBED CALENDAR SECTION -->
 <div scroll-pane class="scroll-pane left">
 	<!-- existing calendars ng-repeat -->
@@ -60,7 +13,6 @@
 		calendar="calendar"
 		user="user"
 		reminder-types="reminderTypes"
-		reminders="reminders[$index]"
 		close="closeAll()">
 	</active-subscription>
 	<!-- / existing calendars ng-repeat -->
@@ -115,7 +67,7 @@
 					<!-- / DISPLAY -->
 
 					<!-- EDIT -->
-					<form name="newCalendarForm" class="subscription resource-edit" novalidate>
+					<form name="newCalendarForm" class="subscription resource-edit" ng-submit="newCalendarForm.$valid && save()" novalidate>
 						<!-- Name -->
 						<div class="row" style="padding-top: 1em;">
 							<div class="large-12 columns">
@@ -141,18 +93,22 @@
 						</div>
 
 						<!-- Reminders -->
-						<reminder-list reminders="reminders"></reminder-list>
+						<reminder-list
+							reminders="newCalendar.reminders"
+							type-filter="reminderTypeFilter"
+						>
+						</reminder-list>
 
 						<div class="row">
 							<div class="large-12 columns">
 								<ul class="button-group even-2">
 									<li>
-										<button class="button radius" ng-click="cancelNew()">
+										<button type="button" class="button radius" ng-click="cancelNew()">
 											<span aria-hidden="true" class="icon-remove2"></span> <!-- unsubscribe -->
 										</button>
 									</li>
 									<li style="padding-right: 0;">
-										<button class="button radius" ng-click="save()">
+										<button type="submit" class="button radius">
 											<span aria-hidden="true" class="icon-checkmark"></span> <!-- save -->
 										</button>
 									</li>

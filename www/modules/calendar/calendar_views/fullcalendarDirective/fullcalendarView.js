@@ -6,6 +6,7 @@ angular.module('pinwheelApp')
 			restrict: 'E',
 			templateUrl: 'modules/calendar/calendar_views/fullcalendarDirective/_fullcalendar_view.html',
 			controller: function($scope, $filter, $element, $attrs, $routeParams, Event){
+				console.warn('FULLCALENDAR DIRECTIVE LOADING');
 				$scope.thisMonthsEvents = function(item) {
 					var startOfMonth = new Date($routeParams.month+'-01-'+$routeParams.year).getTime()/1000;
 					var endOfMonth = new Date($routeParams.month*1+1+'-01-'+$routeParams.year).getTime()/1000;
@@ -39,7 +40,7 @@ angular.module('pinwheelApp')
 					height:$scope.mainAreaHeight(),
 					allDayDefault:false,
 					viewRender: function(view,element) {
-						console.warn('fullCalendar render');
+						console.warn(['fullCalendar render', {path:'(modules/calendar/calendar_views/fullcalendarDirective/fullcalendarView.js)'}]);
 						//on fullCalendar render, bind scroll event to close pop up summary
 						$(".fc-scroll", element).scroll(function() {
 							$scope.$apply($scope.resetSummary());

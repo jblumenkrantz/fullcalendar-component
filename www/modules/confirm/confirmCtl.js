@@ -104,6 +104,7 @@ angular.module('pinwheelApp')
 
 					var mod = angular.element('#global-modal');
 					var screen = angular.element('#global-modal-bg');
+
 					element.bind('click', function(){
 						scope.openModal();
 						scope.$apply();

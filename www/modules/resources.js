@@ -14,6 +14,7 @@ angular.module('pinwheelApp')
 		 	query: {
 					method: 'GET',
 					isArray: true,
+					cache:true,
 				}
 		});
 	})
@@ -27,7 +28,14 @@ angular.module('pinwheelApp')
 		return $resource('/api/v1/facilities/');
 	})
 	.factory('OrgUserList', function($resource){
-		return $resource('/api/v1//hallpass/userlist/:id');
+		return $resource('/api/v1//hallpass/userlist/:id', {},
+		 {
+		 	query: {
+					method: 'GET',
+					isArray: true,
+					cache:true,
+				}
+		});
 	})
 	.factory('Hallpass', function($resource){
 		return $resource('/api/v1/hallpass/:id', {},
@@ -239,6 +247,7 @@ angular.module('pinwheelApp')
 				query: {
 					method: 'GET',
 					isArray: true,
+					cache: true,
 					transformResponse: function(data) {
 						var calendars = angular.fromJson(data);
 						angular.forEach(calendars, function(calendar, k) {

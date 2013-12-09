@@ -551,6 +551,10 @@
 	text-overflow: ellipsis;
 }
 
+.resource-panel .tabs dd {
+	margin: 0 !important;
+}
+
 .resource-panel button {
 	border: none !important;
 }
