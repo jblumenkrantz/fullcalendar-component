@@ -22,10 +22,6 @@ angular.module('pinwheelApp')
 		$scope.edit = function() {
 			delete $scope.calendar.events;
 
-
-
-
-
 			//make an edit copy of this calendar's reminders
 			$scope.editReminders = angular.copy($scope.calendar.reminders);
 
@@ -34,7 +30,6 @@ angular.module('pinwheelApp')
 
 			//delete reminders array from edit copy of calendar
 			delete $scope.editCalendar.reminders;
-
 
 			console.log($scope.editReminders, $scope.editCalendar, $scope.calendar);
 
