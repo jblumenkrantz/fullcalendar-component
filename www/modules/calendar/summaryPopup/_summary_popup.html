@@ -1,0 +1,54 @@
+<div 
+	id='summaryPopup'
+	"asdf"
+	ng-show='summaryPopup'
+	ng-style='summaryPopup.position'
+	>
+	<div class="summaryPopup-body" style="background: {{summaryPopup.color}};">
+		<div class="resource-gradient">
+			<div class="resource-body">
+				<div class='close' ng-click='resetSummary()'>
+					<span class='icon-x-altx-alt' aria-hidden='true'></span>
+				</div>
+				<div class="title" ng-click='summaryEdit(summaryPopup.isTask);'>
+					<strong>{{event.title}}</strong>
+					<span
+						ng-hide="summaryPopup.isTask || !event.editable"
+						aria-hidden='true'
+						class='icon-pencil'>
+					</span>
+					<span
+						ng-hide="(event.editable && !summaryPopup.isTask) || summaryPopup.hasReminder"
+						aria-hidden='true'
+						class='icon-alarm-plus'>
+					</span>
+					<span
+						ng-hide="(event.editable && !summaryPopup.isTask) || !summaryPopup.hasReminder"
+						aria-hidden='true'
+						class='icon-alarm-cancel'>
+					</span>
+				</div>
+				<div class="time">
+					{{summaryPopup.dateString}}
+				</div>
+				<div ng-show="summaryPopup.description!=''" class="description" ng-class="{'short':!summaryPopup.expand}" ng-click="toggleExpand();">
+					{{summaryPopup.description}}
+				</div>
+				<ul class='button-group even-2' style="clear: both;"> 
+					<li> 
+						<button class='button radius' ng-click='resetSummary();'> 
+							<span aria-hidden='true' class='icon-share'></span> 
+						</button> 
+					</li> 
+					<li style="padding: 0;"> 
+						<button class='button radius' ng-click='summaryDelete(summaryPopup.isTask); resetSummary();'> 
+							<span aria-hidden='true' class='icon-remove2'></span> 
+						</button> 
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="pointer" ng-class="{'top':summaryPopup.pointer.top}" ng-style="summaryPopup.pointer">
+	</div>
+</div>

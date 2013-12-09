@@ -1,0 +1,29 @@
+<div class="row reminders">
+	<div class="large-12 columns">
+		<table>
+			<tbody>
+				<tr calendar-admin ng-repeat="admin in calendar.admins"></tr>
+				<tr>
+					<td class="add">
+						<div ng-show="!addingAdmin" ng-click="toggle('addingAdmin')">
+							<span class="icon-plus-alt" aria-hidden="true"></span>
+							Add Administrator
+						</div>
+						<form ng-show='addingAdmin'name="reminder-form" novalidate>
+							<div class="large-12 columns">
+								<div class="reminder-type">
+									<select ui-select2="{minimumInputLength: 2}" data-placeholder="-- Search Users --" ng-model="newAdmin"  style="width: 100%;" >
+  										<option value=""></option>
+   										<option ng-repeat="user in orgUserList" value="{{user}}">{{user.first_name}} {{user.last_name}}</option>
+									</select>
+								</div>
+							</div>
+							<span class="icon-checkmark" ng-click="addAdmin()" aria-hidden="true"></span>
+							<span class="icon-x-altx-alt" ng-click="toggle('addingAdmin')" aria-hidden="true"></span>
+						</form>
+					</td>
+				</tr>
+			<tbody>
+		</table>
+	</div>
+</div>

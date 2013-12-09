@@ -1,0 +1,25 @@
+{
+	"require": {
+		"aws/aws-sdk-php":"2.0.*",
+		"symfony/event-dispatcher":"2.1.*",
+		"slim/slim": "2.*"
+	},
+	"autoload": { 
+		"classmap": [
+			"lib/",
+			"lib/aws/",
+			"lib/zone/",
+			"lib/dispatcher/",
+			"lib/queues",
+			"www/api/v1/controllers/",
+			"www/api/v1/models/",
+			"www/api/v1/",
+			"www/api/v1/exceptions/",
+			"lib/dtables"
+		],
+		"files": [
+			"vendor/aws/aws-sdk-php-1.5.17.1/sdk.class.php",
+			"etc/config.php"
+		]
+	}
+}

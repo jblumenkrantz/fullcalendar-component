@@ -4,7 +4,9 @@ class EventCtl
 
 
 	function getAll(){
-	 	echo json_encode(array());
+		$authUserID = Authorize:: sharedInstance()->userID();
+		$events = Event:: getUsersEvents($authUserID);
+	 	echo json_encode($events);
 	}
 	/**
 	*	EventCtl::get provides an interface for aquiring events by means of
@@ -19,7 +21,52 @@ class EventCtl
 		$events = Event::getBatch();
 	 	echo json_encode($events);
 	}
+	function getMonth() {
+		$authUserID = Authorize:: sharedInstance()->userID();
+		$month = array_slice(Request::parsePath(),-2,2);
+		$month['year'] = $month[0];		
+		$month['month'] = $month[1];
+		unset($month[0],$month[1]);
 
+		$date = new DateTime($month['year']."-".$month['month']."-1");
+		$month['start'] = $date->format("U");
+		$date = new DateTime($month['year']."-".$month['month']."-".$date->format("t"));
+		$month['end'] = $date->format("U");
+		$events = Event::getEventsBetween($authUserID, $month['start'], $month['end']);
+	 	echo json_encode($events);
+	}
+
+	function getWeek() {
+		$authUserID = Authorize:: sharedInstance()->userID();
+		$week = array_slice(Request::parsePath(),-3,3);
+		$week['year'] = $week[0];
+		$week['month'] = $week[1];
+		$week['day'] = $week[2];
+		unset($week[0],$week[1],$week[2]);
+
+		$date = new DateTime($week['year']."-".$week['month']."-".$week['day']." 00:00:00");
+		$week['start'] = strtotime('this week', $date->format("U"));
+
+		$week['end'] = $week['start']+6*24*3600;
+		$events = Event::getEventsBetween($authUserID, $week['start'], $week['end']);
+	 	echo json_encode($events);
+	}
+
+	function getDay() {
+		$authUserID = Authorize:: sharedInstance()->userID();
+		$day = array_slice(Request::parsePath(),-3,3);
+		$day['year'] = $day[0];
+		$day['month'] = $day[1];
+		$day['day'] = $day[2];
+		unset($day[0],$day[1],$day[2]);
+
+		$date = new DateTime($day['year']."-".$day['month']."-".$day['day']." 00:00:00");
+		$day['start'] = $date->format("U");
+		$date = new DateTime($day['year']."-".$day['month']."-".$day['day']." 23:59:59");
+		$day['end'] = $date->format("U");
+		$events = Event::getEventsBetween($authUserID, $day['start'], $day['end']);
+	 	echo json_encode($events);
+	}
 
 	/**
 	*	EventCtl::Create provides an interface for createing new events. The
@@ -31,7 +78,7 @@ class EventCtl
 	*	EventCtl::create's query pattern is not atomic due to an INSERT followed
 	*	by a SELECT without locking. There does exist a posibility,
 	*	however unlikely, after the INSERT an update occurs before the following
-	*	SELECT on the newly created Event(s), and if the event_id and
+	*	SELECT on the newly created Event(s), and if the id and
 	*	last_modified where the only properties to be returned, the client's
 	*	cached/local view of the Event(s) would be improperly bound to the wrong
 	*	last_modified(s). As a result, the improperly bound last_modified(s) could
@@ -45,7 +92,7 @@ class EventCtl
 		$events = Event:: create(json_decode(Request:: body()), $pinsqli);
 		$authUserID = Authorize:: sharedInstance()->userID();
 		//error_log(print_r(json_decode(Request:: body()),true));
-		echo json_encode($events);
+		echo json_encode(array_shift($events));
 		User:: incrementVersion($authUserID);
 	}
 
@@ -74,7 +121,6 @@ class EventCtl
 		$evprops = json_decode(Request:: body());
 		$pinsqli = DistributedMySQLConnection:: writeInstance();
 		$authUserID = Authorize:: sharedInstance()->userID();
-		echo '[';
 		if (is_object($evprops))
 			$evprops = array($evprops);
 		$nevets = count($evprops);
@@ -96,8 +142,12 @@ class EventCtl
 					ReminderPrefs:: create($evprop, $pinsqli);
 				}
 				
+				error_log("---------------------------------------------------------------");
+				error_log($evprop->using_calendar_reminder);
+
 				//updated event is removing it's reminder
-				if ($evprop->had_reminder) {
+				if (!$evprop->has_reminder && $evprop->reminder_pref_id != null && !$evprop->using_calendar_reminder) {
+					error_log("IFFFF");
 					$evprop->version = $evprop->reminder_pref_version;
 					$rpref = new ReminderPrefs($evprop);
 					$rpref->delete($pinsqli);
@@ -105,7 +155,7 @@ class EventCtl
 				
 				$event->update($pinsqli);
 			
-				echo json_encode(array($event->event_id => $event));
+				echo json_encode($event);
 			} catch (EventDataConflictException $e) {
 				echo $e->json_encode();
 			} catch (EventDoesNotExist $e) {
@@ -113,7 +163,6 @@ class EventCtl
 			}
 			if (--$nevets > 0) echo ',';
 		}
-		echo ']';
 		User:: incrementVersion($authUserID);
 	}
 	function unsubscribe() {
@@ -127,7 +176,7 @@ class EventCtl
 		$subscription = ($body==NULL)? json_decode(Request:: body()):$body;
 		$authUserID = Authorize:: sharedInstance()->userID();
 		
-		$event = array_shift(Event::load($subscription->event_id));
+		$event = array_shift(Event::load($subscription->id));
 		$subscription->adhoc_events = true;
 		$subscription->calendar_id = $event->calendar_id;
 		error_log(print_r($subscription,true));
@@ -167,33 +216,31 @@ class EventCtl
 	*	the client to settle the conflict, regardless the local delte of the Same Event.
 	*/
 	function delete(){
-		$evprops = json_decode(Request:: body());
 		$authUserID = Authorize:: sharedInstance()->userID();
-		echo '[';
-		if (is_object($evprops))
-			$evprops = array($evprops);
-		$nevets = count($evprops);
-		foreach ($evprops as $evprop) {
-			try {
-				$event = new Event($evprop);
-				$event->delete();
+		$event = Request:: parsePath();
+		$authUserID = Authorize:: sharedInstance()->userID();
+		$event['id'] = $event[2];
+		$event['version'] = $event[3];
+		unset($event[0], $event[1], $event[2], $event[3]);
 
-				//if event has a reminder
-				if ($evprop->reminder_pref_id != null && !$using_calendar_reminder) {
-					$evprop->version = $evprop->reminder_pref_version;
-					$reminder_pref = new ReminderPrefs($evprop);
-					$reminder_pref->delete();
-				}
-				
-				echo json_encode($event);
-			} catch (EventDataConflictException $e) {
-				echo $e->json_encode();
-			} catch (EventDoesNotExist $e) {
-				echo $e->json_encode();
+		try {
+			$event = new Event($event);
+			$event->delete();
+
+			//if event has a reminder
+			if ($event->reminder_pref_id != null && !$using_calendar_reminder) {
+				$event->version = $event->reminder_pref_version;
+				$reminder_pref = new ReminderPrefs($event);
+				$reminder_pref->delete();
 			}
-			if (--$nevets > 0) echo ',';
+			
+			echo json_encode($event);
+		} catch (EventDataConflictException $e) {
+			echo $e->json_encode();
+		} catch (EventDoesNotExist $e) {
+			echo $e->json_encode();
 		}
-		echo ']';
+
 		User:: incrementVersion($authUserID);
 	}
 }

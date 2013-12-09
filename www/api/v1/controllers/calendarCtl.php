@@ -25,16 +25,66 @@ class CalendarCtl
 	* 	@todo get all calendars per signed in user
 	*/
 	function getAll ($id = null) {
-		$authUserID = null;
-		$authUserID = ($authUserID = Authorize:: sharedInstance()->userID());
-		if ($id !== null &&  $authUserID != $id) {
-			$forbidden = new UserForbiddenException($authUserID);
-			echo $forbidden->json_encode();
-			exit;
+		$authUserID = Authorize:: sharedInstance()->userID();
+		error_log(" ------ GET ALL ------ ");
+	 	$cals = (object) array_merge((array) Calendar::loadUserOrgCalendars($authUserID), (array) Calendar::loadUserSubscriptions($authUserID));
+		$dataRay = array();
+		foreach($cals as $calendar){
+			$calendar->subscribed = false;
+			$calendar->color = '';
+			$colorResult = Calendar:: genericQuery("SELECT
+					color, view_setting
+				FROM
+					calendar_subs
+				WHERE
+					calendar_id='{$calendar->calendar_id}'
+				AND
+					user_id='$authUserID'");
+			if(sizeof($colorResult) > 0){
+				$calendar->color = $colorResult[0]->color;
+				$calendar->subscribed = true;
+				$calendar->viewing = ($colorResult[0]->view_setting)? true:false;
+			}
+			$publicResult = Calendar:: genericQuery("SELECT
+					org_id
+				FROM
+					public_calendars
+				WHERE
+					calendar_id='{$calendar->calendar_id}'
+				");
+			if(sizeof($publicResult) > 0){
+				$calendar->public = true;
+				$calendar->org_id = $publicResult[0]->org_id;
+			}else{
+				$calendar->public = false;
+			}
+			$calendar->active = ($calendar->active)? true:false;
+			$calendar->calendar_admin = ($calendar->calendar_admin)? true:false;
+			
+
+			$date  = time();
+			$start = strtotime("-2 months", $date);
+			$end   = strtotime("+12 months", $date);
+
+			$calendar->events = Event::getUserEventsForCalendar($authUserID, $calendar, $start, $end);
+			$calendar->events = array_merge($calendar->events, Task::getUserTasksForCalendar($authUserID, $calendar->calendar_id)); 
+
+			//dummy reminder data remove when reminders are real again
+			$calendar->reminders = array(
+				array("reminder_pref_id" => "123", "reminder_type" => 0, "mins_before" => 30, "active"=>true),
+				array("reminder_pref_id" => "123", "reminder_type" => 1, "mins_before" => 120, "active"=>true),
+				array("reminder_pref_id" => "123", "reminder_type" => 2, "mins_before" => 1440, "active"=>true),
+			);
+
+			if(property_exists($calendar, 'adhoc_events') && !$calendar->adhoc_events){
+				unset($calendar->adhoc_events);
+			}
+						
+			array_push($dataRay,$calendar);
 		}
+
+		echo json_encode($dataRay);
 		
-		$calendars = Calendar::loadIndex($id === null? $authUserID: $id);
-	 	echo json_encode($calendars);
 	}
 	
 	/**
@@ -63,11 +113,9 @@ class CalendarCtl
 			echo $forbidden->json_encode();
 			exit;
 		}
-		$calendars = Calendar:: create($id === null? $authUserID: $id,json_decode(Request:: body()));
-		foreach($calendars as $calendar){
+		$calendar = Calendar:: create($id === null? $authUserID: $id,json_decode(Request:: body()));
 			$calendar->subscribed = true;
-		}
-		echo json_encode($calendars);
+		echo json_encode($calendar);
 		User:: incrementVersion($authUserID);
 	}
 
@@ -94,39 +142,61 @@ class CalendarCtl
 	*/
 	function update() {
 		$authUserID = Authorize:: sharedInstance()->userID();
-		//error_log("---- calendar request body ----");
-		//error_log(Request:: body());
+		//$userPermissions = User:: loadPermissions($authUserID);
 		$tsprops = json_decode(Request:: body());
-		echo '[';
+
 		if (is_object($tsprops))
 			$tsprops = array($tsprops);
 		$ncalendars = count($tsprops);
 		foreach ($tsprops as $tsprop) {
 			try {
-				//grab calendar obj and version
 				$calendar = new Calendar($tsprop);
-				error_log(print_r($calendar,true));
-				//grab shared sql conn
 				$pinsqli = DistributedMySQLConnection:: writeInstance();
+
+				/*//loop over $scope.calendar.reminders
+					//if new (no id + active = true) - make new reminder
+					//if exising and dirty (has id + marked as dirty) - make reminder update
+				*/
 
 				//perform calendar updates
 				$calendar->update_subscriptions($pinsqli);
 				$calendar->update_reminders($pinsqli);
-				$calendar->update($pinsqli);
-				if($calendar->creator_id == $authUserID){
+				$calendar->updateSubscription($calendar->calendar_id, $calendar->viewing, $authUserID);
+				
+				$hasPermission = User:: checkPermissions('modify_public_calendars',$authUserID, $tsprop->org_id);
+				if($calendar->creator_id == $authUserID || $calendar->calendar_admin || $hasPermission){
+					$calendar->update($pinsqli);
 					if(property_exists($tsprop,'public') && $tsprop->public){
 						Admin::promoteToPublicCalendar($tsprop);
+						error_log(print_r('promote calendar',true));
 					}
 					else{
 						Admin::demoteFromPublicCalendar($tsprop);
+						error_log(print_r('demote calendar',true));
+
 					}
-					error_log(print_r('calendar updated',true));
 				}
 
-				error_log(print_r($calendar,true));
-
-				//return response
-				echo json_encode(array($calendar->calendar_id => $calendar));
+				$calendar->subscribed = false;
+				$calendar->color = '';
+				$colorResult = Calendar:: genericQuery("SELECT
+						color, view_setting
+					FROM
+						calendar_subs
+					WHERE
+						calendar_id='{$calendar->calendar_id}'
+					AND
+						user_id='$authUserID'");
+				if(sizeof($colorResult) > 0){
+					$calendar->color = $colorResult[0]->color;
+					$calendar->subscribed = true;
+					$calendar->viewing = ($colorResult[0]->view_setting)? true:false;
+				}
+				$calendar->active = ($calendar->active)? true:false;
+				$calendar->calendar_admin = ($calendar->calendar_admin)? true:false;
+				$calendar->events = Event::getUserEventsForCalendar($authUserID, $calendar);
+				$calendar->events = array_merge($calendar->events, Task::getUserTasksForCalendar($authUserID, $calendar->calendar_id)); 
+				echo json_encode($calendar);
 				
 			} catch (CalendarDataConflictException $e) {
 				echo $e->json_encode();
@@ -135,32 +205,39 @@ class CalendarCtl
 			}
 			if (--$ncalendars > 0) echo ',';
 		}
-		echo ']';
+
 		User:: incrementVersion($authUserID);
 	}
 
+	/** UPDATED FOR PINWHEEL **/
 	function unsubscribe() {
 		$subscription = json_decode(Request:: body());
 		$authUserID = Authorize:: sharedInstance()->userID();
+		$subscription->subscribed = false;
+
 		Event::removeAdhocEvents($subscription, $authUserID);
-		echo(json_encode(Calendar::unsubscribe($subscription, $authUserID)));
+		
+		$unsubscribed = Calendar::unsubscribe($subscription, $authUserID);														
+		echo json_encode($unsubscribed);
 		User:: incrementVersion($authUserID);
 	}
-
+	/** UPDATED FOR PINWHEEL **/
 	function subscribe($body=NULL, $return=FALSE) {
 		$subscription = ($body==NULL)? json_decode(Request:: body()):$body;
-		//error_log(print_r($subscription,true));
 		$authUserID = Authorize:: sharedInstance()->userID();
-																		
-		$subscription = json_encode(array('tasks'=> Task::getBatch(array("tasks.calendar_id='{$subscription->calendar_id}'","(tasks.creator_id='$authUserID' OR tasks.creator_id=(SELECT creator_id from calendars where calendar_id = '{$subscription->calendar_id}'))")),
-		                       'events'=> Event::getBatch(array("events.calendar_id='{$subscription->calendar_id}'","(events.creator_id='$authUserID' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$subscription->calendar_id}'))")),
-		                       'subscription'=>Calendar::subscribe($subscription, $authUserID)));
-		if($return){
-			User:: incrementVersion($authUserID);
-			return json_decode($subscription);
-		}else{
-			echo $subscription;
+		if($subscription->color == ''){
+			$subscription->color = 'blue';
 		}
+		if(!property_exists($subscription, 'adhoc_events')){
+			$subscription->adhoc_events = false;
+		}
+		$subscription->subscribed = true;
+
+		$subscribed = Calendar::subscribe($subscription, $authUserID);														
+		$subscribed->events = Event::getUserEventsForCalendar($authUserID, $subscribed);
+		$subscribed->events = array_merge($subscribed->events, Task::getUserTasksForCalendar($authUserID, $subscribed->calendar_id)); 
+		User:: incrementVersion($authUserID);
+		echo json_encode($subscribed);	
 	}
 	function updateVewSettings() {
 		$calendar = json_decode(Request:: body());
@@ -169,6 +246,54 @@ class CalendarCtl
 		Calendar::updateSubscription($calendar->calendar_id, $calendar->viewing, $authUserID);
 		echo json_encode($calendar);
 		User:: incrementVersion($authUserID);
+	}
+
+	function getCalendarAdmins($id) {
+		$authUserID = Authorize:: sharedInstance()->userID();
+		echo json_encode(Calendar::getCalendarAdmins($id));
+		//error_log(print_r("get cal admins for id $id",true));
+	}
+	function addCalendarAdmin($calendar_id){
+		$authUserID = Authorize:: sharedInstance()->userID();
+		$admin = json_decode(Request:: body());
+		$calendar = Calendar::load($calendar_id);
+
+		//check to see if the admin actually exists
+		if(User::validateUserName($admin->user_handle,true)){
+			$admin = User::loadWithHandle($admin->user_handle);
+		}else{
+			throw new UserDoesNotExist();
+		}
+		$subscription->calendar_id = $calendar_id;
+		$subscription->color = 'blue';
+		$subscription->adhoc_events = false;
+		// check the users permissions for this calendar
+		if($calendar->creator_id == $authUserID || $calendar->calendar_admin){
+			Calendar::addCalendarAdmin($admin, $calendar_id);
+			Calendar::subscribe($subscription, $admin->user_id);		
+			Calendar::sendNewAdminMessage(array($admin->email),$calendar->calendar_name);
+			unset($admin->active, $admin->email, $admin->last_modified, $admin->password, $admin->settings, $admin->timezone,$admin->version);
+			echo json_encode($admin);
+			// send email to new admin
+		}else{
+			$insuficientPrivileges = new InsuficientPriviledgesException();
+			echo $insuficientPrivileges->json_encode();
+			exit;
+		}
+	}
+	function deleteCalendarAdmin($calendar_id){
+		$authUserID = Authorize:: sharedInstance()->userID();
+		$admin = json_decode(Request:: body());
+		$calendar = Calendar::load($calendar_id);
+		if($calendar->creator_id == $authUserID || $calendar->calendar_admin){
+			Calendar::deleteCalendarAdmin($admin, $calendar_id);
+			echo json_encode($admin);
+			// send email to deleted admin
+		}else{
+			$insuficientPrivileges = new InsuficientPriviledgesException();
+			echo $insuficientPrivileges->json_encode();
+			exit;
+		}
 	}
 	/**
 	*	CalendarCtrl::delete provides an interface for deleting pre-existing calendars.

@@ -1,1 +1,652 @@
-@import "../bower_components/foundation/scss/foundation";
+@import "settings";
+@import "events";
+
+@import "../bower_components/foundation/scss/foundation/";
+
+/* Each individual part that can be added in */
+// FYI, turning off all unessential components (about half) only shaves about 50-60KB
+// @import "../bower_components/foundation/scss/foundation/components/global";
+// @import "../bower_components/foundation/scss/foundation/components/grid";
+// @import "../bower_components/foundation/scss/foundation/components/visibility";
+// @import "../bower_components/foundation/scss/foundation/components/block-grid";
+// @import "../bower_components/foundation/scss/foundation/components/type";
+// @import "../bower_components/foundation/scss/foundation/components/buttons";
+// @import "../bower_components/foundation/scss/foundation/components/forms";
+// @import "../bower_components/foundation/scss/foundation/components/custom-forms";
+// @import "../bower_components/foundation/scss/foundation/components/button-groups";
+// @import "../bower_components/foundation/scss/foundation/components/dropdown-buttons";
+// @import "../bower_components/foundation/scss/foundation/components/split-buttons";
+// @import "../bower_components/foundation/scss/foundation/components/flex-video";
+// @import "../bower_components/foundation/scss/foundation/components/section";
+// @import "../bower_components/foundation/scss/foundation/components/top-bar";
+// @import "../bower_components/foundation/scss/foundation/components/orbit";
+// @import "../bower_components/foundation/scss/foundation/components/reveal"; //LEAVE THIS ON -jt
+// @import "../bower_components/foundation/scss/foundation/components/joyride";
+// @import "../bower_components/foundation/scss/foundation/components/clearing";
+// @import "../bower_components/foundation/scss/foundation/components/alert-boxes";
+// @import "../bower_components/foundation/scss/foundation/components/breadcrumbs";
+// @import "../bower_components/foundation/scss/foundation/components/keystrokes";
+// @import "../bower_components/foundation/scss/foundation/components/labels";
+// @import "../bower_components/foundation/scss/foundation/components/inline-lists";
+// @import "../bower_components/foundation/scss/foundation/components/pagination";
+// @import "../bower_components/foundation/scss/foundation/components/panels";
+// @import "../bower_components/foundation/scss/foundation/components/pricing-tables";
+// @import "../bower_components/foundation/scss/foundation/components/progress-bars";
+// @import "../bower_components/foundation/scss/foundation/components/side-nav";
+// @import "../bower_components/foundation/scss/foundation/components/sub-nav";
+// @import "../bower_components/foundation/scss/foundation/components/switch";
+// @import "../bower_components/foundation/scss/foundation/components/magellan";
+// @import "../bower_components/foundation/scss/foundation/components/tables";
+// @import "../bower_components/foundation/scss/foundation/components/thumbs";
+// @import "../bower_components/foundation/scss/foundation/components/tooltips";
+// @import "../bower_components/foundation/scss/foundation/components/dropdown";
+// WIREFRAME TODO
+// 
+// example of a task
+// 
+// -----------------------------
+// SET CUSTOM VARIABLES HERE
+// -----------------------------
+$letter-press:  1px 1px 2px #fff;
+// $primary-color: #658929; //org primary color
+
+body {
+
+}
+#my-calendars, #main-content, #tasks {
+	min-height: 822px; // min-height for simulation purposes -jt
+	padding: 0 !important; 
+	margin: 0 !important; margin-right:-1px;
+}
+
+#my-calendars, #tasks {
+	background: #eee; 
+}
+
+#main-content {
+	background: #fff;
+	border-left: 1px solid darken($topbar-bg, 18%);
+	border-right: 1px solid darken($topbar-bg, 18%);
+}
+
+#tasks{
+	height: 100%;
+}
+#mainHeader {
+	-webkit-box-shadow:  0px 1px 3px 1px rgba(0, 0, 0, .5); 
+  box-shadow:  0px 1px 3px 1px rgba(0, 0, 0, .5);
+  z-index: 100;
+}
+.top-bar-section ul,
+
+ {
+	height: auto;
+	background: none;
+	margin: 0;
+}
+.top-bar-section ul.left{
+	height: 45px;
+}
+
+//position topbar control icons
+.top-bar ul li a span {
+	font-size: 20px;
+	height: 45px;
+	position: relative;
+	top: 4px;
+	margin: 0 -3px;
+}
+
+//Calendar filter widget in top-bar
+dl.sub-nav.calendar-filter {
+	display: inline;
+	padding: 0;
+	margin: 0;
+	position: relative;
+	top: 12px;
+	margin-top: 10px;
+}
+
+dl.sub-nav.calendar-filter dd {
+	margin-top: 12px;
+	border-radius: $global-radius;
+}
+
+// --------------------------
+// header bar for sidebars
+// --------------------------
+.pane-header [class*="icon-"] {
+	position: relative;
+	top: 3px;
+	cursor:pointer;
+}
+
+.pane-header span{
+	position: relative;
+	top: 8px;
+}
+.pane-header span.right{ 
+	margin-right: 12px;
+	margin-top: 6px;
+}
+.pane-header .pane-title{ 
+	margin-left: 6px;
+}
+
+
+header#content-header {
+	// width: 100%; 
+	//fixes ipad rendering 1px gap
+}
+
+header#content-header ul.small-block-grid-3 li{
+	text-align: center;
+	margin: 0 !important;
+	padding-bottom: 0 !important;
+	background: darken($topbar-bg, 5%);
+	font-size: 20px;
+	padding-top: 4px;
+}
+
+header#content-header ul.small-block-grid-3 span.month-switcher{
+	font-family: $body-font-family;
+	position: relative;
+	top: -1px;
+}
+header#content-header [class*="icon-"] {
+	cursor:pointer;
+}
+
+// #org-name-wrapper {
+// 	position: absolute; left: 50%;
+// }
+
+.org-name {
+font-size: 20px;
+font-weight: bold;
+text-shadow: $letter-press;
+position: relative;
+top: -2px;
+width: 50%;
+margin-left: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+ul.days {padding: 0; margin: 0; width: 100%; position: relative; left: 2px;}
+}
+
+// apply letter-press shadow to all glyphs by default
+[class*="icon-"]{
+	text-shadow: $letter-press;
+}
+
+
+.calendar-index {
+	position: absolute;
+	left: 0;
+	top: 36px;
+	padding: 0 !important; 
+	margin: 0 !important; 
+	background: #ddd;
+	// margin-right: 20px;
+	width: 40px;
+	height: 100%;
+	text-align: center;
+	border-right: 1px solid #aaa;
+}
+.calendar-index ul.side-nav {
+	margin: 0;
+  padding: 0;
+
+}
+.calendar-index ul.side-nav li  {
+list-style-type: none;
+margin: 0;
+text-align: center;
+padding: 14px 0 ;
+border: 1px solid #aaa;
+border-width: 1px 0 0 0;
+cursor: pointer; 
+}
+
+.calendar-index ul.side-nav li:hover  {
+background: rgba($primary-color, .1); 
+}
+
+.calendar-index ul.side-nav li:nth-child(1) {
+background: #ccc;
+border-width: 0; 
+}
+.calendar-index ul.side-nav li:nth-child(14) {
+	background: #ccc;
+border-width: 1px 0 1px  0; 
+}
+
+
+//dummy calendar for proper visionality during html wireframe developmentality -jt
+.calendar-wrapper{display:inline;overflow:hidden;margin:0 auto; padding: 0 !important;  width: auto;}
+.calendar { padding: 0; margin: 0 0 0 38px !important;}
+.calendar ul.month-browser li{ width: 33.3%;padding:0;border:0;text-align:center;text-transform:uppercase;height:auto;margin:20px 0;}
+.calendar ul{list-style:none;padding:0;margin:0;clear:both;width:100%;}
+.calendar ul.weekdays{height:40px; width: 100%;}
+.calendar ul.weekdays li{text-align:center;text-transform:uppercase;line-height:20px;border:none!important;padding:10px 0px;color:#666;font-size:13px;}
+.calendar li{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;width:14.2857142857%;padding:5px;display:block;float:left;border:1px solid #ccc;margin-right:0px;margin-bottom:-1px;overflow:visible!important;}
+.calendar .days:last-child li{margin-bottom:0px!important;}
+.calendar li .day,.calendar li .month{display:none;}
+.calendar .date{text-align:right;margin-bottom:5px;}
+.show-info{display:block;font-size:13px;border-radius:4px;padding:5px;margin-bottom:5px;color:#666;line-height:14px;background:#e4f2f2;border:1px solid #b5dbdc;color:#009aaf;text-decoration:none;}
+.show-info:hover .venue{display:block;}
+.show-info .show-name{text-decoration:underline;}
+.show-info .show-time,.venue{color:#666;margin-top:2px;text-decoration:none;}
+.calendar .no-shows{display:none;}
+.calendar .venue{display:none;}
+.calendar li.out_of_range{background-color:#F5F5F5;color:#666;}
+ul.days, .calendar-day {padding: 0; margin: 0; width: 100%;}
+
+.calendar-picker-container {
+	position: relative;
+}
+.calendar-picker-container button {
+	top: 22px;
+	right: 20px;
+	position: absolute;
+	display: block;
+	color: #555;
+	font-size: 18px;
+	border: 0;
+	background: 0;
+	padding: 0;
+	margin: 0;
+	cursor: pointer;
+}
+
+.calendar-picker-container.nolabel button {
+	top: 5px;
+	right: 5px;
+}
+
+.icon-backspace:before {
+	content: "\e037";
+	background: #fff;
+	text-shadow: 0px 0px 0px #000;
+    filter: dropshadow(color=#000, offx=0, offy=0);
+	position: absolute;
+	top: 3px;
+	right: 2px;
+	height: auto;
+	padding-left: 5px;
+	line-height: 24px;
+	color: #555;
+	cursor: pointer !important; //make inline style
+	font-size: 20px;
+}
+// -----------------------------
+// subscriptions & tasks
+// -----------------------------
+.resource-gradient {
+	background: #eeeeee; /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.3)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(255,255,255,0.3) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(255,255,255,0.3) 0%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(255,255,255,0.3) 0%,rgba(255,255,255,0) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(255,255,255,0.3) 0%,rgba(255,255,255,0) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4dffffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
+}
+
+.resource-body { //inside
+	background: #eeeeee; /* Old browsers */
+	background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+}
+
+.task .resource-body.add {
+	min-height: none;
+	// same light gray gradient as topbar
+	background: #eeeeee; /* Old browsers */
+	background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+	padding: 16px 4px 6px;
+	margin-left: 8px;
+}
+
+.resource-panel [class*="icon-"]:active {
+	color: $primary-color;
+}
+
+.close-panel {
+	position: relative; 
+	float: right; 
+	cursor:pointer;
+	font-size: 20px;
+}
+
+.button-group li {
+	padding: 0 5px 0 0;
+}
+
+#main-content button,
+.button-group li div.button,
+.button-group li button { 
+ 	color: #333 !important;
+	padding: 6px;	
+	background: #eeeeee; /* Old browsers */
+	background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+	border: 1px solid #ccc;
+	margin: 0;
+	height: 36px;
+}
+
+.button-group li div.button:hover:enabled,
+.button-group li button:hover:enabled { 
+ 	color: #333 !important;
+	background: #eeeeee; /* Old browsers */
+	background: -moz-linear-gradient(top,  #eeeeee 60%, #cccccc 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(60%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #eeeeee 60%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #eeeeee 60%,#cccccc 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #eeeeee 60%,#cccccc 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #eeeeee 60%,#cccccc 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+	margin: 0;
+}
+
+button:focus {
+	outline: none;
+}
+
+button.disabled, button[disabled], .button.disabled, .button[disabled] {
+	color: grey;
+	border-color: rgb(204, 204, 204) !important;
+}
+
+.button-group li [class*="icon-"]{
+ color: #333;
+}
+
+.button-group li button:disabled [class*="icon-"]{
+ color: gray;
+}
+$topbar-link-color-active: $primary-color;
+
+.top-bar{
+background: rgba($topbar-bg, .3) repeat !important; 
+overflow: visible;
+}
+
+.top-bar-section li a:not(.button) {
+background: none !important;
+}
+// tabs
+
+.tabs dd.active {
+border-top: 0px solid $primary-color;
+}
+.top-bar-section ul li {
+	float: left !important;
+}
+
+//comment out 'fugly' import below to disable marketing mode
+@import "fugly";
+
+#mainHeader {
+  overflow: hidden;
+  height: 45px;
+  line-height: 45px;
+  position: relative;
+  background: #dddddd;
+  margin-bottom: 0;
+}
+.menubar {
+	// width: auto;
+	text-align: left;
+	width: auto;
+}
+.menubar ul li{
+	display: inline;
+	
+}
+
+.menubar ul li [class*="icon-"]{
+	color: #777;
+	height: 45px;
+	font-size: 24px;
+	display: inline-block;
+	margin-top: 11px;
+	margin-left: 10px;
+  cursor: pointer !important;
+}
+.menubar ul li [class*="icon-"]:hover{
+	color: #555;
+}
+
+.menubar ul li [class*="icon-"]:active{
+	color: $primary-color;
+}
+
+.menubar ul.left{
+	height: 45px;
+	width: auto;
+}
+
+// style main header bar and default content area with gradient
+#main-content, #mainHeader {
+	background: #eeeeee; /* Old browsers */
+	background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+}
+
+//position topbar control icons
+.menubar ul li a span {
+	font-size: 20px;
+	height: 45px;
+	position: relative;
+	top: 8px;
+	margin: 0 12px;
+}
+
+// OFF CANVAS MENU EXPERIMENT BELOW -JT
+// .main-header {
+//   text-align: center;
+//   text-shadow: #222 0px -1px 1px;
+//   left: 0;
+//   transition: all 0.7s ease;
+// }
+
+.page-wrap {
+  float: right;
+  width: 100%;
+  transition: width .7s ease;
+}
+
+.left-nav {
+  position: fixed;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background: #333;
+  transition: width .7s ease;
+  -webkit-box-shadow: inset -3px 0px 3px 0px rgba(0, 0, 0, .6);
+	box-shadow: inset -3px 0px 3px 0px rgba(0, 0, 0, .6);
+	color: #fff !important;
+	white-space: nowrap;
+	overflow: hidden;
+  a {
+    display: block;
+    border-bottom: 1px solid #222;
+    color: white;
+    padding: 10px 20px;
+    white-space: nowrap;
+    width: 100%;
+    font-size: 14px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 2px #000;
+    &:hover, &:focus {
+      background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.2));
+    }
+    &:active {
+      background: rgba($primary-color, .5) !important;
+    }
+    &.logout {
+    	background: rgba(#880000, .3) !important;
+	  }
+	  &.logout:hover, &.logout:focus {
+	     background: rgba(#880000, .7) !important;
+	  }
+   	[class*="icon-"] {
+    	text-shadow: 1px 1px 2px #000;
+    	font-size: 36px;
+    	text-align: center;
+    }
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    // width: 34px;
+    background: linear-gradient(left, rgba(black, 0), rgba(black, 0.4));
+  }
+  a.locked {
+  	// background: #999;
+  	color: #999;
+  }
+  a span:nth-of-type(2) { // select 2nd span inside to v. center app title
+    position: relative;
+		top: -9px;
+		font-size: 18px !important;
+    }
+  label {color:#fff; white-space: nowrap !important;}
+  h5 {color: #fff; margin-left: 20px;}
+  form * {
+  	white-space: nowrap !important;
+  }
+  button {
+  	width: 160px;
+  	margin: 20px !important;
+  	border-radius: $global-radius;
+  }
+}
+
+.close-menu {
+  display: none;
+}
+
+// #apps:target  {
+//   width: 200px;
+//   // width: calc(100% - 200px);
+// }
+// #apps:target + .page-wrap {
+//   // width: 80%;
+//   width: calc(100% - 200px);
+//   .open-menu {
+//      display: none; 
+//   }
+//   .close-menu {
+//      display: inline;
+//   }
+//   .main-header {
+ 
+//   }
+// }
+
+// HALLPASS STYLES
+#content {
+	max-width: 98%;
+	// margin: 20px;
+	// background: #fff;
+}
+#content label{
+	font-weight: bold;
+	cursor: default !important;
+}
+#content input[type=text]{
+	border-radius: 4px !important;
+	border: 1px solid #aaa !important;
+	height: 26px !important;
+}
+#content input[type=checkbox]{
+	margin: 0;padding: 0;position: relative;top: 2px;
+}
+
+#hallpass-tabs dd p span.icon-close2{
+	position: relative;
+	top: -8px;
+	right: -12px;
+	cursor: pointer !important;
+	font-size: 16px;
+}
+
+.tabs dd.active p {
+	color: $primary-color !important;
+}
+
+#content table{
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 0;
+	height: auto;
+}
+
+#content table thead tr th {
+	text-align: center;
+	background-color: $primary-color;
+	color: #fff;
+	font-weight: 300;
+
+}
+#content table thead tr th, #content div table tbody tr td {
+	width: 14.289%;
+}
+#content div table tbody tr td {
+	text-align: center;
+}
+
+#content table tr td:last-of-type{
+	text-align: center;
+}
+
+.admin-table tr{
+	padding: 0px;
+	margin: 0px;
+}
+.admin-table td span.student{
+	border-bottom: 1px dotted #222;
+}
+.admin-table td span.student, .admin-table tr td span[class*="icon-"]{
+  cursor: pointer !important;
+}
+.admin-table tr td span[class*="icon-"]{
+  color: #ccc;
+  padding-right: 5px;
+}
+.admin-table tr td span[class*="icon-"]:hover{
+  color: #222;
+}
+.admin-table tbody tr td input{ //bump checkbox to the left
+	position: relative;
+	top: 5px;
+	left: 18px; 
+}

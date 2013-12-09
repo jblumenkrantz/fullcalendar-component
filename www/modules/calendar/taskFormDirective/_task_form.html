@@ -1,14 +1,107 @@
-<div class="row">
-	<input type="text" ng-model="task.title" placeholder="Title (required)" />
-	<select ng-options="calendar.title for calendar in calendars" ng-model="task.calendar" ></select>
-	<textarea ng-model="task.note" placeholder="Add Note"></textarea>
-</div>
-<div class="row">
-	<div class="large-6 columns">
-		<div class="expand small alert button" ng-click="cancel()" >cancel</div>
+<form name="taskForm" class="task resource-edit" novalidate>
+	<!-- NAME -->
+	<div class="row" style="padding-top: 1em;">
+		<div class="large-12 columns">
+			<div class="resource-name">
+				<input focus-me="[task.editing]" delay="500" required type="text" ng-model="task.title" placeholder="Untitled task" />
+			</div>
+		</div>
 	</div>
-	<div class="large-6 columns">
-		<div class="expand small button" ng-click="save()" >save</div>
-	</div>
-</div>
 
+	<!-- DUE DATE
+	<div class=" nolabel">
+		<datetime
+			ng-required="task.has_due_date"
+			ng-show="task.has_due_date"
+			ng-model="task.start"
+			placeholder="m/d/yyyy h:mm AM/PM"
+			date-format="MM/d/yyyy"
+			time-format="h:mm a"
+			divider="@"
+			dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y @ h:M a'}"
+			jqui-opts="{dateFormat: 'm/d/yy'}"
+		/>
+	</div>
+	-->
+	<div class="row">
+		<div class="large-12 columns calendar-picker-container nolabel">
+			<datetime
+				ng-required="task.has_due_date"
+				ng-model="task.start"
+				placeholder="Due date"
+				date-format="MM/d/yyyy"
+				time-format="h:mm a"
+				divider="@"
+				dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y @ h:M a'}"
+				jqui-opts="{dateFormat: 'm/d/yy'}"
+				name="due"
+			/>
+		</div>
+	</div>
+	
+	<!-- CALENDAR -->
+
+	<div class="row">
+		<div class="large-12 columns">
+			<select
+				ng-change="switchCalendar(task)"
+				ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'"
+				ng-model="task.calendar_id">
+			</select>
+		</div>
+	</div>
+
+	<!-- NOTES -->
+	<div class="row">
+		<div class="large-12 columns">
+			<textarea ng-model="task.task_notes" placeholder="Add a note"></textarea>
+		</div>
+	</div>
+
+
+
+	<!-- HAS A DUE DATE CHECKBOX
+	<label class="checkbox" ng-class="{'on-date':task.has_due_date}">
+		<input type="checkbox" ng-model="task.has_due_date" ng-change="dueDateToggle(task);" />
+		Has a due date
+	</label>
+	<div class="row">
+		<div class="large-12 columns">
+			<checkbox
+				ng-model="task.has_due_date"
+				text="Has a due date"
+				ng-click="dueDateToggle(task);"
+			/>
+		</div>
+	</div>
+	-->
+	
+	<!-- REMINDER SETTINGS -->
+	<reminder-list reminders="reminders" type-filter="reminderTypeFilter" default-reminder="defaultReminder"></reminder-list>
+
+	<!-- BUTTONS -->
+	<div class="row">
+		<div class="large-12 columns">
+			<ul class="button-group" ng-class="{'even-2':!existingTask, 'even-3':existingTask}">
+				<li>
+					<button ng-show="existingTask = task.version != undefined" ng-disabled="taskForm.$invalid" class="button radius" ng-click="share()">
+						<span aria-hidden="true" class="icon-share"></span>
+					</button>
+					<button ng-hide="existingTask" class="button radius" ng-click="reset()">
+						<span aria-hidden="true" class="icon-reload-alt"></span>
+					</button>
+				</li>
+				<li ng-show="existingTask">
+					<button class="button radius" ng-click="delete()">
+						<span aria-hidden="true" class="icon-remove2"></span>
+					</button>
+				</li>
+				<li style="padding-right: 0;">
+					<button ng-disabled="taskForm.$invalid" class="button radius" ng-click="save()">
+						<span aria-hidden="true" class="icon-checkmark"></span>
+					</button>
+				</li>
+			</ul>
+		</div>
+	</div>
+</form>

@@ -1,0 +1,36 @@
+<div
+	class="resource-panel existing"
+	style="background: #222;">
+	<div class="resource-gradient">
+		<div class="resource-header pane-header small">
+		    <span class="pane-title">{{calendar.calendar_name}}</span>
+		    <span class="icon-x-altx-alt right" ng-click="cancel()" aria-hidden="true"></span>
+		</div>
+		<div class="resource-body">
+
+			<!-- RSS FEED ICON -->
+
+			<div class="subscribed" ng-hide="checkPermission('calendar_creator',true,calendar)">
+				<span aria-hidden="true" class="icon-rss-alt" style="color: #222;">
+				</span>
+			</div>
+
+			<!-- / RSS FEED ICON -->
+
+			<!-- DISPLAY CALENDAR NAME -->
+
+			<div class="resource-display">
+				<label class="checkbox resource-checkbox">
+					<span ng-hide="calendar.recent" ng-click="subscribe()" class="icon-calendarPlus"></span>
+				</label>
+				<div class="resource-data" ng-click="subscribe()">
+					<strong class="resource-title">
+						{{calendar.calendar_name}}
+					</strong>
+				</div>
+			</div>
+
+			<!-- / DISPLAY CALENDAR NAME -->
+		</div>
+	</div>
+</div>

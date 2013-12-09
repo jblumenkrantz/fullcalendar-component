@@ -2,17 +2,30 @@
   "name": "pinwheel",
   "version": "0.0.0",
   "dependencies": {
-    "angular": "~1.0.7",
+    "angular": "1.2.0-rc.2",
     "json3": "~3.2.4",
     "es5-shim": "~2.0.8",
-    "angular-resource": "~1.0.7",
-    "angular-cookies": "~1.0.7",
-    "angular-sanitize": "~1.0.7",
+    "angular-resource": "1.2.0-rc.2",
+    "angular-animate": "1.2.0-rc.2",
+    "angular-cookies": "1.2.0-rc.2",
+    "angular-sanitize": "1.2.0-rc.2",
     "foundation": "~4.3.1",
-    "jquery": "~2.0.3"
+    "jquery": "~2.0.3",
+    "angular-ui-date": "latest",
+    "angular-route": "1.2.0-rc.2",
+    "angular-dragdrop": "~1.0.4",
+    "sdi-angular-ui-calendar": "latest",
+    "sdi-fullcalendar": "latest",
+    "sdi-jquery-ui": "latest",
+    "angular-ui-select2": "~0.0.2",
+    "sdi-select2": "~3.4.51"
   },
   "devDependencies": {
-    "angular-mocks": "~1.0.7",
-    "angular-scenario": "~1.0.7"
+    "angular-mocks": "latest",
+    "angular-scenario": "latest"
+  },
+  "resolutions": {
+    "angular": "1.2.0-rc.2",
+    "jquery": "~2.0.3"
   }
 }

@@ -1,0 +1,8 @@
+<div ng-repeat="event in events | filter: isCalendarShowing | filter: thisWeeksEvents | orderBy: 'start'">
+	<div class="row display" ng-style="{color: calendarWatchers[event.calendar_id].color}">
+		<div class="large-3 columns">{{event.title}}</div>
+		<div class="large-3 columns">{{event.start | date}}</div>
+		<div class="large-3 columns">{{event.end | date}}</div>
+		<div class="large-3 columns">{{event.event_description}}</div>
+	</div>
+</div>

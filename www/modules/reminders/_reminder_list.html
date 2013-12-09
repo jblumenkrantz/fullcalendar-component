@@ -1,0 +1,27 @@
+<div class="row reminders">
+	<div class="large-12 columns">
+		<table>
+			<tbody>
+				<tr ng-repeat="r in reminders | filter: {active: true} | orderBy: 'mins_before'" reminder="r" type-filter="typeFilter"></tr>
+				<tr>
+					<td class="add">
+						<div ng-show="!adding" ng-click="add()">
+							<span class="icon-plus-alt" aria-hidden="true"></span>
+							Add reminder
+						</div>
+						<div ng-show="adding" class="row">
+							<reminder-form
+								editing="adding"
+								form-reminder="newReminder"
+								save="save()"
+								cancel="cancel()"
+								reminder-types="reminderTypes"
+								type-filter="typeFilter">
+							</reminder-form>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

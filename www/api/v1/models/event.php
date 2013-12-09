@@ -1,12 +1,12 @@
 <?php
 class Event extends PinwheelModelObject
 {
-	public $event_id;
-	public $event_title;
+	public $id;
+	public $title;
 	public $event_description;
 	public $calendar_id;
-	public $event_start;
-	public $event_end;
+	public $start;
+	public $end;
 	public $opponent_id;
 	public $location_id;
 	public $creator_id;
@@ -14,7 +14,7 @@ class Event extends PinwheelModelObject
 	public $active;
 	public $last_modified;
 	public $version;
-	public $all_day;
+	public $allDay;
   public $stops_repeating;
   public $repeat_by;
   public $repeat_on;
@@ -32,12 +32,12 @@ class Event extends PinwheelModelObject
 	*/
 	static protected function defaults () {
 		return array(
-			'event_id' => NULL,
-			'event_title' => '',
+			'id' => NULL,
+			'title' => '',
 			'event_description' => '',
 			'calendar_id' => '',
-			'event_start' => '',
-			'event_end' => '',
+			'start' => '',
+			'end' => '',
 			'opponent_id' => '',
 			'location_id' => '',
 			'creator_id' => '',
@@ -45,7 +45,7 @@ class Event extends PinwheelModelObject
 			'repeat_by' => null,
 			'repeat_on' => null,
 			'repeat_interval' => null,
-			'all_day' => 0,
+			'allDay' => 0,
 			'last_modified' => NULL,
 			'version' => 0,
 			'mins_before' => '',
@@ -90,12 +90,12 @@ class Event extends PinwheelModelObject
 		$id = is_array($id)? "'".implode("','", $id)."'": "'$id'";
 		return static:: loadByQuery(
 			"SELECT 
-					events.event_id,
-					event_title,
+					events.id,
+					title,
 					event_description,
 					events.calendar_id,
-					UNIX_TIMESTAMP(event_start) as event_start,
-					UNIX_TIMESTAMP(event_end) as event_end,
+					UNIX_TIMESTAMP(start) as start,
+					UNIX_TIMESTAMP(end) as end,
 					opponent_id,
 					location_id,
 					creator_id,
@@ -105,7 +105,7 @@ class Event extends PinwheelModelObject
 					repeat_on,
 					repeat_interval,
 					events.active,
-					all_day,
+					allDay,
 					UNIX_TIMESTAMP(events.last_modified) as last_modified,
 					events.version,
 					reminder_prefs.mins_before,
@@ -115,8 +115,8 @@ class Event extends PinwheelModelObject
 					reminder_prefs.version as reminder_pref_version
 				FROM events
 				LEFT OUTER JOIN reminder_prefs
-				ON events.event_id = reminder_prefs.event_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$authUserID'
-				WHERE events.event_id IN ($id)
+				ON events.id = reminder_prefs.event_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$authUserID'
+				WHERE events.id IN ($id)
 			"
 		, $pinsqli);
 	}
@@ -124,12 +124,12 @@ class Event extends PinwheelModelObject
 	static public function loadByUser($userId, $pinsqli=NULL){
 		return static:: loadByQuery(
 			"SELECT
-					events.event_id,
-					event_title,
+					events.id,
+					title,
 					event_description,
 					events.calendar_id,
-					UNIX_TIMESTAMP(event_start) as event_start,
-					UNIX_TIMESTAMP(event_end) as event_end,
+					UNIX_TIMESTAMP(start) as start,
+					UNIX_TIMESTAMP(end) as end,
 					opponent_id,
 					location_id,
 					creator_id,
@@ -139,7 +139,7 @@ class Event extends PinwheelModelObject
 					repeat_on,
 					repeat_interval,
 					events.active,
-					all_day,
+					allDay,
 					UNIX_TIMESTAMP(events.last_modified) as last_modified,
 					events.version,
 					reminder_prefs.mins_before,
@@ -149,7 +149,7 @@ class Event extends PinwheelModelObject
 					reminder_prefs.version as reminder_pref_version
 				FROM events
 				LEFT OUTER JOIN reminder_prefs
-				ON events.event_id = reminder_prefs.event_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$userId' 
+				ON events.id = reminder_prefs.event_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$userId' 
 				WHERE events.creator_id = '$userId'
 			", $pinsqli);
 	}
@@ -159,12 +159,12 @@ class Event extends PinwheelModelObject
 		$id = is_array($id)? "'".implode("','", $id)."'": "'$id'";
 		return static:: loadByQuery(
 			"SELECT
-					events.event_id,
-					event_title,
+					events.id,
+					title,
 					event_description,
 					events.calendar_id,
-					UNIX_TIMESTAMP(event_start) as event_start,
-					UNIX_TIMESTAMP(event_end) as event_end,
+					UNIX_TIMESTAMP(start) as start,
+					UNIX_TIMESTAMP(end) as end,
 					opponent_id,
 					location_id,
 					creator_id,
@@ -174,7 +174,7 @@ class Event extends PinwheelModelObject
 					repeat_on,
 					repeat_interval,
 					events.active,
-					all_day,
+					allDay,
 					UNIX_TIMESTAMP(events.last_modified) as last_modified,
 					events.version,
 					reminder_prefs.mins_before,
@@ -184,20 +184,60 @@ class Event extends PinwheelModelObject
 					reminder_prefs.version as reminder_pref_version
 				FROM events
 				LEFT OUTER JOIN reminder_prefs
-				ON events.event_id = reminder_prefs.event_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$authUserID' 
-				WHERE events.event_id IN ($id)
+				ON events.id = reminder_prefs.event_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$authUserID' 
+				WHERE events.id IN ($id)
 					AND events.active = TRUE
 			"
 		, $pinsqli);
 	}
 
+	/** USED BY PINWHEEL **/
+	static public function getUserEventsForCalendar($userId, $calendar, $pinsqli=NULL) {
+		$dataRay = $eventArray = array();
+
+		//error_log(print_r($calendar,true));
+
+		$events = Event::getBatch(array("events.active = true","events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}'))"));
+
+
+		/*if(isSet($calendar) && property_exists($calendar, 'adhoc_events') && !$calendar->adhoc_events){
+			unset($calendar->adhoc_events);
+		}*/
+		foreach($events as $event){
+			$event->active = (bool)($event->active);
+			$event->allDay = (bool)($event->allDay);
+			$event->editable = (bool)(($userId == $calendar->creator_id) || $calendar->calendar_admin);
+			array_push($dataRay, $event);
+		}
+		return($dataRay);
+	}
+	
+
+	static public function getEventsBetween($userId, $start, $end, $pinsqli=NULL) {
+		$dataRay = $eventArray = array();
+
+		$cals = (object) array_merge((array) Calendar::loadUserCreatedCalendars($userId), (array) Calendar::loadUserSubscriptions($userId));
+
+		foreach($cals as $calendar){
+
+			$events = Event::getBatch(array("events.active = true","start > FROM_UNIXTIME('$start')","start < FROM_UNIXTIME('$end')","events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}'))"));
+
+			if(property_exists($calendar, 'adhoc_events') && !$calendar->adhoc_events){
+				unset($calendar->adhoc_events);
+			}
+			foreach($events as $event){
+				array_push($dataRay, $event);
+			}
+		}
+		return($dataRay);
+	}
 	static public function loadByQuery ($query, $pinsqli = NULL) {
 		$pinsqli = $pinsqli === NULL? DistributedMySQLConnection:: readInstance(): $pinsqli;
 		$resulti = $pinsqli->query($query);
 		$events = array();
 		if (!$pinsqli->errno) {
 			while (($object = $resulti->fetch_object()))
-			$events[$object->event_id] = new Event($object);
+			array_push($events, new Event($object));
 				//array_push($events, new Event($object));  // why were we doing it this way?
 		} else
 			throw new Exception($pinsqli->error, 1);
@@ -215,12 +255,12 @@ class Event extends PinwheelModelObject
 		$pinsqli = DistributedMySQLConnection:: writeInstance();
 		$resulti = $pinsqli->query(
 			"INSERT INTO event_subs (
-					event_id,
+					id,
 					calendar_id,
 					user_id
 				)
 				Values (
-					'{$subscription->event_id}',
+					'{$subscription->id}',
 					'{$subscription->calendar_id}',
 					'$userId'
 				)");
@@ -264,21 +304,21 @@ class Event extends PinwheelModelObject
 			$ep = array_map(array($pinsqli, 'real_escape_string'), $ep);
 			$eventID = MySQLConnection::generateUID('event');
 			$ep['creator_id'] = $authUserID;
-			if($ep['repeat_id'] == $ep['event_id']){
+			if($ep['repeat_id'] == $ep['id']){
 				$ep['repeat_id'] = $eventID;
 			}
 			array_push($valueStrings,
 				"(
 					'$eventID',
-					'{$ep['event_title']}',
+					'{$ep['title']}',
 					'{$ep['event_description']}',
 					'{$ep['calendar_id']}',
-					FROM_UNIXTIME('{$ep['event_start']}'),
-					FROM_UNIXTIME('{$ep['event_end']}'),
+					FROM_UNIXTIME('{$ep['start']}'),
+					FROM_UNIXTIME('{$ep['end']}'),
 					'{$ep['opponent_id']}',
 					'{$ep['location_id']}',
 					'{$ep['creator_id']}',
-					'{$ep['all_day']}',
+					'{$ep['allDay']}',
 					'{$ep['repeat_id']}',
 					FROM_UNIXTIME('{$ep['stops_repeating']}'),
 					'{$ep['repeat_interval']}',
@@ -287,7 +327,7 @@ class Event extends PinwheelModelObject
 				)"
 			);
 			if ($ep["has_reminder"] == true && !$ep['using_calendar_reminder']) {
-				$ep["event_id"] = $eventID;
+				$ep["id"] = $eventID;
 				$ep["user_id"] = $authUserID;
 				ReminderPrefs:: create($ep, $pinsqli);
 			}
@@ -297,16 +337,16 @@ class Event extends PinwheelModelObject
 
 		$resulti = $pinsqli->query(
 			"INSERT INTO events (
-					event_id,
-					event_title,
+					id,
+					title,
 					event_description,
 					calendar_id,
-					event_start,
-					event_end,
+					start,
+					end,
 					opponent_id,
 					location_id,
 					creator_id,
-					all_day,
+					allDay,
 					repeat_id,
 					stops_repeating,
 					repeat_interval,
@@ -322,6 +362,8 @@ class Event extends PinwheelModelObject
 		
 		$events = static:: load($eventIDs, $pinsqli);
 		foreach ($events as $event)
+			$event->active = (bool)($event->active);
+			$event->allDay = (bool)($event->allDay);
 			BRCDispatcher:: dispatchEventModification(new BRCEventModification($event, BRCEventModification:: $Created));
 		return $events;
 	}
@@ -335,12 +377,12 @@ class Event extends PinwheelModelObject
 		$pinsqli = $pinsqli === NULL? DistributedMySQLConnection:: readInstance(): $pinsqli;
 		$resulti = $pinsqli->query(
 			"SELECT
-					events.event_id,
-					event_title,
+					events.id,
+					title,
 					event_description,
 					events.calendar_id,
-					UNIX_TIMESTAMP(event_start) as event_start,
-					UNIX_TIMESTAMP(event_end) as event_end,
+					UNIX_TIMESTAMP(start) as start,
+					UNIX_TIMESTAMP(end) as end,
 					opponent_id,
 					location_id,
 					creator_id,
@@ -350,7 +392,7 @@ class Event extends PinwheelModelObject
 					repeat_on,
 					repeat_interval,
 					events.active,
-					all_day,
+					allDay,
 					UNIX_TIMESTAMP(events.last_modified) as last_modified,
 					events.version,
 					reminder_prefs.mins_before,
@@ -360,8 +402,8 @@ class Event extends PinwheelModelObject
 					reminder_prefs.version as reminder_pref_version
 				From events
 				LEFT OUTER JOIN reminder_prefs
-				ON events.event_id = reminder_prefs.event_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$authUserID'
-				WHERE events.event_id = '$this->event_id'
+				ON events.id = reminder_prefs.event_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$authUserID'
+				WHERE events.id = '$this->id'
 					AND events.version > $this->version
 			"
 		);
@@ -389,29 +431,29 @@ class Event extends PinwheelModelObject
 			$pinsqli = DistributedMySQLConnection:: writeInstance();
 		}
 		$properties = array_map(array($pinsqli, 'real_escape_string'), get_object_vars($this));
-		if(!IsSet($properties['all_day'])){
-			$properties['all_day'] = 0;
+		if(!IsSet($properties['allDay'])){
+			$properties['allDay'] = 0;
 		}
 		
 		$resulti = $pinsqli->query(
 			"UPDATE events
 				SET
-					event_title = '{$properties['event_title']}',
+					title = '{$properties['title']}',
 					event_description = '{$properties['event_description']}',
 					calendar_id = '{$properties['calendar_id']}',
-					event_start = FROM_UNIXTIME('{$properties['event_start']}'),
-					event_end   = FROM_UNIXTIME('{$properties['event_end']}'),
+					start = FROM_UNIXTIME('{$properties['start']}'),
+					end   = FROM_UNIXTIME('{$properties['end']}'),
 					opponent_id = '{$properties['opponent_id']}',
 					location_id = '{$properties['location_id']}',
 					creator_id  = '{$properties['creator_id']}',
-					all_day     = '{$properties['all_day']}',
+					allDay     = '{$properties['allDay']}',
 					repeat_id   = '{$properties['repeat_id']}',
 					stops_repeating = FROM_UNIXTIME('{$properties['stops_repeating']}'),
 					repeat_interval = '{$properties['repeat_interval']}',
 					repeat_on   = '{$properties['repeat_on']}',
 					repeat_by   = '{$properties['repeat_by']}',
 					version 	  = version + 1
-				WHERE event_id = '{$properties['event_id']}'
+				WHERE id = '{$properties['id']}'
 					AND version = $this->version
 			"
 		);
@@ -419,34 +461,36 @@ class Event extends PinwheelModelObject
 		if ($pinsqli->errno) {
 			var_dump("UPDATE events
 				SET
-					event_title = '{$properties['event_title']}',
+					title = '{$properties['title']}',
 					event_description = '{$properties['event_description']}',
 					calendar_id = '{$properties['calendar_id']}',
-					event_start = FROM_UNIXTIME('{$properties['event_start']}'),
-					event_end   = FROM_UNIXTIME('{$properties['event_end']}'),
+					start = FROM_UNIXTIME('{$properties['start']}'),
+					end   = FROM_UNIXTIME('{$properties['end']}'),
 					opponent_id = '{$properties['opponent_id']}',
 					location_id = '{$properties['location_id']}',
 					creator_id  = '{$properties['creator_id']}',
-					all_day  = {$properties['all_day']},
+					allDay  = {$properties['allDay']},
 					repeat_id   = '{$properties['repeat_id']}',
 					stops_repeating = FROM_UNIXTIME('{$properties['stops_repeating']}'),
 					repeat_interval = '{$properties['repeat_interval']}',
 					repeat_on   = '{$properties['repeat_on']}',
 					repeat_by   = '{$properties['repeat_by']}',
 					version 	= version + 1
-				WHERE event_id = '{$properties['event_id']}'
+				WHERE id = '{$properties['id']}'
 					AND version = $this->version
 			");
 			throw new Exception($pinsqli->error, 1);
 		}
 		if ($pinsqli->affected_rows == 0) {
-			$resource = static:: load($this->event_id, $pinsqli);
+			$resource = static:: load($this->id, $pinsqli);
 			$resource = array_pop($resource);
 			if (!$resource)
 				throw new EventDoesNotExist($this);
 			throw new EventDataConflictException($resource, array($this));
 		}
 		$this->reload($pinsqli);
+		$this->active = (bool)($this->active);
+		$this->allDay = (bool)($this->allDay);
 		BRCDispatcher:: dispatchEventModification(new BRCEventModification($this, BRCEventModification:: $Updated));
 	}
 
@@ -462,7 +506,7 @@ class Event extends PinwheelModelObject
 	*	where a,b,d are requests and e is event and f is delete-function). As a result,
 	*	Event::delete could be batched.
 	*/
-	public function delete ($pinsqli) {
+	public function delete ($pinsqli=NULL) {
 		if (!isset($pinsqli)) {
 			$pinsqli = DistributedMySQLConnection:: writeInstance();
 		}
@@ -471,14 +515,14 @@ class Event extends PinwheelModelObject
 				SET
 					active = FALSE,
 					version = version + 1
-				WHERE event_id = '$this->event_id'
+				WHERE id = '$this->id'
 					AND version = $this->version
 			"
 		);
 		if ($pinsqli->errno)
 			throw new Exception($pinsqli->error, 1);
 		if ($pinsqli->affected_rows == 0) {
-			$resource = static:: load($this->event_id, $pinsqli);
+			$resource = static:: load($this->id, $pinsqli);
 			$resource = array_pop($resource);
 			if (!$resource)
 				throw new EventDoesNotExist($this);
@@ -500,12 +544,12 @@ class Event extends PinwheelModelObject
 	*/
 	static public function allBetween($start, $end, $calendar_id=NULL){
 		$where_array = array();
-		$where_array[] = "event_start > FROM_UNIXTIME('$start')";
-		$where_array[] = "event_start < FROM_UNIXTIME('$end')";
+		$where_array[] = "start > FROM_UNIXTIME('$start')";
+		$where_array[] = "start < FROM_UNIXTIME('$end')";
 		if($calendar_id){
 			$where_array[] = "events.calendar_id = '$calendar_id'";
 		}
-		return(Event::getBatch($where_array, array('event_id_only'=>false)));
+		return(Event::getBatch($where_array, array('id_only'=>false)));
 	}
 
 
@@ -514,7 +558,7 @@ class Event extends PinwheelModelObject
 	*	on the passed clause.
 	*
 	*	@param $where_array  Array of conditions to impose on Event aquasition.
-	*	@param $event_id_only  Flag indicating whether to return only event_id
+	*	@param $id_only  Flag indicating whether to return only id
 	*	property from datastore.
 	*	@return Array of Event(s).
 	*/
@@ -522,15 +566,15 @@ class Event extends PinwheelModelObject
 		$authUserID = Authorize:: sharedInstance()->userID();
 		$query = "SELECT ";
 
-		if(!isSet($opts['event_id_only']) || $opts['event_id_only'] == false){
+		if(!isSet($opts['id_only']) || $opts['id_only'] == false){
 			$opts = array_keys(get_class_vars('Event'));
 			$query .= "
-				events.event_id,
-				event_title,
+				events.id,
+				title,
 				event_description,
 				events.calendar_id,
-				UNIX_TIMESTAMP(event_start) as event_start,
-				UNIX_TIMESTAMP(event_end) as event_end,
+				UNIX_TIMESTAMP(start) as start,
+				UNIX_TIMESTAMP(end) as end,
 				opponent_id,
 				location_id,
 				creator_id,
@@ -541,7 +585,7 @@ class Event extends PinwheelModelObject
 				UNIX_TIMESTAMP(events.last_modified) as last_modified,
 				UNIX_TIMESTAMP(stops_repeating) as stops_repeating,
 				events.active,
-				all_day,
+				allDay,
 				events.version,
 				reminder_prefs.mins_before,
 				UNIX_TIMESTAMP(reminder_prefs.absolute_date) as absolute_date,
@@ -550,9 +594,9 @@ class Event extends PinwheelModelObject
 				reminder_prefs.version as reminder_pref_version
 			";
 		}else{
-			$query .= 'events.event_id';
+			$query .= 'events.id';
 		}
-		$query .= " FROM events LEFT OUTER JOIN reminder_prefs ON events.event_id = reminder_prefs.event_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$authUserID'";
+		$query .= " FROM events LEFT OUTER JOIN reminder_prefs ON events.id = reminder_prefs.event_id AND reminder_prefs.active = TRUE AND reminder_prefs.user_id = '$authUserID'";
 		
 		$where_query = '';
 		if($where_array && is_array($where_array) && sizeof($where_array) > 0){
@@ -560,9 +604,10 @@ class Event extends PinwheelModelObject
 		}
 
 		$query .= $where_query;
-
+		//error_log(print_r(preg_replace('~[\r\n\t]+~','',$query),true));
 		// Query Datastore
 		$pinsqli = DistributedMySQLConnection:: readInstance();
+		//return $query;
 		$resulti = $pinsqli->query($query);
 		if ($pinsqli->errno)
 			throw new Exception($pinsqli->error, 1);
@@ -570,12 +615,13 @@ class Event extends PinwheelModelObject
 		// Unpack Result
 		$events = array();
 		while($event = $resulti->fetch_assoc()){
-			if(!isSet($opts['event_id_only']) || $opts['event_id_only'] == false){
+			if(!isSet($opts['id_only']) || $opts['id_only'] == false){
 				$returnedEvent = new Event($event);
 			}else{
-				$returnedEvent = $event['event_id'];
+				$returnedEvent = $event['id'];
 			}
-			$events[$event['event_id']] = $returnedEvent;
+			array_push($events, $returnedEvent);
+			//$events[$event['id']] = $returnedEvent;
 		}
 		return($events);
 	}

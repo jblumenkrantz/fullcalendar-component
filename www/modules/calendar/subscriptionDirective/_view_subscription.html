@@ -1,2 +1,122 @@
-<h1>subscription goes here</h1>
+<div
+	resource-panel
+	class="resource-panel existing"
+	ng-class="{'open':calendar.editing, 'close':!calendar.editing}"
+	ng-style="{background:color}">
+	<div class="resource-gradient">
+		<div class="resource-header pane-header small">
+		    <span class="pane-title">
+		    	<span style="top: 0px;" ng-show="editCalendarForm.$dirty">*</span>{{editCalendar.calendar_name}}
+		    </span>
+		    <span class="icon-x-altx-alt right" ng-click="cancel()" aria-hidden="true"></span>
+		</div>
+		<div class="resource-body">
+			<div class="subscribed" ng-hide="checkPermission('calendar_creator',true,calendar)">
+				<span aria-hidden="true" class="icon-rss-alt" ng-style="{color:color}">
+				</span>
+			</div>
 
+			<!-- DISPLAY CALENDAR -->
+
+			<div class="resource-display">
+				<checkbox
+					class="resource-checkbox"
+					ng-model="calendar.viewing"
+					ng-click="setShowState();"
+					icon-if-true="icon-eye"
+					icon-if-false="icon-eye-blocked"
+				/>
+				<div class="resource-data" ng-click="edit()">
+					<strong class="resource-title">
+						{{calendar.calendar_name}}
+					</strong>
+				</div>
+			</div>
+
+			<!-- EDIT CALENDAR -->
+
+			<form name="editCalendarForm" class="subscription resource-edit" ng-submit="editCalendarForm.$valid && update()" novalidate>
+				<!-- Name -->
+				<div class="row" style="padding-top: 1em;">
+					<div class="large-12 columns">
+						<div class="resource-name">
+							<input required type="text" focus-me="[editCalendar]" delay="500" ng-model="editCalendar.calendar_name" placeholder="Name (required)" />
+						</div>
+						<div class="color-selector">
+							<ui-colorpicker ng-model="editCalendar.color"></ui-colorpicker>
+						</div>
+					</div>
+				</div>
+
+				<!-- Public Checkbox -->
+				<div class="row" ng-show="hasPublic = checkPermision('modify_public_calendars',true)">
+					<div class="large-12 columns">
+						<checkbox
+							ng-model="editCalendar.public"
+							text="This is a public calendar" 
+						/>
+					</div>
+				</div>
+
+				<!-- TABS MENU -->
+				<div class="row">
+					<div class="large-12 columns">
+						<tabs 
+							default="Reminders" 
+							ng-init="list = [
+										{
+											name:'Reminders',
+											icon:'icon-bell'
+										},
+										{
+											name:'Administrators',
+											icon:'icon-cog',
+											permission:[
+												'modify_public_calendars',
+												'calendar_admin',
+												'calendar_creator'
+											]
+										}
+									]">
+						</tabs>
+					</div>
+				</div>
+
+				<!-- Reminders TAB -->
+				<div ng-show="activeTab.Reminders">
+					<reminder-list
+						reminders="editCalendar.reminders"
+						type-filter="reminderTypeFilter"
+					>
+					</reminder-list>
+				</div>
+
+				<!-- Calendar Admins TAB -->
+				<calendar-admin-list ng-show="activeTab.Administrators"></calendar-admin-list>
+
+				<!-- FORM BUTTONS -->
+				<div class="row">
+					<div class="large-12 columns">
+						<ul class="button-group even-3">
+							<li>
+								<button type="button" ng-disabled="editCalendarForm.$invalid" class="button radius">
+									<span aria-hidden="true" class="icon-share"></span> <!-- cancel -->
+								</button>
+							</li>
+							<li>
+								<button type="button" class="button radius" ng-click="unsubscribe()">
+									<span aria-hidden="true" class="icon-remove2"></span> <!-- unsubscribe -->
+								</button>
+							</li>
+							<li style="padding-right: 0;">
+								<button type="submit" ng-disabled="editCalendarForm.$invalid" class="button radius">
+									<span aria-hidden="true" class="icon-checkmark"></span> <!-- save -->
+								</button>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

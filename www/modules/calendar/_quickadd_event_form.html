@@ -1,0 +1,29 @@
+<div class="pane-header">
+    <span class="pane-title">Quick Add Event</span>
+    <span class="icon-x-altx-alt right" ng-click="cancel()" aria-hidden="true"></span>
+</div>
+<form name="quickAddForm">
+	<div class="row" style="margin-top: 1em;">
+		<div class="large-12 columns">
+	    	<input required focus-me="[quickAdding]" type="text" ng-model="quickAdd.text" placeholder="Movie at 7pm on Friday" />
+	    </div>
+	</div>
+	<!-- BUTTONS -->
+	<div class="row">
+		<div class="large-12 columns">
+			<ul class="button-group even-2">
+				<li>
+					<button class="button radius" ng-click="add()">
+						<span aria-hidden="true" class="icon-grid-3"> Advanced Entry</span>
+					</button>
+				</li>
+				<li>
+					<button ng-disabled="quickAddForm.$invalid" class="button radius" ng-click="quickSave()">
+						<span aria-hidden="true" class="icon-checkmark"> Save</span>
+					</button>
+				</li>
+			</ul>
+			<br>
+		</div>
+	</div>
+</form>

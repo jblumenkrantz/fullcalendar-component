@@ -1,37 +1,22 @@
 'use strict';
 
-angular.module('pinwheelApp', [])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/calendar/:view/:year/:month/:day', {
-        templateUrl: 'modules/calendar/month.html',
-        controller: 'CalendarCtl'
-      })
-			.when("/handbook", {
-        templateUrl: 'modules/handbook/main.html',
-        controller: 'HandbookCtl'
-			})
-			.when("/messaging", {
-        templateUrl: 'modules/messaging/main.html',
-        controller: 'MessagingCtl'
-			})
-			.when("/reference", {
-        templateUrl: 'modules/reference/main.html',
-        controller: 'ReferenceCtl'
-			})
-      .otherwise({
-        redirectTo: '/calendar/month/'+(new Date().getFullYear())+'/'+(new Date().getMonth()+1)+'/'+(new Date().getDate())
-      });
-  })
-	.factory('User', function($resource){
-		return $resource('/api/user', {}, {update: {method:'PUT'}});
-	})
-	.factory('Calendar', function($resource){
-		return $resource('/api/calendar', {}, {update: {method:'PUT'}});
-	})
-	.factory('Task', function($resource){
-		return $resource('/api/task', {}, {update: {method:'PUT'}});
-	})
-	.factory('Event', function($resource){
-		return $resource('/api/event', {}, {update: {method:'PUT'}});
+angular.module('pinwheelApp', ['ui.calendar', 'ngDragDrop', 'ngResource', 'ui.date', 'ngRoute', 'ngAnimate', 'ui.select2'])
+	.value("localStorage", localStorage)
+	.value("Debounce", function(func, threshold, execAsap) {
+		var timeout;
+	    return function debounced () {
+	        var obj = this, args = arguments;
+	        function delayed () {
+	            if (!execAsap)
+	                func.apply(obj, args);
+	            timeout = null; 
+	        };
+	 
+	        if (timeout)
+	            clearTimeout(timeout);
+	        else if (execAsap)
+	            func.apply(obj, args);
+	 
+	        timeout = setTimeout(delayed, threshold || 100); 
+	    };
 	})

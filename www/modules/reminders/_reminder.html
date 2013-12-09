@@ -1,0 +1,17 @@
+<td>
+	<div ng-show="!editing">
+		<div class="description" ng-click="edit();">{{rs.describe(reminder)}}</div>
+		<span ng-click="edit();" class="icon-pencil" aria-hidden="true"></span>
+		<span ng-click="delete();" class="icon-remove2" aria-hidden="true"></span>
+	</div>
+	<div ng-show="editing" class="row">
+		<reminder-form
+			editing="editing"
+			form-reminder="editReminder"
+			save="update()"
+			cancel="cancel()"
+			reminder-types="reminderTypes"
+			type-filter="typeFilter">
+		</reminder-form>
+	</div>
+</td>

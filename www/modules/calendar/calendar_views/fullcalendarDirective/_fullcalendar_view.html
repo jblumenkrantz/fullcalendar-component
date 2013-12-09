@@ -1,0 +1,24 @@
+<div class="calendar-wrapper">
+	<div class="calendar-index">
+		<ul class="side-nav">		
+			<li><b ng-click="makeNavYear(navYear-1)">{{navYear-1}}</b></li>
+			<li><b>{{navYear}}</b></li>
+			<li ng-click="gotoMonth(1, navYear)">Jan</li>
+			<li ng-click="gotoMonth(2, navYear)">Feb</li>
+			<li ng-click="gotoMonth(3, navYear)">Mar</li>
+			<li ng-click="gotoMonth(4, navYear)">Apr</li>
+			<li ng-click="gotoMonth(5, navYear)">May</li>
+			<li ng-click="gotoMonth(6, navYear)">Jun</li>
+			<li ng-click="gotoMonth(7, navYear)">Jul</li>
+			<li ng-click="gotoMonth(8, navYear)">Aug</li>
+			<li ng-click="gotoMonth(9, navYear)">Sep</li>
+			<li ng-click="gotoMonth(10, navYear)">Oct</li>
+			<li ng-click="gotoMonth(11, navYear)">Nov</li>
+			<li ng-click="gotoMonth(12, navYear)">Dec</li>
+			<li><b ng-click="makeNavYear(navYear+1)">{{navYear+1}}</b></li>
+		</ul>
+	</div>
+	<div>
+	</div>
+	<div id="monthCalendar" ui-calendar="calendarOptions" ng-model="eventSources" calendar="pinwheel"/>
+</div>

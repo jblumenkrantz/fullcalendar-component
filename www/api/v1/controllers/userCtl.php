@@ -28,7 +28,10 @@ class UserCtl
 		}
 		$user = User::loadActive($id === null? $authUserID: $id);
 		$user->settings = array_shift(User::loadSettings($id === null? $authUserID: $id));
-		$user->settings->primary_org = array_shift(MessagingGroup:: getPrimaryOrg($authUserID));
+		$user->settings->calendar_drawer_visible = ($user->settings->calendar_drawer_visible) ? true:false;
+		$user->settings->task_drawer_visible = ($user->settings->task_drawer_visible) ? true:false;
+		$user->permissions = PinwheelModelObject::convert_properties_to_boolean(User::loadPermissions($id === null? $authUserID: $id));
+
 		echo json_encode($user);
 	}
 
@@ -43,11 +46,21 @@ class UserCtl
 		$options = User::loadNewUserOptions();
 		echo json_encode($options);
 	}
-	function validateUserName() {
-		$body = json_decode(Request:: body());
-		$validity = User::validateUserName($body);
+	function validate($prop, $string) {
+		if($prop == 'username'){
+			$validity = User::validateUserName($string);
+		}
+		elseif($prop == 'email'){
+			$validity = User::validateUserEmail($string);
+		}
 		echo json_encode($validity);
 	}
+/*	function validateUserName($bypass=false) {
+		$body = json_decode(Request:: body());
+		error_log(print_r($body->user_handle,true));
+		$validity = User::validateUserName($body->user_handle);
+		echo json_encode($validity);
+	}*/
 	function forgotPassword () {
 		$body = json_decode(Request:: body());
 		$user = new User($body);
@@ -61,7 +74,7 @@ class UserCtl
 			$user = $user->loadWithEmail($user->email);
 		}
 		if($match){
-			error_log(print_r($user,true));
+			//error_log(print_r($user,true));
 			$user->sendResetInfo();
 		}else{
 			$noReset = new CantFindUser();
@@ -104,7 +117,7 @@ class UserCtl
 	*	UserCtl::create's query pattern is not atomic due to an INSERT followed
 	*	by a SELECT without locking. There does exist a posibility,
 	*	however unlikely, after the INSERT an update occurs before the following
-	*	SELECT on the newly created User, and if the event_id and
+	*	SELECT on the newly created User, and if the id and
 	*	last_modified where the only properties to be returned, the client's
 	*	cached/local view of the User would be improperly bound to the wrong
 	*	last_modified(s). As a result, the improperly bound last_modified(s) could
@@ -156,13 +169,14 @@ class UserCtl
 			}
 		}
 		try {
-			error_log(print_r(Request::body(),true));
+			//error_log(print_r(Request::body(),true));
 			$user = new User(json_decode(Request:: body()));
 			$user->update();
 			$user->password = null;
 			$user->settings = array_shift(User::loadSettings($id === null? $authUserID: $id));
-			$user->settings->primary_org = array_shift(MessagingGroup:: getPrimaryOrg($authUserID));
-			echo json_encode($user);
+			$user->settings->calendar_drawer_visible = ($user->settings->calendar_drawer_visible) ? true:false;
+			$user->settings->task_drawer_visible = ($user->settings->task_drawer_visible) ? true:false;
+			$user->permissions = PinwheelModelObject::convert_properties_to_boolean(User::loadPermissions($id === null? $authUserID: $id));			echo json_encode($user);
 		} catch (UserDataConflictException $e) {
 			echo $e->json_encode();
 		} catch (UserDoesNotExist $e) {

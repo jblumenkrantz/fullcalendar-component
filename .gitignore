@@ -1,4 +1,7 @@
 node_modules
 dist
+vendor/composer
 .tmp
 .sass-cache
+bower_components
+bdd4php

@@ -1,0 +1,22 @@
+      <nav id="mainHeader" class="main-header">
+        <!-- content of _topbar.html -->
+        <section class="menubar left">
+          <!-- Right Nav Section -->
+          <ul ng-show="user">
+            <li>
+              <span ng-click='toggle_drawer()' aria-hidden="true" class="icon-menu">
+            </li>
+            <li class="org-name"> <a href="The Jedi Academy">The Jedi Academy</a> </li>
+          </ul>
+        </section>
+        <section class="menubar right" style="margin-right: 20px;">
+          <dl class="sub-nav calendar-filter" ng-show="user && calViewNavigator">
+            <dd ng-click="changeView('datebook')" ng-class="{active:view=='datebook'}"><a>DB</a></dd>
+            <dd ng-click="changeView('day')" ng-class="{active:view=='day'}"><a>D</a></dd>
+            <dd ng-click="changeView('week')" ng-class="{active:view=='week'}"><a>W</a></dd>
+            <dd ng-click="changeView('month')" ng-class="{active:view=='month'}"><a>M</a></dd>
+            <dd ng-click="changeView('year')" ng-class="{active:view=='year'}"><a>Y</a></dd>
+            <dd ng-click="changeView('list')" ng-class="{active:view=='list'}"><a>L</a></dd>
+          </dl>
+        </section>
+      </nav>

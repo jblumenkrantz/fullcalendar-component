@@ -1,0 +1,74 @@
+{
+	"static_1": {
+		"id" : "event_1",
+		"title" : "static event one",
+		"calendar_id" : "cal_1",
+		"start" : "10/15/2013 5:00PM",
+		"end" : "10/15/2013 7:00PM",
+		"creator_id" : "frank"
+	},
+	"static_2": {
+		"id" : "event_2",
+		"title" : "static event two",
+		"calendar_id" : "cal_1",
+		"start" : "10/15/2013 5:00PM",
+		"end" : "10/15/2013 7:00PM",
+		"creator_id" : "frank"
+	},
+	"repeat_daily": {
+		"id" : "event_3",
+		"title" : "repeating event one",
+		"calendar_id" : "cal_1",
+		"repeat_frequency": "DAILY",
+		"repeat_interval": 1,
+		"repeat_stop": "10/21/2013",
+		"start" : "10/15/2013 5:00PM",
+		"end" : "10/15/2013 7:00PM",
+		"creator_id" : "frank"
+	},
+	"repeat_weekly": {
+		"id" : "event_4",
+		"title" : "repeating event one",
+		"calendar_id" : "cal_1",
+		"repeat_frequency": "WEEKLY",
+		"repeat_interval": 1,
+		"repeat_by_day": "WED",
+		"repeat_stop": "11/31/2013",
+		"start" : "9/15/2013 5:00PM",
+		"end" : "9/15/2013 7:00PM",
+		"creator_id" : "frank"
+	},
+	"repeat_monthly": {
+		"id" : "event_5",
+		"title" : "repeating event one",
+		"calendar_id" : "cal_1",
+		"start" : "1/12/2013 5:00PM",
+		"end" : "1/12/2013 7:00PM",
+		"repeat_frequency": "MONTHLY",
+		"repeat_interval": 1,
+		"repeat_by_monthday": "12",
+		"repeat_stop": "11/31/2013",
+		"creator_id" : "frank"
+	},
+	"daily_blackout": {
+		"id" : "event_6",
+		"title" : "repeating event one",
+		"calendar_id" : "cal_1",
+		"start" : "10/17/2013 5:00PM",
+		"end" : "10/17/2013 7:00PM",
+		"repeat_addendum": 1,
+		"repeat_blackout": 1,
+		"repeat_id": "event_3",
+		"creator_id" : "frank"
+	},
+	"daily_addendum": {
+		"id" : "event_6",
+		"title" : "repeating event one",
+		"calendar_id" : "cal_1",
+		"start" : "10/18/2013 7:00PM",
+		"end" : "10/18/2013 9:00PM",
+		"repeat_addendum": 1,
+		"repeat_id": "event_3",
+		"creator_id" : "frank"
+	}
+}

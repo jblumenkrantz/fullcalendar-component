@@ -1,0 +1,16 @@
+<form name="reminderForm" novalidate>
+	<div class="large-12 columns">
+		<div class="reminder-offset">
+			<input ng-required='editing' focus-me='[editing]' type='number' min="1" ng-model="reminder.reminder_offset" placeholder="2" />
+		</div>
+		<div class="reminder-type">
+			<!-- Relative Reminder Types -->
+			<select
+				ng-options="r.id as r.name for r in reminderTypes | filter: typeFilter(r)"
+				ng-model="reminder.reminder_type">
+			</select>
+		</div>
+	</div>
+	<span ng-click="reminderForm.$valid && save()" class="icon-checkmark" aria-hidden="true"></span>
+	<span class="icon-x-altx-alt" ng-click="cancel()" aria-hidden="true"></span>
+</form>

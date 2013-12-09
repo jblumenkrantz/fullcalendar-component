@@ -1,0 +1,62 @@
+<!-- event view -->
+<div ng-controller="EventCtl" id="main-content" style="height: 100%; overflow: hidden; position: relative; z-index: 2" class="small-12 columns {{size}}">
+	<summary-popup></summary-popup>
+	<header id="content-header" class="scroll-header">
+		<ul class="small-block-grid-3">
+			<li class="text-left">
+				<span>
+					<span class="hide-for-small" ng-click="toggleSidebar('calendarDrawer')" aria-hidden="true" ng-class="{'icon-hide-left':calendarDrawer, 'icon-show-left':!calendarDrawer}" style="margin-left: 4px;"></span>
+				</span>
+				<!-- <span aria-hidden="true" class="icon-poop-1"></span> -->
+			</li>
+			<li>
+				<span aria-hidden="true" class="icon-arrow-left2" ng-click="previous()"></span></a>
+				<span class="month-switcher">{{routeDate | date: 'MMMM y'}}</span>
+				<span aria-hidden="true" class="icon-arrow-right2" ng-click="next()"></span>
+			</li>
+			<li class="text-right">
+				<span class="icon-plus-alt" ng-click="quickAdd()" aria-hidden="true"></span>
+				<span>
+					<span class="hide-for-small" ng-click="toggleSidebar('taskDrawer')" aria-hidden="true" ng-class="{'icon-hide-right':taskDrawer, 'icon-show-right':!taskDrawer}" style="margin-right: 4px;"></span>
+				</span>
+			</li>
+		</ul>
+    </header>
+
+    <!-- event quickAdd form -->
+	<div id="quickEvent" class="transition duration-700 slide-drawer top-down" ng-class="{open:quickAdding}">
+		<div ng-include src="'modules/calendar/_quickadd_event_form.html'"></div>
+	</div>
+
+	<!-- event add/edit form -->
+	<div id="advancedEvent" class="transition duration-700 slide-drawer top-down" ng-class="{open:(addingEvent || editingEvent)}">
+		<div ng-include src="'modules/calendar/_event_form.html'"></div>
+	</div>
+
+  <div scroll-pane style="border-left: 1px solid #afafaf; border-right: 1px solid #afafaf;">
+		<!-- calendar views switch -->
+		<spinwheel class="spinwheel-holder"><div ng-show="loading_events" class="spinwheel"><div class="spinwheel"><div class="spinwheel"><div class="spinwheel"></div></div></div></div></spinwheel>
+<!-- 	<div ng-switch-when="day">
+			<day-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></day-view>
+		</div>
+
+		<div ng-switch-when="week">
+			<week-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></week-view>
+		</div> -->
+
+		<div ng-hide="view==('list'||'datebook')">
+			<fullcalendar-view></fullcalendar-view>
+		</div>
+		<!-- <div ng-switch-when="year">
+			<year-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></year-view>
+		</div> -->
+		<div ng-show="view=='list'">
+			<list-view></list-view>
+		</div>
+
+		<div ng-show="view=='datebook'">
+			<datebook-view tasks="tasks" calendars="calendars" events="events" colors="calendarWatchers" filter="isCalendarShowing"></datebook-view>
+		</div>
+	</div>
+</div>
+<!-- / event view -->

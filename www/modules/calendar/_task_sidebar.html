@@ -1,0 +1,62 @@
+<div class="pane-header scroll-header">
+	<span class="pane-title">Tasks/To Do</span>
+	<span ng-click="add()" aria-hidden="true" class="add-new icon-plus-alt right"></span>
+</div>
+<div ng-show="loading_tasks" class="spinwheel"></div>
+<div scroll-pane class="scroll-pane right">
+
+	<!-- new task entry form -->
+	<div
+		resource-panel
+		class="resource-panel add-new"
+		ng-class="{'open':newTask.editing, 'close':!newTask.editing}"
+		ng-style="{background:newTask.color}">
+		<div class="resource-gradient">
+			<div class="resource-header pane-header small">
+			    <span ng-hide="newTask.title" class="pane-title">New Task</span>
+			    <span ng-show="newTask.title" class="pane-title">{{newTask.title}}</span>
+			    <span class="icon-x-altx-alt right" ng-click="cancel()" aria-hidden="true"></span>
+			</div>
+			<div class="resource-body">
+				<!-- DISPLAY -->
+				<div class="resource-display"></div>
+				<!-- / DISPLAY -->
+
+				<!-- EDIT -->
+				<task-form
+					task="newTask"
+					save="save()"
+					cancel="cancel()"
+					reset="reset()"
+					calendars="calendars"
+					reminder-type-filter="reminderTypeFilter"
+					reminder-toggle="reminderToggle(newTask)"
+					switch-calendar="switchCalendar(newTask)"
+					check-calendar-reminder="checkCalendarReminder(newTask)"
+					due-date-toggle="dueDateToggle(newTask)"
+					using-own-reminder="usingOwnReminder(newTask)"
+					no-reminder="noReminder(newTask)">
+				</task-form>
+				<!-- / EDIT -->
+			</div>
+		</div>
+	</div>
+	<!-- / new task entry form -->
+
+	<!-- existing tasks ng-repeat -->	
+	<view-task
+		ng-repeat="task in visibleTasks = (visibleCalendarTasks() | filter:isTask)"
+		task="task"
+		calendars="calendars"
+		calendar-watchers="calendarWatchers"
+		ng-show="task.active"
+		reminder-toggle="reminderToggle"
+		switch-calendar="switchCalendar"
+		check-calendar-reminder="checkCalendarReminder"
+		due-date-toggle="dueDateToggle"
+		using-own-reminder="usingOwnReminder"
+		no-reminder="noReminder"
+		close="closeAll()">
+	</view-task>
+	<!-- / existing tasks ng-repeat -->	
+</div>

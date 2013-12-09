@@ -25,7 +25,8 @@ class TaskCtl
 	* 	@todo get all tasks per signed in user
 	*/
 	function getAll(){
-		$tasks = Task::loadByUser(1);
+		$authUserID = Authorize:: sharedInstance()->userID();
+		$tasks = Task::loadByUser($authUserID);
 	 	echo json_encode($tasks);
 	}
 
@@ -40,7 +41,7 @@ class TaskCtl
 	*	TaskCtl::create's query pattern is not atomic due to an INSERT followed
 	*	by a SELECT without locking. There does exist a posibility,
 	*	however unlikely, after the INSERT an update occurs before the following
-	*	SELECT on the newly created Task(s), and if the task_id and
+	*	SELECT on the newly created Task(s), and if the id and
 	*	last_modified where the only properties to be returned, the client's
 	*	cached/local view of the Task(s) would be improperly bound to the wrong
 	*	last_modified(s). As a result, the improperly bound last_modified(s) could
@@ -51,7 +52,7 @@ class TaskCtl
 	function create() {
 		$pinsqli = DistributedMySQLConnection:: writeInstance();
 		$authUserID = Authorize:: sharedInstance()->userID();
-		$tasks = Task:: create(json_decode(Request:: body()), $pinsqli);
+		$tasks = array_shift(Task:: create(json_decode(Request:: body()), $pinsqli));
 		echo json_encode($tasks);
 		User:: incrementVersion($authUserID);
 	}
@@ -81,23 +82,19 @@ class TaskCtl
 		$tsprops = json_decode(Request:: body());
 		$authUserID = Authorize:: sharedInstance()->userID();
 		$pinsqli = DistributedMySQLConnection:: writeInstance();
-		echo '[';
 		if (is_object($tsprops))
 			$tsprops = array($tsprops);
 		$ntasks = count($tsprops);
+		//error_log(print_r($tsprops,true));
 		foreach ($tsprops as $tsprop) {
 			try {
 				$task = new Task($tsprop);
-
-				//strip off event_id for reminder prefs
-				if (isset($tsprop->event_id)) {
-					unset($tsprop->event_id);
-				}
 				
 				//updated task is updating it's reminder
 				if (@$tsprop->has_reminder && $tsprop->reminder_pref_id != null && !$tsprop->using_calendar_reminder) {
 					$tsprop->user_id = Authorize:: sharedInstance()->userID();
 					$tsprop->version = $tsprop->reminder_pref_version;
+					$tsprop->task_id = $tsprop->id;
 					$rpref = new ReminderPrefs($tsprop);
 					$rpref->update($pinsqli);
 				}
@@ -109,7 +106,7 @@ class TaskCtl
 				}
 				
 				//updated task is removing it's reminder
-				if (@$tsprop->had_reminder) {
+				if (@!$tsprop->has_reminder && $tsprop->reminder_pref_id != null && !$tsprop->using_calendar_reminder) {
 					$tsprop->version = $tsprop->reminder_pref_version;
 					$rpref = new ReminderPrefs($tsprop);
 					$rpref->delete($pinsqli);
@@ -117,7 +114,7 @@ class TaskCtl
 				
 				$task->update($pinsqli);
 				
-				echo json_encode(array($task->task_id => $task));
+				echo json_encode($task);
 			} catch (TaskDataConflictException $e) {
 				echo $e->json_encode();
 			} catch (TaskDoesNotExist $e) {
@@ -125,7 +122,6 @@ class TaskCtl
 			}
 			if (--$ntasks > 0) echo ',';
 		}
-		echo ']';
 		User:: incrementVersion($authUserID);
 	}
 
@@ -142,33 +138,21 @@ class TaskCtl
 	*	the client to settle the conflict, regardless the local delte of the Same Task.	
 	*/
 	function delete(){
-		$tsprops = json_decode(Request:: body());
+		$task = Request:: parsePath();
 		$authUserID = Authorize:: sharedInstance()->userID();
-		echo '[';
-		if (is_object($tsprops))
-			$tsprops = array($tsprops);
-		$ntasks = count($tsprops);
-		foreach ($tsprops as $tsprop) {
-			try {
-				$task = new Task($tsprop);
-				$task->delete();
+		$task['id'] = $task[2];
+		$task['version'] = $task[3];
+		unset($task[0], $task[1], $task[2], $task[3]);
+		$task = new Task($task);
+		$task->delete();
 
-				//if event has a reminder and
-				if ($tsprop->reminder_pref_id != null && !$using_calendar_reminder) {
-					$tsprop->version = $tsprop->reminder_pref_version;
-					$reminder_pref = new ReminderPrefs($tsprop);
-					$reminder_pref->delete();
-				}
-
-				echo json_encode($task);
-			} catch (TaskDataConflictException $e) {
-				echo $e->json_encode();
-			} catch (TaskDoesNotExist $e) {
-				echo $e->json_encode();
-			}
-			if (--$ntasks > 0) echo ',';
+		//if event has a reminder and
+		if ($task->reminder_pref_id != null && !$using_calendar_reminder) {
+			$task->version = $task->reminder_pref_version;
+			$reminder_pref = new ReminderPrefs($tsprop);
+			$reminder_pref->delete();
 		}
-		echo ']';
+		echo json_encode($task);
 		User:: incrementVersion($authUserID);
 	}
 }

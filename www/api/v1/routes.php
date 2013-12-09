@@ -6,30 +6,52 @@ function routes () {
 
 
 		/* Event Api */
-		'/event/' => array(
+		'/event/:alpha/:number/?' => array(
+			Route::$delete=>'EventCtl::delete',
+			Route::Authorize(),
+			Route::Request("application/json"),
+			Route::Response("application/json")
+		),
+		'/event/all/?' => array(
 			Route::$get => 'EventCtl::getAll',
 			Route::Authorize(),
 			Route::Request("application/json"),
 			Route::Response("application/json")
 		),
+		'/event/month/:number/:number/?' => array(
+			Route::$get => 'EventCtl::getMonth',
+			Route::Authorize(),
+			Route::Request("application/json"),
+			Route::Response("application/json")
+		),
+		'/event/day/:number/:number/:number/?' => array(
+			Route::$get => 'EventCtl::getDay',
+			Route::Authorize(),
+			Route::Request("application/json"),
+			Route::Response("application/json")
+		),
+		'/event/week/:number/:number/:number/?' => array(
+			Route::$get => 'EventCtl::getWeek',
+			Route::Authorize(),
+			Route::Request("application/json"),
+			Route::Response("application/json")
+		),		
 		'/event/:alpha/?' => array(
-			Route::$get=>'EventCtl::get',
+			//Route::$get=>'EventCtl::get',
 			Route::$put=>'EventCtl::update',
-			Route::$delete=>'EventCtl::delete',
 			Route::Authorize(),
 			Route::Request("application/json"),
 			Route::Response("application/json")
 		),
-		'/event/((?:/?::alpha)+)/?' => array(
+		/*'/event/((?:/?::alpha)+)/?' => array(
 			Route::$get=>'EventCtl::get',
 			Route::Authorize(),
 			Route::Request("application/json"),
 			Route::Response("application/json")
-		),
+		),*/
 		'/event/?' => array(
 			Route::$post=>'EventCtl::create',
 			Route::$put=>'EventCtl::update',
-			Route::$delete=>'EventCtl::delete',
 			Route::Authorize(),
 			Route::Request("application/json"),
 			Route::Response("application/json")
@@ -51,8 +73,20 @@ function routes () {
 			Route::Request("application/json"),
 			Route::Response("application/json")
 		),
-		'/reminder_preferences/user/:alpha/?' => array(
-			Route::$get=>'ReminderPrefsCtl::getByUser',
+		'/reminder/calendar/?' => array(
+			Route::$get=>'ReminderPrefsCtl::getCalendarReminders',
+			Route::Authorize(),
+			Route::Request("application/json"),
+			Route::Response("application/json")
+		),
+		'/reminder/event/?' => array(
+			Route::$get=>'ReminderPrefsCtl::getEventReminders',
+			Route::Authorize(),
+			Route::Request("application/json"),
+			Route::Response("application/json")
+		),
+		'/reminder/task/?' => array(
+			Route::$get=>'ReminderPrefsCtl::getTaskReminders',
 			Route::Authorize(),
 			Route::Request("application/json"),
 			Route::Response("application/json")
@@ -63,7 +97,8 @@ function routes () {
 			Route::Request("application/json"),
 			Route::Response("application/json")
 		),
-		'/reminder_preferences/?' => array(
+		'/reminder/?' => array(
+			Route::$get=>'ReminderPrefsCtl::getByUser',
 			Route::$post=>'ReminderPrefsCtl::create',
 			Route::$put=>'ReminderPrefsCtl::update',
 			Route::$delete=>'ReminderPrefsCtl::delete',
@@ -158,12 +193,15 @@ function routes () {
 		),
 
 		'/user/new/?' => array(
-			Route::$post=>'UserCtl::validateUserName',
 			Route::$get=>'UserCtl::loadNewUserOptions',
 			Route::Request("application/json"),
 			Route::Response("application/json")
 		),
-
+		'/user/validate/:alpha/:any?' => array(
+			Route::$get=>'UserCtl::validate',
+			Route::Request("application/json"),
+			Route::Response("application/json")
+		),
 		'/user/create/?' => array(
 			Route::$post=>'UserCtl::create',
 			Route::Request("application/json"),
@@ -210,20 +248,19 @@ function routes () {
 		),
 
 		/* Calendar Api */
+
+		'/calendar/:alpha/:number' => array(
+			Route::$delete=>'CalendarCtl::delete',
+			Route::Authorize(),
+			Route::Request("application/json"),
+			Route::Response("application/json")
+		),
 		'/calendar/settings/view/?' => array(
 			Route::$put=>'CalendarCtl::updateVewSettings',
 			Route::Authorize(),
 			Route::Request("application/json"),
 			Route::Response("application/json")
 		),
-		'/calendar/:alpha/:alpha/?' => array(
-			Route::$get=>'CalendarCtl::get',
-			Route::$put=>'CalendarCtl::update',
-			Route::$delete=>'CalendarCtl::delete',
-			Route::Authorize(),
-			Route::Response("application/json")
-		),
-
 		'/calendar/unsubscribe' => array(
 			Route::$put=>'CalendarCtl::unsubscribe',
 			Route::Authorize(),
@@ -262,26 +299,74 @@ function routes () {
 			Route::Authorize(),
 			Route::Response("application/json")
 		),
+		'/calendar/:alpha/?' => array(
+			Route::$get=>'CalendarCtl::get',
+			Route::$put=>'CalendarCtl::update',
+			Route::Authorize(),
+			Route::Request("application/json"),
+			Route::Response("application/json")
+		),
 		'/calendar/subscribe/?' => array(
 			Route::$post => 'CalendarCtl::subscribe',
 			Route::Authorize(),
 			Route::Request("application/json"),
 			Route::Response("application/json")
 		),
+		'/calendar/admins/:alpha/?' => array(
+			Route::$get => 'CalendarCtl::getCalendarAdmins',
+			Route::$post => 'CalendarCtl::addCalendarAdmin',
+			Route::$delete => 'CalendarCtl::deleteCalendarAdmin',
+			Route::Authorize(),
+			Route::Request("application/json"),
+			Route::Response("application/json")
+		),
 		
+		/* Hallpass API */
+		'/hallpass/?' => array(
+			Route::$get=>'HallpassCtl::getAllPasses',
+			Route::$put=>'HallpassCtl::checkIn',
+			Route::$post=>'HallpassCtl::createHallpass',
+			Route::Authorize(),
+			Route::Request("application/json"),
+			Route::Response("application/json")
+		),
+		'/hallpass/userlist/:alpha' => array(
+			Route::$get=>'HallpassCtl::getUserList',
+			Route::Authorize(),
+			Route::Request("application/json"),
+			Route::Response("application/json")
+		),
+		'/hallpass/:alpha/?' => array(
+			Route::$get=>'HallpassCtl::get',
+			Route::$put=>'HallpassCtl::checkInPass',
+			Route::Authorize(),
+			Route::Request("application/json"),
+			Route::Response("application/json")
+		),
 
+		/* Facilities API */
+		'/facilities/?' => array(
+			Route::$get=>'FacilitiesCtl::getLocations',
+			Route::Authorize(),
+			Route::Request("application/json"),
+			Route::Response("application/json")
+		),
 
 		/* Task Api */
+		'/task/:alpha/:number' => array(
+			Route::$delete=>'TaskCtl::delete',
+			Route::Authorize(),
+			Route::Request("application/json"),
+			Route::Response("application/json")
+		),
 		'/task/all/?' => array(
 			Route::$get => 'TaskCtl::getAll',
 			Route::Authorize(),
 			Route::Response("application/json")
 		),
-
 		'/task/:alpha/?' => array(
 			Route::$get=>'TaskCtl::get',
 			Route::$put=>'TaskCtl::update',
-			Route::$delete=>'TaskCtl::delete',
 			Route::Authorize(),
 			Route::Request("application/json"),
 			Route::Response("application/json")
@@ -295,7 +380,6 @@ function routes () {
 		'/task/?' => array(
 			Route::$post=>'TaskCtl::create',
 			Route::$put=>'TaskCtl::update',
-			Route::$delete=>'TaskCtl::delete',
 			Route::Authorize(),
 			Route::Request("application/json"),
 			Route::Response("application/json")

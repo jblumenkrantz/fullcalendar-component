@@ -90,8 +90,31 @@ class User extends PinwheelModelObject
 	static public function loadSettings ($id, $pinsqli = NULL) {
 		return(static:: genericQuery(
 			"SELECT
-				default_calendar, start_of_day, end_of_day, version as DB_version
+				default_calendar, start_of_day, end_of_day, version as DB_version, calendar_drawer_visible, task_drawer_visible
 				FROM users_settings
+				WHERE user_id = '$id'
+			"
+		, $pinsqli));
+	}
+	static public function loadPermissions ($id, $pinsqli = NULL) {
+		return(static:: genericQuery(
+			"SELECT
+				permissions.org_id,
+				modify_public_calendars,
+				message_calendar_subscribers,
+				modify_handbook,
+				modify_theme,
+				view_hallpass_history,
+				issue_hall_pass,
+				check_in_hall_pass,
+				org_wide_messaging,
+				org_wide_emergency_alerts,
+				advanced_messaging,
+				modify_org_admins,
+				org_name
+				FROM permissions
+				LEFT OUTER JOIN organizations
+				ON organizations.org_id = permissions.org_id
 				WHERE user_id = '$id'
 			"
 		, $pinsqli));
@@ -193,23 +216,23 @@ class User extends PinwheelModelObject
 
 				$calendar->events = array();
 				foreach($events as $event){
-					array_push($calendar->events, $event->event_id);
+					array_push($calendar->events, $event->id);
 				}
 
 				$calendar->tasks = array();
 				foreach($tasks as $task){
-					array_push($calendar->tasks, $task->task_id);
+					array_push($calendar->tasks, $task->id);
 				}
 
 				$dataRay['events'] = array_merge($dataRay['events'], $events);
 				$dataRay['tasks'] = array_merge($dataRay['tasks'],  $tasks);
 			}
 			elseif($calendar->subscribed && $calendar->adhoc_events){
-				$events = Event::getBatch(array("events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}')) AND (events.event_id in (SELECT event_id from event_subs where event_subs.user_id = '$userId' AND event_subs.calendar_id = '{$calendar->calendar_id}'))"));
+				$events = Event::getBatch(array("events.calendar_id='{$calendar->calendar_id}'","(events.creator_id='$userId' OR events.creator_id=(SELECT creator_id from calendars where calendar_id = '{$calendar->calendar_id}')) AND (events.id in (SELECT id from event_subs where event_subs.user_id = '$userId' AND event_subs.calendar_id = '{$calendar->calendar_id}'))"));
 
 				$calendar->events = array();
 				foreach($events as $event){
-					array_push($calendar->events, $event->event_id);
+					array_push($calendar->events, $event->id);
 				}
 
 				$dataRay['events'] = array_merge($dataRay['events'], $events);
@@ -354,9 +377,9 @@ class User extends PinwheelModelObject
 		$user = $this;
 		$pw_reset_token = MySQLConnection:: generateUID('pw_rst');
 		$this->updatePasswordResetSettings($this->user_id, $pw_reset_token);
-		$queryParameters = array('pw_rst'=>$pw_reset_token);
-		$queryString = http_build_query($queryParameters);
-		$url = $_SERVER['HTTP_REFERER']."?".$queryString;
+		//$queryParameters = array('pw_rst'=>$pw_reset_token);
+		//$queryString = http_build_query($queryParameters);
+		$url = $_SERVER['HTTP_REFERER']."#/reset_password/".$pw_reset_token ;
 		//$this->delete();
 		$messageBody['html'] = "<html>
 									<body lang='en' style='background-color:#fff; color: #222'>
@@ -374,7 +397,7 @@ class User extends PinwheelModelObject
 													To reset your password, click on the link below (or copy and paste the URL into your browser):<br/>
 													<a href='$url'>$url</a>
 												</p>
-												<p>The link will only be valid for one hour.</p>
+												<p>The link will only be valid for one hour, and can only be used once.</p>
 												<p style='font-family: Helvetica Neue, Arial, Helvetica, sans-serif;margin-top:5px;font-size:10px;color:#888888;'>
 													Please do not reply to this message; it was sent from an unmonitored email address.  This message is a service email related to your Pinwheel account.
 												</p>
@@ -486,8 +509,8 @@ class User extends PinwheelModelObject
 			throw new Exception($pinsqli->error, 1);
 		
 		// create user default calendar
-		$dco = Calendar::create($userID,array('calendar_name'=>'Default Calendar','color'=>'blue'));
-		$dca = array_shift($dco);
+		$dca = Calendar::create($userID,array('calendar_name'=>'Default Calendar','color'=>'blue'));
+		//$dca = array_shift($dco);
 		
 		// make new calendar visibility turned on
 		$pinsqli->query(
@@ -503,12 +526,14 @@ class User extends PinwheelModelObject
 		$resulti = $pinsqli->query(
 			"INSERT INTO users_settings (
 					user_id,
+					version,
 					default_calendar,
 					start_of_day,
 					end_of_day
 				)
 				Values (
 					'$userID',
+					0,
 					'{$dca->calendar_id}',
 					'08:00:00',
 					'17:00:00'
@@ -555,11 +580,10 @@ class User extends PinwheelModelObject
 	*/
 	public function update () {
 		$pinsqli = DistributedMySQLConnection:: writeInstance();
-		$properties = array_map(array($pinsqli, 'real_escape_string'), get_object_vars($this));
-		$settings = array_map(array($pinsqli, 'real_escape_string'), get_object_vars($this->settings));
-
+		$properties = static::mysql_escape_array($this);
+		$settings = static::mysql_escape_array($this->settings);
 		$hash = NULL;
-		if (array_key_exists('password', $properties)){
+		if (array_key_exists('password', $properties) && $properties['password'] != ''){
 			$hash = Authorize:: hashedPassword($properties['password']);
 			$passwordString = "password = '$hash',";
 		}
@@ -589,6 +613,8 @@ class User extends PinwheelModelObject
 		$resulti2 = $pinsqli->query(
 			"UPDATE users_settings
 				SET
+					calendar_drawer_visible ='{$settings['calendar_drawer_visible']}',
+					task_drawer_visible = '{$settings['task_drawer_visible']}',
 					default_calendar = '{$settings['default_calendar']}',
 					start_of_day = '{$settings['start_of_day']}',
 					end_of_day = '{$settings['end_of_day']}'
@@ -669,5 +695,17 @@ class User extends PinwheelModelObject
 		if ($pinsqli->affected_rows == 0) {
 			throw new UserDoesNotExist();
 		}
+	}
+	static function checkPermissions($p,$userID,$orgID){
+		$hasPermission = false;
+		$perms = static:: loadPermissions($userID);
+		foreach ($perms as $key => $value) {
+			if($value->$p && $value->org_id == $orgID){
+				//error_log(print_r($p,true));
+				//error_log(print_r($value->$p,true));
+				$hasPermission = true;
+			}
+		}
+		return $hasPermission;
 	}
 }

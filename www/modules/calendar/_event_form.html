@@ -1,0 +1,191 @@
+<!-- HEADER -->
+<div class="pane-header">
+	<span ng-show="editingEvent && !formEvent.editable" class="pane-title">Edit Reminder</span>
+    <span ng-show="editingEvent && formEvent.editable" class="pane-title">Edit Event</span>
+    <span ng-show="addingEvent" class="pane-title">
+    	Add New Event 
+    	<label style="display: inline; font-size: 14px; color: inherit;" for="alwaysAdvanced">
+    		<input id="alwaysAdvanced" type="checkbox" ng-model="quickAdder.alwaysAdvanced" ng-click="" />
+    		Always open advanced event entry
+    	</label>
+    </span>
+    <span class="icon-x-altx-alt right" ng-click="cancel()" aria-hidden="true"></span>
+</div>
+<!-- EVENT FIELDS -->
+<form name="eventForm" novalidate>
+	<div class="row" style="padding-top: 1em;">
+		<!-- Event Title -->
+		<div class="large-6 columns">
+			<label>Title:</label>
+			<input
+				type="text"
+				placeholder="Untitled event"
+				required
+				ng-disabled="!formEvent.editable"
+				focus-me="[addingEvent, editingEvent]"
+				ng-model="formEvent.title"
+			/>
+		</div>
+		<!-- / Event Title -->
+		<!-- Calendar -->
+		<div class="large-6 columns">
+			<label>Calendar:</label>
+			<select
+				ng-disabled="!formEvent.editable"
+				ng-change="switchCalendar()"
+				ng-options="calendar.calendar_id as calendar.calendar_name for calendar in calendars | filter:{subscribed: true} | orderBy: 'calendar_name'"
+				ng-model="formEvent.calendar_id"
+			></select>
+		</div>
+		<!-- / Calendar -->
+	</div>
+	<div class="row">
+		<!-- Start Time -->
+		<div class="large-6 columns calendar-picker-container">
+			<label>From<span ng-show="formEvent.allDay"> start of day</span>:</label>
+			<!-- Non allDay event show datetime entry -->
+			<datetime
+				ng-required="!formEvent.allDay"
+				ng-disabled="!formEvent.editable"
+				ng-show="!formEvent.allDay"
+				ng-model="formEvent.start"
+				name="start"
+				placeholder="m/d/yyyy h:mm AM/PM"
+				date-format="M/d/yyyy"
+				time-format="h:mm a"
+				divider="@"
+				dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y @ h:M a'}"
+				jqui-opts="{dateFormat: 'm/d/yy'}"
+				ng-change="moveEndTime(1);"
+			/>
+			<!--AllDay event show date entry -->
+			<date
+				ng-required="formEvent.allDay"
+				ng-disabled="!formEvent.editable"
+				ng-show="formEvent.allDay"
+				ng-model="formEvent.start"
+				name="start"
+				placeholder="m/d/yyyy"
+				date-format="M/d/yyyy"
+				dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y'}"
+				jqui-opts="{dateFormat: 'm/d/yy'}"
+				ng-change="moveEndTime(0);"
+			/>
+		</div>
+		<!-- / Start Time -->
+		<!-- End Time -->
+		<div class="large-6 columns calendar-picker-container">
+			<label>To<span ng-show="formEvent.allDay"> end of day</span>:</label>
+			<!-- Non allDay event show datetime entry -->
+			<datetime
+				ng-required="!formEvent.allDay"
+				ng-disabled="!formEvent.editable"
+				ng-show="!formEvent.allDay"
+				ng-model="formEvent.end"
+				name="end"
+				placeholder="m/d/yyyy h:mm AM/PM"
+				date-format="M/d/yyyy"
+				time-format="h:mm a"
+				min-watch="formEvent.start"
+				divider="@"
+				dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y @ h:M a', minDatetime: formEvent.start}"
+				jqui-opts="{dateFormat: 'm/d/yy', minDate: formEvent.start}"
+				ng-change="end.moved = true;"
+			/>
+			<!--AllDay event show date entry -->
+			<date
+				ng-required="formEvent.allDay"
+				ng-disabled="!formEvent.editable"
+				ng-show="formEvent.allDay"
+				ng-model="formEvent.end"
+				name="end"
+				placeholder="m/d/yyyy"
+				date-format="M/d/yyyy"
+				min-watch="formEvent.start"
+				dte-opts="{spinnerImage: '', datetimeFormat: 'o/d/Y', minDateime: formEvent.start}"
+				jqui-opts="{dateFormat: 'm/d/yy', minDate: formEvent.start}"
+				ng-change="end.moved = true;"
+			/>
+		</div>
+		<!-- / End Time -->
+	</div>
+	<!-- EVENT CHECKBOXES -->
+	<div class="row">
+		<!-- All Day -->
+		<div class="large-4 columns">
+			<checkbox
+				ng-click="allDayToggle()"
+				ng-disabled="!formEvent.editable"
+				ng-model="$parent.formEvent.allDay"
+				icon-if-true="icon-checkbox-checked"
+				icon-if-false="icon-checkbox-unchecked"
+				text="All day event"
+			/>
+		</div>
+		<!-- / All Day -->
+		<!-- Reminder -->
+		<div class="large-4 columns">
+			<checkbox
+				ng-click="reminderToggle()"
+				ng-model="$parent.formEvent.has_reminder"
+				icon-if-true="icon-checkbox-checked"
+				icon-if-false="icon-checkbox-unchecked"
+				text="Add Reminder"
+			/>
+		</div>
+		<!-- / Reminder -->
+		<!-- Repeating -->
+		<div class="large-4 columns">
+			<checkbox
+				ng-disabled="!formEvent.editable"
+				ng-model="$parent.formEvent.isRepeating"
+				icon-if-true="icon-checkbox-checked"
+				icon-if-false="icon-checkbox-unchecked"
+				text="Repeating"
+			/>
+		</div>
+		<!-- / Repeating -->
+	</div>
+	<!-- Description -->
+	<div class="row">
+		<div class="large-12 columns">
+			<textarea ng-model="formEvent.event_description" placeholder="Add a description"></textarea>
+		</div>
+	</div>
+	<!-- / Description -->
+	<div class="row">
+		<!-- REPEAT SETTINGS -->
+		<div class="large-6 columns" ng-if="formEvent.isRepeating">
+			<label>Repeats:</label>
+		</div>
+	</div>
+	<!-- BUTTONS -->
+	<div class="row">
+		<div class="large-12 columns">
+			<ul class="button-group even-3">
+				<li>
+					<button class="button radius" ng-click="reset(addingEvent)">
+						<span aria-hidden="true" class="icon-reload-alt"> Reset</span>
+					</button>
+				</li>
+				<li>
+					<button ng-show="editingEvent" class="button radius" ng-click="delete(formEvent)">
+						<span aria-hidden="true" class="icon-remove2"> Delete</span>
+					</button>
+					<button ng-disabled="eventForm.$invalid" ng-show="addingEvent" class="button radius" ng-click="save(true)">
+						<span aria-hidden="true" class="icon-plus-alt"> Continue</span>
+					</button>
+				</li>
+				<li style="padding-right: 0;">
+					<button ng-show="addingEvent" class="button radius" ng-click="save()" ng-disabled="eventForm.$invalid">
+						<span aria-hidden="true" class="icon-checkmark"> Done</span>
+					</button>
+					<button ng-show="editingEvent" class="button radius" ng-click="update()" ng-disabled="eventForm.$invalid">
+						<span aria-hidden="true" class="icon-checkmark"> Save</span>
+					</button>
+				</li>
+			</ul>
+			<br>
+		</div>
+	</div>
+</form>
