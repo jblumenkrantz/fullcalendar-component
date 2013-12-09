@@ -14,7 +14,7 @@ angular.module('pinwheelApp')
 				$scope.orgUserList = users;
 			});
 
-			$scope.CalendarAdmins.query({id: $scope.calendar.calendar_id}, function(admins){
+			CalendarAdmins.query({id: $scope.calendar.calendar_id}, function(admins){
 				$scope.calendar.admins = admins;
 			});
 			
