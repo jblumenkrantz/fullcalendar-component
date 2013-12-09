@@ -429,9 +429,9 @@ form input.ng-invalid {
 	user-select: none;
 	white-space: nowrap;
 }
-
 .reminders table {
 	position: relative;
+	table-layout: fixed;
 	width: 100%;
 }
 .reminders table td {
@@ -450,14 +450,16 @@ form input.ng-invalid {
 }
 .reminders .reminder-offset {
 	width: 10%;
-	margin-right: 2%;
+	margin: -7.1875px 2% -7.1875px 0;
+	/*margin-right: 2%;*/
 }
 .reminders .reminder-type {
 	width: 70%;
+	margin: -7.1875px 0;
 }
 .reminders .icon-x-altx-alt,
 .reminders .icon-checkmark {
-	top: 17px !important;
+	top: 14px !important;
 	font-size: 1.05em;
 }
 .reminders .icon-pencil,

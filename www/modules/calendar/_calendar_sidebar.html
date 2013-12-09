@@ -13,7 +13,6 @@
 		calendar="calendar"
 		user="user"
 		reminder-types="reminderTypes"
-		reminders="reminders[$index]"
 		close="closeAll()">
 	</active-subscription>
 	<!-- / existing calendars ng-repeat -->
@@ -94,7 +93,11 @@
 						</div>
 
 						<!-- Reminders -->
-						<reminder-list reminders="reminders"></reminder-list>
+						<reminder-list
+							reminders="newCalendar.reminders"
+							type-filter="reminderTypeFilter"
+						>
+						</reminder-list>
 
 						<div class="row">
 							<div class="large-12 columns">

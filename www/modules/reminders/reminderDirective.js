@@ -6,25 +6,34 @@ angular.module('pinwheelApp')
 		restrict: "E",
 		replace: true,
 		templateUrl: 'modules/reminders/_reminder_list.html',
-		link: function($scope, $element, $attrs) {
+		scope: {
+			reminders: "=",
+			typeFilter: "="
+		},
+		controller: function($scope, $element, $attrs) {
 			$scope.defaultReminder = function() {
 				return {
-					reminder_pref_id: "000",
 					reminder_type: 1,
 					mins_before: 120,
-					reminder_offset: 2
+					reminder_offset: 2,
+					active: true
 				};
 			}
-			
+
 			$scope.newReminder = $scope.defaultReminder();
 
 			$scope.add = function() {
+				console.log("Adding new reminder");
 				$scope.adding = true;
 			}
+
 			$scope.save = function() {
-				$scope.cancelAddReminder();
+				console.log("Saving new reminder");
+				$scope.reminders.push($scope.newReminder);
+				$scope.cancel();
 			}
-			$scope.cancelAddReminder = function() {
+
+			$scope.cancel = function(reminder) {
 				$scope.newReminder = $scope.defaultReminder();
 				$scope.adding = false;
 			}
@@ -36,25 +45,30 @@ angular.module('pinwheelApp')
 		restrict: "A",
 		templateUrl: 'modules/reminders/_reminder.html',
 		scope: {
-			reminder: "="
+			reminder: "=",
+			typeFilter: "="
 		},
 		controller: function($scope, $element, $attrs) {
-			//set description
-			$scope.reminder.description = [
-				"Remind me",
-				$scope.reminder.reminder_offset,
-				['minutes', 'hours', 'days'][$scope.reminder.reminder_type],
-				"prior to start or due date."
-			].join(" ");
-			
+			$scope.rs = ReminderService;
+			$scope.reminder.reminder_offset = ReminderService.getOffsetFromMinsBefore($scope.reminder);
+		
 			$scope.edit = function() {
+				console.log("Editing existing reminder");
+				//$scope.editReminder = new Reminder($scope.reminder);	//uncomment when Reminder resource exists
+				$scope.editReminder = angular.copy($scope.reminder);	//remove when line above is uncommented	
+				console.log($scope.reminder);
 				$scope.editing = true;
 			}
 			$scope.update = function() {
+				console.log("Updating existing reminder");
+				angular.copy($scope.editReminder, $scope.reminder);
+				console.log($scope.reminder);
 				$scope.cancel();
 			}
 			$scope.delete = function() {
-				$element.remove();
+				console.log("Deleting reminder");
+				$scope.reminder.active = false;
+				console.log($scope.reminder);
 				$scope.cancel();
 			}
 			$scope.cancel = function() {
@@ -71,11 +85,31 @@ angular.module('pinwheelApp')
 		scope: {
 			reminder: "=formReminder",
 			save: "&",
-			cancel: "&"
+			cancel: "&",
+			editing: "=",
+			typeFilter: "&"
 		},
-		link: function($scope, $element, $attrs) {
+		controller: function($scope, $element, $attrs) {
 			$scope.reminderTypes = ReminderService.reminderTypes;
-			$scope.reminder.reminder_offset = 1;
+
+			//when reminder_offset OR reminder_type changes, calculate minutes before
+			//newVal[0] is reminder_offset
+			//newVal[1] is reminder_type
+			$scope.$watchCollection('[reminder.reminder_offset, reminder.reminder_type]', function(newVal) {
+				if (newVal[0] == undefined && newVal[1] == undefined) return;	//prevent initial call
+				$scope.reminder.mins_before = ReminderService.getMinutesBeforeFromOffset($scope.reminder);
+				//console.log(newVal, ReminderService.getMinutesBeforeFromOffset($scope.reminder));
+			});
+
+			//when reminder_time OR reminder_datetime changes, calculate absolute date
+			//newVal[0] is reminder_time
+			//newVal[1] is reminder_datetime
+			$scope.$watchCollection('[reminder.reminder_time, reminder.reminder_datetime]', function(newVal) {
+				if (newVal[0] == undefined && newVal[1] == undefined) return;	//prevent initial call
+				var start = new Date(); //TODO start should reference either due or event start
+				$scope.reminder.absolute_date = ReminderService.getAbsoluteDate($scope.reminder, start);
+				//console.log(newVal, ReminderService.getAbsoluteDate($scope.reminder, start));
+			});
 		}
 	}
 });

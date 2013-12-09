@@ -2,7 +2,7 @@
 	<div class="large-12 columns">
 		<table>
 			<tbody>
-				<tr ng-repeat="r in reminders" reminder="r"></tr>
+				<tr ng-repeat="r in reminders | filter: {active: true}" reminder="r" type-filter="typeFilter"></tr>
 				<tr>
 					<td class="add">
 						<div ng-show="!adding" ng-click="add()">
@@ -11,14 +11,17 @@
 						</div>
 						<div ng-show="adding" class="row">
 							<reminder-form
+								editing="adding"
 								form-reminder="newReminder"
 								save="save()"
-								cancel="cancelAddReminder()">
+								cancel="cancel()"
+								reminder-types="reminderTypes"
+								type-filter="typeFilter">
 							</reminder-form>
 						</div>
 					</td>
 				</tr>
-			<tbody>
+			</tbody>
 		</table>
 	</div>
 </div>

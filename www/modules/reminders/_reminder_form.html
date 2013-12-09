@@ -1,12 +1,12 @@
 <form name="reminder-form" novalidate>
 	<div class="large-12 columns">
 		<div class="reminder-offset">
-			<input required type='number' min="1" ng-model="reminder.reminder_offset" placeholder="2" />
+			<input ng-required='editing' focus-me='[editing]' type='number' min="1" ng-model="reminder.reminder_offset" placeholder="2" />
 		</div>
 		<div class="reminder-type">
 			<!-- Relative Reminder Types -->
 			<select
-				ng-options="r.id as r.name for r in reminderTypes | filter:{type:'relative'}"
+				ng-options="r.id as r.name for r in reminderTypes | filter: typeFilter(r)"
 				ng-model="reminder.reminder_type">
 			</select>
 		</div>

@@ -10,22 +10,24 @@ angular.module('pinwheelApp')
 			return {
 				color: "#222",
 				viewing: true,
-				has_reminder: false
+				reminders: []
 			};
-		}	
+		}
 
 		$scope.newCalendar = new Calendar($scope.defaultCalendar());
 
-		//open calendar add/subscribe drawer
+		//open calendar adder / subscription finder drawer
 		$scope.add = function() {
 			$scope.closeAll(); //close all calendar forms
 			$scope.addingSubscription = true;
 		}
 
+		//add a new calendar
 		$scope.addNew = function() {
 			$scope.addingCalendar = true; //open this one
 		}
 
+		//close all open calendars
 		$scope.closeAll = function() {
 			$scope.addingCalendar = false;
 			angular.forEach($scope.calendarWatchers, function(calObj, calID) {
@@ -61,9 +63,5 @@ angular.module('pinwheelApp')
 		$scope.cancelNew = function() {
 			$scope.reset();
 			$scope.addingCalendar = false;
-		}
-
-		$scope.reminderToggle = function() {
-			($scope.newCalendar.has_reminder && ReminderService.reminderDefaultsEvent($scope.newCalendar, $scope.user));
 		}
   });

@@ -13,6 +13,14 @@ angular.module('pinwheelApp').service('ReminderService', function($filter, Devic
 			{id: 3, name: "On date:", type: "both"},
 			{id: 7, name: "No reminder", type: "both"}
 		],
+		describe: function(reminder) {
+			return [
+				"Remind me",
+				reminder.reminder_offset,
+				['minutes', 'hours', 'days'][reminder.reminder_type],
+				"prior to start or due date."
+			].join(" ");
+		},
 		setReminderProperties: function(resource) {
 			resource.has_reminder = true;
 			resource.reminder_type = parseInt(resource.reminder_type);

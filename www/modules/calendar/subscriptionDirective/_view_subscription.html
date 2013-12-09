@@ -55,31 +55,44 @@
 						/>
 					</div>
 				</div>
-				<tabs 
-					default="reminders" 
-					ng-init="list = [
-								{
-									name:'reminders',
-									icon:'icon-notebook'
-								},
-								{
-									name:'admins',
-									icon:'icon-cog',
-									permission:[
-										'modify_public_calendars',
-										'calendar_admin',
-										'calendar_creator'
-									]
-								}
-					]">
-				</tabs>
 
-				<!-- Reminders -->
-				<reminder-list ng-show="activeTab.reminders"></reminder-list>
+				<!-- TABS MENU -->
+				<div class="row">
+					<div class="large-12 columns">
+						<tabs 
+							default="Reminders" 
+							ng-init="list = [
+										{
+											name:'Reminders',
+											icon:'icon-bell'
+										},
+										{
+											name:'Administrators',
+											icon:'icon-cog',
+											permission:[
+												'modify_public_calendars',
+												'calendar_admin',
+												'calendar_creator'
+											]
+										}
+									]">
+						</tabs>
+					</div>
+				</div>
 
-				<!-- Calendar Admins -->
-				<calendar-admin-list ng-show="activeTab.admins"></calendar-admin-list>
+				<!-- Reminders TAB -->
+				<div ng-show="activeTab.Reminders">
+					<reminder-list
+						reminders="editReminders"
+						type-filter="reminderTypeFilter"
+					>
+					</reminder-list>
+				</div>
 
+				<!-- Calendar Admins TAB -->
+				<calendar-admin-list ng-show="activeTab.Administrators"></calendar-admin-list>
+
+				<!-- FORM BUTTONS -->
 				<div class="row">
 					<div class="large-12 columns">
 						<ul class="button-group even-3">

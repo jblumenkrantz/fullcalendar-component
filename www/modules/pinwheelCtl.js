@@ -66,26 +66,7 @@ angular.module('pinwheelApp')
 				$timeout(function(){$('#monthCalendar').fullCalendar('render')});
 			}
 		});
-
-		//list of reminder types for use in reminder <select ng-model='reminder_type'> 
-		$scope.reminderTypes = ReminderService.reminderTypes;
-		//DUMMY REMINDERS
-		$scope.reminders = [
-			[
-				{reminder_pref_id: "123", reminder_type: 0, mins_before: 30},
-				{reminder_pref_id: "456", reminder_type: 1, mins_before: 120},
-				{reminder_pref_id: "789", reminder_type: 2, mins_before: 1440}
-			],
-			[
-				{reminder_pref_id: "123", reminder_type: 0, mins_before: 30},
-				{reminder_pref_id: "456", reminder_type: 1, mins_before: 120}
-			],
-			[
-				{reminder_pref_id: "123", reminder_type: 0, mins_before: 30}
-			],
-			[]
-		];
-
+		
 		Timezones.query({}, function(timezones){
 			$scope.timezones = timezones;
 		});
@@ -170,11 +151,10 @@ angular.module('pinwheelApp')
 				$('#monthCalendar').fullCalendar('changeView','month');
 			}
 		};
-		$scope.checkPermission = function(p,expectBoolean,calendar){
+		$scope.checkPermission = function(p,expectBoolean){
 			// If expectBoolean is true the function will only return a boolean value 
 			// otherwise it will return an object with the definitive boolean value 
 			// alongside an array of orgs that have that permission set to true 
-
 			var permission = {};
 			permission.orgs = [];
 			permission.definitive = false;
@@ -185,18 +165,9 @@ angular.module('pinwheelApp')
 						permission.orgs.push({org_name:v.org_name, org_id:v.org_id});
 					}
 				});
-
 			}
-			if(p == 'calendar_admin'){
-				permission.definitive = calendar.calendar_admin;
-			}
-			if(p == 'calendar_creator'){
-				permission.definitive = ($scope.user.user_id == calendar.creator_id);
-			}
-			
 			return (expectBoolean)? permission.definitive:permission;
 		}
-		
 		$scope.toggle_drawer = function(){
 			if($(".left-nav").width() > 0){
 				$(".page-wrap").css('width','100%');
