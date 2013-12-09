@@ -18,61 +18,39 @@ angular.module('pinwheelApp')
 			$scope.color = ($scope.calendar.editing) ? newVal : $scope.calendar.color;
 		});
 
+		$scope.editCalendar = {
+			reminders: []
+		}
+
 		//open existing calendar for editing
 		$scope.edit = function() {
 			delete $scope.calendar.events;
-
-			//make an edit copy of this calendar's reminders
-			$scope.editReminders = angular.copy($scope.calendar.reminders);
+			delete $scope.editCalendar.reminders;
 
 			//make an edit copy of this calendar
 			$scope.editCalendar = angular.copy($scope.calendar);
 
-			//delete reminders array from edit copy of calendar
-			delete $scope.editCalendar.reminders;
-
-			console.log($scope.editReminders, $scope.editCalendar, $scope.calendar);
-
-
 			$scope.close(); //close all other open calendars
 			$scope.calendar.editing = true;
+			$scope.editCalendarForm.$setPristine();
 		}
 
 		//update existing calendar
 		$scope.update = function() {
-			//if($scope.editCalendar.org_id == null){
-				//$scope.editCalendar.org_id = $scope.checkPermision('modify_public_calendars').orgs[0].org_id;
-			//}
-
-
-
-
-
+			if($scope.editCalendar.org_id == null){
+				$scope.editCalendar.org_id = $scope.checkPermision('modify_public_calendars').orgs[0].org_id;
+			}
 			angular.copy($scope.editCalendar, $scope.calendar);
-
-			$scope.calendar.reminders = $scope.editReminders;
-
-			//angular.copy($scope.editReminders, $scope.calendar.reminders);
-
-
-
-			console.log($scope.calendar, $scope.editReminders);
-
-
-
-
-
-
-			/*$scope.calendar.$update({id: $scope.calendar.calendar_id}, function(calendar) {
+			$scope.calendar.$update({id: $scope.calendar.calendar_id}, function(calendar) {
 				$scope.calendar = calendar;
 				$scope.calendar.recent = $scope.editCalendar.recent;
 				angular.extend($scope.watcher[$scope.calendar.calendar_id], {
 					color: $scope.calendar.color,
 					//reminder: ReminderService.getCalendarReminderProperties($scope.calendar)
 				});
-				$("#monthCalendar").fullCalendar('refetchEvents');*/
+				$("#monthCalendar").fullCalendar('refetchEvents');
 				$scope.cancel();
-			//});
+			});
 		}
 
 		//subscribe to a calendar

@@ -23,13 +23,12 @@ angular.module('pinwheelApp')
 			$scope.newReminder = $scope.defaultReminder();
 
 			$scope.add = function() {
-				console.log("Adding new reminder");
 				$scope.adding = true;
 			}
 
 			$scope.save = function() {
-				console.log("Saving new reminder");
 				$scope.reminders.push($scope.newReminder);
+				$scope.$$childHead.reminderForm.$setDirty();
 				$scope.cancel();
 			}
 
@@ -53,22 +52,16 @@ angular.module('pinwheelApp')
 			$scope.reminder.reminder_offset = ReminderService.getOffsetFromMinsBefore($scope.reminder);
 		
 			$scope.edit = function() {
-				console.log("Editing existing reminder");
-				//$scope.editReminder = new Reminder($scope.reminder);	//uncomment when Reminder resource exists
-				$scope.editReminder = angular.copy($scope.reminder);	//remove when line above is uncommented	
-				console.log($scope.reminder);
+				$scope.editReminder = angular.copy($scope.reminder);
 				$scope.editing = true;
 			}
 			$scope.update = function() {
-				console.log("Updating existing reminder");
 				angular.copy($scope.editReminder, $scope.reminder);
-				console.log($scope.reminder);
 				$scope.cancel();
 			}
 			$scope.delete = function() {
-				console.log("Deleting reminder");
 				$scope.reminder.active = false;
-				console.log($scope.reminder);
+				$scope.$$childHead.reminderForm.$setDirty();
 				$scope.cancel();
 			}
 			$scope.cancel = function() {

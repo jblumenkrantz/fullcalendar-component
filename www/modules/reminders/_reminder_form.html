@@ -1,4 +1,4 @@
-<form name="reminder-form" novalidate>
+<form name="reminderForm" novalidate>
 	<div class="large-12 columns">
 		<div class="reminder-offset">
 			<input ng-required='editing' focus-me='[editing]' type='number' min="1" ng-model="reminder.reminder_offset" placeholder="2" />
@@ -11,6 +11,6 @@
 			</select>
 		</div>
 	</div>
-	<span class="icon-checkmark" ng-click="save()" aria-hidden="true"></span>
+	<span ng-click="reminderForm.$valid && save()" class="icon-checkmark" aria-hidden="true"></span>
 	<span class="icon-x-altx-alt" ng-click="cancel()" aria-hidden="true"></span>
 </form>

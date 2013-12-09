@@ -67,7 +67,7 @@
 					<!-- / DISPLAY -->
 
 					<!-- EDIT -->
-					<form name="newCalendarForm" class="subscription resource-edit" novalidate>
+					<form name="newCalendarForm" class="subscription resource-edit" ng-submit="newCalendarForm.$valid && save()" novalidate>
 						<!-- Name -->
 						<div class="row" style="padding-top: 1em;">
 							<div class="large-12 columns">
@@ -103,12 +103,12 @@
 							<div class="large-12 columns">
 								<ul class="button-group even-2">
 									<li>
-										<button class="button radius" ng-click="cancelNew()">
+										<button type="button" class="button radius" ng-click="cancelNew()">
 											<span aria-hidden="true" class="icon-remove2"></span> <!-- unsubscribe -->
 										</button>
 									</li>
 									<li style="padding-right: 0;">
-										<button class="button radius" ng-click="save()">
+										<button type="submit" class="button radius">
 											<span aria-hidden="true" class="icon-checkmark"></span> <!-- save -->
 										</button>
 									</li>
