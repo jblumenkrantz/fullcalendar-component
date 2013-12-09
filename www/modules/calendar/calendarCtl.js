@@ -4,7 +4,7 @@ angular.module('pinwheelApp')
 	.controller('CalendarCtl', function ($filter, $scope, $routeParams, $location, $timeout, Calendar) {
 		$scope.routeDate = new Date($routeParams.month+"/"+$routeParams.day+"/"+$routeParams.year);
 		$scope.navYear = parseInt($routeParams.year);
-		
+
 		$scope.makeNavYear = function(year){
 			$scope.navYear = year;
 		}
@@ -36,6 +36,7 @@ angular.module('pinwheelApp')
 			$location.path("/calendar/"+$routeParams.year+"/"+$routeParams.month+"/"+$routeParams.day);
 			$timeout(function(){$('#monthCalendar').fullCalendar('render')});
 		}
+		
   });
 
 

@@ -4,7 +4,7 @@ angular.module('pinwheelApp')
   .controller('HallpassCtl', function ($scope, $location, $timeout, $http, Hallpass, Facilities, OrgUserList, User) {
 
   	  	$scope.activeTab = {activePasses:true};
-  	  	angular.element("#hallpass-tabs").find("dd[settings-tab='activePasses']").addClass("active").siblings().removeClass("active");
+  	  	angular.element("#hallpass-tabs").find("dd[hallpass-tab='activePasses']").addClass("active").siblings().removeClass("active");
   	  	$scope.viewing_history = [];
   	  	if(!$scope.hallpasses){
 	  		Hallpass.query({}, function(hallpasses){
@@ -26,14 +26,14 @@ angular.module('pinwheelApp')
 		}
 
 		$scope.$watch('user',function(){
-			if($scope.user){
-				// Check user permissions
-				if(!$scope.checkPermission('view_hallpass_history',true)){
-  					$location.path('calendar');
-  				}
-  				if(!$scope.orgUsers){
+			if($scope.user != undefined){
+				if($scope.user.permissions != undefined){
+					// Check user permissions
+					if(!$scope.checkPermission('view_hallpass_history',true)){
+	  					$location.path('calendar');
+	  				}
 					OrgUserList.query({id:$scope.user.permissions[0].org_id}, function(users){
-						$scope.$parent.orgUsers = users;
+						$scope.orgUsers = users;
 						console.warn(['OrgUsers loaded',$scope.orgUsers]);
 					});
 				}
@@ -65,7 +65,7 @@ angular.module('pinwheelApp')
 				$scope.viewing_history.push(pass);
 			}
 			angular.element("#hallpass-tabs").children().removeClass("active");
-			$timeout(function(){angular.element("#hallpass-tabs").find("dd[settings-tab="+pass.pass_holder_user_id+"]").addClass("active")});
+			$timeout(function(){angular.element("#hallpass-tabs").find("dd[hallpass-tab="+pass.pass_holder_user_id+"]").addClass("active")});
 			angular.forEach($scope.activeTab, function(value, section){
 				//set all activeTab properties to false
 				$scope.activeTab[section] = false;

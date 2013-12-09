@@ -26,7 +26,7 @@ class CalendarCtl
 	*/
 	function getAll ($id = null) {
 		$authUserID = Authorize:: sharedInstance()->userID();
-
+		error_log(" ------ GET ALL ------ ");
 	 	$cals = (object) array_merge((array) Calendar::loadUserOrgCalendars($authUserID), (array) Calendar::loadUserSubscriptions($authUserID));
 		$dataRay = array();
 		foreach($cals as $calendar){
@@ -68,7 +68,14 @@ class CalendarCtl
 
 			$calendar->events = Event::getUserEventsForCalendar($authUserID, $calendar, $start, $end);
 			$calendar->events = array_merge($calendar->events, Task::getUserTasksForCalendar($authUserID, $calendar->calendar_id)); 
-			
+
+			//dummy reminder data remove when reminders are real again
+			$calendar->reminders = array(
+				array("reminder_pref_id" => "123", "reminder_type" => 0, "mins_before" => 30, "active"=>true),
+				array("reminder_pref_id" => "123", "reminder_type" => 1, "mins_before" => 120, "active"=>true),
+				array("reminder_pref_id" => "123", "reminder_type" => 2, "mins_before" => 1440, "active"=>true),
+			);
+
 			if(property_exists($calendar, 'adhoc_events') && !$calendar->adhoc_events){
 				unset($calendar->adhoc_events);
 			}
@@ -145,6 +152,11 @@ class CalendarCtl
 			try {
 				$calendar = new Calendar($tsprop);
 				$pinsqli = DistributedMySQLConnection:: writeInstance();
+
+				/*//loop over $scope.calendar.reminders
+					//if new (no id + active = true) - make new reminder
+					//if exising and dirty (has id + marked as dirty) - make reminder update
+				*/
 
 				//perform calendar updates
 				$calendar->update_subscriptions($pinsqli);
@@ -235,6 +247,7 @@ class CalendarCtl
 		echo json_encode($calendar);
 		User:: incrementVersion($authUserID);
 	}
+
 	function getCalendarAdmins($id) {
 		$authUserID = Authorize:: sharedInstance()->userID();
 		echo json_encode(Calendar::getCalendarAdmins($id));
@@ -246,8 +259,8 @@ class CalendarCtl
 		$calendar = Calendar::load($calendar_id);
 
 		//check to see if the admin actually exists
-		if(User::validateUserName($admin->username,true)){
-			$admin = User::loadWithHandle($admin->username);
+		if(User::validateUserName($admin->user_handle,true)){
+			$admin = User::loadWithHandle($admin->user_handle);
 		}else{
 			throw new UserDoesNotExist();
 		}

@@ -9,8 +9,7 @@ angular.module('pinwheelApp')
 			scope: {
 				task: '=',
 				calendars: '=',
-				reminderTypes: '=',
-				reminderTypeFilter: '&',
+				reminderTypeFilter: '=',
 				save: '&',
 				cancel: '&',
 				reset: '&',

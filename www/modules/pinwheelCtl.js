@@ -4,7 +4,6 @@ angular.module('pinwheelApp')
   .controller('PinwheelCtl', function ($scope, $location, $http, $timeout, $routeParams, Calendar, User, localStorage, Event, Task, Timezones, ContactPoints, $route, DeviceService, ReminderService) {
 		$scope.calendarWatchers = {};
 		$scope.reminders = {};
-
 		$scope.device = DeviceService;
 		$scope.calendarColor = function(item) {
 			return $scope.calendarWatchers[item.calendar_id].color;
@@ -35,19 +34,38 @@ angular.module('pinwheelApp')
 		$scope.init = function(){
 			User.get({}, function(user){
 				$scope.user = user;
-				User.query({id:'new'}, function(orgs){
-					$scope.loading_user = false;
-					$scope.orgs = orgs;
-				});
+				if(!$scope.user){
+					User.query({id:'new'}, function(orgs){
+						console.warn(['User loaded',user]);
+						$scope.loading_user = false;
+						$scope.orgs = orgs;
+					});
+				}
 				$scope.initialUser = {};
 				angular.copy(user, $scope.initialUser);
-				ContactPoints.query(function(contactPoints){
-					$scope.contactPoints = contactPoints;
-				});
-				Calendar.query({id: 'all'}, function(calendars){
-					$scope.loading_calendars = false;
-					$scope.calendars = calendars;
-				});
+				if(!$scope.contactPoints){
+					ContactPoints.query(function(contactPoints){
+						console.warn(['Contact Points loaded',contactPoints]);
+						$scope.contactPoints = contactPoints;
+					});
+				}
+				if(!$scope.calendars || ($scope.calendars.length < 1)){
+					Calendar.query({id: 'all'}, function(calendars){
+						console.warn(['Calendars loaded',calendars]);
+						$scope.loading_calendars = false;
+						$scope.calendars = calendars;
+					});
+				}else{
+					console.warn('calendars already exist');
+					Calendar.query({id: 'all'}, function(calendars){
+						console.warn(['Calendars loaded',calendars]);
+						//console.warn(angular.element('#monthCalendar').scope());
+						$scope.loading_calendars = false;
+						$scope.calendars = calendars;
+					});
+
+					$timeout(function(){$('#monthCalendar').fullCalendar('render')});
+				}
 			}, function(error){
 				// TODO: update this and other requests
 				//       include proper error logging
@@ -63,29 +81,11 @@ angular.module('pinwheelApp')
 		/* to accomidate the user login functions */
 		$scope.$on('$routeChangeSuccess', function (ev, data) {
 			if(data.controller == 'CalendarCtl'){
-				$timeout(function(){$('#monthCalendar').fullCalendar('render')});
+				$scope.init();
+				//$timeout(function(){$('#monthCalendar').fullCalendar('renderEvents')});
 			}
 		});
-
-		//list of reminder types for use in reminder <select ng-model='reminder_type'> 
-		$scope.reminderTypes = ReminderService.reminderTypes;
-		//DUMMY REMINDERS
-		$scope.reminders = [
-			[
-				{reminder_pref_id: "123", reminder_type: 0, mins_before: 30},
-				{reminder_pref_id: "456", reminder_type: 1, mins_before: 120},
-				{reminder_pref_id: "789", reminder_type: 2, mins_before: 1440}
-			],
-			[
-				{reminder_pref_id: "123", reminder_type: 0, mins_before: 30},
-				{reminder_pref_id: "456", reminder_type: 1, mins_before: 120}
-			],
-			[
-				{reminder_pref_id: "123", reminder_type: 0, mins_before: 30}
-			],
-			[]
-		];
-
+		
 		Timezones.query({}, function(timezones){
 			$scope.timezones = timezones;
 		});

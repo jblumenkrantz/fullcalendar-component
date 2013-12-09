@@ -10,7 +10,7 @@
 
 			<!-- RSS FEED ICON -->
 
-			<div class="subscribed" ng-hide="isCalendarCreator(calendar)">
+			<div class="subscribed" ng-hide="checkPermission('calendar_creator',true,calendar)">
 				<span aria-hidden="true" class="icon-rss-alt" style="color: #222;">
 				</span>
 			</div>

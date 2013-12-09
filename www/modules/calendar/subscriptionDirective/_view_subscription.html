@@ -5,11 +5,13 @@
 	ng-style="{background:color}">
 	<div class="resource-gradient">
 		<div class="resource-header pane-header small">
-		    <span class="pane-title">{{editCalendar.calendar_name}}</span>
+		    <span class="pane-title">
+		    	<span style="top: 0px;" ng-show="editCalendarForm.$dirty">*</span>{{editCalendar.calendar_name}}
+		    </span>
 		    <span class="icon-x-altx-alt right" ng-click="cancel()" aria-hidden="true"></span>
 		</div>
 		<div class="resource-body">
-			<div class="subscribed" ng-hide="isCalendarCreator(calendar)">
+			<div class="subscribed" ng-hide="checkPermission('calendar_creator',true,calendar)">
 				<span aria-hidden="true" class="icon-rss-alt" ng-style="{color:color}">
 				</span>
 			</div>
@@ -33,7 +35,7 @@
 
 			<!-- EDIT CALENDAR -->
 
-			<form name="editCalendarForm" class="subscription resource-edit" novalidate>
+			<form name="editCalendarForm" class="subscription resource-edit" ng-submit="editCalendarForm.$valid && update()" novalidate>
 				<!-- Name -->
 				<div class="row" style="padding-top: 1em;">
 					<div class="large-12 columns">
@@ -56,51 +58,58 @@
 					</div>
 				</div>
 
-				<!-- Reminders -->
-				<reminder-list reminders="reminders"></reminder-list>
-
-				<!-- Check for permissions for all these elements -->
-				<div class="row" style="display: none;">
-					<div class="large-12 columns" ng-show="checkPermision('modify_public_calendars',true)" >
-						<select
-							ng-show="checkPermision('modify_public_calendars').orgs.length > 1 && editCalendar.public"
-							ng-options="permission.org_id as permission.org_name for permission in user.permissions | filter:{modify_public_calendars: true}"
-							ng-model="editCalendar.org_id"
-							class="ng-pristine ng-valid"
-						>
-							<option value="">-- Select Org --</option>
-						</select>
-						<label class=checkbox ng-show="checkPermision('modify_public_calendars').orgs.length == 1 && editCalendar.public">
-							{{checkPermision('modify_public_calendars').orgs[0].org_name}}
-						</label>
-					</div>
-					<div class="large-12 columns" ng-show="checkPermision('modify_public_calendars',true) || isCalendarCreator(calendar) || editCalendar.calendar_admin" >
-						<ul class="button-group">
-							<li>
-								<button class="button radius" ng-show="editCalendar.calendar_admin || isCalendarCreator(calendar)">
-									<span calendar-admin-modal-trigger="calendars" aria-hidden="true" class="icon-star">Calendar Admins</span> <!-- cancel -->
-								</button>
-							</li>
-						</ul>
+				<!-- TABS MENU -->
+				<div class="row">
+					<div class="large-12 columns">
+						<tabs 
+							default="Reminders" 
+							ng-init="list = [
+										{
+											name:'Reminders',
+											icon:'icon-bell'
+										},
+										{
+											name:'Administrators',
+											icon:'icon-cog',
+											permission:[
+												'modify_public_calendars',
+												'calendar_admin',
+												'calendar_creator'
+											]
+										}
+									]">
+						</tabs>
 					</div>
 				</div>
-				<!-- End of Check for Permissions section -->
 
+				<!-- Reminders TAB -->
+				<div ng-show="activeTab.Reminders">
+					<reminder-list
+						reminders="editCalendar.reminders"
+						type-filter="reminderTypeFilter"
+					>
+					</reminder-list>
+				</div>
+
+				<!-- Calendar Admins TAB -->
+				<calendar-admin-list ng-show="activeTab.Administrators"></calendar-admin-list>
+
+				<!-- FORM BUTTONS -->
 				<div class="row">
 					<div class="large-12 columns">
 						<ul class="button-group even-3">
 							<li>
-								<button ng-disabled="editCalendarForm.$invalid" class="button radius">
+								<button type="button" ng-disabled="editCalendarForm.$invalid" class="button radius">
 									<span aria-hidden="true" class="icon-share"></span> <!-- cancel -->
 								</button>
 							</li>
 							<li>
-								<button class="button radius" ng-click="unsubscribe()">
+								<button type="button" class="button radius" ng-click="unsubscribe()">
 									<span aria-hidden="true" class="icon-remove2"></span> <!-- unsubscribe -->
 								</button>
 							</li>
 							<li style="padding-right: 0;">
-								<button ng-disabled="editCalendarForm.$invalid" class="button radius" ng-click="update()">
+								<button type="submit" ng-disabled="editCalendarForm.$invalid" class="button radius">
 									<span aria-hidden="true" class="icon-checkmark"></span> <!-- save -->
 								</button>
 							</li>
