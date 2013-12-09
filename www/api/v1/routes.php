@@ -37,18 +37,18 @@ function routes () {
 			Route::Response("application/json")
 		),		
 		'/event/:alpha/?' => array(
-			Route::$get=>'EventCtl::get',
+			//Route::$get=>'EventCtl::get',
 			Route::$put=>'EventCtl::update',
 			Route::Authorize(),
 			Route::Request("application/json"),
 			Route::Response("application/json")
 		),
-		'/event/((?:/?::alpha)+)/?' => array(
+		/*'/event/((?:/?::alpha)+)/?' => array(
 			Route::$get=>'EventCtl::get',
 			Route::Authorize(),
 			Route::Request("application/json"),
 			Route::Response("application/json")
-		),
+		),*/
 		'/event/?' => array(
 			Route::$post=>'EventCtl::create',
 			Route::$put=>'EventCtl::update',

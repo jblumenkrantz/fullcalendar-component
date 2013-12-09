@@ -60,7 +60,13 @@ class CalendarCtl
 			}
 			$calendar->active = ($calendar->active)? true:false;
 			$calendar->calendar_admin = ($calendar->calendar_admin)? true:false;
-			$calendar->events = Event::getUserEventsForCalendar($authUserID, $calendar);
+			
+
+			$date  = time();
+			$start = strtotime("-2 months", $date);
+			$end   = strtotime("+12 months", $date);
+
+			$calendar->events = Event::getUserEventsForCalendar($authUserID, $calendar, $start, $end);
 			$calendar->events = array_merge($calendar->events, Task::getUserTasksForCalendar($authUserID, $calendar->calendar_id)); 
 			
 			if(property_exists($calendar, 'adhoc_events') && !$calendar->adhoc_events){

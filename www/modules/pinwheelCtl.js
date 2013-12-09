@@ -58,11 +58,11 @@ angular.module('pinwheelApp')
 				}
 			});
 		}
+		$scope.init();
 		/* resource queries were put into an init funciton */
 		/* to accomidate the user login functions */
 		$scope.$on('$routeChangeSuccess', function (ev, data) {
 			if(data.controller == 'CalendarCtl'){
-				$scope.init();
 				$timeout(function(){$('#monthCalendar').fullCalendar('render')});
 			}
 		});
