@@ -327,6 +327,9 @@ class Event extends PinwheelModelObject
 			$ep = array_map(array($pinsqli, 'real_escape_string'), $ep);
 			$eventID = MySQLConnection::generateUID('event');
 			$ep['creator_id'] = $authUserID;
+			if(!IsSet($ep['stops_repeating'])){
+				$ep['stops_repeating']=0;
+			}
 			array_push($valueStrings,
 				"(
 					'$eventID',
@@ -373,7 +376,7 @@ class Event extends PinwheelModelObject
 					repeat_frequency,
 					repeat_by_day,
 					repeat_by_month,
-					repeat_by_monthday,
+					repeat_by_monthday
 				)
 				Values $values
 			"
