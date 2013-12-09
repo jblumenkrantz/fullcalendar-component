@@ -74,13 +74,13 @@ angular.module('pinwheelApp')
 				var eventBlock = $(clickEvent.target).closest(".fc-event");		//event container
 				var eventBlockOffset = eventBlock.offset();						//event container offset relative to document
 
-				//for non-all day events that appear in the day/week view place even popup where the user clicked 
+				//for NON- allDay events that appear in day or week view place event popup where the user clicked 
 				var placeWhereClicked = (!isAllDay && (calendarView == 'week' || calendarView == 'day'));			
 
 				//set color
 				style.color = color;
 
-				//set pointer position/color defaults
+				//set pointer position/background color defaults
 				style.pointer = {
 					left: 4,
 					bottom: -9,

@@ -13,7 +13,25 @@ License: MIT
     *display: inline;
     *zoom: 1;
     z-index: 2147483647;
-    overflow: hidden;
+    background-color: #ECECEC;
+    border: solid 1px;
+    border-left-width: 8px !important;
+    -webkit-box-shadow: 0 0 5px #999999;
+    -moz-box-shadow: 0 0 5px #999999;
+    box-shadow: 0 0 5px #999999;
+}
+.sp-container:before {
+    bottom: 100%;
+    right: -1px;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-bottom-color: inherit;
+    border-width: 16px;
+    margin-left: -16px;
 }
 .sp-container.sp-flat {
     position: relative;
@@ -215,12 +233,6 @@ License: MIT
 }
 
 /* Basic display options (colors, fonts, global widths) */
-.sp-container {
-    border-radius: 0;
-    background-color: #ECECEC;
-    border: solid 1px #f0c49B;
-    padding: 0;
-}
 .sp-container, .sp-container button, .sp-container input, .sp-color, .sp-hue
 {
     font: normal 12px "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
@@ -231,7 +243,7 @@ License: MIT
 }
 .sp-top
 {
-    margin-bottom: 3px;
+    margin-bottom: -2px;
 }
 .sp-color, .sp-hue
 {
@@ -267,24 +279,16 @@ License: MIT
 }
 .sp-picker-container , .sp-palette-container
 {
-    float:left;
     position: relative;
     padding: 10px;
-    padding-bottom: 300px;
-    margin-bottom: -290px;
 }
 .sp-picker-container
 {
     width: 172px;
-    border-left: solid 1px #fff;
+    padding-top: 0px;
 }
 
 /* Palettes */
-.sp-palette-container
-{
-    border-right: solid 1px #ccc;
-}
-
 .sp-palette .sp-thumb-el {
     display: block;
     position:relative;
@@ -333,6 +337,11 @@ License: MIT
 .sp-replacer:hover, .sp-replacer.sp-active {
     color: #111;
 }
+.sp-replacer.sp-active {
+    -webkit-box-shadow: 0 0 5px #999999;
+    -moz-box-shadow: 0 0 5px #999999;
+    box-shadow: 0 0 5px #999999;
+}
 .sp-replacer.sp-disabled {
     cursor:default;
     border-color: silver;
@@ -347,13 +356,7 @@ License: MIT
     float:left;
     font-size:10px;
     text-align: right;
-}/*
-.sp-dd:before {
-    content: "";
-    font-size: 12px;
-    font-weight: 500;
-    text-align: left;
-}*/
+}
 .sp-preview
 {
     position:relative;
@@ -380,27 +383,22 @@ License: MIT
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4dffffff', endColorstr='#00ffffff',GradientType=0 );
     /* IE6-9 */
 }
-
+.sp-replacer.sp-active .sp-preview {
+    border: none;
+}
 .sp-palette
 {
     *width: 220px;
     max-width: 220px;
+    margin-bottom: -5px;
 }
 .sp-palette .sp-thumb-el
 {
     width:16px;
     height: 16px;
-    margin:2px 1px;
+    margin: 0 2px 4px 0;
     border: solid 1px #d0d0d0;
 }
-
-.sp-container
-{
-	border-radius: 4px;
-	border-width: 2px !important;
-    padding-bottom:0;
-}
-
 
 /* Buttons: http://hellohappy.org/css3-buttons/ */
 .sp-container button {

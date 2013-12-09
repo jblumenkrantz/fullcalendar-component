@@ -583,9 +583,9 @@ border-top: 0px solid $primary-color;
 	cursor: default !important;
 }
 #content input[type=text]{
-	// border-radius: 4px !important;
+	border-radius: 4px !important;
 	border: 1px solid #aaa !important;
-	// height: 26px !important;
+	height: 26px !important;
 }
 #content input[type=checkbox]{
 	margin: 0;padding: 0;position: relative;top: 2px;
@@ -605,6 +605,9 @@ border-top: 0px solid $primary-color;
 
 #content table{
 	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 0;
+	height: auto;
 }
 
 #content table thead tr th {
@@ -612,8 +615,15 @@ border-top: 0px solid $primary-color;
 	background-color: $primary-color;
 	color: #fff;
 	font-weight: 300;
+
 }
-// center check-in boxes in the last column
+#content table thead tr th, #content div table tbody tr td {
+	width: 14.289%;
+}
+#content div table tbody tr td {
+	text-align: center;
+}
+
 #content table tr td:last-of-type{
 	text-align: center;
 }
@@ -628,10 +638,15 @@ border-top: 0px solid $primary-color;
 .admin-table td span.student, .admin-table tr td span[class*="icon-"]{
   cursor: pointer !important;
 }
-.admin-table tr td input{
+.admin-table tr td span[class*="icon-"]{
+  color: #ccc;
+  padding-right: 5px;
+}
+.admin-table tr td span[class*="icon-"]:hover{
+  color: #222;
+}
+.admin-table tbody tr td input{ //bump checkbox to the left
 	position: relative;
 	top: 5px;
+	left: 18px; 
 }
-// // .admin-table tr td button [class*="icon-"] {
-// //   text-shadow: none;
-// // }
