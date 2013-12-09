@@ -54,5 +54,9 @@
 		static public function findDayEnd($day){
 			return static::endOf($day);
 		}
+
+		static public function getStatsFor($day){
+			return static::statsForDate($day);
+		}
 	}
 ?>

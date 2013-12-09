@@ -22,6 +22,7 @@ class Event extends PinwheelModelObject
   public $repeat_interval;
   public $repeat_addendum;
   public $repeat_blackout;
+  public $repeat_position;
   public $repeat_id;
   public $repeat_stop;
 	public $mins_before;
@@ -53,6 +54,7 @@ class Event extends PinwheelModelObject
 			'repeat_interval' => null,
 			'repeat_addendum' => null,
 			'repeat_blackout' => null,
+			'repeat_position' => null,
 			'repeat_id' => null,
 			'repeat_stop' => null,
 			'allDay' => 0,
@@ -109,6 +111,7 @@ class Event extends PinwheelModelObject
 
 		$onDate = $start;
 		while($onDate <= $end){
+
 			foreach($repeaters as $repeater){
 				if($repeater->repeat_stop == null){
 					$repeater->repeat_stop = INF;
@@ -147,14 +150,20 @@ class Event extends PinwheelModelObject
 								break;
 							case 'MONTHLY':
 								$by_day = explode(",", $repeater->repeat_by_monthday);
+								$stats = static::statsForDate($onDate);
 								if(
-										(static::monthsSince($repeater->start, $onDate)%$repeater->repeat_interval == 0) &&
-										(in_array(strtoupper(date('d', $onDate)), $by_day))
-									){
+										(isSet($repeater->repeat_position) &&
+										$stats['dayName'] == $repeater->repeat_by_day &&
+										$stats['currently'] == $repeater->repeat_position)
+								 	||
+										((static::monthsSince($repeater->start, $onDate)%$repeater->repeat_interval == 0) &&
+										(in_array(strtoupper(date('d', $onDate)), $by_day)))
+								){
 										$eventStart = strtotime("+$daysSince day", $repeater->start);
 										$eventEnd = $eventStart+($repeater->end-$repeater->start);
 										$events[] = Event::makeFrom($repeater, array('start'=>$eventStart, 'end'=>$eventEnd));
-									}
+								}
+
 								break;
 							case 'YEARLY':
 								break;
@@ -177,6 +186,22 @@ class Event extends PinwheelModelObject
 			array_push($dataRay, $event);
 		}
 		return($dataRay);
+	}
+
+	static protected function statsForDate($date){
+		$ray = array();
+		$ray['dayName'] = strtoupper(date("D", $date));
+
+		$startOfMonth = strtotime(date('Y-m-01', $date));
+
+		$offsetFromFirst = strftime('%w', $date) - strftime('%w', $startOfMonth);
+		if($offsetFromFirst < 0){
+			$offsetFromFirst = 7 + $offsetFromFirst;
+		}
+
+		$ray['repeated']  = ceil((date('t', $date) - $offsetFromFirst)/7);
+		$ray['currently'] = ceil((date('d', $date) - $offsetFromFirst)/7);
+		return $ray;
 	}
 
 	static protected function beginningOf($date){

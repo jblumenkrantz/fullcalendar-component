@@ -9,9 +9,6 @@
 	Fixture::at('spec/fixtures');
 
 	Scenario::when("passing values to set batch", function($then){
-
-
-
 		$then->beforeEach("when addendums and repeaters are added", function($scene){
 			$scene->eventList  = Fixture::get('events', true);
 			$calendar = new Calendar();
@@ -36,7 +33,6 @@
 			expect($scene->addendums[0]->id)->toBe('event_6');
 		});
 	});
-
 	Scenario::when("testing ancillary methods for repeating events", function($then){
 		$then->the("event model should be able to tell if a timestamp occurs within a specific day", function($scene){
 			$date = strtotime("9/23/1982");
