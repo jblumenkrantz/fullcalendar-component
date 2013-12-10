@@ -82,7 +82,7 @@ angular.module('pinwheelApp')
 		$scope.$on('$routeChangeSuccess', function (ev, data) {
 			if(data.controller == 'CalendarCtl'){
 				$scope.init();
-				//$timeout(function(){$('#monthCalendar').fullCalendar('renderEvents')});
+				$timeout(function(){$('#monthCalendar').fullCalendar('render')});
 			}
 		});
 		
@@ -162,7 +162,7 @@ angular.module('pinwheelApp')
 		// show and hide the calendar view switcher (DB D W M Y L) when not in the calendar view
 		$scope.$on('$routeChangeSuccess',function(event, next){
 			var path = (next.hasOwnProperty('$$route'))? String(next.$$route.originalPath) : 'none';
-			$scope.calViewNavigator = (path.match(/calendar/g));
+			$scope.calViewNavigator = $scope.viewSidebar = (path.match(/calendar/g));
 		});
 
 		$scope.changeView = function(view) {

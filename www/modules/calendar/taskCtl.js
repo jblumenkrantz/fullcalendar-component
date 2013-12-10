@@ -8,7 +8,7 @@ angular.module('pinwheelApp')
 				has_due_date: false
 			};
 		}
-
+		
   		//scope toggle function
 		$scope.toggle = function(name) {
 			$scope[name] = !$scope[name];

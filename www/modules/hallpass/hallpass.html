@@ -1,6 +1,6 @@
 <div id="main-content" style="height: 100%; overflow: hidden; position: relative; z-index: 3" class="small-12 columns large-12">
 	<div id="content" class="row">
-		<div class="row" style="background: #ddd;">
+		<div id="hallpass-form-container" class="row" style="background: #ddd;">
 			<div class="large-12 columns">
 				<br>
 				<form>
@@ -57,7 +57,7 @@
 			</dd>
 		</dl> 
 		<div class="large-12" ng-show="activeTab.activePasses" style="height: 100%;">
-			<table style="margin: 0;">
+			<table class="hallpass-table-header" style="margin: 0;">
 				<thead>
 					<tr>
 						<th>Name</th>
@@ -69,7 +69,7 @@
 					</tr>
 				</thead>
 			</table>
-			<div style="overflow-y: scroll !important; max-height: 490px;">
+			<div class='hallpass-list' style="overflow-y: scroll !important;">
 				<table class="admin-table">
 					<tbody>
 						<tr ng-repeat="pass in hallpasses | filter:{in_time:'!'}">
@@ -90,7 +90,7 @@
 		</div>
 
 		<div class="large-12" ng-show="activeTab.recentPasses">
-			<table style="margin: 0;">
+			<table class="hallpass-table-header" style="margin: 0;">
 				<thead>
 					<tr>
 						<th>Name</th>
@@ -102,7 +102,7 @@
 					</tr>
 				</thead>
 			</table>
-			<div style="overflow-y: scroll !important; height: 490px !important;">
+			<div class='hallpass-list' style="overflow-y: scroll !important;">
 				<table class="admin-table">
 					<tbody>
 						<tr ng-repeat="pass in hallpasses | filter:{in_time:'!!'}">
@@ -120,7 +120,7 @@
 		
 		<div ng-repeat="user in viewing_history" class="large-12" ng-show="activeTab[user.pass_holder_user_id]">
 			<!-- <h5 style="padding: 0; margin: 0;">{{user.pass_holder_first_name}} {{user.pass_holder_last_name}}</h5> -->
-			<table style="margin: 0;">
+			<table class="hallpass-table-header" style="margin: 0;">
 				<thead>
 					<tr>
 						<th>Name</th>
@@ -132,7 +132,7 @@
 					</tr>
 				</thead>
 			</table>
-			<div style="overflow-y: scroll !important; height: 490px !important;">
+			<div class='hallpass-list' style="overflow-y: scroll !important;">
 				<table>
 					<tbody>
 						<tr ng-repeat="pass in hallpasses | filter:{pass_holder_user_id:user.pass_holder_user_id}">

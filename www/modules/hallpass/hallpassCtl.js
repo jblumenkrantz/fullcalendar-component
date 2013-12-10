@@ -2,7 +2,19 @@
 
 angular.module('pinwheelApp')
   .controller('HallpassCtl', function ($scope, $location, $timeout, $http, Hallpass, Facilities, OrgUserList, User) {
-
+		$scope.mainAreaHeight = function(){
+			var windowHeight = $(window).height();
+			var mainHeaderHeight = $("#mainHeader").outerHeight();
+			var hallpassFormHeight = $("#hallpass-form-container").outerHeight();
+			var hallpassTabsHeight = $("#hallpass-tabs").outerHeight();
+			var hallpassTableHeaderHeight = $(".hallpass-table-header:visible").outerHeight();
+			var height = windowHeight - mainHeaderHeight - hallpassFormHeight - hallpassTabsHeight - hallpassTableHeaderHeight - 10 //for some padding insurance;
+			//console.warn([windowHeight,mainHeaderHeight,hallpassFormHeight,hallpassTabsHeight, hallpassTableHeaderHeight]);
+			return height;
+		}
+		
+		$(".hallpass-list").height($scope.mainAreaHeight());
+		
   	  	$scope.activeTab = {activePasses:true};
   	  	angular.element("#hallpass-tabs").find("dd[hallpass-tab='activePasses']").addClass("active").siblings().removeClass("active");
   	  	$scope.viewing_history = [];
@@ -65,7 +77,10 @@ angular.module('pinwheelApp')
 				$scope.viewing_history.push(pass);
 			}
 			angular.element("#hallpass-tabs").children().removeClass("active");
-			$timeout(function(){angular.element("#hallpass-tabs").find("dd[hallpass-tab="+pass.pass_holder_user_id+"]").addClass("active")});
+			$timeout(function(){
+				angular.element("#hallpass-tabs").find("dd[hallpass-tab="+pass.pass_holder_user_id+"]").addClass("active");
+				angular.element(".hallpass-list").height($scope.mainAreaHeight());
+			});
 			angular.forEach($scope.activeTab, function(value, section){
 				//set all activeTab properties to false
 				$scope.activeTab[section] = false;

@@ -17,12 +17,19 @@ angular.module('pinwheelApp')
 					var windowHeight = $(window).height();
 					var mainHeaderHeight = $("#mainHeader").outerHeight();
 					var contentHeadHeight = $("#content-header").outerHeight();
-					//var fcHeaderHeight = $(".fc-header").outerHeight();
 					var height = windowHeight - mainHeaderHeight - contentHeadHeight;
-					//console.warn([windowHeight,mainHeaderHeight,contentHeadHeight,fcHeaderHeight]);
 					return height;
 				}
-				
+
+				// Adjust the padding of the side-nav li elements until the list fits the window height
+				$scope.resizeSideNav = function(){
+				 if (angular.element(".side-nav").outerHeight() > $scope.mainAreaHeight()){
+				 	angular.element("ul.side-nav").children().css('padding',(parseInt(angular.element("ul.side-nav").children().css('padding-top')) - 1)+'px 0px')
+					$scope.resizeSideNav();
+				 }     
+				}
+				$scope.resizeSideNav();
+
 				$scope.eventSources = function(){
 					return $scope.calendars
 				}
