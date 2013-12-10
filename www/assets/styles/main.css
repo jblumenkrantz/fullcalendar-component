@@ -500,4 +500,5 @@ label.checkbox {
 
 .outer-container {
 	position:relative;
+	overflow: hidden;
 }
