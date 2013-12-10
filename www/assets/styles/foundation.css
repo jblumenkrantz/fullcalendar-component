@@ -1,3 +1,291 @@
+/*adjust background and content text colors for entire references view*/
+/* line 2, ../../scss/_refpages.scss */
+.reference-panel {
+  height: 100%;
+  background-color: #fff;
+  color: #000;
+}
+
+/*set reference pages content pane*/
+/* line 5, ../../scss/_refpages.scss */
+#reference-page-content {
+  overflow-y: auto;
+  height: 100%;
+  background-color: #fff !important;
+  color: #000;
+}
+
+/*makes images resize and always be 100% width inside containers*/
+/* line 13, ../../scss/_refpages.scss */
+#reference-page-content img {
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  width: 100%;
+  /*height: 100%;*/
+  text-align: center;
+}
+
+/*resets padding for columns*/
+/*selects the first h2 on the page and properly aligns*/
+/*reset margin for elements inside columns*/
+/*reset panel padding and text color for reference pages only*/
+/* line 48, ../../scss/_refpages.scss */
+#reference-page-content .panel.intro {
+  color: #000 !important;
+}
+
+/* line 54, ../../scss/_refpages.scss */
+#reference-page-content .panel.intro p {
+  padding: 0;
+  color: #000 !important;
+}
+
+/* line 59, ../../scss/_refpages.scss */
+#reference-page-content .panel.dark {
+  padding: 15px;
+  background: #222 !important;
+  color: #fff !important;
+  line-height: 20px;
+  border-radius: 4px;
+}
+
+/* line 68, ../../scss/_refpages.scss */
+#reference-page-content .panel.callout {
+  padding: 15px;
+  background: #00ccff !important;
+  color: #fff !important;
+  line-height: 20px;
+  border-radius: 4px;
+  font-size: 20px;
+  transform: rotate(3deg);
+  -ms-transform: rotate(3deg);
+  /* IE 9 */
+  -webkit-transform: rotate(3deg);
+  /* Safari and Chrome */
+}
+
+/*force 100% width and remove cellspacing/border effect on tables*/
+/* line 83, ../../scss/_refpages.scss */
+#reference-page-content div table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/*optional header image matches padding of other elements*/
+/* line 88, ../../scss/_refpages.scss */
+#reference-page-content header {
+  text-align: center;
+}
+
+/*PULLQUOTE STYLES*/
+/* line 94, ../../scss/_refpages.scss */
+.pullquote {
+  padding: 5px;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 15px;
+  margin: 0 15px;
+}
+
+/* line 101, ../../scss/_refpages.scss */
+.pullquote h4 {
+  font-weight: 800 !important;
+  font-style: italic;
+  color: #00ccff;
+  margin: 0 15px !important;
+  padding: 10px !important;
+}
+
+/* line 109, ../../scss/_refpages.scss */
+.pullquote-dark {
+  padding: 5px;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 15px;
+  background: #222;
+  /*margin: 0 15px;*/
+}
+
+/* line 117, ../../scss/_refpages.scss */
+.pullquote-dark h4 {
+  font-weight: 800 !important;
+  font-style: italic;
+  color: #fff;
+  margin: 0 15px !important;
+  padding: 10px !important;
+}
+
+/*ACCORDION STYLES*/
+/* line 125, ../../scss/_refpages.scss */
+.tabs.vertical {
+  background: #ddd;
+}
+
+/* line 128, ../../scss/_refpages.scss */
+.tabs.vertical li {
+  border-left: 0px solid #cccccc;
+  margin-bottom: 1px;
+}
+
+/* line 133, ../../scss/_refpages.scss */
+#reference-page-content .panel p {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 137, ../../scss/_refpages.scss */
+#reference-page-content .panel ol {
+  padding: 0 15px;
+}
+
+/* line 146, ../../scss/_refpages.scss */
+span.accordion-heading-text {
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-width: 1px 1px 0 4px;
+  color: #555;
+  padding: 8px;
+  display: block;
+  cursor: pointer;
+}
+
+/* line 156, ../../scss/_refpages.scss */
+.accordion-body {
+  /*background: #ccc;*/
+}
+
+/* line 163, ../../scss/_refpages.scss */
+.accordion-inner .content li a {
+  padding: 4px;
+  height: 24px;
+  border-left: 4px solid #ddd;
+  border-top: 0px solid #ddd;
+}
+
+/* line 164, ../../scss/_refpages.scss */
+.accordion-inner .content li.active {
+  border-top: 1px solid #ddd;
+  border-left: 4px solid #ddd;
+}
+
+/* line 165, ../../scss/_refpages.scss */
+.accordion-inner .content li.active a {
+  color: #fff;
+  background: #666;
+  border-top: 0px solid #ddd;
+  border-left: 0px solid #ddd;
+  cursor: pointer;
+}
+
+/*REFERENCE PAGE HEADING STYLES*/
+/*main heading subtitle, smaller and lighter color*/
+/* line 171, ../../scss/_refpages.scss */
+#reference-page-content h2 span {
+  font-size: 30px;
+  font-weight: 400;
+  color: #999;
+}
+
+/*#reference-page-content h6 {
+	font-weight: bold;
+}
+#reference-page-content h6 span {
+	font-weight: normal; 
+}*/
+/* IPAD FIXES */
+@media only screen and (max-width: 1024px) {
+  /* Global Misc --- */
+  /*                 */
+  /*aspect ratio fix for column width */
+  /* line 189, ../../scss/_refpages.scss */
+  .reference-panel .ten.columns#reference-page-content {
+    width: 75%;
+  }
+
+  /* line 191, ../../scss/_refpages.scss */
+  .reference-panel .two, .reference-panel .row .two {
+    width: 25%;
+  }
+
+  /* line 194, ../../scss/_refpages.scss */
+  #reference-page-content h2 {
+    font-size: 30px;
+    margin: 0 15px;
+    padding: 15px 0;
+  }
+
+  /* line 199, ../../scss/_refpages.scss */
+  #reference-page-content h2 span {
+    font-size: 20px;
+    font-weight: 400;
+    margin-left: 15px;
+    color: #999;
+  }
+}
+/*ANY CUSTOM CSS SHOULD GO BELOW THIS POINT*/
+/* line 208, ../../scss/_refpages.scss */
+.dark p {
+  padding: 13px 0 18px 0 !important;
+}
+
+/* line 213, ../../scss/_refpages.scss */
+img {
+  padding: 10px 0;
+}
+
+/*FOR DARK PANEL H4*/
+/* line 220, ../../scss/_refpages.scss */
+.panel h4 {
+  padding: 10px 0 10px 0 !important;
+}
+
+/*FOR MATH PAGES*/
+/* line 226, ../../scss/_refpages.scss */
+.math ul {
+  margin: 10px 15px 0 10px !important;
+}
+
+/* line 231, ../../scss/_refpages.scss */
+.math ul li {
+  border-right: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+}
+
+/* line 237, ../../scss/_refpages.scss */
+.math li:last-child {
+  border-right: 0px solid #dddddd;
+}
+
+/* line 243, ../../scss/_refpages.scss */
+.math table tbody tr td {
+  text-align: center;
+}
+
+/* line 248, ../../scss/_refpages.scss */
+.math p {
+  font-size: 15px;
+}
+
+/* line 252, ../../scss/_refpages.scss */
+.math hr {
+  height: 2px;
+  background: #dddddd;
+  padding: 0px;
+}
+
+/* line 258, ../../scss/_refpages.scss */
+.math h6 {
+  margin: 0 !important;
+}
+
+/* line 262, ../../scss/_refpages.scss */
+.math span {
+  font-weight: bold;
+  font-size: 19px;
+}
+
 /* line 264, ../../bower_components/foundation/scss/foundation/components/_global.scss */
 meta.foundation-mq-small {
   font-family: "only screen and (min-width: 768px)";
@@ -6883,7 +7171,7 @@ a.th {
 }
 
 /* Each individual part that can be added in */
-/* line 56, ../../scss/foundation.scss */
+/* line 57, ../../scss/foundation.scss */
 #my-calendars, #main-content, #tasks {
   min-height: 822px;
   padding: 0 !important;
@@ -6891,43 +7179,48 @@ a.th {
   margin-right: -1px;
 }
 
-/* line 62, ../../scss/foundation.scss */
+/* line 63, ../../scss/foundation.scss */
 #my-calendars, #tasks {
   background: #eee;
 }
 
-/* line 66, ../../scss/foundation.scss */
+/* line 67, ../../scss/foundation.scss */
 #main-content {
   background: #fff;
   border-left: 1px solid #afafaf;
   border-right: 1px solid #afafaf;
 }
 
-/* line 72, ../../scss/foundation.scss */
+/* line 73, ../../scss/foundation.scss */
+#main-content ol {
+  margin-left: 20px;
+}
+
+/* line 77, ../../scss/foundation.scss */
 #tasks {
   height: 100%;
 }
 
-/* line 75, ../../scss/foundation.scss */
+/* line 80, ../../scss/foundation.scss */
 #mainHeader {
   -webkit-box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.5);
   box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.5);
   z-index: 100;
 }
 
-/* line 82, ../../scss/foundation.scss */
+/* line 87, ../../scss/foundation.scss */
 .top-bar-section ul {
   height: auto;
   background: none;
   margin: 0;
 }
 
-/* line 87, ../../scss/foundation.scss */
+/* line 92, ../../scss/foundation.scss */
 .top-bar-section ul.left {
   height: 45px;
 }
 
-/* line 92, ../../scss/foundation.scss */
+/* line 97, ../../scss/foundation.scss */
 .top-bar ul li a span {
   font-size: 20px;
   height: 45px;
@@ -6936,7 +7229,7 @@ a.th {
   margin: 0 -3px;
 }
 
-/* line 101, ../../scss/foundation.scss */
+/* line 106, ../../scss/foundation.scss */
 dl.sub-nav.calendar-filter {
   display: inline;
   padding: 0;
@@ -6946,37 +7239,37 @@ dl.sub-nav.calendar-filter {
   margin-top: 10px;
 }
 
-/* line 110, ../../scss/foundation.scss */
+/* line 115, ../../scss/foundation.scss */
 dl.sub-nav.calendar-filter dd {
   margin-top: 12px;
   border-radius: 3px;
 }
 
-/* line 118, ../../scss/foundation.scss */
+/* line 123, ../../scss/foundation.scss */
 .pane-header [class*="icon-"] {
   position: relative;
   top: 3px;
   cursor: pointer;
 }
 
-/* line 124, ../../scss/foundation.scss */
+/* line 129, ../../scss/foundation.scss */
 .pane-header span {
   position: relative;
   top: 8px;
 }
 
-/* line 128, ../../scss/foundation.scss */
+/* line 133, ../../scss/foundation.scss */
 .pane-header span.right {
   margin-right: 12px;
   margin-top: 6px;
 }
 
-/* line 132, ../../scss/foundation.scss */
+/* line 137, ../../scss/foundation.scss */
 .pane-header .pane-title {
   margin-left: 6px;
 }
 
-/* line 142, ../../scss/foundation.scss */
+/* line 147, ../../scss/foundation.scss */
 header#content-header ul.small-block-grid-3 li {
   text-align: center;
   margin: 0 !important;
@@ -6986,19 +7279,19 @@ header#content-header ul.small-block-grid-3 li {
   padding-top: 4px;
 }
 
-/* line 151, ../../scss/foundation.scss */
+/* line 156, ../../scss/foundation.scss */
 header#content-header ul.small-block-grid-3 span.month-switcher {
   font-family: "Oswald", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
   position: relative;
   top: -1px;
 }
 
-/* line 156, ../../scss/foundation.scss */
+/* line 161, ../../scss/foundation.scss */
 header#content-header [class*="icon-"] {
   cursor: pointer;
 }
 
-/* line 164, ../../scss/foundation.scss */
+/* line 169, ../../scss/foundation.scss */
 .org-name {
   font-size: 20px;
   font-weight: bold;
@@ -7010,7 +7303,7 @@ header#content-header [class*="icon-"] {
 }
 
 @media only screen and (max-width: 768px) {
-  /* line 175, ../../scss/foundation.scss */
+  /* line 180, ../../scss/foundation.scss */
   ul.days {
     padding: 0;
     margin: 0;
@@ -7019,12 +7312,12 @@ header#content-header [class*="icon-"] {
     left: 2px;
   }
 }
-/* line 179, ../../scss/foundation.scss */
+/* line 184, ../../scss/foundation.scss */
 [class*="icon-"] {
   text-shadow: 1px 1px 2px white;
 }
 
-/* line 184, ../../scss/foundation.scss */
+/* line 189, ../../scss/foundation.scss */
 .calendar-index {
   position: absolute;
   left: 0;
@@ -7038,13 +7331,13 @@ header#content-header [class*="icon-"] {
   border-right: 1px solid #aaa;
 }
 
-/* line 197, ../../scss/foundation.scss */
+/* line 202, ../../scss/foundation.scss */
 .calendar-index ul.side-nav {
   margin: 0;
   padding: 0;
 }
 
-/* line 202, ../../scss/foundation.scss */
+/* line 207, ../../scss/foundation.scss */
 .calendar-index ul.side-nav li {
   list-style-type: none;
   margin: 0;
@@ -7055,24 +7348,24 @@ header#content-header [class*="icon-"] {
   cursor: pointer;
 }
 
-/* line 212, ../../scss/foundation.scss */
+/* line 217, ../../scss/foundation.scss */
 .calendar-index ul.side-nav li:hover {
   background: rgba(35, 83, 138, 0.1);
 }
 
-/* line 216, ../../scss/foundation.scss */
+/* line 221, ../../scss/foundation.scss */
 .calendar-index ul.side-nav li:nth-child(1) {
   background: #ccc;
   border-width: 0;
 }
 
-/* line 220, ../../scss/foundation.scss */
+/* line 225, ../../scss/foundation.scss */
 .calendar-index ul.side-nav li:nth-child(14) {
   background: #ccc;
   border-width: 1px 0 1px  0;
 }
 
-/* line 227, ../../scss/foundation.scss */
+/* line 232, ../../scss/foundation.scss */
 .calendar-wrapper {
   display: inline;
   overflow: hidden;
@@ -7081,13 +7374,13 @@ header#content-header [class*="icon-"] {
   width: auto;
 }
 
-/* line 228, ../../scss/foundation.scss */
+/* line 233, ../../scss/foundation.scss */
 .calendar {
   padding: 0;
   margin: 0 0 0 38px !important;
 }
 
-/* line 229, ../../scss/foundation.scss */
+/* line 234, ../../scss/foundation.scss */
 .calendar ul.month-browser li {
   width: 33.3%;
   padding: 0;
@@ -7098,7 +7391,7 @@ header#content-header [class*="icon-"] {
   margin: 20px 0;
 }
 
-/* line 230, ../../scss/foundation.scss */
+/* line 235, ../../scss/foundation.scss */
 .calendar ul {
   list-style: none;
   padding: 0;
@@ -7107,13 +7400,13 @@ header#content-header [class*="icon-"] {
   width: 100%;
 }
 
-/* line 231, ../../scss/foundation.scss */
+/* line 236, ../../scss/foundation.scss */
 .calendar ul.weekdays {
   height: 40px;
   width: 100%;
 }
 
-/* line 232, ../../scss/foundation.scss */
+/* line 237, ../../scss/foundation.scss */
 .calendar ul.weekdays li {
   text-align: center;
   text-transform: uppercase;
@@ -7124,7 +7417,7 @@ header#content-header [class*="icon-"] {
   font-size: 13px;
 }
 
-/* line 233, ../../scss/foundation.scss */
+/* line 238, ../../scss/foundation.scss */
 .calendar li {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -7140,23 +7433,23 @@ header#content-header [class*="icon-"] {
   overflow: visible !important;
 }
 
-/* line 234, ../../scss/foundation.scss */
+/* line 239, ../../scss/foundation.scss */
 .calendar .days:last-child li {
   margin-bottom: 0px !important;
 }
 
-/* line 235, ../../scss/foundation.scss */
+/* line 240, ../../scss/foundation.scss */
 .calendar li .day, .calendar li .month {
   display: none;
 }
 
-/* line 236, ../../scss/foundation.scss */
+/* line 241, ../../scss/foundation.scss */
 .calendar .date {
   text-align: right;
   margin-bottom: 5px;
 }
 
-/* line 237, ../../scss/foundation.scss */
+/* line 242, ../../scss/foundation.scss */
 .show-info {
   display: block;
   font-size: 13px;
@@ -7171,52 +7464,52 @@ header#content-header [class*="icon-"] {
   text-decoration: none;
 }
 
-/* line 238, ../../scss/foundation.scss */
+/* line 243, ../../scss/foundation.scss */
 .show-info:hover .venue {
   display: block;
 }
 
-/* line 239, ../../scss/foundation.scss */
+/* line 244, ../../scss/foundation.scss */
 .show-info .show-name {
   text-decoration: underline;
 }
 
-/* line 240, ../../scss/foundation.scss */
+/* line 245, ../../scss/foundation.scss */
 .show-info .show-time, .venue {
   color: #666;
   margin-top: 2px;
   text-decoration: none;
 }
 
-/* line 241, ../../scss/foundation.scss */
+/* line 246, ../../scss/foundation.scss */
 .calendar .no-shows {
   display: none;
 }
 
-/* line 242, ../../scss/foundation.scss */
+/* line 247, ../../scss/foundation.scss */
 .calendar .venue {
   display: none;
 }
 
-/* line 243, ../../scss/foundation.scss */
+/* line 248, ../../scss/foundation.scss */
 .calendar li.out_of_range {
   background-color: #F5F5F5;
   color: #666;
 }
 
-/* line 244, ../../scss/foundation.scss */
+/* line 249, ../../scss/foundation.scss */
 ul.days, .calendar-day {
   padding: 0;
   margin: 0;
   width: 100%;
 }
 
-/* line 246, ../../scss/foundation.scss */
+/* line 251, ../../scss/foundation.scss */
 .calendar-picker-container {
   position: relative;
 }
 
-/* line 249, ../../scss/foundation.scss */
+/* line 254, ../../scss/foundation.scss */
 .calendar-picker-container button {
   top: 22px;
   right: 20px;
@@ -7231,13 +7524,13 @@ ul.days, .calendar-day {
   cursor: pointer;
 }
 
-/* line 263, ../../scss/foundation.scss */
+/* line 268, ../../scss/foundation.scss */
 .calendar-picker-container.nolabel button {
   top: 5px;
   right: 5px;
 }
 
-/* line 268, ../../scss/foundation.scss */
+/* line 273, ../../scss/foundation.scss */
 .icon-backspace:before {
   content: "\e037";
   background: #fff;
@@ -7254,7 +7547,7 @@ ul.days, .calendar-day {
   font-size: 20px;
 }
 
-/* line 286, ../../scss/foundation.scss */
+/* line 291, ../../scss/foundation.scss */
 .resource-gradient {
   background: #eeeeee;
   /* Old browsers */
@@ -7274,7 +7567,7 @@ ul.days, .calendar-day {
   /* IE6-9 */
 }
 
-/* line 297, ../../scss/foundation.scss */
+/* line 302, ../../scss/foundation.scss */
 .resource-body {
   background: #eeeeee;
   /* Old browsers */
@@ -7294,7 +7587,7 @@ ul.days, .calendar-day {
   /* IE6-9 */
 }
 
-/* line 308, ../../scss/foundation.scss */
+/* line 313, ../../scss/foundation.scss */
 .task .resource-body.add {
   min-height: none;
   background: #eeeeee;
@@ -7317,12 +7610,12 @@ ul.days, .calendar-day {
   margin-left: 8px;
 }
 
-/* line 323, ../../scss/foundation.scss */
+/* line 328, ../../scss/foundation.scss */
 .resource-panel [class*="icon-"]:active {
   color: #23538a;
 }
 
-/* line 327, ../../scss/foundation.scss */
+/* line 332, ../../scss/foundation.scss */
 .close-panel {
   position: relative;
   float: right;
@@ -7330,12 +7623,12 @@ ul.days, .calendar-day {
   font-size: 20px;
 }
 
-/* line 334, ../../scss/foundation.scss */
+/* line 339, ../../scss/foundation.scss */
 .button-group li {
   padding: 0 5px 0 0;
 }
 
-/* line 340, ../../scss/foundation.scss */
+/* line 345, ../../scss/foundation.scss */
 #main-content button,
 .button-group li div.button,
 .button-group li button {
@@ -7362,7 +7655,7 @@ ul.days, .calendar-day {
   height: 36px;
 }
 
-/* line 357, ../../scss/foundation.scss */
+/* line 362, ../../scss/foundation.scss */
 .button-group li div.button:hover:enabled,
 .button-group li button:hover:enabled {
   color: #333 !important;
@@ -7385,44 +7678,44 @@ ul.days, .calendar-day {
   margin: 0;
 }
 
-/* line 370, ../../scss/foundation.scss */
+/* line 375, ../../scss/foundation.scss */
 button:focus {
   outline: none;
 }
 
-/* line 374, ../../scss/foundation.scss */
+/* line 379, ../../scss/foundation.scss */
 button.disabled, button[disabled], .button.disabled, .button[disabled] {
   color: grey;
   border-color: #cccccc !important;
 }
 
-/* line 379, ../../scss/foundation.scss */
+/* line 384, ../../scss/foundation.scss */
 .button-group li [class*="icon-"] {
   color: #333;
 }
 
-/* line 383, ../../scss/foundation.scss */
+/* line 388, ../../scss/foundation.scss */
 .button-group li button:disabled [class*="icon-"] {
   color: gray;
 }
 
-/* line 388, ../../scss/foundation.scss */
+/* line 393, ../../scss/foundation.scss */
 .top-bar {
   background: rgba(221, 221, 221, 0.3) repeat !important;
   overflow: visible;
 }
 
-/* line 393, ../../scss/foundation.scss */
+/* line 398, ../../scss/foundation.scss */
 .top-bar-section li a:not(.button) {
   background: none !important;
 }
 
-/* line 398, ../../scss/foundation.scss */
+/* line 403, ../../scss/foundation.scss */
 .tabs dd.active {
   border-top: 0px solid #23538a;
 }
 
-/* line 401, ../../scss/foundation.scss */
+/* line 406, ../../scss/foundation.scss */
 .top-bar-section ul li {
   float: left !important;
 }
@@ -7513,7 +7806,7 @@ header#content-header ul.small-block-grid-3 li {
   width: auto !important;
 }
 
-/* line 408, ../../scss/foundation.scss */
+/* line 413, ../../scss/foundation.scss */
 #mainHeader {
   overflow: hidden;
   height: 45px;
@@ -7523,18 +7816,18 @@ header#content-header ul.small-block-grid-3 li {
   margin-bottom: 0;
 }
 
-/* line 416, ../../scss/foundation.scss */
+/* line 421, ../../scss/foundation.scss */
 .menubar {
   text-align: left;
   width: auto;
 }
 
-/* line 421, ../../scss/foundation.scss */
+/* line 426, ../../scss/foundation.scss */
 .menubar ul li {
   display: inline;
 }
 
-/* line 426, ../../scss/foundation.scss */
+/* line 431, ../../scss/foundation.scss */
 .menubar ul li [class*="icon-"] {
   color: #777;
   height: 45px;
@@ -7545,23 +7838,23 @@ header#content-header ul.small-block-grid-3 li {
   cursor: pointer !important;
 }
 
-/* line 435, ../../scss/foundation.scss */
+/* line 440, ../../scss/foundation.scss */
 .menubar ul li [class*="icon-"]:hover {
   color: #555;
 }
 
-/* line 439, ../../scss/foundation.scss */
+/* line 444, ../../scss/foundation.scss */
 .menubar ul li [class*="icon-"]:active {
   color: #23538a;
 }
 
-/* line 443, ../../scss/foundation.scss */
+/* line 448, ../../scss/foundation.scss */
 .menubar ul.left {
   height: 45px;
   width: auto;
 }
 
-/* line 449, ../../scss/foundation.scss */
+/* line 454, ../../scss/foundation.scss */
 #main-content, #mainHeader {
   background: #eeeeee;
   /* Old browsers */
@@ -7581,7 +7874,7 @@ header#content-header ul.small-block-grid-3 li {
   /* IE6-9 */
 }
 
-/* line 461, ../../scss/foundation.scss */
+/* line 466, ../../scss/foundation.scss */
 .menubar ul li a span {
   font-size: 20px;
   height: 45px;
@@ -7590,14 +7883,14 @@ header#content-header ul.small-block-grid-3 li {
   margin: 0 12px;
 }
 
-/* line 477, ../../scss/foundation.scss */
+/* line 482, ../../scss/foundation.scss */
 .page-wrap {
   float: right;
   width: 100%;
   transition: width .7s ease;
 }
 
-/* line 483, ../../scss/foundation.scss */
+/* line 488, ../../scss/foundation.scss */
 .left-nav {
   position: fixed;
   top: 0;
@@ -7611,7 +7904,7 @@ header#content-header ul.small-block-grid-3 li {
   white-space: nowrap;
   overflow: hidden;
 }
-/* line 495, ../../scss/foundation.scss */
+/* line 500, ../../scss/foundation.scss */
 .left-nav a {
   display: block;
   border-bottom: 1px solid #222;
@@ -7623,29 +7916,29 @@ header#content-header ul.small-block-grid-3 li {
   text-transform: uppercase;
   text-shadow: 1px 1px 2px #000;
 }
-/* line 505, ../../scss/foundation.scss */
+/* line 510, ../../scss/foundation.scss */
 .left-nav a:hover, .left-nav a:focus {
   background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
 }
-/* line 508, ../../scss/foundation.scss */
+/* line 513, ../../scss/foundation.scss */
 .left-nav a:active {
   background: rgba(35, 83, 138, 0.5) !important;
 }
-/* line 511, ../../scss/foundation.scss */
+/* line 516, ../../scss/foundation.scss */
 .left-nav a.logout {
   background: rgba(136, 0, 0, 0.3) !important;
 }
-/* line 514, ../../scss/foundation.scss */
+/* line 519, ../../scss/foundation.scss */
 .left-nav a.logout:hover, .left-nav a.logout:focus {
   background: rgba(136, 0, 0, 0.7) !important;
 }
-/* line 517, ../../scss/foundation.scss */
+/* line 522, ../../scss/foundation.scss */
 .left-nav a [class*="icon-"] {
   text-shadow: 1px 1px 2px #000;
   font-size: 36px;
   text-align: center;
 }
-/* line 523, ../../scss/foundation.scss */
+/* line 528, ../../scss/foundation.scss */
 .left-nav:after {
   content: "";
   position: absolute;
@@ -7654,61 +7947,61 @@ header#content-header ul.small-block-grid-3 li {
   height: 100%;
   background: linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
 }
-/* line 532, ../../scss/foundation.scss */
+/* line 537, ../../scss/foundation.scss */
 .left-nav a.locked {
   color: #999;
 }
-/* line 536, ../../scss/foundation.scss */
+/* line 541, ../../scss/foundation.scss */
 .left-nav a span:nth-of-type(2) {
   position: relative;
   top: -9px;
   font-size: 18px !important;
 }
-/* line 541, ../../scss/foundation.scss */
+/* line 546, ../../scss/foundation.scss */
 .left-nav label {
   color: #fff;
   white-space: nowrap !important;
 }
-/* line 542, ../../scss/foundation.scss */
+/* line 547, ../../scss/foundation.scss */
 .left-nav h5 {
   color: #fff;
   margin-left: 20px;
 }
-/* line 543, ../../scss/foundation.scss */
+/* line 548, ../../scss/foundation.scss */
 .left-nav form * {
   white-space: nowrap !important;
 }
-/* line 546, ../../scss/foundation.scss */
+/* line 551, ../../scss/foundation.scss */
 .left-nav button {
   width: 160px;
   margin: 20px !important;
   border-radius: 3px;
 }
 
-/* line 553, ../../scss/foundation.scss */
+/* line 558, ../../scss/foundation.scss */
 .close-menu {
   display: none;
 }
 
-/* line 576, ../../scss/foundation.scss */
+/* line 581, ../../scss/foundation.scss */
 #content {
   max-width: 98%;
 }
 
-/* line 581, ../../scss/foundation.scss */
+/* line 586, ../../scss/foundation.scss */
 #content label {
   font-weight: bold;
   cursor: default !important;
 }
 
-/* line 585, ../../scss/foundation.scss */
+/* line 590, ../../scss/foundation.scss */
 #content input[type=text] {
   border-radius: 4px !important;
   border: 1px solid #aaa !important;
   height: 26px !important;
 }
 
-/* line 590, ../../scss/foundation.scss */
+/* line 595, ../../scss/foundation.scss */
 #content input[type=checkbox] {
   margin: 0;
   padding: 0;
@@ -7716,7 +8009,7 @@ header#content-header ul.small-block-grid-3 li {
   top: 2px;
 }
 
-/* line 594, ../../scss/foundation.scss */
+/* line 599, ../../scss/foundation.scss */
 #hallpass-tabs dd p span.icon-close2 {
   position: relative;
   top: -8px;
@@ -7725,12 +8018,12 @@ header#content-header ul.small-block-grid-3 li {
   font-size: 16px;
 }
 
-/* line 602, ../../scss/foundation.scss */
+/* line 607, ../../scss/foundation.scss */
 .tabs dd.active p {
   color: #23538a !important;
 }
 
-/* line 606, ../../scss/foundation.scss */
+/* line 611, ../../scss/foundation.scss */
 #content table {
   width: 100%;
   border-collapse: collapse;
@@ -7738,7 +8031,7 @@ header#content-header ul.small-block-grid-3 li {
   height: auto;
 }
 
-/* line 613, ../../scss/foundation.scss */
+/* line 618, ../../scss/foundation.scss */
 #content table thead tr th {
   text-align: center;
   background-color: #23538a;
@@ -7746,49 +8039,49 @@ header#content-header ul.small-block-grid-3 li {
   font-weight: 300;
 }
 
-/* line 620, ../../scss/foundation.scss */
+/* line 625, ../../scss/foundation.scss */
 #content table thead tr th, #content div table tbody tr td {
   width: 14.289%;
 }
 
-/* line 623, ../../scss/foundation.scss */
+/* line 628, ../../scss/foundation.scss */
 #content div table tbody tr td {
   text-align: center;
 }
 
-/* line 627, ../../scss/foundation.scss */
+/* line 632, ../../scss/foundation.scss */
 #content table tr td:last-of-type {
   text-align: center;
 }
 
-/* line 631, ../../scss/foundation.scss */
+/* line 636, ../../scss/foundation.scss */
 .admin-table tr {
   padding: 0px;
   margin: 0px;
 }
 
-/* line 635, ../../scss/foundation.scss */
+/* line 640, ../../scss/foundation.scss */
 .admin-table td span.student {
   border-bottom: 1px dotted #222;
 }
 
-/* line 638, ../../scss/foundation.scss */
+/* line 643, ../../scss/foundation.scss */
 .admin-table td span.student, .admin-table tr td span[class*="icon-"] {
   cursor: pointer !important;
 }
 
-/* line 641, ../../scss/foundation.scss */
+/* line 646, ../../scss/foundation.scss */
 .admin-table tr td span[class*="icon-"] {
   color: #ccc;
   padding-right: 5px;
 }
 
-/* line 645, ../../scss/foundation.scss */
+/* line 650, ../../scss/foundation.scss */
 .admin-table tr td span[class*="icon-"]:hover {
   color: #222;
 }
 
-/* line 648, ../../scss/foundation.scss */
+/* line 653, ../../scss/foundation.scss */
 .admin-table tbody tr td input {
   position: relative;
   top: 5px;

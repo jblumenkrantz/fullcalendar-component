@@ -1,201 +1,194 @@
 <div id="main-content" style="height: 100%; overflow: hidden; position: relative; z-index: 2" class="small-12 columns large-12">
-	<div class="refpage-container" style="overflow-y: scroll !important; height: 800px;">
-		<div class="large-12 columns">
-			<h2>Reference Pages & You<span>{ A Style Guide }</span></h2>
-			<h4 style="font-weight: 400; line-height: 28px;">We need you guys to churn out more reference pages for Pinwheel, our new digital datebook product. This is the style guide you will use to build digital versions of reference pages. To keep things simple, you will work on a gutted version of BRC (the first incarnation of Pinwheel) that only contains the structure and resources we need to build the reference pages. These will be added to the main project as they are completed and approved. Many changes have been made to these pages.</h4>
-			<hr>
-			<h4>The Rules</h4>
-			<p>While you are encouraged to be creative with the layouts, you must abide by some very important rules:</p>
-			<ol style="margin-left: 20px;">
-				<li>Follow the styles and conventions laid out in this document</li>
-				<li>Markup should be clean, consistent and simple</li>
-				<li>Replicate the print layouts as closely as possible</li>
-				<li>Apply responsive design best practices</li>
-				<li>Pay attention to spacing, font-sizes, font-weights, and colors</li>
-				<li>Use standard html and default foundation markup as much as possible</li>
-				<li>Learn and have fun!</li>
-			</ol>
-			<hr>
-			<h4>The Project</h4>
-		 	<p>For now, we will just be using svn to manage the project on devo. Open up putty and navigate to your home directory <code>yourname/data/</code> and checkout the reference pages project.</p>
-		 	<ol>
-		 		<li>Paste the following code into putty: <code>svn co file:///svn/refpages/trunk refpages</code></li>
-		 		<li>Put a vhost entry in your .conf file. make sure your paths are correct. this project is not a sportcamp.</li>
-		 		<li>Place all reference pages in <code>resources/reference_pages/category/</code></li>
-		 		<li>For now just name each document in the form <code>category-name-xxx.html</code> where "x" is the sequential number of the document in its category.</li>
-		 		<li>Place all page-specific images in subfolders called <code>images/</code> and any scripts/plugins in <code>lib/</code></li>
-		 	</ol>
-		 	<p>Commit your changes at the end of the day, and your work will be reviewed the following morning.</p>
-		 	<hr>
-			<h4>The List</h4>
-			<p>We have a spreadsheet of the most popular reference pages provided by the marketing department. It is a shared google doc, and we all have editing priveleges. Make sure it is sorted by <b>UseCount</b> in descending order. Start at the top, pick a page from the <b><a href="https://docs.google.com/spreadsheet/ccc?key=0AtSqbg3CUQNbdHQwUXptMXdodXNCdUExQnVsQTZ4Y0E&usp=sharing" target="_blank">master list</a></b>, and claim it with a mark in the column with your name so we know who is responsible for it. If you choose to work together on a page, mark both columns. 
-			</p>
-			<p>For pages marked <b>'interactive'</b> just make the page as simple as possible and move on. These pages just need a placeholder and we'll deal with them later. </p>
-			<hr>
-			<h4>Your First Page</h4>
-			<p>Get the example PDFs from <a href="https://schooldatebooks.com/resources/" target="_blank">https://schooldatebooks.com/resources/</a>. There are multiple versions of some files, but for now we will concentrate on the second option under Reference Pages: <b>Large School Reference Pages</b>.</p>
-			<p>Examine the PDF and think about how best to recreate it in a responsive grid. You should be able to copy and paste the majority of the text content into our html skeleton and go about dividing the content up into blocks, paragraphs, headings, lists, and images. Most pages shouldn't take more than an hour to throw together, and each of you should be able to get 3-4 done a day. Don't worry about extracting images from the pdfs right now, just use placeholder images and write quick comments about what type of image should go there. The images are all black and white and we will probably be replacing a lot of them with colorful modern images.</p>
-			<p>As always, make sure any files you added or worked on are committed before you go home so everyone has access to the latest versions. Your work will be reviewed and either added to the official project, or sent back to you with notes on design and usability concerns.</p>
-			<hr>
-			<h4>Design Notes</h4>
-			<p>You will notice that some reference pages are perfect for adapting to the digital datebook format. Any page that is a single column of content or whose content is broken into columns and blocks will probably be easy to port to the grid. However, some pages have to be reformatted and redesigned to work because they were designed for print. Still others just don't make any sense in the digital world such as the ones with lined areas meant for handwriting. We have to evaluate each reference page design and decide which category it falls into.</p>
-			<p>If a page doesn't make sense to you, just mark it as such on the list and move on. We will review these pages later and decide whether they are needed.</p>
-			<p>Any foundation widgets that rely on javascript click/show/hide events will not work out of the box so we should avoid them.</p>
-			<p>Some pages are formatted in such a way that users will have to scroll down, then back up to read the second column of info. These pages should be reformatted into a single column or otherwise formatted to increase usability on smaller screens like tablets.</p>
-		</div>
-		<hr>
+	<div id="reference-page-content" style="overflow-y: scroll !important; height: 800px; padding: 0 1em;">
 		
-		<div class="large-12 columns">
-			<h2>Typography</h2>
-			<h5 class="subheader">Foundation 3 uses a modular scale to generate typography. That means a great, logical relationship for your copy. You shouldn't have to change the standard typography defaults. Use the default fonts, and use alternate font-weight, italics, and colors to create different looks. If the design would benefit from alternate fonts you might have to generate a custom image because we have to keep page loads fast and light. Remember to stick to text and CSS as much as possible.
-			</h5>
-			
-			<hr>
-				
-			<h3>Glyphs</h3>
-			<h5 class="no-marg-top subheader">Don't forget, you can use icon/glyphs too. We only have a limited set of glyphs available to the brc project right now, but one is being built for use in reference pages as well. In the meantime you can just add a placeholder glyph from the current set. Cheatsheet available <code><a href="../../../glyphs.html">here</a>.</code></h5>
-			
-			<hr>
-				
-      <h3>Header Styles</h3>
-
-		  <h5 class="no-marg-top subheader">Foundation 3 includes a number of different styles and treatments for typographic elements, such as subheaders or small header segments. Every page should start with an h2 tag, and contain a span with a subheading. After that it's really up to you to design the pages using this document as your guide. Don't hesitate to try new things and ask lots of questions.</h5>
-		  <h2>Page Heading <span>{subheading}</span></h2>
-
-		  <hr>
-
-		  <h3>Paragraphs</h3>
-		  <h5 class="no-marg-top subheader">In Foundation, paragraphs fall within the modular scale. This includes their line-height, giving the page a feeling of harmony as you scroll.</h5>
-      <div class="row">
-        <div class="six columns">
-          <p>It's really easy to add emphasis to copy in Foundation. We've implemented some standards like <strong>bold</strong> and <em>italics</em>, as well as, our own nifty styles, such as <code>&lt;code&gt;</code>, <kbd>&lt;kbd&gt;</kbd> and <small>&lt;small&gt;</small></p>
-        </div>
-        <div class="six columns">
-          <aside><p>You can also put text into and <strong>&lt;aside&gt;</strong> element to give it some hierarchy on the page. Maecenas faucibus mollis interdum. Donec ullamcorper nulla non metus auctor fringilla. Maecenas faucibus mollis interdum. Donec ullamcorper nulla non metus auctor fringilla.</p></aside>
-        </div>
-      </div>
-        
-			<hr>
-     
-      <h3>Links</h3>
-      <h5 class="no-marg-top subheader">Sometimes there will be a need for links to online resources. Keep it simple. If there is a url on the page, link it up and make note if the link is dead and needs replaced by placing a standard foundation alert label <span class="alert label">Dead Link</span> next to it.</h5>
-			<p><a href="#">This is a standard inline paragraph link.</a></p>
-			
-			<hr>
-				
-      <h3>Lists</h3>
-      <h5 class="no-marg-top subheader">Lists are helpful for, well, lists of things. Use lists as much as you can to break up content. Have some fun with styling lists in creative ways.</h5>
-
-			<hr>
-				
-			<h3>Tables</h3>
-			<h5 class="no-marg-top subheader">Tables are necessary for data that is best presented in table-view, but they are notoriously difficult to use in responsive layouts at smaller sizes because of all the scrolling that is required and also the way wide tables bust out of their container.</h5>
-			<div style="margin: 0 15px;">
-				<table>
-		      <tr>
-		        <td><i><i>Examples:</i></i></td>
-		        <td><i>Singular</i></td>
-		        <td><i>Plural</i></td>
-		      </tr>
-		      <tr>
-		        <td><i>1st Person:</i></td>
-		        <td>I stop.</td>
-		        <td>We stop.</td>
-		      </tr>
-		      <tr>
-		        <td><i>2nd Person:</i> </td>
-		        <td>You stop.</td>
-		        <td>You stop.</td>
-		      </tr>
-		      <tr>
-		        <td><i>3rd Person:</i></td>
-		        <td>He/She/It stops.</td>
-		        <td>They stop.</td>
-		      </tr>
-		    </table>
-			</div>
-			
-			<hr>
-			
-			<h3>Pullquotes/Callouts</h3>
-			<h5 class="no-marg-top subheader">Sometimes other people say smart things, and you may want to mention that through a blockquote callout. We've got you covered.</h5>
-     
-    	<div class="pullquote"><h4>"You're a Jedi, Frodo." <i>- Bruce Wayne </i></h4></div>
-    	<br>
-    	<div class="pullquote-dark"><h4>"Use the fork, Luke." <i>- Obie Trice </i></h4></div>
-    	<br>
-    	<br>
-    	<br>
-    	<div class="panel callout"><h4>Tilted callout box (3 degrees):</h4> 
-			Use this box for inspiration to come up with interesting ways to present the reference page content.
-			</div>
-			<br>
-			<br>
-				
-			<hr>
-			<h3>Images</h3>
-			<h5 class="no-marg-top subheader">Put images in the 'images' subfolder inside each category folder. Give them descriptive, semantic names. I have set images to fill their container width 100% using <code>background-size: cover;</code> so they will stretch to fill as much of the screen as they need. Use image placeholder service like <code><a href="//placehold.it">placehold.it</a></code> for most images. Don't worry too much about extracting images from the PDFs, as most of them should be replaced with full-color images.</h5>
-     	<header><img src="http://placehold.it/1000x200" alt=""/></header>
-     	<br>
-		</div>
+	<h2>Reference Pages & You<span>{ A Style Guide }</span></h2>
+	<h4 style="font-weight: 400; line-height: 28px;">We need you guys to churn out more reference pages for Pinwheel, our new digital datebook product. This is the style guide you will use to build digital versions of reference pages. To keep things simple, you will work on a gutted version of BRC (the first incarnation of Pinwheel) that only contains the structure and resources we need to build the reference pages. These will be added to the main project as they are completed and approved. Many changes have been made to these pages.</h4>
+	<hr>
+	<h4>The Rules</h4>
+	<p>While you are encouraged to be creative with the layouts, you must abide by some very important rules:</p>
+	<ol>
+		<li>Follow the styles and conventions laid out in this document</li>
+		<li>Markup should be clean, consistent and simple</li>
+		<li>Replicate the print layouts as closely as possible</li>
+		<li>Apply responsive design best practices</li>
+		<li>Pay attention to spacing, font-sizes, font-weights, and colors</li>
+		<li>Use standard html and default foundation markup as much as possible</li>
+		<li>Learn and have fun!</li>
+	</ol>
+	<hr>
+	<h4>The Project</h4>
+ 	<p>For now, we will just be using svn to manage the project on devo. Open up putty and navigate to your home directory <code>yourname/data/</code> and checkout the reference pages project.</p>
+ 	<ol>
+ 		<li>Paste the following code into putty: <code>svn co file:///svn/refpages/trunk refpages</code></li>
+ 		<li>Put a vhost entry in your .conf file. make sure your paths are correct. this project is not a sportcamp.</li>
+ 		<li>Place all reference pages in <code>resources/reference_pages/category/</code></li>
+ 		<li>For now just name each document in the form <code>category-name-xxx.html</code> where "x" is the sequential number of the document in its category.</li>
+ 		<li>Place all page-specific images in subfolders called <code>images/</code> and any scripts/plugins in <code>lib/</code></li>
+ 	</ol>
+ 	<p>Commit your changes at the end of the day, and your work will be reviewed the following morning.</p>
+ 	<hr>
+	<h4>The List</h4>
+	<p>We have a spreadsheet of the most popular reference pages provided by the marketing department. It is a shared google doc, and we all have editing priveleges. Make sure it is sorted by <b>UseCount</b> in descending order. Start at the top, pick a page from the <b><a href="https://docs.google.com/spreadsheet/ccc?key=0AtSqbg3CUQNbdHQwUXptMXdodXNCdUExQnVsQTZ4Y0E&usp=sharing" target="_blank">master list</a></b>, and claim it with a mark in the column with your name so we know who is responsible for it. If you choose to work together on a page, mark both columns. 
+	</p>
+	<p>For pages marked <b>'interactive'</b> just make the page as simple as possible and move on. These pages just need a placeholder and we'll deal with them later. </p>
+	<hr>
+	<h4>Your First Page</h4>
+	<p>Get the example PDFs from <a href="https://schooldatebooks.com/resources/" target="_blank">https://schooldatebooks.com/resources/</a>. There are multiple versions of some files, but for now we will concentrate on the second option under Reference Pages: <b>Large School Reference Pages</b>.</p>
+	<p>Examine the PDF and think about how best to recreate it in a responsive grid. You should be able to copy and paste the majority of the text content into our html skeleton and go about dividing the content up into blocks, paragraphs, headings, lists, and images. Most pages shouldn't take more than an hour to throw together, and each of you should be able to get 3-4 done a day. Don't worry about extracting images from the pdfs right now, just use placeholder images and write quick comments about what type of image should go there. The images are all black and white and we will probably be replacing a lot of them with colorful modern images.</p>
+	<p>As always, make sure any files you added or worked on are committed before you go home so everyone has access to the latest versions. Your work will be reviewed and either added to the official project, or sent back to you with notes on design and usability concerns.</p>
+	<hr>
+	<h4>Design Notes</h4>
+	<p>You will notice that some reference pages are perfect for adapting to the digital datebook format. Any page that is a single column of content or whose content is broken into columns and blocks will probably be easy to port to the grid. However, some pages have to be reformatted and redesigned to work because they were designed for print. Still others just don't make any sense in the digital world such as the ones with lined areas meant for handwriting. We have to evaluate each reference page design and decide which category it falls into.</p>
+	<p>If a page doesn't make sense to you, just mark it as such on the list and move on. We will review these pages later and decide whether they are needed.</p>
+	<p>Any foundation widgets that rely on javascript click/show/hide events will not work out of the box so we should avoid them.</p>
+	<p>Some pages are formatted in such a way that users will have to scroll down, then back up to read the second column of info. These pages should be reformatted into a single column or otherwise formatted to increase usability on smaller screens like tablets.</p>
+		
+	<hr>
 	
-		<hr>
-			
-		<div class="large-12 columns">
-    	<h2>Page Heading <span>{subheading}</span></h2>
-			<h6 class="text-center"><i>(Generic Style Demo)</i></h6>
-			<!--Alcohol Tobacco and Drugs -->
+	<h2>Typography</h2>
+	<h5 class="subheader">Foundation 3 uses a modular scale to generate typography. That means a great, logical relationship for your copy. You shouldn't have to change the standard typography defaults. Use the default fonts, and use alternate font-weight, italics, and colors to create different looks. If the design would benefit from alternate fonts you might have to generate a custom image because we have to keep page loads fast and light. Remember to stick to text and CSS as much as possible.
+	</h5>
+	
+	<hr>
 		
-			<div class="panel intro">
-				<b>NOTES</b> - This is just a very generic template for building reference pages that includes all the basic layout elements to be used. The goal is to port all reference pages to this format. It is deliberately a very basic wireframe using only standard foundation 3 elements. These basic styles can all be manipulated with css to add more polish to individual pages that need it.
-			</div>
-			<header><img src="http://placehold.it/1000x200" alt=""/></header>
+	<h3>Glyphs</h3>
+	<h5 class="no-marg-top subheader">Don't forget, you can use icon/glyphs too. We only have a limited set of glyphs available to the brc project right now, but one is being built for use in reference pages as well. In the meantime you can just add a placeholder glyph from the current set. Cheatsheet available <code><a href="../../../glyphs.html">here</a>.</code></h5>
+	
+	<hr>
+		
+  <h3>Header Styles</h3>
+  <h5 class="no-marg-top subheader">Foundation 3 includes a number of different styles and treatments for typographic elements, such as subheaders or small header segments. Every page should start with an h2 tag, and contain a span with a subheading. After that it's really up to you to design the pages using this document as your guide. Don't hesitate to try new things and ask lots of questions.</h5>
+  <h2>Page Heading <span>{subheading}</span></h2>
 
-			<div class="row">
-				<div class="large-6 columns">
-					<h4>Section 1 Heading</h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A quas doloribus eius iusto ipsa odit explicabo et dolorum dolores excepturi. Dolores animi facere quibusdam quis natus sequi! Accusamus ad magni.</p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A quas doloribus eius iusto ipsa odit explicabo et dolorum dolores excepturi. Dolores animi facere quibusdam quis natus sequi! Accusamus ad magni.</p>
+  <hr>
 
-					<div class="pullquote"><h4>Pullquote: "Blah blah blah blah blah." <i>- Bob Loblaw</i></h4></div>  
+  <h3>Paragraphs</h3>
+  <h5 class="no-marg-top subheader">In Foundation, paragraphs fall within the modular scale. This includes their line-height, giving the page a feeling of harmony as you scroll.</h5>
+  <div class="row">
+    <div class="six columns">
+      <p>It's really easy to add emphasis to copy in Foundation. We've implemented some standards like <strong>bold</strong> and <em>italics</em>, as well as, our own nifty styles, such as <code>&lt;code&gt;</code>, <kbd>&lt;kbd&gt;</kbd> and <small>&lt;small&gt;</small></p>
+    </div>
+    <div class="six columns">
+      <aside><p>You can also put text into and <strong>&lt;aside&gt;</strong> element to give it some hierarchy on the page. Maecenas faucibus mollis interdum. Donec ullamcorper nulla non metus auctor fringilla. Maecenas faucibus mollis interdum. Donec ullamcorper nulla non metus auctor fringilla.</p></aside>
+    </div>
+  </div>
+    
+	<hr>
+ 
+  <h3>Links</h3>
+  <h5 class="no-marg-top subheader">Sometimes there will be a need for links to online resources. Keep it simple. If there is a url on the page, link it up and make note if the link is dead and needs replaced by placing a standard foundation alert label <span class="alert label">Dead Link</span> next to it.</h5>
+	<p><a href="#">This is a standard inline paragraph link.</a></p>
+	
+	<hr>
+		
+  <h3>Lists</h3>
+  <h5 class="no-marg-top subheader">Lists are helpful for, well, lists of things. Use lists as much as you can to break up content. Have some fun with styling lists in creative ways.</h5>
 
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A quas doloribus eius iusto ipsa odit explicabo et dolorum dolores excepturi. Dolores animi facere quibusdam quis natus sequi! Accusamus ad magni.</p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quo officia sequi. Expedita doloremque dicta. Lorem ipsum d ratione perspiciatis. Est repellendus facilsi rem ipsa illum illo non mollitia. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quo officia sequi. Expedita doloremque dicta. Lorem ipsum d ratione perspiciatis. Est repellendus facilis rem ipsa illum illo non mollitia. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quo officia sequi. Expedita doloremque dicta. Lorem ipsum d ratione perspiciatis. Est repellendus facilis rem ipsa illum illo non mollitia. </p>
-					<h5 class="subheading">Section 1, Subheading 1</h5>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A quas doloribus eius iusto ipsa odit explicabo et dolorum dolores excepturi. Dolores animi facere quibusdam quis natus sequi! Accusamus ad magni.</p>
-					<img src="http://placehold.it/600x200" alt=""/>
-					<!-- <img data-src="holder.js/light/500x500/text:Figure 1" alt="" class=""> -->
-					<div><i>Captions go here. [1]</i></div>
-					<br>
-					<br>
-					<h5 class="subheading">Section 1, Subheading 2</h5>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A quas doloribus eius iusto ipsa odit explicabo et dolorum dolores excepturi. Dolores animi facere quibusdam quis natus sequi! Accusamus ad magni.</p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A quas doloribus eius iusto ipsa odit explicabo et dolorum dolores excepturi. Dolores animi facere quibusdam quis natus sequi! Accusamus ad magni.</p>
-					<hr>
-					<h4>Section 2 Heading</h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A quas doloribus eius iusto ipsa odit explicabo et dolorum dolores excepturi. Dolores animi facere quibusdam quis natus sequi! Accusamus ad magni.</p>
-				</div>
-				<div class="large-6 columns">
-					<img src="http://placehold.it/600x200" alt=""/>
-					<div><i>Captions go here. [2]</i></div>
-					<h4>Section 3 Heading</h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A quas doloribus eius iusto ipsa odit explicabo et dolorum dolores excepturi. Dolores animi facere quibusdam quis natus sequi! Accusamus ad magni.</p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quo officia sequi. Expedita doloremque dicta. Lorem ipsum d ratione perspiciatis. Est repellendus facilis rem ipsa illum illo non mollitia. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quo officia sequi. Expedita doloremque dicta. Lorem ipsum d ratione perspiciatis. Est repellendus facilis rem ipsa illum illo non mollitia. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quo officia sequi. Expedita doloremque dicta. Lorem ipsum d ratione perspiciatis. Est repellendus facilis rem ipsa illum illo non mollitia. </p>
-					<h5>Section 3 Subheading</h5>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A quas doloribus eius iusto ipsa odit explicabo et dolorum dolores excepturi. Dolores animi facere quibusdam quis natus sequi! Accusamus ad magni. [3]</p> 
-					<h4>Section 4 Heading</h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A quas doloribus eius iusto ipsa odit explicabo et dolorum dolores excepturi. Dolores animi facere quibusdam quis natus sequi! Accusamus ad magni.</p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A quas doloribus eius iusto ipsa odit explicabo et dolorum dolores excepturi. Dolores animi facere quibusdam quis natus sequi! Accusamus ad magni.</p>
+	<hr>
+		
+	<h3>Tables</h3>
+	<h5 class="no-marg-top subheader">Tables are necessary for data that is best presented in table-view, but they are notoriously difficult to use in responsive layouts at smaller sizes because of all the scrolling that is required and also the way wide tables bust out of their container.</h5>
+	<div style="margin: 0 15px;">
+		<table>
+      <tr>
+        <td><i><i>Examples:</i></i></td>
+        <td><i>Singular</i></td>
+        <td><i>Plural</i></td>
+      </tr>
+      <tr>
+        <td><i>1st Person:</i></td>
+        <td>I stop.</td>
+        <td>We stop.</td>
+      </tr>
+      <tr>
+        <td><i>2nd Person:</i> </td>
+        <td>You stop.</td>
+        <td>You stop.</td>
+      </tr>
+      <tr>
+        <td><i>3rd Person:</i></td>
+        <td>He/She/It stops.</td>
+        <td>They stop.</td>
+      </tr>
+    </table>
+	</div>
+	
+	<hr>
+	
+	<h3>Pullquotes/Callouts</h3>
+	<h5 class="no-marg-top subheader">Sometimes other people say smart things, and you may want to mention that through a blockquote callout. We've got you covered.</h5>
+ 
+	<div class="pullquote"><h4>"You're a Jedi, Frodo." <i>- Bruce Wayne </i></h4></div>
+	<br>
+	<div class="pullquote-dark"><h4>"Use the fork, Luke." <i>- Obie Trice </i></h4></div>
+	<br>
+	<br>
+	<br>
+	<div class="panel callout"><h4>Tilted callout box (3 degrees):</h4> 
+	Use this box for inspiration to come up with interesting ways to present the reference page content.
+	</div>
+	<br>
+	<br>
+		
+	<hr>
+	<h3>Images</h3>
+	<h5 class="no-marg-top subheader">Put images in the 'images' subfolder inside each category folder. Give them descriptive, semantic names. I have set images to fill their container width 100% using <code>background-size: cover;</code> so they will stretch to fill as much of the screen as they need. Use image placeholder service like <code><a href="//placehold.it">placehold.it</a></code> for most images. Don't worry too much about extracting images from the PDFs, as most of them should be replaced with full-color images.</h5>
+ 	<header><img src="http://placehold.it/1000x200" alt=""/></header>
+ 	<br>
+ 	<hr>
+	<h2>Page Heading <span>{subheading}</span></h2>
+	<h6 class="text-center"><i>(Generic Style Demo)</i></h6>
+	<!--Alcohol Tobacco and Drugs -->
 
-					<div class="pullquote"><h4>"You're a Jedi, Frodo." <i>-Bruce Wayne </i></h4></div>  
+	<div class="panel intro">
+		<b>NOTES</b> - This is just a very generic template for building reference pages that includes all the basic layout elements to be used. The goal is to port all reference pages to this format. It is deliberately a very basic wireframe using only standard foundation 3 elements. These basic styles can all be manipulated with css to add more polish to individual pages that need it.
+	</div>
+	<header><img src="http://placehold.it/1000x200" alt=""/><br><br></header>
 
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. [4] A quas doloribus eius iusto ipsa odit explicabo et dolorum dolores excepturi. Dolores animi facere quibusdam quis natus sequi! Accusamus ad magni.</p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A quas doloribus eius iusto ipsa odit explicabo et dolorum dolores excepturi. Dolores animi facere quibusdam quis natus sequi! Accusamus ad magni.</p>
-					<hr>
-					<p><i>Footnotes, Authors, Source etc. [1] Footnote citation goes here. [2] Footnote citation goes here. [3] Footnote citation goes here. [4] Footnote citation goes here.</i></p>  
-				</div> 
-			</div>
+	<div class="row" style="margin: 0; max-width: 100%;">
+		<div class="large-6 columns"style="padding:0 1em 0 0;">
+			<h4>Section 1 Heading</h4>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A quas doloribus eius iusto ipsa odit explicabo et dolorum dolores excepturi. Dolores animi facere quibusdam quis natus sequi! Accusamus ad magni.</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A quas doloribus eius iusto ipsa odit explicabo et dolorum dolores excepturi. Dolores animi facere quibusdam quis natus sequi! Accusamus ad magni.</p>
+
+			<div class="pullquote"><h4>Pullquote: "Blah blah blah blah blah." <i>- Bob Loblaw</i></h4></div>  
+
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A quas doloribus eius iusto ipsa odit explicabo et dolorum dolores excepturi. Dolores animi facere quibusdam quis natus sequi! Accusamus ad magni.</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quo officia sequi. Expedita doloremque dicta. Lorem ipsum d ratione perspiciatis. Est repellendus facilsi rem ipsa illum illo non mollitia. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quo officia sequi. Expedita doloremque dicta. Lorem ipsum d ratione perspiciatis. Est repellendus facilis rem ipsa illum illo non mollitia. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quo officia sequi. Expedita doloremque dicta. Lorem ipsum d ratione perspiciatis. Est repellendus facilis rem ipsa illum illo non mollitia. </p>
+			<h5 class="subheading">Section 1, Subheading 1</h5>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A quas doloribus eius iusto ipsa odit explicabo et dolorum dolores excepturi. Dolores animi facere quibusdam quis natus sequi! Accusamus ad magni.</p>
+			<img src="http://placehold.it/600x200" alt=""/>
+			<!-- <img data-src="holder.js/light/500x500/text:Figure 1" alt="" class=""> -->
+			<div><i>Captions go here. [1]</i></div>
+
+			<h5 class="subheading">Section 1, Subheading 2</h5>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quo officia sequi. Expedita doloremque dicta. Lorem ipsum d ratione perspiciatis. Est repellendus facilsi rem ipsa illum illo non mollitia. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quo officia sequi. Expedita doloremque dicta. Lorem ipsum d ratione perspiciatis. Est repellendus facilis rem ipsa illum illo non mollitia. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quo officia sequi. Expedita doloremque dicta. Lorem ipsum d ratione perspiciatis. Est repellendus facilis rem ipsa illum illo non mollitia.</p>
+			<hr>
+			<h4>Section 2 Heading</h4>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quo officia sequi. Expedita doloremque dicta. Lorem ipsum d ratione perspiciatis. Est repellendus facilsi rem ipsa illum illo non mollitia. </p>
 		</div>
+		<div class="large-6 columns" style="padding:0;">
+			<div class="header"><img src="http://placehold.it/600x200" alt=""/></div>
+			
+			<div><i>Captions go here. [2]</i></div>
+			<h4>Section 3 Heading</h4>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A quas doloribus eius iusto ipsa odit explicabo et dolorum dolores excepturi. Dolores animi facere quibusdam quis natus sequi! Accusamus ad magni.</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quo officia sequi. Expedita doloremque dicta. Lorem ipsum d ratione perspiciatis. Est repellendus facilis rem ipsa illum illo non mollitia. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quo officia sequi. Expedita doloremque dicta. Lorem ipsum d ratione perspiciatis. Est repellendus facilis rem ipsa illum illo non mollitia. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quo officia sequi. Expedita doloremque dicta. Lorem ipsum d ratione perspiciatis. Est repellendus facilis rem ipsa illum illo non mollitia. </p>
+			<h5>Section 3 Subheading</h5>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A quas doloribus eius iusto ipsa odit explicabo et dolorum dolores excepturi. Dolores animi facere quibusdam quis natus sequi! Accusamus ad magni. [3]</p> 
+			<h4>Section 4 Heading</h4>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A quas doloribus eius iusto ipsa odit explicabo et dolorum dolores excepturi. Dolores animi facere quibusdam quis natus sequi! Accusamus ad magni.</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A quas doloribus eius iusto ipsa odit explicabo et dolorum dolores excepturi. Dolores animi facere quibusdam quis natus sequi! Accusamus ad magni.</p>
+
+			<div class="pullquote"><h4>"You're a Jedi, Frodo." <i>-Bruce Wayne </i></h4></div>  
+
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. [4] A quas doloribus eius iusto ipsa odit explicabo et dolorum dolores excepturi. Dolores animi facere quibusdam quis natus sequi! Accusamus ad magni.</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A quas doloribus eius iusto ipsa odit explicabo et dolorum dolores excepturi. Dolores animi facere quibusdam quis natus sequi! Accusamus ad magni.</p>
+			<hr>
+			<p><i>Footnotes, Authors, Source etc. [1] Footnote citation goes here. [2] Footnote citation goes here. [3] Footnote citation goes here. [4] Footnote citation goes here.</i></p>  
+		</div> 
+	</div>
+		
 	<!-- <div id="content" class="row">
 		<h1>Resources</h1>
 		<br>

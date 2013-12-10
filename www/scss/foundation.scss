@@ -1,5 +1,6 @@
 @import "settings";
 @import "events";
+@import "refpages";
 
 @import "../bower_components/foundation/scss/foundation/";
 
@@ -67,6 +68,10 @@ body {
 	background: #fff;
 	border-left: 1px solid darken($topbar-bg, 18%);
 	border-right: 1px solid darken($topbar-bg, 18%);
+}
+
+#main-content ol{
+ margin-left: 20px;
 }
 
 #tasks{
