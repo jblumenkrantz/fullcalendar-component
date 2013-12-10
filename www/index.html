@@ -129,22 +129,26 @@
 				<!-- / main content -->
 
 				<!-- task view -->
-				<div
-					ng-controller="TaskCtl"
-					id="tasks"
-					style="height: 100%; z-index: 1; right: 0px;"
-					class="small-12 large-2 columns drawer"
-					ng-include src="'modules/calendar/_task_sidebar.html'">
+				<div ng-show="viewSidebar">
+					<div 
+						ng-controller="TaskCtl"
+						id="tasks"
+						style="height: 100%; z-index: 1; right: 0px;"
+						class="small-12 large-2 columns drawer"
+						ng-include src="'modules/calendar/_task_sidebar.html'">
+					</div>
 				</div>
 				<!-- / task view -->
 
 				<!-- subscription view  gets pulled 10 columns from it's original position, all the way to the left. -->
-				<div
-					ng-controller="SubscriptionCtl"
-					id="my-calendars"
-					style="height: 100%; z-index: 1;"
-					class="small-12 large-2 columns drawer"
-					ng-include src="'modules/calendar/_calendar_sidebar.html'">
+				<div ng-show="viewSidebar">
+					<div
+						ng-controller="SubscriptionCtl"
+						id="my-calendars"
+						style="height: 100%; z-index: 1;"
+						class="small-12 large-2 columns drawer"
+						ng-include src="'modules/calendar/_calendar_sidebar.html'">
+					</div>
 				</div>
 				<!-- / subscription view -->
 			</div> <!-- / outer container --> 

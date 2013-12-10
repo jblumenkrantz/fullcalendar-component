@@ -33,7 +33,7 @@ angular.module('pinwheelApp')
 		 	query: {
 					method: 'GET',
 					isArray: true,
-					cache:true,
+					cache:false,
 				}
 		});
 	})

@@ -5,7 +5,7 @@
 		<ul class="small-block-grid-3">
 			<li class="text-left">
 				<span>
-					<span class="hide-for-small" ng-click="toggleSidebar('calendarDrawer')" aria-hidden="true" ng-class="{'icon-hide-left':calendarDrawer, 'icon-show-left':!calendarDrawer}" style="margin-left: 4px;"></span>
+					<span class="hide-for-small" ng-click="toggleSidebar('calendarDrawer')" aria-hidden="true" ng-class="{'icon-hide-left':calendarDrawer, 'icon-show-left':!calendarDrawer}" style="margin-left: 4px;"></span>&nbsp;
 				</span>
 				<!-- <span aria-hidden="true" class="icon-poop-1"></span> -->
 			</li>
@@ -33,7 +33,7 @@
 		<div ng-include src="'modules/calendar/_event_form.html'"></div>
 	</div>
 
-  <div scroll-pane style="border-left: 1px solid #afafaf; border-right: 1px solid #afafaf;">
+  <div scroll-pane style="border-left: 1px solid #afafaf; border-right: 1px solid #afafaf; overflow:scroll; /* remove overflow property to stop scrolling on calendar*/">
 		<!-- calendar views switch -->
 		<spinwheel class="spinwheel-holder"><div ng-show="loading_events" class="spinwheel"><div class="spinwheel"><div class="spinwheel"><div class="spinwheel"></div></div></div></div></spinwheel>
 <!-- 	<div ng-switch-when="day">
