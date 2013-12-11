@@ -7295,6 +7295,7 @@ header#content-header [class*="icon-"] {
 .org-name {
   font-size: 20px;
   font-weight: bold;
+  color: #23538a;
   text-shadow: 1px 1px 2px white;
   position: relative;
   top: -2px;
@@ -7303,7 +7304,7 @@ header#content-header [class*="icon-"] {
 }
 
 @media only screen and (max-width: 768px) {
-  /* line 180, ../../scss/foundation.scss */
+  /* line 181, ../../scss/foundation.scss */
   ul.days {
     padding: 0;
     margin: 0;
@@ -7312,12 +7313,12 @@ header#content-header [class*="icon-"] {
     left: 2px;
   }
 }
-/* line 184, ../../scss/foundation.scss */
+/* line 185, ../../scss/foundation.scss */
 [class*="icon-"] {
   text-shadow: 1px 1px 2px white;
 }
 
-/* line 189, ../../scss/foundation.scss */
+/* line 190, ../../scss/foundation.scss */
 .calendar-index {
   position: absolute;
   left: 0;
@@ -7331,13 +7332,13 @@ header#content-header [class*="icon-"] {
   border-right: 1px solid #aaa;
 }
 
-/* line 202, ../../scss/foundation.scss */
+/* line 203, ../../scss/foundation.scss */
 .calendar-index ul.side-nav {
   margin: 0;
   padding: 0;
 }
 
-/* line 207, ../../scss/foundation.scss */
+/* line 208, ../../scss/foundation.scss */
 .calendar-index ul.side-nav li {
   list-style-type: none;
   margin: 0;
@@ -7348,24 +7349,24 @@ header#content-header [class*="icon-"] {
   cursor: pointer;
 }
 
-/* line 217, ../../scss/foundation.scss */
+/* line 218, ../../scss/foundation.scss */
 .calendar-index ul.side-nav li:hover {
   background: rgba(35, 83, 138, 0.1);
 }
 
-/* line 221, ../../scss/foundation.scss */
+/* line 222, ../../scss/foundation.scss */
 .calendar-index ul.side-nav li:nth-child(1) {
   background: #ccc;
   border-width: 0;
 }
 
-/* line 225, ../../scss/foundation.scss */
+/* line 226, ../../scss/foundation.scss */
 .calendar-index ul.side-nav li:nth-child(14) {
   background: #ccc;
   border-width: 1px 0 1px  0;
 }
 
-/* line 232, ../../scss/foundation.scss */
+/* line 233, ../../scss/foundation.scss */
 .calendar-wrapper {
   display: inline;
   overflow: hidden;
@@ -7374,13 +7375,13 @@ header#content-header [class*="icon-"] {
   width: auto;
 }
 
-/* line 233, ../../scss/foundation.scss */
+/* line 234, ../../scss/foundation.scss */
 .calendar {
   padding: 0;
   margin: 0 0 0 38px !important;
 }
 
-/* line 234, ../../scss/foundation.scss */
+/* line 235, ../../scss/foundation.scss */
 .calendar ul.month-browser li {
   width: 33.3%;
   padding: 0;
@@ -7391,7 +7392,7 @@ header#content-header [class*="icon-"] {
   margin: 20px 0;
 }
 
-/* line 235, ../../scss/foundation.scss */
+/* line 236, ../../scss/foundation.scss */
 .calendar ul {
   list-style: none;
   padding: 0;
@@ -7400,13 +7401,13 @@ header#content-header [class*="icon-"] {
   width: 100%;
 }
 
-/* line 236, ../../scss/foundation.scss */
+/* line 237, ../../scss/foundation.scss */
 .calendar ul.weekdays {
   height: 40px;
   width: 100%;
 }
 
-/* line 237, ../../scss/foundation.scss */
+/* line 238, ../../scss/foundation.scss */
 .calendar ul.weekdays li {
   text-align: center;
   text-transform: uppercase;
@@ -7417,7 +7418,7 @@ header#content-header [class*="icon-"] {
   font-size: 13px;
 }
 
-/* line 238, ../../scss/foundation.scss */
+/* line 239, ../../scss/foundation.scss */
 .calendar li {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -7433,23 +7434,23 @@ header#content-header [class*="icon-"] {
   overflow: visible !important;
 }
 
-/* line 239, ../../scss/foundation.scss */
+/* line 240, ../../scss/foundation.scss */
 .calendar .days:last-child li {
   margin-bottom: 0px !important;
 }
 
-/* line 240, ../../scss/foundation.scss */
+/* line 241, ../../scss/foundation.scss */
 .calendar li .day, .calendar li .month {
   display: none;
 }
 
-/* line 241, ../../scss/foundation.scss */
+/* line 242, ../../scss/foundation.scss */
 .calendar .date {
   text-align: right;
   margin-bottom: 5px;
 }
 
-/* line 242, ../../scss/foundation.scss */
+/* line 243, ../../scss/foundation.scss */
 .show-info {
   display: block;
   font-size: 13px;
@@ -7464,52 +7465,52 @@ header#content-header [class*="icon-"] {
   text-decoration: none;
 }
 
-/* line 243, ../../scss/foundation.scss */
+/* line 244, ../../scss/foundation.scss */
 .show-info:hover .venue {
   display: block;
 }
 
-/* line 244, ../../scss/foundation.scss */
+/* line 245, ../../scss/foundation.scss */
 .show-info .show-name {
   text-decoration: underline;
 }
 
-/* line 245, ../../scss/foundation.scss */
+/* line 246, ../../scss/foundation.scss */
 .show-info .show-time, .venue {
   color: #666;
   margin-top: 2px;
   text-decoration: none;
 }
 
-/* line 246, ../../scss/foundation.scss */
+/* line 247, ../../scss/foundation.scss */
 .calendar .no-shows {
   display: none;
 }
 
-/* line 247, ../../scss/foundation.scss */
+/* line 248, ../../scss/foundation.scss */
 .calendar .venue {
   display: none;
 }
 
-/* line 248, ../../scss/foundation.scss */
+/* line 249, ../../scss/foundation.scss */
 .calendar li.out_of_range {
   background-color: #F5F5F5;
   color: #666;
 }
 
-/* line 249, ../../scss/foundation.scss */
+/* line 250, ../../scss/foundation.scss */
 ul.days, .calendar-day {
   padding: 0;
   margin: 0;
   width: 100%;
 }
 
-/* line 251, ../../scss/foundation.scss */
+/* line 252, ../../scss/foundation.scss */
 .calendar-picker-container {
   position: relative;
 }
 
-/* line 254, ../../scss/foundation.scss */
+/* line 255, ../../scss/foundation.scss */
 .calendar-picker-container button {
   top: 22px;
   right: 20px;
@@ -7524,13 +7525,13 @@ ul.days, .calendar-day {
   cursor: pointer;
 }
 
-/* line 268, ../../scss/foundation.scss */
+/* line 269, ../../scss/foundation.scss */
 .calendar-picker-container.nolabel button {
   top: 5px;
   right: 5px;
 }
 
-/* line 273, ../../scss/foundation.scss */
+/* line 274, ../../scss/foundation.scss */
 .icon-backspace:before {
   content: "\e037";
   background: #fff;
@@ -7547,7 +7548,7 @@ ul.days, .calendar-day {
   font-size: 20px;
 }
 
-/* line 291, ../../scss/foundation.scss */
+/* line 292, ../../scss/foundation.scss */
 .resource-gradient {
   background: #eeeeee;
   /* Old browsers */
@@ -7567,7 +7568,7 @@ ul.days, .calendar-day {
   /* IE6-9 */
 }
 
-/* line 302, ../../scss/foundation.scss */
+/* line 303, ../../scss/foundation.scss */
 .resource-body {
   background: #eeeeee;
   /* Old browsers */
@@ -7587,7 +7588,7 @@ ul.days, .calendar-day {
   /* IE6-9 */
 }
 
-/* line 313, ../../scss/foundation.scss */
+/* line 314, ../../scss/foundation.scss */
 .task .resource-body.add {
   min-height: none;
   background: #eeeeee;
@@ -7610,12 +7611,12 @@ ul.days, .calendar-day {
   margin-left: 8px;
 }
 
-/* line 328, ../../scss/foundation.scss */
+/* line 329, ../../scss/foundation.scss */
 .resource-panel [class*="icon-"]:active {
   color: #23538a;
 }
 
-/* line 332, ../../scss/foundation.scss */
+/* line 333, ../../scss/foundation.scss */
 .close-panel {
   position: relative;
   float: right;
@@ -7623,12 +7624,12 @@ ul.days, .calendar-day {
   font-size: 20px;
 }
 
-/* line 339, ../../scss/foundation.scss */
+/* line 340, ../../scss/foundation.scss */
 .button-group li {
   padding: 0 5px 0 0;
 }
 
-/* line 345, ../../scss/foundation.scss */
+/* line 346, ../../scss/foundation.scss */
 #main-content button,
 .button-group li div.button,
 .button-group li button {
@@ -7655,7 +7656,7 @@ ul.days, .calendar-day {
   height: 36px;
 }
 
-/* line 362, ../../scss/foundation.scss */
+/* line 363, ../../scss/foundation.scss */
 .button-group li div.button:hover:enabled,
 .button-group li button:hover:enabled {
   color: #333 !important;
@@ -7678,44 +7679,44 @@ ul.days, .calendar-day {
   margin: 0;
 }
 
-/* line 375, ../../scss/foundation.scss */
+/* line 376, ../../scss/foundation.scss */
 button:focus {
   outline: none;
 }
 
-/* line 379, ../../scss/foundation.scss */
+/* line 380, ../../scss/foundation.scss */
 button.disabled, button[disabled], .button.disabled, .button[disabled] {
   color: grey;
   border-color: #cccccc !important;
 }
 
-/* line 384, ../../scss/foundation.scss */
+/* line 385, ../../scss/foundation.scss */
 .button-group li [class*="icon-"] {
   color: #333;
 }
 
-/* line 388, ../../scss/foundation.scss */
+/* line 389, ../../scss/foundation.scss */
 .button-group li button:disabled [class*="icon-"] {
   color: gray;
 }
 
-/* line 393, ../../scss/foundation.scss */
+/* line 394, ../../scss/foundation.scss */
 .top-bar {
   background: rgba(221, 221, 221, 0.3) repeat !important;
   overflow: visible;
 }
 
-/* line 398, ../../scss/foundation.scss */
+/* line 399, ../../scss/foundation.scss */
 .top-bar-section li a:not(.button) {
   background: none !important;
 }
 
-/* line 403, ../../scss/foundation.scss */
+/* line 404, ../../scss/foundation.scss */
 .tabs dd.active {
   border-top: 0px solid #23538a;
 }
 
-/* line 406, ../../scss/foundation.scss */
+/* line 407, ../../scss/foundation.scss */
 .top-bar-section ul li {
   float: left !important;
 }
@@ -7806,7 +7807,7 @@ header#content-header ul.small-block-grid-3 li {
   width: auto !important;
 }
 
-/* line 413, ../../scss/foundation.scss */
+/* line 414, ../../scss/foundation.scss */
 #mainHeader {
   overflow: hidden;
   height: 45px;
@@ -7816,18 +7817,18 @@ header#content-header ul.small-block-grid-3 li {
   margin-bottom: 0;
 }
 
-/* line 421, ../../scss/foundation.scss */
+/* line 422, ../../scss/foundation.scss */
 .menubar {
   text-align: left;
   width: auto;
 }
 
-/* line 426, ../../scss/foundation.scss */
+/* line 427, ../../scss/foundation.scss */
 .menubar ul li {
   display: inline;
 }
 
-/* line 431, ../../scss/foundation.scss */
+/* line 432, ../../scss/foundation.scss */
 .menubar ul li [class*="icon-"] {
   color: #777;
   height: 45px;
@@ -7838,23 +7839,23 @@ header#content-header ul.small-block-grid-3 li {
   cursor: pointer !important;
 }
 
-/* line 440, ../../scss/foundation.scss */
+/* line 441, ../../scss/foundation.scss */
 .menubar ul li [class*="icon-"]:hover {
   color: #555;
 }
 
-/* line 444, ../../scss/foundation.scss */
+/* line 445, ../../scss/foundation.scss */
 .menubar ul li [class*="icon-"]:active {
   color: #23538a;
 }
 
-/* line 448, ../../scss/foundation.scss */
+/* line 449, ../../scss/foundation.scss */
 .menubar ul.left {
   height: 45px;
   width: auto;
 }
 
-/* line 454, ../../scss/foundation.scss */
+/* line 455, ../../scss/foundation.scss */
 #main-content, #mainHeader {
   background: #eeeeee;
   /* Old browsers */
@@ -7874,7 +7875,7 @@ header#content-header ul.small-block-grid-3 li {
   /* IE6-9 */
 }
 
-/* line 466, ../../scss/foundation.scss */
+/* line 467, ../../scss/foundation.scss */
 .menubar ul li a span {
   font-size: 20px;
   height: 45px;
@@ -7883,14 +7884,14 @@ header#content-header ul.small-block-grid-3 li {
   margin: 0 12px;
 }
 
-/* line 482, ../../scss/foundation.scss */
+/* line 483, ../../scss/foundation.scss */
 .page-wrap {
   float: right;
   width: 100%;
   transition: width .7s ease;
 }
 
-/* line 488, ../../scss/foundation.scss */
+/* line 489, ../../scss/foundation.scss */
 .left-nav {
   position: fixed;
   top: 0;
@@ -7904,7 +7905,7 @@ header#content-header ul.small-block-grid-3 li {
   white-space: nowrap;
   overflow: hidden;
 }
-/* line 500, ../../scss/foundation.scss */
+/* line 501, ../../scss/foundation.scss */
 .left-nav a {
   display: block;
   border-bottom: 1px solid #222;
@@ -7916,29 +7917,29 @@ header#content-header ul.small-block-grid-3 li {
   text-transform: uppercase;
   text-shadow: 1px 1px 2px #000;
 }
-/* line 510, ../../scss/foundation.scss */
+/* line 511, ../../scss/foundation.scss */
 .left-nav a:hover, .left-nav a:focus {
   background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
 }
-/* line 513, ../../scss/foundation.scss */
+/* line 514, ../../scss/foundation.scss */
 .left-nav a:active {
   background: rgba(35, 83, 138, 0.5) !important;
 }
-/* line 516, ../../scss/foundation.scss */
+/* line 517, ../../scss/foundation.scss */
 .left-nav a.logout {
   background: rgba(136, 0, 0, 0.3) !important;
 }
-/* line 519, ../../scss/foundation.scss */
+/* line 520, ../../scss/foundation.scss */
 .left-nav a.logout:hover, .left-nav a.logout:focus {
   background: rgba(136, 0, 0, 0.7) !important;
 }
-/* line 522, ../../scss/foundation.scss */
+/* line 523, ../../scss/foundation.scss */
 .left-nav a [class*="icon-"] {
   text-shadow: 1px 1px 2px #000;
   font-size: 36px;
   text-align: center;
 }
-/* line 528, ../../scss/foundation.scss */
+/* line 529, ../../scss/foundation.scss */
 .left-nav:after {
   content: "";
   position: absolute;
@@ -7947,61 +7948,61 @@ header#content-header ul.small-block-grid-3 li {
   height: 100%;
   background: linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
 }
-/* line 537, ../../scss/foundation.scss */
+/* line 538, ../../scss/foundation.scss */
 .left-nav a.locked {
   color: #999;
 }
-/* line 541, ../../scss/foundation.scss */
+/* line 542, ../../scss/foundation.scss */
 .left-nav a span:nth-of-type(2) {
   position: relative;
   top: -9px;
   font-size: 18px !important;
 }
-/* line 546, ../../scss/foundation.scss */
+/* line 547, ../../scss/foundation.scss */
 .left-nav label {
   color: #fff;
   white-space: nowrap !important;
 }
-/* line 547, ../../scss/foundation.scss */
+/* line 548, ../../scss/foundation.scss */
 .left-nav h5 {
   color: #fff;
   margin-left: 20px;
 }
-/* line 548, ../../scss/foundation.scss */
+/* line 549, ../../scss/foundation.scss */
 .left-nav form * {
   white-space: nowrap !important;
 }
-/* line 551, ../../scss/foundation.scss */
+/* line 552, ../../scss/foundation.scss */
 .left-nav button {
   width: 160px;
   margin: 20px !important;
   border-radius: 3px;
 }
 
-/* line 558, ../../scss/foundation.scss */
+/* line 559, ../../scss/foundation.scss */
 .close-menu {
   display: none;
 }
 
-/* line 581, ../../scss/foundation.scss */
+/* line 582, ../../scss/foundation.scss */
 #content {
   max-width: 98%;
 }
 
-/* line 586, ../../scss/foundation.scss */
+/* line 587, ../../scss/foundation.scss */
 #content label {
   font-weight: bold;
   cursor: default !important;
 }
 
-/* line 590, ../../scss/foundation.scss */
+/* line 591, ../../scss/foundation.scss */
 #content input[type=text] {
   border-radius: 4px !important;
   border: 1px solid #aaa !important;
   height: 26px !important;
 }
 
-/* line 595, ../../scss/foundation.scss */
+/* line 596, ../../scss/foundation.scss */
 #content input[type=checkbox] {
   margin: 0;
   padding: 0;
@@ -8009,7 +8010,7 @@ header#content-header ul.small-block-grid-3 li {
   top: 2px;
 }
 
-/* line 599, ../../scss/foundation.scss */
+/* line 600, ../../scss/foundation.scss */
 #hallpass-tabs dd p span.icon-close2 {
   position: relative;
   top: -8px;
@@ -8018,12 +8019,12 @@ header#content-header ul.small-block-grid-3 li {
   font-size: 16px;
 }
 
-/* line 607, ../../scss/foundation.scss */
+/* line 608, ../../scss/foundation.scss */
 .tabs dd.active p {
   color: #23538a !important;
 }
 
-/* line 611, ../../scss/foundation.scss */
+/* line 612, ../../scss/foundation.scss */
 #content table {
   width: 100%;
   border-collapse: collapse;
@@ -8031,7 +8032,7 @@ header#content-header ul.small-block-grid-3 li {
   height: auto;
 }
 
-/* line 618, ../../scss/foundation.scss */
+/* line 619, ../../scss/foundation.scss */
 #content table thead tr th {
   text-align: center;
   background-color: #23538a;
@@ -8039,49 +8040,49 @@ header#content-header ul.small-block-grid-3 li {
   font-weight: 300;
 }
 
-/* line 625, ../../scss/foundation.scss */
+/* line 626, ../../scss/foundation.scss */
 #content table thead tr th, #content div table tbody tr td {
   width: 14.289%;
 }
 
-/* line 628, ../../scss/foundation.scss */
+/* line 629, ../../scss/foundation.scss */
 #content div table tbody tr td {
   text-align: center;
 }
 
-/* line 632, ../../scss/foundation.scss */
+/* line 633, ../../scss/foundation.scss */
 #content table tr td:last-of-type {
   text-align: center;
 }
 
-/* line 636, ../../scss/foundation.scss */
+/* line 637, ../../scss/foundation.scss */
 .admin-table tr {
   padding: 0px;
   margin: 0px;
 }
 
-/* line 640, ../../scss/foundation.scss */
+/* line 641, ../../scss/foundation.scss */
 .admin-table td span.student {
   border-bottom: 1px dotted #222;
 }
 
-/* line 643, ../../scss/foundation.scss */
+/* line 644, ../../scss/foundation.scss */
 .admin-table td span.student, .admin-table tr td span[class*="icon-"] {
   cursor: pointer !important;
 }
 
-/* line 646, ../../scss/foundation.scss */
+/* line 647, ../../scss/foundation.scss */
 .admin-table tr td span[class*="icon-"] {
   color: #ccc;
   padding-right: 5px;
 }
 
-/* line 650, ../../scss/foundation.scss */
+/* line 651, ../../scss/foundation.scss */
 .admin-table tr td span[class*="icon-"]:hover {
   color: #222;
 }
 
-/* line 653, ../../scss/foundation.scss */
+/* line 654, ../../scss/foundation.scss */
 .admin-table tbody tr td input {
   position: relative;
   top: 5px;
