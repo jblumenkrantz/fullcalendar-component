@@ -28,6 +28,10 @@ angular.module('pinwheelApp')
 				templateUrl: 'modules/hallpass/hallpass.html',
 				controller: 'HallpassCtl'
 			})
+			.when("/facilities", {
+				templateUrl: 'modules/facilities/facilities.html',
+				controller: 'FacilitiesCtl'
+			})
 			.when("/settings", {
 				templateUrl: 'modules/settings/settings.html',
 				controller: 'SettingsCtl'
