@@ -1,7 +1,10 @@
 <div id="main-content" style="height: 100%; overflow: hidden; position: relative; z-index: 2" class="small-12 columns large-12">
 	<div id="reference-page-content" style="overflow-y: scroll !important; height: 800px; padding: 0;">
 		<!-- start page content -->
-			<div class="large-10 push-2 columns">
+			<div class="large-10 push-2 columns" id="refPage">
+				
+				<!-- DEAC: this column is the content container that is swapped; i gave it an id but you canchange the container structure however you want -->
+				
 				<h2>Reference Pages & You<span>{ A Style Guide }</span></h2>
 				<h4 style="font-weight: 400; line-height: 28px;">We need you guys to churn out more reference pages for Pinwheel, our new digital datebook product. This is the style guide you will use to build digital versions of reference pages. To keep things simple, you will work on a gutted version of BRC (the first incarnation of Pinwheel) that only contains the structure and resources we need to build the reference pages. These will be added to the main project as they are completed and approved. Many changes have been made to these pages.</h4>
 				<hr>
@@ -190,7 +193,7 @@
 					</div> 
 				</div>
 			</div>
-			<div class="large-2 pull-10 columns" style="padding: 0 1em 0 0; position: absolute; top: 0; left: 0;">
+			<div class="large-2 pull-10 columns" style="padding: 0; margin: 0 1em 0 0; position: absolute; top: 0; left: 0; overflow-y: scroll !important; height: 800px;">
 				<div class="section-container accordion" data-section="accordion" data-section-small-style="true">
 					<section class="section">
 				   <input type="text" placeholder="Search References...." style="margin: 0; padding: 0 1em;">
@@ -313,9 +316,6 @@
 				      </ul>
 				    </div>
 				  </section>
-				  
-				  
-				  
 				  <section class="section ">
 				    <p class="title"><a href="#">Science</a></p>
 				    <div class="content">
