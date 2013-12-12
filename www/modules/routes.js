@@ -16,7 +16,7 @@ angular.module('pinwheelApp')
 				templateUrl: 'modules/messaging/main.html',
 				controller: 'MessagingCtl'
 			})
-			.when("/reference", {
+			.when("/reference/:page?", {
 				templateUrl: 'modules/reference/main.html',
 				controller: 'ReferenceCtl'
 			})
