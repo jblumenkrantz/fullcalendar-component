@@ -1,0 +1,100 @@
+/* datebook view full calendar css */
+
+/* parent view class */
+.fc-view-datebook {}
+
+/* view overrides */
+
+.fc-view-datebook .fc-event {
+	border-width: 0 !important;
+}
+
+.fc-view-datebook .fc-event .fc-event-inner {
+	border: 1px solid;
+	border-color: inherit !important;
+	border-radius: 3px;
+	padding-left: 3px;
+	width: calc(100% - 4px) !important;
+	margin-left: 2px;
+}
+
+.fc-view-datebook .fc-event.fc-event-start .fc-event-inner {
+	border-left-width: 8px;
+	width: calc(100% - 2px) !important;
+	margin-left: 0px;
+}
+
+.fc-view-datebook .fc-event.fc-event-end .fc-event-inner {
+	width: calc(100% - 2px) !important;
+	margin-left: 2px;
+}
+
+.fc-view-datebook .fc-event.fc-event-start.fc-event-end .fc-event-inner {
+	width: 100% !important;
+	margin-left: 0px;
+}
+
+.fc-view-datebook .fc-event-hori {
+	padding: 0px;
+}
+
+.fc-view-datebook .fc-datebook-header {
+	position: relative;
+	text-align: center;
+	padding: 2px 0;
+	background: rgba(221, 221, 221, 0.5);
+	border-bottom: 1px solid #ddd;
+	font-weight: 300;
+	font-size: 15px;
+}
+
+.fc-view-datebook .fc-other-month .fc-datebook-header {
+	opacity: 0.5;
+	filter: alpha(opacity=50);
+}
+
+.fc-view-datebook .fc-other-month .fc-day-number {
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+
+.fc-view-datebook .fc-day-number {
+	float: none;
+	padding: 0;
+	opacity: 1;
+}
+
+.fc-view-datebook .fc-datebook-header .icon-plus-alt {
+	margin: 0 3px 0 0;
+}
+
+/* QUOTE CELL CSS */
+.fc-view-datebook .fc-quote-content .picture {
+	float: left;
+	width: 50%;
+	padding: 2px 0 0 2px;
+}
+
+.fc-quote-content .picture img {
+	padding: 0;
+}
+
+.fc-quote-content .quote {
+	float: left;
+	width: 50%;
+	padding: 10px;
+	text-align: center;
+}
+
+.fc-quote-content .quote .text {}
+
+.fc-quote-content .quote .author {
+	margin-top: 10%;
+}
+.fc-quote-content .quote .word {
+	margin-top: 10%;
+	font-weight: bold;
+}	
+.fc-quote-content .quote .definition {
+	
+}
