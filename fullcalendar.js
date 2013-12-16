@@ -184,6 +184,16 @@ function setDefaults(d) {
 
 ;;
 
+function ordinal(number) {
+  var d = number % 10;
+  var ord = (~~ (number % 100 / 10) === 1) ? 'th' :
+        	(d === 1) ? 'st' :
+        	(d === 2) ? 'nd' :
+         	(d === 3) ? 'rd' : 'th';
+
+	return number + ord;
+}
+
  
 function Calendar(element, options, eventSources) {
 	var t = this;
@@ -1126,7 +1136,6 @@ function EventManager(options, _sources) {
 	
 	
 	function updateEvent(event) { // update an existing event
-		console.warn('updated');
 		var i, len = cache.length, e,
 			defaultEventEnd = getView().defaultEventEnd, // getView???
 			startDelta = event.start - event._start,
@@ -1952,6 +1961,106 @@ function firstDefined() {
 
 ;;
 
+fcViews.datebook = DatebookView;
+
+function DatebookView(element, calendar) {
+	var t = this;
+	
+	// exports
+	t.render = render;
+	t.datebookCellToDate = datebookCellToDate;
+	t.rangeToSegmentsDatebook = rangeToSegmentsDatebook;
+	t.getTheTopDatebook = getTheTopDatebook;
+
+	// imports
+	BasicView.call(t, element, calendar, 'basicWeek');
+	var opt = t.opt;
+	var skipHiddenDays = t.skipHiddenDays;
+	var getCellsPerWeek = t.getCellsPerDatebookWeek;
+	var formatDates = calendar.formatDates;
+	var buildEventContainer = t.buildEventContainer;
+	var renderDatebook = t.renderDatebook;
+	var dateToDayOffset = t.dateToDayOffset;
+
+	//overrides
+	t.draggableDayEvent = t.draggableDayEventDatebook;
+	
+	function render(date, delta) {
+		if (delta) {
+			addDays(date, delta * 7);
+		}
+
+		var start = addDays(cloneDate(date), -((date.getDay() - 1 + 7) % 7));
+		var end = addDays(cloneDate(start), 7);
+
+		var visStart = cloneDate(start);
+		//skipHiddenDays(visStart, -1, true);
+
+		var visEnd = cloneDate(end);
+		skipHiddenDays(visEnd, -1, true);
+
+		var colCnt = getCellsPerWeek(); //for datebooks this = 2 always
+
+		t.start = start;
+		t.end = end;
+		t.visStart = visStart;
+		t.visEnd = visEnd;
+
+		t.title = formatDates(
+			visStart,
+			addDays(cloneDate(visEnd), -1),
+			opt('titleFormat')
+		);
+
+		renderDatebook(4, colCnt, true);
+	}
+
+	function datebookCellToDate(row, col) {
+		var c = cloneDate(t.visStart);
+		var date = addDays(c, row + 4*col);
+		return date;
+	}
+	//
+	// Converts a date range into an array of segment objects for the Datebook View
+	// The datebook view renders its events from top to bottom and not left to right
+	// A segment object has the following properties:
+	// - row
+	// - cols
+	// - isStart
+	// - isEnd
+	//
+	function rangeToSegmentsDatebook(startDate, endDate) {
+		var segments = []; // array of segments to return
+
+		// day offset (relative to start date) for given date range
+		var rangeDayOffsetStart = dateToDayOffset(startDate);
+		var rangeDayOffsetEnd = dateToDayOffset(endDate); // exclusive
+
+		//array of cell coordinates ordered top to bottom as that is how datebook view renders it's days
+		var cells = [[1, 0],[2, 0], [3, 0], [0, 1], [1, 1], [2, 1], [3, 1]];
+
+		//loop over the cells in the date range requested
+		for (var cell=rangeDayOffsetStart; cell<rangeDayOffsetEnd; cell++) {
+			//if cell exists in range
+			if (cells[cell]) {
+				segments.push({
+					row: cells[cell][0],
+					leftCol: cells[cell][1],
+					rightCol: cells[cell][1],
+					isStart: (cell==rangeDayOffsetStart),
+					isEnd: (cell==rangeDayOffsetEnd-1)
+				});
+			}	
+		}
+
+		return segments;
+	}
+
+	function getTheTopDatebook(i, rowContentElement) {
+		return (i==0) ? 24 : rowContentElement.position().top;
+	}
+}
+
 fcViews.month = MonthView;
 
 function MonthView(element, calendar) {
@@ -1960,8 +2069,7 @@ function MonthView(element, calendar) {
 	
 	// exports
 	t.render = render;
-	
-	
+		
 	// imports
 	BasicView.call(t, element, calendar, 'month');
 	var opt = t.opt;
@@ -2121,9 +2229,9 @@ setDefaults({
 function BasicView(element, calendar, viewName) {
 	var t = this;
 	
-	
 	// exports
 	t.renderBasic = renderBasic;
+	t.renderDatebook = renderDatebook;
 	t.setHeight = setHeight;
 	t.setWidth = setWidth;
 	t.renderDayOverlay = renderDayOverlay;
@@ -2144,8 +2252,7 @@ function BasicView(element, calendar, viewName) {
 	t.getRowCnt = function() { return rowCnt };
 	t.getColCnt = function() { return colCnt };
 	t.getColWidth = function() { return colWidth };
-	t.getDaySegmentContainer = function() { return daySegmentContainer };
-	
+	t.getDaySegmentContainer = function() { return daySegmentContainer };	
 	
 	// imports
 	View.call(t, element, calendar, viewName);
@@ -2159,9 +2266,9 @@ function BasicView(element, calendar, viewName) {
 	var daySelectionMousedown = t.daySelectionMousedown;
 	var cellToDate = t.cellToDate;
 	var dateToCell = t.dateToCell;
-	var rangeToSegments = t.rangeToSegments;
+	var rangeToSegments = t.rangeToSegmentsDatebook || t.rangeToSegments; //basicview
 	var formatDate = calendar.formatDate;
-	
+	var datebookCellToDate = t.datebookCellToDate;
 	
 	// locals
 	
@@ -2193,7 +2300,173 @@ function BasicView(element, calendar, viewName) {
 	var showWeekNumbers;
 	var weekNumberTitle;
 	var weekNumberFormat;
-	
+
+	/* DATEBOOK VIEW RENDERING */
+
+	function renderDatebook(_rowCnt, _colCnt, _showNumbers) {
+		rowCnt = _rowCnt;
+		colCnt = _colCnt;
+		showNumbers = _showNumbers;
+		updateOptions();
+
+		if (!body) {
+			buildEventContainer();
+		}
+
+		buildDatebookTable();
+	}
+
+	function buildHeadHTMLDatebook() {
+		var headerClass = tm + "-widget-header";
+		var html = '';
+
+		html += "<thead><tr>";
+		
+		for (var col=0; col<colCnt; col++) {
+			html += "<th class='fc-day-header " + headerClass + "'></th>";
+		}
+
+		html += "</tr></thead>";
+
+		return html;
+	}
+
+	function getQuoteCellHTML() {
+		var html = '';
+		var rand = Math.floor(Math.random()*10);
+		var quotes = [
+			"Time is of the essence! Comb your hair.",
+			"Sanity is a golden apple with no shoelaces.",
+			"Repent! The end is coming, $9.95 at Amazon.",
+			"Honesty blurts where deception sneezes.",
+			"Pastry satisfies where art is unavailable.",
+			"Delete not, lest you, too, be deleted.",
+			"O! Youth! What a pain in the backside.",
+			"Wishes are like goldfish with propellors.",
+			"Love the river's \"beauty\", but live on a hill.",
+			"Invention is the mother of too many useless toys."
+		];
+
+		var authors = [
+			"Abraham Lincoln",
+			"Samuel L. Jackson",
+			"Peyton Manning",
+			"Benjamin Franklin",
+			"Abraham Lincoln",
+			"Samuel L. Jackson",
+			"Peyton Manning",
+			"Benjamin Franklin",
+			"Abraham Lincoln",
+			"Samuel L. Jackson"
+		];
+
+		html += "<div class='picture'>" +
+					"<img src='http://placehold.it/150x150&text=INSPIRATION' />" +
+				"</div>" +
+				"<div class='quote'>" +
+					"<div class='text'>" +
+						quotes[rand] +
+					"</div>" +
+					"<div class='author'>" +
+						" - " + authors[rand] +
+					"</div>" +
+					"<div class='word'>" +
+						"annotate" +
+					"</div>" +
+					"<div class='definition'>" +
+						"add notes to (a text or diagram) giving explanation or comment" +
+					"</div>" +
+				"</div>";
+
+		return html;
+	}
+
+
+	function buildQuoteCellHTML() {
+		var contentClass = tm + "-widget-content";
+		var html = '';
+		var classNames = [
+			'fc-day',
+			'fc-quote',
+			contentClass
+		];
+
+		html +=
+			"<td" +
+			" class='" + classNames.join(' ') + "'" +
+			">" +
+			"<div>";
+
+		html +=
+			"<div class='fc-day-content fc-quote-content'>" +
+			"<div style='position:relative'>" + 
+			getQuoteCellHTML() +
+			"</div>" +
+			"</div>" +
+			"</div>" +
+			"</td>";
+
+		return html;
+	}
+
+	function buildDatebookTable() {
+		var contentClass = tm + "-widget-content";
+		var html = '';
+		var row;
+		var col;
+		var date;
+
+		//form html
+		var html = "<table class='fc-border-separate' style='width:100%' cellspacing='0'>";
+
+		html += buildHeadHTMLDatebook();
+
+		html += "<tbody>";
+
+		for (row=0; row<rowCnt; row++) {
+
+			html += "<tr class='fc-week'>";
+
+			for (col=0; col<colCnt; col++) {
+				date = addDays(cloneDate(t.visStart), row + 4*col - 1);
+				html += (row==0 && col==0) ? buildQuoteCellHTML() : buildDatebookCellHTML(date);	
+			}
+
+			html += "</tr>";
+		}
+
+		html += "<tbody></table>";
+
+		if (table) {
+			table.remove();
+		}
+		table = $(html).appendTo(element);
+		
+		head = table.find('thead');
+		headCells = head.find('.fc-day-header');
+		body = table.find('tbody');
+		bodyRows = body.find('tr');
+		bodyCells = body.find('.fc-day').not('.fc-quote');
+		bodyFirstCells = bodyRows.find('td:first-child');
+
+		firstRowCellInners = bodyRows.eq(0).find('.fc-day > div');
+		firstRowCellContentInners = bodyRows.eq(0).find('.fc-day-content > div');
+		
+		markFirstLast(head.add(head.find('tr'))); // marks first+last tr/th's
+		markFirstLast(bodyRows); // marks first+last td's
+		bodyRows.eq(0).addClass('fc-first');
+		bodyRows.filter(':last').addClass('fc-last');
+
+		bodyCells.each(function(i, _cell) {
+			var date = datebookCellToDate(
+				Math.floor(i / colCnt),
+				i % colCnt
+			);
+			trigger('dayRender', t, date, $(_cell));
+		});
+
+		dayBind(bodyCells);
+	}
 	
 	
 	/* Rendering
@@ -2215,8 +2488,7 @@ function BasicView(element, calendar, viewName) {
 
 		buildTable();
 	}
-	
-	
+
 	function updateOptions() {
 		tm = opt('theme') ? 'ui' : 'fc';
 		colFormat = opt('columnFormat');
@@ -2238,7 +2510,6 @@ function BasicView(element, calendar, viewName) {
 			$("<div class='fc-event-container' style='position:absolute;z-index:8;top:0;left:0'/>")
 				.appendTo(element);
 	}
-	
 	
 	function buildTable() {
 		var html = buildTableHTML();
@@ -2274,8 +2545,6 @@ function BasicView(element, calendar, viewName) {
 		dayBind(bodyCells);
 	}
 
-
-
 	/* HTML Building
 	-----------------------------------------------------------*/
 
@@ -2289,7 +2558,6 @@ function BasicView(element, calendar, viewName) {
 
 		return html;
 	}
-
 
 	function buildHeadHTML() {
 		var headerClass = tm + "-widget-header";
@@ -2356,6 +2624,59 @@ function BasicView(element, calendar, viewName) {
 		return html;
 	}
 
+	function buildDatebookCellHTML(date) {
+		var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+		var contentClass = tm + "-widget-content";
+		var month = t.start.getMonth();
+		var today = clearTime(new Date());
+		var html = '';
+		var classNames = [
+			'fc-day',
+			'fc-datebook-day',
+			'fc-' + dayIDs[date.getDay()],
+			contentClass
+		];
+
+		if (date.getMonth() != month) {
+			classNames.push('fc-other-month');
+		}
+		if (+date == +today) {
+			classNames.push(
+				'fc-today',
+				tm + '-state-highlight'
+			);
+		}
+		else if (date < today) {
+			classNames.push('fc-past');
+		}
+		else {
+			classNames.push('fc-future');
+		}
+
+		html +=
+			"<td" +
+			" class='" + classNames.join(' ') + "'" +
+			" data-date='" + formatDate(date, 'yyyy-MM-dd') + "'" +
+			">" +
+			"<div>";
+
+		if (showNumbers) {
+			html += "<div class='fc-datebook-header'>" +
+						"<span class='fc-datebook-day-header'>" + days[date.getDay()] + "</span> " +
+						"<span class='fc-day-number'>" + ordinal(date.getDate()) + "</span>" +
+						"<span class='icon-plus-alt right' aria-hidden='true'></span>" +
+					"</div>";
+		}
+
+		html +=
+			"<div class='fc-day-content'>" +
+				"<div style='position:relative'>&nbsp;</div>" +
+				"</div>" +
+			"</div>" +
+			"</td>";
+
+		return html;
+	}
 
 	function buildCellHTML(date) {
 		var contentClass = tm + "-widget-content";
@@ -2836,7 +3157,7 @@ function AgendaView(element, calendar, viewName) {
 	var slotSegHtml = t.slotSegHtml;
 	var cellToDate = t.cellToDate;
 	var dateToCell = t.dateToCell;
-	var rangeToSegments = t.rangeToSegments;
+	var rangeToSegments = t.rangeToSegments; //agenda view
 	var formatDate = calendar.formatDate;
 	
 	
@@ -4549,7 +4870,6 @@ function compareSlotSegs(seg1, seg2) {
 function View(element, calendar, viewName) {
 	var t = this;
 	
-	
 	// exports
 	t.element = element;
 	t.calendar = calendar;
@@ -4844,6 +5164,7 @@ function View(element, calendar, viewName) {
 	t.isHiddenDay = isHiddenDay;
 	t.skipHiddenDays = skipHiddenDays;
 	t.getCellsPerWeek = getCellsPerWeek;
+	t.getCellsPerDatebookWeek = getCellsPerDatebookWeek;
 	t.dateToCell = dateToCell;
 	t.dateToDayOffset = dateToDayOffset;
 	t.dayOffsetToCellOffset = dayOffsetToCellOffset;
@@ -4854,7 +5175,6 @@ function View(element, calendar, viewName) {
 	t.dayOffsetToDate = dayOffsetToDate;
 	t.rangeToSegments = rangeToSegments;
 
-
 	// internals
 	var hiddenDays = opt('hiddenDays') || []; // array of day-of-week indices that are hidden
 	var isHiddenDayHash = []; // is the day-of-week hidden? (hash with day-of-week-index -> bool)
@@ -4862,6 +5182,7 @@ function View(element, calendar, viewName) {
 	var dayToCellMap = []; // hash from dayIndex -> cellIndex, for one week
 	var cellToDayMap = []; // hash from cellIndex -> dayIndex, for one week
 	var isRTL = opt('isRTL');
+	var cellsPerDatebookWeek = 2;
 
 
 	// initialize important internal variables
@@ -4903,7 +5224,10 @@ function View(element, calendar, viewName) {
 	function getCellsPerWeek() {
 		return cellsPerWeek;
 	}
-
+	
+	function getCellsPerDatebookWeek() {
+		return cellsPerDatebookWeek;
+	}
 
 	// Keep incrementing the current day until it is no longer a hidden day.
 	// If the initial value of `date` is not a hidden day, don't do anything.
@@ -5018,6 +5342,7 @@ function View(element, calendar, viewName) {
 	}
 
 
+	
 	//
 	// Converts a date range into an array of segment objects.
 	// "Segments" are horizontal stretches of time, sliced up by row.
@@ -5081,19 +5406,17 @@ function View(element, calendar, viewName) {
 
 		return segments;
 	}
-	
-
 }
 
 ;;
 
 function DayEventRenderer() {
 	var t = this;
-
 	
 	// exports
 	t.renderDayEvents = renderDayEvents;
 	t.draggableDayEvent = draggableDayEvent; // made public so that subclasses can override
+	t.draggableDayEventDatebook = draggableDayEventDatebook; // made public so that subclasses can override
 	t.resizableDayEvent = resizableDayEvent; // "
 	
 	
@@ -5124,19 +5447,19 @@ function DayEventRenderer() {
 	var clearOverlays = t.clearOverlays;
 	var clearSelection = t.clearSelection;
 	var getHoverListener = t.getHoverListener;
-	var rangeToSegments = t.rangeToSegments;
+	var rangeToSegments = t.rangeToSegmentsDatebook || t.rangeToSegments;  //day event renderer
 	var cellToDate = t.cellToDate;
 	var cellToCellOffset = t.cellToCellOffset;
 	var cellOffsetToDayOffset = t.cellOffsetToDayOffset;
 	var dateToDayOffset = t.dateToDayOffset;
 	var dayOffsetToCellOffset = t.dayOffsetToCellOffset;
-
+	var datebookCellToDate = t.datebookCellToDate;
+	var getTheTop = t.getTheTopDatebook || getTheTopNormal;  //day event renderer
 
 	// Render `events` onto the calendar, attach mouse event handlers, and call the `eventAfterRender` callback for each.
 	// Mouse event will be lazily applied, except if the event has an ID of `modifiedEventId`.
 	// Can only be called when the event container is empty (because it wipes out all innerHTML).
 	function renderDayEvents(events, modifiedEventId) {
-
 		// do the actual rendering. Receive the intermediate "segment" data structures.
 		var segments = _renderDayEvents(
 			events,
@@ -5193,7 +5516,6 @@ function DayEventRenderer() {
 	// Set `doAppend` to `true` for rendering elements without clearing the existing container.
 	// Set `doRowHeights` to allow setting the height of each row, to compensate for vertical event overflow.
 	function _renderDayEvents(events, doAppend, doRowHeights) {
-
 		// where the DOM nodes will eventually end up
 		var finalContainer = getDaySegmentContainer();
 
@@ -5272,6 +5594,7 @@ function DayEventRenderer() {
 		var startDate = event.start;
 		var endDate = exclEndDay(event);
 		var segments = rangeToSegments(startDate, endDate);
+	
 		for (var i=0; i<segments.length; i++) {
 			segments[i].event = event;
 		}
@@ -5432,6 +5755,10 @@ function DayEventRenderer() {
 	/* Top-coordinate Methods
 	-------------------------------------------------------------------------------------------------*/
 
+	function getTheTopNormal(i, rowContentElement) {
+		return rowContentElement.position().top;
+	}
+
 
 	// Sets the "top" CSS property for each element.
 	// If `doRowHeights` is `true`, also sets each row's first cell to an explicit height,
@@ -5452,7 +5779,7 @@ function DayEventRenderer() {
 		// Important to do this after setting each row's height.
 		for (var i=0; i<rowContentElements.length; i++) {
 			rowContentTops.push(
-				rowContentElements[i].position().top
+				getTheTop(i, rowContentElements[i])
 			);
 		}
 
@@ -5548,7 +5875,6 @@ function DayEventRenderer() {
 
 		return segmentRows;
 	}
-
 
 	// Sort an array of segments according to which segment should appear closest to the top
 	function sortSegmentRow(segments) {
@@ -5652,7 +5978,6 @@ function DayEventRenderer() {
 		// needs to be after, because resizableDayEvent might stopImmediatePropagation on click
 		eventElementHandlers(event, eventElement);
 	}
-
 	
 	function draggableDayEvent(event, eventElement) {
 		var hoverListener = getHoverListener();
@@ -5670,6 +5995,50 @@ function DayEventRenderer() {
 					if (cell) {
 						var origDate = cellToDate(origCell);
 						var date = cellToDate(cell);
+						dayDelta = dayDiff(date, origDate);
+						renderDayOverlay(
+							addDays(cloneDate(event.start), dayDelta),
+							addDays(exclEndDay(event), dayDelta)
+						);
+					}else{
+						dayDelta = 0;
+					}
+				}, ev, 'drag');
+			},
+			stop: function(ev, ui) {
+				hoverListener.stop();
+				clearOverlays();
+				trigger('eventDragStop', eventElement, event, ev, ui);
+				if (dayDelta) {
+					eventDrop(this, event, dayDelta, 0, event.allDay, ev, ui);
+				}else{
+					eventElement.css('filter', ''); // clear IE opacity side-effects
+					showEvents(event, eventElement);
+				}
+			}
+		});
+	}
+
+	function draggableDayEventDatebook(event, eventElement) {
+		var hoverListener = getHoverListener();
+		var dayDelta;
+		eventElement.draggable({
+			delay: 50,
+			opacity: opt('dragOpacity'),
+			revertDuration: opt('dragRevertDuration'),
+			start: function(ev, ui) {
+				trigger('eventDragStart', eventElement, event, ev, ui);
+				hideEvents(event, eventElement);
+				hoverListener.start(function(cell, origCell, rowDelta, colDelta) {
+					//prevent events from being dragged into the quote cell (0,0)
+					if (cell) {
+						if (cell.row == 0 && cell.col == 0) cell = null; 
+					}
+					eventElement.draggable('option', 'revert', !cell || !rowDelta && !colDelta);
+					clearOverlays();
+					if (cell) {
+						var origDate = datebookCellToDate(origCell.row, origCell.col);
+						var date = datebookCellToDate(cell.row, cell.col);
 						dayDelta = dayDiff(date, origDate);
 						renderDayOverlay(
 							addDays(cloneDate(event.start), dayDelta),
