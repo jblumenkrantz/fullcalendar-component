@@ -2361,7 +2361,7 @@ function BasicView(element, calendar, viewName) {
 		];
 
 		html += "<div class='picture'>" +
-					"<img src='http://placehold.it/150x150&text=INSPIRATION' />" +
+					"<img src='/assets/images/school.png' />" +
 				"</div>" +
 				"<div class='quote'>" +
 					"<div class='text'>" +
