@@ -2242,8 +2242,8 @@ function ListView(element, calendar) {
 
       //when the user scrolls to the top or bottom of list view
       //advance month by +/- 1 month as if they had clicked the month arrows
-      $("#fc-scroller").unbind('mousewheel');
-      $("#fc-scroller").bind('mousewheel', infinityScroll);
+      //$("#fc-scroller").unbind('mousewheel');
+      //$("#fc-scroller").bind('mousewheel', infinityScroll);
 
       //scroll to today if today is in view range
       var todayScrollPosition = $(".fc-today-header").position();
