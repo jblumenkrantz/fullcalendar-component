@@ -2209,6 +2209,7 @@ function ListView(element, calendar) {
       var totalDelta = 0;
       var deltaThreshold = 1200;
 
+      //only works on Chrome
       function infinityScroll(e) {
       	//user is at the scroll limit if scrollable area is either:
       	//all the way at the to or all the way at the bottom
