@@ -2205,9 +2205,6 @@ function ListView(element, calendar) {
       		trigger('dayClick', $(this), date, false, e);
       });
 
-      var topCount = 0;
-      var bottomCount = 0;
-      var moveRangeAtCount = 10;
       var angularScope = opt('angularScope');
       var totalDelta = 0;
       var deltaThreshold = 1200;
