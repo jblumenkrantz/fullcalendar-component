@@ -1,0 +1,34 @@
+/* agendaList view full calendar css */
+
+/* parent view class */
+.fc-view-agendaList {
+	background: white;
+}
+
+/* view overrides */
+.fc-view-agendaList ul {
+	margin: 0;
+}
+
+.fc-view-agendaList ul li {}
+
+.fc-view-agendaList ul li.dayHeader {
+	font-weight: 300;
+	padding-left: 3px;
+	border-left: none;
+	border-right: none;
+	background: rgba(221, 221, 221, 0.5);
+}
+
+.fc-view-agendaList ul li.dayHeader.fc-state-highlight {
+	background: #fcf8e3;
+}
+
+.fc-view-agendaList ul li.dayDetails {
+	margin: 3px;
+	padding-right: 3px;
+}
+
+.fc-view-agendaList ul li.listEndCap {
+	height: 0px;
+}

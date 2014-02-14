@@ -120,8 +120,6 @@ var fcViews = fc.views = {};
 
 
 $.fn.fullCalendar = function(options) {
-
-
 	// method calling
 	if (typeof options == 'string') {
 		var args = Array.prototype.slice.call(arguments, 1);
@@ -168,8 +166,7 @@ $.fn.fullCalendar = function(options) {
 		element.data('fullCalendar', calendar); // TODO: look into memory leak implications
 		calendar.render();
 	});
-	
-	
+
 	return this;
 	
 };
@@ -1960,6 +1957,314 @@ function firstDefined() {
 
 
 ;;
+
+//---------------------------------------------------------------
+//
+// FULLCALENDAR LIST
+//
+//---------------------------------------------------------------
+
+// new view and its button
+fcViews.agendaList = agendaListView;
+defaults.buttonText.agendaList = 'L';
+defaults.titleFormat.agendaList = 'MMMM yyyy';
+defaults.agendaDisType = true;
+
+function agendaListView(element, calendar)
+{
+   var t = this;
+
+
+   // exports
+   t.render = render;
+
+   // imports
+   ListView.call(t, element, calendar);
+   var opt = t.opt;
+   var renderAgendaList = t.renderAgendaList;
+   var formatDate = calendar.formatDate;
+
+
+   function render(date, delta)
+   {
+      if (delta)
+      {
+         addMonths(date, delta);
+         date.setDate(1);
+      }
+      var start, end, visStart, visEnd;
+      start = cloneDate(date, true);
+      start.setDate(1);
+      end = addMonths(cloneDate(start), 1);
+      visStart = cloneDate(start);
+      visEnd = cloneDate(end);
+      // I will keep all params and discuss with the group about the header 
+      // as well as if we should use June 1st or start of the calendar view date
+      t.title = formatDate(start, opt('titleFormat'));
+      t.start = start;
+      t.end = end;
+      t.visStart = visStart;
+      t.visEnd = visEnd;
+      renderAgendaList(false);
+   }
+}
+
+function ListView(element, calendar) {
+   var t = this;
+
+
+   // exports
+   t.renderAgendaList = renderAgendaList;
+   t.setHeight = setHeight;
+   t.setWidth = setWidth;
+   t.renderEvents = renderEvents;
+   t.clearEvents = clearEvents;
+
+   t.cellIsAllDay = function () {
+      return true
+   };
+
+   t.getColWidth = function () {
+      return colWidth
+   };
+
+   t.getDaySegmentContainer = function () {
+      return daySegmentContainer
+   };
+
+
+   // imports
+   View.call(t, element, calendar, 'agendaList');
+   OverlayManager.call(t);
+   SelectionManager.call(t);
+
+   var opt = t.opt;
+   var trigger = t.trigger;
+   var renderOverlay = t.renderOverlay;
+   var clearOverlays = t.clearOverlays;
+   var daySelectionMousedown = t.daySelectionMousedown;
+   var formatDate = calendar.formatDate;
+
+   // locals
+   var updateEvents = t.calendar.updateEvents;
+   var table;
+   var head;
+   var headCells;
+   var body;
+   var bodyRows;
+   var bodyCells;
+   var bodyFirstCells;
+   var bodyCellTopInners;
+   var daySegmentContainer;
+
+   var viewWidth;
+   var viewHeight;
+   var colWidth;
+   var weekNumberWidth;
+
+   var rowCnt, colCnt;
+   var coordinateGrid;
+   var hoverListener;
+   var colContentPositions;
+
+   var rtl, dis, dit;
+   var firstDay;
+   var nwe;
+   var tm;
+   var colFormat;
+   var showWeekNumbers;
+   var weekNumberTitle;
+   var weekNumberFormat;
+   var eventElementHandlers = t.eventElementHandlers;
+
+   function renderAgendaList() {
+      var firstTime = !body;
+      if (firstTime)
+      {
+         buildTable();
+      }
+      else
+      {
+         clearEvents();
+      }
+   }
+
+
+   function buildTable() {
+      body = true;
+   }
+
+
+   function setHeight(height) {
+      viewHeight = height;
+      var bodyHeight = viewHeight;
+   }
+
+   function setWidth(width) {
+      viewWidth = width;
+   }
+
+   //var reportEventClear = t.reportEventClear;
+   var getDaySegmentContainer = t.getDaySegmentContainer;
+
+
+   function renderEvents(events, modifiedEventId) {
+      var EmptyMonth = true ;
+      var html = $("<ul class='listCalendar'></ul>");
+      var ClassName = "";
+
+      var lMonth, lDay, lTime, lDate, lUrl, lTitle;
+      var temp, i = 0;
+      var vMonthAndYear = formatDate(t.visStart, 'MM yyyy');
+      var arr = [];
+      var today = formatDate(new Date(), 'MMM d');
+      var todayHeaderClass;
+
+      //sort events by start time ascending because for some reason they are not at this point
+      events.sort(function(a,b) {
+      	return a.start - b.start;
+      });
+
+      for (i in events) {
+         z = i;
+         eMonthAndYear = formatDate(events[i].start, 'MM yyyy');
+
+         //if event falls into view range, render it
+         if (eMonthAndYear == vMonthAndYear) {
+            EmptyMonth = false;
+            lMonth = formatDate(events[i].start, 'MMM');
+            lDay = formatDate(events[i].start, 'dddd');
+            lDate = formatDate(events[i].start, 'MMM d');
+            lDDay = formatDate(events[i].start, 'dddd, MMM d');
+            lTitle = events[i].title;
+            allDay = events[i].allDay;
+            ClassName = events[i].className;
+            textColor = events[i].source.color;
+            todayHeaderClass = (lDate == today) ? "fc-today-header fc-state-highlight" : "";
+            var format;
+
+            //if single day event
+            if (formatDate(events[i].start, 'd MMM') == formatDate(events[i].end, 'd MMM')) {
+               	lTime = formatDate(events[i].start, opt('timeFormat')) + ' - ' + formatDate(events[i].end, opt('timeFormat'))
+            }
+            //if multiday event
+            else {
+				format = 'MMM d ' + opt('timeFormat');
+				lTime = formatDate(events[i].start, format) + ' - ' + formatDate(events[i].end, format);
+            }
+
+            lUrl = events[i].url;
+
+            if (lUrl != null) {
+               lTitle = "<a href='" + htmlEscape(lUrl) + "'>" + lTitle + "</a>";
+            }
+
+            if (i != temp) {
+               if (!dayHeaderExists(arr, lDDay)) {
+                  $("<li data-date='" + formatDate(events[i].start, "yyyy-MM-dd") + "' class='dayHeader fc-widget-header fc-day-number " + todayHeaderClass + "'>" + lDDay + "</li>").appendTo(html);
+                  temp = z;
+                  arr.push(lDDay);
+               }
+            }
+
+            if (i % 2 == 0) {
+               if (allDay) {
+                  eventdisplay = $("<li style='border-color:" + textColor + ";' class='" + ClassName.join(' ') + "fc-event fc-event-hori fc-event-start fc-event-end dayDetails even'>" + lTitle + "</a><span style='float:right'>" + opt('allDayText') + "</span></li>").appendTo(html);
+               }
+               else {
+                  eventdisplay = $("<li style='border-color:" + textColor + ";' class='" + ClassName.join(' ') + "fc-event fc-event-hori fc-event-start fc-event-end dayDetails even'>" + lTitle + "</a><span style='float:right'>" + lTime + "</span></li>").appendTo(html);
+               }
+            }
+            else {
+               if (allDay)  {
+                  eventdisplay = $("<li style='border-color:" + textColor + ";' class='" + ClassName.join(' ') + "fc-event fc-event-hori fc-event-start fc-event-end dayDetails odd'>" + lTitle + "</a><span style='float:right'>" + opt('allDayText') + "</span></li>").appendTo(html);
+               }
+               else {
+                  eventdisplay = $("<li style='border-color:" + textColor + ";' class='" + ClassName.join(' ') + "fc-event fc-event-hori fc-event-start fc-event-end dayDetails odd'>" + lTitle + "</a><span style='float:right'>" + lTime + "</span></li>").appendTo(html);
+               }
+            }
+
+            eventElementHandlers(events[i], eventdisplay);
+         }
+      }
+
+      if (EmptyMonth == true)
+      {
+         $("<div>Empty Month</div>").appendTo(html);
+      }
+      else
+      {    
+         eventdisplay = $("<li class='listEndCap'> </li>").appendTo(html);
+      }
+       
+      $(element).empty().html(html);
+
+      //clicking on day headers switches to day view
+      $(".dayHeader", element).click(function(e) {
+      		var date = parseDate($(this).attr('data-date'));
+      		trigger('dayClick', $(this), date, false, e);
+      });
+
+      var topCount = 0;
+      var bottomCount = 0;
+      var moveRangeAtCount = 10;
+      var angularScope = opt('angularScope');
+
+      function infinityScroll(e) {
+      	var scrolledTop = ($(this).scrollTop() == 0);
+  		var scrolledBottom = ($(this)[0].scrollHeight-$(this).scrollTop() == $(this).outerHeight());
+
+  		topCount = (e.originalEvent.wheelDelta < 0) ? 0 : topCount;
+  		bottomCount = (e.originalEvent.wheelDelta > 0) ? 0 : bottomCount;
+
+		if(e.originalEvent.wheelDelta < 0 && scrolledBottom) {
+			bottomCount++;
+		}
+
+		if (e.originalEvent.wheelDelta > 0 && scrolledTop) {
+			topCount++;
+		}
+
+  		if (topCount > moveRangeAtCount) {
+  			topCount = 0;
+  			bottomCount = 0;
+  			$(this).scrollTop(2000);
+  			angularScope.previous();
+  		}
+
+  		if (bottomCount > moveRangeAtCount) {
+  			topCount = 0;
+  			bottomCount = 0;
+  			$(this).scrollTop(0);
+  			angularScope.next();
+  		}
+      }
+
+      //when the user scrolls to the top or bottom of list view
+      //advance month by +/- 1 month as if they had clicked the month arrows
+      $("#fc-scroller").unbind('mousewheel');
+      $("#fc-scroller").bind('mousewheel', infinityScroll);
+
+      //scroll to today if today is in view range
+      var todayScrollPosition = $(".fc-today-header").position();
+	  $("#fc-scroller").scrollTop(todayScrollPosition ? todayScrollPosition.top : 0);
+
+      trigger('eventAfterAllRender');
+   }
+
+   function dayHeaderExists(arr, header) {
+      for (var i = 0; i < arr.length; i++) {
+         if (arr[i] == header) return true;
+      }
+      return false;
+   }
+
+   function clearEvents() {
+      //reportEventClear();
+   }
+}
+
+;
 
 fcViews.datebook = DatebookView;
 
