@@ -2209,41 +2209,36 @@ function ListView(element, calendar) {
       var bottomCount = 0;
       var moveRangeAtCount = 10;
       var angularScope = opt('angularScope');
+      var totalDelta = 0;
+      var deltaThreshold = 1200;
 
       function infinityScroll(e) {
-      	var scrolledTop = ($(this).scrollTop() == 0);
-  		var scrolledBottom = ($(this)[0].scrollHeight-$(this).scrollTop() == $(this).outerHeight());
+      	//user is at the scroll limit if scrollable area is either:
+      	//all the way at the to or all the way at the bottom
+  		var atScrollLimit = (
+  			$(this).scrollTop() == 0 || 
+  			$(this)[0].scrollHeight-$(this).scrollTop() == $(this).outerHeight()
+  		);
 
-  		topCount = (e.originalEvent.wheelDelta < 0) ? 0 : topCount;
-  		bottomCount = (e.originalEvent.wheelDelta > 0) ? 0 : bottomCount;
+  		if (atScrollLimit) totalDelta += e.originalEvent.wheelDelta;
 
-		if(e.originalEvent.wheelDelta < 0 && scrolledBottom) {
-			bottomCount++;
-		}
-
-		if (e.originalEvent.wheelDelta > 0 && scrolledTop) {
-			topCount++;
-		}
-
-  		if (topCount > moveRangeAtCount) {
-  			topCount = 0;
-  			bottomCount = 0;
-  			$(this).scrollTop(2000);
-  			angularScope.previous();
-  		}
-
-  		if (bottomCount > moveRangeAtCount) {
-  			topCount = 0;
-  			bottomCount = 0;
-  			$(this).scrollTop(0);
-  			angularScope.next();
+  		if (Math.abs(totalDelta) > deltaThreshold) {
+  			if (totalDelta > 0) {
+  				angularScope.$apply(angularScope.previous);
+  				$(this).scrollTop(2000);
+  			}
+  			if (totalDelta < 0) {
+  				angularScope.$apply(angularScope.next);
+  				$(this).scrollTop(0);
+  			}
+  			totalDelta = 0;
   		}
       }
 
       //when the user scrolls to the top or bottom of list view
       //advance month by +/- 1 month as if they had clicked the month arrows
-      //$("#fc-scroller").unbind('mousewheel');
-      //$("#fc-scroller").bind('mousewheel', infinityScroll);
+      $("#fc-scroller").unbind('mousewheel');
+      $("#fc-scroller").bind('mousewheel', infinityScroll);
 
       //scroll to today if today is in view range
       var todayScrollPosition = $(".fc-today-header").position();
