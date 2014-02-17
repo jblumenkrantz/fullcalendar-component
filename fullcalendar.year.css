@@ -1,0 +1,242 @@
+/* year view full calendar css */
+
+/* parent view class */
+.fc-view-year {}
+
+.fc-view-year table tr.even, table tr.alt, table tr:nth-of-type(even) {
+	background: none;
+}
+
+.fc-view-year .fc-year-day {
+	cursor:pointer;
+}
+
+.fc-view-year .fc-year-main-table {
+	
+}
+
+.fc-view-year .fc-year-monthly-td {
+	padding: 5px;
+}
+
+.fc-view-year .fc-year-monthly-name {
+	color: rgb(34, 34, 34);
+	padding: 5px 5px 0 5px;
+	font-size: 1.5em;
+	cursor: pointer;
+}
+
+/* JAN COLORS */
+.fc-view-year .fc-January.fc-year-current-month {
+	background: rgba(241,191,184,0.4);
+}
+.fc-view-year .fc-January .fc-year-monthly-name  {
+	color: #DE4D54;
+}
+.fc-view-year .fc-January.fc-year-current-month  .fc-year-month thead {
+ 	background: #F1BFB8;
+}
+.fc-view-year .fc-January.fc-year-current-month .fc-year-month {
+	border: 1px solid #F1BFB8;
+}
+
+/* FEB COLORS */
+.fc-view-year .fc-February.fc-year-current-month {
+	background: rgba(215,147,181,0.4);
+}
+.fc-view-year .fc-February .fc-year-monthly-name {
+	color: #882266;
+}
+.fc-view-year .fc-February.fc-year-current-month  .fc-year-month thead {
+ 	background: #BB5588;
+}
+.fc-view-year .fc-February.fc-year-current-month .fc-year-month {
+	border: 1px solid #BB5588;
+}
+
+/* MARCH COLORS */
+.fc-view-year .fc-March.fc-year-current-month {
+	background: rgba(172,221,243,0.4);
+}
+.fc-view-year .fc-March .fc-year-monthly-name {
+	color: #53A3CB;
+}
+.fc-view-year .fc-March.fc-year-current-month  .fc-year-month thead {
+ 	background: #ACDDF3;
+}
+.fc-view-year .fc-March.fc-year-current-month .fc-year-month {
+	border: 1px solid #ACDDF3;
+}
+
+/* April COLORS */
+.fc-view-year .fc-April.fc-year-current-month {
+	background: rgba(0,0,0,.2);
+}
+.fc-view-year .fc-April .fc-year-monthly-name {
+	color: black;
+}
+.fc-view-year .fc-April.fc-year-current-month  .fc-year-month thead {
+ 	background: whitesmoke;
+}
+
+/* MAY COLORS */
+.fc-view-year .fc-May.fc-year-current-month {
+	background: rgba(54,249,240,0.4);
+}
+.fc-view-year .fc-May .fc-year-monthly-name {
+	color: #0F622A;
+}
+.fc-view-year .fc-May.fc-year-current-month  .fc-year-month thead {
+ 	background: #1CBF80;
+}
+.fc-view-year .fc-May.fc-year-current-month .fc-year-month {
+	border: 1px solid #1CBF80;
+}
+
+/* JUNE COLORS */
+.fc-view-year .fc-June.fc-year-current-month {
+	background: rgba(254,249,240,0.7);
+}
+.fc-view-year .fc-June .fc-year-monthly-name {
+	color: #777;
+}
+.fc-view-year .fc-June.fc-year-current-month  .fc-year-month thead {
+ 	background: #FEF9F0;
+}
+
+/* JULY COLORS */
+.fc-view-year .fc-July.fc-year-current-month {
+	background: rgba(186,42,85,0.3);
+}
+.fc-view-year .fc-July .fc-year-monthly-name {
+	color: #731629;
+}
+.fc-view-year .fc-July.fc-year-current-month  .fc-year-month thead {
+ 	background: rgba(153,53,77,0.5);
+}
+.fc-view-year .fc-July.fc-year-current-month .fc-year-month {
+	border: 1px solid rgba(153,53,77,0.5);
+}
+
+/* AUGUST COLORS */
+.fc-view-year .fc-August.fc-year-current-month {
+	background: rgba(204,238,25,0.4);
+}
+.fc-view-year .fc-August .fc-year-monthly-name {
+	color: #83AF13;
+}
+.fc-view-year .fc-August.fc-year-current-month  .fc-year-month thead {
+ 	background: #A4CF13;
+}
+.fc-view-year .fc-August.fc-year-current-month .fc-year-month {
+	border: 1px solid #A4CF13;
+}
+
+
+/* SEPT COLORS */
+.fc-view-year .fc-September.fc-year-current-month {
+	background: rgba(106,137,216,0.4);
+}
+.fc-view-year .fc-September .fc-year-monthly-name {
+	color: blue;
+}
+.fc-view-year .fc-September.fc-year-current-month  .fc-year-month thead {
+ 	background: #6A89D8;
+}
+.fc-view-year .fc-September.fc-year-current-month .fc-year-month {
+	border: 1px solid #6A89D8;
+}
+
+/* OCT COLORS */
+.fc-view-year .fc-October.fc-year-current-month {
+	background: rgba(59,90,75,0.2);
+}
+.fc-view-year .fc-October .fc-year-monthly-name {
+	color: purple;
+}
+.fc-view-year .fc-October.fc-year-current-month  .fc-year-month thead {
+ 	background: #93DEFE;
+}
+.fc-view-year .fc-October.fc-year-current-month .fc-year-month {
+	border: 1px solid #93DEFE;
+}
+
+/* NOV COLORS */
+.fc-view-year .fc-November.fc-year-current-month {
+	background: rgba(218,176,118,0.4);
+}
+.fc-view-year .fc-November .fc-year-monthly-name  {
+	color: #D45F20;
+}
+.fc-view-year .fc-November.fc-year-current-month  .fc-year-month thead {
+ 	background: #DAB076;
+}
+.fc-view-year .fc-November.fc-year-current-month .fc-year-month {
+	border: 1px solid #DAB076;
+}
+
+/* DECEMBER COLORS */
+.fc-view-year .fc-December.fc-year-current-month {
+	background: rgba(80,211,239,0.4);
+}
+.fc-view-year .fc-December .fc-year-monthly-name {
+	color: #3C7DDE;
+}
+.fc-view-year .fc-December.fc-year-current-month  .fc-year-month thead {
+ 	background: #3C7DDE;
+}
+.fc-view-year .fc-December.fc-year-current-month .fc-year-month {
+	border: 1px solid #3C7DDE;
+}
+
+.fc-view-year .fc-state-highlight {
+	background: none;
+}
+
+.fc-view-year .fc-today .icon-star2 {
+	position: relative;
+	float: left;
+	margin: calc(50% - 2.2em) 0 -1em 0;
+	font-size: 1.525em;
+	text-shadow: none;
+	text-align: center;
+	width: 100%;
+	cursor: pointer;
+}
+ 
+/* EVENT DENSITY */
+.fc-event-density-20 {background-color: #660000;}
+.fc-event-density-19 {background-color: #7A0000;}
+.fc-event-density-18 {background-color: #8F0000;}
+.fc-event-density-17 {background-color: #A30000;}
+.fc-event-density-16 {background-color: #B80000;}
+.fc-event-density-15 {background-color: #CC0000;}
+.fc-event-density-14 {background-color: #E00000;}
+.fc-event-density-13 {background-color: #F50000;}
+.fc-event-density-12 {background-color: #FF0000;}
+.fc-event-density-11 {background-color: #FF1F1F;}
+.fc-event-density-10 {background-color: #FF3333;}
+.fc-event-density-9 {background-color: #FF4747;}
+
+.fc-event-density-20 *, .fc-event-density-20 + * {color: white;}
+.fc-event-density-19 *, .fc-event-density-19 + * {color: white;}
+.fc-event-density-18 *, .fc-event-density-18 + * {color: white;}
+.fc-event-density-17 *, .fc-event-density-17 + * {color: white;}
+.fc-event-density-16 *, .fc-event-density-16 + * {color: white;}
+.fc-event-density-15 *, .fc-event-density-15 + * {color: white;}
+.fc-event-density-14 *, .fc-event-density-14 + * {color: white;}
+.fc-event-density-13 *, .fc-event-density-13 + * {color: white;}
+.fc-event-density-12 *, .fc-event-density-12 + * {color: white;}
+.fc-event-density-11 *, .fc-event-density-11 + * {color: white;}
+.fc-event-density-10 *, .fc-event-density-10 + * {color: white;}
+.fc-event-density-9 *, .fc-event-density-9 + * {color: white;}
+
+
+.fc-event-density-8 {background-color: #FF5C5C;}
+.fc-event-density-7 {background-color: #FF7070;}
+.fc-event-density-6 {background-color: #FF8585;}
+.fc-event-density-5 {background-color: #FF9999;}
+.fc-event-density-4 {background-color: #FFADAD;}
+.fc-event-density-3 {background-color: #FFC2C2;}
+.fc-event-density-2 {background-color: #FFD6D6;}
+.fc-event-density-1 {background-color: #FFEBEB;}
