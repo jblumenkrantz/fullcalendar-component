@@ -2457,21 +2457,31 @@ function BasicYearView(element, calendar, viewName) {
 	SelectionManager.call(t);
 
 	t.rangeToSegments = rangeToSegmentsYear;
-	t.renderEvents = function(events, b, c, d, e) {
-		console.log("--- YearView renderEvents() ---");
-		console.log(events, b, c, d, e);
+	t.renderEvents = function(events) {
+
+		//reset all densities
+		$(".fc-year-day-container").data("eventDensity", 0);
 		
+		//loop over events and determind density classes
+		for (i in events) {
+			var start = events[i].start;
+			var selector = ".fc-day-"+formatDate(start, "yyyy-MM-dd")+" .fc-year-day-container";
+			$(selector).removeClass(oldDensityClass).addClass(newDensityClass);
+		}
 
+		function oldDensityClass(index, oldClass) {
+			return (oldClass.match(/\bfc-event-density-\S+/g) || []).join(' ');
+		}
 
+		function newDensityClass(index, currentClass) {
+			var oldDensity =  $(this).data("eventDensity");
+			var newDensity = oldDensity+1;
+			var newClass = "fc-event-density-"+newDensity;
+			$(this).data("eventDensity", newDensity);
+			return newClass;
+		}
 	};
-	t.clearEvents = function(events, b, c, d, e) {
-		console.log("--- YearView clearEvents() ---");
-		console.log(events, b, c, d, e);
-
-
-		
-
-	};
+	t.clearEvents = function(events) {};
 	//BasicEventRenderer.call(t);
 
 	t.rowToGridOffset = rowToGridOffset;
@@ -2766,9 +2776,6 @@ function BasicYearView(element, calendar, viewName) {
 			// in current month, but hidden (weekends) at end
 			otherMonthDays[mi][3] = endDaysHidden;
 		});
-
-		console.log(otherMonthDays);
-
 		bodyRows.filter('.fc-year-have-event').removeClass('fc-year-have-event');
 	}
 

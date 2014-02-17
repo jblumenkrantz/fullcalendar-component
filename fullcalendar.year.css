@@ -157,3 +157,33 @@
 .fc-view-year .fc-December .fc-year-month thead {
  	background: #3C7DDE;
 }
+
+.fc-view-year .fc-year-day-container {
+
+}
+
+/* EVENT DENSITY */
+/* tint method */
+.fc-event-density-20 {background-color: rgba(255, 0, 0, 1);}
+.fc-event-density-19 {background-color: rgba(255, 0, 0, .95);}
+.fc-event-density-18 {background-color: rgba(255, 0, 0, .9);}
+.fc-event-density-17 {background-color: rgba(255, 0, 0, .85);}
+.fc-event-density-16 {background-color: rgba(255, 0, 0, .8);}
+.fc-event-density-15 {background-color: rgba(255, 0, 0, .75);}
+.fc-event-density-14 {background-color: rgba(255, 0, 0, .7);}
+.fc-event-density-13 {background-color: rgba(255, 0, 0, .65);}
+.fc-event-density-12 {background-color: rgba(255, 0, 0, .6);}
+.fc-event-density-11 {background-color: rgba(255, 0, 0, .55);}
+.fc-event-density-10 {background-color: rgba(255, 0, 0, .5);}
+.fc-event-density-9 {background-color: rgba(255, 0, 0, .45);}
+.fc-event-density-8 {background-color: rgba(255, 0, 0, .4);}
+.fc-event-density-7 {background-color: rgba(255, 0, 0, .35);}
+.fc-event-density-6 {background-color: rgba(255, 0, 0, .3);}
+.fc-event-density-5 {background-color: rgba(255, 0, 0, .25);}
+.fc-event-density-4 {background-color: rgba(255, 0, 0, .2);}
+.fc-event-density-3 {background-color: rgba(255, 0, 0, .15);}
+.fc-event-density-2 {background-color: rgba(255, 0, 0, .1);}
+.fc-event-density-1 {background-color: rgba(255, 0, 0, .05);}
+
+/* shade method */
+
