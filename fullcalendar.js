@@ -2456,8 +2456,6 @@ function BasicYearView(element, calendar, viewName) {
 		//any day with more than 20 events will look like 20 events dense
 		var densityThreshold = 20;
 
-		console.log("adsf");
-
 		//reset all densities
 		$(".fc-year-day-container").data("eventDensity", 0);
 		$(".fc-year-day-container").removeClass(oldDensityClass);
