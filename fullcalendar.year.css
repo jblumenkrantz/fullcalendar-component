@@ -16,14 +16,14 @@
 }
 
 .fc-view-year .fc-year-monthly-td {
-	/*border: 1px solid #444;*/
-	border: 2px solid transparent;
+	padding: 5px;
 }
 
 .fc-view-year .fc-year-monthly-name {
 	color: rgb(34, 34, 34);
 	padding: 5px 5px 0 5px;
 	font-size: 1.5em;
+	cursor: pointer;
 }
 
 /* JAN COLORS */
@@ -36,6 +36,9 @@
 .fc-view-year .fc-January.fc-year-current-month  .fc-year-month thead {
  	background: #F1BFB8;
 }
+.fc-view-year .fc-January.fc-year-current-month .fc-year-month {
+	border: 1px solid #F1BFB8;
+}
 
 /* FEB COLORS */
 .fc-view-year .fc-February.fc-year-current-month {
@@ -47,6 +50,9 @@
 .fc-view-year .fc-February.fc-year-current-month  .fc-year-month thead {
  	background: #BB5588;
 }
+.fc-view-year .fc-February.fc-year-current-month .fc-year-month {
+	border: 1px solid #BB5588;
+}
 
 /* MARCH COLORS */
 .fc-view-year .fc-March.fc-year-current-month {
@@ -57,6 +63,9 @@
 }
 .fc-view-year .fc-March.fc-year-current-month  .fc-year-month thead {
  	background: #ACDDF3;
+}
+.fc-view-year .fc-March.fc-year-current-month .fc-year-month {
+	border: 1px solid #ACDDF3;
 }
 
 /* April COLORS */
@@ -80,6 +89,9 @@
 .fc-view-year .fc-May.fc-year-current-month  .fc-year-month thead {
  	background: #1CBF80;
 }
+.fc-view-year .fc-May.fc-year-current-month .fc-year-month {
+	border: 1px solid #1CBF80;
+}
 
 /* JUNE COLORS */
 .fc-view-year .fc-June.fc-year-current-month {
@@ -102,6 +114,9 @@
 .fc-view-year .fc-July.fc-year-current-month  .fc-year-month thead {
  	background: rgba(153,53,77,0.5);
 }
+.fc-view-year .fc-July.fc-year-current-month .fc-year-month {
+	border: 1px solid rgba(153,53,77,0.5);
+}
 
 /* AUGUST COLORS */
 .fc-view-year .fc-August.fc-year-current-month {
@@ -113,6 +128,10 @@
 .fc-view-year .fc-August.fc-year-current-month  .fc-year-month thead {
  	background: #A4CF13;
 }
+.fc-view-year .fc-August.fc-year-current-month .fc-year-month {
+	border: 1px solid #A4CF13;
+}
+
 
 /* SEPT COLORS */
 .fc-view-year .fc-September.fc-year-current-month {
@@ -123,6 +142,9 @@
 }
 .fc-view-year .fc-September.fc-year-current-month  .fc-year-month thead {
  	background: #6A89D8;
+}
+.fc-view-year .fc-September.fc-year-current-month .fc-year-month {
+	border: 1px solid #6A89D8;
 }
 
 /* OCT COLORS */
@@ -135,6 +157,9 @@
 .fc-view-year .fc-October.fc-year-current-month  .fc-year-month thead {
  	background: #93DEFE;
 }
+.fc-view-year .fc-October.fc-year-current-month .fc-year-month {
+	border: 1px solid #93DEFE;
+}
 
 /* NOV COLORS */
 .fc-view-year .fc-November.fc-year-current-month {
@@ -145,6 +170,9 @@
 }
 .fc-view-year .fc-November.fc-year-current-month  .fc-year-month thead {
  	background: #DAB076;
+}
+.fc-view-year .fc-November.fc-year-current-month .fc-year-month {
+	border: 1px solid #DAB076;
 }
 
 /* DECEMBER COLORS */
@@ -157,9 +185,8 @@
 .fc-view-year .fc-December.fc-year-current-month  .fc-year-month thead {
  	background: #3C7DDE;
 }
-
-.fc-view-year .fc-year-day-container {
-
+.fc-view-year .fc-December.fc-year-current-month .fc-year-month {
+	border: 1px solid #3C7DDE;
 }
 
 .fc-view-year .fc-state-highlight {

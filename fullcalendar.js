@@ -2483,6 +2483,12 @@ function BasicYearView(element, calendar, viewName) {
 			var oldDensity =  $(this).data("eventDensity");
 			var newDensity = (oldDensity < densityThreshold) ? oldDensity+1 : oldDensity;
 			var newClass = "fc-event-density-"+newDensity;
+
+			//don't give a day from another month a red color
+			if ($(this).parent().hasClass('fc-other-month')) {
+				newClass = "";
+			}
+
 			$(this).data("eventDensity", newDensity);
 			return newClass;
 		}
@@ -2666,11 +2672,7 @@ function BasicYearView(element, calendar, viewName) {
 
 				s += '<tr class="fc-week' + i + '">';
 				for (j=0; j<colCnt; j++) {
-					if (di.getMonth() == (m%12)) {
-						dayStr=formatDate(di, '-yyyy-MM-dd');
-					} else {
-						dayStr='';
-					}
+					dayStr=formatDate(di, '-yyyy-MM-dd');
 					s += '<td class="'+contentClass+' fc-day fc-'+dayIDs[di.getDay()]+' fc-day'+dayStr + '">' + // need fc- for setDayID
 					'<div class="fc-year-day fc-year-day-container">' +
 						(showNumbers ? '<div class="fc-day-number fc-year-day"/>' : '') +
@@ -2806,10 +2808,8 @@ function BasicYearView(element, calendar, viewName) {
 	function dayClick(ev) {
 		if (!opt('selectable')) { // if selectable, SelectionManager will worry about dayClick
 			var match = this.className.match(/fc\-day\-(\d+)\-(\d+)\-(\d+)/);
-			if (match!=null) {
-				var date = new Date(match[1], match[2]-1, match[3]);
-				trigger('dayClick', this, date, true, ev);
-			}
+			var date = new Date(match[1], match[2]-1, match[3]);
+			trigger('dayClick', this, date, true, ev);
 		}
 	}
 
