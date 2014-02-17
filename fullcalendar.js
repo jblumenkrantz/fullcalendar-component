@@ -2658,9 +2658,9 @@ function BasicYearView(element, calendar, viewName) {
 					skipWeekend(di);
 				}
 				// don't show week if all days are in next month
-				if (di.getMonth() == (m+1)%12 && opt('weekMode') != 'fixed') {
-					continue;
-				}
+				//if (di.getMonth() == (m+1)%12 && opt('weekMode') != 'fixed') {
+				//	continue;
+				//}
 				rowsForMonth[m]++;
 				rowCnt++;
 
