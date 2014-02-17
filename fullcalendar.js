@@ -2457,7 +2457,22 @@ function BasicYearView(element, calendar, viewName) {
 	SelectionManager.call(t);
 
 	t.rangeToSegments = rangeToSegmentsYear;
-	BasicEventRenderer.call(t);
+	t.renderEvents = function(events, b, c, d, e) {
+		console.log("--- YearView renderEvents() ---");
+		console.log(events, b, c, d, e);
+		
+
+
+	};
+	t.clearEvents = function(events, b, c, d, e) {
+		console.log("--- YearView clearEvents() ---");
+		console.log(events, b, c, d, e);
+
+
+		
+
+	};
+	//BasicEventRenderer.call(t);
 
 	t.rowToGridOffset = rowToGridOffset;
 	t.dayOffsetToCellOffset = dayOffsetToCellOffset;
@@ -2751,6 +2766,9 @@ function BasicYearView(element, calendar, viewName) {
 			// in current month, but hidden (weekends) at end
 			otherMonthDays[mi][3] = endDaysHidden;
 		});
+
+		console.log(otherMonthDays);
+
 		bodyRows.filter('.fc-year-have-event').removeClass('fc-year-have-event');
 	}
 
