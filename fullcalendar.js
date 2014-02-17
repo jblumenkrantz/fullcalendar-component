@@ -2457,25 +2457,31 @@ function BasicYearView(element, calendar, viewName) {
 	SelectionManager.call(t);
 
 	t.rangeToSegments = rangeToSegmentsYear;
+
+	//renders days with increasing density depending on how many events they have
 	t.renderEvents = function(events) {
+		//any day with more than 20 events will look like 20 events dense
+		var densityThreshold = 20;
 
 		//reset all densities
 		$(".fc-year-day-container").data("eventDensity", 0);
 		
 		//loop over events and determind density classes
 		for (i in events) {
-			var start = events[i].start;
-			var selector = ".fc-day-"+formatDate(start, "yyyy-MM-dd")+" .fc-year-day-container";
+			var start = formatDate(events[i].start, "yyyy-MM-dd");
+			var selector = ".fc-day-"+start+" .fc-year-day-container";
 			$(selector).removeClass(oldDensityClass).addClass(newDensityClass);
 		}
 
 		function oldDensityClass(index, oldClass) {
+			//remove any classes with fc-event-density
 			return (oldClass.match(/\bfc-event-density-\S+/g) || []).join(' ');
 		}
 
 		function newDensityClass(index, currentClass) {
+			//update event density
 			var oldDensity =  $(this).data("eventDensity");
-			var newDensity = oldDensity+1;
+			var newDensity = (oldDensity < densityThreshold) ? oldDensity+1 : oldDensity;
 			var newClass = "fc-event-density-"+newDensity;
 			$(this).data("eventDensity", newDensity);
 			return newClass;
@@ -2760,6 +2766,7 @@ function BasicYearView(element, calendar, viewName) {
 					}
 					if (+d == +today) {
 						cell.addClass(tm + '-state-highlight fc-today');
+						cell.append("<span class='icon-star2 fc-year-day'></span>")
 					} else {
 						cell.addClass((+d < +today) ? 'fc-past' : 'fc-future');
 					}
@@ -2799,8 +2806,10 @@ function BasicYearView(element, calendar, viewName) {
 	function dayClick(ev) {
 		if (!opt('selectable')) { // if selectable, SelectionManager will worry about dayClick
 			var match = this.className.match(/fc\-day\-(\d+)\-(\d+)\-(\d+)/);
-			var date = new Date(match[1], match[2]-1, match[3]);
-			trigger('dayClick', this, date, true, ev);
+			if (match!=null) {
+				var date = new Date(match[1], match[2]-1, match[3]);
+				trigger('dayClick', this, date, true, ev);
+			}
 		}
 	}
 
