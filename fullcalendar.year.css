@@ -1,0 +1,159 @@
+/* year view full calendar css */
+
+/* parent view class */
+.fc-view-year {}
+
+.fc-view-year table tr.even, table tr.alt, table tr:nth-of-type(even) {
+	background: none;
+}
+
+.fc-view-year .fc-year-day {
+	cursor:pointer;
+}
+
+.fc-view-year .fc-year-main-table {
+	
+}
+
+.fc-view-year .fc-year-monthly-td {
+	/*border: 1px solid #444;*/
+	border: 2px solid transparent;
+}
+
+.fc-view-year .fc-year-monthly-name {
+	color: rgb(34, 34, 34);
+	padding: 5px 5px 0 5px;
+	font-size: 1.5em;
+}
+
+/* JAN COLORS */
+.fc-view-year .fc-January.fc-year-current-month {
+	background: rgba(241,191,184,0.2);
+}
+.fc-view-year .fc-January .fc-year-monthly-name  {
+	color: #DE4D54;
+}
+.fc-view-year .fc-January .fc-year-month thead {
+ 	background: #F1BFB8;
+}
+
+/* FEB COLORS */
+.fc-view-year .fc-February.fc-year-current-month {
+	background: rgba(215,147,181,0.2);
+}
+.fc-view-year .fc-February .fc-year-monthly-name {
+	color: #882266;
+}
+.fc-view-year .fc-February .fc-year-month thead {
+ 	background: #BB5588;
+}
+
+/* MARCH COLORS */
+.fc-view-year .fc-March.fc-year-current-month {
+	background: rgba(172,221,243,0.2);
+}
+.fc-view-year .fc-March .fc-year-monthly-name {
+	color: #53A3CB;
+}
+.fc-view-year .fc-March .fc-year-month thead {
+ 	background: #ACDDF3;
+}
+
+/* April COLORS */
+.fc-view-year .fc-April.fc-year-current-month {
+	background: whitesmoke;
+}
+.fc-view-year .fc-April .fc-year-monthly-name {
+	color: black;
+}
+.fc-view-year .fc-April .fc-year-month thead {
+ 	background: whitesmoke;
+}
+
+/* MAY COLORS */
+.fc-view-year .fc-May.fc-year-current-month {
+	background: rgba(54,249,240,0.2);
+}
+.fc-view-year .fc-May .fc-year-monthly-name {
+	color: #0F622A;
+}
+.fc-view-year .fc-May .fc-year-month thead {
+ 	background: #1CBF80;
+}
+
+/* JUNE COLORS */
+.fc-view-year .fc-June.fc-year-current-month {
+	background: rgba(254,249,240,0.7);
+}
+.fc-view-year .fc-June .fc-year-monthly-name {
+	color: black;
+}
+.fc-view-year .fc-June .fc-year-month thead {
+ 	background: #FEF9F0;
+}
+
+/* JULY COLORS */
+.fc-view-year .fc-July.fc-year-current-month {
+	background: rgba(186,42,85,0.3);
+}
+.fc-view-year .fc-July .fc-year-monthly-name {
+	color: #731629;
+}
+.fc-view-year .fc-July .fc-year-month thead {
+ 	background: rgba(153,53,77,0.5);
+}
+
+/* AUGUST COLORS */
+.fc-view-year .fc-August.fc-year-current-month {
+	background: rgba(204,238,25,0.2);
+}
+.fc-view-year .fc-August .fc-year-monthly-name {
+	color: #83AF13;
+}
+.fc-view-year .fc-August .fc-year-month thead {
+ 	background: #A4CF13;
+}
+
+/* SEPT COLORS */
+.fc-view-year .fc-September.fc-year-current-month {
+	background: rgba(106,137,216,0.4);
+}
+.fc-view-year .fc-September .fc-year-monthly-name {
+	color: #131B72;
+}
+.fc-view-year .fc-September .fc-year-month thead {
+ 	background: #6A89D8;
+}
+
+/* OCT COLORS */
+.fc-view-year .fc-October.fc-year-current-month {
+	background: rgba(59,90,75,0.2);
+}
+.fc-view-year .fc-October .fc-year-monthly-name {
+	color: #69365F;
+}
+.fc-view-year .fc-October .fc-year-month thead {
+ 	background: #93DEFE;
+}
+
+/* NOV COLORS */
+.fc-view-year .fc-November.fc-year-current-month {
+	background: rgba(218,176,118,0.2);
+}
+.fc-view-year .fc-November.fc-year-current-month.fc-year-monthly-name  {
+	color: #D45F20;
+}
+.fc-view-year .fc-November .fc-year-month thead {
+ 	background: #DAB076;
+}
+
+/* DECEMBER COLORS */
+.fc-view-year .fc-December.fc-year-current-month {
+	background: rgba(80,211,239,0.4);
+}
+.fc-view-year .fc-December .fc-year-monthly-name {
+	color: #3C7DDE;
+}
+.fc-view-year .fc-December .fc-year-month thead {
+ 	background: #3C7DDE;
+}
