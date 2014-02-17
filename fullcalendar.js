@@ -2638,7 +2638,7 @@ function BasicYearView(element, calendar, viewName) {
 				s +='<td class="fc-year-month-separator"></td>';
 			}
 
-			currentMonth = (today.getMonth()==m) ? "fc-year-current-month" : "";
+			currentMonth = (m==today.getMonth() && miYear==today.getFullYear()) ? "fc-year-current-month" : "";
 
 			s +='<td class="fc-year-monthly-td fc-'+ monthName +' ' + currentMonth + '" style="' + display + '">';
 			s +='<table class="fc-border-separate fc-year-month" style="width:100%;" cellspacing="0">'+
@@ -2714,9 +2714,10 @@ function BasicYearView(element, calendar, viewName) {
 		markFirstLast(head.add(head.find('tr'))); // marks first+last tr/th's
 		markFirstLast(bodyRows);
 
-		table.find('.fc-year-monthly-name a').click(function() {
-			calendar.changeView('month');
-			calendar.gotoDate($(this).attr('data-year'), $(this).attr('data-month'), 1);
+		var angularScope = opt('angularScope');
+
+		table.find('.fc-year-monthly-name div').click(function() {
+			angularScope.gotoMonthViewAtMonth($(this).attr('data-year'), $(this).attr('data-month'));
 		});
 
 		dayBind(bodyCells);
