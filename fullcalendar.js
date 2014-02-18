@@ -341,6 +341,7 @@ function Calendar(element, options, eventSources) {
 	
 
 	function changeView(newViewName) {
+		$("#fc-scroller").unbind('mousewheel');
 		if (!currentView || newViewName != currentView.name) {
 			_changeView(newViewName);
 		}
