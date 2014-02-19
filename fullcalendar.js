@@ -87,6 +87,7 @@ var defaults = {
 	unselectAuto: true,
 	
 	dropAccept: '*',
+	hideWhileDragging: true,
 	
 	handleWindowResize: true
 	
@@ -2912,6 +2913,7 @@ function BasicYearView(element, calendar, viewName) {
 	/* External Dragging
 	-----------------------------------------------------------------------*/
 	function dragStart(_dragElement, ev, ui) {
+		console.log("drag 3");
 		hoverListener.start(function(cell) {
 			clearOverlays();
 			if (cell) {
@@ -4027,6 +4029,7 @@ function BasicView(element, calendar, viewName) {
 	
 	
 	function dragStart(_dragElement, ev, ui) {
+		console.log("basic view drag start");
 		hoverListener.start(function(cell) {
 			clearOverlays();
 			if (cell) {
@@ -5115,6 +5118,7 @@ function AgendaView(element, calendar, viewName) {
 	
 	
 	function dragStart(_dragElement, ev, ui) {
+		console.log("drag 2");
 		hoverListener.start(function(cell) {
 			clearOverlays();
 			if (cell) {
@@ -5525,6 +5529,7 @@ function AgendaEventRenderer() {
 	// to and from the slot area.
 	
 	function draggableDayEvent(event, eventElement, seg) {
+		console.log("dg 1");
 		var isStart = seg.isStart;
 		var origWidth;
 		var revert;
@@ -5539,6 +5544,7 @@ function AgendaEventRenderer() {
 			opacity: opt('dragOpacity', 'month'), // use whatever the month view was using
 			revertDuration: opt('dragRevertDuration'),
 			start: function(ev, ui) {
+				console("drag start 1");
 				trigger('eventDragStart', eventElement, event, ev, ui);
 				hideEvents(event, eventElement);
 				origWidth = eventElement.width();
@@ -5643,7 +5649,7 @@ function AgendaEventRenderer() {
 			opacity: opt('dragOpacity'),
 			revertDuration: opt('dragRevertDuration'),
 			start: function(ev, ui) {
-
+				console.log("drag start 2");
 				trigger('eventDragStart', eventElement, event, ev, ui);
 				hideEvents(event, eventElement);
 
@@ -6206,7 +6212,9 @@ function View(element, calendar, viewName) {
 	
 	
 	function hideEvents(event, exceptElement) {
-		eachEventElement(event, exceptElement, 'hide');
+		if (opt('hideWhileDragging')) {
+			eachEventElement(event, exceptElement, 'hide');
+		}
 	}
 	
 	
@@ -7146,6 +7154,7 @@ function DayEventRenderer() {
 	}
 	
 	function draggableDayEvent(event, eventElement) {
+		console.log("dg 2");
 		var hoverListener = getHoverListener();
 		var dayDelta;
 		eventElement.draggable({
@@ -7153,6 +7162,7 @@ function DayEventRenderer() {
 			opacity: opt('dragOpacity'),
 			revertDuration: opt('dragRevertDuration'),
 			start: function(ev, ui) {
+				console.log("Drag start 3");
 				trigger('eventDragStart', eventElement, event, ev, ui);
 				hideEvents(event, eventElement);
 				hoverListener.start(function(cell, origCell, rowDelta, colDelta) {
@@ -7186,6 +7196,7 @@ function DayEventRenderer() {
 	}
 
 	function draggableDayEventDatebook(event, eventElement) {
+		console.log("dg 3");
 		var hoverListener = getHoverListener();
 		var dayDelta;
 		eventElement.draggable({
@@ -7193,6 +7204,7 @@ function DayEventRenderer() {
 			opacity: opt('dragOpacity'),
 			revertDuration: opt('dragRevertDuration'),
 			start: function(ev, ui) {
+				console.log("drag start 4");
 				trigger('eventDragStart', eventElement, event, ev, ui);
 				hideEvents(event, eventElement);
 				hoverListener.start(function(cell, origCell, rowDelta, colDelta) {
