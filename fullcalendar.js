@@ -3500,51 +3500,15 @@ function BasicView(element, calendar, viewName) {
 
 	function getQuoteCellHTML() {
 		var html = '';
-		var rand = Math.floor(Math.random()*10);
-		var quotes = [
-			"Time is of the essence! Comb your hair.",
-			"Sanity is a golden apple with no shoelaces.",
-			"Repent! The end is coming, $9.95 at Amazon.",
-			"Honesty blurts where deception sneezes.",
-			"Pastry satisfies where art is unavailable.",
-			"Delete not, lest you, too, be deleted.",
-			"O! Youth! What a pain in the backside.",
-			"Wishes are like goldfish with propellors.",
-			"Love the river's \"beauty\", but live on a hill.",
-			"Invention is the mother of too many useless toys."
-		];
-
-		var authors = [
-			"Abraham Lincoln",
-			"Samuel L. Jackson",
-			"Peyton Manning",
-			"Benjamin Franklin",
-			"Abraham Lincoln",
-			"Samuel L. Jackson",
-			"Peyton Manning",
-			"Benjamin Franklin",
-			"Abraham Lincoln",
-			"Samuel L. Jackson"
-		];
-
 		html += "<div class='picture'>" +
 					"<img src='/assets/images/school.png' />" +
 				"</div>" +
 				"<div class='quote'>" +
-					"<div class='text'>" +
-						quotes[rand] +
-					"</div>" +
-					"<div class='author'>" +
-						" - " + authors[rand] +
-					"</div>" +
-					"<div class='word'>" +
-						"annotate" +
-					"</div>" +
-					"<div class='definition'>" +
-						"add notes to (a text or diagram) giving explanation or comment" +
-					"</div>" +
+					"<div class='text'></div>" +
+					"<div class='author'></div>" +
+					"<span class='word'></span>" +
+					"<span class='definition'></span>" +
 				"</div>";
-
 		return html;
 	}
 
