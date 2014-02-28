@@ -6290,6 +6290,15 @@ function View(element, calendar, viewName) {
 			if (e.end) {
 				e.end = addMinutes(addDays(e.end, dayDelta, true), minuteDelta);
 			}
+			if (e.setup_time) {
+				e.setup_time = addMinutes(addDays(e.setup_time, dayDelta, true), minuteDelta);
+			}
+			if (e.teardown_time) {
+				e.teardown_time = addMinutes(addDays(e.teardown_time, dayDelta, true), minuteDelta);
+			}
+
+			console.log(e);
+
 			normalizeEvent(e, options);
 		}
 	}
