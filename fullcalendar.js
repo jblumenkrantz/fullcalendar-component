@@ -6296,9 +6296,6 @@ function View(element, calendar, viewName) {
 			if (e.teardown_time) {
 				e.teardown_time = addMinutes(addDays(e.teardown_time, dayDelta, true), minuteDelta);
 			}
-
-			console.log(e);
-
 			normalizeEvent(e, options);
 		}
 	}
