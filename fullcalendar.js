@@ -3505,7 +3505,6 @@ function BasicView(element, calendar, viewName) {
 				"</div>" +
 				"<div class='quote'>" +
 					"<div class='text'></div>" +
-					"<div class='author'></div>" +
 					"<span class='word'></span>" +
 					"<span class='definition'></span>" +
 				"</div>";
