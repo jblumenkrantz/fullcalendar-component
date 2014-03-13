@@ -6196,7 +6196,8 @@ function View(element, calendar, viewName) {
 	function eventDrop(e, event, dayDelta, minuteDelta, allDay, ev, ui) {
 		var oldAllDay = event.allDay;
 		var eventId = event._id;
-		moveEvents(eventsByID[eventId], dayDelta, minuteDelta, allDay);
+		console.log(event);
+		if (!event.initiallyRepeating) moveEvents(eventsByID[eventId], dayDelta, minuteDelta, allDay);
 		trigger(
 			'eventDrop',
 			e,
