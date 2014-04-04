@@ -3501,7 +3501,7 @@ function BasicView(element, calendar, viewName) {
 	function getQuoteCellHTML() {
 		var html = '';
 		html += "<div class='picture'>" +
-					"<img src='/assets/images/school.png' />" +
+					"<img src='/assets/images/email-logo.jpg' />" +
 				"</div>" +
 				"<div class='quote'>" +
 					"<div class='text'></div>" +
