@@ -70,9 +70,15 @@
 
 /* QUOTE CELL CSS */
 .fc-view-datebook .fc-quote-content .picture {
-	float: left;
+	position: absolute;
 	width: 50%;
-	padding: 2px 0 0 2px;
+	padding: 10px;
+	margin-left: 25%;
+	margin-left: calc(25% - 10px);
+}
+
+.fc-quote.hasquote .picture {
+	margin-left: 0;
 }
 
 .fc-quote-content .picture img {
@@ -80,22 +86,17 @@
 }
 
 .fc-quote-content .quote {
-	float: left;
+	position: absolute;
+	left: 50%;
 	width: 50%;
 	padding: 10px;
 	text-align: center;
 }
 
 .fc-quote-content .quote .text {}
-
-.fc-quote-content .quote .author {
-	margin-top: 10%;
-}
 .fc-quote-content .quote .word {
 	display: inline-block;
 	margin-top: 10%;
 	font-weight: bold;
 }	
-.fc-quote-content .quote .definition {
-	
-}
+.fc-quote-content .quote .definition {}
