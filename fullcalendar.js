@@ -3500,9 +3500,7 @@ function BasicView(element, calendar, viewName) {
 
 	function getQuoteCellHTML() {
 		var html = '';
-		html += "<div class='picture'>" +
-					"<img src='/assets/images/Pinwheel-Logo.png' />" +
-				"</div>" +
+		html += "<div class='picture'></div>" +
 				"<div class='quote'>" +
 					"<div class='text'></div>" +
 					"<span class='word'></span>" +
