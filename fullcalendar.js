@@ -5340,7 +5340,8 @@ function AgendaEventRenderer() {
 			seg.top = top;
 			seg.left = left;
 			seg.outerWidth = width;
-			seg.outerHeight = bottom - top;
+			//seg.outerHeight = bottom - top; uncomment if removing the line below
+			seg.outerHeight = Math.max(opt('minSegmentHeight'), bottom - top); /* added by gabe to support min heights on short events */
 			html += slotSegHtml(event, seg);
 		}
 
