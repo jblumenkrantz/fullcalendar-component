@@ -6191,13 +6191,21 @@ function View(element, calendar, viewName) {
 	/* Event Modification Reporting
 	---------------------------------------------------------------------------------*/
 	
-	
 	function eventDrop(e, event, dayDelta, minuteDelta, allDay, ev, ui) {
 		var oldAllDay = event.allDay;
 		var eventId = event._id;
 		moveEvents(eventsByID[eventId], dayDelta, minuteDelta, allDay);
+
+		var name = 'eventDrop';
+		if (event.repeat_frequency=='DAILY'||event.repeat_frequency=='WEEKLY'||event.repeat_frequency=='MONTHLY') {
+			name += 'Repeating';
+			if (event.start.getTime() > event.repeat_stop.getTime()) {
+				name += 'FutureOutside';
+			}
+		}
+
 		trigger(
-			'eventDrop',
+			name,
 			e,
 			event,
 			dayDelta,
@@ -6211,9 +6219,9 @@ function View(element, calendar, viewName) {
 			ev,
 			ui
 		);
+
 		if (opt('hideWhileDragging')) reportEventChange(eventId);
 	}
-	
 	
 	function eventResize(e, event, dayDelta, minuteDelta, ev, ui) {
 		var eventId = event._id;
