@@ -2763,9 +2763,9 @@ function BasicYearView(element, calendar, viewName) {
 							otherMonthDays[mi][1]++;
 						}
 					}
-					if (+d == +today) {
+					if (d.getTime() == today.getTime() && !cell.hasClass('fc-other-month')) {
 						cell.addClass(tm + '-state-highlight fc-today');
-						cell.append("<span class='icon-star2 fc-year-day'></span>")
+						cell.append("<span class='icon-star fc-year-day'></span>")
 					} else {
 						cell.addClass((+d < +today) ? 'fc-past' : 'fc-future');
 					}
