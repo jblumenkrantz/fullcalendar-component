@@ -2141,7 +2141,7 @@ function ListView(element, calendar) {
             lTitle = events[i].title;
             allDay = events[i].allDay;
             ClassName = events[i].className;
-            textColor = events[i].source.color;
+            textColor = events[i].source.color||events[i].color;
             todayHeaderClass = (lDate == today) ? "fc-today-header fc-state-highlight" : "";
             var format;
 
