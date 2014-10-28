@@ -6787,7 +6787,7 @@ function DayEventRenderer() {
 		var html = '';
 		var isRTL = opt('isRTL');
 		var event = segment.event;
-		event.title = (event.private)? event.title : htmlEscape(event.title || '');
+		event.title = (event.private == undefined || event.private)? event.title : htmlEscape(event.title || '');
 		var url = event.url;
 
 		// generate the list of CSS classNames
