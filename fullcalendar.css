@@ -593,5 +593,20 @@ table.fc-border-separate {
 .fc-agenda .ui-resizable-resizing { /* TODO: better selector */
 	_overflow: hidden;
 	}
-	
-	
+
+/* responsive heat maps */
+.fc-view-datebook [class*='fc-event-density-'] {
+	background-color: transparent;
+}
+
+@media only screen and (min-width: 768px) {
+	.fc-view-month [class*='fc-event-density-'] {
+		background-color: transparent;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.fc-view-month .fc-event-container {
+		display: none;
+	}
+}

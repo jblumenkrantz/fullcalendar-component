@@ -1867,6 +1867,28 @@ function disableTextSelection(element) {
 		.bind('selectstart.ui', function() { return false; });
 }
 
+function oldDensityClass(index, oldClass) {
+	//remove any classes with fc-event-density
+	return (oldClass.match(/\bfc-event-density-\S+/g) || []).join(' ');
+}
+
+function newDensityClass(index, currentClass) {
+	//any day with more than 20 events will look like 20 events dense
+	var densityThreshold = 20;
+
+	//update event density
+	var oldDensity =  $(this).data("eventDensity");
+	var newDensity = (oldDensity < densityThreshold) ? oldDensity+1 : oldDensity;
+	var newClass = "fc-event-density-"+newDensity;
+
+	//don't give a day from another month a red color
+	if ($(this).parent().hasClass('fc-other-month')) {
+		newClass = "";
+	}
+
+	$(this).data("eventDensity", newDensity);
+	return newClass;
+}
 
 /*
 function enableTextSelection(element) {
@@ -2455,9 +2477,6 @@ function BasicYearView(element, calendar, viewName) {
 
 	//renders days with increasing density depending on how many events they have
 	t.renderEvents = function(events) {
-		//any day with more than 20 events will look like 20 events dense
-		var densityThreshold = 20;
-
 		//reset all densities
 		$(".fc-year-day-container").data("eventDensity", 0);
 		$(".fc-year-day-container").removeClass(oldDensityClass);
@@ -2467,26 +2486,6 @@ function BasicYearView(element, calendar, viewName) {
 			var start = formatDate(events[i].start, "yyyy-MM-dd");
 			var selector = ".fc-day-"+start+" .fc-year-day-container";
 			$(selector).removeClass(oldDensityClass).addClass(newDensityClass);
-		}
-
-		function oldDensityClass(index, oldClass) {
-			//remove any classes with fc-event-density
-			return (oldClass.match(/\bfc-event-density-\S+/g) || []).join(' ');
-		}
-
-		function newDensityClass(index, currentClass) {
-			//update event density
-			var oldDensity =  $(this).data("eventDensity");
-			var newDensity = (oldDensity < densityThreshold) ? oldDensity+1 : oldDensity;
-			var newClass = "fc-event-density-"+newDensity;
-
-			//don't give a day from another month a red color
-			if ($(this).parent().hasClass('fc-other-month')) {
-				newClass = "";
-			}
-
-			$(this).data("eventDensity", newDensity);
-			return newClass;
 		}
 	};
 	t.clearEvents = function(events) {};
@@ -3246,8 +3245,7 @@ function MonthView(element, calendar) {
 	var formatDate = calendar.formatDate;
 	
 	
-	function render(date, delta) {
-
+	function render(date, delta, a, b, c) {
 		if (delta) {
 			addMonths(date, delta);
 			date.setDate(1);
@@ -6604,12 +6602,23 @@ function DayEventRenderer() {
 	// Mouse event will be lazily applied, except if the event has an ID of `modifiedEventId`.
 	// Can only be called when the event container is empty (because it wipes out all innerHTML).
 	function renderDayEvents(events, modifiedEventId) {
+
 		// do the actual rendering. Receive the intermediate "segment" data structures.
 		var segments = _renderDayEvents(
 			events,
 			false, // don't append event elements
 			true // set the heights of the rows
 		);
+
+		//reset all densities
+		$(".fc-day").data("eventDensity", 0);
+		$(".fc-day").removeClass(oldDensityClass);
+
+		for (i in events) {
+			var start = formatDate(events[i].start, "yyyy-MM-dd");
+			var selector = "td[data-date='"+start+"']";
+			$(selector).removeClass(oldDensityClass).addClass(newDensityClass);
+		}
 
 		// report the elements to the View, for general drag/resize utilities
 		segmentElementEach(segments, function(segment, element) {
