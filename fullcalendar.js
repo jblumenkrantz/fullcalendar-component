@@ -1881,6 +1881,11 @@ function newDensityClass(index, currentClass) {
 	var newDensity = (oldDensity < densityThreshold) ? oldDensity+1 : oldDensity;
 	var newClass = "fc-event-density-"+newDensity;
 
+	//densities past 8 are so red that we need to change the font color
+	if (newDensity > 8) {
+		newClass+= " fc-dense";
+	}
+
 	//don't give a day from another month a red color
 	if ($(this).parent().hasClass('fc-other-month')) {
 		newClass = "";

@@ -218,19 +218,7 @@
 .fc-event-density-10 {background-color: #FF3333;}
 .fc-event-density-9 {background-color: #FF4747;}
 
-.fc-event-density-20 *, .fc-event-density-20 + * {color: white;}
-.fc-event-density-19 *, .fc-event-density-19 + * {color: white;}
-.fc-event-density-18 *, .fc-event-density-18 + * {color: white;}
-.fc-event-density-17 *, .fc-event-density-17 + * {color: white;}
-.fc-event-density-16 *, .fc-event-density-16 + * {color: white;}
-.fc-event-density-15 *, .fc-event-density-15 + * {color: white;}
-.fc-event-density-14 *, .fc-event-density-14 + * {color: white;}
-.fc-event-density-13 *, .fc-event-density-13 + * {color: white;}
-.fc-event-density-12 *, .fc-event-density-12 + * {color: white;}
-.fc-event-density-11 *, .fc-event-density-11 + * {color: white;}
-.fc-event-density-10 *, .fc-event-density-10 + * {color: white;}
-.fc-event-density-9 *, .fc-event-density-9 + * {color: white;}
-
+.fc-view-year .fc-dense *, .fc-view-year .fc-dense + * {color: white;}
 
 .fc-event-density-8 {background-color: #FF5C5C;}
 .fc-event-density-7 {background-color: #FF7070;}
@@ -240,3 +228,7 @@
 .fc-event-density-3 {background-color: #FFC2C2;}
 .fc-event-density-2 {background-color: #FFD6D6;}
 .fc-event-density-1 {background-color: #FFEBEB;}
+
+@media only screen and (max-width: 768px) {
+	.fc-view-month .fc-dense *, .fc-view-month .fc-dense + * {color: white;}
+}
